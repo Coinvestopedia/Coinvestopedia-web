@@ -205,7 +205,7 @@ export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
       
       {/* Market Pulse Section */}
       <section>
-        <MarketPulseDashboard />
+        <MarketPulseDashboard onNavigate={onNavigate} />
       </section>
 
       {/* Live Feed & Ad */}

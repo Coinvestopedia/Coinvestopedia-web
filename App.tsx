@@ -4,14 +4,18 @@ import { Header } from './components/Header';
 import { SidebarLeft } from './components/SidebarLeft';
 import { SidebarRight } from './components/SidebarRight';
 import { Background } from './components/Background';
+import { ScrollToTop } from './components/ScrollToTop';
 import { Home } from './pages/Home';
 import { WhaleTracker } from './pages/WhaleTracker';
 import { Compare } from './pages/Compare';
 import { Tools } from './pages/Tools';
-import { Markets } from './pages/Markets';
+import { MacroIntel } from './pages/MacroIntel';
 import { Learn } from './pages/Learn';
 import { Insights } from './pages/Insights';
 import { Newsletter } from './pages/Newsletter';
+import { Privacy } from './pages/Privacy';
+import { Terms } from './pages/Terms';
+import { Cookies } from './pages/Cookies';
 import { PageRoute } from './types';
 import { AppProvider, useAppContext } from './context/AppContext';
 import { ToastContainer } from './components/Toast';
@@ -33,12 +37,13 @@ const AppContent: React.FC = () => {
     switch (currentRoute) {
       case PageRoute.HOME:
         return <Home onNavigate={handleNavigate} />;
-      case PageRoute.MARKETS:
-        return <Markets />;
+
       case PageRoute.WHALE:
         return <WhaleTracker />;
       case PageRoute.COMPARE:
         return <Compare />;
+      case PageRoute.MACRO_INTEL:
+        return <MacroIntel />;
       case PageRoute.TOOLS:
         return <Tools />;
       case PageRoute.NEWSLETTER:
@@ -49,6 +54,12 @@ const AppContent: React.FC = () => {
         return <Learn />;
       case PageRoute.INSIGHTS:
         return <Insights />;
+      case PageRoute.PRIVACY:
+        return <Privacy />;
+      case PageRoute.TERMS:
+        return <Terms />;
+      case PageRoute.COOKIES:
+        return <Cookies />;
       default:
         return <Home onNavigate={handleNavigate} />;
     }
@@ -56,7 +67,6 @@ const AppContent: React.FC = () => {
 
   const mobileNavItems = [
     { label: 'Dashboard', icon: <HomeIcon size={20} />, route: PageRoute.HOME },
-    { label: 'Markets', icon: <BarChart2 size={20} />, route: PageRoute.MARKETS },
     { label: 'Whales', icon: <TargetIcon className="w-5 h-5" />, route: PageRoute.WHALE },
     { label: 'Tools', icon: <Calculator size={20} />, route: PageRoute.TOOLS },
   ];
@@ -106,14 +116,43 @@ const AppContent: React.FC = () => {
           </div>
         </main>
         
-        <footer className="hidden md:block border-t border-border mt-auto py-12 bg-background/80 backdrop-blur-sm relative z-20">
-          <div className="max-w-container mx-auto px-6 flex flex-col items-center gap-4">
-            <img 
-              src={theme === 'dark' ? '/logo-dark-full.png' : '/logo-light-full.png'} 
-              alt="Coinvestopedia" 
-              className="h-9 w-auto opacity-80 hover:opacity-100 transition-opacity" 
-            />
-            <p className="text-text-muted text-sm">© 2025 Coinvestopedia. World-class crypto data.</p>
+        {/* Unified Footer: Visible on all devices */}
+        <footer className="border-t border-border mt-auto py-12 bg-background/80 backdrop-blur-md relative z-20">
+          <div className="max-w-container mx-auto px-6 flex flex-col items-center text-center gap-6">
+            <div className="flex flex-col items-center gap-4">
+              <img 
+                src={theme === 'dark' ? '/logo-dark mode-full.png' : '/logo-light mode full.png'} 
+                alt="Coinvestopedia" 
+                className={`h-9 w-auto opacity-80 hover:opacity-100 transition-opacity ${theme === 'dark' ? 'mix-blend-screen' : 'mix-blend-multiply'}`}
+              />
+              <p className="text-text-muted text-sm px-4">
+                © 2025 Coinvestopedia Academy. World-class institutional crypto data and research.
+              </p>
+            </div>
+
+            <div className="flex flex-wrap justify-center gap-x-8 gap-y-4 text-sm font-medium">
+              <button 
+                onClick={() => handleNavigate(PageRoute.PRIVACY)} 
+                className={`transition-colors whitespace-nowrap ${currentRoute === PageRoute.PRIVACY ? 'text-primary' : 'text-text-muted hover:text-primary'}`}
+              >
+                Privacy Policy
+              </button>
+              <button 
+                onClick={() => handleNavigate(PageRoute.TERMS)} 
+                className={`transition-colors whitespace-nowrap ${currentRoute === PageRoute.TERMS ? 'text-primary' : 'text-text-muted hover:text-primary'}`}
+              >
+                Terms of Service
+              </button>
+              <button 
+                onClick={() => handleNavigate(PageRoute.COOKIES)} 
+                className={`transition-colors whitespace-nowrap ${currentRoute === PageRoute.COOKIES ? 'text-primary' : 'text-text-muted hover:text-primary'}`}
+              >
+                Cookie Policy
+              </button>
+            </div>
+            
+            {/* Mobile Bottom Padding to account for navigation bar */}
+            <div className="h-20 md:hidden" aria-hidden="true" />
           </div>
         </footer>
 
@@ -148,6 +187,9 @@ const AppContent: React.FC = () => {
           {/* Safe area spacer for iOS Home Indicator */}
           <div className="h-[env(safe-area-inset-bottom)] bg-surface"></div>
         </div>
+
+        {/* Global Action Button: Invisible until scroll > 300px */}
+        <ScrollToTop />
       </div>
     </div>
   );

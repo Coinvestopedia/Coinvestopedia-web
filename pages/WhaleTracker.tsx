@@ -9,6 +9,7 @@ import { analyzeAssetMovement, InsightResult } from '../services/geminiService';
 import { Input } from '../components/Input';
 import { useAppContext } from '../context/AppContext';
 import { PulseIcon } from '../components/AnimatedIcons';
+import { fetchWhaleAlerts, fetchMempoolTxs } from '../services/api';
 
 // Helper to generate fake ETH addresses
 const generateEthAddress = () => {
@@ -85,13 +86,14 @@ const flowData = [
 
 export const WhaleTracker: React.FC = () => {
    const { addToast } = useAppContext();
-   const [tableData, setTableData] = useState<typeof ALL_MOCK_TRANSACTIONS>([]);
-   const [isLoading, setIsLoading] = useState(false);
+   const [tableData, setTableData] = useState<any[]>([]);
+   const [fullLiveDataset, setFullLiveDataset] = useState<any[]>(ALL_MOCK_TRANSACTIONS);
+   const [isLoading, setIsLoading] = useState(true);
    const [pagination, setPagination] = useState({
      page: 1,
      pageSize: 10
    });
-   const [selectedTx, setSelectedTx] = useState<typeof ALL_MOCK_TRANSACTIONS[0] | null>(null);
+   const [selectedTx, setSelectedTx] = useState<any>(null);
    const [analysis, setAnalysis] = useState<InsightResult | null>(null);
    const [isAnalyzing, setIsAnalyzing] = useState(false);
 
@@ -108,10 +110,10 @@ export const WhaleTracker: React.FC = () => {
 
    // Filter Data based on Search
    const filteredData = useMemo(() => {
-     if (!searchQuery) return ALL_MOCK_TRANSACTIONS;
+     if (!searchQuery) return fullLiveDataset;
      const lowerQuery = searchQuery.toLowerCase();
      
-     return ALL_MOCK_TRANSACTIONS.filter(tx => {
+     return fullLiveDataset.filter(tx => {
        const fromLabel = walletLabels[tx.from] || '';
        const toLabel = walletLabels[tx.to] || '';
        
@@ -123,25 +125,65 @@ export const WhaleTracker: React.FC = () => {
          toLabel.toLowerCase().includes(lowerQuery)
        );
      });
-   }, [searchQuery, walletLabels]);
+   }, [searchQuery, walletLabels, fullLiveDataset]);
 
-   // Simulate fetching data from an API (using filtered data)
-   const fetchTransactions = useCallback(async (page: number, size: number, data: typeof ALL_MOCK_TRANSACTIONS) => {
-     setIsLoading(true);
-     // Simulate network delay
-     await new Promise(resolve => setTimeout(resolve, 300));
-     
-     const start = (page - 1) * size;
-     const end = start + size;
-     const slicedData = data.slice(start, end);
-     
-     setTableData(slicedData);
-     setIsLoading(false);
+   // Handle API data fetching
+   useEffect(() => {
+     const fetchLive = async () => {
+       setIsLoading(true);
+       try {
+         const [whaleAlerts, mempoolData] = await Promise.all([
+           fetchWhaleAlerts(),
+           fetchMempoolTxs()
+         ]);
+
+         let transformed: any[] = [];
+         
+         if (whaleAlerts && whaleAlerts.length > 0) {
+           transformed = whaleAlerts.map((tx: any) => {
+             const fromOwner = tx.from?.owner || tx.from?.address || 'Unknown';
+             const toOwner = tx.to?.owner || tx.to?.address || 'Unknown';
+             
+             let type: 'inflow' | 'outflow' | 'transfer' = 'transfer';
+             if (tx.to?.owner_type === 'exchange' && tx.from?.owner_type !== 'exchange') type = 'inflow';
+             else if (tx.from?.owner_type === 'exchange' && tx.to?.owner_type !== 'exchange') type = 'outflow';
+
+             return {
+               id: tx.id || tx.hash,
+               time: new Date(tx.timestamp * 1000).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+               amount: `${tx.amount.toLocaleString()} ${tx.symbol.toUpperCase()}`,
+               assetCode: tx.symbol.toUpperCase(),
+               value: tx.amount_usd ? tx.amount_usd.toLocaleString('en-US', { style: 'currency', currency: 'USD', notation: 'compact' }) : 'Unknown',
+               valueNumeric: tx.amount_usd || 0,
+               amountNumeric: tx.amount,
+               from: fromOwner,
+               to: toOwner,
+               type
+             };
+           });
+         } else {
+           // Fallback if API keys missing, per "Ignore missing APIs" requirement
+           transformed = ALL_MOCK_TRANSACTIONS;
+         }
+
+         setFullLiveDataset(transformed);
+       } catch(e) {
+         console.error(e);
+         setFullLiveDataset(ALL_MOCK_TRANSACTIONS);
+       } finally {
+         setIsLoading(false);
+       }
+     };
+
+     fetchLive();
    }, []);
 
+   // Paginate filtered data for display
    useEffect(() => {
-     fetchTransactions(pagination.page, pagination.pageSize, filteredData);
-   }, [pagination.page, pagination.pageSize, filteredData, fetchTransactions]);
+      const start = (pagination.page - 1) * pagination.pageSize;
+      const end = start + pagination.pageSize;
+      setTableData(filteredData.slice(start, end));
+   }, [pagination.page, pagination.pageSize, filteredData]);
 
    // Trigger AI analysis when a transaction is selected
    useEffect(() => {

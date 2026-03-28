@@ -39,10 +39,13 @@ export enum PageRoute {
   HOME = '/',
   WHALE = '/whale-tracker',
   COMPARE = '/compare',
+  MACRO_INTEL = '/macro-intel',
   TOOLS = '/tools',
-  MARKETS = '/markets',
   LEARN = '/learn',
   INSIGHTS = '/insights',
   NEWSLETTER = '/newsletter',
   AUDIT = '/security-audit',
+  PRIVACY = '/privacy',
+  TERMS = '/terms',
+  COOKIES = '/cookies'
 }

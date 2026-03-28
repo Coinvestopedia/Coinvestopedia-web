@@ -6,7 +6,7 @@ import { TargetIcon } from '../components/AnimatedIcons';
 
 const CATEGORIES = ['All', 'Sovereignty', 'Regulation', 'Institutions', 'Markets', 'Geopolitics'];
 
-interface Article {
+export interface Article {
   id: string;
   title: string;
   category: string;
@@ -18,7 +18,7 @@ interface Article {
   content: React.ReactNode;
 }
 
-const ARTICLES: Article[] = [
+export const ARTICLES: Article[] = [
   {
     id: 'cross-border-portability',
     title: 'Cross-Border Asset Portability in Conflict Zones',
@@ -564,6 +564,26 @@ export const Insights: React.FC = () => {
   const [activeCategory, setActiveCategory] = useState('All');
   const [searchQuery, setSearchQuery] = useState('');
 
+  // Handle URL Hash for deep linking
+  useEffect(() => {
+    const handleHashChange = () => {
+      if (window.location.hash) {
+        const hashId = window.location.hash.replace('#', '');
+        const validArticle = ARTICLES.find(a => a.id === hashId);
+        if (validArticle) {
+          setActiveArticleId(hashId);
+        }
+      }
+    };
+    
+    // Initial check
+    handleHashChange();
+    
+    // Listen for changes
+    window.addEventListener('hashchange', handleHashChange);
+    return () => window.removeEventListener('hashchange', handleHashChange);
+  }, []);
+
   const activeArticle = ARTICLES.find(a => a.id === activeArticleId);
 
   // Scroll to top when view changes
@@ -571,11 +591,16 @@ export const Insights: React.FC = () => {
     window.scrollTo(0, 0);
   }, [activeArticleId]);
 
+  const handleBackToList = () => {
+    setActiveArticleId(null);
+    history.pushState("", document.title, window.location.pathname + window.location.search);
+  };
+
   if (activeArticle) {
     return (
       <div className="animate-fade-in max-w-[800px] mx-auto pb-16">
         <button 
-          onClick={() => setActiveArticleId(null)}
+          onClick={handleBackToList}
           className="flex items-center gap-2 text-text-muted hover:text-primary transition-colors text-sm font-bold group mb-8"
         >
           <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" /> Back to Insights

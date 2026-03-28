@@ -27,21 +27,7 @@ export const Hero: React.FC = () => {
           </Button>
         </div>
         
-        {/* Live Data Ticker */}
-        <div className="mt-8 lg:mt-12 border-t border-border/50 pt-6 flex w-full overflow-hidden max-w-[800px] mx-auto opacity-80" aria-label="Live Market Ticker">
-          <div className="flex items-center gap-8 animate-marquee whitespace-nowrap text-sm min-w-max pr-8 hover:[animation-play-state:paused] cursor-default">
-            {/* Duplicated for smooth marquee effect */}
-            {[1, 2, 3].map((set) => (
-              <React.Fragment key={set}>
-                <span className="flex items-center gap-2"><span className="text-text-muted font-semibold">BTC</span> <span className="font-bold text-text">$68,432</span> <span className="text-primary text-xs font-bold">↑ 2.4%</span></span>
-                <span className="flex items-center gap-2"><span className="text-text-muted font-semibold">ETH</span> <span className="font-bold text-text">$3,521</span> <span className="text-primary text-xs font-bold">↑ 1.8%</span></span>
-                <span className="flex items-center gap-2"><span className="text-text-muted font-semibold">SOL</span> <span className="font-bold text-text">$142.50</span> <span className="text-primary text-xs font-bold">↑ 5.2%</span></span>
-                <span className="flex items-center gap-2"><span className="text-text-muted font-semibold">S&P 500</span> <span className="font-bold text-text">5,123.41</span> <span className="text-primary text-xs font-bold">↑ 0.8%</span></span>
-                <span className="flex items-center gap-2"><span className="text-text-muted font-semibold">GOLD</span> <span className="font-bold text-text">$2,156.20</span> <span className="text-red-400 text-xs font-bold">↓ 0.2%</span></span>
-              </React.Fragment>
-            ))}
-          </div>
-        </div>
+
       </div>
       
       {/* Animated mesh gradient background */}

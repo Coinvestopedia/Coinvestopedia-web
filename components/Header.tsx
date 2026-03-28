@@ -24,7 +24,17 @@ export const Header: React.FC<HeaderProps> = ({
   
   const navLinks = [
     { label: 'Asset Comparison', route: PageRoute.COMPARE, options: [] },
-    { label: 'Market Overview', route: PageRoute.MARKETS, options: [] },
+    { 
+      label: 'Macro Intel', 
+      route: PageRoute.MACRO_INTEL, 
+      options: [
+        { label: 'Weekly Briefing', route: PageRoute.MACRO_INTEL },
+        { label: 'Geopolitical Decoder', route: PageRoute.MACRO_INTEL },
+        { label: 'Cross-Market Analysis', route: PageRoute.MACRO_INTEL },
+        { label: 'Institutional Lens', route: PageRoute.MACRO_INTEL },
+        { label: 'Archive', route: PageRoute.MACRO_INTEL }
+      ]
+    },
     { 
       label: 'Tools & Calculators', 
       route: PageRoute.TOOLS, 
@@ -248,9 +258,8 @@ export const Header: React.FC<HeaderProps> = ({
                ))}
             </div>
             
-            <div className="mt-4 pb-8">
+            <div className="mt-4 pb-8 text-center px-6">
                <Button className="w-full justify-center py-4 text-lg">Sign In / Sign Up</Button>
-               <Button variant="ghost" className="w-full mt-4 text-text-muted">Restore Purchase</Button>
             </div>
           </div>
         </div>

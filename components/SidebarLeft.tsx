@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavItem, PageRoute } from '../types';
-import { BookOpen, BarChart2, TrendingUp, Shield, Calculator } from 'lucide-react';
+import { BookOpen, BarChart2, TrendingUp, Shield, Calculator, Globe } from 'lucide-react';
 import { TargetIcon } from './AnimatedIcons';
 
 interface SidebarLeftProps {
@@ -10,8 +10,8 @@ interface SidebarLeftProps {
 
 export const SidebarLeft: React.FC<SidebarLeftProps> = ({ onNavigate, currentRoute }) => {
   const menuItems = [
-    { icon: <TrendingUp size={20} />, label: 'Market Overview', route: PageRoute.MARKETS },
     { icon: <BarChart2 size={20} />, label: 'Asset Comparison', route: PageRoute.COMPARE },
+    { icon: <Globe size={20} />, label: 'Macro Intel', route: PageRoute.MACRO_INTEL },
     { icon: <TargetIcon className="w-5 h-5" />, label: 'Whale Tracker', route: PageRoute.WHALE },
     { icon: <Calculator size={20} />, label: 'Tools & Calculators', route: PageRoute.TOOLS },
     { icon: <Shield size={20} />, label: 'Security', route: PageRoute.AUDIT },
