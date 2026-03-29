@@ -80,7 +80,7 @@ export default defineConfig({
 
   // Optimize dev server
   optimizeDeps: {
-    include: ['react', 'react-dom', 'react-router-dom', 'recharts'],
+    include: ['react', 'react-dom', 'recharts'],
   },
 });
 
