@@ -21,6 +21,7 @@ import { PageRoute } from './types';
 import { AppProvider, useAppContext } from './context/AppContext';
 import { ToastContainer } from './components/Toast';
 import { SecurityAudit } from './pages/SecurityAudit';
+import { AdUnit } from './components/AdUnit';
 import { TargetIcon } from './components/AnimatedIcons';
 
 const AppContent: React.FC = () => {
@@ -190,6 +191,9 @@ const AppContent: React.FC = () => {
           {/* Safe area spacer for iOS Home Indicator */}
           <div className="h-[env(safe-area-inset-bottom)] bg-surface"></div>
         </div>
+
+        {/* Global Mobile Sticky Ad */}
+        <AdUnit size="mobile-sticky" partner="binance" />
 
         {/* Global Action Button: Invisible until scroll > 300px */}
         <ScrollToTop />

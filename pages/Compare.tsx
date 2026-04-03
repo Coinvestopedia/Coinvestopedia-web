@@ -13,11 +13,13 @@ import { AnalystPanel } from '../components/compare/AnalystPanel';
 
 // Icons
 import { LayoutDashboard, TrendingUp, ShieldAlert, PieChart, GitMerge, Lightbulb } from 'lucide-react';
+import { AdUnit } from '../components/AdUnit';
+import { useAppContext } from '../context/AppContext';
 
 type TabId = 'overview' | 'performance' | 'risk' | 'allocation' | 'correlation' | 'analyst';
 
 export const Compare: React.FC = () => {
-  const isProUser = true; // Set to true for institutional dashboard view
+  const { isProUser } = useAppContext();
   const [selectedAssetIds, setSelectedAssetIds] = useState<string[]>(DEFAULT_ASSETS);
   const [activeTab, setActiveTab] = useState<TabId>('overview');
 
@@ -101,15 +103,31 @@ export const Compare: React.FC = () => {
       </div>
 
       {/* ─── TAB CONTENT PANELS ────────────────────────────────────────────── */}
-      <div className="min-h-[500px]">
-        {activeTab === 'overview' && <OverviewPanel assets={selectedAssets} />}
-        {activeTab === 'performance' && <PerformancePanel assets={selectedAssets} />}
-        {activeTab === 'risk' && <RiskPanel assets={selectedAssets} isProUser={isProUser} />}
-        {activeTab === 'allocation' && <AllocationPanel />}
-        {activeTab === 'correlation' && <CorrelationHeatmap assets={selectedAssets} />}
-        {activeTab === 'analyst' && <AnalystPanel assets={selectedAssets} isProUser={isProUser} />}
+      <div className="flex flex-col lg:flex-row gap-6">
+        <div className="flex-1 min-w-0 min-h-[500px]">
+          {activeTab === 'overview' && <OverviewPanel assets={selectedAssets} />}
+          {activeTab === 'performance' && <PerformancePanel assets={selectedAssets} />}
+          {activeTab === 'risk' && <RiskPanel assets={selectedAssets} isProUser={isProUser} />}
+          {activeTab === 'allocation' && <AllocationPanel />}
+          {activeTab === 'correlation' && <CorrelationHeatmap assets={selectedAssets} />}
+          {activeTab === 'analyst' && <AnalystPanel assets={selectedAssets} isProUser={isProUser} />}
+        </div>
+        
+        {!isProUser && (
+           <aside className="lg:w-[300px] shrink-0">
+             <div className="sticky top-[140px] space-y-6">
+                <AdUnit size="medium" partner="binance" label="Sponsored Integration" />
+                <AdUnit size="skyscraper" partner="ledger" label="Secure Your Portfolio" />
+             </div>
+           </aside>
+        )}
       </div>
 
+      {!isProUser && (
+        <div className="flex justify-center pt-8 border-t border-border mt-12">
+          <AdUnit size="leaderboard" partner="bybit" />
+        </div>
+      )}
     </div>
   );
 };

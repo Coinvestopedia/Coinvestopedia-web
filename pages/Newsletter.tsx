@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { NewsletterSignup } from '../components/NewsletterSignup';
 import { Card } from '../components/Card';
 import { IconCard } from '../components/IconCard';
-import { Mail, Sparkles, TrendingUp, BarChart3, Shield, Clock, Check, Users, Target } from 'lucide-react';
+import { Mail, Sparkles, TrendingUp, BarChart3, Shield, Clock, Check, Users, Target, ArrowLeft, ArrowUpRight, X } from 'lucide-react';
 import { Button } from '../components/Button';
+import { Modal } from '../components/Modal';
 
 export const Newsletter: React.FC = () => {
+  const [selectedIssue, setSelectedIssue] = useState<any>(null);
+
   const sampleIssues = [
     {
       date: 'Dec 9, 2025',
@@ -109,7 +112,7 @@ export const Newsletter: React.FC = () => {
       <section className="mb-16 lg:mb-24">
         <div className="flex items-center justify-between mb-8">
           <h2 className="text-2xl lg:text-3xl font-bold">Recent Issues</h2>
-          <Button variant="secondary">
+          <Button variant="secondary" onClick={() => setSelectedIssue(sampleIssues[0])}>
             Read Sample Issue
           </Button>
         </div>
@@ -136,13 +139,67 @@ export const Newsletter: React.FC = () => {
                 ))}
               </ul>
               
-              <button className="w-full py-3 bg-primary/10 text-primary font-semibold rounded-lg hover:bg-primary hover:text-white transition-colors">
+              <button 
+                onClick={() => setSelectedIssue(issue)}
+                className="w-full py-3 bg-primary/10 text-primary font-semibold rounded-lg hover:bg-primary hover:text-white transition-colors"
+              >
                 Read This Issue
               </button>
             </Card>
           ))}
         </div>
       </section>
+
+      {/* Sample Issue Modal */}
+      <Modal 
+        isOpen={!!selectedIssue} 
+        onClose={() => setSelectedIssue(null)}
+        title={selectedIssue?.title || "Sample Issue"}
+        size="lg"
+      >
+        {selectedIssue && (
+          <div className="space-y-6">
+            <div className="flex justify-between items-center text-xs text-text-muted border-b border-border pb-4">
+              <span className="font-bold text-primary italic uppercase tracking-widest leading-none">
+                 The Coinvestopedia Weekly
+              </span>
+              <span>{selectedIssue.date}</span>
+            </div>
+
+            <div className="prose prose-invert max-w-none">
+               <h2 className="text-2xl font-bold mb-4">Inside the Institutional Lens</h2>
+               <p className="text-text-muted mb-4 italic">"Providing clarity across the macro-crypto transmission corridor."</p>
+               
+               <h3 className="text-lg font-bold text-primary mb-2">Executive Summary</h3>
+               <p className="text-sm mb-4">The current market regime is shifting toward institutional consolidation. Our proprietary data shows a persistent shift in exchange vs. vault balances, suggesting a multi-quarter accumulation cycle is maturing.</p>
+               
+               <div className="bg-surface p-4 rounded-xl border border-border mb-6">
+                  <h4 className="text-sm font-bold mb-3 uppercase tracking-tighter text-text-muted">High-Conviction Bullet Points</h4>
+                  <ul className="space-y-3">
+                    {selectedIssue.highlights.map((h: string, i: number) => (
+                      <li key={i} className="flex gap-3 text-sm">
+                         <div className="mt-1 w-1.5 h-1.5 rounded-full bg-primary shrink-0" />
+                         <span>{h}</span>
+                      </li>
+                    ))}
+                  </ul>
+               </div>
+
+               <p className="text-sm leading-relaxed text-text-muted">
+                 Full issues include proprietary charts, Glassnode-backed on-chain metrics, and deep-dive macro correlations. 
+                 Professionals subscribe to save time and gain institutional-grade clarity.
+               </p>
+            </div>
+
+            <div className="pt-6 border-t border-border flex flex-col gap-4">
+               <p className="text-xs text-center text-text-muted">Ready for the full institutional briefing?</p>
+               <Button isFullWidth onClick={() => setSelectedIssue(null)}>
+                  Get Next Issue (Free)
+               </Button>
+            </div>
+          </div>
+        )}
+      </Modal>
 
       {/* Stats */}
       <section className="mb-16 lg:mb-24">

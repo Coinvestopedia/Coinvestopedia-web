@@ -140,7 +140,12 @@ export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
 
   return (
     <div className="animate-fade-in space-y-12 lg:space-y-20">
-      <Hero />
+      <div className="flex flex-col items-center gap-4">
+         <span className="text-[10px] text-text-muted uppercase tracking-[0.2em] font-bold">Recommended Partner</span>
+         <AdUnit size="leaderboard" partner="binance" />
+      </div>
+      
+      <Hero onNavigate={onNavigate} />
       
       {/* Featured Comparisons Section */}
       <section>

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { BookOpen, Clock, ExternalLink, Shield, Zap, BarChart3, Globe } from 'lucide-react';
+import { BookOpen, Clock, ExternalLink, Shield, Zap, BarChart3, Globe, ArrowUpRight } from 'lucide-react';
 import { AdUnit } from '../components/AdUnit';
 import { NativeSponsoredCard } from '../components/NativeSponsoredCard';
 import { Button } from '../components/Button';
@@ -137,25 +137,31 @@ export const Research: React.FC = () => {
             ))}
           </div>
 
-          <div className="flex flex-col items-center gap-2 pt-8">
+          <div className="flex flex-col items-center gap-6 pt-12 border-t border-border mt-12 w-full">
+            <div className="text-center space-y-2">
+               <h3 className="text-xl font-bold">Deep Dive into On-Chain Data</h3>
+               <p className="text-sm text-text-muted">Access professional-grade on-chain intelligence directly from the source.</p>
+            </div>
+            
             <a
-              href="https://insights.glassnode.com/tag/newsletter/"
+              href="https://glassnode.com/registration/?ref=COINVEST"
               target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 text-xs text-text-muted hover:text-primary border border-border hover:border-primary rounded-lg px-4 py-2 transition-colors font-sans mx-auto w-fit mt-4"
+              rel="noopener sponsored"
+              className="flex items-center gap-3 px-8 py-4 bg-primary text-background font-bold rounded-xl hover:bg-primary-light transition-all shadow-lg shadow-primary/20 hover:-translate-y-1"
             >
-              View all editions on Glassnode Insights
-              <ExternalLink size={12} />
+              Get Glassnode Professional
+              <ArrowUpRight size={20} />
             </a>
-            <p className="text-center text-[10px] text-text-muted pt-2 font-body">
-              Research by Glassnode · The Week On-Chain · Published every Tuesday ·{" "}
+
+            <p className="text-center text-[10px] text-text-muted pt-2 font-body max-w-md mx-auto">
+              Institutional analysis provided in partnership with Glassnode Insights · The Week On-Chain · Published Weekly · {" "}
               <a
                 href="https://insights.glassnode.com"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="underline underline-offset-2 hover:text-primary transition-colors"
               >
-                insights.glassnode.com
+                glassnode.com
               </a>
             </p>
           </div>
