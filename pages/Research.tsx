@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react';
 import { BookOpen, Clock, ExternalLink, Shield, Zap, BarChart3, Globe, ArrowUpRight } from 'lucide-react';
 import { AdUnit } from '../components/AdUnit';
-import { NativeSponsoredCard } from '../components/NativeSponsoredCard';
 import { Button } from '../components/Button';
+import { PageRoute } from '../types';
+import { useAppContext } from '../context/AppContext';
 
 export interface GlassnodeArticle {
   title: string;
@@ -81,6 +82,7 @@ const GLASSNODE_ARTICLES: GlassnodeArticle[] = [
 ];
 
 export const Research: React.FC = () => {
+  const { isProUser } = useAppContext();
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -103,10 +105,11 @@ export const Research: React.FC = () => {
         </div>
       </div>
 
-      {/* Page Leaderboard */}
-      <div className="mb-12 flex justify-center">
-         <AdUnit size="leaderboard" partner="okx" label="Exchange Sponsor" />
-      </div>
+       {!isProUser && (
+        <div className="mb-12 flex justify-center">
+           <AdUnit size="leaderboard" context={{ page: PageRoute.RESEARCH }} label="Exchange Sponsor" />
+        </div>
+      )}
 
       <div className="grid grid-cols-1 xl:grid-cols-4 gap-8">
         <div className="xl:col-span-3 space-y-8">
@@ -122,15 +125,9 @@ export const Research: React.FC = () => {
               <ResearchCard key={idx} article={article} />
             ))}
             
-            {/* Native Sponsored Card */}
-            <NativeSponsoredCard 
-              title="Automate Your On-Chain Strategy"
-              description="Connect your exchange keys to 3Commas and let AI bots trade the on-chain signals for you 24/7."
-              ctaLabel="Start Free Trial"
-              href="#"
-              partner="3Commas"
-              image="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?auto=format&fit=crop&q=80&w=400"
-            />
+            {!isProUser && (
+               <AdUnit size="native" context={{ page: PageRoute.RESEARCH }} label="Sponsor" />
+            )}
 
             {GLASSNODE_ARTICLES.slice(2).map((article, idx) => (
               <ResearchCard key={idx + 2} article={article} />
@@ -146,7 +143,7 @@ export const Research: React.FC = () => {
             <a
               href="https://glassnode.com/registration/?ref=COINVEST"
               target="_blank"
-              rel="noopener sponsored"
+              rel="nofollow sponsored"
               className="flex items-center gap-3 px-8 py-4 bg-primary text-background font-bold rounded-xl hover:bg-primary-light transition-all shadow-lg shadow-primary/20 hover:-translate-y-1"
             >
               Get Glassnode Professional
@@ -168,38 +165,40 @@ export const Research: React.FC = () => {
         </div>
 
         {/* Research Sidebar */}
-        <aside className="hidden xl:block space-y-8">
-           <AdUnit size="medium" partner="ledger" label="Sponsored Content" />
-           
-           <div className="leather-card p-6 rounded-xl border-dashed border-border">
-              <h4 className="font-bold text-sm mb-4 flex items-center gap-2">
-                 <Shield size={16} className="text-primary" />
-                 Pro Research
-              </h4>
-              <p className="text-xs text-text-muted mb-6 leading-relaxed">
-                 Get access to live dashboards, custom alerts, and historical CSV exports for institutional analysis.
-              </p>
-              <Button isFullWidth size="sm">Upgrade to Pro</Button>
-           </div>
-
-           <div className="p-6 bg-surface border border-border rounded-xl">
-              <h4 className="font-bold text-sm mb-4">Market Indicators</h4>
-              <div className="space-y-4">
-                 {[
-                    { label: 'Market Heating', value: 'Moderate', color: 'text-amber-400' },
-                    { label: 'Exchange Reserve', value: 'Decreasing', color: 'text-emerald-400' },
-                    { label: 'Miner Balance', value: 'Neutral', color: 'text-text' }
-                 ].map(stat => (
-                    <div key={stat.label} className="flex justify-between items-center">
-                       <span className="text-xs text-text-muted">{stat.label}</span>
-                       <span className={`text-xs font-bold ${stat.color}`}>{stat.value}</span>
-                    </div>
-                 ))}
+        {!isProUser && (
+           <aside className="hidden xl:block space-y-8">
+              <AdUnit size="medium" context={{ page: PageRoute.RESEARCH }} label="Sponsored Content" />
+              
+              <div className="leather-card p-6 rounded-xl border-dashed border-border">
+                 <h4 className="font-bold text-sm mb-4 flex items-center gap-2">
+                    <Shield size={16} className="text-primary" />
+                    Pro Research
+                 </h4>
+                 <p className="text-xs text-text-muted mb-6 leading-relaxed">
+                    Get access to live dashboards, custom alerts, and historical CSV exports for institutional analysis.
+                 </p>
+                 <Button isFullWidth size="sm">Upgrade to Pro</Button>
               </div>
-           </div>
 
-           <AdUnit size="skyscraper" partner="bybit" label="Liquidity Partner" />
-        </aside>
+              <div className="p-6 bg-surface border border-border rounded-xl">
+                 <h4 className="font-bold text-sm mb-4">Market Indicators</h4>
+                 <div className="space-y-4">
+                    {[
+                       { label: 'Market Heating', value: 'Moderate', color: 'text-amber-400' },
+                       { label: 'Exchange Reserve', value: 'Decreasing', color: 'text-emerald-400' },
+                       { label: 'Miner Balance', value: 'Neutral', color: 'text-text' }
+                    ].map(stat => (
+                       <div key={stat.label} className="flex justify-between items-center">
+                          <span className="text-xs text-text-muted">{stat.label}</span>
+                          <span className={`text-xs font-bold ${stat.color}`}>{stat.value}</span>
+                       </div>
+                    ))}
+                 </div>
+              </div>
+
+              <AdUnit size="skyscraper" context={{ page: PageRoute.RESEARCH }} label="Liquidity Partner" />
+           </aside>
+        )}
       </div>
     </div>
   );

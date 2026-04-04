@@ -14,6 +14,7 @@ import { Input } from '../components/Input';
 import { useAppContext } from '../context/AppContext';
 import { PulseIcon } from '../components/AnimatedIcons';
 import { fetchWhaleAlerts, fetchMempoolTxs } from '../services/api';
+import { PageRoute } from '../types';
 
 // Helper to generate fake ETH addresses
 const generateEthAddress = () => {
@@ -89,7 +90,7 @@ const flowData = [
 ];
 
 export const WhaleTracker: React.FC = () => {
-   const { addToast } = useAppContext();
+   const { addToast, isProUser } = useAppContext();
    const [tableData, setTableData] = useState<any[]>([]);
    const [fullLiveDataset, setFullLiveDataset] = useState<any[]>(ALL_MOCK_TRANSACTIONS);
    const [isLoading, setIsLoading] = useState(true);
@@ -307,7 +308,7 @@ export const WhaleTracker: React.FC = () => {
       </div>
 
       <div className="mb-8 flex justify-center">
-         <AdUnit size="leaderboard" partner="kucoin" label="Market Liquidity" />
+         <AdUnit size="leaderboard" context={{ page: PageRoute.WHALE }} label="Market Liquidity" />
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 lg:gap-6 mb-6 lg:mb-8">
@@ -380,6 +381,12 @@ export const WhaleTracker: React.FC = () => {
         </div>
       </div>
 
+      {!isProUser && (
+        <div className="flex justify-center mb-8">
+           <AdUnit size="native" context={{ page: PageRoute.WHALE }} label="Whale Analyst" />
+        </div>
+      )}
+
       <div className="leather-card rounded-xl overflow-hidden mb-6 lg:mb-8">
          <div className="p-3 lg:p-4 border-b border-border bg-background/50 flex justify-between items-center relative z-10">
             <h3 className="font-bold text-sm lg:text-base">Recent Large Transactions</h3>
@@ -426,7 +433,7 @@ export const WhaleTracker: React.FC = () => {
               renderAfterRow={(index) => index === 4 ? (
                 <tr>
                   <td colSpan={7} className="p-4 bg-surface/50 border-b border-border">
-                    <AdUnit size="leaderboard" partner="binance" label="Sponsored Alert" />
+                    <AdUnit size="leaderboard" partner="htx" context={{ page: PageRoute.WHALE }} label="Sponsored Alert" />
                   </td>
                 </tr>
               ) : null}
@@ -445,7 +452,7 @@ export const WhaleTracker: React.FC = () => {
                   <Button className="mt-2" size="lg">Upgrade to Pro</Button>
                </div>
                <div className="hidden md:block sticky top-24">
-                  <AdUnit size="medium" partner="ledger" label="Sponsored" />
+                  <AdUnit size="medium" context={{ page: PageRoute.WHALE }} label="Sponsored" />
                </div>
             </div>
             <div className="opacity-30 blur-sm pointer-events-none p-4 space-y-4">

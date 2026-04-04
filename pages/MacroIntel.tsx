@@ -10,6 +10,8 @@ import { fetchMacroIndicators } from '../services/api';
 import { AdUnit } from '../components/AdUnit';
 import { LeaderboardAd } from '../components/LeaderboardAd';
 import { AffiliateCTA } from '../components/AffiliateCTA';
+import { PageRoute } from '../types';
+import { useAppContext } from '../context/AppContext';
 
 // ─── TYPES ────────────────────────────────────────────────────────────────────
 
@@ -563,6 +565,7 @@ const ReportCard: React.FC<{ report: MacroReport; onClick: () => void }> = ({ re
 // ─── MAIN PAGE ────────────────────────────────────────────────────────────────
 
 export const MacroIntel: React.FC = () => {
+  const { isProUser } = useAppContext();
   const [activeTab, setActiveTab] = useState<MacroTab>('weekly');
   const [activeReportId, setActiveReportId] = useState<string | null>(null);
 
@@ -632,11 +635,11 @@ export const MacroIntel: React.FC = () => {
                   </section>
                   
                   {/* Ad after Section 1 */}
-                  {idx === 0 && (
+                  {idx === 0 && !isProUser && (
                     <div className="py-8 border-y border-border/50 my-12">
                        <div className="flex flex-col items-center gap-4">
                           <span className="text-[10px] text-text-muted uppercase tracking-[0.2em] font-bold">Research Sponsor</span>
-                          <AdUnit size="leaderboard" partner="binance" />
+                          <AdUnit size="leaderboard" context={{ page: PageRoute.MACRO_INTEL }} />
                        </div>
                     </div>
                   )}
@@ -663,7 +666,7 @@ export const MacroIntel: React.FC = () => {
           {/* Sticky Reader Sidebar */}
           <aside className="hidden lg:block lg:col-span-1">
             <div className="sticky top-28 space-y-8">
-               <AdUnit size="medium" partner="ledger" label="Sponsored Content" />
+               {!isProUser && <AdUnit size="medium" context={{ page: PageRoute.MACRO_INTEL }} label="Sponsored Content" />}
                
                <div className="p-6 bg-surface border border-border rounded-xl">
                   <h4 className="font-bold text-sm mb-4">Related Intelligence</h4>
@@ -677,7 +680,7 @@ export const MacroIntel: React.FC = () => {
                   </div>
                </div>
 
-               <AdUnit size="skyscraper" partner="kucoin" label="Market Liquidity" />
+               {!isProUser && <AdUnit size="skyscraper" context={{ page: PageRoute.MACRO_INTEL }} label="Market Liquidity" />}
             </div>
           </aside>
         </div>
@@ -701,12 +704,20 @@ export const MacroIntel: React.FC = () => {
           <p className="text-text-muted max-w-2xl leading-relaxed">
             You are a professional investor. Here is what is happening in the world. Here is how it flows through traditional markets into crypto. Here is what questions you should be asking.
           </p>
+
+          {!isProUser && (
+             <div className="mt-8">
+                <AdUnit size="native" context={{ page: PageRoute.MACRO_INTEL }} label="Macro Sponsor" />
+             </div>
+          )}
         </div>
       </div>
 
-      <div className="mt-8 mb-4 flex justify-center">
-        <AdUnit size="leaderboard" partner="coinledger" label="Data Sponsor" />
-      </div>
+      {!isProUser && (
+        <div className="mt-8 mb-4 flex justify-center">
+          <AdUnit size="leaderboard" context={{ page: PageRoute.MACRO_INTEL }} label="Data Sponsor" />
+        </div>
+      )}
 
       <LiveMacroBar />
 
@@ -757,7 +768,7 @@ export const MacroIntel: React.FC = () => {
 
         {/* List Sidebar Ad */}
         <aside className="hidden xl:flex flex-col gap-6">
-          <AdUnit size="medium" partner="kucoin" label="Sponsored Integration" />
+          {!isProUser && <AdUnit size="medium" context={{ page: PageRoute.MACRO_INTEL }} label="Sponsored Integration" />}
           <div className="leather-card p-6 rounded-xl border-dashed border-border flex flex-col items-center justify-center text-center">
              <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary mb-4">
                 <ArchiveIcon size={24} />
@@ -766,7 +777,7 @@ export const MacroIntel: React.FC = () => {
              <p className="text-xs text-text-muted mb-4">Access 5+ years of historical macro data and cross-asset correlations.</p>
              <Button variant="secondary" size="sm" isFullWidth>Unlock with Pro</Button>
           </div>
-          <AdUnit size="skyscraper" partner="3commas" label="Trading Tools" />
+          {!isProUser && <AdUnit size="skyscraper" context={{ page: PageRoute.MACRO_INTEL }} label="Trading Tools" />}
         </aside>
       </div>
     </div>

@@ -15,6 +15,7 @@ import { AnalystPanel } from '../components/compare/AnalystPanel';
 import { LayoutDashboard, TrendingUp, ShieldAlert, PieChart, GitMerge, Lightbulb } from 'lucide-react';
 import { AdUnit } from '../components/AdUnit';
 import { useAppContext } from '../context/AppContext';
+import { PageRoute } from '../types';
 
 type TabId = 'overview' | 'performance' | 'risk' | 'allocation' | 'correlation' | 'analyst';
 
@@ -82,7 +83,7 @@ export const Compare: React.FC = () => {
 
       {!isProUser && (
         <div className="flex justify-center mt-2 mb-4">
-          <AdUnit size="leaderboard" partner="binance" label="Sponsored Integration" />
+          <AdUnit size="leaderboard" context={{ page: PageRoute.COMPARE }} label="Sponsored Integration" />
         </div>
       )}
 
@@ -107,6 +108,12 @@ export const Compare: React.FC = () => {
           );
         })}
       </div>
+      
+      {!isProUser && (
+        <div className="flex justify-center py-4">
+          <AdUnit size="native" context={{ page: PageRoute.COMPARE }} label="Analyst Insight" />
+        </div>
+      )}
 
       {/* ─── TAB CONTENT PANELS ────────────────────────────────────────────── */}
       <div className="flex flex-col lg:flex-row gap-6">
@@ -122,8 +129,8 @@ export const Compare: React.FC = () => {
         {!isProUser && (
            <aside className="lg:w-[300px] shrink-0">
              <div className="sticky top-[140px] space-y-6">
-                <AdUnit size="medium" partner="binance" label="Sponsored Integration" />
-                <AdUnit size="skyscraper" partner="ledger" label="Secure Your Portfolio" />
+                <AdUnit size="medium" context={{ page: PageRoute.COMPARE }} label="Sponsored Integration" />
+                <AdUnit size="skyscraper" context={{ page: PageRoute.COMPARE }} label="Secure Your Portfolio" />
              </div>
            </aside>
         )}
@@ -131,7 +138,7 @@ export const Compare: React.FC = () => {
 
       {!isProUser && (
         <div className="flex justify-center pt-8 border-t border-border mt-12">
-          <AdUnit size="leaderboard" partner="bybit" />
+          <AdUnit size="leaderboard" context={{ page: PageRoute.COMPARE }} />
         </div>
       )}
     </div>

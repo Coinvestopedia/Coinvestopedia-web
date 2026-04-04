@@ -142,10 +142,14 @@ export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
     <div className="animate-fade-in space-y-12 lg:space-y-20">
       <div className="flex flex-col items-center gap-4">
          <span className="text-[10px] text-text-muted uppercase tracking-[0.2em] font-bold">Recommended Partner</span>
-         <AdUnit size="leaderboard" partner="binance" />
+         <AdUnit size="leaderboard" context={{ page: PageRoute.HOME }} />
       </div>
       
       <Hero onNavigate={onNavigate} />
+
+      <div className="flex justify-center -mt-8 mb-4">
+         <AdUnit size="native" context={{ page: PageRoute.HOME }} label="Sponsor" />
+      </div>
       
       {/* Featured Comparisons Section */}
       <section>
@@ -213,12 +217,15 @@ export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
         <MarketPulseDashboard onNavigate={onNavigate} />
       </section>
 
+      <div className="flex justify-center my-12">
+         <AdUnit size="billboard" context={{ page: PageRoute.HOME }} label="Market Sponsor" />
+      </div>
+
       {/* Live Feed & Ad */}
       <section className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
         <LiveActivityFeed />
         <div className="flex flex-col gap-6">
-           {/* Passing partner="3commas" for diversity, or remove prop for random */}
-           <AdUnit size="large" className="w-full h-full min-h-[250px]" label="Sponsored Partner" partner="3commas" />
+           <AdUnit size="large" className="w-full h-full min-h-[250px]" label="Sponsored Partner" context={{ page: PageRoute.HOME }} />
         </div>
       </section>
 
@@ -242,7 +249,10 @@ export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
       </section>
 
       {/* Newsletter */}
-      <section>
+      <section className="relative">
+        <div className="absolute -top-12 right-0 hidden xl:block">
+           <AdUnit size="native" context={{ page: PageRoute.HOME }} />
+        </div>
         <NewsletterSignup />
       </section>
     </div>

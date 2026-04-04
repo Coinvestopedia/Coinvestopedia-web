@@ -5,7 +5,8 @@ import { Search, ArrowLeft, Clock, Share2, BookmarkPlus, Globe, Shield, Building
 import { TargetIcon } from '../components/AnimatedIcons';
 import { AdUnit } from '../components/AdUnit';
 import { AffiliateCTA } from '../components/AffiliateCTA';
-import { NativeSponsoredCard } from '../components/NativeSponsoredCard';
+import { PageRoute } from '../types';
+import { useAppContext } from '../context/AppContext';
 
 const CATEGORIES = ['All', 'Sovereignty', 'Regulation', 'Institutions', 'Markets', 'Geopolitics'];
 
@@ -563,6 +564,7 @@ export const ARTICLES: Article[] = [
 ];
 
 export const Insights: React.FC = () => {
+  const { isProUser } = useAppContext();
   const [activeArticleId, setActiveArticleId] = useState<string | null>(null);
   const [activeCategory, setActiveCategory] = useState('All');
   const [searchQuery, setSearchQuery] = useState('');
@@ -642,9 +644,11 @@ export const Insights: React.FC = () => {
               </div>
             </div>
 
-            <div className="mb-12 flex justify-center py-4 border-b border-border/30">
-               <AdUnit size="leaderboard" partner="binance" label="Research Sponsor" />
-            </div>
+             {!isProUser && (
+               <div className="mb-12 flex justify-center py-4 border-b border-border/30">
+                  <AdUnit size="leaderboard" context={{ page: PageRoute.INSIGHTS }} label="Research Sponsor" />
+               </div>
+             )}
 
             <article className="prose prose-invert max-w-none text-text leading-relaxed text-lg">
               {activeArticle.content}
@@ -665,15 +669,17 @@ export const Insights: React.FC = () => {
                </div>
             </div>
             
-            <div className="mt-12 flex justify-center">
-               <AdUnit size="billboard" partner="okx" label="Trading Partner" />
-            </div>
+             {!isProUser && (
+               <div className="mt-12 flex justify-center">
+                  <AdUnit size="billboard" context={{ page: PageRoute.INSIGHTS }} label="Trading Partner" />
+               </div>
+             )}
           </div>
 
           {/* Sticky Article Sidebar */}
           <aside className="hidden lg:block lg:col-span-1">
             <div className="sticky top-28 space-y-8">
-               <AdUnit size="medium" partner="ledger" label="Sponsored Integration" />
+               {!isProUser && <AdUnit size="medium" context={{ page: PageRoute.INSIGHTS }} label="Sponsored Integration" />}
                
                <div className="p-6 bg-surface border border-border rounded-xl">
                   <h4 className="font-bold text-sm mb-4">You might also like</h4>
@@ -687,7 +693,7 @@ export const Insights: React.FC = () => {
                   </div>
                </div>
 
-               <AdUnit size="skyscraper" partner="kucoin" label="Market Liquidity" />
+               {!isProUser && <AdUnit size="skyscraper" context={{ page: PageRoute.INSIGHTS }} label="Market Liquidity" />}
             </div>
           </aside>
         </div>
@@ -726,6 +732,12 @@ export const Insights: React.FC = () => {
            />
         </div>
       </div>
+
+      {!isProUser && (
+         <div className="flex justify-center">
+            <AdUnit size="native" context={{ page: PageRoute.INSIGHTS }} label="Knowledge Partner" />
+         </div>
+      )}
 
       {/* Category Pills */}
       <div className="flex items-center gap-2 overflow-x-auto pb-4 scrollbar-hide">
@@ -788,10 +800,12 @@ export const Insights: React.FC = () => {
       </section>
 
       {/* Mid-list Ad Break */}
-      <div className="py-2 border-y border-border/50 flex flex-col items-center gap-4">
-         <span className="text-[10px] text-text-muted uppercase tracking-[0.2em] font-bold">Research Sponsor</span>
-         <AdUnit size="leaderboard" partner="kucoin" />
-      </div>
+      {!isProUser && (
+        <div className="py-2 border-y border-border/50 flex flex-col items-center gap-4">
+           <span className="text-[10px] text-text-muted uppercase tracking-[0.2em] font-bold">Research Sponsor</span>
+           <AdUnit size="leaderboard" context={{ page: PageRoute.INSIGHTS }} />
+        </div>
+      )}
 
       {/* Latest Intelligence with Sidebar */}
       <div className="grid grid-cols-1 xl:grid-cols-4 gap-10">
@@ -840,7 +854,7 @@ export const Insights: React.FC = () => {
 
          {/* Insights List Sidebar */}
          <aside className="hidden xl:flex flex-col gap-8 pt-12">
-            <AdUnit size="medium" partner="ledger" label="Sponsored Content" />
+            {!isProUser && <AdUnit size="medium" context={{ page: PageRoute.INSIGHTS }} label="Sponsored Content" />}
             
             <div className="leather-card p-6 rounded-xl border border-border bg-gradient-to-b from-surface to-background">
                <h4 className="font-bold text-sm mb-4 flex items-center gap-2">
@@ -853,7 +867,7 @@ export const Insights: React.FC = () => {
                <Button isFullWidth size="sm" variant="secondary">Upgrade to Pro</Button>
             </div>
 
-            <AdUnit size="skyscraper" partner="3commas" label="Trading Tools" />
+            {!isProUser && <AdUnit size="skyscraper" context={{ page: PageRoute.INSIGHTS }} label="Trading Tools" />}
          </aside>
       </div>
     </div>

@@ -5,6 +5,8 @@ import { Input } from '../components/Input';
 import { Card } from '../components/Card';
 import { AdUnit } from '../components/AdUnit';
 import { AffiliateCTA } from '../components/AffiliateCTA';
+import { PageRoute } from '../types';
+import { useAppContext } from '../context/AppContext';
 
 // Interfaces
 interface CheckResult {
@@ -23,6 +25,7 @@ interface AuditResult {
 }
 
 export const SecurityAudit: React.FC = () => {
+    const { isProUser } = useAppContext();
     const [address, setAddress] = useState('');
     const [isAnalyzing, setIsAnalyzing] = useState(false);
     const [result, setResult] = useState<AuditResult | null>(null);
@@ -111,6 +114,12 @@ export const SecurityAudit: React.FC = () => {
                                 START SCAN
                             </Button>
                         </div>
+                        
+                        {!isProUser && (
+                           <div className="mt-8 flex justify-center">
+                              <AdUnit size="native" context={{ page: PageRoute.AUDIT }} label="Security Partner" />
+                           </div>
+                        )}
                     </div>
 
                     {isAnalyzing && (
@@ -128,7 +137,7 @@ export const SecurityAudit: React.FC = () => {
                             </Card>
                             
                             <div className="flex justify-center">
-                               <AdUnit size="leaderboard" partner="ledger" label="Sponsored Security" />
+                               <AdUnit size="leaderboard" context={{ page: PageRoute.AUDIT }} label="Sponsored Security" />
                             </div>
                          </div>
                     )}
@@ -159,7 +168,7 @@ export const SecurityAudit: React.FC = () => {
                             </div>
 
                             <div className="flex justify-center">
-                               <AdUnit size="leaderboard" partner="binance" label="Exchange Integration" />
+                               <AdUnit size="leaderboard" context={{ page: PageRoute.AUDIT }} label="Exchange Integration" />
                             </div>
 
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -232,7 +241,7 @@ export const SecurityAudit: React.FC = () => {
 
                 {/* Audit Sidebar */}
                 <aside className="hidden xl:flex flex-col gap-10">
-                   <AdUnit size="medium" partner="bybit" label="Sponsored Marketplace" />
+                   <AdUnit size="medium" context={{ page: PageRoute.AUDIT }} label="Sponsored Marketplace" />
                    
                    <div className="p-6 bg-surface border border-border rounded-2xl shadow-lg">
                       <h4 className="font-bold text-xs uppercase tracking-widest mb-6 flex items-center gap-2">
@@ -259,7 +268,7 @@ export const SecurityAudit: React.FC = () => {
                       <Button variant="secondary" size="sm" isFullWidth className="mt-8 text-[10px] font-bold">VIEW PUBLIC REPO</Button>
                    </div>
 
-                   <AdUnit size="skyscraper" partner="okx" label="Trade Secured Assets" />
+                   <AdUnit size="skyscraper" context={{ page: PageRoute.AUDIT }} label="Trade Secured Assets" />
 
                    <div className="leather-card p-6 rounded-2xl border-border border-dashed">
                       <h4 className="font-bold text-xs mb-4 flex items-center gap-2">

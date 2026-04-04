@@ -6,7 +6,7 @@ import { TargetIcon } from '../components/AnimatedIcons';
 import { PageRoute } from '../types';
 import { AdUnit } from '../components/AdUnit';
 import { AffiliateCTA } from '../components/AffiliateCTA';
-import { NativeSponsoredCard } from '../components/NativeSponsoredCard';
+import { useAppContext } from '../context/AppContext';
 
 // --- Types & Data ---
 
@@ -87,6 +87,7 @@ export interface LearnProps {
 }
 
 export const Learn: React.FC<LearnProps> = ({ onNavigate }) => {
+  const { isProUser } = useAppContext();
   const [activeCategoryId, setActiveCategoryId] = useState<string | null>(null);
 
   const featuredCourse = {
@@ -191,10 +192,16 @@ export const Learn: React.FC<LearnProps> = ({ onNavigate }) => {
             Institutional education for digital assets. From foundational concepts to complex derivatives and on-chain forensics.
           </p>
         </div>
-        <div className="hidden lg:block">
-           <AdUnit size="medium" partner="okx" label="Learning Partner" />
-        </div>
+         <div className="hidden lg:block">
+            {!isProUser && <AdUnit size="medium" context={{ page: PageRoute.LEARN }} label="Learning Partner" />}
+         </div>
       </div>
+
+      {!isProUser && (
+         <div className="flex justify-center">
+            <AdUnit size="native" context={{ page: PageRoute.LEARN }} label="Academy Sponsor" />
+         </div>
+      )}
 
       <div className="h-px bg-border/50 w-full" />
 
@@ -246,8 +253,8 @@ export const Learn: React.FC<LearnProps> = ({ onNavigate }) => {
                   className="leather-card rounded-2xl p-8 bg-gradient-to-br from-surface to-background relative overflow-hidden group cursor-pointer border border-border hover:border-primary/50 transition-all flex flex-col items-center text-center gap-6 shadow-xl"
                   onClick={() => onNavigate?.(PageRoute.RESEARCH)}
                >
-                  <div className="absolute top-0 right-0 p-4">
-                     <AdUnit size="medium" partner="ledger" label="Sponsor" />
+                   <div className="absolute top-0 right-0 p-4">
+                     {!isProUser && <AdUnit size="medium" context={{ page: PageRoute.LEARN }} label="Sponsor" />}
                   </div>
                   <div className="flex-shrink-0 w-16 h-16 bg-surface border border-border rounded-xl flex items-center justify-center text-primary group-hover:scale-110 group-hover:bg-primary/5 transition-all duration-500 shadow-inner mt-4">
                      <BookOpen size={32} className="group-hover:animate-pulse" />
@@ -285,9 +292,11 @@ export const Learn: React.FC<LearnProps> = ({ onNavigate }) => {
             </div>
 
             {/* In-feed Ad */}
-            <div className="py-8 border-y border-border/30 flex justify-center">
-               <AdUnit size="leaderboard" partner="binance" label="Academy Sponsor" />
-            </div>
+            {!isProUser && (
+               <div className="py-8 border-y border-border/30 flex justify-center">
+                  <AdUnit size="leaderboard" context={{ page: PageRoute.LEARN }} label="Academy Sponsor" />
+               </div>
+            )}
 
             {/* Categories */}
             <section>
@@ -343,22 +352,16 @@ export const Learn: React.FC<LearnProps> = ({ onNavigate }) => {
                      </Card>
                   ))}
                   
-                  {/* Native Ad Integrated in List */}
-                  <NativeSponsoredCard 
-                     title="Automate Your Trading Modules"
-                     description="Apply your academy learnings with 3Commas AI bots. The smart way to handle 24/7 markets."
-                     ctaLabel="Start Bot"
-                     href="#"
-                     partner="3Commas"
-                     image="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&q=80&w=400"
-                  />
+                   {!isProUser && (
+                      <AdUnit size="native" context={{ page: PageRoute.LEARN }} label="Sponsor" />
+                   )}
                </div>
             </section>
          </div>
 
          {/* Academy Sidebar */}
          <aside className="hidden xl:flex flex-col gap-10">
-            <AdUnit size="medium" partner="bybit" label="Sponsored Partner" />
+            {!isProUser && <AdUnit size="medium" context={{ page: PageRoute.LEARN }} label="Sponsored Partner" />}
             
             <div className="leather-card p-6 rounded-2xl border-dashed border-primary/30 bg-primary/5">
                <h4 className="font-bold text-sm mb-4 flex items-center gap-2">
@@ -399,7 +402,7 @@ export const Learn: React.FC<LearnProps> = ({ onNavigate }) => {
                </div>
             </div>
 
-            <AdUnit size="skyscraper" partner="ledger" label="Secure Your Gains" />
+            {!isProUser && <AdUnit size="skyscraper" context={{ page: PageRoute.LEARN }} label="Secure Your Gains" />}
          </aside>
       </div>
 

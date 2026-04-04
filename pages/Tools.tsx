@@ -8,6 +8,7 @@ import {
 } from 'lucide-react';
 import { useAppContext } from '../context/AppContext';
 import { AdUnit } from '../components/AdUnit';
+import { PageRoute } from '../types';
 
 // Existing Tools
 import { DCACalculator } from '../components/tools/Tier3/DCACalculator';
@@ -130,7 +131,7 @@ export const Tools: React.FC = () => {
 
         {!isProUser && (
           <div className="mb-8 flex justify-center">
-            <AdUnit size="leaderboard" partner="ledger" label="Secure Your Assets" />
+            <AdUnit size="leaderboard" context={{ page: PageRoute.TOOLS, toolId: activeToolId }} label="Secure Your Assets" />
           </div>
         )}
 
@@ -158,6 +159,12 @@ export const Tools: React.FC = () => {
             Professional-grade modelling tools and risk analytics. 
             Everything calculates in real-time on your hardware.
           </p>
+          
+          {!isProUser && (
+            <div className="mt-8">
+               <AdUnit size="native" context={{ page: PageRoute.TOOLS }} label="Featured Partner" />
+            </div>
+          )}
         </div>
       </div>
 
@@ -236,7 +243,7 @@ export const Tools: React.FC = () => {
          ═══════════════════════════════════════════════════════════════════ */}
       {!isProUser && (
         <div className="flex justify-center mt-12 mb-4">
-          <AdUnit size="leaderboard" partner="binance" label="Sponsored Integration" />
+          <AdUnit size="leaderboard" context={{ page: PageRoute.TOOLS }} label="Sponsored Integration" />
         </div>
       )}
 
@@ -247,8 +254,13 @@ export const Tools: React.FC = () => {
             Economic Calendar
           </h2>
           <div className="h-[1px] flex-1 bg-gradient-to-r from-border/50 to-transparent" />
+          {!isProUser && (
+            <div className="hidden lg:block">
+               <AdUnit size="medium" partner="tradingview" context={{ page: PageRoute.TOOLS }} label="Calendar Sponsor" />
+            </div>
+          )}
           <span className="text-[10px] font-bold text-text-muted/50 border border-border/50 px-2 py-0.5 rounded uppercase tracking-widest">
-            Powered by TradingView
+             Powered by TradingView
           </span>
         </div>
         <p className="text-sm text-text-muted font-body -mt-2">

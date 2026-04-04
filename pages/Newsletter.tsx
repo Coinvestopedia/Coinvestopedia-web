@@ -6,8 +6,11 @@ import { Mail, Sparkles, TrendingUp, BarChart3, Shield, Clock, Check, Users, Tar
 import { Button } from '../components/Button';
 import { Modal } from '../components/Modal';
 import { AdUnit } from '../components/AdUnit';
+import { PageRoute } from '../types';
+import { useAppContext } from '../context/AppContext';
 
 export const Newsletter: React.FC = () => {
+  const { isProUser } = useAppContext();
   const [selectedIssue, setSelectedIssue] = useState<any>(null);
 
   const sampleIssues = [
@@ -86,6 +89,12 @@ export const Newsletter: React.FC = () => {
             Get the top 3 crypto stories each Monday, explained in traditional finance terms. No jargon. No hype. Just analysis.
           </p>
           
+          {!isProUser && (
+             <div className="mb-10 flex justify-center">
+                <AdUnit size="native" context={{ page: PageRoute.NEWSLETTER }} label="Newsletter Sponsor" />
+             </div>
+          )}
+
           {/* Extended width container for the card */}
           <div className="w-full max-w-4xl mx-auto mt-8">
             <NewsletterSignup variant="compact" />
@@ -109,9 +118,11 @@ export const Newsletter: React.FC = () => {
         </div>
       </section>
 
-      <div className="flex justify-center mb-16 lg:mb-24">
-        <AdUnit size="leaderboard" partner="3commas" label="Trading Tools" />
-      </div>
+       {!isProUser && (
+        <div className="flex justify-center mb-16 lg:mb-24">
+          <AdUnit size="leaderboard" context={{ page: PageRoute.NEWSLETTER }} label="Trading Tools" />
+        </div>
+      )}
 
       {/* Sample Issues */}
       <section className="mb-16 lg:mb-24">
