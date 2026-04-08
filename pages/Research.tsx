@@ -78,10 +78,6 @@ const GLASSNODE_ARTICLES: GlassnodeArticle[] = [
 ];
 
 export const Research: React.FC = () => {
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-
   return (
     <div className="animate-fade-in pb-16">
       {/* Hero */}

@@ -354,7 +354,15 @@ export const Learn: React.FC<LearnProps> = ({ onNavigate }) => {
                  
                  <div className="mt-auto flex items-center justify-between text-xs text-text-muted font-medium pt-4 border-t border-border">
                     <span>{article.readTime}</span>
-                    <span className="flex items-center gap-1 group-hover:text-primary transition-colors">Read Now</span>
+                                        <button 
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setActiveCategoryId(article.catId);
+                      }}
+                      className="flex items-center gap-1 text-primary hover:underline font-bold transition-all"
+                    >
+                      Read Now →
+                    </button>
                  </div>
               </Card>
            ))}
@@ -376,10 +384,11 @@ export const Learn: React.FC<LearnProps> = ({ onNavigate }) => {
                </p>
                <Button 
                  size="lg" 
-                 variant="secondary"
-                 onClick={() => addToast('Assessment coming soon!', 'info')}
+                 variant="primary"
+                 onClick={() => addToast('The Coinvestopedia Knowledge Assessment is launching next month! Join the waitlist in the newsletter.', 'info')}
+                 className="shadow-xl"
                >
-                 Take the Assessment
+                 Join Assessment Waitlist
                </Button>
             </div>
          </div>

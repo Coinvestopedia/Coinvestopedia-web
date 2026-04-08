@@ -340,10 +340,13 @@ const AffiliateBanner: React.FC<{ banner: typeof AFFILIATE_BANNERS[0] }> = ({ ba
         <h3 className="font-bold text-base mb-1">{banner.title}</h3>
         <p className="text-text-muted text-sm">{banner.body}</p>
       </div>
-      <a href={banner.ctaUrl} target="_blank" rel="noopener sponsored">
-        <Button>
-          {banner.cta} <sup className="text-[10px] opacity-70 ml-0.5">A</sup>
-        </Button>
+      <a 
+        href={banner.ctaUrl} 
+        target="_blank" 
+        rel="noopener sponsored"
+        className="px-6 py-2.5 bg-primary text-background font-bold rounded-lg hover:bg-primary/90 transition-all shadow-lg hover:shadow-primary/20 flex items-center justify-center gap-2"
+      >
+        {banner.cta} <sup className="text-[10px] opacity-70">A</sup>
       </a>
     </div>
   </div>
@@ -493,10 +496,13 @@ const ComparisonTool: React.FC = () => {
                 <td className="p-4"></td>
                 {selectedExchanges.map(e => (
                   <td key={e.id} className="p-4 text-center">
-                    <a href={e.affiliateUrl} target="_blank" rel="noopener noreferrer">
-                      <Button size="sm">
-                        Open Account <sup className="text-[8px] opacity-70 ml-0.5">A</sup>
-                      </Button>
+                    <a 
+                      href={e.affiliateUrl} 
+                      target="_blank" 
+                      rel="noopener sponsored"
+                      className="inline-flex items-center justify-center px-4 py-2 bg-primary/10 text-primary hover:bg-primary hover:text-background font-bold text-xs rounded-lg transition-all border border-primary/20"
+                    >
+                      Open Account <sup className="text-[8px] opacity-70 ml-0.5">A</sup>
                     </a>
                   </td>
                 ))}
@@ -848,10 +854,6 @@ const DisclaimerSection: React.FC = () => {
 // ─── Main Page ────────────────────────────────────────────────────
 
 export const Exchanges: React.FC = () => {
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-
   return (
     <div className="animate-fade-in space-y-10 lg:space-y-14 pb-12">
       <PageHeader />
