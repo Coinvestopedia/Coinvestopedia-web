@@ -340,7 +340,7 @@ const AffiliateBanner: React.FC<{ banner: typeof AFFILIATE_BANNERS[0] }> = ({ ba
         <h3 className="font-bold text-base mb-1">{banner.title}</h3>
         <p className="text-text-muted text-sm">{banner.body}</p>
       </div>
-      <a href={banner.ctaUrl}>
+      <a href={banner.ctaUrl} target="_blank" rel="noopener sponsored">
         <Button>
           {banner.cta} <sup className="text-[10px] opacity-70 ml-0.5">A</sup>
         </Button>

@@ -31,9 +31,38 @@ const AppContent: React.FC = () => {
   const [currentRoute, setCurrentRoute] = useState<PageRoute>(PageRoute.HOME);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
+  // Initialize and sync route with hash
+  React.useEffect(() => {
+    const handlePopState = () => {
+      const hash = window.location.hash.replace('#', '');
+      const routeMap: Record<string, PageRoute> = Object.values(PageRoute).reduce((acc, route) => {
+        acc[route.replace('/', '')] = route;
+        return acc;
+      }, {} as Record<string, PageRoute>);
+
+      // Map special case for root
+      if (!hash || hash === '/') {
+        setCurrentRoute(PageRoute.HOME);
+      } else if (routeMap[hash]) {
+        setCurrentRoute(routeMap[hash]);
+      }
+    };
+
+    // Initial load
+    handlePopState();
+
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
+
   const handleNavigate = (route: PageRoute) => {
     setCurrentRoute(route);
     setIsMobileMenuOpen(false); // Close menu if navigating
+    
+    // Update hash and push to history
+    const hash = route === PageRoute.HOME ? '' : `#${route.replace('/', '')}`;
+    window.history.pushState({}, '', window.location.pathname + hash);
+    
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
@@ -129,7 +158,7 @@ const AppContent: React.FC = () => {
 
             {/* Col 5: Right Sidebar */}
             <div className="mt-12 lg:mt-0 hidden xl:block">
-              <SidebarRight />
+              <SidebarRight onNavigate={handleNavigate} />
             </div>
 
           </div>

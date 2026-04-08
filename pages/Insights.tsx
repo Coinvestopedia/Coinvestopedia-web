@@ -3,6 +3,7 @@ import { Card } from '../components/Card';
 import { Button } from '../components/Button';
 import { Search, ArrowLeft, Clock, Share2, BookmarkPlus, Globe, Shield, Building2 } from 'lucide-react';
 import { TargetIcon } from '../components/AnimatedIcons';
+import { useAppContext } from '../context/AppContext';
 
 const CATEGORIES = ['All', 'Sovereignty', 'Regulation', 'Institutions', 'Markets', 'Geopolitics'];
 
@@ -560,6 +561,7 @@ export const ARTICLES: Article[] = [
 ];
 
 export const Insights: React.FC = () => {
+  const { addToast } = useAppContext();
   const [activeArticleId, setActiveArticleId] = useState<string | null>(null);
   const [activeCategory, setActiveCategory] = useState('All');
   const [searchQuery, setSearchQuery] = useState('');
@@ -793,7 +795,13 @@ export const Insights: React.FC = () => {
       </section>
       
       <div className="flex justify-center mt-8">
-         <Button variant="secondary" size="lg">Load More Research</Button>
+         <Button 
+            variant="secondary" 
+            size="lg"
+            onClick={() => addToast('More research is being indexed. Coming soon!', 'info')}
+         >
+            Load More Research
+         </Button>
       </div>
     </div>
   );

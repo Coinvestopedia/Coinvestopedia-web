@@ -298,11 +298,28 @@ export const WhaleTracker: React.FC = () => {
                   className="w-full bg-surface border border-border rounded-lg pl-9 pr-4 py-2 text-sm focus:outline-none focus:border-primary transition-colors"
                />
             </div>
-            <Button size="sm" variant="secondary" icon={<Filter size={16} />}>Filters</Button>
+            <Button 
+              size="sm" 
+              variant="secondary" 
+              icon={<Filter size={16} />}
+              onClick={() => addToast('Filters coming soon!', 'info')}
+            >
+              Filters
+            </Button>
         </div>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 lg:gap-6 mb-6 lg:mb-8">
+        <div className="leather-card p-4 lg:p-6 rounded-xl">
+           <div className="text-text-muted text-xs lg:text-sm mb-1">24h Large Inflows</div>
+           <div className="text-xl lg:text-2xl font-bold text-[#EF4444]">$1.2B</div>
+           <div className="text-xs text-text-muted mt-1">Potential Sell Pressure</div>
+        </div>
+        <div className="leather-card p-4 lg:p-6 rounded-xl">
+           <div className="text-text-muted text-xs lg:text-sm mb-1">24h Large Outflows</div>
+           <div className="text-xl lg:text-2xl font-bold text-primary">$850M</div>
+           <div className="text-xs text-text-muted mt-1">Accumulation</div>
+        </div>
         <div className="leather-card p-4 lg:p-6 rounded-xl">
            <div className="text-text-muted text-xs lg:text-sm mb-1">24h Large Inflows</div>
            <div className="text-xl lg:text-2xl font-bold text-[#EF4444]">$1.2B</div>
@@ -426,7 +443,12 @@ export const WhaleTracker: React.FC = () => {
                </div>
                <h3 className="text-lg lg:text-xl font-bold text-center">Unlock Full Live Tracking</h3>
                <p className="text-text-muted text-sm lg:text-base max-w-md text-center">Get access to historical data, wallet labelling, and real-time push notifications.</p>
-               <Button className="mt-2">Upgrade to Pro</Button>
+               <Button 
+                className="mt-2"
+                onClick={() => addToast('Pro subscription coming soon!', 'info')}
+               >
+                 Upgrade to Pro
+               </Button>
             </div>
             <div className="opacity-30 blur-sm pointer-events-none p-4 space-y-4">
                {[1,2,3].map(i => <div key={i} className="h-8 lg:h-10 bg-background rounded w-full"></div>)}

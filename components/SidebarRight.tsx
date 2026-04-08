@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import { AdUnit } from './AdUnit';
-import { getMarketInsight, InsightResult } from '../services/geminiService';
-import { Sparkles, ArrowUpRight, ExternalLink } from 'lucide-react';
+import { PageRoute } from '../types';
 
-export const SidebarRight: React.FC = () => {
+interface SidebarRightProps {
+  onNavigate?: (route: PageRoute) => void;
+}
+
+export const SidebarRight: React.FC<SidebarRightProps> = ({ onNavigate }) => {
   const [insight, setInsight] = useState<InsightResult | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -62,8 +63,11 @@ export const SidebarRight: React.FC = () => {
                 </div>
               </div>
             )}
-            <button className="text-xs font-bold text-primary flex items-center gap-1 hover:underline">
-              FULL REPORT <ArrowUpRight size={12} />
+            <button 
+              onClick={() => onNavigate?.(PageRoute.MACRO_INTEL)}
+              className="text-xs font-bold text-primary flex items-center gap-1 hover:underline"
+            >
+               FULL REPORT <ArrowUpRight size={12} />
             </button>
           </>
         )}
@@ -78,8 +82,12 @@ export const SidebarRight: React.FC = () => {
             { name: 'Solana', symbol: 'SOL', change: '+5.8%' },
             { name: 'Pepe', symbol: 'PEPE', change: '+12.1%' }
           ].map((coin, i) => (
-            <li key={i} className="flex justify-between items-center text-sm">
-              <span className="text-text-muted font-medium"><span className="text-text">{i + 1}.</span> {coin.name}</span>
+            <li 
+              key={i} 
+              className="flex justify-between items-center text-sm cursor-pointer group"
+              onClick={() => onNavigate?.(PageRoute.COMPARE)}
+            >
+              <span className="text-text-muted font-medium group-hover:text-primary transition-colors"><span className="text-text">{i + 1}.</span> {coin.name}</span>
               <span className="text-primary">{coin.change}</span>
             </li>
           ))}

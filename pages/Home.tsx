@@ -140,7 +140,7 @@ export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
 
   return (
     <div className="animate-fade-in space-y-12 lg:space-y-20">
-      <Hero />
+      <Hero onNavigate={onNavigate} />
       
       {/* Featured Comparisons Section */}
       <section>

@@ -1,7 +1,10 @@
-import React from 'react';
-import { Button } from './Button';
+import { PageRoute } from '../types';
 
-export const Hero: React.FC = () => {
+interface HeroProps {
+  onNavigate?: (route: PageRoute) => void;
+}
+
+export const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
   return (
     <section className="relative hero-mesh bg-background overflow-hidden py-12 lg:py-24 mb-8 lg:mb-12 rounded-2xl lg:rounded-3xl border border-border">
       <div className="relative z-10 max-w-[800px] mx-auto text-center px-4 lg:px-6">
@@ -19,10 +22,10 @@ export const Hero: React.FC = () => {
           Bridge traditional finance and crypto markets with data-driven analysis, real-time tracking, and educational resources
         </p>
         <div className="flex flex-col sm:flex-row items-center justify-center gap-3 lg:gap-4">
-          <Button size="lg">
+          <Button size="lg" onClick={() => onNavigate?.(PageRoute.COMPARE)}>
             Browse Comparisons
           </Button>
-          <Button variant="secondary" size="lg">
+          <Button variant="secondary" size="lg" onClick={() => onNavigate?.(PageRoute.NEWSLETTER)}>
             Read the Newsletter
           </Button>
         </div>

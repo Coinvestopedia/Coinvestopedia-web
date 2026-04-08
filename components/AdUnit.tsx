@@ -19,6 +19,7 @@ const PARTNERS: Record<AdPartner, {
   subOffer: string;
   description: string;
   cta: string;
+  href: string;
   icon: React.ReactNode;
 }> = {
   kucoin: {
@@ -30,6 +31,7 @@ const PARTNERS: Record<AdPartner, {
     subOffer: 'Welcome Gift',
     description: 'Find the next crypto gem on the people\'s exchange.',
     cta: 'Claim Bonus',
+    href: 'https://www.kucoin.com/r/COINVESTOPEDIA',
     icon: <Zap size={20} className="text-[#24AE8F]" />
   },
   trezor: {
@@ -41,6 +43,7 @@ const PARTNERS: Record<AdPartner, {
     subOffer: 'Total Security',
     description: 'Protect your crypto assets with the original hardware wallet.',
     cta: 'Get Safe',
+    href: 'https://trezor.io/?offer=COINVESTOPEDIA',
     icon: <Shield size={20} className="text-[#00854D]" />
   },
   '3commas': {
@@ -52,6 +55,7 @@ const PARTNERS: Record<AdPartner, {
     subOffer: 'Automate 24/7',
     description: 'The world\'s best crypto trading bots and terminal.',
     cta: 'Try For Free',
+    href: 'https://3commas.io/?partner=COINVESTOPEDIA',
     icon: <Bot size={20} className="text-[#00D09C]" />
   }
 };
@@ -107,9 +111,14 @@ export const AdUnit: React.FC<AdUnitProps> = ({ size, className = '', label = 'S
                 )}
             </div>
 
-            <button className={`mt-4 w-full py-3.5 rounded-xl font-bold text-sm flex items-center justify-center gap-2 transition-all shadow-xl hover:shadow-2xl hover:-translate-y-0.5 ${adData.accentColor}`}>
+            <a 
+              href={adData.href} 
+              target="_blank" 
+              rel="noopener sponsored"
+              className={`mt-4 w-full py-3.5 rounded-xl font-bold text-sm flex items-center justify-center gap-2 transition-all shadow-xl hover:shadow-2xl hover:-translate-y-0.5 ${adData.accentColor}`}
+            >
                 {adData.cta} <ArrowUpRight size={16} strokeWidth={3} />
-            </button>
+            </a>
         </div>
     </div>
   );

@@ -5,6 +5,8 @@ import { BookOpen, Video, FileText, PlayCircle, Star, Award, TrendingUp, Shield,
 import { TargetIcon } from '../components/AnimatedIcons';
 import { PageRoute } from '../types';
 
+import { useAppContext } from '../context/AppContext';
+
 // --- Types & Data ---
 
 type ResourceType = 'Video' | 'Article' | 'Guide' | 'Deep Dive' | 'Video Series';
@@ -18,6 +20,7 @@ interface Resource {
   level: Level;
   locked: boolean;
   desc?: string;
+  categoryId?: string;
 }
 
 interface Category {
@@ -84,6 +87,7 @@ export interface LearnProps {
 }
 
 export const Learn: React.FC<LearnProps> = ({ onNavigate }) => {
+  const { addToast } = useAppContext();
   const [activeCategoryId, setActiveCategoryId] = useState<string | null>(null);
 
   const featuredCourse = {
@@ -96,9 +100,9 @@ export const Learn: React.FC<LearnProps> = ({ onNavigate }) => {
   };
 
   const recentArticles = [
-    { title: 'Understanding Impermanent Loss in AMMs', type: 'Article', readTime: '8 min read', icon: <FileText size={16} />, tag: 'DeFi' },
-    { title: 'How to Read On-Chain Order Books', type: 'Video Series', readTime: '45 mins', icon: <Video size={16} />, tag: 'Trading' },
-    { title: 'The Evolution of Layer 2 Rollups', type: 'Deep Dive', readTime: '15 min read', icon: <FileText size={16} />, tag: 'Technology' }
+    { title: 'Understanding Impermanent Loss in AMMs', type: 'Article', readTime: '8 min read', icon: <FileText size={16} />, tag: 'DeFi', catId: 'defi' },
+    { title: 'How to Read On-Chain Order Books', type: 'Video Series', readTime: '45 mins', icon: <Video size={16} />, tag: 'Trading', catId: 'ta' },
+    { title: 'The Evolution of Layer 2 Rollups', type: 'Deep Dive', readTime: '15 min read', icon: <FileText size={16} />, tag: 'Technology', catId: 'sec' }
   ];
 
   // --- Scroll to Top on View Change ---
@@ -330,7 +334,11 @@ export const Learn: React.FC<LearnProps> = ({ onNavigate }) => {
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
            {recentArticles.map((article, i) => (
-              <Card key={i} className="flex flex-col cursor-pointer group hover:border-primary/40">
+              <Card 
+                key={i} 
+                className="flex flex-col cursor-pointer group hover:border-primary/40"
+                onClick={() => setActiveCategoryId(article.catId)}
+              >
                  <div className="flex justify-between items-start mb-4">
                     <span className="px-2 py-1 bg-surface border border-border text-xs rounded font-medium text-text-muted uppercase">
                        {article.tag}
@@ -366,7 +374,13 @@ export const Learn: React.FC<LearnProps> = ({ onNavigate }) => {
                <p className="text-text-muted mb-8">
                   Take our comprehensive 50-question assessment to identify gaps in your crypto knowledge and get personalized course recommendations.
                </p>
-               <Button size="lg" variant="secondary">Take the Assessment</Button>
+               <Button 
+                 size="lg" 
+                 variant="secondary"
+                 onClick={() => addToast('Assessment coming soon!', 'info')}
+               >
+                 Take the Assessment
+               </Button>
             </div>
          </div>
       </section>

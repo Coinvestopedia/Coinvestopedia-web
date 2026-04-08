@@ -109,7 +109,10 @@ export const Newsletter: React.FC = () => {
       <section className="mb-16 lg:mb-24">
         <div className="flex items-center justify-between mb-8">
           <h2 className="text-2xl lg:text-3xl font-bold">Recent Issues</h2>
-          <Button variant="secondary">
+          <Button 
+            variant="secondary"
+            onClick={() => window.open('https://newsletter.coinvestopedia.com/samples', '_blank')}
+          >
             Read Sample Issue
           </Button>
         </div>
@@ -136,7 +139,10 @@ export const Newsletter: React.FC = () => {
                 ))}
               </ul>
               
-              <button className="w-full py-3 bg-primary/10 text-primary font-semibold rounded-lg hover:bg-primary hover:text-white transition-colors">
+              <button 
+                onClick={() => window.open(`https://newsletter.coinvestopedia.com/issues/${issue.date.replace(/ /g, '-').toLowerCase()}`, '_blank')}
+                className="w-full py-3 bg-primary/10 text-primary font-semibold rounded-lg hover:bg-primary hover:text-white transition-colors"
+              >
                 Read This Issue
               </button>
             </Card>
