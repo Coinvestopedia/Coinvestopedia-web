@@ -1,4 +1,9 @@
+import React, { useState, useEffect } from 'react';
+import { Sparkles, ExternalLink, ArrowUpRight } from 'lucide-react';
 import { PageRoute } from '../types';
+import { AdUnit } from './AdUnit';
+import { Button } from './Button';
+import { getMarketInsight, InsightResult } from '../services/geminiService';
 
 interface SidebarRightProps {
   onNavigate?: (route: PageRoute) => void;

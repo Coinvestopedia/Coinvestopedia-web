@@ -1,4 +1,6 @@
+import React from 'react';
 import { PageRoute } from '../types';
+import { Button } from './Button';
 
 interface HeroProps {
   onNavigate?: (route: PageRoute) => void;
