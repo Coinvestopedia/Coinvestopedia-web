@@ -18,7 +18,7 @@ const MacroStrip: React.FC<{ allAssets: Record<string, AssetData> }> = ({ allAss
   return (
     <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-hide">
       {macroAssets.map(asset => (
-        <div key={asset.symbol} className="flex items-center gap-3 px-4 py-2.5 bg-surface rounded-xl border border-border whitespace-nowrap min-w-[155px] hover:border-primary/50 hover:bg-surface-alt hover:scale-[1.03] hover:shadow-lg hover:shadow-primary/5 transition-all duration-300 group cursor-default">
+        <div key={asset.symbol} className="flex items-center gap-3 px-4 py-2.5 bg-surface rounded-xl border border-border whitespace-nowrap min-w-[155px] hover:border-primary/50 hover:bg-surface-alt hover:scale-[1.03] hover:shadow-lg hover:shadow-primary/5 transition-colors transition-transform transition-shadow transform-gpu duration-300 group cursor-default">
           <AssetIcon symbol={asset.symbol} size={24} />
           <div className="flex flex-col">
             <span className="text-[10px] text-text-muted font-bold uppercase tracking-wider">{asset.symbol}</span>

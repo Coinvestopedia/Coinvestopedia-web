@@ -1,108 +1,132 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Home as HomeIcon, BarChart2, Calculator, Menu } from 'lucide-react';
+import { Home as HomeIcon, Calculator, Menu } from 'lucide-react';
 import { Header } from './components/Header';
 import { SidebarLeft } from './components/SidebarLeft';
 import { SidebarRight } from './components/SidebarRight';
 import { Background } from './components/Background';
 import { ScrollToTop } from './components/ScrollToTop';
+import { ErrorBoundary } from './components/ErrorBoundary';
+import { useFocusOnRouteChange } from './hooks/useFocusOnRouteChange';
 import { Home } from './pages/Home';
-import { WhaleTracker } from './pages/WhaleTracker';
-import { Compare } from './pages/Compare';
-import { Tools } from './pages/Tools';
-import { MacroIntel } from './pages/MacroIntel';
-import { Learn } from './pages/Learn';
-import { Insights } from './pages/Insights';
-import { Research } from './pages/Research';
-import { Glossary } from './pages/Glossary';
-import { Exchanges } from './pages/Exchanges';
-import { Newsletter } from './pages/Newsletter';
 import { Privacy } from './pages/Privacy';
 import { Terms } from './pages/Terms';
 import { Cookies } from './pages/Cookies';
+
+
+// Lazy-loaded pages for performance
+const WhaleTracker = React.lazy(() => import('./pages/WhaleTracker').then(module => ({ default: module.WhaleTracker })));
+const Compare = React.lazy(() => import('./pages/Compare').then(module => ({ default: module.Compare })));
+const Tools = React.lazy(() => import('./pages/Tools').then(module => ({ default: module.Tools })));
+const MacroIntel = React.lazy(() => import('./pages/MacroIntel').then(module => ({ default: module.MacroIntel })));
+const Exchanges = React.lazy(() => import('./pages/Exchanges').then(module => ({ default: module.Exchanges })));
+const Learn = React.lazy(() => import('./pages/Learn').then(module => ({ default: module.Learn })));
+const Insights = React.lazy(() => import('./pages/Insights').then(module => ({ default: module.Insights })));
+const Research = React.lazy(() => import('./pages/Research').then(module => ({ default: module.Research })));
+const Glossary = React.lazy(() => import('./pages/Glossary').then(module => ({ default: module.Glossary })));
+const Newsletter = React.lazy(() => import('./pages/Newsletter').then(module => ({ default: module.Newsletter })));
+
 import { PageRoute } from './types';
 import { AppProvider, useAppContext } from './context/AppContext';
 import { ToastContainer } from './components/Toast';
-import { SecurityAudit } from './pages/SecurityAudit';
 import { TargetIcon } from './components/AnimatedIcons';
 
+/**
+ * Maps a pathname string to a PageRoute enum value.
+ * Handles both exact matches and the root fallback.
+ */
+function pathnameToRoute(pathname: string): PageRoute {
+  // Build reverse lookup: '/compare' → PageRoute.COMPARE, etc.
+  const routeValues = Object.values(PageRoute) as string[];
+  const match = routeValues.find(r => r === pathname);
+  if (match) return match as PageRoute;
+
+  // Default to home for unknown paths
+  return PageRoute.HOME;
+}
+
 const AppContent: React.FC = () => {
-  console.log("AppContent initializing...");
   const { theme } = useAppContext();
-  const [currentRoute, setCurrentRoute] = useState<PageRoute>(PageRoute.HOME);
+  const [currentRoute, setCurrentRoute] = useState<PageRoute>(() => pathnameToRoute(window.location.pathname));
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  // Initialize and sync route with hash
-  React.useEffect(() => {
+  // Accessibility: move focus to main content on route change
+  useFocusOnRouteChange(currentRoute);
+
+  // Sync route state with browser back/forward buttons
+  useEffect(() => {
     const handlePopState = () => {
-      const hash = window.location.hash.replace('#', '');
-      const routeMap: Record<string, PageRoute> = Object.values(PageRoute).reduce((acc, route) => {
-        acc[route.replace('/', '')] = route;
-        return acc;
-      }, {} as Record<string, PageRoute>);
-
-      // Map special case for root
-      if (!hash || hash === '/') {
-        setCurrentRoute(PageRoute.HOME);
-      } else if (routeMap[hash]) {
-        setCurrentRoute(routeMap[hash]);
-      }
+      setCurrentRoute(pathnameToRoute(window.location.pathname));
     };
-
-    // Initial load
-    handlePopState();
 
     window.addEventListener('popstate', handlePopState);
     return () => window.removeEventListener('popstate', handlePopState);
   }, []);
 
-  const handleNavigate = (route: PageRoute) => {
+  const handleNavigate = useCallback((route: PageRoute) => {
     setCurrentRoute(route);
-    setIsMobileMenuOpen(false); // Close menu if navigating
-    
-    // Update hash and push to history
-    const hash = route === PageRoute.HOME ? '' : `#${route.replace('/', '')}`;
-    window.history.pushState({}, '', window.location.pathname + hash);
-    
+    setIsMobileMenuOpen(false);
+
+    // Push new path to browser history
+    window.history.pushState({}, '', route);
     window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
+  }, []);
 
   const renderPage = () => {
+    let page;
     switch (currentRoute) {
       case PageRoute.HOME:
-        return <Home onNavigate={handleNavigate} />;
-
+        page = <Home onNavigate={handleNavigate} />;
+        break;
       case PageRoute.WHALE:
-        return <WhaleTracker />;
+        page = <WhaleTracker />;
+        break;
       case PageRoute.COMPARE:
-        return <Compare />;
+        page = <Compare />;
+        break;
       case PageRoute.MACRO_INTEL:
-        return <MacroIntel />;
+        page = <MacroIntel />;
+        break;
       case PageRoute.TOOLS:
-        return <Tools />;
+        page = <Tools />;
+        break;
       case PageRoute.NEWSLETTER:
-        return <Newsletter />;
-      case PageRoute.AUDIT:
-        return <SecurityAudit />;
+        page = <Newsletter />;
+        break;
       case PageRoute.LEARN:
-        return <Learn onNavigate={handleNavigate} />;
+        page = <Learn onNavigate={handleNavigate} />;
+        break;
       case PageRoute.RESEARCH:
-        return <Research />;
+        page = <Research />;
+        break;
       case PageRoute.INSIGHTS:
-        return <Insights />;
+        page = <Insights />;
+        break;
       case PageRoute.GLOSSARY:
-        return <Glossary />;
+        page = <Glossary />;
+        break;
       case PageRoute.EXCHANGES:
-        return <Exchanges />;
+        page = <Exchanges />;
+        break;
       case PageRoute.PRIVACY:
-        return <Privacy />;
+        page = <Privacy />;
+        break;
       case PageRoute.TERMS:
-        return <Terms />;
+        page = <Terms />;
+        break;
       case PageRoute.COOKIES:
-        return <Cookies />;
+        page = <Cookies />;
+        break;
       default:
-        return <Home onNavigate={handleNavigate} />;
+        page = <Home onNavigate={handleNavigate} />;
+        break;
     }
+    
+    return (
+      <React.Suspense fallback={<div className="animate-pulse h-96 w-full rounded-2xl bg-surface/50 border border-border"></div>}>
+        {page}
+      </React.Suspense>
+    );
   };
 
   const mobileNavItems = [
@@ -111,8 +135,15 @@ const AppContent: React.FC = () => {
     { label: 'Tools', icon: <Calculator size={20} />, route: PageRoute.TOOLS },
   ];
 
+
+
   return (
     <div className="min-h-screen bg-background text-text font-body selection:bg-primary/30 relative">
+      {/* Skip to main content — accessibility */}
+      <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:z-[100] focus:top-2 focus:left-2 focus:px-4 focus:py-2 focus:bg-primary focus:text-white focus:rounded-lg focus:text-sm focus:font-bold">
+        Skip to main content
+      </a>
+      
       <Background />
       <ToastContainer />
       
@@ -129,7 +160,7 @@ const AppContent: React.FC = () => {
           160px Sidebar | 32px gap | 720px Content | 32px gap | 300px Sidebar 
           Total: 1244px fit in 1280px container
         */}
-        <main className="max-w-container mx-auto pt-[72px] lg:pt-[120px] px-6 pb-32 md:pb-24">
+        <main id="main-content" tabIndex={-1} className="max-w-container mx-auto pt-[72px] lg:pt-[100px] px-6 pb-32 md:pb-24 outline-none">
           <div className="lg:grid lg:grid-cols-[160px_32px_1fr_32px_300px] lg:gap-0">
             
             {/* Col 1: Left Sidebar */}
@@ -144,13 +175,18 @@ const AppContent: React.FC = () => {
             <AnimatePresence mode="wait">
               <motion.div 
                 key={currentRoute}
-                initial={{ opacity: 0, y: 10 }}
+                initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                transition={{ duration: 0.3 }}
-                className="w-full min-w-0"
+                exit={{ opacity: 0, y: -15 }}
+                transition={{ 
+                  duration: 0.4,
+                  ease: [0.23, 1, 0.32, 1] // Custom easeOutQuint for premium feel
+                }}
+                className="w-full min-w-0 transform-gpu"
               >
-                {renderPage()}
+                <ErrorBoundary>
+                  {renderPage()}
+                </ErrorBoundary>
               </motion.div>
             </AnimatePresence>
 
@@ -170,12 +206,12 @@ const AppContent: React.FC = () => {
           <div className="max-w-container mx-auto px-6 flex flex-col items-center text-center gap-6">
             <div className="flex flex-col items-center gap-4">
               <img 
-                src={theme === 'dark' ? '/logo-dark mode-full.png' : '/logo-light mode full.png'} 
+                src={theme === 'dark' ? '/logo-transparent-dark-desktop.png' : '/logo-transparent-light-desktop.png'} 
                 alt="Coinvestopedia" 
-                className={`h-9 w-auto opacity-80 hover:opacity-100 transition-opacity ${theme === 'dark' ? 'mix-blend-screen' : 'mix-blend-multiply'}`}
+                className="h-16 md:h-24 w-auto opacity-80 hover:opacity-100 transition-opacity"
               />
               <p className="text-text-muted text-sm px-4">
-                © 2025 Coinvestopedia Knowledge. World-class institutional crypto data and research.
+                © {new Date().getFullYear()} Coinvestopedia Knowledge. World-class institutional crypto data and research.
               </p>
             </div>
 
@@ -239,6 +275,8 @@ const AppContent: React.FC = () => {
 
         {/* Global Action Button: Invisible until scroll > 300px */}
         <ScrollToTop />
+        
+
       </div>
     </div>
   );
@@ -247,7 +285,9 @@ const AppContent: React.FC = () => {
 const App: React.FC = () => {
   return (
     <AppProvider>
-      <AppContent />
+      <ErrorBoundary>
+        <AppContent />
+      </ErrorBoundary>
     </AppProvider>
   );
 };

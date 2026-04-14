@@ -2,6 +2,30 @@ import { useState, useEffect } from 'react';
 import { ASSET_REGISTRY, AssetData } from '../data/assetRegistry';
 import { fetchMarketData, fetchMacroIndicators } from '../services/api';
 
+interface CoinGeckoMarketItem {
+  symbol: string;
+  current_price: number;
+  price_change_percentage_24h_in_currency?: number;
+  price_change_percentage_24h?: number;
+  price_change_percentage_7d_in_currency?: number;
+  price_change_percentage_30d_in_currency?: number;
+  price_change_percentage_1y_in_currency?: number;
+  market_cap?: number;
+  total_volume?: number;
+  fully_diluted_valuation?: number;
+  ath?: number;
+  ath_change_percentage?: number;
+}
+
+interface FMPQuote {
+  symbol: string;
+  price: number;
+  changesPercentage: number;
+  marketCap?: number;
+  volume?: number;
+  yearHigh?: number;
+}
+
 export const useLiveAssetRegistry = () => {
   const [registry, setRegistry] = useState<Record<string, AssetData>>(ASSET_REGISTRY);
   const [isHydrating, setIsHydrating] = useState(true);
@@ -25,7 +49,7 @@ export const useLiveAssetRegistry = () => {
 
         // Process Crypto
         if (Array.isArray(cryptoData)) {
-          cryptoData.forEach((coin: any) => {
+          (cryptoData as CoinGeckoMarketItem[]).forEach((coin) => {
             const sym = coin.symbol.toUpperCase();
             if (updatedRegistry[sym]) {
               updatedRegistry[sym] = {
@@ -47,7 +71,7 @@ export const useLiveAssetRegistry = () => {
 
         // Process Macro (FMP returns an array of quotes)
         if (Array.isArray(macroData)) {
-          macroData.forEach((quote: any) => {
+          (macroData as FMPQuote[]).forEach((quote) => {
             let internalSym = quote.symbol;
             if (quote.symbol === 'DX-Y.NYB') internalSym = 'DXY';
             if (quote.symbol === '^GSPC') internalSym = 'SPY'; // approx
@@ -89,3 +113,4 @@ export const useLiveAssetRegistry = () => {
 
   return { registry, isHydrating };
 };
+

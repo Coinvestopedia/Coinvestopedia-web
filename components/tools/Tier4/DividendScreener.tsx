@@ -89,7 +89,7 @@ export const DividendScreener: React.FC = () => {
             
             <div className="space-y-3">
               {filteredAssets.map((asset) => (
-                <div key={asset.id} className="group p-4 bg-background/50 border border-border/50 hover:border-primary/50 rounded-xl transition-all flex items-center justify-between">
+                <div key={asset.id} className="group p-4 bg-background/50 border border-border/50 hover:border-primary/50 rounded-xl transition-colors flex items-center justify-between">
                   <div className="flex items-center gap-4">
                     <div className={`w-10 h-10 rounded-lg flex items-center justify-center font-bold text-xs ${
                       asset.category === 'DeFi' ? 'bg-indigo-500/10 text-indigo-400 border border-indigo-500/20' : 

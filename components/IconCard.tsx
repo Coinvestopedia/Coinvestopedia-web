@@ -33,7 +33,7 @@ const IconCardComponent: React.FC<IconCardProps> = ({
   
   return (
     <div 
-      className={`group relative overflow-hidden rounded-xl lg:rounded-2xl p-4 lg:p-6 cursor-pointer transition-all duration-300 hover:-translate-y-1 lg:hover:-translate-y-2 hover:scale-[1.01] lg:hover:scale-[1.02] h-full flex flex-col focus:outline-none focus-visible:ring-4 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background ${
+      className={`group relative overflow-hidden rounded-xl lg:rounded-2xl p-4 lg:p-6 cursor-pointer transition duration-300 hover:-translate-y-1 lg:hover:-translate-y-2 hover:scale-[1.01] lg:hover:scale-[1.02] transform-gpu h-full flex flex-col focus:outline-none focus-visible:ring-4 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background ${
         variant === 'highlight' 
           ? 'bg-gradient-to-br from-primary/20 to-primary-dark/10 border-2 border-primary/50 hover:border-primary shadow-lg shadow-primary/10 backdrop-blur-sm' 
           : 'leather-card'
@@ -72,7 +72,7 @@ const IconCardComponent: React.FC<IconCardProps> = ({
       )}
       
       {/* Icon container */}
-        <div className={`relative mb-3 lg:mb-4 w-10 h-10 lg:w-14 lg:h-14 rounded-lg lg:rounded-xl flex items-center justify-center transition-all duration-300 lg:group-hover:scale-110 lg:group-hover:rotate-3 flex-shrink-0 min-w-[44px] min-h-[44px] ${
+        <div className={`relative mb-3 lg:mb-4 w-10 h-10 lg:w-14 lg:h-14 rounded-lg lg:rounded-xl flex items-center justify-center transition duration-300 lg:group-hover:scale-110 lg:group-hover:rotate-3 transform-gpu flex-shrink-0 min-w-[44px] min-h-[44px] ${
         variant === 'highlight' 
           ? 'bg-primary/20 text-primary group-hover:bg-primary group-hover:text-white shadow-lg shadow-primary/20' 
           : 'bg-background dark:bg-[#181818] border border-border dark:border-white/5 text-primary group-hover:border-primary/50 group-hover:shadow-lg group-hover:shadow-primary/20'

@@ -16,6 +16,13 @@ export const getContextualAd = (context: AdContext): AdPartner => {
   if (context.toolId === 'il') return 'bybit';
   if (context.toolId === 'on-chain-valuation' || context.toolId === 'rup') return 'glassnode';
   if (context.toolId === 'macro-regime' || context.toolId === 'fear-greed') return 'tradingview';
+  if (context.toolId === 'beta-alpha') return 'glassnode';
+  if (context.toolId === 'drawdown') return 'tradingview';
+  if (context.toolId === 'allocation-sim') return 'bybit';
+  if (context.toolId === 'rebalancer') return 'binance';
+  if (context.toolId === 'fixed-income') return 'tradingview';
+  if (context.toolId === 'dividend-screen') return 'coinledger';
+  if (context.toolId === 'monte-carlo') return 'glassnode';
   
   // Asset-specific routing
   if (context.assetSelected === 'BTC') return 'binance';
@@ -36,8 +43,6 @@ export const getContextualAd = (context: AdContext): AdPartner => {
       return 'coinledger';
     case PageRoute.COMPARE:
       return 'bitget';
-    case PageRoute.AUDIT:
-      return 'trezor';
     case PageRoute.INSIGHTS:
       return 'bybit';
   }

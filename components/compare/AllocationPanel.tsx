@@ -63,7 +63,7 @@ export const AllocationPanel: React.FC = () => {
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           {MODEL_PORTFOLIOS.map((portfolio, idx) => (
-            <div key={idx} className="bg-surface border border-border rounded-xl p-5 hover:border-primary/50 hover:bg-surface-alt transition-all duration-300 group flex flex-col">
+            <div key={idx} className="bg-surface border border-border rounded-xl p-5 hover:border-primary/50 hover:bg-surface-alt transition-colors duration-300 group flex flex-col">
               {/* Header */}
               <div className="mb-3">
                 <h4 className="font-bold text-base text-primary mb-1">{portfolio.name}</h4>
@@ -81,7 +81,7 @@ export const AllocationPanel: React.FC = () => {
                   <div 
                     key={i} 
                     style={{ width: `${alloc.pct}%`, backgroundColor: alloc.color }} 
-                    className="h-full hover:brightness-110 transition-all cursor-crosshair"
+                    className="h-full hover:brightness-110 transition-[filter] cursor-crosshair"
                     title={`${alloc.asset}: ${alloc.pct}%`}
                   />
                 ))}

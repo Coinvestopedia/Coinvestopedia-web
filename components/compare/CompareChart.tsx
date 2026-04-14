@@ -3,7 +3,6 @@ import { AssetData, CHART_MOCK_DATA } from '../../data/assetRegistry';
 import { ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 import { Button } from '../Button';
 import { ArrowUpDown, Maximize2, Type } from 'lucide-react';
-import { ProGate } from '../ProGate';
 
 interface CompareChartProps {
   assets: AssetData[];
@@ -56,7 +55,6 @@ export const CompareChart: React.FC<CompareChartProps> = ({ assets, timeframe, o
 
   // Determine if current TF requires Pro
   const currentTfObj = TIMEFRAMES.find(t => t.label === timeframe);
-  const isLockedTf = currentTfObj?.isPro && !isProUser;
 
   return (
     <div className="leather-card rounded-xl p-4 lg:p-6 animate-fade-in flex flex-col min-h-[500px]">
@@ -102,57 +100,55 @@ export const CompareChart: React.FC<CompareChartProps> = ({ assets, timeframe, o
 
       {/* Chart Canvas */}
       <div className="flex-grow w-full relative">
-         <ProGate isUnlocked={!isLockedTf} featureName="Extended Historical Data (3Y+)">
-            <div className="w-full h-[400px]">
-              <ResponsiveContainer width="100%" height="100%">
-                 <LineChart data={chartData} margin={{ top: 20, right: 30, left: 0, bottom: 0 }}>
-                    <CartesianGrid strokeDasharray="3 3" stroke="#27272A" vertical={false} />
-                    <XAxis 
-                      dataKey="date" 
-                      stroke="#52525B" 
-                      tick={{fill: '#71717A', fontSize: 11}} 
-                      tickMargin={10}
-                      tickFormatter={(val) => {
-                         const d = new Date(val);
-                         return `${d.toLocaleString('default', { month: 'short' })} '${d.getFullYear().toString().substring(2)}`;
-                      }}
-                    />
-                    <YAxis 
-                      scale={scale === 'log' ? 'log' : 'linear'} 
-                      domain={['auto', 'auto']}
-                      stroke="#52525B" 
-                      tick={{fill: '#71717A', fontSize: 11}}
-                      tickFormatter={(val) => val.toFixed(0)}
-                      width={40}
-                      allowDataOverflow
-                    />
-                    <Tooltip 
-                       contentStyle={{ backgroundColor: '#18181B', borderColor: '#27272A', color: '#F4F4F5', borderRadius: '8px' }}
-                       itemStyle={{ fontSize: '12px', fontWeight: 'bold' }}
-                       labelStyle={{ color: '#A1A1AA', fontSize: '11px', marginBottom: '4px' }}
-                       formatter={(value: number) => [`${value.toFixed(2)}`, undefined]}
-                    />
-                    <Legend 
-                      iconType="circle" 
-                      wrapperStyle={{ fontSize: '12px', paddingTop: '20px' }} 
-                    />
-                    
-                    {assets.map((asset) => (
-                      <Line 
-                        key={asset.id}
-                        type="monotone" 
-                        dataKey={asset.symbol} 
-                        name={asset.symbol}
-                        stroke={asset.color} 
-                        strokeWidth={2.5}
-                        dot={false}
-                        activeDot={{ r: 6, strokeWidth: 0 }}
-                      />
-                    ))}
-                 </LineChart>
-              </ResponsiveContainer>
-            </div>
-         </ProGate>
+         <div className="w-full h-[400px]">
+           <ResponsiveContainer width="100%" height="100%">
+              <LineChart data={chartData} margin={{ top: 20, right: 30, left: 0, bottom: 0 }}>
+                 <CartesianGrid strokeDasharray="3 3" stroke="#27272A" vertical={false} />
+                 <XAxis 
+                   dataKey="date" 
+                   stroke="#52525B" 
+                   tick={{fill: '#71717A', fontSize: 11}} 
+                   tickMargin={10}
+                   tickFormatter={(val) => {
+                      const d = new Date(val);
+                      return `${d.toLocaleString('default', { month: 'short' })} '${d.getFullYear().toString().substring(2)}`;
+                   }}
+                 />
+                 <YAxis 
+                   scale={scale === 'log' ? 'log' : 'linear'} 
+                   domain={['auto', 'auto']}
+                   stroke="#52525B" 
+                   tick={{fill: '#71717A', fontSize: 11}}
+                   tickFormatter={(val) => val.toFixed(0)}
+                   width={40}
+                   allowDataOverflow
+                 />
+                 <Tooltip 
+                    contentStyle={{ backgroundColor: '#18181B', borderColor: '#27272A', color: '#F4F4F5', borderRadius: '8px' }}
+                    itemStyle={{ fontSize: '12px', fontWeight: 'bold' }}
+                    labelStyle={{ color: '#A1A1AA', fontSize: '11px', marginBottom: '4px' }}
+                    formatter={(value: number) => [`${value.toFixed(2)}`, undefined]}
+                 />
+                 <Legend 
+                   iconType="circle" 
+                   wrapperStyle={{ fontSize: '12px', paddingTop: '20px' }} 
+                 />
+                 
+                 {assets.map((asset) => (
+                   <Line 
+                     key={asset.id}
+                     type="monotone" 
+                     dataKey={asset.symbol} 
+                     name={asset.symbol}
+                     stroke={asset.color} 
+                     strokeWidth={2.5}
+                     dot={false}
+                     activeDot={{ r: 6, strokeWidth: 0 }}
+                   />
+                 ))}
+              </LineChart>
+           </ResponsiveContainer>
+         </div>
       </div>
     </div>
   );

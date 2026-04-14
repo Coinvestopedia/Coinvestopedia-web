@@ -1,3 +1,5 @@
+import { PageMeta } from '../components/PageMeta';
+import { VaraDisclaimer } from '../components/VaraDisclaimer';
 import React, { useState } from 'react';
 import { Card } from '../components/Card';
 import { Button } from '../components/Button';
@@ -6,6 +8,7 @@ import { TargetIcon } from '../components/AnimatedIcons';
 import { PageRoute } from '../types';
 
 import { useAppContext } from '../context/AppContext';
+
 
 // --- Types & Data ---
 
@@ -118,6 +121,8 @@ export const Learn: React.FC<LearnProps> = ({ onNavigate }) => {
 
     return (
       <div className="animate-fade-in space-y-8 pb-12">
+      <PageMeta title="Learn Crypto" description="Educational resources and tutorials for modern cryptocurrency investing." />
+
         <button 
           onClick={() => setActiveCategoryId(null)}
           className="flex items-center gap-2 text-text-muted hover:text-primary transition-colors text-sm font-bold group"
@@ -169,6 +174,10 @@ export const Learn: React.FC<LearnProps> = ({ onNavigate }) => {
             </Card>
           ))}
         </div>
+
+        <div className="mt-12">
+          <VaraDisclaimer variant="inline" />
+        </div>
       </div>
     );
   }
@@ -202,12 +211,12 @@ export const Learn: React.FC<LearnProps> = ({ onNavigate }) => {
       <section className="space-y-6">
          {/* Research & Reports Card */}
          <div 
-           className="leather-card rounded-2xl p-8 lg:p-12 bg-gradient-to-br from-surface to-background relative overflow-hidden group cursor-pointer border border-border hover:border-primary/50 transition-all flex flex-col md:flex-row items-center gap-8 shadow-xl"
+           className="leather-card rounded-2xl p-8 lg:p-12 bg-gradient-to-br from-surface to-background relative overflow-hidden group cursor-pointer border border-border hover:border-primary/50 transition-colors flex flex-col md:flex-row items-center gap-8 shadow-xl"
            onClick={() => onNavigate?.(PageRoute.RESEARCH)}
          >
             <div className="absolute top-1/2 left-0 w-64 h-64 bg-primary/10 rounded-full blur-[80px] -translate-y-1/2 -translate-x-1/2 pointer-events-none group-hover:bg-primary/20 transition-colors duration-700"></div>
             
-            <div className="flex-shrink-0 relative z-10 w-20 h-20 bg-surface border border-border rounded-2xl flex items-center justify-center text-primary group-hover:scale-110 group-hover:bg-primary/5 transition-all duration-500 shadow-inner">
+            <div className="flex-shrink-0 relative z-10 w-20 h-20 bg-surface border border-border rounded-2xl flex items-center justify-center text-primary group-hover:scale-110 group-hover:bg-primary/5 transition-colors transition-transform transform-gpu duration-500 shadow-inner">
                <BookOpen size={40} className="group-hover:animate-pulse" />
             </div>
             
@@ -222,7 +231,7 @@ export const Learn: React.FC<LearnProps> = ({ onNavigate }) => {
             </div>
             
             <div className="relative z-10 flex-shrink-0">
-               <Button variant="secondary" className="group-hover:bg-primary group-hover:text-background group-hover:border-primary transition-all">
+               <Button variant="secondary" className="group-hover:bg-primary group-hover:text-background group-hover:border-primary transition-colors">
                  Explore Research
                </Button>
             </div>
@@ -230,12 +239,12 @@ export const Learn: React.FC<LearnProps> = ({ onNavigate }) => {
 
          {/* Institutional Insights Card */}
          <div 
-           className="leather-card rounded-2xl p-8 lg:p-12 bg-gradient-to-br from-surface to-background relative overflow-hidden group cursor-pointer border border-border hover:border-primary/50 transition-all flex flex-col md:flex-row items-center gap-8 shadow-xl"
+           className="leather-card rounded-2xl p-8 lg:p-12 bg-gradient-to-br from-surface to-background relative overflow-hidden group cursor-pointer border border-border hover:border-primary/50 transition-colors flex flex-col md:flex-row items-center gap-8 shadow-xl"
            onClick={() => onNavigate?.(PageRoute.INSIGHTS)}
          >
             <div className="absolute top-1/2 left-0 w-64 h-64 bg-primary/10 rounded-full blur-[80px] -translate-y-1/2 -translate-x-1/2 pointer-events-none group-hover:bg-primary/20 transition-colors duration-700"></div>
             
-            <div className="flex-shrink-0 relative z-10 w-20 h-20 bg-surface border border-border rounded-2xl flex items-center justify-center text-primary group-hover:scale-110 group-hover:bg-primary/5 transition-all duration-500 shadow-inner">
+            <div className="flex-shrink-0 relative z-10 w-20 h-20 bg-surface border border-border rounded-2xl flex items-center justify-center text-primary group-hover:scale-110 group-hover:bg-primary/5 transition-colors transition-transform transform-gpu duration-500 shadow-inner">
                <TargetIcon className="w-10 h-10 group-hover:animate-pulse" />
             </div>
             
@@ -250,7 +259,7 @@ export const Learn: React.FC<LearnProps> = ({ onNavigate }) => {
             </div>
             
             <div className="relative z-10 flex-shrink-0">
-               <Button variant="secondary" className="group-hover:bg-primary group-hover:text-background group-hover:border-primary transition-all">
+               <Button variant="secondary" className="group-hover:bg-primary group-hover:text-background group-hover:border-primary transition-colors">
                  Read Insights
                </Button>
             </div>
@@ -258,12 +267,12 @@ export const Learn: React.FC<LearnProps> = ({ onNavigate }) => {
 
          {/* Crypto Glossary Card */}
          <div 
-            className="leather-card rounded-2xl p-8 lg:p-12 bg-gradient-to-br from-surface to-background relative overflow-hidden group cursor-pointer border border-border hover:border-primary/50 transition-all flex flex-col md:flex-row items-center gap-8 shadow-xl"
+            className="leather-card rounded-2xl p-8 lg:p-12 bg-gradient-to-br from-surface to-background relative overflow-hidden group cursor-pointer border border-border hover:border-primary/50 transition-colors flex flex-col md:flex-row items-center gap-8 shadow-xl"
             onClick={() => onNavigate?.(PageRoute.GLOSSARY)}
           >
              <div className="absolute top-1/2 left-0 w-64 h-64 bg-primary/10 rounded-full blur-[80px] -translate-y-1/2 -translate-x-1/2 pointer-events-none group-hover:bg-primary/20 transition-colors duration-700"></div>
              
-             <div className="flex-shrink-0 relative z-10 w-20 h-20 bg-surface border border-border rounded-2xl flex items-center justify-center text-primary group-hover:scale-110 group-hover:bg-primary/5 transition-all duration-500 shadow-inner">
+             <div className="flex-shrink-0 relative z-10 w-20 h-20 bg-surface border border-border rounded-2xl flex items-center justify-center text-primary group-hover:scale-110 group-hover:bg-primary/5 transition-colors transition-transform transform-gpu duration-500 shadow-inner">
                 <FileText size={40} className="group-hover:animate-pulse" />
              </div>
              
@@ -278,7 +287,7 @@ export const Learn: React.FC<LearnProps> = ({ onNavigate }) => {
              </div>
              
              <div className="relative z-10 flex-shrink-0">
-                <Button variant="secondary" className="group-hover:bg-primary group-hover:text-background group-hover:border-primary transition-all">
+                <Button variant="secondary" className="group-hover:bg-primary group-hover:text-background group-hover:border-primary transition-colors">
                   Browse Glossary
                 </Button>
              </div>
@@ -286,12 +295,12 @@ export const Learn: React.FC<LearnProps> = ({ onNavigate }) => {
 
           {/* ClearRate™ Exchange Intelligence Card */}
           <div 
-             className="leather-card rounded-2xl p-8 lg:p-12 bg-gradient-to-br from-surface to-background relative overflow-hidden group cursor-pointer border border-border hover:border-primary/50 transition-all flex flex-col md:flex-row items-center gap-8 shadow-xl"
+             className="leather-card rounded-2xl p-8 lg:p-12 bg-gradient-to-br from-surface to-background relative overflow-hidden group cursor-pointer border border-border hover:border-primary/50 transition-colors flex flex-col md:flex-row items-center gap-8 shadow-xl"
              onClick={() => onNavigate?.(PageRoute.EXCHANGES)}
            >
               <div className="absolute top-1/2 left-0 w-64 h-64 bg-primary/10 rounded-full blur-[80px] -translate-y-1/2 -translate-x-1/2 pointer-events-none group-hover:bg-primary/20 transition-colors duration-700"></div>
               
-              <div className="flex-shrink-0 relative z-10 w-20 h-20 bg-surface border border-border rounded-2xl flex items-center justify-center text-primary group-hover:scale-110 group-hover:bg-primary/5 transition-all duration-500 shadow-inner">
+              <div className="flex-shrink-0 relative z-10 w-20 h-20 bg-surface border border-border rounded-2xl flex items-center justify-center text-primary group-hover:scale-110 group-hover:bg-primary/5 transition-colors transition-transform transform-gpu duration-500 shadow-inner">
                  <BarChart2 size={40} className="group-hover:animate-pulse" />
               </div>
               
@@ -306,7 +315,7 @@ export const Learn: React.FC<LearnProps> = ({ onNavigate }) => {
               </div>
               
               <div className="relative z-10 flex-shrink-0">
-                 <Button variant="secondary" className="group-hover:bg-primary group-hover:text-background group-hover:border-primary transition-all">
+                 <Button variant="secondary" className="group-hover:bg-primary group-hover:text-background group-hover:border-primary transition-colors">
                    Compare Exchanges
                  </Button>
               </div>
@@ -321,9 +330,9 @@ export const Learn: React.FC<LearnProps> = ({ onNavigate }) => {
              <div 
                key={cat.id} 
                onClick={() => setActiveCategoryId(cat.id)}
-               className="leather-card rounded-xl p-6 cursor-pointer hover:border-primary/50 group flex items-center gap-6 transition-all"
+               className="leather-card rounded-xl p-6 cursor-pointer hover:border-primary/50 group flex items-center gap-6 transition-colors"
              >
-                <div className="p-4 bg-surface rounded-xl text-primary group-hover:bg-primary/20 transition-all flex-shrink-0">
+                <div className="p-4 bg-surface rounded-xl text-primary group-hover:bg-primary/20 transition-colors flex-shrink-0">
                    {cat.icon}
                 </div>
                 <div className="flex-1">
@@ -368,7 +377,7 @@ export const Learn: React.FC<LearnProps> = ({ onNavigate }) => {
                         e.stopPropagation();
                         setActiveCategoryId(article.catId);
                       }}
-                      className="flex items-center gap-1 text-primary hover:underline font-bold transition-all"
+                      className="flex items-center gap-1 text-primary hover:underline font-bold transition-colors"
                     >
                       Read Now →
                     </button>
@@ -378,7 +387,8 @@ export const Learn: React.FC<LearnProps> = ({ onNavigate }) => {
         </div>
       </section>
 
-      {/* Assessment CTA */}
+
+      
       <section>
          <div className="leather-card rounded-2xl p-8 lg:p-12 text-center bg-gradient-to-b from-surface to-background relative overflow-hidden">
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/5 rounded-full blur-3xl pointer-events-none"></div>
@@ -402,6 +412,10 @@ export const Learn: React.FC<LearnProps> = ({ onNavigate }) => {
             </div>
          </div>
       </section>
+
+      <div className="mt-12">
+        <VaraDisclaimer variant="inline" />
+      </div>
     </div>
   );
 };

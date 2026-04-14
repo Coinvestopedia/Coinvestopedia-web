@@ -1,3 +1,4 @@
+import { PageMeta } from '../components/PageMeta';
 import React, { useState, useMemo, useEffect } from 'react';
 import { Card } from '../components/Card';
 import { Button } from '../components/Button';
@@ -7,12 +8,15 @@ import {
   Star, CheckCircle, MinusCircle, Trophy, Building, Droplets, TrendingDown, Repeat, Lock, Coins
 } from 'lucide-react';
 import {
-  EXCHANGES, BEST_FOR_CARDS, FAQ_DATA, AFFILIATE_BANNERS, REGIONS,
+  EXCHANGES, BEST_FOR_CARDS, FAQ_DATA, REGIONS,
   ExchangeProfile, Grade, CustodyModel, PoRStatus
 } from '../data/exchanges';
 import { ExchangeCard } from '../components/exchanges/ExchangeCard';
+
 import { AreaChart, Area, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar, ResponsiveContainer, Tooltip as RechartsTooltip, XAxis, YAxis, CartesianGrid, BarChart, Bar, Cell } from 'recharts';
 import { PulseIcon } from '../components/AnimatedIcons';
+
+import { VaraDisclaimer } from '../components/VaraDisclaimer';
 
 // Custom dimension colors for charts matching default Coinvestopedia palette
 const ICON_MAP: Record<string, React.FC<any>> = {
@@ -111,7 +115,7 @@ const PageHeader: React.FC = () => {
             { value: '$2.3T+', label: 'Combined 30D Volume' },
             { value: 'Monthly', label: 'Updated' },
           ].map((m, i) => (
-            <div key={i} className="p-4 bg-background/40 border border-border rounded-xl text-center backdrop-blur-sm hover:-translate-y-1 hover:shadow-xl hover:border-primary/30 transition-all duration-300">
+            <div key={i} className="p-4 bg-background/40 border border-border rounded-xl text-center backdrop-blur-sm hover:-translate-y-1 hover:shadow-xl hover:border-primary/30 transition-colors transition-shadow transition-transform duration-300 transform-gpu">
               <div className="text-xl md:text-2xl font-bold text-primary mb-1">{m.value}</div>
               <div className="text-[10px] text-text-muted font-bold uppercase tracking-wider">{m.label}</div>
             </div>
@@ -189,7 +193,7 @@ const MethodologySection: React.FC = () => {
               <h3 className="text-lg font-bold mb-4 flex items-center gap-2"><Scale size={18} className="text-primary" /> Scoring Model (100-pt Scale)</h3>
               <div className="space-y-3">
                 {dimensions.map((d, i) => (
-                  <div key={i} className="flex flex-col gap-2.5 p-4 bg-surface rounded-xl border border-border group hover:border-primary/30 transition-colors">
+                  <div key={i} className="flex flex-col gap-2.5 p-4 bg-surface rounded-xl border border-border group hover:border-primary/30 transition-colors duration-200 transform-gpu">
                     <div className="flex items-center justify-between gap-4">
                       <div className="flex items-center gap-3">
                         <span className="text-primary">{d.icon}</span>
@@ -270,11 +274,11 @@ const BestForGrid: React.FC = () => {
         Quick Pick — Best Exchange For…
       </h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        {BEST_FOR_CARDS.map((card) => {
+        {BEST_FOR_CARDS.map((card, i) => {
           const exchange = EXCHANGES.find(e => e.id === card.exchangeId)!;
           return (
+            <React.Fragment key={card.exchangeId}>
             <Card
-              key={card.exchangeId}
               variant="interactive"
               className="h-full relative overflow-hidden"
               onClick={() => scrollTo(card.exchangeId)}
@@ -283,7 +287,7 @@ const BestForGrid: React.FC = () => {
               <div className="relative z-10 flex flex-col h-full justify-between">
                 <div>
                   <div className="flex items-center justify-between mb-4">
-                    <div className="w-10 h-10 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center text-primary group-hover:scale-110 group-hover:shadow-[0_0_15px_rgba(var(--color-primary-rgb),0.3)] group-hover:bg-primary/20 transition-all duration-300">
+                    <div className="w-10 h-10 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center text-primary group-hover:scale-110 group-hover:shadow-[0_0_15px_rgba(var(--color-primary-rgb),0.3)] group-hover:bg-primary/20 transition-colors transition-shadow transition-transform transform-gpu duration-300">
                       {(() => {
                         const IconComponent = ICON_MAP[(card as any).iconName] || Trophy;
                         return <IconComponent size={20} strokeWidth={2} />;
@@ -296,11 +300,13 @@ const BestForGrid: React.FC = () => {
                   <h3 className="font-bold text-lg mb-1 group-hover:text-primary transition-colors">{card.label}</h3>
                   <p className="text-sm text-text-muted mb-4">{exchange.name}</p>
                 </div>
-                <div className="flex items-center gap-1 text-primary text-[13px] font-bold opacity-0 group-hover:opacity-100 transition-all -translate-x-2 group-hover:translate-x-0 duration-300">
+                <div className="flex items-center gap-1 text-primary text-[13px] font-bold opacity-0 group-hover:opacity-100 transition-opacity transition-transform transform-gpu -translate-x-2 group-hover:translate-x-0 duration-300">
                   {card.cta} <ArrowRight size={14} />
                 </div>
               </div>
             </Card>
+
+            </React.Fragment>
           );
         })}
       </div>
@@ -322,8 +328,7 @@ const ExchangeProfilesSection: React.FC = () => {
       {EXCHANGES.map((exchange, index) => (
         <React.Fragment key={exchange.id}>
           <ExchangeCard exchange={exchange} rank={index + 1} />
-          {index === 2 && <AffiliateBanner banner={AFFILIATE_BANNERS[0]} />}
-          {index === 7 && <AffiliateBanner banner={AFFILIATE_BANNERS[2]} />}
+
         </React.Fragment>
       ))}
     </section>
@@ -332,25 +337,7 @@ const ExchangeProfilesSection: React.FC = () => {
 
 // ─── Affiliate Banner ─────────────────────────────────────────────
 
-const AffiliateBanner: React.FC<{ banner: typeof AFFILIATE_BANNERS[0] }> = ({ banner }) => (
-  <div className="p-6 bg-surface border border-primary/20 rounded-xl relative overflow-hidden">
-    <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full blur-[60px]" />
-    <div className="relative z-10 flex flex-col md:flex-row md:items-center gap-4">
-      <div className="flex-1">
-        <h3 className="font-bold text-base mb-1">{banner.title}</h3>
-        <p className="text-text-muted text-sm">{banner.body}</p>
-      </div>
-      <a 
-        href={banner.ctaUrl} 
-        target="_blank" 
-        rel="noopener sponsored"
-        className="px-6 py-2.5 bg-primary text-background font-bold rounded-lg hover:bg-primary/90 transition-all shadow-lg hover:shadow-primary/20 flex items-center justify-center gap-2"
-      >
-        {banner.cta} <sup className="text-[10px] opacity-70">A</sup>
-      </a>
-    </div>
-  </div>
-);
+
 
 // ─── Section: Comparison Tool ─────────────────────────────────────
 
@@ -418,7 +405,7 @@ const ComparisonTool: React.FC = () => {
       <div className="mb-6 relative">
         <button
           onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-          className={`w-full leather-card rounded-xl p-4 flex items-center justify-between transition-all duration-300 ${isDropdownOpen ? 'border-primary/40 bg-primary/5 shadow-md shadow-primary/5' : 'hover:border-primary/30 hover:bg-primary/5 hover:shadow-md'}`}
+          className={`w-full leather-card rounded-xl p-4 flex items-center justify-between transition duration-300 transform-gpu ${isDropdownOpen ? 'border-primary/40 bg-primary/5 shadow-md shadow-primary/5' : 'hover:border-primary/30 hover:bg-primary/5 hover:shadow-md'}`}
         >
           <div className="flex items-center gap-2 flex-wrap">
             <span className="text-sm text-text-muted mr-2">Comparing:</span>
@@ -430,7 +417,7 @@ const ComparisonTool: React.FC = () => {
           </div>
           <div className="flex items-center gap-3">
             <span className="text-xs text-text-muted font-bold">{selected.length}/4</span>
-            <ChevronDown size={18} className={`text-text-muted transition-transform duration-300 ${isDropdownOpen ? 'rotate-180 text-primary' : ''}`} />
+            <ChevronDown size={18} className={`text-text-muted transition-transform transform-gpu duration-300 ${isDropdownOpen ? 'rotate-180 text-primary' : ''}`} />
           </div>
         </button>
 
@@ -491,23 +478,7 @@ const ComparisonTool: React.FC = () => {
                 );
               })}
             </tbody>
-             <tfoot>
-              <tr className="border-t border-border">
-                <td className="p-4"></td>
-                {selectedExchanges.map(e => (
-                  <td key={e.id} className="p-4 text-center">
-                    <a 
-                      href={e.affiliateUrl} 
-                      target="_blank" 
-                      rel="noopener sponsored"
-                      className="inline-flex items-center justify-center px-4 py-2 bg-primary/10 text-primary hover:bg-primary hover:text-background font-bold text-xs rounded-lg transition-all border border-primary/20"
-                    >
-                      Open Account <sup className="text-[8px] opacity-70 ml-0.5">A</sup>
-                    </a>
-                  </td>
-                ))}
-              </tr>
-            </tfoot>
+
           </table>
         </div>
       </Card>
@@ -598,7 +569,7 @@ const FeeCalculator: React.FC = () => {
               <button
                 key={t}
                 onClick={() => setTradeType(t)}
-                className={`px-4 py-2 rounded-lg text-sm font-bold transition-all ${
+                className={`px-4 py-2 rounded-lg text-sm font-bold transition-colors ${
                   tradeType === t ? 'bg-primary text-background' : 'bg-surface border border-border text-text-muted hover:text-text hover:border-primary/30'
                 }`}
               >
@@ -617,7 +588,7 @@ const FeeCalculator: React.FC = () => {
                 key={e.id}
                 onClick={() => toggleCalcExchange(e.id)}
                 disabled={!selectedIds.includes(e.id) && selectedIds.length >= 5}
-                className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${
+                className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-colors ${
                   selectedIds.includes(e.id) ? 'bg-primary/10 text-primary border border-primary/20' : 'bg-surface border border-border text-text-muted hover:text-text hover:border-primary/30'
                 } disabled:opacity-30`}
               >
@@ -640,7 +611,7 @@ const FeeCalculator: React.FC = () => {
                    const savings = mostExpensive ? mostExpensive.annualCost - r.annualCost : 0;
                    const maxCost = mostExpensive?.annualCost || 1;
                    return (
-                     <div key={r.exchange.id} className={`p-4 rounded-xl transition-all ${i === 0 ? 'bg-primary/10 border border-primary/30' : 'bg-surface border border-border group-hover:border-primary/20'}`}>
+                     <div key={r.exchange.id} className={`p-4 rounded-xl transition-colors ${i === 0 ? 'bg-primary/10 border border-primary/30' : 'bg-surface border border-border group-hover:border-primary/20'}`}>
                        <div className="flex items-center justify-between mb-2">
                          <div className="flex items-center gap-3">
                            {i === 0 && <span className="text-[10px] font-black text-primary bg-primary/10 px-2 py-0.5 rounded border border-primary/20">BEST VALUE</span>}
@@ -711,12 +682,7 @@ const FeeCalculator: React.FC = () => {
                   <strong className="text-primary font-black">{formatCurrency(mostExpensive.annualCost - cheapest.annualCost)}</strong> annually
                   vs. {mostExpensive.exchange.name}.
                 </p>
-                <a href={cheapest.exchange.affiliateUrl} target="_blank" rel="noopener noreferrer" className="flex-shrink-0">
-                  <Button className="w-full sm:w-auto shadow-lg shadow-primary/20">
-                    Open Account <sup className="text-[10px] opacity-70 ml-0.5">A</sup>
-                    <ExternalLink size={14} className="ml-1" />
-                  </Button>
-                </a>
+
               </div>
             )}
           </div>
@@ -725,9 +691,7 @@ const FeeCalculator: React.FC = () => {
       </Card>
 
       {/* Fee optimization banner */}
-      <div className="mt-4">
-        <AffiliateBanner banner={AFFILIATE_BANNERS[1]} />
-      </div>
+
     </section>
   );
 };
@@ -825,20 +789,16 @@ const DisclaimerSection: React.FC = () => {
         <div className="flex flex-col items-center justify-center gap-2">
           <div className="flex items-center gap-2 text-text-muted font-bold text-sm uppercase tracking-wider">
             <Shield size={14} />
-            <span>ClearRate™ Affiliate & Editorial Disclosure</span>
+            <span>ClearRate™ Editorial Disclosure</span>
           </div>
           <div className="space-y-3 text-xs text-text-muted leading-relaxed max-w-2xl">
             <p>
-              Coinvestopedia operates the ClearRate™ Exchange Intelligence product independently
-              of commercial relationships. Scores reflect quantitative analysis of publicly available data
-              and are not influenced by affiliate compensation.
+              Coinvestopedia operates the ClearRate™ Exchange Intelligence product independently.
+              Scores reflect quantitative analysis of publicly available data
+              and are based solely on objective criteria.
             </p>
             <p>
-              Coinvestopedia may receive referral fees when users open accounts via links on this
-              page. Commercial relationships are disclosed with an <span className="text-primary font-bold">[A]</span> badge.
-            </p>
-            <p>
-              This page is for informational purposes only and does not constitute financial,
+              This page is for informational and educational purposes only and does not constitute financial,
               investment, or legal advice. Cryptocurrency trading involves significant risk of loss.
             </p>
             <p className="text-text-muted/60 italic">
@@ -856,10 +816,14 @@ const DisclaimerSection: React.FC = () => {
 export const Exchanges: React.FC = () => {
   return (
     <div className="animate-fade-in space-y-10 lg:space-y-14 pb-12">
+      <PageMeta title="Exchange Directory" description="Compare leading cryptocurrency exchanges by fees, volume, and features." />
+
       <PageHeader />
+      <VaraDisclaimer variant="banner" />
       <MethodologySection />
       <BestForGrid />
       <ExchangeProfilesSection />
+
       <ComparisonTool />
       <FeeCalculator />
       <RegulatoryMatrix />

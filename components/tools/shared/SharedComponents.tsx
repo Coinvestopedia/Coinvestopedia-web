@@ -113,7 +113,7 @@ export const InputField: React.FC<{
 
   return (
   <div 
-    className={`input-field-wrapper relative flex flex-col gap-1.5 min-w-0 transition-all ${infoOpen ? 'ring-1 ring-primary/20 bg-primary/5 rounded-lg' : 'hover:z-[90] focus-within:z-[90]'}`}
+    className={`input-field-wrapper relative flex flex-col gap-1.5 min-w-0 transition-colors transition-shadow ${infoOpen ? 'ring-1 ring-primary/20 bg-primary/5 rounded-lg' : 'hover:z-[90] focus-within:z-[90]'}`}
     style={{ zIndex: infoOpen ? 9999 : undefined }}
   >
     <div className="relative flex items-center justify-between gap-2 z-20">
@@ -127,7 +127,7 @@ export const InputField: React.FC<{
           <select
             value={value}
             onChange={e => onChange(e.target.value)}
-            className="w-full bg-input-bg dark:bg-[#18181b] border border-border rounded-lg py-2.5 px-4 text-sm text-text focus:border-primary focus:ring-1 focus:ring-primary/20 focus:outline-none appearance-none cursor-pointer transition-all hover:border-text-muted/50"
+            className="w-full bg-input-bg dark:bg-[#18181b] border border-border rounded-lg py-2.5 px-4 text-sm text-text focus:border-primary focus:ring-1 focus:ring-primary/20 focus:outline-none appearance-none cursor-pointer transition-colors transition-shadow hover:border-text-muted/50"
           >
             {options.map(o => <option key={o.value} value={o.value}>{o.label}</option>)}
           </select>
@@ -149,7 +149,7 @@ export const InputField: React.FC<{
             min={min} 
             max={max} 
             step={step}
-            className={`w-full bg-input-bg/60 dark:bg-[#18181b]/60 backdrop-blur-md border border-border/80 rounded-lg py-2.5 text-sm font-medium text-text focus:border-primary focus:ring-2 focus:ring-primary/40 focus:outline-none transition-all hover:border-text-muted/60 ${prefix ? 'pl-9' : 'pl-4'} ${suffix ? 'pr-12' : 'pr-4'}`}
+            className={`w-full bg-input-bg/60 dark:bg-[#18181b]/60 backdrop-blur-md border border-border/80 rounded-lg py-2.5 text-sm font-medium text-text focus:border-primary focus:ring-2 focus:ring-primary/40 focus:outline-none transition-colors transition-shadow hover:border-text-muted/60 ${prefix ? 'pl-9' : 'pl-4'} ${suffix ? 'pr-12' : 'pr-4'}`}
           />
           {suffix && (
             <div className="absolute right-3.5 text-text-muted text-[10px] font-extrabold uppercase tracking-widest pointer-events-none bg-input-bg dark:bg-[#18181b] pl-1">
@@ -189,7 +189,7 @@ export const ResultMetric: React.FC<{
   const isMediumNumber = charLength >= 7; 
 
   return (
-    <div className="p-4 rounded-xl border border-border bg-surface dark:bg-[#18181b] hover:border-primary/40 hover:bg-primary/5 dark:hover:bg-[#1a1a1e] transition-all group"
+    <div className="p-4 rounded-xl border border-border bg-surface dark:bg-[#18181b] hover:border-primary/40 hover:bg-primary/5 dark:hover:bg-[#1a1a1e] transition-colors group"
       title={valStr}
     >
       <p className="text-[10px] font-bold text-text-muted uppercase tracking-widest">{label}</p>
@@ -218,36 +218,8 @@ export const fmtPct = (n: number) => (n >= 0 ? '+' : '') + fmt(n) + '%';
 
 
 // ─── Pro Gate Wrapper ──────────────────────────────────────────────────────────
-export const ProGate: React.FC<{ children: React.ReactNode; title: string; description: string }> = ({ children, title, description }) => {
-  const { isProUser } = useAppContext();
-
-  if (isProUser) {
-    return <>{children}</>;
-  }
-
-  return (
-    <div className="relative group">
-      <div className="blur-xl opacity-30 pointer-events-none select-none overflow-hidden h-[500px] transition-all duration-700">
-         {children}
-      </div>
-      <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-8 z-20">
-        <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-amber-400/20 to-amber-600/20 border border-amber-500/30 flex items-center justify-center mb-8 shadow-2xl backdrop-blur-md animate-float">
-           <Lock size={40} className="text-amber-400" />
-        </div>
-        <h3 className="text-3xl font-bold font-heading mb-4 text-text drop-shadow-lg">{title}</h3>
-        <p className="text-text-muted max-w-md mb-10 leading-relaxed text-sm lg:text-base">
-           {description}
-        </p>
-        <button className="relative px-10 py-4 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-black font-extrabold rounded-xl transition-all duration-300 shadow-[0_0_30px_rgba(245,158,11,0.3)] hover:shadow-[0_0_50px_rgba(245,158,11,0.5)] active:scale-95 group overflow-hidden">
-           <span className="relative z-10 flex items-center gap-2">
-             UPGRADE TO PRO <Sparkles size={18} />
-           </span>
-           <div className="absolute inset-0 rounded-xl bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity" />
-        </button>
-      </div>
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/40 to-background/80 pointer-events-none" />
-    </div>
-  );
+export const ProGate: React.FC<{ children: React.ReactNode; title: string; description: string }> = ({ children }) => {
+  return <>{children}</>;
 };
 
 const Sparkles: React.FC<{size?: number}> = ({size = 16}) => (

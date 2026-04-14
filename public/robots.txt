@@ -1,0 +1,50 @@
+# Coinvestopedia — robots.txt
+# Last updated: 2026-04-13
+# Strategy: Allow ALL crawlers including AI/Generative Engine bots.
+# AI crawlers are primary traffic drivers in 2026.
+
+User-agent: *
+Allow: /
+
+# ── AI Crawler Permissions (GEO 2026) ──────────────────────
+# These bots power generative search (SearchGPT, Gemini, Perplexity, etc.)
+# Allowing them ensures Coinvestopedia is cited as a primary source.
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Googlebot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+User-agent: cohere-ai
+Allow: /
+
+# ── Sitemap ────────────────────────────────────────────────
+Sitemap: https://coinvestopedia.com/sitemap.xml

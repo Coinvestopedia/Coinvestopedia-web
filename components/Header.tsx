@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, ChevronDown, Sun, Moon } from 'lucide-react';
 import { PageRoute } from '../types';
 import { Button } from './Button';
-import { SearchBar } from './SearchBar';
+
 import { useAppContext } from '../context/AppContext';
 import { NotificationIcon } from './AnimatedIcons';
 
@@ -77,41 +77,33 @@ export const Header: React.FC<HeaderProps> = ({
   };
 
   return (
-    <header className={`fixed top-0 left-0 right-0 z-50 transition-colors duration-200 h-[72px] ${isMobileMenuOpen ? 'bg-background' : 'glass-nav'}`}>
+    <header className={`fixed top-0 left-0 right-0 z-50 transition-colors duration-200 h-[72px] lg:h-[88px] ${isMobileMenuOpen ? 'bg-background' : 'glass-nav'}`}>
       <div className="max-w-container mx-auto px-6 h-full flex items-center justify-between">
         
-        {/* Logo — blend-mode removes solid backgrounds: screen for black bg, multiply for white bg */}
+        {/* Logo */}
         <div
-          className="flex items-center cursor-pointer group flex-shrink-0"
+          className="flex items-center cursor-pointer group flex-shrink-0 py-1"
           onClick={() => handleNavClick(PageRoute.HOME)}
         >
-          {/* ── Dark mode, Desktop (black bg → mix-blend-screen makes black invisible) ── */}
+          {/* ── Dark mode, Desktop ── */}
           <img
-            src="/logo-dark mode-full.png"
+            src="/logo-transparent-dark-desktop.png"
             alt="Coinvestopedia"
-            className={`h-10 lg:h-12 w-auto object-contain mix-blend-screen transition-transform duration-200 group-hover:scale-105
+            className={`h-14 lg:h-[76px] w-auto object-contain transition-transform duration-200 group-hover:scale-105
               ${theme === 'dark' ? 'hidden md:block' : 'hidden'}`}
           />
-          {/* ── Light mode, Desktop (white bg → mix-blend-multiply makes white invisible) ── */}
+          {/* ── Light mode, Desktop ── */}
           <img
-            src="/logo-light mode full.png"
+            src="/logo-transparent-light-desktop.png"
             alt="Coinvestopedia"
-            className={`h-10 lg:h-12 w-auto object-contain mix-blend-multiply transition-transform duration-200 group-hover:scale-105
+            className={`h-14 lg:h-[76px] w-auto object-contain transition-transform duration-200 group-hover:scale-105
               ${theme !== 'dark' ? 'hidden md:block' : 'hidden'}`}
           />
-          {/* ── Mobile Dark (black bg → mix-blend-screen) ── */}
+          {/* ── Mobile (Universal) ── */}
           <img
-            src="/Mobile logo-light and dark mode-icon.png"
+            src="/logo-transparent-mobile.png"
             alt="Coinvestopedia"
-            className={`h-10 w-auto object-contain mix-blend-screen transition-transform duration-200 group-hover:scale-105
-              ${theme === 'dark' ? 'block md:hidden' : 'hidden'}`}
-          />
-          {/* ── Mobile Light (white bg → mix-blend-multiply) ── */}
-          <img
-            src="/Mobile logo-light-mode-icon.png"
-            alt="Coinvestopedia"
-            className={`h-10 w-auto object-contain mix-blend-multiply transition-transform duration-200 group-hover:scale-105
-              ${theme !== 'dark' ? 'block md:hidden' : 'hidden'}`}
+            className="h-12 lg:h-14 w-auto object-contain transition-transform duration-200 group-hover:scale-105 block md:hidden"
           />
         </div>
 
@@ -133,7 +125,7 @@ export const Header: React.FC<HeaderProps> = ({
                 {link.options.length > 0 && <ChevronDown size={14} className={`mt-[2px] transition-transform ${activeDropdown === link.label ? 'rotate-180' : ''}`} aria-hidden="true" />}
                 
                 {/* Active Indicator Line */}
-                <span className={`absolute -bottom-1 left-0 h-[2px] bg-primary transition-all duration-300 ${currentRoute === link.route ? 'w-full' : 'w-0 group-hover:w-full opacity-50'}`} aria-hidden="true" />
+                <span className={`absolute -bottom-1 left-0 h-[2px] w-full bg-primary transition-transform duration-300 origin-left ${currentRoute === link.route ? 'scale-x-100 opacity-100' : 'scale-x-0 group-hover:scale-x-100 opacity-50'}`} aria-hidden="true" />
               </div>
               
               {link.options.length > 0 && activeDropdown === link.label && (
@@ -167,12 +159,7 @@ export const Header: React.FC<HeaderProps> = ({
 
         {/* Actions */}
         <div className="flex items-center gap-3">
-          <div className="hidden md:block">
-            <SearchBar 
-              className="w-[180px] xl:w-[240px]" 
-              placeholder="Search (Cmd+K)"
-            />
-          </div>
+
           
           <button 
              onClick={handleNotificationClick}
@@ -205,15 +192,10 @@ export const Header: React.FC<HeaderProps> = ({
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.2 }}
-            className="xl:hidden fixed inset-0 top-[72px] bg-background/95 backdrop-blur-md z-40 overflow-y-auto pb-32 border-t border-border"
+            className="xl:hidden fixed inset-0 top-[72px] lg:top-[88px] bg-background/95 backdrop-blur-md z-40 overflow-y-auto pb-32 border-t border-border"
           >
             <div className="p-6 flex flex-col gap-6">
-              <div className="mb-4">
-                <SearchBar 
-                  className="w-full" 
-                  placeholder="Search assets..."
-                />
-              </div>
+
 
               <div className="flex flex-col gap-2">
                  <h3 className="text-xs font-bold text-text-muted uppercase tracking-widest mb-2">Navigation</h3>

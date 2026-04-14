@@ -1,14 +1,16 @@
+import { PageMeta, homePageSchema } from '../components/PageMeta';
+import { VaraDisclaimer } from '../components/VaraDisclaimer';
 import React from 'react';
 import { Hero } from '../components/Hero';
 import { Card } from '../components/Card';
 import { IconCard } from '../components/IconCard';
-import { AdUnit } from '../components/AdUnit';
+
 import { LiveActivityFeed } from '../components/LiveActivityFeed';
 import { VideoTutorial } from '../components/VideoTutorial';
 import { FilterChips } from '../components/FilterChips';
 import { MarketPulseDashboard } from '../components/MarketPulseDashboard';
 import { NewsletterSignup } from '../components/NewsletterSignup';
-import { TrendingUp, Activity, Globe, LineChart, Zap, Shield, BookOpen, Calculator, Hash, Sparkles, Flame, Coins, BarChart3, Target, DollarSign } from 'lucide-react';
+import { TrendingUp, Activity, Globe, LineChart, Zap, BookOpen, Calculator, Hash, Sparkles, Flame, Coins, BarChart3, Target, DollarSign } from 'lucide-react';
 import { PageRoute } from '../types';
 import { TargetIcon } from '../components/AnimatedIcons';
 
@@ -60,13 +62,6 @@ export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
       description: 'AI-powered sentiment analysis and market indicators',
       variant: 'default' as const,
       progress: 60
-    },
-    {
-      icon: <Shield size={24} />,
-      title: 'Security Audit',
-      description: 'Verify smart contract safety before investing',
-      variant: 'default' as const,
-      progress: 45
     },
     {
       icon: <BookOpen size={24} />,
@@ -139,10 +134,13 @@ export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
   ];
 
   return (
-    <div className="animate-fade-in space-y-12 lg:space-y-20">
-      <Hero onNavigate={onNavigate} />
+    <div className="animate-fade-in">
+      <PageMeta title="Institutional Crypto Data" description="World-class institutional crypto data, analysis, and investment tools." structuredData={homePageSchema} />
       
-      {/* Featured Comparisons Section */}
+      <div className="space-y-12 lg:space-y-16">
+        <Hero onNavigate={onNavigate} />
+        
+        {/* Featured Comparisons Section */}
       <section>
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 lg:mb-8">
           <div>
@@ -150,7 +148,7 @@ export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
             <p className="text-text-muted text-sm lg:text-base">Quantitative Analysis: Where Digital Assets Meet Traditional Finance</p>
           </div>
           <button 
-            className="px-4 py-2 bg-surface hover:bg-surface-hover border border-border text-primary font-semibold transition-all group text-sm lg:text-base self-start sm:self-auto rounded-lg shadow-sm"
+            className="px-4 py-2 bg-surface hover:bg-surface-hover border border-border text-primary font-semibold transition duration-200 group text-sm lg:text-base self-start sm:self-auto rounded-lg shadow-sm transform-gpu"
             onClick={() => onNavigate?.(PageRoute.COMPARE)}
           >
             View All Comparisons
@@ -208,20 +206,16 @@ export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
         <MarketPulseDashboard onNavigate={onNavigate} />
       </section>
 
-      {/* Live Feed & Ad */}
-      <section className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
+      {/* Live Feed */}
+      <section>
         <LiveActivityFeed />
-        <div className="flex flex-col gap-6">
-           {/* Passing partner="3commas" for diversity, or remove prop for random */}
-           <AdUnit size="large" className="w-full h-full min-h-[250px]" label="Sponsored Partner" partner="3commas" />
-        </div>
       </section>
 
       {/* Tools Grid */}
       <section>
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
           <h2 className="text-2xl lg:text-3xl font-bold text-text">Essential Tools & Guides</h2>
-          <FilterChips chips={categories} onFilterChange={(ids) => console.log(ids)} />
+          <FilterChips chips={categories} onFilterChange={() => {}} />
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-4 lg:gap-6">
@@ -236,10 +230,14 @@ export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
         </div>
       </section>
 
+      {/* Disclaimer */}
+      <VaraDisclaimer variant="inline" />
+
       {/* Newsletter */}
       <section>
         <NewsletterSignup />
       </section>
+      </div>
     </div>
   );
 };

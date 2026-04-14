@@ -54,12 +54,12 @@ const LiveActivityFeedComponent: React.FC<LiveActivityFeedProps> = ({
         {activities.map((activity, i) => (
           <div 
             key={i} 
-            className="flex items-center justify-between p-4 bg-background/50 rounded-xl border border-border hover:border-primary/30 transition-all group animate-slide-in" 
+            className="flex items-center justify-between p-4 bg-background/50 rounded-xl border border-border hover:border-primary/30 transition-colors group animate-slide-in" 
             style={{ animationDelay: `${i * 100}ms` }}
             role="article"
           >
             <div className="flex items-center gap-3 flex-1 min-w-0">
-              <div className="w-10 h-10 bg-surface rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform flex-shrink-0">
+              <div className="w-10 h-10 bg-surface rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform transform-gpu flex-shrink-0">
                 <Hash size={20} className="text-primary" />
               </div>
               <div className="flex-1 min-w-0">
@@ -79,10 +79,10 @@ const LiveActivityFeedComponent: React.FC<LiveActivityFeedProps> = ({
         ))}
       </div>
 
-      <button className="w-full mt-4 px-4 py-3 bg-primary/10 border border-primary/30 rounded-xl text-primary font-semibold hover:bg-primary hover:text-white transition-all flex items-center justify-center gap-2 group">
+      <button className="w-full mt-4 px-4 py-3 bg-primary/10 border border-primary/30 rounded-xl text-primary font-semibold hover:bg-primary hover:text-white transition-colors flex items-center justify-center gap-2 group">
         <Lock size={16} />
         <span>Unlock Real-Time Feed</span>
-        <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+        <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform transform-gpu" />
       </button>
     </Card>
   );

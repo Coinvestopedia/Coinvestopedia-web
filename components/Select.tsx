@@ -70,7 +70,7 @@ export const Select = ({
         <button
           onClick={() => !disabled && setIsOpen(!isOpen)}
           className={cn(
-            'w-full flex items-center justify-between bg-input-bg border rounded-lg transition-all duration-200',
+            'w-full flex items-center justify-between bg-input-bg border rounded-lg transition-colors transition-shadow duration-200',
             'text-text',
             'focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20',
             'disabled:opacity-50 disabled:cursor-not-allowed',
@@ -88,7 +88,7 @@ export const Select = ({
           <ChevronDown
             size={16}
             className={cn(
-              'transition-transform duration-200 text-text-muted',
+              'transition-transform transform-gpu duration-200 text-text-muted',
               isOpen && 'rotate-180'
             )}
           />

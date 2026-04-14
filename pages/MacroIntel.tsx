@@ -1,3 +1,5 @@
+import { PageMeta } from '../components/PageMeta';
+import { VaraDisclaimer } from '../components/VaraDisclaimer';
 import React, { useState, useEffect } from 'react';
 import { Card } from '../components/Card';
 import { Button } from '../components/Button';
@@ -7,6 +9,7 @@ import {
   ChevronRight, Lock, Zap, ArrowUpRight, ArrowDownRight
 } from 'lucide-react';
 import { fetchMacroIndicators } from '../services/api';
+
 
 // ─── TYPES ────────────────────────────────────────────────────────────────────
 
@@ -63,7 +66,7 @@ const REPORTS: MacroReport[] = [
         title: 'Macro Context',
         content: (
           <>
-            <p className="mb-4">The Federal Reserve held rates at 5.25-5.50% for the seventh consecutive meeting, signaling "higher for longer" with no cuts expected until inflation sustainably approaches 2%. Meanwhile, the DXY (U.S. Dollar Index) has surged above 106, its highest level since November 2023.</p>
+            <p className="mb-4">The Federal Reserve held rates at 5.25-5.50% for the seventh consecutive meeting, indicating "higher for longer" with no cuts expected until inflation sustainably approaches 2%. Meanwhile, the DXY (U.S. Dollar Index) has surged above 106, its highest level since November 2023.</p>
             <p className="mb-4"><strong>What's driving dollar strength:</strong></p>
             <ul className="list-disc pl-5 space-y-2 mb-4">
               <li><strong>Rate differentials:</strong> US rates remain significantly above Europe and Japan, attracting global capital into dollar-denominated assets.</li>
@@ -96,7 +99,7 @@ const REPORTS: MacroReport[] = [
               </div>
             </div>
             <p className="mb-4"><strong>Current lag analysis:</strong> In 2022-2023, BTC's reaction to DXY moves lagged by approximately 2-3 weeks. The current DXY breakout above 106 occurred 8 trading days ago. Based on historical lag patterns, the transmission effect may not fully manifest for another 7-12 trading days.</p>
-            <p><strong>Key nuance:</strong> Unlike 2022, the current strong dollar cycle is occurring alongside spot BTC ETF inflows, creating a structural bid that partially offsets the macro headwind. The question is whether ETF demand can absorb the macro-driven selling pressure.</p>
+            <p><strong>Key nuance:</strong> Unlike 2022, the current strong dollar cycle is occurring alongside spot BTC ETF inflows, creating a structural bid that partially offsets the macro headwind. The question is whether ETF demand can absorb the macro-driven supply-side pressure.</p>
           </>
         ),
       },
@@ -147,11 +150,11 @@ const REPORTS: MacroReport[] = [
             <div className="space-y-3">
               <div className="p-4 bg-background border border-border rounded-lg">
                 <h4 className="font-bold text-amber-400 mb-1">Stablecoin yield arbitrage</h4>
-                <p className="text-sm text-text-muted">When DXY strength pushes EM currencies down, DeFi stablecoin yields often compress to below US treasury rates. When this inverts (DeFi yields &gt; Treasuries), historically it signals late-stage dollar strength.</p>
+                <p className="text-sm text-text-muted">When DXY strength pushes EM currencies down, DeFi stablecoin yields often compress to below US treasury rates. When this inverts (DeFi yields &gt; Treasuries), historically it has preceded late-stage dollar strength.</p>
               </div>
               <div className="p-4 bg-background border border-border rounded-lg">
                 <h4 className="font-bold text-amber-400 mb-1">Mining economics compression</h4>
-                <p className="text-sm text-text-muted">Strong dollar + range-bound BTC squeezes miners with non-USD costs. Hash ribbons indicator approaching a compression signal — historically a leading indicator of capitulation followed by recovery (4 of last 5 instances).</p>
+                <p className="text-sm text-text-muted">Strong dollar + range-bound BTC squeezes miners with non-USD costs. Hash ribbons indicator approaching a compression zone — historically a leading indicator of capitulation followed by recovery (4 of last 5 instances).</p>
               </div>
               <div className="p-4 bg-background border border-border rounded-lg">
                 <h4 className="font-bold text-amber-400 mb-1">BTC/ETH ratio divergence</h4>
@@ -190,7 +193,7 @@ const REPORTS: MacroReport[] = [
                     <td className="py-3 pl-4 text-text-muted">Ongoing</td>
                   </tr>
                   <tr className="border-b border-border/50 hover:bg-primary/5">
-                    <td className="py-3 pr-4 font-medium">Surprise rate cut signal</td>
+                    <td className="py-3 pr-4 font-medium">Surprise rate cut indication</td>
                     <td className="py-3 px-4 text-red-400">10%</td>
                     <td className="py-3 px-4 text-emerald-400">Strongly Positive</td>
                     <td className="py-3 pl-4 text-text-muted">Immediate</td>
@@ -204,7 +207,7 @@ const REPORTS: MacroReport[] = [
                 </tbody>
               </table>
             </div>
-            <p className="mt-4 text-sm text-text-muted"><strong>Thesis invalidation:</strong> If BTC holds above $65,000 despite DXY above 107 for 3+ weeks, it suggests structural demand (ETFs) is overcoming macro headwinds — a fundamentally bullish development.</p>
+            <p className="mt-4 text-sm text-text-muted"><strong>Thesis invalidation:</strong> If BTC holds above $65,000 despite DXY above 107 for 3+ weeks, it suggests structural demand (ETFs) is overcoming macro headwinds — a development worth monitoring closely.</p>
           </>
         ),
       },
@@ -329,7 +332,7 @@ const REPORTS: MacroReport[] = [
             </li>
             <li className="flex items-start gap-3">
               <span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" />
-              <div><strong className="text-text">BTC ETF flows during gold rallies:</strong><span className="text-text-muted"> If BTC ETFs see inflows while gold rallies, it suggests institutional investors are treating both as complementary hedges — a major maturation signal.</span></div>
+              <div><strong className="text-text">BTC ETF flows during gold rallies:</strong><span className="text-text-muted"> If BTC ETFs see inflows while gold rallies, it suggests institutional investors are treating both as complementary hedges — a significant maturation indicator.</span></div>
             </li>
           </ul>
         ),
@@ -338,7 +341,7 @@ const REPORTS: MacroReport[] = [
         icon: <Layers size={18} />,
         title: 'Opportunity Landscape',
         content: (
-          <p className="text-text-muted">The most asymmetric position historically has been scaling into BTC during the Tier 1 → Tier 2 transition (gold rallying, BTC stalling/declining). In the last 3 such transitions, BTC went on to outperform gold by an average of 4.3x over the subsequent 90 days. This is not a signal to buy — it's a structural pattern that professional macro allocators track.</p>
+          <p className="text-text-muted">The most asymmetric position historically has been scaling into BTC during the Tier 1 → Tier 2 transition (gold rallying, BTC stalling/declining). In the last 3 such transitions, BTC went on to outperform gold by an average of 4.3x over the subsequent 90 days. This is not a recommendation — it's a structural pattern that professional macro allocators track for educational purposes.</p>
         ),
       },
       {
@@ -385,7 +388,7 @@ const REPORTS: MacroReport[] = [
             <p className="mb-4"><strong>Key capital flow dynamics:</strong></p>
             <ul className="list-disc pl-5 space-y-2 mb-4">
               <li>MENA (Middle East & North Africa) region stablecoin volumes have increased 340% vs. 30-day average on major P2P (Peer-to-Peer) platforms.</li>
-              <li>USDT (Tether) is trading at a 4.2% premium to USD on Turkish and Lebanese P2P markets — a classic capital flight signal.</li>
+              <li>USDT (Tether) is trading at a 4.2% premium to USD on Turkish and Lebanese P2P markets — a classic indicator of capital outflows.</li>
               <li>UAE crypto exchange volumes have doubled, suggesting the region is being used as a capital intermediary.</li>
               <li>Hawala networks are reporting increased BTC settlement requests from conflict-adjacent regions.</li>
             </ul>
@@ -462,6 +465,997 @@ const REPORTS: MacroReport[] = [
       },
     ],
   },
+  {
+    id: 'liquidity-inflation-mechanics',
+    title: 'Liquidity and Inflation Mechanics: Fed Balance Sheet Runoff vs. Crypto Liquidity',
+    subtitle: 'Analyzing the composite dynamics of the Fed balance sheet, T-Account swings, and reserve management on Bitcoin cycles.',
+    tab: 'institutional',
+    date: 'April 14, 2026',
+    readTime: '18 min read',
+    confidenceLevel: 'High',
+    keyMetrics: [
+      { label: 'Fed Balance Sheet', value: '$6.6T', direction: 'down' },
+      { label: 'Bank Reserves', value: '$3.0T', direction: 'neutral' },
+      { label: 'TGA Balance', value: '$875B', direction: 'up' },
+      { label: 'Net Liquidity Index', value: '+1.2%', direction: 'up' },
+    ],
+    sections: [
+      {
+        icon: <ArchiveIcon size={18} />,
+        title: 'Framework: The Quantity Theory of Liquidity',
+        content: (
+          <>
+            <p className="mb-4">In the post-2020 macro regime, the <strong>quantity of money</strong> (liquidity availability) has proven to be a more potent driver for Bitcoin than the <strong>price of money</strong> (interest rates). While rate hikes grab headlines, the actual stock of risk-bearing cash depends on the Fed\'s balance sheet and Treasury management.</p>
+            <div className="p-4 bg-surface border border-border rounded-xl mb-6">
+              <h4 className="text-sm font-bold text-primary mb-2">The Net Liquidity Formula</h4>
+              <code className="text-xs bg-background p-2 rounded block font-mono">
+                Net Liquidity ≈ Δ(Fed Assets) - Δ(TGA) - Δ(ON RRP)
+              </code>
+              <p className="text-xs text-text-muted mt-2 font-medium italic">Practical application: When the Fed expands assets or the Treasury spends down its account, liquidity enters the banking system, typically boosting risk assets like BTC.</p>
+            </div>
+            <p className="text-sm text-text-muted">Research indicates that both higher interest on reserves (IORB) and lower reserve supply tighten secured funding conditions, directly impacting dealers\' ability to warehouse risk assets.</p>
+          </>
+        ),
+      },
+      {
+        icon: <TrendingUp size={18} />,
+        title: 'The QT Era & The 2025-26 Pivot',
+        content: (
+          <>
+            <p className="mb-4">From June 2022 through late 2025, the Federal Reserve conducted one of the most aggressive Quantitative Tightening (QT) programs in history. By December 2025, total assets shrunk by approximately <strong>$2.4 trillion</strong>, bringing the balance sheet down to ~$6.5T.</p>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+              <div className="p-4 bg-surface border border-border rounded-xl">
+                <h4 className="text-sm font-bold text-red-400 mb-2">QT Regime (2022-2025)</h4>
+                <p className="text-xs text-text-muted">Managed runoff of $60B/month in Treasuries and $35B/month in MBS. Reserves pushed toward the lower edge of "ample," sparking money-market stress reminiscent of 2019.</p>
+              </div>
+              <div className="p-4 bg-surface border border-border rounded-xl">
+                <h4 className="text-sm font-bold text-emerald-400 mb-2">Pivot: RMPs (Dec 2025)</h4>
+                <p className="text-xs text-text-muted">QT halted. Started "Reserve Management Purchases" (RMPs) of ~$40B/month to stabilize reserves. Effectively a return to balance-sheet expansion labeled as "operational management."</p>
+              </div>
+            </div>
+            <p>For BTC, the end of QT marks the removal of a major structural headwind. The transition from contraction to a flat/mildly expansionary reserve path is historically associated with the start of new liquidity cycles.</p>
+          </>
+        ),
+      },
+      {
+        icon: <Database size={18} />,
+        title: 'Treasury Mechanics: The TGA Swing Factor',
+        content: (
+          <>
+            <p className="mb-4">The Treasury General Account (TGA) acts as a mechanical offset to Fed liquidity. Large TGA rebuilds drain reserves, while drawdowns act as "mini-QE" injections. In late 2025, a $200B TGA spike coincided with a 36% BTC drawdown.</p>
+            <div className="p-5 bg-surface border border-border rounded-xl mb-6">
+              <h4 className="text-sm font-bold mb-3">TGA Liquidity Impact Correlation</h4>
+              <div className="overflow-x-auto">
+                <table className="w-full text-xs text-left">
+                  <thead>
+                    <tr className="border-b border-border text-text-muted">
+                      <th className="py-2 pr-4 font-medium uppercase text-[10px]">TGA Event</th>
+                      <th className="py-2 px-4 font-medium uppercase text-[10px]">Liquidity Effect</th>
+                      <th className="py-2 pl-4 font-medium uppercase text-[10px] text-right">BTC Performance</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr className="border-b border-border/30">
+                      <td className="py-2 pr-4 font-medium">Major Drawdown (Spend)</td>
+                      <td className="py-2 px-4 text-emerald-400">Reserves Increase</td>
+                      <td className="py-2 pl-4 text-right text-emerald-400">+19% to +22%</td>
+                    </tr>
+                    <tr>
+                      <td className="py-2 pr-4 font-medium">Major Rebuild (Issue)</td>
+                      <td className="py-2 px-4 text-red-400">Reserves Drain</td>
+                      <td className="py-2 pl-4 text-right text-red-400">-15% to -35%</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <p className="text-sm text-text-muted">If political constraints or fiscal needs force the Treasury to spend down its current ~$875B TGA balance in mid-2026, it would provide a massive tailwind for BTC despite any "higher for longer" rate rhetoric.</p>
+          </>
+        ),
+      },
+      {
+        icon: <Eye size={18} />,
+        title: 'BTC Correlation & Dominance Cycles',
+        content: (
+          <>
+            <p className="mb-4">As BTC has become financialized (especially post-ETF), its sensitivity to global liquidity has surpassed its sensitivity to idiosyncratic factors like the halving. It now trades as a <strong>leveraged expression of US-dollar liquidity</strong>.</p>
+            <div className="space-y-3 mb-6">
+              <div className="p-4 bg-background border-l-2 border-primary rounded-r-lg">
+                <p className="text-sm"><strong>Correlation Spike:</strong> 90-day correlation with global net liquidity indices has exceeded 0.8 during major cycle turns.</p>
+              </div>
+              <div className="p-4 bg-background border-l-2 border-emerald-400 rounded-r-lg">
+                <p className="text-sm"><strong>Dominance Shift:</strong> BTC tends to rally first when liquidity returns, often driving "BTC Dominance" higher before capital rotates into smaller altcoins.</p>
+              </div>
+            </div>
+            <p className="text-sm text-text-muted italic">Key Observation: BTC\'s 2020-21 surge from $8k to $69k coincided almost perfectly with global QE, while the 2022-23 bear market overlapped with aggressive QT.</p>
+          </>
+        ),
+      },
+      {
+        icon: <Globe size={18} />,
+        title: 'Synthesis: Assessing the 2026 Outlook',
+        content: (
+          <>
+            <div className="p-5 bg-surface border border-border rounded-xl mb-6">
+              <h4 className="font-bold text-amber-400 mb-3">Thesis: The Liquidity Vacuum is Ending</h4>
+              <p className="text-sm leading-relaxed mb-4">The evidence supports a transition from a "liquidity drain" regime (2022-2025) to a "neutral-to-expansionary" environment. While inflation remains sticky at ~3%, the Fed\'s preference to maintain "ample" reserves takes precedence over further balance sheet contraction.</p>
+              <div className="flex items-center gap-3 p-3 bg-background rounded-lg border border-border">
+                <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                <span className="text-xs font-bold uppercase tracking-wider">Early 2026 Stance: Moderately Constructive</span>
+              </div>
+            </div>
+            <p className="text-sm text-text-muted">Thesis Invalidation: If Treasury bill issuance significantly outpaces Fed RMPs while the TGA remains elevated, reserves could fall back into "adequate/stress" territory, forcing another deleveraging event in risk assets.</p>
+          </>
+        ),
+      },
+      {
+        icon: <Shield size={18} />,
+        title: 'Practical Monitoring Checkpoints',
+        content: (
+          <>
+            <ul className="space-y-4">
+              <li className="flex items-start gap-3">
+                <div className="w-5 h-5 rounded bg-primary/20 flex items-center justify-center shrink-0 mt-0.5"><Clock size={12} className="text-primary"/></div>
+                <div><strong className="text-text">Weekly Fed H.4.1 Report:</strong><span className="text-text-muted"> Monitor the "Securities Held Outright" line. Consistent growth indicates RMP effectiveness.</span></div>
+              </li>
+              <li className="flex items-start gap-3">
+                <div className="w-5 h-5 rounded bg-primary/20 flex items-center justify-center shrink-0 mt-0.5"><BarChart3 size={12} className="text-primary"/></div>
+                <div><strong className="text-text">TGA Level:</strong><span className="text-text-muted"> Any move below $750B has historically been positive for liquidity; any climb toward $1T creates a liquidity vacuum.</span></div>
+              </li>
+              <li className="flex items-start gap-3">
+                <div className="w-5 h-5 rounded bg-primary/20 flex items-center justify-center shrink-0 mt-0.5"><Zap size={12} className="text-primary"/></div>
+                <div><strong className="text-text">ON RRP Drains:</strong><span className="text-text-muted"> Cash moving out of reverse-repo into the banking system provides a hidden liquidity bid.</span></div>
+              </li>
+              <li className="flex items-start gap-3">
+                <div className="w-5 h-5 rounded bg-primary/20 flex items-center justify-center shrink-0 mt-0.5"><Layers size={12} className="text-primary"/></div>
+                <div><strong className="text-text">Global Context:</strong><span className="text-text-muted"> Bitcoin reacts to the PBoC and ECB as much as the Fed. Watch global liquidity aggregates.</span></div>
+              </li>
+            </ul>
+          </>
+        ),
+      },
+    ],
+  },
+  {
+    id: 'dollar-milkshake-2026',
+    title: 'Dollar Milkshake Theory & DXY Regimes',
+    subtitle: 'Evaluating the evolution of DXY logic in a multipolar BRICS+ environment and the rise of "anti-dollar" trades.',
+    tab: 'geopolitical',
+    date: 'April 14, 2026',
+    readTime: '15 min read',
+    confidenceLevel: 'Medium',
+    keyMetrics: [
+      { label: 'DXY Index', value: '104.2', direction: 'down' },
+      { label: 'BRICS Local Sett.', value: '+22%', direction: 'up' },
+      { label: 'Gold', value: '$2,340', direction: 'up' },
+      { label: 'BTC/USD', value: '$68,400', direction: 'neutral' },
+    ],
+    sections: [
+      {
+        icon: <Globe size={18} />,
+        title: 'Theory vs. Reality: The 2026 Milkshake',
+        content: (
+          <>
+            <p className="mb-4">The <strong>Dollar Milkshake Theory</strong> argues that a tighter Fed and a world full of dollar liabilities pull liquidity into the U.S., forcing the DXY higher as global capital scrambles for dollars. In its simplest form, this is a liquidity squeeze story that stresses weaker balance sheets abroad.</p>
+            <p className="mb-4">However, in early 2026, the theory faces headwinds from a Fed cutting cycle and the rise of multipolar trade settlement. While the mechanism for episodic DXY spikes remains intact, the one-way upward narrative has weakened.</p>
+            <div className="p-4 bg-surface border border-border rounded-xl mb-4">
+              <p className="text-sm italic text-text-muted">"The core thesis still works, but it is more conditional. DXY strength is no longer a given in a regime where gold and Bitcoin act as direct counter-forces to fiscal dominance."</p>
+            </div>
+          </>
+        ),
+      },
+      {
+        icon: <TrendingUp size={18} />,
+        title: 'Why 2026 is Different: Fed Cuts & Yield Pressure',
+        content: (
+          <>
+            <p className="mb-4">The 2026 setup is less friendly to a durable DXY uptrend for several structural reasons:</p>
+            <ul className="list-disc pl-5 space-y-3 mb-4">
+              <li><strong>Fed Cutting Cycle:</strong> Market commentary in April 2026 tied DXY weakness to rising cut bets, as the Fed prioritizes economic growth over absolute dollar strength.</li>
+              <li><strong>Cautious Strategist Outlook:</strong> Reuters reported that major desks started 2026 with a cautious dollar outlook due to Fed independence concerns and decreasing yield advantages.</li>
+              <li><strong>Fiscal Dominance:</strong> With US debt crossing the <strong>$50T wall</strong>, the "safe haven" appeal of Treasuries is increasingly balanced against debasement risks.</li>
+            </ul>
+          </>
+        ),
+      },
+      {
+        icon: <Globe size={18} />,
+        title: 'BRICS+ and the Rise of Local Settlement',
+        content: (
+          <>
+            <p className="mb-4">BRICS de-dollarization is becoming more operational through local-currency settlement and <strong>CBDC linkage</strong> proposals. India’s central bank proposed linking BRICS digital currencies to simplify trade, explicitly aiming to reduce dollar dependence.</p>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+              <div className="p-4 bg-background border border-border rounded-xl">
+                <h4 className="text-sm font-bold text-primary mb-2">Operational Shift</h4>
+                <p className="text-xs text-text-muted">Direct settlement in CNY, INR, and AED has grown to 22% of total BRICS trade volume, bypassing marginal USD demand.</p>
+              </div>
+              <div className="p-4 bg-background border border-border rounded-xl">
+                <h4 className="text-sm font-bold text-primary mb-2">CBDC Corridors</h4>
+                <p className="text-xs text-text-muted">The mBridge project and similar initiatives are creating a parallel settlement layer that reduces the "liquidity vacuum" effect of the dollar Milkshake.</p>
+              </div>
+            </div>
+          </>
+        ),
+      },
+      {
+        icon: <Layers size={18} />,
+        title: 'The Anti-Dollar Trades: Gold and Bitcoin',
+        content: (
+          <>
+            <p className="mb-4">Gold and Bitcoin are no longer generic risk assets; they are acting as <strong>direct hedges</strong> against currency debasement. Coverage in late 2025 highlighted that these assets are actively competing with the dollar as stores of value during debt-wall anxiety.</p>
+            <p className="text-sm text-text-muted mb-4 italic">"Gold and Bitcoin price the credibility cost of the system. In this regime, they are not merely reacting to dollar weakness; they are forcing it by offering a finite alternative to infinite debt expansion."</p>
+          </>
+        ),
+      },
+      {
+        icon: <BarChart3 size={18} />,
+        title: 'Practical 2026 Regime Map',
+        content: (
+          <div className="overflow-x-auto">
+            <table className="w-full text-xs text-left border-collapse min-w-[500px]">
+              <thead>
+                <tr className="border-b border-border text-text-muted">
+                  <th className="py-3 pr-4 font-medium uppercase text-[10px]">Regime</th>
+                  <th className="py-3 px-4 font-medium uppercase text-[10px]">Dollar Implication</th>
+                  <th className="py-3 px-4 font-medium uppercase text-[10px]">Best Assets</th>
+                  <th className="py-3 pl-4 font-medium uppercase text-[10px]">Key Driver</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr className="border-b border-border/50 hover:bg-primary/5 transition-colors">
+                  <td className="py-3 pr-4 font-bold">Fed Tightening + Stress</td>
+                  <td className="py-3 px-4 text-emerald-400">DXY Constructive</td>
+                  <td className="py-3 px-4">USD, Treasuries</td>
+                  <td className="py-3 pl-4 text-text-muted">Scarcity Dominates</td>
+                </tr>
+                <tr className="border-b border-border/50 hover:bg-primary/5 transition-colors">
+                  <td className="py-3 pr-4 font-bold">Fed Cutting + Growth</td>
+                  <td className="py-3 px-4 text-amber-400">DXY Softer</td>
+                  <td className="py-3 px-4">Gold, BTC, Crypto</td>
+                  <td className="py-3 pl-4 text-text-muted">Yield Support Fades</td>
+                </tr>
+                <tr className="border-b border-border/50 hover:bg-primary/5 transition-colors">
+                  <td className="py-3 pr-4 font-bold">Fiscal Dominance</td>
+                  <td className="py-3 px-4 text-red-400">DXY Mixed/Weak</td>
+                  <td className="py-3 px-4">Gold, BTC</td>
+                  <td className="py-3 pl-4 text-text-muted">Debasement Hedge</td>
+                </tr>
+                <tr className="hover:bg-primary/5 transition-colors">
+                  <td className="py-3 pr-4 font-bold">BRICS Growth</td>
+                  <td className="py-3 px-4 text-red-400">Structurally Challenged</td>
+                  <td className="py-3 px-4">Local FX, Rails</td>
+                  <td className="py-3 pl-4 text-text-muted">Demand Drop</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        )
+      },
+      {
+        icon: <Shield size={18} />,
+        title: 'Bottom Line',
+        content: (
+          <>
+            <p className="mb-4">The right view for 2026 is not "DXY up equals everything down." Instead, <strong>DXY strength remains a crisis indicator</strong>, while gold and Bitcoin increasingly act as parallel trades that price the fiscal cost of the current monetary system.</p>
+            <p className="text-sm font-bold text-primary">Key Takeaway: Monitor DXY for short-term liquidity shocks, but watch Gold/BTC for the long-term structural pivot away from dollar hegemony.</p>
+          </>
+        ),
+      },
+    ],
+  },
+  {
+    id: 'yield-curve-normalization-2026',
+    title: 'Yield Curve Normalization and US Debt Ceiling',
+    subtitle: 'Analyzing the 2-30Y steepening trend and the legacy of the 2025 "One Big Beautiful Bill" on market liquidity.',
+    tab: 'institutional',
+    date: 'April 14, 2026',
+    readTime: '16 min read',
+    confidenceLevel: 'High',
+    keyMetrics: [
+      { label: '2-30Y Spread', value: '139 bps', direction: 'up' },
+      { label: 'Debt Ceiling', value: '+$5.0T', direction: 'neutral' },
+      { label: '2026 Deficit', value: '$1.9T', direction: 'down' },
+      { label: 'Debt/GDP', value: '101%', direction: 'up' },
+    ],
+    sections: [
+      {
+        icon: <TrendingUp size={18} />,
+        title: 'The Steepening Signal: Why Front-End Easing Matters',
+        content: (
+          <>
+            <p className="mb-4">In early 2026, the U.S. yield curve reached its steepest level since 2021, with the <strong>2-30 year spread</strong> breaking out toward 139 basis points. This shift reflects a more accommodative policy path at the front end as the Fed initiates cuts, while long-term rates remain firm.</p>
+            <p className="mb-4">Historically, a steepening curve is supportive for risk assets like Bitcoin and Equities because it creates favorable funding conditions and reduces the discount rate for growth assets. However, the current "bear steepener" flavor — where long rates rise faster than short rates fall — suggests that fiscal concerns are the primary driver.</p>
+          </>
+        ),
+      },
+      {
+        icon: <Shield size={18} />,
+        title: 'Legislating Liquidity: The 2025 Debt Act',
+        content: (
+          <>
+            <p className="mb-4">The 2025 <strong>"One Big Beautiful Bill Act"</strong> successfully raised the federal debt ceiling by $5 trillion, effectively delaying the next major fiscal impasse until 2027. This legislative reprieve removed a critical "tail risk" for the treasury market.</p>
+            <div className="p-4 bg-surface border border-border rounded-xl mb-4 text-sm leading-relaxed">
+               <strong>Liquidity Impact:</strong> While the higher ceiling doesn\'t "create" permanent liquidity, it allows the Treasury to operate without the threat of a default shock, maintaining the stability needed for the current BTC rally.
+            </div>
+          </>
+        ),
+      },
+      {
+        icon: <AlertTriangle size={18} />,
+        title: 'Structural Headwinds: Sticky Long-End Yields',
+        content: (
+          <>
+            <p className="mb-4">Despite the Fed\'s easing cycle, long-dated Treasury yields act "sticky" due to institutional concerns over Fed independence and heavy issuance. The CBO projects deficits of <strong>$1.9 trillion</strong> for 2026, forcing the Treasury to supply a constant stream of new paper to the market.</p>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+              <div className="p-4 bg-background border border-border rounded-xl">
+                <h4 className="text-sm font-bold text-red-400 mb-2">The Supply Overhang</h4>
+                <p className="text-xs text-text-muted">High issuance levels keep term premiums elevated. If the market cannot absorb the supply, long yields will continue to rise even as the Fed cuts the front end.</p>
+              </div>
+              <div className="p-4 bg-background border border-border rounded-xl">
+                <h4 className="text-sm font-bold text-red-400 mb-2">Inflation Hedges</h4>
+                <p className="text-xs text-text-muted">Gold and Bitcoin are increasingly priced against this "fiscal dominance" regime, serving as protection against the eventual monetization of this debt.</p>
+              </div>
+            </div>
+          </>
+        ),
+      },
+      {
+        icon: <BarChart3 size={18} />,
+        title: 'Market Impact: Constructive Liquidity vs. Duration Risk',
+        content: (
+          <div className="space-y-4">
+            <p>For macro positioning, early 2026 represents a <strong>complex macro environment</strong>:</p>
+            <div className="leather-card p-5 rounded-xl border border-border">
+              <ul className="space-y-4">
+                <li className="flex gap-4">
+                  <div className="w-auto px-2 h-8 rounded-full bg-emerald-500/10 flex items-center justify-center text-emerald-400 text-[10px] font-bold shrink-0">CONSTRUCTIVE</div>
+                  <p className="text-xs text-text-muted"><strong>Liquidity-Sensitive Assets:</strong> Equities and Crypto benefit from front-end easing and the absence of debt-ceiling volatility until 2027.</p>
+                </li>
+                <li className="flex gap-4">
+                  <div className="w-auto px-2 h-8 rounded-full bg-red-500/10 flex items-center justify-center text-red-400 text-[10px] font-bold shrink-0">CAUTIOUS</div>
+                  <p className="text-xs text-text-muted"><strong>Long Duration:</strong> Treasury duration exposure remains risky as supply concerns keep the long end from rallying alongside the front end.</p>
+                </li>
+              </ul>
+            </div>
+          </div>
+        )
+      },
+      {
+        icon: <Zap size={18} />,
+        title: 'Trade Implications & Global Context',
+        content: (
+          <>
+            <p className="mb-4">Early 2026 yields a "Goldilocks" environment for Bitcoin if growth remains stable. As the yield curve normalizes, capital typically rotates from cash-equivalents back into risk-on sectors.</p>
+            <div className="overflow-x-auto">
+              <table className="w-full text-xs text-left border-collapse">
+                <thead>
+                  <tr className="border-b border-border text-text-muted">
+                    <th className="py-2 pr-4 font-medium uppercase text-[10px]">Asset Class</th>
+                    <th className="py-2 px-4 font-medium uppercase text-[10px]">Market Stance</th>
+                    <th className="py-2 pl-4 font-medium uppercase text-[10px] text-right">Institutional Observation</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr className="border-b border-border/30">
+                    <td className="py-3 pr-4 font-bold">Bitcoin (BTC)</td>
+                    <td className="py-3 px-4 text-emerald-400">Moderately Constructive</td>
+                    <td className="py-3 pl-4 text-right">Strategic Range Entry</td>
+                  </tr>
+                  <tr className="border-b border-border/30">
+                    <td className="py-3 pr-4 font-bold">Gold</td>
+                    <td className="py-3 px-4 text-emerald-400">Constructive</td>
+                    <td className="py-3 pl-4 text-right">Portfolio Stability Asset</td>
+                  </tr>
+                  <tr>
+                    <td className="py-3 pr-4 font-bold">US 10Y Treasuries</td>
+                    <td className="py-3 px-4 text-red-400">Neutral to Cautious</td>
+                    <td className="py-3 pl-4 text-right">Duration Risk Mitigation</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </>
+        ),
+      },
+      {
+        icon: <Globe size={18} />,
+        title: 'Bottom Line',
+        content: (
+          <div className="p-5 bg-surface border border-border rounded-xl">
+            <h4 className="font-bold text-amber-400 mb-2 tracking-wide uppercase text-xs text-center border-b border-border/50 pb-2">Institutional Verdict</h4>
+            <p className="text-sm mt-3 leading-relaxed">
+              The $5 trillion liquidity reprieve buys the market time, but the underlying fiscal math (Debt/GDP at 101%) ensures that the "anti-dollar" bid for scarce assets will remain the dominant structural theme for the remainder of 2026.
+            </p>
+          </div>
+        ),
+      },
+    ],
+  },
+  {
+    id: 'jobs-report-inflation-2026',
+    title: 'Jobs Report & Inflation (PCE vs. CPI)',
+    subtitle: 'Analyzing Bitcoin\'s sensitivity to labor market prints and the tactical divergence between PCE and CPI indicators.',
+    tab: 'weekly',
+    date: 'April 14, 2026',
+    readTime: '13 min read',
+    confidenceLevel: 'High',
+    keyMetrics: [
+      { label: 'NFP Print', value: '130k', direction: 'up' },
+      { label: 'Core PCE', value: '2.1%', direction: 'neutral' },
+      { label: 'Core CPI', value: '3.2%', direction: 'down' },
+      { label: 'BTC Volatility', value: '62%', direction: 'up' },
+    ],
+    sections: [
+      {
+        icon: <Zap size={18} />,
+        title: 'The NFP Impulse: Jobs Data and BTC',
+        content: (
+          <>
+            <p className="mb-4">Bitcoin continues to exhibit high sensitivity to <strong>Non-Farm Payroll (NFP)</strong> prints. In the current 2026 regime, BTC has increasingly traded like a liquidity-sensitive macro asset around major U.S. labor releases.</p>
+            <p className="mb-4">Strong beats, such as the January 2026 print (130k vs 55k estimated), act as immediate headwinds for the asset. This is because robust employment lowers the federal urgency for rate cuts, keeping the dollar and yields firmer for longer.</p>
+          </>
+        ),
+      },
+      {
+        icon: <TrendingUp size={18} />,
+        title: 'The Rate-Cut Channel: Why Strong NFP Can Hurt',
+        content: (
+          <>
+            <p className="mb-4">The core mechanism is a shift in <strong>liquidity expectations</strong>. When a jobs number is "too good," traders focus on the "higher for longer" narrative. This tends to be negative for Bitcoin because crypto fundamentally benefits from easier financial conditions and expanding liquidity.</p>
+            <div className="p-4 bg-surface border border-border rounded-xl mb-4">
+              <h4 className="text-sm font-bold text-amber-400 mb-2">The 2026 Correlation Pattern</h4>
+              <p className="text-xs text-text-muted">A study of recent releases shows that while NFP beats are "good" for the economy, they triggered a median 2.4% drawdown in BTC within the first 4 hours as market-implied rate cut odds for the quarter fell by 15%.</p>
+            </div>
+          </>
+        ),
+      },
+      {
+        icon: <Database size={18} />,
+        title: 'PCE versus CPI: The Fed\'s Preferred Metric',
+        content: (
+          <>
+            <p className="mb-4">While the <strong>Consumer Price Index (CPI)</strong> often moves markets first due to its early release, the <strong>Personal Consumption Expenditures (PCE)</strong> index remains the Fed’s preferred measure of inflation performance.</p>
+            <div className="space-y-3 mb-6">
+              <div className="p-4 bg-background border border-border rounded-lg">
+                <h4 className="font-bold text-primary mb-1">PCE Divergence</h4>
+                <p className="text-sm text-text-muted">Historically, sharp price corrections in crypto occur when core PCE remains sticky above 2% despite headline CPI cooling. This indicates that underlying inflation is still too hot for a dovish pivot.</p>
+              </div>
+              <div className="p-4 bg-background border border-border rounded-lg">
+                <h4 className="font-bold text-primary mb-1">Headline Noise</h4>
+                <p className="text-sm text-text-muted">Markets often "cheer" a soft CPI print, but that rally can fade if the subsequent PCE report shows that energy-driven headline cooling isn\'t being matched by services inflation.</p>
+              </div>
+            </div>
+          </>
+        ),
+      },
+      {
+        icon: <BarChart3 size={18} />,
+        title: 'The Divergence Playbook: CPI Easing vs. Core PCE',
+        content: (
+          <div className="overflow-x-auto">
+            <table className="w-full text-xs text-left border-collapse min-w-[500px]">
+              <thead>
+                <tr className="border-b border-border text-text-muted">
+                  <th className="py-3 pr-4 font-medium uppercase text-[10px]">Macro Print</th>
+                  <th className="py-3 px-4 font-medium uppercase text-[10px]">Fed Implication</th>
+                  <th className="py-3 pl-4 font-medium uppercase text-[10px] text-right">BTC Reaction</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr className="border-b border-border/50 hover:bg-primary/5 transition-colors">
+                  <td className="py-3 pr-4 font-bold">NFP Strong Beat</td>
+                  <td className="py-3 px-4 text-amber-400">Fewer or later cuts</td>
+                  <td className="py-3 pl-4 text-right text-red-400">Near-term Pressure</td>
+                </tr>
+                <tr className="border-b border-border/50 hover:bg-primary/5 transition-colors">
+                  <td className="py-3 pr-4 font-bold">NFP Major Miss</td>
+                  <td className="py-3 px-4 text-emerald-400">More cuts priced in</td>
+                  <td className="py-3 pl-4 text-right text-emerald-400">Volatility Spike (Upside)</td>
+                </tr>
+                <tr className="border-b border-border/50 hover:bg-primary/5 transition-colors">
+                  <td className="py-3 pr-4 font-bold">CPI Soft / PCE Sticky</td>
+                  <td className="py-3 px-4 text-amber-400">Cuts delayed despite relief</td>
+                  <td className="py-3 pl-4 text-right text-amber-400">Initial relief can fade</td>
+                </tr>
+                <tr className="hover:bg-primary/5 transition-colors">
+                  <td className="py-3 pr-4 font-bold">Both Metrics Cool</td>
+                  <td className="py-3 px-4 text-emerald-400">Easier policy path</td>
+                  <td className="py-3 pl-4 text-right text-emerald-400">Strongly Constructive</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        )
+      },
+      {
+        icon: <Globe size={18} />,
+        title: 'The 2026 Pattern: Data-Driven Sensitivity',
+        content: (
+          <>
+            <p className="mb-4">The 2026 pattern suggests that Bitcoin is behaving less like "digital gold" and more like a <strong>macro-sensitive high-beta asset</strong> around U.S. data. This data-driven regime makes NFP and core PCE especially important for short-horizon BTC direction.</p>
+            <p className="text-sm text-text-muted italic">"In early 2026, the market isn\'t trading the halving; it\'s trading the labor market and the Fed\'s preferred inflation yardstick."</p>
+          </>
+        ),
+      },
+      {
+        icon: <Shield size={18} />,
+        title: 'Practical Takeaway: The Monitoring Framework',
+        content: (
+          <div className="p-5 bg-surface border border-border rounded-xl">
+             <p className="text-sm leading-relaxed mb-4">
+                Watch <strong>NFP</strong> for the immediate volatility impulse, then watch <strong>core PCE</strong> for whether that move is likely to persist.
+             </p>
+             <div className="space-y-2">
+                <div className="flex items-center gap-2">
+                   <div className="w-1.5 h-1.5 rounded-full bg-primary" />
+                   <p className="text-xs text-text-muted">Strong NFP + Sticky PCE = Persistent Headwinds</p>
+                </div>
+                <div className="flex items-center gap-2">
+                   <div className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+                   <p className="text-xs text-text-muted">NFP Miss + PCE Cooling = Constructive Backdrop</p>
+                </div>
+             </div>
+          </div>
+        ),
+      },
+    ],
+  },
+  {
+    id: 'latam-infrastructure-2026',
+    title: "Latin America's Crypto Infrastructure Moment",
+    subtitle: 'Analyzing the structural shift from survival utility to institutional-grade rails across Brazil, Argentina, and Mexico.',
+    tab: 'geopolitical',
+    date: 'April 14, 2026',
+    readTime: '14 min read',
+    confidenceLevel: 'High',
+    keyMetrics: [
+      { label: 'LatAm Volume', value: '$730B', direction: 'up' },
+      { label: 'Brazil Share', value: '44%', direction: 'neutral' },
+      { label: 'Arg. Adoption', value: '20%', direction: 'up' },
+      { label: 'Remittance Fee', value: '<1%', direction: 'down' },
+    ],
+    sections: [
+      {
+        icon: <Globe size={18} />,
+        title: 'The Structural Reality: A $1.5 Trillion Shift',
+        content: (
+          <>
+            <p className="mb-4">Between 2022 and 2025, Latin America processed nearly <strong>$1.5 trillion</strong> in cryptocurrency volume. By 2026, the region has matured from a retail adoption story into a critical institutional infrastructure layer.</p>
+            <p className="mb-4">The driver isn\'t speculation, but structural necessity. Persistent inflation and a correspondent banking system that charges 5–10% for cross-border moves have created a demand vacuum that blockchain rails have filled.</p>
+            <div className="p-4 bg-surface border border-border rounded-xl mb-4">
+              <p className="text-sm font-bold text-primary">Key Data: LatAm processed $730B in 2025 alone, a 60% YoY surge outpacing North American institutional growth.</p>
+            </div>
+          </>
+        ),
+      },
+      {
+        icon: <TrendingUp size={18} />,
+        title: 'Institutional Anchors: Brazil and Argentina',
+        content: (
+          <>
+            <p className="mb-4"><strong>Brazil</strong> anchors the regional market with $318.8 billion in volume. The "DeCripto" framework (fully live July 2026) has solidified regulatory floors, allowing giants like Nubank to serve 127 million users natively with crypto tools.</p>
+            <p className="mb-4"><strong>Argentina</strong> remains the capital of "survival adoption," with 20% of the population holding digital assets as a hedge against 220%+ inflation. USDT and USDC function as de facto dollar savings accounts for millions.</p>
+          </>
+        ),
+      },
+      {
+        icon: <Shield size={18} />,
+        title: 'Infrastructure Corridors: Remittance Economics',
+        content: (
+          <>
+            <p className="mb-4">The US-Mexico corridor, which saw <strong>$64.7 billion</strong> in 2024, is the definitive proof of concept. Traditional wire costs of 5-7% have been replaced by stablecoin rails under 1% with near-instant settlement.</p>
+            <div className="overflow-x-auto mb-4">
+              <table className="w-full text-xs text-left border-collapse">
+                <thead>
+                  <tr className="border-b border-border text-text-muted">
+                    <th className="py-2 pr-4 font-medium uppercase text-[10px]">Corridor</th>
+                    <th className="py-2 px-4 font-medium uppercase text-[10px]">Traditional Cost</th>
+                    <th className="py-2 pl-4 font-medium uppercase text-[10px]">Blockchain Cost</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr className="border-b border-border/30">
+                    <td className="py-2 pr-4">US &rarr; Mexico</td>
+                    <td className="py-2 px-4 text-red-400">5-7%</td>
+                    <td className="py-2 pl-4 text-emerald-400 font-bold">&lt;1%</td>
+                  </tr>
+                  <tr>
+                    <td className="py-2 pr-4">US &rarr; Brazil</td>
+                    <td className="py-2 px-4 text-red-400">0.5-2%</td>
+                    <td className="py-2 pl-4 text-emerald-400 font-bold">Instant (PIX)</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </>
+        ),
+      },
+      {
+        icon: <BarChart3 size={18} />,
+        title: 'Global Benchmarks: Africa vs. Europe',
+        content: (
+          <>
+            <p className="mb-4">Latin America provides the template for <strong>Sub-Saharan Africa</strong> ($205B volume), where adoption is also necessity-driven but remains mobile-first and P2P-dominant.</p>
+            <p className="mb-4">In contrast, <strong>Europe</strong> ($2.6T volume) is undergoing "regulatory Darwinism" via MiCA. This has triggered a bifurcation where USDT remains dominant in emerging markets like LatAm, while regulated Circle (EURC) captures the EU market.</p>
+          </>
+        ),
+      },
+      {
+        icon: <Layers size={18} />,
+        title: 'The Tokenization Layer: RWAs in 2026',
+        content: (
+          <>
+            <p className="mb-4">Real-World Asset (RWA) tokenization crossed <strong>$20 billion</strong> in early 2026. The NYSE and Brazil\'s B3 have announced joint development of blockchain-enabled 24/7 tokenized securities trading.</p>
+            <ul className="list-disc pl-5 space-y-2 mb-4 text-sm text-text-muted">
+              <li><strong>Tokenized Treasuries:</strong> $8B AUM (Dec 2025)</li>
+              <li><strong>Tokenized Gold:</strong> $3.5B AUM</li>
+              <li><strong>Wealth Transfer:</strong> Millennials/Gen Z view blockchain as the default financial rail.</li>
+            </ul>
+          </>
+        ),
+      },
+      {
+        icon: <Database size={18} />,
+        title: 'Security Risks & The Bottom Line',
+        content: (
+          <>
+            <p className="mb-4">Illicit flows hit $158B in 2025, with AI-enabled scams growing 1,400% YoY. Exchange concentration is the primary systemic risk, with Binance holding over 55% of Latin American volume.</p>
+            <div className="p-5 bg-background border border-border rounded-xl">
+              <h4 className="font-bold text-amber-400 mb-2 uppercase text-xs">Institutional Verdict</h4>
+              <p className="text-sm">Latin America is the definitive testing ground for the future of money. While concentration and cyber-risks remain, the cost case for blockchain settlement is closed: it is faster, cheaper, and increasingly regulated.</p>
+            </div>
+          </>
+        ),
+      },
+    ],
+  },
+  {
+    id: 'gulf-brics-settlement-2026',
+    title: 'Gulf States & BRICS Settlement Layer',
+    subtitle: 'Analyzing the rise of Project mBridge and the regulatory velocity of Dubai\'s VARA in a multipolar finance landscape.',
+    tab: 'geopolitical',
+    date: 'April 14, 2026',
+    readTime: '12 min read',
+    confidenceLevel: 'High',
+    keyMetrics: [
+      { label: 'mBridge Volume', value: '$4.5B', direction: 'up' },
+      { label: 'UAE VASP Hub', value: '+140%', direction: 'up' },
+      { label: 'Non-USD Trade', value: '12%', direction: 'up' },
+      { label: 'Gulf Crypto AUM', value: '$125B', direction: 'up' },
+    ],
+    sections: [
+      {
+        icon: <Globe size={18} />,
+        title: 'The Sovereignty Pivot: Digital Asset Strategies',
+        content: (
+          <>
+            <p className="mb-4">The UAE, Saudi Arabia, and Qatar have pivoted toward sovereign digital asset strategies, viewing blockchain not just as "crypto," but as the foundational infrastructure for 21st-century finance.</p>
+            <p className="mb-4">This posture is about <strong>controlling infrastructure</strong>, licensing rails, and strategic chokepoints for finance and data residency. UAE is focusing on ecosystem-building, Saudi Arabia on vertical integration, and Qatar on global connectivity.</p>
+          </>
+        ),
+      },
+      {
+        icon: <Zap size={18} />,
+        title: 'Regulatory Velocity: The VARA Advantage',
+        content: (
+          <>
+            <p className="mb-4">Dubai\'s <strong>VARA (Virtual Assets Regulatory Authority)</strong> leads the region in "regulatory velocity." By 2023, it established a first-of-its-kind comprehensive licensing regime for VASPs.</p>
+            <div className="p-4 bg-surface border border-border rounded-xl mb-4">
+               <p className="text-sm italic text-text-muted">"VARA allows Dubai to move faster than Western peers while maintaining high capital-markets style standards. It is a sovereign shield that attracts institutional capital through clarity."</p>
+            </div>
+          </>
+        ),
+      },
+      {
+        icon: <Database size={18} />,
+        title: 'Project mBridge: The Architecture of Multi-CBDC',
+        content: (
+          <>
+             <p className="mb-4">The strongest real-world anchor for BRICS settlement is <strong>Project mBridge</strong>, which reached MVP in mid-2024. Using DLT, mBridge enables real-time cross-border payments and atomic FX settlement among participating central banks.</p>
+             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                <div className="p-4 bg-background border border-border rounded-xl">
+                   <h4 className="text-sm font-bold text-primary mb-1">Participating Entities</h4>
+                   <p className="text-xs text-text-muted">Currently includes the central banks of the UAE, China, Thailand, and Hong Kong, with Saudi Arabia joining the steering committee in 2025.</p>
+                </div>
+                <div className="p-4 bg-background border border-border rounded-xl">
+                   <h4 className="text-sm font-bold text-primary mb-1">Atomic Settlement</h4>
+                   <p className="text-xs text-text-muted">Reduces bypass time from days to seconds by eliminating the need for traditional correspondent banking chains.</p>
+                </div>
+             </div>
+          </>
+        ),
+      },
+      {
+        icon: <Layers size={18} />,
+        title: 'The Modular Stack: Diversifying Away from SWIFT',
+        content: (
+          <>
+            <p className="mb-4">BRICS is building a **modular settlement stack** rather than a unified currency. Domestic CBDCs or tokenized deposits remain sovereign, while a bridge layer handles coordinate settlement.</p>
+            <p className="mb-4">This design improves efficiency in trade among participating economies and provides a parallel rail that reduces reliance on the US dollar-centric plumbing (SWIFT).</p>
+          </>
+        ),
+      },
+      {
+        icon: <BarChart3 size={18} />,
+        title: 'Strategic Impact: Optional Settlement Rails',
+        content: (
+          <>
+             <p className="mb-4">The strategic impact is about <strong>optionality</strong>. For Gulf states, this means more leverage in trade finance and tokenized deposits. For BRICS, it is a path to diversify payment infrastructure away from legacy Western rails.</p>
+             <div className="overflow-x-auto">
+                <table className="w-full text-xs text-left border-collapse">
+                   <thead>
+                      <tr className="border-b border-border text-text-muted">
+                         <th className="py-2 pr-4 font-medium uppercase text-[10px]">Entity</th>
+                         <th className="py-2 px-4 font-medium uppercase text-[10px]">Strategic Goal</th>
+                         <th className="py-2 pl-4 font-medium uppercase text-[10px]">Key Instrument</th>
+                      </tr>
+                   </thead>
+                   <tbody>
+                      <tr className="border-b border-border/30 hover:bg-primary/5 transition-colors">
+                         <td className="py-3 pr-4 font-bold italic">UAE / VARA</td>
+                         <td className="py-3 px-4">Global Liquidity Hub</td>
+                         <td className="py-3 pl-4">VASP Licensing Framework</td>
+                      </tr>
+                      <tr className="border-b border-border/30 hover:bg-primary/5 transition-colors">
+                         <td className="py-3 pr-4 font-bold italic">Saudi Arabia</td>
+                         <td className="py-3 px-4">Digital Sovereignty</td>
+                         <td className="py-3 pl-4">Bilateral Trade Tokenization</td>
+                      </tr>
+                      <tr className="hover:bg-primary/5 transition-colors">
+                         <td className="py-3 pr-4 font-bold italic">BRICS Bloc</td>
+                         <td className="py-3 px-4">SWIFT Independence</td>
+                         <td className="py-3 pl-4">mBridge / Multi-CBDC Layer</td>
+                      </tr>
+                   </tbody>
+                </table>
+             </div>
+          </>
+        ),
+      },
+      {
+        icon: <Shield size={18} />,
+        title: 'Investor Verdict: Parallel Settlement Stacks',
+        content: (
+          <div className="p-5 bg-surface border border-border rounded-xl">
+             <h4 className="font-bold text-amber-400 mb-2 uppercase text-[10px] tracking-widest text-center border-b border-border/50 pb-2">Institutional Conclusion</h4>
+             <p className="text-sm mt-3 leading-relaxed">
+                The macro story is less "replacement of SWIFT" and more the emergence of a <strong>parallel settlement stack</strong>. Beneficiaries include compliant custodians, cross-border payment firms, and infrastructure providers that can operate across both sovereign and multilateral rails.
+             </p>
+          </div>
+        ),
+      },
+    ],
+  },
+  {
+    id: 'pakistan-russia-macro-2026',
+    title: "Pakistan's IMF Paradox & Russia Sanctions Evasion",
+    subtitle: 'Analyzing the collision of IMF conditionality and sanctions pressure on national digital asset infrastructure.',
+    tab: 'geopolitical',
+    date: 'April 14, 2026',
+    readTime: '14 min read',
+    confidenceLevel: 'Medium',
+    keyMetrics: [
+      { label: 'Russia A7A5 Vol.', value: '$93.3B', direction: 'up' },
+      { label: 'Pakistan P2P Est.', value: '$2.5B', direction: 'up' },
+      { label: 'IMF Requirement', value: 'High', direction: 'neutral' },
+      { label: 'Sanctions Risk', value: 'Critical', direction: 'up' },
+    ],
+    sections: [
+      {
+        icon: <Globe size={18} />,
+        title: "The Informal Loop: Pakistan's Remittance P2P",
+        content: (
+          <>
+            <p className="mb-4">Pakistan remains a global top-10 remittance nation, with approximately <strong>$2.1–$2.5 billion</strong> flowing through unregulated crypto P2P channels annually. This grassroots adoption is driven by dollarization pressures and limited access to formal banking rails.</p>
+            <p className="mb-4">Informal ecosystems like Binance P2P serve as a lifeline for millions, despite the lack of a top-down national strategy. The demand is purely functional: capital preservation and efficient cross-border movement.</p>
+          </>
+        ),
+      },
+      {
+        icon: <Lock size={18} />,
+        title: 'The Policy Bottleneck: IMF Conditionality',
+        content: (
+          <>
+            <p className="mb-4">The "Paradox" lies in the <strong>IMF conditionality</strong>. As part of its funding program, Pakistan is required to maintain strict AML/CFT safeguards and fiscal discipline. This often targets crypto-forward state plans, viewing them as potential leaks in the formal financial perimeter.</p>
+            <div className="p-4 bg-surface border border-border rounded-xl mb-4">
+               <p className="text-sm italic text-text-muted">"Pakistan is institutionally dependent on external financing. Unlike El Salvador, the cost of formal Bitcoin adoption includes the risk of losing IMF program credibility—a price the state currently cannot afford."</p>
+            </div>
+          </>
+        ),
+      },
+      {
+        icon: <Shield size={18} />,
+        title: "Russia A7A5: Industrialized Sanctions Evasion",
+        content: (
+          <>
+             <p className="mb-4">Russia has matured its infrastructure from ad-hoc usage into an industrial-scale settlement network. The <strong>A7A5 stablecoin network</strong> processed over $93.3 billion in 2025 alone, serving as a primary rail for bypassing Western sanctions.</p>
+             <p className="mb-4">By pegging digital assets to the ruble and connecting them to offshore USDT liquidity pools, sanctioned entities have created an operational trade-finance workaround that effectively bypasses SWIFT.</p>
+          </>
+        ),
+      },
+      {
+        icon: <Database size={18} />,
+        title: 'The Infrastructure of Bypass: Stablecoin Rails',
+        content: (
+          <>
+             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                <div className="p-4 bg-background border border-border rounded-xl">
+                   <h4 className="text-sm font-bold text-red-400 mb-1">A7A5 Throughput</h4>
+                   <p className="text-xs text-text-muted">Demonstrates the industrialization of crypto as a settlement layer, bridging domestic rubles to global USDT liquidity.</p>
+                </div>
+                <div className="p-4 bg-background border border-border rounded-xl">
+                   <h4 className="text-sm font-bold text-primary mb-1">Sanctions Resistance</h4>
+                   <p className="text-xs text-text-muted">The architecture connects local-currency rails to DLT with high-velocity clearing, making it harder to freeze compared to bank-led transfers.</p>
+                </div>
+             </div>
+          </>
+        ),
+      },
+      {
+        icon: <BarChart3 size={18} />,
+        title: 'Side-by-Side: Drivers and Obstacles',
+        content: (
+          <div className="overflow-x-auto">
+             <table className="w-full text-xs text-left border-collapse">
+                <thead>
+                   <tr className="border-b border-border text-text-muted">
+                      <th className="py-2 pr-4 font-medium uppercase text-[10px]">Theme</th>
+                      <th className="py-2 px-4 font-medium uppercase text-[10px]">Pakistan</th>
+                      <th className="py-2 pl-4 font-medium uppercase text-[10px]">Russia</th>
+                   </tr>
+                </thead>
+                <tbody>
+                   <tr className="border-b border-border/30 hover:bg-primary/5 transition-colors">
+                      <td className="py-3 pr-4 font-bold italic">Main Driver</td>
+                      <td className="py-3 px-4">Remittances (Bottom-up)</td>
+                      <td className="py-3 pl-4">Sanctions Bypass (Top-down)</td>
+                   </tr>
+                   <tr className="border-b border-border/30 hover:bg-primary/5 transition-colors">
+                      <td className="py-3 pr-4 font-bold italic">Constraint</td>
+                      <td className="py-3 px-4 text-red-400">IMF Conditionality</td>
+                      <td className="py-3 pl-4 text-amber-400">Compliance Enforcement</td>
+                   </tr>
+                   <tr className="hover:bg-primary/5 transition-colors">
+                      <td className="py-3 pr-4 font-bold italic">Primary Form</td>
+                      <td className="py-3 px-4">P2P Exchange Workarounds</td>
+                      <td className="py-3 pl-4 font-bold">Stablecoin Networks (A7A5)</td>
+                   </tr>
+                </tbody>
+             </table>
+          </div>
+        ),
+      },
+      {
+        icon: <AlertTriangle size={18} />,
+        title: 'Final Geopolitical Verdict',
+        content: (
+          <div className="p-5 bg-surface border border-border rounded-xl">
+             <p className="text-sm leading-relaxed">
+                Crypto adoption in 2026 is bifurcating. Pakistan illustrates how <strong>debt dependence</strong> suppresses formal adoption even when demand is critical, while Russia shows how <strong>sanctions pressure</strong> forces the industrialization of digital rails. Both regimes highlight the growing role of decentralized finance as a "gray market" lifeline during macro-economic isolation.
+             </p>
+          </div>
+        ),
+      },
+    ],
+  },
+  {
+    id: 'nasdaq-btc-decoupling-2026',
+    title: 'Nasdaq-BTC Decoupling & Oil Transmission',
+    subtitle: 'Analyzing the episodic breakdown of the BTC-Nasdaq correlation and the indirect impact of $90+ oil on hashrate.',
+    tab: 'cross-market',
+    date: 'April 14, 2026',
+    readTime: '11 min read',
+    confidenceLevel: 'Medium',
+    keyMetrics: [
+      { label: 'BTC/Nasdaq Corr.', value: '0.13', direction: 'down' },
+      { label: 'Oil (WTI)', value: '$92.50', direction: 'up' },
+      { label: 'Oil-Linked Hash', value: '9%', direction: 'neutral' },
+      { label: 'Real Yields', value: '+1.4%', direction: 'up' },
+    ],
+    sections: [
+      {
+        icon: <TrendingUp size={18} />,
+        title: 'The Correlation Collapse: Nasdaq vs. BTC',
+        content: (
+          <>
+            <p className="mb-4">Since the onset of regional conflict in February 2026, Bitcoin\'s correlation with the <strong>Nasdaq</strong> and the IGV software index has fallen sharply. Early estimates showed a drop from 1.0 toward 0.13, suggesting that BTC is increasingly being treated as a macro hedge rather than just "leveraged tech."</p>
+            <p className="mb-4 text-sm text-text-muted">However, this decoupling is highly regime-dependent. While it spikes during geopolitical stress, the relationship often reverts when liquidity conditions or real yields become the dominant market driver.</p>
+          </>
+        ),
+      },
+      {
+        icon: <Zap size={18} />,
+        title: 'Geopolitical Shocks: BTC as a Conditional Hedge',
+        content: (
+          <>
+            <p className="mb-4">Bitcoin acts as a <strong>conditional hedge</strong>. It can decouple from traditional tech during crisis events, but the break is rarely structural. The strongest driver for BTC in 2026 remains changing macro dominance: Fed expectations, institutional ETF flows, and the 10Y real yield path.</p>
+            <div className="p-4 bg-surface border border-border rounded-xl mb-4">
+               <p className="text-sm italic text-text-muted">"The signal is real but episodic. Do not misinterpret a short-term geopolitical decoupling for a permanent divorce from tech liquidity."</p>
+            </div>
+          </>
+        ),
+      },
+      {
+        icon: <Database size={18} />,
+        title: 'Oil Transmission: The Mining Hashrate Myth',
+        content: (
+          <>
+             <p className="mb-4">Direct transmission from <strong>$90+ oil prices</strong> into the Bitcoin hash rate is surprisingly weak. Industry estimates confirm that only 8–10% of global hashing capacity sits in oil-sensitive grids (primarily in the Gulf).</p>
+             <p className="mb-4">The majority of the network (~90%) is insulated by diverse power sources including hydro, coal, nuclear, and renewables, making the total network hash rate highly resilient to crude price shocks.</p>
+          </>
+        ),
+      },
+      {
+        icon: <BarChart3 size={18} />,
+        title: 'Revenue-Side Risk: The True Mining Driver',
+        content: (
+          <>
+             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                <div className="p-4 bg-background border border-border rounded-xl">
+                   <h4 className="text-sm font-bold text-red-400 mb-1">Indirect Impact</h4>
+                   <p className="text-xs text-text-muted">Higher oil reinforces inflation fears, delays rate cuts, and pressures BTC price. This hits miners through <strong>revenue compression</strong>, not power bills.</p>
+                </div>
+                <div className="p-4 bg-background border border-border rounded-xl">
+                   <h4 className="text-sm font-bold text-primary mb-1">Hashprice Pressure</h4>
+                   <p className="text-xs text-text-muted">The core risk to miners during an oil shock is a macro-driven BTC drawdown that pushes hashprice below breakeven levels across all grids.</p>
+                </div>
+             </div>
+          </>
+        ),
+      },
+      {
+        icon: <Globe size={18} />,
+        title: 'Gulf Exposure & Network Resilience',
+        content: (
+          <>
+             <p className="mb-4">While Gulf states like the UAE and Qatar are growing their mining footprint, they still represent a single-digit share of total global hashrate. An energy shock in the Middle East is unlikely to reprice the entire network through mining costs alone.</p>
+             <div className="overflow-x-auto">
+                <table className="w-full text-xs text-left border-collapse">
+                   <thead>
+                      <tr className="border-b border-border text-text-muted">
+                         <th className="py-2 pr-4 font-medium uppercase text-[10px]">Power Source</th>
+                         <th className="py-2 px-4 font-medium uppercase text-[10px]">Estimated Share</th>
+                         <th className="py-2 pl-4 font-medium uppercase text-[10px]">Oil Sensitivity</th>
+                      </tr>
+                   </thead>
+                   <tbody>
+                      <tr className="border-b border-border/30 hover:bg-primary/5 transition-colors">
+                         <td className="py-3 pr-4 font-bold italic">Hydro/Nuclear/Renewables</td>
+                         <td className="py-3 px-4">~55%</td>
+                         <td className="py-3 pl-4 text-emerald-400">Zero</td>
+                      </tr>
+                      <tr className="border-b border-border/30 hover:bg-primary/5 transition-colors">
+                         <td className="py-3 pr-4 font-bold italic">Coal/Natural Gas</td>
+                         <td className="py-3 px-4">~35%</td>
+                         <td className="py-3 pl-4 text-amber-400">Low/Mid</td>
+                      </tr>
+                      <tr className="hover:bg-primary/5 transition-colors">
+                         <td className="py-3 pr-4 font-bold italic">Oil / Crude Gas</td>
+                         <td className="py-3 px-4">~10%</td>
+                         <td className="py-3 pl-4 text-red-400">High</td>
+                      </tr>
+                   </tbody>
+                </table>
+             </div>
+          </>
+        ),
+      },
+      {
+        icon: <Shield size={18} />,
+        title: 'Investment Verdict: The Decoupling Signal',
+        content: (
+          <div className="p-5 bg-surface border border-border rounded-xl">
+             <p className="text-sm leading-relaxed mb-4">
+                The most robust leading indicators for both BTC and miners are <strong>real yields</strong>, Fed path expectations, and ETF flows. Geopolitical conflict can trigger short-run decoupling, but the decoupling is unstable.
+             </p>
+             <p className="text-xs font-bold text-primary border-t border-border/50 pt-3">
+                Key View: BTC is a conditional hedge. Use it for geopolitical diversification, but monitor real yields for the structural trend.
+             </p>
+          </div>
+        ),
+      },
+    ],
+  },
 ];
 
 
@@ -513,7 +1507,7 @@ const LiveMacroBar: React.FC = () => {
 };
 
 const ReportCard: React.FC<{ report: MacroReport; onClick: () => void }> = ({ report, onClick }) => (
-  <Card className="flex flex-col group hover:border-primary/40 cursor-pointer h-full transition-all duration-300" onClick={onClick}>
+  <Card className="flex flex-col group hover:border-primary/40 cursor-pointer h-full transition duration-300 transform-gpu" onClick={onClick}>
     <div className="flex justify-between items-start mb-4">
       <span className="px-3 py-1 bg-surface border border-border text-xs rounded-full font-bold text-text-muted uppercase tracking-widest">
         {TABS.find(t => t.id === report.tab)?.label}
@@ -577,11 +1571,13 @@ export const MacroIntel: React.FC = () => {
   if (activeReport) {
     return (
       <div className="animate-fade-in max-w-[800px] mx-auto pb-16">
+      <PageMeta title="Macro Intel" description="Macroeconomic indicators mapped against crypto market performance." />
+
         <button
           onClick={() => setActiveReportId(null)}
           className="flex items-center gap-2 text-text-muted hover:text-primary transition-colors text-sm font-bold group mb-8"
         >
-          <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" /> Back to Macro Intel
+          <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform transform-gpu" /> Back to Macro Intel
         </button>
 
         {/* Report Header */}
@@ -625,6 +1621,7 @@ export const MacroIntel: React.FC = () => {
               {idx < activeReport.sections.length - 1 && (
                 <div className="border-b border-border mt-10" />
               )}
+
             </section>
           ))}
         </div>
@@ -634,9 +1631,12 @@ export const MacroIntel: React.FC = () => {
 
   // ── LIST VIEW ──
   return (
-    <div className="space-y-8 animate-fade-in">
-      {/* Hero */}
-      <section className="relative overflow-hidden rounded-2xl lg:rounded-3xl border border-border bg-gradient-to-br from-background to-surface p-8 lg:p-16 mb-12 lg:mb-20 text-center">
+    <div className="animate-fade-in">
+      <PageMeta title="Macro Intelligence | Coinvestopedia" description="Professional-grade analysis of global market trends, geopolitical shifts, and institutional capital flows." />
+      
+      <div className="space-y-8">
+        {/* Hero */}
+        <section className="relative overflow-hidden rounded-2xl lg:rounded-3xl border border-border bg-gradient-to-br from-background to-surface p-8 lg:p-16 mb-4 lg:mb-8 text-center">
         <div className="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full -translate-y-48 translate-x-48 blur-3xl pointer-events-none"></div>
         
         <div className="relative z-10">
@@ -657,13 +1657,17 @@ export const MacroIntel: React.FC = () => {
 
       <LiveMacroBar />
 
+      <VaraDisclaimer variant="banner" />
+
+
+
       {/* Tab Navigation */}
       <div className="flex overflow-x-auto no-scrollbar gap-2 md:gap-3 pb-2 scroll-smooth">
         {TABS.map(tab => (
           <button
             key={tab.id}
             onClick={() => setActiveTab(tab.id)}
-            className={`flex items-center justify-center gap-2 px-6 py-3.5 text-sm font-bold rounded-xl border transition-all duration-300 whitespace-nowrap shrink-0
+            className={`flex items-center justify-center gap-2 px-6 py-3.5 text-sm font-bold rounded-xl border transition duration-300 whitespace-nowrap shrink-0 transform-gpu
               ${activeTab === tab.id
                 ? 'border-primary/50 text-primary bg-primary/10 shadow-[0_0_15px_rgba(255,215,0,0.1)]'
                 : 'border-border text-text-muted hover:text-text hover:bg-surface hover:border-primary/30'
@@ -671,11 +1675,7 @@ export const MacroIntel: React.FC = () => {
           >
             {tab.icon}
             {tab.label}
-            {tab.isPro && (
-              <span className="flex items-center gap-0.5 px-1.5 py-0.5 bg-amber-500/10 border border-amber-500/20 rounded text-[9px] text-amber-400 font-bold">
-                <Lock size={9} /> PRO
-              </span>
-            )}
+
           </button>
         ))}
       </div>
@@ -698,6 +1698,7 @@ export const MacroIntel: React.FC = () => {
           <p className="text-sm text-text-muted/70">Check back soon. New intelligence is published weekly.</p>
         </div>
       )}
+      </div>
     </div>
   );
 };

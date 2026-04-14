@@ -46,7 +46,7 @@ export const FilterChips: React.FC<FilterChipsProps> = ({
           <button
             key={chip.id}
             onClick={() => handleClick(chip.id)}
-            className={`px-4 py-2 rounded-full text-sm font-semibold transition-all duration-200 ${
+            className={`px-4 py-2 rounded-full text-sm font-semibold transition-colors transition-shadow transition-transform transform-gpu duration-200 ${
               isSelected
                 ? 'bg-primary text-white shadow-lg shadow-primary/20 scale-105'
                 : 'bg-surface border border-border text-text-muted hover:border-primary/50 hover:text-text hover:scale-105'

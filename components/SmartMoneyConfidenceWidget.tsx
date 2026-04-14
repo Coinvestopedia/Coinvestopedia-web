@@ -83,9 +83,9 @@ export const SmartMoneyConfidenceWidget: React.FC = () => {
         </div>
         <div className="tooltip-container group relative">
            <Info size={16} className="text-text-muted cursor-help" />
-           <div className="absolute right-0 md:left-0 top-6 w-48 p-2 bg-surface text-xs text-text border border-border rounded shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50">
-              Aggregates data from Glassnode, CryptoQuant, Whale Alert, and Alternative.me.
-           </div>
+            <div className="absolute right-0 md:left-0 top-6 w-48 p-2 bg-surface text-xs text-text border border-border rounded shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-opacity z-50">
+               Aggregates data from Glassnode, CryptoQuant, Whale Alert, and Alternative.me.
+            </div>
         </div>
       </div>
 

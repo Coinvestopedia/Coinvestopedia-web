@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavItem, PageRoute } from '../types';
-import { BookOpen, BarChart2, TrendingUp, Shield, Calculator, Globe } from 'lucide-react';
+import { BookOpen, BarChart2, Calculator, Globe } from 'lucide-react';
 import { TargetIcon } from './AnimatedIcons';
 
 interface SidebarLeftProps {
@@ -14,7 +14,6 @@ export const SidebarLeft: React.FC<SidebarLeftProps> = ({ onNavigate, currentRou
     { icon: <Globe size={20} />, label: 'Macro Intel', route: PageRoute.MACRO_INTEL },
     { icon: <TargetIcon className="w-5 h-5" />, label: 'Whale Tracker', route: PageRoute.WHALE },
     { icon: <Calculator size={20} />, label: 'Tools & Calculators', route: PageRoute.TOOLS },
-    { icon: <Shield size={20} />, label: 'Security', route: PageRoute.AUDIT },
     { icon: <BookOpen size={20} />, label: 'Research', route: PageRoute.RESEARCH },
     { icon: <BookOpen size={20} />, label: 'Knowledge', route: PageRoute.LEARN },
   ];
@@ -27,7 +26,7 @@ export const SidebarLeft: React.FC<SidebarLeftProps> = ({ onNavigate, currentRou
           <button 
             key={index} 
             onClick={() => item.route && onNavigate?.(item.route)}
-            className={`flex items-center gap-3 px-3 py-2 w-full text-left rounded-md transition-all duration-300 group ${currentRoute === item.route ? 'text-primary bg-surface shadow-sm' : 'text-text/80 hover:text-primary hover:bg-surface hover:-translate-y-[1px]'}`}
+            className={`flex items-center gap-3 px-3 py-2 w-full text-left rounded-md transition duration-300 group transform-gpu ${currentRoute === item.route ? 'text-primary bg-surface shadow-sm' : 'text-text/80 hover:text-primary hover:bg-surface hover:-translate-y-[1px]'}`}
           >
             <span className="group-hover:text-primary transition-colors flex items-center justify-center">{item.icon}</span>
             <span className="text-sm font-medium">{item.label}</span>

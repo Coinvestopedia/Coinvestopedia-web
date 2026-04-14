@@ -59,8 +59,15 @@ export const NewsletterSignup: React.FC<NewsletterSignupProps> = ({
       if (onSubscribe) {
         await onSubscribe(email);
       } else {
-        // Simulate API call
-        await new Promise(resolve => setTimeout(resolve, 1000));
+        const response = await fetch('/api/subscribe', {
+          method: 'POST',
+          headers: {
+             'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ email })
+        });
+        
+        if (!response.ok) throw new Error('Failed to subscribe');
       }
       
       setIsSubmitting(false);
@@ -104,7 +111,7 @@ export const NewsletterSignup: React.FC<NewsletterSignupProps> = ({
                   value={email}
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  className={`w-full h-12 bg-background border rounded-lg px-4 text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all ${
+                  className={`w-full h-12 bg-background border rounded-lg px-4 text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-colors transition-shadow ${
                     error && touched ? 'border-red-500' : 'border-border'
                   }`}
                   aria-label="Email address for newsletter subscription"
@@ -201,12 +208,7 @@ export const NewsletterSignup: React.FC<NewsletterSignupProps> = ({
                   {isSuccess ? <Check size={20} aria-hidden="true" /> : isSubmitting ? 'Subscribing...' : 'Get Free Issues'}
                 </Button>
               </div>
-              {error && touched ? (
-                <p className="text-red-500 text-sm mt-3 flex items-center gap-2">
-                  <AlertCircle size={14} />
-                  {error}
-                </p>
-              ) : (
+              {(!error || !touched) && (
                 <p className="text-text-muted text-sm mt-3">
                   Join 15,000+ finance professionals. Unsubscribe anytime.
                 </p>

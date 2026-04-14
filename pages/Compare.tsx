@@ -1,3 +1,5 @@
+import { PageMeta } from '../components/PageMeta';
+import { VaraDisclaimer } from '../components/VaraDisclaimer';
 import React, { useState } from 'react';
 import { DEFAULT_ASSETS, AssetData } from '../data/assetRegistry';
 import { useLiveAssetRegistry } from '../hooks/useLiveAssetRegistry';
@@ -10,6 +12,8 @@ import { RiskPanel } from '../components/compare/RiskPanel';
 import { AllocationPanel } from '../components/compare/AllocationPanel';
 import { CorrelationHeatmap } from '../components/compare/CorrelationHeatmap';
 import { AnalystPanel } from '../components/compare/AnalystPanel';
+import { CompareChart } from '../components/compare/CompareChart';
+
 
 // Icons
 import { LayoutDashboard, TrendingUp, ShieldAlert, PieChart, GitMerge, Lightbulb, Activity } from 'lucide-react';
@@ -20,6 +24,7 @@ export const Compare: React.FC = () => {
   const isProUser = true; // Set to true for institutional dashboard view
   const [selectedAssetIds, setSelectedAssetIds] = useState<string[]>(DEFAULT_ASSETS);
   const [activeTab, setActiveTab] = useState<TabId>('overview');
+  const [chartTimeframe, setChartTimeframe] = useState<string>('1Y');
 
   const { registry, isHydrating } = useLiveAssetRegistry();
 
@@ -37,10 +42,14 @@ export const Compare: React.FC = () => {
   ];
 
   return (
-    <div className="space-y-6 animate-fade-in pt-4 md:pt-0">
+    <div className="animate-fade-in">
+      <PageMeta title="Compare Assets" description="Compare cryptocurrency performance, risk metrics, and correlations side-by-side." />
+
+      <div className="space-y-6 pt-4 md:pt-0">
+
       
       {/* ─── HERO SECTION (Standardized Design) ─────────────── */}
-      <div className="relative rounded-2xl lg:rounded-3xl border border-border bg-gradient-to-br from-background to-surface p-8 lg:p-16 mb-12 lg:mb-20">
+      <div className="relative z-30 rounded-2xl lg:rounded-3xl border border-border bg-gradient-to-br from-background to-surface p-8 lg:p-16 mb-12 lg:mb-20">
         <div className="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full -translate-y-48 translate-x-48 blur-3xl pointer-events-none"></div>
         
         <div className="relative z-10">
@@ -71,7 +80,7 @@ export const Compare: React.FC = () => {
               </div>
               {isProUser && (
                 <div className="shrink-0 w-full md:w-auto mt-2 md:mt-0">
-                  <button className="flex justify-center md:items-center gap-2 px-6 py-3 w-full md:w-auto bg-primary/10 hover:bg-primary/20 text-primary text-sm font-bold border border-primary/20 rounded-lg transition-colors shadow-sm">
+                  <button className="flex justify-center md:items-center gap-2 px-6 py-3 w-full md:w-auto bg-primary/10 hover:bg-primary/20 text-primary text-sm font-bold border border-primary/20 rounded-lg transition-colors duration-200 shadow-sm transform-gpu">
                     Export Data
                   </button>
                 </div>
@@ -80,6 +89,12 @@ export const Compare: React.FC = () => {
           </div>
         </div>
       </div>
+
+      {/* ─── VARA DISCLAIMER ───────────────────────────────────────────────── */}
+      <VaraDisclaimer variant="banner" />
+
+
+
 
       {/* ─── TABS & NAVIGATION ─────────────────────────────────────────────── */}
       <div className="flex overflow-x-auto scrollbar-hide gap-2 md:gap-3 pb-2 scroll-smooth">
@@ -90,7 +105,7 @@ export const Compare: React.FC = () => {
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
-              className={`flex items-center justify-center gap-2 px-6 py-3.5 text-sm font-bold rounded-xl border transition-all duration-300 whitespace-nowrap shrink-0
+              className={`flex items-center justify-center gap-2 px-6 py-3.5 text-sm font-bold rounded-xl border transition-colors transition-shadow transform-gpu duration-300 whitespace-nowrap shrink-0
                 ${isActive 
                   ? 'border-primary/50 text-primary bg-primary/10 shadow-[0_0_15px_rgba(255,215,0,0.1)]' 
                   : 'border-border text-text-muted hover:text-text hover:bg-surface hover:border-primary/30'
@@ -106,12 +121,23 @@ export const Compare: React.FC = () => {
       {/* ─── TAB CONTENT PANELS ────────────────────────────────────────────── */}
       <div className="min-h-[500px]">
         {activeTab === 'overview' && <OverviewPanel assets={selectedAssets} />}
-        {activeTab === 'performance' && <PerformancePanel assets={selectedAssets} />}
+        {activeTab === 'performance' && (
+          <div className="space-y-6">
+            <CompareChart
+              assets={selectedAssets}
+              timeframe={chartTimeframe}
+              onTimeframeChange={setChartTimeframe}
+              isProUser={true}
+            />
+            <PerformancePanel assets={selectedAssets} />
+          </div>
+        )}
         {activeTab === 'risk' && <RiskPanel assets={selectedAssets} isProUser={isProUser} />}
         {activeTab === 'allocation' && <AllocationPanel />}
         {activeTab === 'correlation' && <CorrelationHeatmap assets={selectedAssets} />}
         {activeTab === 'analyst' && <AnalystPanel assets={selectedAssets} isProUser={isProUser} />}
       </div>
+    </div>
     </div>
   );
 };

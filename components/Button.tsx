@@ -54,7 +54,7 @@ const ButtonComponent = forwardRef<HTMLButtonElement, ButtonProps>(
     ref
   ) => {
     // Dev-time accessibility checks
-    if (process.env.NODE_ENV !== 'production') {
+    if (import.meta.env.MODE !== 'production') {
       const isIconOnly = !children && !!icon;
       if (isIconOnly && !ariaLabel) {
         // eslint-disable-next-line no-console
@@ -63,10 +63,10 @@ const ButtonComponent = forwardRef<HTMLButtonElement, ButtonProps>(
     }
 
     const buttonClasses = cn(
-      'inline-flex items-center justify-center gap-2 transition-all duration-200',
+      'inline-flex items-center justify-center gap-2 transition duration-200',
       'focus:outline-none focus-visible:outline-none',
       'disabled:cursor-not-allowed disabled:opacity-60',
-      'active:scale-95',
+      'active:scale-95 transform-gpu',
       variantClasses[variant],
       sizeClasses[size],
       isFullWidth && 'w-full',

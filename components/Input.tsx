@@ -53,7 +53,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
             type={type}
             disabled={disabled}
             className={cn(
-              'w-full bg-input-bg border rounded-lg transition-all duration-200',
+              'w-full bg-input-bg border rounded-lg transition-colors transition-shadow duration-200',
               'placeholder-text-muted text-text',
               'focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20',
               'disabled:opacity-50 disabled:cursor-not-allowed',

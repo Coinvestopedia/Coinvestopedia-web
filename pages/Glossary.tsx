@@ -1,6 +1,8 @@
+import { PageMeta } from '../components/PageMeta';
 import React, { useState, useMemo, useRef, useEffect, useCallback } from 'react';
 import { BookOpen, Search, ChevronUp, Hash, X, ArrowRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+
 
 // ── Glossary Data ──
 
@@ -32,7 +34,7 @@ const GLOSSARY_DATA: GlossarySection[] = [
     letter: 'B',
     entries: [
       { term: 'Bagholder', definition: 'Investor holding a depreciated position with no clear exit strategy. The crypto equivalent of being long a stock that\'s blown through all technical support.' },
-      { term: 'Bearish / Bear Market', definition: 'Standard directional terminology. Negative price outlook; sustained downtrend exceeding 20% from cycle highs.' },
+      { term: 'Bearish / Bear Market', definition: 'Technical term for a sustained downtrend, typically characterized by declining asset prices and contractionary market participation. Often demarcated by a 20% decline from cycle highs.' },
       { term: 'Bitcoin ATM', definition: 'Physical terminal for retail buy/sell of Bitcoin. Analogous to a foreign currency kiosk, with significantly higher spreads.' },
       { term: 'Bitcoin Improvement Proposal (BIP)', definition: 'Formal protocol upgrade proposal for Bitcoin. Equivalent to a regulatory comment letter — community reviewed before implementation.' },
       { term: 'Block', definition: 'The unit of data appended to the blockchain ledger per validation cycle. Think of each block as a single page in a continuously growing settlement ledger.' },
@@ -42,9 +44,9 @@ const GLOSSARY_DATA: GlossarySection[] = [
       { term: 'Block Height', definition: 'Sequential block number in the chain. Functions as a timestamp proxy — each block height corresponds to a point in the ledger\'s history.' },
       { term: 'Block Reward', definition: 'Newly minted coins awarded to the miner or validator who produces a valid block. The issuance mechanism — crypto\'s equivalent of seigniorage.' },
       { term: 'Bots', definition: 'Algorithmic trading programs executing pre-programmed strategies autonomously. On-chain equivalent of quant algo strategies.' },
-      { term: 'Bullish / Bull Market', definition: 'Positive price outlook; sustained uptrend. Standard directional terminology applied to crypto markets.' },
+      { term: 'Bullish / Bull Market', definition: 'Technical term for a sustained uptrend, typically characterized by rising asset prices and expansionary market participation. Reflects constructive demand across the primary asset class.' },
       { term: 'Burned Tokens', definition: 'Tokens permanently removed from circulation by sending to an unspendable address. Equivalent to a share buyback that reduces float — deflationary by design.' },
-      { term: 'Buy Wall / Sell Wall', definition: 'Concentrated bid or ask orders at a specific price level, visible on the order book. Used to signal support/resistance or manipulate perceived liquidity. Analogous to a large iceberg order that\'s been made visible.' },
+      { term: 'Buy Wall / Sell Wall', definition: 'Concentrated bid or ask orders at a specific price level, visible on the order book. Used to indicate support/resistance levels or manipulate perceived liquidity. Analogous to a large iceberg order that\'s been made visible.' },
     ]
   },
   {
@@ -71,7 +73,7 @@ const GLOSSARY_DATA: GlossarySection[] = [
       { term: 'Derivatives', definition: 'Futures, options, and swaps on crypto assets. Same instrument category as traditional derivatives — settlement mechanics differ (often cash-settled, sometimes physically settled in tokens).' },
       { term: 'Difficulty', definition: 'A dynamic parameter governing how hard it is to mine a valid block. Self-adjusts to maintain consistent block production intervals — the protocol\'s built-in rate stabilizer.' },
       { term: 'Distributed Ledger', definition: 'A synchronized, replicated database across multiple nodes. No single point of failure; no central authority required for validation.' },
-      { term: 'Dominance', definition: 'Bitcoin\'s share of total crypto market capitalization. Functions like a benchmark weight — rising BTC dominance typically signals risk-off rotation within the crypto asset class.' },
+      { term: 'Dominance', definition: 'Bitcoin\'s share of total crypto market capitalization. Functions like a benchmark weight — rising BTC dominance is often associated with risk-off rotation within the crypto asset class.' },
       { term: 'Double Spending', definition: 'The fraudulent attempt to spend the same digital asset twice. Blockchain\'s primary innovation was solving this problem without a trusted intermediary.' },
     ]
   },
@@ -106,7 +108,7 @@ const GLOSSARY_DATA: GlossarySection[] = [
   {
     letter: 'H',
     entries: [
-      { term: 'Halving', definition: 'Programmatic reduction of block reward by 50% at predetermined intervals. Bitcoin halves approximately every four years. Functions as a pre-scheduled supply shock — widely cited as a bullish catalyst.' },
+      { term: 'Halving', definition: 'Programmatic reduction of block reward by 50% at predetermined intervals. Bitcoin halves approximately every four years. Functions as a pre-scheduled supply shock — widely cited as a significant supply-reduction event.' },
       { term: 'Hard Fork', definition: 'A permanent, backward-incompatible protocol upgrade that splits the chain into two separate blockchains. Analogous to a corporate spin-off — existing holders receive tokens on both chains.' },
       { term: 'Hash / Hashrate', definition: 'A hash is the cryptographic output of a hashing algorithm — a unique fingerprint for block data. Hashrate is the network\'s total computational power: higher hashrate = more secure network = higher cost of attack.' },
       { term: 'HODL', definition: 'Hold On for Dear Life. Long-only, conviction-based position holding through volatility — the crypto equivalent of a buy-and-hold value investor ignoring short-term noise.' },
@@ -351,7 +353,7 @@ const SmartSearch: React.FC<SmartSearchProps> = ({ searchQuery, onSearchChange, 
     <div className="relative max-w-xl w-full" id="glossary-smart-search">
       {/* Input */}
       <div className={`
-        relative flex items-center rounded-2xl transition-all duration-300
+        relative flex items-center rounded-2xl transition-colors transition-shadow duration-300
         ${isFocused
           ? 'bg-surface border-2 border-primary/50 shadow-xl shadow-primary/10 ring-4 ring-primary/5'
           : 'bg-surface border-2 border-border hover:border-primary/30'
@@ -422,7 +424,7 @@ const SmartSearch: React.FC<SmartSearchProps> = ({ searchQuery, onSearchChange, 
                 role="option"
                 aria-selected={highlightedIndex === index}
                 className={`
-                  px-4 py-3.5 cursor-pointer transition-all duration-150 border-b border-border/30 last:border-b-0
+                  px-4 py-3.5 cursor-pointer transition-colors duration-150 border-b border-border/30 last:border-b-0
                   ${highlightedIndex === index
                     ? 'bg-primary/10 border-l-2 border-l-primary'
                     : 'hover:bg-primary/5 border-l-2 border-l-transparent'
@@ -452,7 +454,7 @@ const SmartSearch: React.FC<SmartSearchProps> = ({ searchQuery, onSearchChange, 
                       {highlightSearchTerm(suggestion.definition, searchQuery)}
                     </p>
                   </div>
-                  <ArrowRight size={14} className={`flex-shrink-0 mt-1.5 transition-all ${
+                  <ArrowRight size={14} className={`flex-shrink-0 mt-1.5 transition-opacity transition-transform transform-gpu ${
                     highlightedIndex === index ? 'text-primary translate-x-0 opacity-100' : 'text-text-muted/30 -translate-x-1 opacity-0'
                   }`} />
                 </div>
@@ -539,7 +541,7 @@ const GlossaryEntryCard: React.FC<GlossaryEntryCardProps> = ({ entry, isExpanded
     <div
       ref={cardRef}
       className={`
-        leather-card rounded-xl overflow-hidden transition-all duration-300
+        leather-card rounded-xl overflow-hidden transition-colors transition-shadow duration-300
         ${canExpand ? 'cursor-pointer' : 'cursor-default'}
         ${isExpanded
           ? 'border-primary/40 shadow-lg shadow-primary/5'
@@ -558,7 +560,7 @@ const GlossaryEntryCard: React.FC<GlossaryEntryCardProps> = ({ entry, isExpanded
             <p
               ref={textRef}
               className={`
-                text-text-muted text-sm mt-2 transition-all duration-300
+                text-text-muted text-sm mt-2 transition-colors duration-300
                 ${isExpanded ? 'leading-relaxed' : 'line-clamp-2'}
               `}
               style={{ 
@@ -575,14 +577,14 @@ const GlossaryEntryCard: React.FC<GlossaryEntryCardProps> = ({ entry, isExpanded
 
         {canExpand && (
           <button
-            className={`flex-shrink-0 w-8 h-8 rounded-lg flex items-center justify-center transition-all duration-200 mt-0.5 ${
+            className={`flex-shrink-0 w-8 h-8 rounded-lg flex items-center justify-center transition-colors transition-shadow duration-200 mt-0.5 ${
               isExpanded
                 ? 'bg-primary/10 text-primary'
                 : 'bg-surface text-text-muted hover:text-primary shadow-sm border border-border/50'
             }`}
             aria-label={isExpanded ? 'Collapse' : 'Expand'}
           >
-            <ChevronUp size={16} className={`transform transition-transform duration-300 ${isExpanded ? '' : 'rotate-180'}`} />
+            <ChevronUp size={16} className={`transform transition-transform transform-gpu duration-300 ${isExpanded ? '' : 'rotate-180'}`} />
           </button>
         )}
       </div>
@@ -676,7 +678,9 @@ export const Glossary: React.FC = () => {
       }
     };
     window.addEventListener('keydown', handleGlobalKeyDown);
-    return () => window.removeEventListener('keydown', handleGlobalKeyDown);
+    return () =>
+      <PageMeta title="Crypto Glossary" description="Comprehensive reference for cryptocurrency and blockchain terminology." />
+ window.removeEventListener('keydown', handleGlobalKeyDown);
   }, []);
 
   // Intersection Observer for active letter tracking
@@ -757,7 +761,7 @@ export const Glossary: React.FC = () => {
                 onClick={() => hasResults && scrollToLetter(letter)}
                 disabled={!hasResults}
                 className={`
-                  w-9 h-9 rounded-lg text-sm font-bold transition-all duration-200 flex items-center justify-center
+                  w-9 h-9 rounded-lg text-sm font-bold transition-colors transition-transform transform-gpu duration-200 flex items-center justify-center
                   ${activeLetter === letter
                     ? 'bg-primary text-background shadow-lg shadow-primary/30 scale-110'
                     : hasResults
@@ -773,6 +777,8 @@ export const Glossary: React.FC = () => {
           })}
         </div>
       </div>
+
+
 
       {/* ── Glossary Entries ── */}
       <div className="space-y-10">
@@ -822,7 +828,7 @@ export const Glossary: React.FC = () => {
       <div className="text-center pt-8">
         <button
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-          className="inline-flex items-center gap-2 px-6 py-3 bg-surface border border-border rounded-xl text-sm font-medium text-text-muted hover:text-primary hover:border-primary/50 transition-all"
+          className="inline-flex items-center gap-2 px-6 py-3 bg-surface border border-border rounded-xl text-sm font-medium text-text-muted hover:text-primary hover:border-primary/50 transition-colors"
         >
           <ChevronUp size={16} /> Back to Top
         </button>

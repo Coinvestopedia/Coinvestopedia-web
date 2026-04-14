@@ -70,13 +70,13 @@ export const OnChainValuation: React.FC = () => {
                <div className="flex bg-background border border-border p-1 rounded-lg w-full md:w-auto">
                  <button 
                    onClick={() => setActiveModel('S2F')}
-                   className={`flex-1 px-4 py-2 text-sm font-bold rounded-md transition-all ${activeModel === 'S2F' ? 'bg-primary text-white shadow-md' : 'text-text-muted hover:text-text'}`}
+                   className={`flex-1 px-4 py-2 text-sm font-bold rounded-md transition-colors transition-shadow ${activeModel === 'S2F' ? 'bg-primary text-white shadow-md' : 'text-text-muted hover:text-text'}`}
                  >
                    Stock-to-Flow
                  </button>
                  <button 
                    onClick={() => setActiveModel('MVRV')}
-                   className={`flex-1 px-4 py-2 text-sm font-bold rounded-md transition-all ${activeModel === 'MVRV' ? 'bg-primary text-white shadow-md' : 'text-text-muted hover:text-text'}`}
+                   className={`flex-1 px-4 py-2 text-sm font-bold rounded-md transition-colors transition-shadow ${activeModel === 'MVRV' ? 'bg-primary text-white shadow-md' : 'text-text-muted hover:text-text'}`}
                  >
                    MVRV Z-Score
                  </button>

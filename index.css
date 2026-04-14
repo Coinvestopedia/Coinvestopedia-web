@@ -27,6 +27,9 @@
 }
 
 @layer base {
+  html {
+    scroll-behavior: smooth;
+  }
   body {
     background-color: rgb(var(--c-background));
     color: rgb(var(--c-text));
@@ -67,6 +70,8 @@
     background: radial-gradient(circle, rgba(16, 185, 129, 0.08) 0%, transparent 70%);
     animation: pulse-mesh 8s ease-in-out infinite;
     z-index: 0;
+    will-change: transform, opacity;
+    transform: translateZ(0);
   }
 }
 

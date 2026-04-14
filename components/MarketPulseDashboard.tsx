@@ -8,10 +8,25 @@ import { SmartMoneyConfidenceWidget } from './SmartMoneyConfidenceWidget';
 import { CryptoNewsFeed } from './CryptoNewsFeed';
 import { ARTICLES } from '../pages/Insights';
 import { PageRoute } from '../types';
+
+// ─── Type Definitions ─────────────────────────────────────────────────────────
+
+interface FearGreedEntry {
+  value: string;
+  value_classification: string;
+}
+
+interface SectorEntry {
+  id: string;
+  name: string;
+  market_cap: number;
+  market_cap_change_24h: number | null;
+}
+
 // ─── Sub-Components ───────────────────────────────────────────────────────────
 
 const FearGreedGauge: React.FC = () => {
-  const [data, setData] = useState<any>(null);
+  const [data, setData] = useState<FearGreedEntry | null>(null);
 
   useEffect(() => {
     fetchFearAndGreed().then(res => {
@@ -94,7 +109,7 @@ const MarketInsights: React.FC<{ onNavigate?: (route: PageRoute) => void }> = ({
 
   return (
     <div 
-      className="leather-card rounded-xl p-5 flex flex-col justify-center h-full min-h-[160px] relative overflow-hidden group cursor-pointer border border-transparent hover:border-border/30 transition-all"
+      className="leather-card rounded-xl p-5 flex flex-col justify-center h-full min-h-[160px] relative overflow-hidden group cursor-pointer border border-transparent hover:border-border/30 transition-colors"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       onClick={handleArticleClick}
@@ -124,7 +139,7 @@ const MarketInsights: React.FC<{ onNavigate?: (route: PageRoute) => void }> = ({
                 <button 
                   key={idx}
                   onClick={() => setCurrentIndex(idx)}
-                  className={`h-1 rounded-full transition-all duration-300 ${idx === currentIndex ? 'w-4 bg-primary' : 'w-1 bg-border hover:bg-white/30'}`}
+                  className={`h-1 rounded-full transition-colors transition-[width] duration-300 ${idx === currentIndex ? 'w-4 bg-primary' : 'w-1 bg-border hover:bg-white/30'}`}
                   aria-label={`Go to insight ${idx + 1}`}
                 />
               ))}
@@ -151,7 +166,7 @@ const MarketInsights: React.FC<{ onNavigate?: (route: PageRoute) => void }> = ({
 
 
 const SectorPerformanceCard: React.FC = () => {
-  const [sectors, setSectors] = useState<any[]>([]);
+  const [sectors, setSectors] = useState<SectorEntry[]>([]);
 
   useEffect(() => {
     fetchSectorPerformance().then(data => {
@@ -185,7 +200,7 @@ const SectorPerformanceCard: React.FC = () => {
             return (
               <div 
                 key={s.id} 
-                className={`p-4 rounded-xl flex flex-col items-center justify-center text-center transition-all border
+                className={`p-4 rounded-xl flex flex-col items-center justify-center text-center transition-colors border
                   ${isUp 
                     ? 'bg-emerald-500/5 border-emerald-500/10 hover:bg-emerald-500/10' 
                     : 'bg-red-500/5 border-red-500/10 hover:bg-red-500/10'}

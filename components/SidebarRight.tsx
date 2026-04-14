@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Sparkles, ExternalLink, ArrowUpRight } from 'lucide-react';
+import { Sparkles, ExternalLink, ArrowUpRight, ThumbsUp, ThumbsDown, Hand } from 'lucide-react';
 import { PageRoute } from '../types';
-import { AdUnit } from './AdUnit';
+
 import { Button } from './Button';
 import { getMarketInsight, InsightResult } from '../services/geminiService';
+
 
 interface SidebarRightProps {
   onNavigate?: (route: PageRoute) => void;
@@ -25,8 +26,7 @@ export const SidebarRight: React.FC<SidebarRightProps> = ({ onNavigate }) => {
 
   return (
     <aside className="hidden lg:flex flex-col gap-8 w-[300px] sticky top-[96px] self-start h-fit">
-      {/* Ad Unit 1: Sticky/Top */}
-      <AdUnit size="medium" partner="kucoin" label="Official Partner" />
+
 
       {/* AI Insight Widget */}
       <div className="leather-card rounded-xl p-6 relative overflow-hidden">
@@ -35,7 +35,7 @@ export const SidebarRight: React.FC<SidebarRightProps> = ({ onNavigate }) => {
         </div>
         <div className="flex items-center gap-2 mb-4">
           <Sparkles className="text-primary" size={20} />
-          <h3 className="font-bold text-text">AI Market Pulse</h3>
+          <h3 className="font-bold text-text">AI Market Overview</h3>
         </div>
         
         {isLoading ? (
@@ -68,41 +68,26 @@ export const SidebarRight: React.FC<SidebarRightProps> = ({ onNavigate }) => {
                 </div>
               </div>
             )}
-            <button 
-              onClick={() => onNavigate?.(PageRoute.MACRO_INTEL)}
-              className="text-xs font-bold text-primary flex items-center gap-1 hover:underline"
-            >
-               FULL REPORT <ArrowUpRight size={12} />
-            </button>
+            <div className="pt-2 border-t border-white/5 mt-4">
+              <p className="text-xs font-bold text-center text-text-muted mb-3">How do you feel about the market?</p>
+              <div className="flex justify-center items-center gap-4">
+                <button className="w-9 h-9 rounded-full bg-green-500/10 border border-green-500/20 flex items-center justify-center text-green-500 hover:bg-green-500/20 hover:scale-110 transition-all duration-200">
+                  <ThumbsUp size={16} />
+                </button>
+                <button className="w-9 h-9 rounded-full bg-yellow-500/10 border border-yellow-500/20 flex items-center justify-center text-yellow-500 hover:bg-yellow-500/20 hover:scale-110 transition-all duration-200" title="Neutral">
+                  <Hand size={16} />
+                </button>
+                <button className="w-9 h-9 rounded-full bg-red-500/10 border border-red-500/20 flex items-center justify-center text-red-500 hover:bg-red-500/20 hover:scale-110 transition-all duration-200">
+                  <ThumbsDown size={16} />
+                </button>
+              </div>
+            </div>
           </>
         )}
       </div>
 
-      {/* Trending List */}
-      <div className="leather-card rounded-xl p-6">
-        <h3 className="font-bold text-text mb-4 border-b border-white/5 pb-2">Trending Now 🔥</h3>
-        <ul className="flex flex-col gap-3">
-          {[
-            { name: 'Bitcoin', symbol: 'BTC', change: '+2.4%' },
-            { name: 'Solana', symbol: 'SOL', change: '+5.8%' },
-            { name: 'Pepe', symbol: 'PEPE', change: '+12.1%' }
-          ].map((coin, i) => (
-            <li 
-              key={i} 
-              className="flex justify-between items-center text-sm cursor-pointer group"
-              onClick={() => onNavigate?.(PageRoute.COMPARE)}
-            >
-              <span className="text-text-muted font-medium group-hover:text-primary transition-colors"><span className="text-text">{i + 1}.</span> {coin.name}</span>
-              <span className="text-primary">{coin.change}</span>
-            </li>
-          ))}
-        </ul>
-      </div>
 
-      {/* Ad Unit 4: Sticky Bottom */}
-      <div className="sticky top-8">
-         <AdUnit size="skyscraper" partner="trezor" label="Security" />
-      </div>
+
     </aside>
   );
 };

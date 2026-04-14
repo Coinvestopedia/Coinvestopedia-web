@@ -21,13 +21,13 @@ export const FloatingCardSection: React.FC<FloatingCardSectionProps> = ({ cards 
         {cards.map((card, i) => (
           <div
             key={i}
-            className="group"
+            className="group transform-gpu"
             style={{
               transform: `rotateY(${(i - 1) * 12}deg) translateZ(${Math.abs(i - 1) * -20}px)`,
-              transition: 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)'
+              transition: 'transform 0.6s cubic-bezier(0.4, 0, 0.2, 1)'
             }}
           >
-            <div className="bg-surface/80 backdrop-blur-xl border border-border rounded-2xl p-6 min-w-[200px] shadow-2xl group-hover:shadow-primary/20 group-hover:border-primary/50 transition-all duration-300 group-hover:scale-110">
+            <div className="bg-surface/80 backdrop-blur-xl border border-border rounded-2xl p-6 min-w-[200px] shadow-2xl group-hover:shadow-primary/20 group-hover:border-primary/50 transition-colors transition-shadow transition-transform transform-gpu duration-300 group-hover:scale-110">
               <div className="flex items-center gap-3 mb-3">
                 <div className="p-2 bg-primary/10 rounded-lg text-primary">
                   {card.icon}

@@ -100,34 +100,7 @@ export const ExchangeCard: React.FC<ExchangeCardProps> = ({ exchange, rank }) =>
               />
             </div>
 
-            {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-3 lg:ml-auto">
-              <a
-                href={exchange.affiliateUrl}
-                target="_blank"
-                rel="noopener noreferrer sponsored"
-                className="flex items-center gap-2 px-6 py-3 bg-primary text-background
-                  font-bold rounded-xl hover:bg-primary-dark transition-all
-                  shadow-lg shadow-primary/20 hover:shadow-primary/40"
-              >
-                {exchange.ctaLabel}
-                <ExternalLink size={14} />
-                <sup className="text-[9px] opacity-70">A</sup>
-              </a>
-              {exchange.ctaLabelSecondary && exchange.affiliateUrlSecondary && (
-                <a
-                  href={exchange.affiliateUrlSecondary}
-                  target="_blank"
-                  rel="noopener noreferrer sponsored"
-                  className="flex items-center gap-2 px-6 py-3 bg-surface border border-border
-                    text-text font-bold rounded-xl hover:border-primary transition-all"
-                >
-                  {exchange.ctaLabelSecondary}
-                  <ExternalLink size={14} />
-                  <sup className="text-[9px] opacity-70">A</sup>
-                </a>
-              )}
-            </div>
+
           </div>
 
           {/* Risk Flags — render FIRST if present */}

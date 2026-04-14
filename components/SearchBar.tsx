@@ -22,7 +22,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
 
   return (
     <div className={`relative ${className}`}>
-      <div className={`relative transition-all duration-200 ${isFocused ? 'transform scale-105' : ''}`}>
+      <div className={`relative transition-transform transform-gpu duration-200 ${isFocused ? 'scale-105' : ''}`}>
         <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
           <Search size={18} className={`transition-colors ${isFocused ? 'text-primary' : 'text-text-muted'}`} />
         </div>
@@ -33,7 +33,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
           onChange={(e) => setQuery(e.target.value)}
           onFocus={() => setIsFocused(true)}
           onBlur={() => setTimeout(() => setIsFocused(false), 200)}
-          className={`w-full bg-surface/50 backdrop-blur-sm border rounded-xl pl-12 pr-24 py-4 text-sm text-text placeholder-text-muted/50 transition-all duration-200 ${
+          className={`w-full bg-surface/50 backdrop-blur-sm border rounded-xl pl-12 pr-24 py-4 text-sm text-text placeholder-text-muted/50 transition-colors transition-shadow duration-200 ${
             isFocused 
               ? 'border-primary ring-2 ring-primary/20 shadow-lg shadow-primary/10' 
               : 'border-border hover:border-border/80'
@@ -68,7 +68,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
                   </div>
                   <div className="text-xs text-text-muted">{item.type}</div>
                 </div>
-                <ArrowRight size={14} className="text-text-muted opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
+                <ArrowRight size={14} className="text-text-muted opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-opacity transition-transform transform-gpu" />
               </button>
             ))}
           </div>

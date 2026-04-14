@@ -61,7 +61,7 @@ export const FearGreedComposite: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
           {/* Dashboard Left */}
           <div className="lg:col-span-4 space-y-6">
-            <Card className={`transition-all duration-700 p-8 flex flex-col items-center justify-center text-center overflow-hidden relative shadow-inner ${stats.bg} ${stats.border}`}>
+            <Card className={`transition-colors duration-700 p-8 flex flex-col items-center justify-center text-center overflow-hidden relative shadow-inner ${stats.bg} ${stats.border}`}>
                <div className="absolute top-0 right-0 p-4 opacity-20 pointer-events-none">
                   <Activity size={100} className={stats.color} />
                </div>
@@ -86,7 +86,7 @@ export const FearGreedComposite: React.FC = () => {
                         strokeLinecap="round" 
                         strokeDasharray="251" 
                         strokeDashoffset={251 - (251 * (stats.compositeScore / 100))} 
-                        className="transition-all duration-1000 ease-out"
+                        className="transition-[stroke-dashoffset] duration-1000 ease-out"
                      />
                      <defs>
                         <linearGradient id="gauge-gradient" x1="0%" y1="0%" x2="100%" y2="0%">

@@ -1,5 +1,8 @@
+import { PageMeta } from '../components/PageMeta';
+import { VaraDisclaimer } from '../components/VaraDisclaimer';
 import React, { useEffect } from 'react';
 import { BookOpen, Clock, ExternalLink } from 'lucide-react';
+
 
 export interface GlassnodeArticle {
   title: string;
@@ -13,7 +16,7 @@ export interface GlassnodeArticle {
 const GLASSNODE_ARTICLES: GlassnodeArticle[] = [
   {
     title: "Awaiting Liquidity",
-    summary: "Bitcoin stabilised around ~$70k with ETF flows improving and sell-side pressure easing. Muted spot volume and overhead supply suggest stronger demand is still needed for a durable recovery.",
+    summary: "Bitcoin stabilised around ~$70k with ETF flows improving and supply-side dynamics easing. Muted spot volume and overhead supply suggest stronger demand is still needed for a durable recovery.",
     date: "Mar 25, 2026",
     readTime: "9 min",
     url: "https://insights.glassnode.com/the-week-onchain-week-13-2026/",
@@ -45,7 +48,7 @@ const GLASSNODE_ARTICLES: GlassnodeArticle[] = [
   },
   {
     title: "Range-Bound Under Pressure",
-    summary: "Bitcoin broke below the True Market Mean (~$79k) into a defensive range. Spot and ETF flows weak; options show panic hedging fading but no renewed bullish conviction.",
+    summary: "Bitcoin broke below the True Market Mean (~$79k) into a defensive range. Spot and ETF flows weak; options show panic hedging fading but no renewed upside momentum.",
     date: "Feb 18, 2026",
     readTime: "9 min",
     url: "https://insights.glassnode.com/the-week-onchain-week-8-2026/",
@@ -53,7 +56,7 @@ const GLASSNODE_ARTICLES: GlassnodeArticle[] = [
   },
   {
     title: "Bears In Control",
-    summary: "Spot BTC volumes structurally weak with 30D average depressed despite BTC rolling from $98K to $72K. Demand vacuum — sell-side pressure not met by sustained absorption.",
+    summary: "Spot BTC volumes structurally weak with 30D average depressed despite BTC rolling from $98K to $72K. Demand vacuum — supply-side pressure not met by sustained absorption.",
     date: "Feb 4, 2026",
     readTime: "9 min",
     url: "https://insights.glassnode.com/the-week-onchain-week-6-2026/",
@@ -69,7 +72,7 @@ const GLASSNODE_ARTICLES: GlassnodeArticle[] = [
   },
   {
     title: "Price Discovery",
-    summary: "Bitcoin reached a new ATH trading as high as $122.6k, putting all BTC investors back in profit. Key on-chain metrics suggest a potential push toward ~$130K before demand exhaustion.",
+    summary: "Bitcoin reached a new ATH trading as high as $122.6k, putting all BTC investors back in profit. Key on-chain metrics suggest a potential push toward ~$130K before demand-supply equilibrium.",
     date: "Jul 16, 2025",
     readTime: "6 min",
     url: "https://insights.glassnode.com/the-week-onchain-week-29-2025/",
@@ -80,7 +83,9 @@ const GLASSNODE_ARTICLES: GlassnodeArticle[] = [
 export const Research: React.FC = () => {
   return (
     <div className="animate-fade-in pb-16">
-      {/* Hero */}
+      <PageMeta title="Research Reports" description="In-depth institutional research reports on digital assets." />
+
+      <div className="space-y-12">
       <section className="relative overflow-hidden rounded-2xl lg:rounded-3xl border border-border bg-gradient-to-br from-background to-surface p-8 lg:p-16 mb-12 lg:mb-20 text-center">
         <div className="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full -translate-y-48 translate-x-48 blur-3xl pointer-events-none"></div>
         
@@ -99,6 +104,10 @@ export const Research: React.FC = () => {
           </p>
         </div>
       </section>
+
+      <VaraDisclaimer variant="banner" />
+
+
 
       <div className="space-y-6">
         <div className="flex items-center gap-4">
@@ -172,6 +181,7 @@ export const Research: React.FC = () => {
           </p>
         </div>
       </div>
+    </div>
     </div>
   );
 };

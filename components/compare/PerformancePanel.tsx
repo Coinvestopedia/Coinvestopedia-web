@@ -20,7 +20,7 @@ const RiskAdjustedCards: React.FC<{ assets: AssetData[] }> = ({ assets }) => {
       <p className="text-sm text-text-muted mb-6">Sharpe ratio, 3Y CAGR, and max drawdown — ranked by risk-adjusted returns.</p>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
         {sortedBySharpe.map((asset, idx) => (
-          <div key={asset.id} className="relative bg-surface border border-border rounded-xl p-4 hover:border-primary/50 hover:bg-surface-alt hover:-translate-y-1 hover:shadow-xl hover:shadow-primary/5 transition-all duration-300 group">
+          <div key={asset.id} className="relative bg-surface border border-border rounded-xl p-4 hover:border-primary/50 hover:bg-surface-alt hover:-translate-y-1 hover:shadow-xl hover:shadow-primary/5 transition-colors transition-transform transition-shadow transform-gpu duration-300 group">
             {/* Medal badge */}
             {idx < 3 && (
               <div className="absolute -top-2 -right-2 w-7 h-7 flex items-center justify-center text-base z-10">
@@ -67,7 +67,7 @@ const RiskAdjustedCards: React.FC<{ assets: AssetData[] }> = ({ assets }) => {
               </div>
               <div className="w-full bg-background rounded-full h-1">
                 <div
-                  className="h-1 rounded-full transition-all"
+                  className="h-1 rounded-full transition-[width]"
                   style={{
                     width: `${Math.max(5, 100 - (idx / sortedBySharpe.length) * 100)}%`,
                     backgroundColor: idx === 0 ? '#10B981' : idx === 1 ? '#3B82F6' : idx === 2 ? '#F59E0B' : '#6B7280',

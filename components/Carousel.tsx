@@ -149,7 +149,7 @@ export function Carousel<T>({
               key={index}
               onClick={() => handleDotClick(index)}
               className={cn(
-                'rounded-full transition-all duration-300',
+                'rounded-full transition-[width,background-color] duration-300',
                 index === currentIndex
                   ? 'bg-primary w-8 h-2'
                   : 'bg-zinc-700 w-2 h-2 hover:bg-zinc-600'

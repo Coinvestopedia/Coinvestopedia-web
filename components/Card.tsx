@@ -30,7 +30,7 @@ const CardComponent: React.FC<CardProps> = ({
   if (variant === 'featured') {
     return (
       <div
-        className={`group relative overflow-hidden rounded-xl lg:rounded-2xl p-[1px] lg:p-[2px] w-full text-left transition-all duration-300 ${isActionable ? 'cursor-pointer hover:-translate-y-2 hover:shadow-2xl hover:z-10 focus:outline-none focus-visible:ring-4 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background' : 'cursor-default'} ${className}`}
+        className={`group relative overflow-hidden rounded-xl lg:rounded-2xl p-[1px] lg:p-[2px] w-full text-left transition duration-300 ${isActionable ? 'cursor-pointer hover:-translate-y-2 hover:shadow-2xl hover:z-10 focus:outline-none focus-visible:ring-4 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background transform-gpu' : 'cursor-default'} ${className}`}
         onClick={onClick}
         role={isActionable ? 'button' : undefined}
         tabIndex={isActionable ? 0 : undefined}
@@ -40,7 +40,7 @@ const CardComponent: React.FC<CardProps> = ({
         <div className="absolute inset-0 bg-gradient-to-br from-primary via-primary-dark to-primary opacity-50 blur-sm group-hover:opacity-75 transition-opacity duration-300 z-0 animate-pulse-slow"></div>
 
         {/* Inner content with leather finish */}
-        <div className="leather-card relative z-10 p-5 lg:p-6 rounded-xl lg:rounded-2xl h-full w-full transition-all duration-300">
+        <div className="leather-card relative z-10 p-5 lg:p-6 rounded-xl lg:rounded-2xl h-full w-full transition duration-300">
           {children}
         </div>
 
@@ -55,7 +55,7 @@ const CardComponent: React.FC<CardProps> = ({
   if (variant === 'interactive') {
     return (
       <div
-        className={`group relative leather-card rounded-xl lg:rounded-2xl p-5 lg:p-6 text-left transition-all duration-300 w-full ${isActionable ? 'cursor-pointer focus:outline-none focus-visible:ring-4 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background hover:-translate-y-2 hover:shadow-2xl hover:border-primary/30 hover:z-10' : ''} ${className}`}
+        className={`group relative leather-card rounded-xl lg:rounded-2xl p-5 lg:p-6 text-left transition duration-300 w-full ${isActionable ? 'cursor-pointer focus:outline-none focus-visible:ring-4 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background hover:-translate-y-2 hover:shadow-2xl hover:border-primary/30 hover:z-10 transform-gpu' : ''} ${className}`}
         onClick={onClick}
         role={isActionable ? 'button' : undefined}
         tabIndex={isActionable ? 0 : undefined}
@@ -72,7 +72,7 @@ const CardComponent: React.FC<CardProps> = ({
   // Standard card with leather finish
   return (
     <div
-      className={`group relative leather-card rounded-xl lg:rounded-2xl p-5 lg:p-6 text-left transition-all duration-300 w-full ${isActionable ? 'focus:outline-none focus-visible:ring-4 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background hover:-translate-y-2 hover:shadow-xl cursor-pointer hover:z-10' : ''} ${className}`}
+      className={`group relative leather-card rounded-xl lg:rounded-2xl p-5 lg:p-6 text-left transition duration-300 w-full ${isActionable ? 'focus:outline-none focus-visible:ring-4 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background hover:-translate-y-2 hover:shadow-xl cursor-pointer hover:z-10 transform-gpu' : ''} ${className}`}
       onClick={onClick}
       role={isActionable ? 'button' : undefined}
       tabIndex={isActionable ? 0 : undefined}

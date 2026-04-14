@@ -45,7 +45,6 @@ export enum PageRoute {
   INSIGHTS = '/insights',
   RESEARCH = '/research',
   NEWSLETTER = '/newsletter',
-  AUDIT = '/security-audit',
   PRIVACY = '/privacy',
   TERMS = '/terms',
   GLOSSARY = '/glossary',

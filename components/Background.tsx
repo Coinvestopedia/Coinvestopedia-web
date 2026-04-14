@@ -42,7 +42,10 @@ export const Background: React.FC = () => {
   const [elements, setElements] = useState<any[]>([]);
 
   useEffect(() => {
-    const generatedElements = Array.from({ length: 40 }).map(() => {
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const elementCount = prefersReducedMotion ? 0 : 20;
+
+    const generatedElements = Array.from({ length: elementCount }).map(() => {
       const typeRandom = Math.random();
       const type = typeRandom > 0.7 ? 'ticker' : 'candle';
       const isGreen = Math.random() > 0.5;

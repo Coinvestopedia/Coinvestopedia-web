@@ -28,7 +28,7 @@ export const RiskPanel: React.FC<RiskPanelProps> = ({ assets, isProUser }) => {
             const RiskIcon = risk.icon;
             
             return (
-              <div key={asset.id} className="bg-surface border border-border rounded-xl p-5 hover:border-primary/50 hover:bg-surface-alt hover:-translate-y-1 hover:shadow-xl hover:shadow-primary/5 transition-all duration-300 group min-w-0">
+              <div key={asset.id} className="bg-surface border border-border rounded-xl p-5 hover:border-primary/50 hover:bg-surface-alt hover:-translate-y-1 hover:shadow-xl hover:shadow-primary/5 transition-colors transition-transform transition-shadow transform-gpu duration-300 group min-w-0">
                 {/* Header */}
                 <div className="flex justify-between items-start mb-4">
                   <div className="flex items-center gap-3 min-w-0">
@@ -64,17 +64,8 @@ export const RiskPanel: React.FC<RiskPanelProps> = ({ assets, isProUser }) => {
                       <span className="text-[10px] font-bold uppercase tracking-wider flex items-center gap-1 text-primary">
                         <AlertCircle size={10} /> Value at Risk (95%)
                       </span>
-                      {isProUser ? (
-                        <span className="font-mono font-bold text-sm text-red-400">{asset.var95.toFixed(1)}%</span>
-                      ) : (
-                        <span className="font-mono font-bold text-sm text-text-muted blur-sm select-none">-4.5%</span>
-                      )}
+                      <span className="font-mono font-bold text-sm text-red-400">{asset.var95.toFixed(1)}%</span>
                     </div>
-                    {!isProUser && (
-                      <div className="absolute inset-0 bg-background/40 backdrop-blur-[1px] flex items-center justify-center rounded">
-                        <span className="text-[10px] font-bold bg-primary text-background px-2 py-0.5 rounded uppercase">Pro</span>
-                      </div>
-                    )}
                   </div>
                 </div>
               </div>

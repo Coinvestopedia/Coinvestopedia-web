@@ -1,3 +1,5 @@
+import { PageMeta, toolsPageSchema } from '../components/PageMeta';
+import { VaraDisclaimer } from '../components/VaraDisclaimer';
 import React, { useState, useEffect } from 'react';
 import { Card } from '../components/Card';
 import { 
@@ -7,6 +9,7 @@ import {
   BookOpen, Clock, ExternalLink
 } from 'lucide-react';
 import { useAppContext } from '../context/AppContext';
+
 
 // Existing Tools
 import { DCACalculator } from '../components/tools/Tier3/DCACalculator';
@@ -45,30 +48,30 @@ export interface ToolDefinition {
 export const TOOLS_REGISTRY: ToolDefinition[] = [
   // Tier 1
   { id: 'allocation-sim', name: 'Asset Allocation Simulator', description: 'Backtest portfolio allocations across crypto and traditional assets.', icon: <PieChart size={18} />, tier: 'Tier 1', category: 'Portfolio Construction', isPro: false, component: AssetSimulator },
-  { id: 'rebalancer', name: 'Rebalancing Calculator', description: 'Calculate exact buy/sell orders to restore target portfolio weights.', icon: <Target size={18} />, tier: 'Tier 1', category: 'Portfolio Construction', isPro: false, component: RebalancingCalculator },
+  { id: 'rebalancer', name: 'Rebalancing Simulator', description: 'Simulate adjustments needed to restore target portfolio weights.', icon: <Target size={18} />, tier: 'Tier 1', category: 'Portfolio Construction', isPro: false, component: RebalancingCalculator },
   
   // Tier 2
   { id: 'drawdown', name: 'Drawdown Analyzer', description: 'Analyze historical underwater equity curves and recovery durations.', icon: <TrendingDown size={18} />, tier: 'Tier 2', category: 'Risk Analytics', isPro: false, component: DrawdownAnalyzer },
   { id: 'beta-alpha', name: 'Beta & Alpha Calculator', description: 'Measure systematic risk and excess returns relative to benchmarks.', icon: <BarChart3 size={18} />, tier: 'Tier 2', category: 'Risk Analytics', isPro: false, component: BetaAlphaCalculator },
   
   // Tier 3
-  { id: 'on-chain-valuation', name: 'Bitcoin On-Chain Valuation', description: 'Fidelity/ARK style models: S2F, MVRV Z-Score, Realized Price.', icon: <Globe size={18} />, tier: 'Tier 3', category: 'Crypto Analytics', isPro: true, component: OnChainValuation },
+  { id: 'on-chain-valuation', name: 'Bitcoin On-Chain Valuation', description: 'Fidelity/ARK style models: S2F, MVRV Z-Score, Realized Price.', icon: <Globe size={18} />, tier: 'Tier 3', category: 'Crypto Analytics', isPro: false, component: OnChainValuation },
   { id: 'dca', name: 'DCA Strategy Simulator', description: 'Project portfolio value over time using dollar-cost averaging.', icon: <DollarSign size={18} />, tier: 'Tier 3', category: 'Crypto Analytics', isPro: false, component: DCACalculator },
-  { id: 'roi', name: 'ROI & Trade Calculator', description: 'Compute net profit, break-even, and annualized returns with fees.', icon: <TrendingUp size={18} />, tier: 'Tier 3', category: 'Crypto Analytics', isPro: false, component: ROICalculator },
-  { id: 'il', name: 'Impermanent Loss', description: 'Calculate LP impermanent loss and break-even thresholds.', icon: <AlertTriangle size={18} />, tier: 'Tier 3', category: 'Crypto Analytics', isPro: false, component: ILCalculator },
+  { id: 'roi', name: 'ROI & Trade Simulator', description: 'Model hypothetical returns, break-even points, and annualized performance with fees.', icon: <TrendingUp size={18} />, tier: 'Tier 3', category: 'Crypto Analytics', isPro: false, component: ROICalculator },
+  { id: 'il', name: 'Impermanent Loss Simulator', description: 'Simulate LP impermanent loss and break-even thresholds.', icon: <AlertTriangle size={18} />, tier: 'Tier 3', category: 'Crypto Analytics', isPro: false, component: ILCalculator },
   
   // Tier 4
-  { id: 'fixed-income', name: 'Fixed Income Yield', description: 'Calculate YTM, Macaulay duration, and convexity for bonds.', icon: <LineChart size={18} />, tier: 'Tier 4', category: 'Traditional Assets', isPro: false, component: FixedIncomeCalculator },
+  { id: 'fixed-income', name: 'Fixed Income Yield Simulator', description: 'Simulate YTM, Macaulay duration, and convexity for bonds.', icon: <LineChart size={18} />, tier: 'Tier 4', category: 'Traditional Assets', isPro: false, component: FixedIncomeCalculator },
   { id: 'dividend-screen', name: 'Yield & Income Screener', description: 'Rank TradFi dividend yields alongside DeFi stablecoin APYs.', icon: <Search size={18} />, tier: 'Tier 4', category: 'Traditional Assets', isPro: false, component: DividendScreener },
   { id: 'inflation-adj', name: 'Inflation-Adjusted Returns', description: 'Calculate real purchasing power by offsetting nominal CPI inflation.', icon: <Activity size={18} />, tier: 'Tier 4', category: 'Traditional Assets', isPro: false, component: InflationAdjusted },
   { id: 'tax', name: 'US Tax Estimator 2024', description: 'Estimate STCG, LTCG, and NIIT tax liabilities across income brackets.', icon: <Percent size={18} />, tier: 'Tier 4', category: 'Traditional Assets', isPro: false, component: TaxEstimator },
   { id: 'forex-heatmap', name: 'Forex Heat Map', description: 'Cross-currency strength matrix across 28 major pairs. Real-time visualization for DXY and macro analysis.', icon: <Globe size={18} />, tier: 'Tier 4', category: 'Traditional Assets', isPro: false, component: ForexHeatMap },
   
   // Tier 5
-  { id: 'monte-carlo', name: 'Monte Carlo Simulator', description: '10,000 geometric Brownian motion paths forecasting target probability.', icon: <Sparkles size={18} />, tier: 'Tier 5', category: 'Advanced Pro Tools', isPro: true, component: MonteCarloSimulator },
-  { id: 'risk-adjusted', name: 'Sharpe & Sortino Analyzer', description: 'Comprehensive risk-adjusted return suite evaluating portfolio efficiency.', icon: <Shield size={18} />, tier: 'Tier 5', category: 'Advanced Pro Tools', isPro: true, component: RiskAdjustedReturns },
-  { id: 'macro-regime', name: 'Macro Regime Indicator', description: '4-quadrant Growth/Inflation matrix signaling economic environment shifts.', icon: <Globe size={18} />, tier: 'Tier 5', category: 'Advanced Pro Tools', isPro: true, component: MacroRegimeIndicator },
-  { id: 'fear-greed', name: 'Fear & Greed Index Composite', description: 'Proprietary 0-100 institutional sentiment gauge.', icon: <Activity size={18} />, tier: 'Tier 5', category: 'Advanced Pro Tools', isPro: true, component: FearGreedComposite },
+  { id: 'monte-carlo', name: 'Monte Carlo Simulator', description: '10,000 geometric Brownian motion paths forecasting target probability.', icon: <Sparkles size={18} />, tier: 'Tier 5', category: 'Advanced Pro Tools', isPro: false, component: MonteCarloSimulator },
+  { id: 'risk-adjusted', name: 'Sharpe & Sortino Simulator', description: 'Comprehensive risk-adjusted return suite evaluating portfolio efficiency.', icon: <Shield size={18} />, tier: 'Tier 5', category: 'Advanced Pro Tools', isPro: false, component: RiskAdjustedReturns },
+  { id: 'macro-regime', name: 'Macro Regime Indicator', description: '4-quadrant Growth/Inflation matrix illustrating economic environment shifts.', icon: <Globe size={18} />, tier: 'Tier 5', category: 'Advanced Pro Tools', isPro: false, component: MacroRegimeIndicator },
+  { id: 'fear-greed', name: 'Fear & Greed Index Composite', description: 'Proprietary 0-100 institutional sentiment gauge.', icon: <Activity size={18} />, tier: 'Tier 5', category: 'Advanced Pro Tools', isPro: false, component: FearGreedComposite },
   
   // On-Chain Analytics
   { id: 'rup', name: 'Relative Unrealized Profit', description: 'Measure total unrealized profit held by all BTC market participants relative to market cap.', icon: <TrendingUp size={18} />, tier: 'Tier 3', category: 'Crypto Analytics', isPro: false, component: RelativeUnrealizedProfit },
@@ -102,11 +105,13 @@ export const Tools: React.FC = () => {
   if (activeTool) {
     return (
       <div className="animate-fade-in pb-12">
+      <PageMeta title={`${activeTool.name} | Coinvestopedia Simulators`} description={activeTool.description} structuredData={toolsPageSchema} />
+
         <button
           onClick={() => setActiveToolId(null)}
           className="flex items-center gap-2 text-text-muted hover:text-primary transition-colors text-sm font-bold group mb-8"
         >
-          <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" /> Back to Dashboard
+          <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform transform-gpu" /> Back to Dashboard
         </button>
 
         <div className="mb-8 border-b border-border pb-6">
@@ -118,11 +123,7 @@ export const Tools: React.FC = () => {
           <h1 className="text-3xl lg:text-4xl font-heading font-bold mb-3 flex items-center gap-3">
              <div className="p-2 bg-primary/10 border border-primary/20 rounded-lg text-primary">{activeTool.icon}</div>
              {activeTool.name}
-             {activeTool.isPro && !isProUser && (
-               <span className="flex items-center gap-1 px-2 py-1 bg-amber-500/10 border border-amber-500/30 rounded-full text-xs text-amber-500 tracking-widest uppercase">
-                 <Lock size={12} /> Pro
-               </span>
-             )}
+
           </h1>
           <p className="text-text-muted text-lg">{activeTool.description}</p>
         </div>
@@ -137,6 +138,11 @@ export const Tools: React.FC = () => {
 
   return (
     <div className="animate-fade-in pb-16">
+      <PageMeta 
+        title="Crypto & Investment Simulators" 
+        description="Institutional-grade financial simulators: ROI, DCA, Sharpe ratio, and position sizing. Professional quantitative support for digital assets." 
+        structuredData={toolsPageSchema} 
+      />
       {/* Hero */}
       <section className="relative overflow-hidden rounded-2xl lg:rounded-3xl border border-border bg-gradient-to-br from-background to-surface p-8 lg:p-16 mb-12 lg:mb-20 text-center">
         <div className="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full -translate-y-48 translate-x-48 blur-3xl pointer-events-none"></div>
@@ -158,6 +164,10 @@ export const Tools: React.FC = () => {
         </div>
       </section>
 
+      <VaraDisclaimer variant="banner" />
+
+
+
       <div className="space-y-16">
         {categories.map(category => {
           const catTools = TOOLS_REGISTRY.filter(t => t.category === category);
@@ -178,20 +188,16 @@ export const Tools: React.FC = () => {
                   <button
                     key={tool.id}
                     onClick={() => setActiveToolId(tool.id)}
-                    className="flex flex-col text-left p-6 rounded-2xl border border-border bg-surface dark:bg-[#111114] hover:border-primary/50 hover:bg-primary/5 dark:hover:bg-[#16161a] transition-all duration-500 group h-full relative overflow-hidden shadow-lg hover:shadow-primary/5 active:scale-[0.98]"
+                    className="flex flex-col text-left p-6 rounded-2xl border border-border bg-surface dark:bg-[#111114] hover:border-primary/50 hover:bg-primary/5 dark:hover:bg-[#16161a] transition-colors transition-transform duration-300 group h-full relative overflow-hidden shadow-lg hover:shadow-primary/5 active:scale-[0.98] transform-gpu"
                   >
                     {/* Top row: Icon + Tier/Status */}
                     <div className="flex justify-between items-start mb-6">
-                       <div className="w-12 h-12 rounded-xl bg-background dark:bg-[#18181b] border border-border flex items-center justify-center text-text-muted group-hover:text-primary group-hover:bg-primary/5 group-hover:border-primary/30 transition-all duration-300 shadow-inner">
+                       <div className="w-12 h-12 rounded-xl bg-background dark:bg-[#18181b] border border-border flex items-center justify-center text-text-muted group-hover:text-primary group-hover:bg-primary/5 group-hover:border-primary/30 transition-colors duration-300 shadow-inner">
                          {tool.icon}
                        </div>
                        <div className="flex flex-col items-end gap-1.5">
                          <span className="text-[9px] font-extrabold text-text-muted/40 uppercase tracking-widest">{tool.tier}</span>
-                         {tool.isPro && (
-                           <span className="flex items-center gap-1 text-[9px] font-extrabold uppercase tracking-widest text-amber-500 bg-amber-500/10 border border-amber-500/20 px-2 py-0.5 rounded-full shadow-sm">
-                             <Lock size={10} /> Pro
-                           </span>
-                         )}
+
                          {tool.component === null && (
                            <span className="text-[9px] font-extrabold uppercase tracking-widest text-blue-400 bg-blue-500/10 border border-blue-500/20 px-2 py-0.5 rounded-full">
                              Draft
@@ -212,8 +218,8 @@ export const Tools: React.FC = () => {
                     
                     {/* Bottom action bar */}
                     <div className="mt-8 flex items-center justify-between pointer-events-none">
-                       <span className="text-[10px] font-bold text-text-muted/40 group-hover:text-primary/70 transition-colors uppercase tracking-[0.1em]">Launch Engine</span>
-                       <div className="w-6 h-6 rounded-full border border-border flex items-center justify-center group-hover:border-primary/50 group-hover:bg-primary/10 transition-all duration-300">
+                       <span className="text-[10px] font-bold text-text-muted/40 group-hover:text-primary/70 transition-colors uppercase tracking-[0.1em]">Open Simulator</span>
+                       <div className="w-6 h-6 rounded-full border border-border flex items-center justify-center group-hover:border-primary/50 group-hover:bg-primary/10 transition-colors duration-300">
                           <Calculator size={12} className="text-text-muted/40 group-hover:text-primary transition-colors" />
                        </div>
                     </div>

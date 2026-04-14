@@ -170,7 +170,7 @@ export const Dialog = ({
             onClick={onConfirm}
             disabled={isLoading}
             className={cn(
-              'px-4 py-2 rounded-lg font-semibold transition-all disabled:opacity-50',
+              'px-4 py-2 rounded-lg font-semibold transition-colors disabled:opacity-50',
               isDangerous
                 ? 'bg-red-500 text-white hover:bg-red-600'
                 : 'bg-primary text-white hover:bg-primary-dark'

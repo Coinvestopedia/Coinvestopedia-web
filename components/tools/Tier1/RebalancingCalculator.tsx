@@ -131,7 +131,7 @@ export const RebalancingCalculator: React.FC = () => {
                              type="number"
                              value={h.value}
                              onChange={e => updateHolding(h.id, 'value', e.target.value)}
-                             className="w-full bg-background border border-border rounded-md pl-8 pr-3 py-2 focus:border-primary focus:outline-none transition-all"
+                             className="w-full bg-background border border-border rounded-md pl-8 pr-3 py-2 focus:border-primary focus:outline-none transition-colors"
                              min={0}
                            />
                          </div>

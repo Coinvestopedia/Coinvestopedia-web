@@ -1,3 +1,5 @@
+import { PageMeta } from '../components/PageMeta';
+import { VaraDisclaimer } from '../components/VaraDisclaimer';
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { AreaChart, Area, Tooltip, ResponsiveContainer, BarChart, Bar, XAxis, YAxis, CartesianGrid, Cell } from 'recharts';
 import { Card } from '../components/Card';
@@ -10,6 +12,7 @@ import {
   ChevronRight, Info, Target, Shield, Flame
 } from 'lucide-react';
 import { Modal } from '../components/Modal';
+
 import { analyzeAssetMovement, InsightResult } from '../services/geminiService';
 import { useAppContext } from '../context/AppContext';
 import { PulseIcon } from '../components/AnimatedIcons';
@@ -95,42 +98,7 @@ const assetFlowData = [
   { asset: 'XRP', inflow: 140, outflow: 100, color: '#00AAE4' },
 ];
 
-// ─── Ad Unit Component ────────────────────────────────────────────────────────
-
-const AdBanner: React.FC<{ variant?: 'leaderboard' | 'rectangle' | 'sidebar' }> = ({ variant = 'rectangle' }) => {
-  const partners = [
-    { name: 'KuCoin', offer: 'Up to 700 USDT Welcome Bonus', color: '#24AE8F', bg: 'from-[#051813] to-[#0d3028]', cta: 'Claim Bonus' },
-    { name: 'Bybit', offer: 'Trade Perps with 0.01% Maker Fee', color: '#F7A600', bg: 'from-[#1a1200] to-[#2d1e00]', cta: 'Start Trading' },
-    { name: 'Ledger', offer: 'Secure Your Assets. Hardware Wallet.', color: '#4B5563', bg: 'from-[#0f0f0f] to-[#1c1c1c]', cta: 'Get Ledger' },
-  ];
-  const p = partners[Math.floor(Math.random() * partners.length)];
-
-  if (variant === 'leaderboard') {
-    return (
-      <div className={`w-full h-[90px] rounded-xl bg-gradient-to-r ${p.bg} border border-white/10 flex items-center justify-between px-8 relative overflow-hidden`}>
-        <span className="absolute top-2 right-3 text-[9px] text-white/30 font-bold uppercase tracking-widest">Sponsored</span>
-        <div>
-          <div className="text-white font-black text-lg">{p.name}</div>
-          <div className="text-white/60 text-sm">{p.offer}</div>
-        </div>
-        <a href="#" className="px-5 py-2 rounded-lg text-sm font-bold text-white border border-white/20 hover:border-white/50 transition-colors" style={{ color: p.color, borderColor: p.color + '40' }}>
-          {p.cta} <ArrowUpRight size={14} className="inline" />
-        </a>
-      </div>
-    );
-  }
-
-  return (
-    <div className={`w-full rounded-xl bg-gradient-to-br ${p.bg} border border-white/10 p-5 relative overflow-hidden`}>
-      <span className="absolute top-2 right-3 text-[9px] text-white/30 font-bold uppercase tracking-widest">Ad</span>
-      <div className="text-white font-black text-xl mb-1">{p.name}</div>
-      <div className="text-white/60 text-xs mb-4">{p.offer}</div>
-      <a href="#" className="block text-center py-2.5 rounded-lg text-xs font-bold transition-all" style={{ backgroundColor: p.color, color: '#000' }}>
-        {p.cta}
-      </a>
-    </div>
-  );
-};
+// ─── Stat Card ────────────────────────────────────────────────────────────────
 
 // ─── Stat Card ────────────────────────────────────────────────────────────────
 
@@ -176,7 +144,7 @@ const AddressCell: React.FC<{ address: string; labels: Record<string, string>; o
         <span className={`text-xs ${label ? 'text-text-muted' : 'font-mono text-text-muted'}`}>{short}</span>
         {isRaw && (
           <button onClick={(e) => { e.stopPropagation(); onCopy(address); }}
-            className="opacity-0 group-hover/addr:opacity-100 text-text-muted hover:text-primary transition-all p-0.5">
+            className="opacity-0 group-hover/addr:opacity-100 text-text-muted hover:text-primary transition duration-200 p-0.5 transform-gpu">
             <Copy size={10} />
           </button>
         )}
@@ -222,8 +190,8 @@ const ExchangeFlowChart: React.FC = () => (
       </ResponsiveContainer>
     </div>
     <div className="flex items-center gap-6 mt-2 text-[10px] font-bold text-text-muted">
-      <div className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-sm bg-red-400/70 inline-block" /> To Exchange (Sell signal)</div>
-      <div className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-sm bg-emerald-400/70 inline-block" /> From Exchange (Accumulation)</div>
+      <div className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-sm bg-red-400/70 inline-block" /> To Exchange (Inflow)</div>
+      <div className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-sm bg-emerald-400/70 inline-block" /> From Exchange (Outflow)</div>
     </div>
   </div>
 );
@@ -232,10 +200,10 @@ const ExchangeFlowChart: React.FC = () => (
 
 const AlertFeed: React.FC = () => {
   const alerts = [
-    { icon: <ArrowDownRight size={15} />, color: 'text-red-400', bg: 'bg-red-500/5 border-red-500/10', text: 'Binance received $42M ETH inflow — potential selling pressure', time: '3m ago' },
-    { icon: <ArrowUpRight size={15} />, color: 'text-emerald-400', bg: 'bg-emerald-500/5 border-emerald-500/10', text: 'Unknown whale withdrew 1,200 BTC from Coinbase', time: '11m ago' },
-    { icon: <Flame size={15} />, color: 'text-primary', bg: 'bg-primary/5 border-primary/10', text: 'SOL volume surge detected on Bybit — volatility expected', time: '28m ago' },
-    { icon: <Target size={15} />, color: 'text-blue-400', bg: 'bg-blue-500/5 border-blue-500/10', text: 'Large buy order filled for 5,000 SOL at $138.45', time: '45m ago' },
+    { icon: <ArrowDownRight size={15} />, color: 'text-red-400', bg: 'bg-red-500/5 border-red-500/10', text: 'Binance received $42M ETH inflow — notable large deposit observed', time: '3m ago' },
+    { icon: <ArrowUpRight size={15} />, color: 'text-emerald-400', bg: 'bg-emerald-500/5 border-emerald-500/10', text: 'Unknown whale withdrew 1,200 BTC from Coinbase to external wallet', time: '11m ago' },
+    { icon: <Flame size={15} />, color: 'text-primary', bg: 'bg-primary/5 border-primary/10', text: 'SOL volume surge detected on Bybit — elevated activity observed', time: '28m ago' },
+    { icon: <Target size={15} />, color: 'text-blue-400', bg: 'bg-blue-500/5 border-blue-500/10', text: 'Large order filled for 5,000 SOL at $138.45', time: '45m ago' },
     { icon: <Shield size={15} />, color: 'text-emerald-400', bg: 'bg-emerald-500/5 border-emerald-500/10', text: 'Multi-sig wallet security change: Binance cold storage root key rotation', time: '1h ago' },
   ];
 
@@ -243,7 +211,7 @@ const AlertFeed: React.FC = () => {
     <div className="leather-card rounded-xl p-5">
       <div className="flex items-center justify-between mb-6">
         <h3 className="font-bold text-sm flex items-center gap-2">
-          <Activity size={16} className="text-primary" /> Smart Alerts
+          <Activity size={16} className="text-primary" /> Activity Feed
         </h3>
         <div className="flex items-center gap-1.5">
           <PulseIcon />
@@ -252,7 +220,7 @@ const AlertFeed: React.FC = () => {
       </div>
       <div className="space-y-3">
         {alerts.map((a, i) => (
-          <div key={i} className="group flex items-start gap-4 p-4 rounded-xl bg-surface/30 border border-border/40 hover:border-primary/30 hover:bg-surface/50 transition-all duration-300">
+          <div key={i} className="group flex items-start gap-4 p-4 rounded-xl bg-surface/30 border border-border/40 hover:border-primary/30 hover:bg-surface/50 transition duration-300 transform-gpu">
             <div className={`p-2.5 rounded-lg border flex-shrink-0 transition-transform group-hover:scale-110 ${a.color} ${a.bg}`}>
               {a.icon}
             </div>
@@ -266,10 +234,7 @@ const AlertFeed: React.FC = () => {
           </div>
         ))}
       </div>
-      {/* Ad slot inside alert feed */}
-      <div className="mt-6 pt-6 border-t border-border/40">
-        <AdBanner variant="rectangle" />
-      </div>
+
     </div>
   );
 };
@@ -399,7 +364,7 @@ export const WhaleTracker: React.FC = () => {
     )},
     { key: 'from', label: 'From', width: '22%', render: (v) => <AddressCell address={v} labels={walletLabels} onCopy={copyAddress} /> },
     { key: 'to', label: 'To', width: '22%', render: (v) => <AddressCell address={v} labels={walletLabels} onCopy={copyAddress} /> },
-    { key: 'type', label: 'Signal', width: '10%', render: (v: string) => (
+    { key: 'type', label: 'Flow Type', width: '10%', render: (v: string) => (
       <span className={`px-2 py-1 rounded-md text-[10px] font-bold uppercase flex items-center gap-1 w-fit ${
         v === 'inflow' ? 'bg-red-500/10 text-red-400' :
         v === 'outflow' ? 'bg-emerald-500/10 text-emerald-400' :
@@ -411,16 +376,18 @@ export const WhaleTracker: React.FC = () => {
     )},
     { key: 'id', label: '', width: '8%', isAction: true, render: (_, item) => (
       <button onClick={(e) => { e.stopPropagation(); setSelectedTx(item); }}
-        className="px-3 py-1.5 text-[10px] font-bold rounded-lg bg-primary/10 text-primary hover:bg-primary hover:text-background transition-all">
+        className="px-3 py-1.5 text-[10px] font-bold rounded-lg bg-primary/10 text-primary hover:bg-primary hover:text-background transition duration-200 transform-gpu">
         Analyze
       </button>
     )},
   ];
 
   return (
-    <div className="animate-fade-in space-y-6 pb-12">
+    <div className="animate-fade-in pb-12">
+      <PageMeta title="Whale Tracker" description="Real-time large cryptocurrency transaction alerts and analytics." />
 
-      {/* ── Hero ── */}
+      <div className="space-y-6">
+        {/* ── Hero ── */}
       <div className="relative overflow-hidden rounded-2xl border border-border bg-surface p-6 lg:p-10">
         <div className="absolute top-0 right-0 w-80 h-80 bg-primary/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none" />
         <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-primary/40 to-transparent" />
@@ -431,7 +398,7 @@ export const WhaleTracker: React.FC = () => {
           <h1 className="text-3xl lg:text-4xl font-bold tracking-tight mb-3">Whale Radar 🐋</h1>
           <p className="text-text-muted text-lg max-w-2xl leading-relaxed mb-6">
             Real-time tracking of large-scale institutional wallet movements across Bitcoin, Ethereum, and major alt networks.
-            Exchange inflows signal selling pressure. Outflows signal accumulation.
+            Exchange inflows indicate tokens moving onto exchanges. Outflows indicate tokens moving to external wallets.
           </p>
           <div className="flex flex-wrap gap-3">
             <div className="flex items-center gap-2 px-3 py-2 bg-background/50 border border-border rounded-lg text-sm">
@@ -448,13 +415,14 @@ export const WhaleTracker: React.FC = () => {
         </div>
       </div>
 
-      {/* ── Ad Leaderboard ── */}
-      <AdBanner variant="leaderboard" />
+      <VaraDisclaimer variant="banner" />
+
+
 
       {/* ── Stat Row ── */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <StatCard label="24h Exchange Inflows" value="$1.2B" sub="Potential sell pressure" direction="down" icon={<ArrowDownRight size={16} />} />
-        <StatCard label="24h Exchange Outflows" value="$850M" sub="Accumulation signal" direction="up" icon={<ArrowUpRight size={16} />} />
+        <StatCard label="24h Exchange Inflows" value="$1.2B" sub="Tokens deposited to exchanges" direction="down" icon={<ArrowDownRight size={16} />} />
+        <StatCard label="24h Exchange Outflows" value="$850M" sub="Tokens withdrawn from exchanges" direction="up" icon={<ArrowUpRight size={16} />} />
         <StatCard label="Net Flow" value="+$350M" sub="Outflows dominating" direction="up" icon={<TrendingUp size={16} />} />
         <StatCard label="Active Whale Wallets" value="2,847" sub="Last 24 hours" direction="neutral" icon={<Activity size={16} />} />
       </div>
@@ -521,9 +489,9 @@ export const WhaleTracker: React.FC = () => {
           <div>
             <h4 className="font-bold text-sm mb-1">How to read whale flows</h4>
             <p className="text-xs text-text-muted leading-relaxed">
-              <strong className="text-text">Exchange inflows</strong> (wallet → exchange) indicate intent to sell — large inflows often precede price drops.
-              <strong className="text-text"> Exchange outflows</strong> (exchange → wallet) signal accumulation — whales moving to cold storage tend to be bullish.
-              <strong className="text-text"> Transfers</strong> between exchanges or wallets may indicate OTC deals, arbitrage, or portfolio restructuring.
+              <strong className="text-text">Exchange inflows</strong> (wallet → exchange) represent tokens being deposited onto exchanges, which historically has been associated with increased available supply.
+              <strong className="text-text"> Exchange outflows</strong> (exchange → wallet) represent tokens being withdrawn to external wallets, often associated with longer-term holding behavior.
+              <strong className="text-text"> Transfers</strong> between exchanges or wallets may reflect OTC deals, arbitrage, or portfolio restructuring.
             </p>
           </div>
         </div>
@@ -534,15 +502,15 @@ export const WhaleTracker: React.FC = () => {
         <div className="flex bg-surface border border-border rounded-xl p-1 w-fit">
           <button
             onClick={() => setActiveView('table')}
-            className={`px-6 py-2 rounded-lg text-sm font-bold transition-all flex items-center gap-2 ${activeView === 'table' ? 'bg-primary text-background' : 'text-text-muted hover:text-text'}`}
+            className={`px-6 py-2 rounded-lg text-sm font-bold transition duration-200 transform-gpu ${activeView === 'table' ? 'bg-primary text-background' : 'text-text-muted hover:text-text'}`}
           >
             <BarChart2 size={16} /> Transactions
           </button>
           <button
             onClick={() => setActiveView('alerts')}
-            className={`px-6 py-2 rounded-lg text-sm font-bold transition-all flex items-center gap-2 ${activeView === 'alerts' ? 'bg-primary text-background' : 'text-text-muted hover:text-text'}`}
+            className={`px-6 py-2 rounded-lg text-sm font-bold transition duration-200 transform-gpu ${activeView === 'alerts' ? 'bg-primary text-background' : 'text-text-muted hover:text-text'}`}
           >
-            <Activity size={16} /> Smart Alerts
+            <Activity size={16} /> Activity Feed
           </button>
         </div>
 
@@ -573,7 +541,7 @@ export const WhaleTracker: React.FC = () => {
                 <div className="flex bg-surface border border-border rounded-lg p-0.5">
                   {(['all', 'inflow', 'outflow', 'transfer'] as const).map(f => (
                     <button key={f} onClick={() => { setTypeFilter(f); setPagination(p => ({ ...p, page: 1 })); }}
-                      className={`px-3 py-1.5 rounded-md text-[10px] font-bold uppercase transition-all ${typeFilter === f ? 'bg-primary text-background' : 'text-text-muted hover:text-text'}`}>
+                      className={`px-3 py-1.5 rounded-md text-[10px] font-bold uppercase transition duration-200 transform-gpu ${typeFilter === f ? 'bg-primary text-background' : 'text-text-muted hover:text-text'}`}>
                       {f}
                     </button>
                   ))}
@@ -605,8 +573,7 @@ export const WhaleTracker: React.FC = () => {
         )}
       </div>
 
-      {/* ── Mid-page Ad ── */}
-      <AdBanner variant="leaderboard" />
+
 
       {/* ── Educational Section ── */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
@@ -614,17 +581,17 @@ export const WhaleTracker: React.FC = () => {
           {
             icon: <BarChart2 size={20} className="text-primary" />,
             title: 'Exchange Net Position',
-            body: 'When cumulative outflows exceed inflows over a sustained period, it historically precedes price appreciation. Bitcoin\'s exchange reserves are currently at a 5-year low.',
+            body: 'When cumulative outflows exceed inflows over a sustained period, it has historically been correlated with reduced available supply on exchanges. Bitcoin\'s exchange reserves are currently at a 5-year low.',
           },
           {
             icon: <Eye size={20} className="text-primary" />,
             title: 'Dormant Wallet Activity',
-            body: 'Wallets inactive for 1+ years suddenly moving coins can signal long-term holder sentiment shifts. These are tracked separately as high-conviction signals.',
+            body: 'Wallets inactive for 1+ years suddenly moving coins may indicate a change in long-term holder behavior. These movements are tracked separately for educational analysis.',
           },
           {
             icon: <Zap size={20} className="text-primary" />,
             title: 'Miner Outflows',
-            body: 'Miners selling into exchanges suggests operational pressure or profit-taking. Sustained miner accumulation is a classic bull market precursor.',
+            body: 'Miners depositing to exchanges may reflect operational cost management or treasury rebalancing. Sustained miner withdrawal patterns have historically been observed during periods of network growth.',
           },
         ].map((card, i) => (
           <div key={i} className="leather-card rounded-xl p-5 hover:border-primary/30 transition-colors">
@@ -691,7 +658,7 @@ export const WhaleTracker: React.FC = () => {
                 <p className="font-bold text-primary text-lg">{selectedTx.value}</p>
               </div>
               <div className="text-center">
-                <p className="text-[10px] text-text-muted uppercase font-bold mb-1">Signal</p>
+                <p className="text-[10px] text-text-muted uppercase font-bold mb-1">Flow Type</p>
                 <span className={`text-sm font-bold uppercase ${selectedTx.type === 'inflow' ? 'text-red-400' : selectedTx.type === 'outflow' ? 'text-emerald-400' : 'text-text-muted'}`}>
                   {selectedTx.type}
                 </span>
@@ -732,6 +699,7 @@ export const WhaleTracker: React.FC = () => {
           </div>
         )}
       </Modal>
+    </div>
     </div>
   );
 };
