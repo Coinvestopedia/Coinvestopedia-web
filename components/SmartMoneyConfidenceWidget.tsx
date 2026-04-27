@@ -46,6 +46,8 @@ export const SmartMoneyConfidenceWidget: React.FC = () => {
     fetchAndCalculateScore();
   }, []);
 
+  const [showTooltip, setShowTooltip] = useState<boolean>(false);
+
   const getStatusColor = (s: number) => {
     if (s >= 70) return 'text-primary border-primary bg-primary/10';
     if (s <= 30) return 'text-[#EF4444] border-[#EF4444] bg-[#EF4444]/10';
@@ -80,9 +82,18 @@ export const SmartMoneyConfidenceWidget: React.FC = () => {
           </h2>
           <p className="text-text-muted text-xs mt-1 max-w-[200px] md:max-w-[300px]">Proprietary composite of Exchange Flows, SOPR, and Miner Reserves</p>
         </div>
-        <div className="tooltip-container group relative">
-           <Info size={16} className="text-text-muted cursor-help" />
-            <div className="absolute right-0 md:left-0 top-6 w-48 p-2 bg-surface text-xs text-text border border-border rounded shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-opacity z-50">
+        <div className="tooltip-container relative">
+           <button 
+             onClick={() => setShowTooltip(!showTooltip)}
+             onBlur={() => setTimeout(() => setShowTooltip(false), 200)}
+             className="focus:outline-none"
+             aria-label="More information"
+           >
+             <Info size={16} className={`transition-colors ${showTooltip ? 'text-primary' : 'text-text-muted hover:text-text'}`} />
+           </button>
+            <div className={`absolute right-0 md:left-0 top-6 w-48 p-2 bg-surface text-xs text-text border border-border rounded shadow-lg transition-all z-50 ${
+              showTooltip ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible -translate-y-1'
+            }`}>
                Aggregates data from Glassnode, CryptoQuant, Whale Alert, and Alternative.me.
             </div>
         </div>
