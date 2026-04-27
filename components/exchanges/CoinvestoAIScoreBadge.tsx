@@ -1,7 +1,7 @@
 import React from 'react';
 import { Grade } from '../../data/exchanges';
 
-interface ClearRateBadgeProps {
+interface CoinvestoAIScoreBadgeProps {
   score: number;
   grade: Grade;
   size?: 'sm' | 'md' | 'lg';
@@ -35,7 +35,7 @@ const getScoreColor = (score: number): string => {
   return 'text-red-400';
 };
 
-export const ClearRateBadge: React.FC<ClearRateBadgeProps> = ({
+export const CoinvestoAIScoreBadge: React.FC<CoinvestoAIScoreBadgeProps> = ({
   score,
   grade,
   size = 'md'
@@ -73,9 +73,9 @@ export const ClearRateBadge: React.FC<ClearRateBadgeProps> = ({
         {config.label}
       </span>
 
-      {/* ClearRate label */}
+      {/* Coinvesto AI Score label */}
       <span className="text-[8px] text-text-muted font-bold uppercase tracking-widest">
-        ClearRate™
+        Coinvesto AI Score™
       </span>
     </div>
   );

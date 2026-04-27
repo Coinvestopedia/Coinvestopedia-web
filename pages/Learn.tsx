@@ -293,7 +293,7 @@ export const Learn: React.FC<LearnProps> = ({ onNavigate }) => {
             </div>
          </div>
 
-          {/* ClearRate™ Exchange Intelligence Card */}
+          {/* Coinvesto AI Score™ Exchange Intelligence Card */}
           <div 
              className="leather-card rounded-2xl p-8 lg:p-12 bg-gradient-to-br from-surface to-background relative overflow-hidden group cursor-pointer border border-border hover:border-primary/50 transition-colors flex flex-col md:flex-row items-center gap-8 shadow-xl"
              onClick={() => onNavigate?.(PageRoute.EXCHANGES)}
@@ -306,11 +306,11 @@ export const Learn: React.FC<LearnProps> = ({ onNavigate }) => {
               
               <div className="relative z-10 flex-1 text-center md:text-left">
                  <div className="inline-flex items-center gap-2 px-3 py-1 bg-primary/10 border border-primary/20 rounded-full text-primary text-[10px] font-bold uppercase tracking-[0.2em] mb-4">
-                   ClearRate™
+                   Coinvesto AI Score™
                  </div>
                  <h2 className="text-2xl md:text-3xl font-bold mb-3 group-hover:text-primary transition-colors">Exchange Intelligence</h2>
                  <p className="text-text-muted md:text-lg max-w-2xl leading-relaxed">
-                    Institutional-grade exchange analysis. 10 exchanges scored across 7 weighted dimensions — regulatory standing, custody, fees, and counterparty risk.
+                    Institutional-grade exchange analysis. 10+ exchanges scored across 7 proprietary AI dimensions — regulatory standing, custody architecture, and counterparty risk.
                  </p>
               </div>
               

@@ -93,7 +93,10 @@ export const Header: React.FC<HeaderProps> = ({
               onClick={() => link.route && handleNavClick(link.route)}
             >
               <span className="mr-1">{link.icon}</span>
-              {link.label}
+              <span>{link.label}</span>
+              <span className="ml-1 px-1.5 py-0.5 rounded-full bg-primary/20 text-primary text-[10px] font-black uppercase tracking-wider animate-pulse border border-primary/30">
+                Featured
+              </span>
             </div>
           ))}
         </nav>

@@ -13,7 +13,7 @@ export interface ExchangeFees {
 export interface ExchangeProfile {
   id: string;
   name: string;
-  clearRateScore: number;           // 0–100
+  coinvestoAIScore: number;           // 0–100
   grade: Grade;
   brandColor: string;               // Hex
   founded: number;
@@ -47,7 +47,7 @@ export const EXCHANGES: ExchangeProfile[] = [
   {
     id: 'coinbase',
     name: 'Coinbase Advanced',
-    clearRateScore: 91,
+    coinvestoAIScore: 91,
     grade: 'INSTITUTIONAL',
     brandColor: '#0052FF',
     founded: 2012,
@@ -94,7 +94,7 @@ export const EXCHANGES: ExchangeProfile[] = [
   {
     id: 'kraken',
     name: 'Kraken Pro',
-    clearRateScore: 89,
+    coinvestoAIScore: 89,
     grade: 'INSTITUTIONAL',
     brandColor: '#5741D9',
     founded: 2011,
@@ -140,7 +140,7 @@ export const EXCHANGES: ExchangeProfile[] = [
   {
     id: 'gemini',
     name: 'Gemini',
-    clearRateScore: 86,
+    coinvestoAIScore: 86,
     grade: 'INSTITUTIONAL',
     brandColor: '#00DCFA',
     founded: 2014,
@@ -185,7 +185,7 @@ export const EXCHANGES: ExchangeProfile[] = [
   {
     id: 'binance',
     name: 'Binance',
-    clearRateScore: 84,
+    coinvestoAIScore: 84,
     grade: 'PROFESSIONAL',
     brandColor: '#F0B90B',
     founded: 2017,
@@ -235,7 +235,7 @@ export const EXCHANGES: ExchangeProfile[] = [
   {
     id: 'okx',
     name: 'OKX',
-    clearRateScore: 82,
+    coinvestoAIScore: 82,
     grade: 'PROFESSIONAL',
     brandColor: '#000000',
     founded: 2017,
@@ -277,7 +277,7 @@ export const EXCHANGES: ExchangeProfile[] = [
   {
     id: 'bybit',
     name: 'Bybit',
-    clearRateScore: 79,
+    coinvestoAIScore: 79,
     grade: 'PROFESSIONAL',
     brandColor: '#F7A600',
     founded: 2018,
@@ -322,7 +322,7 @@ export const EXCHANGES: ExchangeProfile[] = [
   {
     id: 'bitstamp',
     name: 'Bitstamp',
-    clearRateScore: 83,
+    coinvestoAIScore: 83,
     grade: 'INSTITUTIONAL',
     brandColor: '#00922E',
     founded: 2011,
@@ -364,7 +364,7 @@ export const EXCHANGES: ExchangeProfile[] = [
   {
     id: 'dydx',
     name: 'dYdX',
-    clearRateScore: 76,
+    coinvestoAIScore: 76,
     grade: 'PROFESSIONAL',
     brandColor: '#6966FF',
     founded: 2017,
@@ -411,7 +411,7 @@ export const EXCHANGES: ExchangeProfile[] = [
   {
     id: 'kucoin',
     name: 'KuCoin',
-    clearRateScore: 67,
+    coinvestoAIScore: 67,
     grade: 'ACTIVE_TRADER',
     brandColor: '#23AF91',
     founded: 2017,
@@ -458,7 +458,7 @@ export const EXCHANGES: ExchangeProfile[] = [
   {
     id: 'hyperliquid',
     name: 'Hyperliquid',
-    clearRateScore: 71,
+    coinvestoAIScore: 71,
     grade: 'ACTIVE_TRADER',
     brandColor: '#00FF94',
     founded: 2023,
@@ -507,7 +507,7 @@ export const EXCHANGES: ExchangeProfile[] = [
   {
     id: 'ibkr',
     name: 'Interactive Brokers',
-    clearRateScore: 78,
+    coinvestoAIScore: 78,
     grade: 'ACTIVE_TRADER',
     brandColor: '#D81B30',
     founded: 1978,
@@ -550,7 +550,7 @@ export const EXCHANGES: ExchangeProfile[] = [
   {
     id: 'etoro',
     name: 'eToro',
-    clearRateScore: 65,
+    coinvestoAIScore: 65,
     grade: 'ACTIVE_TRADER',
     brandColor: '#6CBF47',
     founded: 2007,
@@ -593,7 +593,7 @@ export const EXCHANGES: ExchangeProfile[] = [
   {
     id: 'swissquote',
     name: 'Swissquote',
-    clearRateScore: 82,
+    coinvestoAIScore: 82,
     grade: 'PROFESSIONAL',
     brandColor: '#00A1DE',
     founded: 1996,
@@ -637,7 +637,7 @@ export const EXCHANGES: ExchangeProfile[] = [
   {
     id: 'fidelity',
     name: 'Fidelity Digital Assets',
-    clearRateScore: 85,
+    coinvestoAIScore: 85,
     grade: 'INSTITUTIONAL',
     brandColor: '#4B8B3B',
     founded: 2018,
@@ -681,7 +681,7 @@ export const EXCHANGES: ExchangeProfile[] = [
   {
     id: 'htx',
     name: 'HTX',
-    clearRateScore: 70,
+    coinvestoAIScore: 70,
     grade: 'ACTIVE_TRADER',
     brandColor: '#2B6DEF',
     founded: 2013,
@@ -727,7 +727,7 @@ export const EXCHANGES: ExchangeProfile[] = [
   {
     id: 'bitget',
     name: 'Bitget',
-    clearRateScore: 72,
+    coinvestoAIScore: 72,
     grade: 'ACTIVE_TRADER',
     brandColor: '#00C8B5',
     founded: 2018,
@@ -773,7 +773,7 @@ export const EXCHANGES: ExchangeProfile[] = [
   {
     id: 'cryptocom',
     name: 'Crypto.com',
-    clearRateScore: 88,
+    coinvestoAIScore: 88,
     grade: 'INSTITUTIONAL',
     brandColor: '#103F68',
     founded: 2016,
@@ -813,7 +813,7 @@ export const EXCHANGES: ExchangeProfile[] = [
   {
     id: 'bingx',
     name: 'BingX',
-    clearRateScore: 72,
+    coinvestoAIScore: 72,
     grade: 'ACTIVE_TRADER',
     brandColor: '#2354E6',
     founded: 2018,
@@ -852,7 +852,7 @@ export const EXCHANGES: ExchangeProfile[] = [
   {
     id: 'mexc',
     name: 'MEXC',
-    clearRateScore: 55,
+    coinvestoAIScore: 55,
     grade: 'ACTIVE_TRADER',
     brandColor: '#00B897',
     founded: 2018,
@@ -895,7 +895,7 @@ export const EXCHANGES: ExchangeProfile[] = [
   {
     id: 'robinhood',
     name: 'Robinhood Crypto',
-    clearRateScore: 85,
+    coinvestoAIScore: 85,
     grade: 'INSTITUTIONAL',
     brandColor: '#00C805',
     founded: 2013,

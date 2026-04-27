@@ -88,7 +88,7 @@ const PageHeader: React.FC = () => {
       
       <div className="relative z-10">
         <div className="inline-flex items-center gap-2 px-3 py-1 bg-primary/10 border border-primary/20 rounded-full text-primary text-xs font-bold uppercase tracking-wider mb-6">
-          <PulseIcon /> ClearRate™
+          <PulseIcon /> Coinvesto AI Score™
         </div>
         
         <h1 className="text-4xl lg:text-5xl font-heading font-bold mb-6 leading-tight">
@@ -96,12 +96,12 @@ const PageHeader: React.FC = () => {
         </h1>
         
         <p className="text-lg text-text-muted max-w-3xl mb-4 leading-relaxed">
-          20 exchanges. 7 scoring dimensions. Zero editorial bias.
+          20+ venues. 7 proprietary AI dimensions. Zero editorial bias.
         </p>
         <p className="text-sm text-text-muted max-w-3xl mb-10 leading-relaxed opacity-80">
-          Every exchange rating you've read was written to drive clicks. ClearRate™ is different — a quantitative
-          scoring model built on the same due diligence framework institutional allocators use before onboarding
-          a new prime broker.
+          Most exchange ratings are built for referral clicks. Coinvesto AI Score™ is different — a quantitative
+          proprietary model that analyzes exchange safety, liquidity, and compliance using the same due diligence 
+          framework as institutional prime brokers.
         </p>
 
         {/* Key metrics */}
@@ -139,13 +139,13 @@ const MethodologySection: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const dimensions = [
-    { name: 'Regulatory Compliance', short: 'Regulatory', weight: '25%', icon: <Scale size={16} />, sources: 'NYDFS, FCA, MAS, VARA, SEC filings, VASP registrations' },
-    { name: 'Liquidity Depth', short: 'Liquidity', weight: '20%', icon: <Layers size={16} />, sources: 'Order book depth at 1%, 2%, 5% slippage; 30D spot + derivatives volume' },
-    { name: 'Fee Structure', short: 'Fees', weight: '20%', icon: <DollarSign size={16} />, sources: 'Maker/taker at 5 volume tiers; withdrawal fees; spread analysis' },
-    { name: 'Custody & Security', short: 'Custody', weight: '15%', icon: <Shield size={16} />, sources: 'Cold storage %, insurance coverage, audit history, PoR publication' },
-    { name: 'Asset Coverage', short: 'Assets', weight: '10%', icon: <Layers size={16} />, sources: 'Spot pairs, perpetuals, options, margin, tokenized assets' },
-    { name: 'Institutional Infrastructure', short: 'Infrastructure', weight: '5%', icon: <Server size={16} />, sources: 'FIX API, sub-accounts, OTC desk, prime brokerage, custody separation' },
-    { name: 'Operational Track Record', short: 'Track Record', weight: '5%', icon: <Clock size={16} />, sources: 'Years operational, downtime incidents, hack history, litigation' },
+    { name: 'Security Architecture', short: 'Security', weight: '25%', icon: <Shield size={16} />, sources: 'Institutional custody, cold storage %, insurance depth, threat modeling' },
+    { name: 'Regulatory Compliance', short: 'Regulatory', weight: '20%', icon: <Scale size={16} />, sources: 'Multi-jurisdictional licensing, VASP registrations, AML/KYC robustness' },
+    { name: 'Counterparty Quality', short: 'Counterparty', weight: '15%', icon: <Building size={16} />, sources: 'PoR frequency, financial transparency, audit quality' },
+    { name: 'Liquidity Integrity', short: 'Liquidity', weight: '15%', icon: <Layers size={16} />, sources: 'Order book depth, institutional trade execution quality' },
+    { name: 'Fee Efficiency', short: 'Fees', weight: '10%', icon: <DollarSign size={16} />, sources: 'All-in cost of capital including spreads and withdrawal overhead' },
+    { name: 'Operational Continuity', short: 'Operational', weight: '10%', icon: <Clock size={16} />, sources: 'Service uptime, hack history, infrastructure resilience' },
+    { name: 'Institutional Tooling', short: 'Infrastructure', weight: '5%', icon: <Server size={16} />, sources: 'FIX API, sub-account architecture, OTC connectivity' },
   ];
 
   const methodologyRadarData = React.useMemo(() => dimensions.map(d => ({
@@ -174,8 +174,8 @@ const MethodologySection: React.FC = () => {
               <Info size={18} />
             </div>
             <div>
-              <h2 className="text-lg font-bold group-hover:text-primary transition-colors duration-300">How We Score — ClearRate™ Methodology</h2>
-              <p className="text-sm text-text-muted">7 weighted dimensions, 100-point institutional scoring model</p>
+              <h2 className="text-lg font-bold group-hover:text-primary transition-colors duration-300">How We Score — Coinvesto AI Score™ Methodology</h2>
+              <p className="text-sm text-text-muted">7 proprietary dimensions, 100-point AI-driven scoring model</p>
             </div>
           </div>
           {isOpen ? <ChevronUp size={20} className="text-text-muted transition-transform" /> : <ChevronDown size={20} className="text-text-muted transition-transform" />}
@@ -248,7 +248,7 @@ const MethodologySection: React.FC = () => {
           </div>
 
           <p className="text-xs text-text-muted italic border-t border-border pt-4">
-            ClearRate™ scores reflect publicly available data and editorial analysis. Scores do not constitute investment advice.
+            Coinvesto AI Score™ reflects publicly available data and editorial analysis. Scores do not constitute investment advice.
             Coinvestopedia may receive referral compensation; commercial relationships do not influence scores.
           </p>
         </Card>
@@ -266,12 +266,12 @@ const BestForGrid: React.FC = () => {
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
 
-  const sortedExchanges = useMemo(() => [...EXCHANGES].sort((a, b) => b.clearRateScore - a.clearRateScore), []);
+  const sortedExchanges = useMemo(() => [...EXCHANGES].sort((a, b) => b.coinvestoAIScore - a.coinvestoAIScore), []);
 
   const sortedBestFor = useMemo(() => {
     return [...BEST_FOR_CARDS].sort((a, b) => {
-      const scoreA = EXCHANGES.find(e => e.id === a.exchangeId)?.clearRateScore || 0;
-      const scoreB = EXCHANGES.find(e => e.id === b.exchangeId)?.clearRateScore || 0;
+      const scoreA = EXCHANGES.find(e => e.id === a.exchangeId)?.coinvestoAIScore || 0;
+      const scoreB = EXCHANGES.find(e => e.id === b.exchangeId)?.coinvestoAIScore || 0;
       return scoreB - scoreA;
     });
   }, []);
@@ -318,10 +318,10 @@ const BestForGrid: React.FC = () => {
               {/* Main Score Box */}
               <div className="mb-6 bg-black backdrop-blur-sm p-4 rounded-xl border border-border w-full overflow-hidden flex items-center justify-between group-hover:border-primary/30 transition-all relative z-10">
                 <div className="flex flex-col">
-                  <span className="text-[10px] font-bold uppercase tracking-widest text-text-muted mb-1">ClearRate™ Score</span>
+                  <span className="text-[10px] font-bold uppercase tracking-widest text-text-muted mb-1">Coinvesto AI Score™</span>
                   <div className="flex items-baseline gap-1">
-                    <span className={`text-3xl font-bold font-mono tracking-tight ${scoreColor(exchange.clearRateScore)} group-hover:brightness-110 transition-all`}>
-                      {exchange.clearRateScore}
+                    <span className={`text-3xl font-bold font-mono tracking-tight ${scoreColor(exchange.coinvestoAIScore)} group-hover:brightness-110 transition-all`}>
+                      {exchange.coinvestoAIScore}
                     </span>
                     <span className="text-xs text-text-muted font-mono">/100</span>
                   </div>
@@ -393,7 +393,7 @@ const BestForGrid: React.FC = () => {
 // ─── Exchange Profiles Section ────────────────────────────────────
 
 const ExchangeProfilesSection: React.FC = () => {
-  const sortedExchanges = useMemo(() => [...EXCHANGES].sort((a, b) => b.clearRateScore - a.clearRateScore), []);
+  const sortedExchanges = useMemo(() => [...EXCHANGES].sort((a, b) => b.coinvestoAIScore - a.coinvestoAIScore), []);
 
   return (
     <section id="exchange-profiles" className="scroll-mt-32">
@@ -408,7 +408,7 @@ const ExchangeProfilesSection: React.FC = () => {
               <h2 className="text-2xl font-bold mb-1 flex items-center gap-2">
                 Top 20 Liquidity Venues
               </h2>
-              <p className="text-sm text-text-muted">Ranked by ClearRate™ Institutional Scoring Model</p>
+              <p className="text-sm text-text-muted">Ranked by Coinvesto AI Score™ Institutional Scoring Model</p>
             </div>
             <div className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-text-muted">
               <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
@@ -453,7 +453,7 @@ const ComparisonTool: React.FC = () => {
   };
 
   const comparisonRows = [
-    { label: 'ClearRate™ Score', key: 'clearRateScore', render: (e: ExchangeProfile) => <span className={`font-black text-lg ${scoreColor(e.clearRateScore)}`}>{e.clearRateScore}/100</span> },
+    { label: 'Coinvesto AI Score™', key: 'coinvestoAIScore', render: (e: ExchangeProfile) => <span className={`font-black text-lg ${scoreColor(e.coinvestoAIScore)}`}>{e.coinvestoAIScore}/100</span> },
     { label: 'Grade', key: 'grade', render: (e: ExchangeProfile) => <span className={`text-xs font-bold px-2 py-1 rounded ${gradeColor(e.grade)}`}>{gradeLabel(e.grade)}</span> },
     { label: 'Licenses', key: 'regulatoryLicenses', render: (e: ExchangeProfile) => <div className="flex flex-wrap gap-1 justify-center">{e.regulatoryLicenses.slice(0, 3).map((l, i) => <span key={i} className="text-[10px] px-1.5 py-0.5 bg-surface border border-border rounded">{l}</span>)}</div> },
     { label: 'Spot Maker', key: 'makerFee', render: (e: ExchangeProfile) => <span className="font-bold">{e.fees.spotMaker < 0 ? `${(e.fees.spotMaker * 100).toFixed(3)}% (rebate)` : `${(e.fees.spotMaker * 100).toFixed(3)}%`}</span> },
@@ -480,7 +480,7 @@ const ComparisonTool: React.FC = () => {
   const getBestId = (key: string): string | null => {
     if (!selectedExchanges.length) return null;
     switch (key) {
-      case 'clearRateScore': return selectedExchanges.reduce((a, b) => a.clearRateScore > b.clearRateScore ? a : b).id;
+      case 'coinvestoAIScore': return selectedExchanges.reduce((a, b) => a.coinvestoAIScore > b.coinvestoAIScore ? a : b).id;
       case 'takerFee': return selectedExchanges.reduce((a, b) => a.fees.spotTaker < b.fees.spotTaker ? a : b).id;
       case 'makerFee': return selectedExchanges.reduce((a, b) => a.fees.spotMaker < b.fees.spotMaker ? a : b).id;
       case 'yearsOperational': return selectedExchanges.reduce((a, b) => a.founded < b.founded ? a : b).id;
@@ -528,7 +528,7 @@ const ComparisonTool: React.FC = () => {
               >
                 <span className="font-medium">{e.name}</span>
                 <div className="flex items-center gap-2">
-                  <span className={`text-xs font-bold ${scoreColor(e.clearRateScore)}`}>{e.clearRateScore}</span>
+                  <span className={`text-xs font-bold ${scoreColor(e.coinvestoAIScore)}`}>{e.coinvestoAIScore}</span>
                   {selected.includes(e.id) && <Check size={16} className="text-primary" />}
                 </div>
               </button>
@@ -554,7 +554,7 @@ const ComparisonTool: React.FC = () => {
                       {e.grade === 'INSTITUTIONAL' ? 'INSTITUTIONAL' : 'RETAIL+'}
                     </div>
                     <div className="text-base font-bold group-hover:text-primary transition-colors">{e.name}</div>
-                    <div className={`text-[11px] font-black mt-1 ${scoreColor(e.clearRateScore)}`}>{e.clearRateScore}/100</div>
+                    <div className={`text-[11px] font-black mt-1 ${scoreColor(e.coinvestoAIScore)}`}>{e.coinvestoAIScore}/100</div>
                   </th>
                 ))}
               </tr>
@@ -979,7 +979,7 @@ const FAQAccordion: React.FC = () => {
                   </p>
                   <div className="mt-6 flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-primary/60">
                      <Activity size={12} />
-                     <span>Verified by ClearRate™ Editorial Team</span>
+                     <span>Verified by Coinvesto AI Score™ Editorial Team</span>
                   </div>
                 </div>
               </div>
@@ -1006,13 +1006,13 @@ const DisclaimerSection: React.FC = () => {
              <ShieldCheck size={24} />
           </div>
           
-          <h3 className="text-xs font-black uppercase tracking-[0.3em] text-text-muted mb-4">ClearRate™ Editorial Disclosure</h3>
+          <h3 className="text-xs font-black uppercase tracking-[0.3em] text-text-muted mb-4">Coinvesto AI Score™ Editorial Disclosure</h3>
           
           <div className="space-y-4 text-sm text-text-muted leading-relaxed">
             <p>
-              Coinvestopedia operates the <strong className="text-text font-bold">ClearRate™ Exchange Intelligence</strong> product independently.
+              Coinvestopedia operates the <strong className="text-text font-bold">Coinvesto AI Score™ Exchange Intelligence</strong> product independently.
               Our proprietary scoring algorithms are applied uniformly across all venues based on quarterly 
-              institutional-grade audits and real-time API monitoring.
+              institutional-grade audits and real-time AI monitoring.
             </p>
             <p className="opacity-80">
               The information provided on this portal is for institutional and professional educational purposes 

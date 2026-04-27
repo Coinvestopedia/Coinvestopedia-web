@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { ChevronDown, Shield, CheckCircle, XCircle, Info } from 'lucide-react';
-import { ClearRateBadge } from './ClearRateBadge';
+import { CoinvestoAIScoreBadge } from './CoinvestoAIScoreBadge';
 import { RiskFlags } from './RiskFlags';
 import { ExchangeProfile } from '../../data/exchanges';
 
@@ -62,7 +62,7 @@ export const ExchangeCard: React.FC<ExchangeCardProps> = ({ exchange, rank }) =>
             <span className="font-bold text-sm block group-hover:text-primary transition-colors">{exchange.name}</span>
             <span className="text-[11px] text-text-muted block truncate">{exchange.bestFor}</span>
             <div className="mt-1 inline-block">
-               <ClearRateBadge score={exchange.clearRateScore} grade={exchange.grade} size="sm" />
+               <CoinvestoAIScoreBadge score={exchange.coinvestoAIScore} grade={exchange.grade} size="sm" />
             </div>
           </div>
         </div>
