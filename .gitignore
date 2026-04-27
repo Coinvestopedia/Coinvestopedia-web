@@ -25,3 +25,6 @@ dist-ssr
 
 # Agent files
 .agent/
+scratch/
+test-*.mjs
+*.txt
