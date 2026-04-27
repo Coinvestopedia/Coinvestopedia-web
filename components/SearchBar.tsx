@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Search, TrendingUp, Sparkles, Flame, ArrowRight } from 'lucide-react';
+import { Search, Sparkles, Flame, ArrowRight } from 'lucide-react';
 
 interface SearchBarProps {
   className?: string;

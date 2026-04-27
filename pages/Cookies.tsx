@@ -1,10 +1,24 @@
 import React from 'react';
 import { Database, Search, Settings, Cookie } from 'lucide-react';
+import { PageMeta } from '../components/PageMeta';
 
-export const Cookies: React.FC = () => {
+
+
+export interface CookiesProps {
+  onNavigate?: (route: PageRoute) => void;
+}
+
+export const Cookies: React.FC<CookiesProps> = ({ onNavigate }) => {
   return (
     <div className="animate-fade-in max-w-[800px] mx-auto pb-16">
-      <div className="mb-12">
+      <PageMeta
+        title="Cookie Policy"
+        description="Understand how Coinvestopedia uses cookies to improve your experience. Learn about cookie types and how to manage them."
+        canonical="/cookies"
+        keywords="coinvestopedia cookie policy, website cookies, cookie management"
+      />
+
+      <div className="mb-12 mt-6">
         <div className="flex items-center gap-3 text-primary mb-4">
           <Cookie size={32} />
           <h1 className="text-4xl lg:text-5xl font-heading font-bold text-text">Cookie Policy</h1>

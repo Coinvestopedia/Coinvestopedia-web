@@ -1,85 +1,32 @@
 import { PageMeta } from '../components/PageMeta';
-import { VaraDisclaimer } from '../components/VaraDisclaimer';
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
-import { AreaChart, Area, Tooltip, ResponsiveContainer, BarChart, Bar, XAxis, YAxis, CartesianGrid, Cell } from 'recharts';
-import { Card } from '../components/Card';
+import { AreaChart, Area, Tooltip, ResponsiveContainer, BarChart, Bar, XAxis, YAxis, CartesianGrid } from 'recharts';
 import { Button } from '../components/Button';
 import Table, { Column } from '../components/Table';
 import {
-  Search, Sparkles, ExternalLink, X, Tag, Edit2, Save, Filter,
-  Copy, TrendingUp, TrendingDown, AlertTriangle, ArrowUpRight,
+  Search, Sparkles, ExternalLink, X, Tag, Edit2, Save,
+  Copy, TrendingUp, TrendingDown, ArrowUpRight,
   ArrowDownRight, Activity, Globe, Zap, Eye, Clock, BarChart2,
-  ChevronRight, Info, Target, Shield, Flame
+  Info, Target, Shield, PieChart, DollarSign
 } from 'lucide-react';
 import { Modal } from '../components/Modal';
 
 import { analyzeAssetMovement, InsightResult } from '../services/geminiService';
 import { useAppContext } from '../context/AppContext';
 import { PulseIcon } from '../components/AnimatedIcons';
-import { fetchWhaleAlerts, fetchMempoolTxs } from '../services/api';
+
+import { WhaleOrchestrator, WhaleTransaction } from '../services/whaleOrchestrator';
+import { PageRoute } from '../types';
+
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
-interface WhaleTx {
-  id: string;
-  time: string;
-  amount: string;
-  assetCode: string;
-  value: string;
-  valueNumeric: number;
-  amountNumeric: number;
-  from: string;
-  to: string;
-  type: 'inflow' | 'outflow' | 'transfer';
-}
+// Replaced by WhaleTransaction from services/whaleOrchestrator
 
-// ─── Mock Data Generation ─────────────────────────────────────────────────────
+// ─── Stat Card ────────────────────────────────────────────────────────────────
 
-const generateEthAddress = () => {
-  const chars = '0123456789abcdef';
-  let addr = '0x';
-  for (let i = 0; i < 40; i++) addr += chars[Math.floor(Math.random() * 16)];
-  return addr;
-};
-
-const generateAllTransactions = (count: number): WhaleTx[] => {
-  const assets = ['BTC', 'ETH', 'SOL', 'XRP', 'USDT', 'USDC', 'ADA', 'AVAX'];
-  const knownExchanges = ['KuCoin Hot Wallet', 'Coinbase 2', 'Kraken 4', 'OKX Cold Storage', 'Huobi 3', 'Binance 8', 'Bybit Hot Wallet'];
-  const rawAddresses = Array.from({ length: 20 }, generateEthAddress);
-  const allEntities = [...knownExchanges, ...rawAddresses];
-
-  return Array.from({ length: count }).map((_, i) => {
-    const asset = assets[Math.floor(Math.random() * assets.length)];
-    const amountVal = Math.floor(Math.random() * 10000) + 100;
-    const valueNum = amountVal * (Math.random() * 1000 + 10);
-    const from = allEntities[Math.floor(Math.random() * allEntities.length)];
-    let to = allEntities[Math.floor(Math.random() * allEntities.length)];
-    while (from === to) to = allEntities[Math.floor(Math.random() * allEntities.length)];
-
-    const isFromExchange = knownExchanges.includes(from);
-    const isToExchange = knownExchanges.includes(to);
-    const type: 'inflow' | 'outflow' | 'transfer' = !isFromExchange && isToExchange ? 'inflow' : isFromExchange && !isToExchange ? 'outflow' : 'transfer';
-
-    return {
-      id: `tx-${i}`,
-      time: `${Math.floor(Math.random() * 59) + 1}m ago`,
-      amount: `${amountVal.toLocaleString()} ${asset}`,
-      assetCode: asset,
-      value: `$${(valueNum / 1e6).toFixed(1)}M`,
-      valueNumeric: valueNum,
-      amountNumeric: amountVal,
-      from,
-      to,
-      type,
-    };
-  });
-};
-
-const ALL_MOCK_TRANSACTIONS = generateAllTransactions(150);
-
-// ─── Flow Chart Data ──────────────────────────────────────────────────────────
-
-const flowData = [
+// Fallback data for Simulator Mode
+const FALLBACK_FLOW_DATA = [
   { time: '00:00', inflow: 120, outflow: 80 },
   { time: '03:00', inflow: 95, outflow: 110 },
   { time: '06:00', inflow: 150, outflow: 90 },
@@ -90,12 +37,11 @@ const flowData = [
   { time: '21:00', inflow: 300, outflow: 210 },
 ];
 
-const assetFlowData = [
+const FALLBACK_ASSET_DATA = [
   { asset: 'BTC', inflow: 450, outflow: 320, color: '#F7931A' },
   { asset: 'ETH', inflow: 280, outflow: 390, color: '#627EEA' },
   { asset: 'SOL', inflow: 190, outflow: 120, color: '#14F195' },
-  { asset: 'USDT', inflow: 310, outflow: 280, color: '#26A17B' },
-  { asset: 'XRP', inflow: 140, outflow: 100, color: '#00AAE4' },
+  { asset: 'BSC', inflow: 110, outflow: 140, color: '#F3BA2F' },
 ];
 
 // ─── Stat Card ────────────────────────────────────────────────────────────────
@@ -128,10 +74,18 @@ const StatCard: React.FC<{
 
 // ─── Address Cell ─────────────────────────────────────────────────────────────
 
-const AddressCell: React.FC<{ address: string; labels: Record<string, string>; onCopy: (a: string) => void }> = ({ address, labels, onCopy }) => {
+const AddressCell: React.FC<{ address: string; labels?: Record<string, string> }> = ({ address, labels = {} }) => {
   const label = labels[address];
   const isRaw = address.startsWith('0x');
   const short = isRaw ? `${address.slice(0, 6)}…${address.slice(-4)}` : address;
+
+  const handleCopy = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    navigator.clipboard.writeText(address);
+    if (typeof window !== 'undefined') {
+       // Simple fallback if addToast isn't easily accessible here
+    }
+  };
 
   return (
     <div className="flex flex-col">
@@ -143,7 +97,7 @@ const AddressCell: React.FC<{ address: string; labels: Record<string, string>; o
       <div className="flex items-center gap-1 group/addr">
         <span className={`text-xs ${label ? 'text-text-muted' : 'font-mono text-text-muted'}`}>{short}</span>
         {isRaw && (
-          <button onClick={(e) => { e.stopPropagation(); onCopy(address); }}
+          <button onClick={handleCopy}
             className="opacity-0 group-hover/addr:opacity-100 text-text-muted hover:text-primary transition duration-200 p-0.5 transform-gpu">
             <Copy size={10} />
           </button>
@@ -155,15 +109,17 @@ const AddressCell: React.FC<{ address: string; labels: Record<string, string>; o
 
 // ─── Exchange Flow Breakdown ──────────────────────────────────────────────────
 
-const ExchangeFlowChart: React.FC = () => (
+// ─── Exchange Flow Breakdown ──────────────────────────────────────────────────
+
+const ExchangeFlowChart: React.FC<{ data: any[] }> = ({ data }) => (
   <div className="leather-card rounded-xl p-5">
     <div className="flex items-center justify-between mb-4">
-      <h3 className="font-bold text-sm">Asset Flow Breakdown</h3>
+      <h3 className="font-bold text-sm">Macro Asset Flows (USDm)</h3>
       <span className="text-[10px] text-text-muted uppercase font-bold tracking-widest">24h</span>
     </div>
-    <div className="h-[200px]">
-      <ResponsiveContainer width="100%" height="100%">
-        <BarChart data={assetFlowData} layout="vertical" margin={{ left: 10, right: 30 }}>
+    <div className="h-[200px] w-full relative">
+      <ResponsiveContainer width="100%" height="100%" minWidth={0} minHeight={0} debounce={50}>
+        <BarChart data={data} layout="vertical" margin={{ left: 10, right: 30 }}>
           <CartesianGrid strokeDasharray="3 3" stroke="#27272a" horizontal={false} />
           <XAxis type="number" tick={{ fontSize: 9, fill: '#71717a' }} stroke="#3f3f46" tickFormatter={v => `$${v}M`} />
           <YAxis dataKey="asset" type="category" tick={{ fontSize: 11, fill: '#a1a1aa', fontWeight: 700 }} stroke="none" width={35} />
@@ -180,7 +136,7 @@ const ExchangeFlowChart: React.FC = () => (
               fontWeight: 600,
             }}
             cursor={{ fill: '#3f3f46', fillOpacity: 0.15 }}
-            formatter={(v: number, name: string) => [`$${v}M`, name === 'inflow' ? 'To Exchange' : 'From Exchange']}
+            formatter={(v: any, name: any) => [`$${v}M`, name === 'inflow' ? 'To Exchange' : 'From Exchange']}
             labelStyle={{ color: '#a1a1aa', fontSize: '11px', fontWeight: 'bold', marginBottom: '4px' }}
             itemStyle={{ color: '#f4f4f5', fontWeight: 700 }}
           />
@@ -190,22 +146,26 @@ const ExchangeFlowChart: React.FC = () => (
       </ResponsiveContainer>
     </div>
     <div className="flex items-center gap-6 mt-2 text-[10px] font-bold text-text-muted">
-      <div className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-sm bg-red-400/70 inline-block" /> To Exchange (Inflow)</div>
-      <div className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-sm bg-emerald-400/70 inline-block" /> From Exchange (Outflow)</div>
+      <div className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-sm bg-red-400/70 inline-block" /> Inflow (Sell Pressure)</div>
+      <div className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-sm bg-emerald-400/70 inline-block" /> Outflow (Accumulation)</div>
     </div>
   </div>
 );
 
 // ─── Alert Feed ───────────────────────────────────────────────────────────────
 
-const AlertFeed: React.FC = () => {
-  const alerts = [
-    { icon: <ArrowDownRight size={15} />, color: 'text-red-400', bg: 'bg-red-500/5 border-red-500/10', text: 'Binance received $42M ETH inflow — notable large deposit observed', time: '3m ago' },
-    { icon: <ArrowUpRight size={15} />, color: 'text-emerald-400', bg: 'bg-emerald-500/5 border-emerald-500/10', text: 'Unknown whale withdrew 1,200 BTC from Coinbase to external wallet', time: '11m ago' },
-    { icon: <Flame size={15} />, color: 'text-primary', bg: 'bg-primary/5 border-primary/10', text: 'SOL volume surge detected on Bybit — elevated activity observed', time: '28m ago' },
-    { icon: <Target size={15} />, color: 'text-blue-400', bg: 'bg-blue-500/5 border-blue-500/10', text: 'Large order filled for 5,000 SOL at $138.45', time: '45m ago' },
-    { icon: <Shield size={15} />, color: 'text-emerald-400', bg: 'bg-emerald-500/5 border-emerald-500/10', text: 'Multi-sig wallet security change: Binance cold storage root key rotation', time: '1h ago' },
-  ];
+const AlertFeed: React.FC<{ data: WhaleTransaction[] }> = ({ data }) => {
+  const alerts = data.slice(0, 5).map(tx => {
+    const isBig = tx.valueNumeric > 10000000;
+    const icon = tx.type === 'inflow' ? <ArrowDownRight size={15} /> : tx.type === 'outflow' ? <ArrowUpRight size={15} /> : <Target size={15} />;
+    const color = tx.type === 'inflow' ? 'text-red-400' : tx.type === 'outflow' ? 'text-emerald-400' : 'text-primary';
+    const bg = tx.type === 'inflow' ? 'bg-red-500/5 border-red-500/10' : tx.type === 'outflow' ? 'bg-emerald-500/5 border-emerald-500/10' : 'bg-primary/5 border-primary/10';
+    
+    let text = `${tx.amount} moved from ${tx.from.slice(0, 8)}... to ${tx.to.slice(0, 8)}...`;
+    if (isBig) text = `🚨 INSTITUTIONAL MOVE: ${tx.amount} (${tx.value}) detected in transit.`;
+    
+    return { icon, color, bg, text, time: tx.time };
+  });
 
   return (
     <div className="leather-card rounded-xl p-5">
@@ -219,20 +179,24 @@ const AlertFeed: React.FC = () => {
         </div>
       </div>
       <div className="space-y-3">
-        {alerts.map((a, i) => (
-          <div key={i} className="group flex items-start gap-4 p-4 rounded-xl bg-surface/30 border border-border/40 hover:border-primary/30 hover:bg-surface/50 transition duration-300 transform-gpu">
-            <div className={`p-2.5 rounded-lg border flex-shrink-0 transition-transform group-hover:scale-110 ${a.color} ${a.bg}`}>
-              {a.icon}
-            </div>
-            <div className="flex-1 min-w-0 pt-0.5">
-              <p className="text-xs font-medium text-text leading-relaxed group-hover:text-primary-light transition-colors">{a.text}</p>
-              <div className="flex items-center gap-2 mt-2">
-                <Clock size={10} className="text-text-muted" />
-                <p className="text-[10px] text-text-muted font-bold uppercase tracking-wider">{a.time}</p>
+        {alerts.length > 0 ? (
+          alerts.map((a, i) => (
+            <div key={i} className="group flex items-start gap-4 p-4 rounded-xl bg-surface/30 border border-border/40 hover:border-primary/30 hover:bg-surface/50 transition duration-300 transform-gpu">
+              <div className={`p-2.5 rounded-lg border flex-shrink-0 transition-transform group-hover:scale-110 ${a.color} ${a.bg}`}>
+                {a.icon}
+              </div>
+              <div className="flex-1 min-w-0 pt-0.5">
+                <p className="text-xs font-medium text-text leading-relaxed group-hover:text-primary-light transition-colors">{a.text}</p>
+                <div className="flex items-center gap-2 mt-2">
+                  <Clock size={10} className="text-text-muted" />
+                  <p className="text-[10px] text-text-muted font-bold uppercase tracking-wider">{a.time}</p>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          ))
+        ) : (
+          <div className="text-center py-10 text-text-muted text-xs">No whale alerts in the last 24h</div>
+        )}
       </div>
 
     </div>
@@ -241,56 +205,69 @@ const AlertFeed: React.FC = () => {
 
 // ─── Main Component ───────────────────────────────────────────────────────────
 
-export const WhaleTracker: React.FC = () => {
-  const { addToast } = useAppContext();
-  const [tableData, setTableData] = useState<WhaleTx[]>([]);
-  const [fullDataset, setFullDataset] = useState<WhaleTx[]>(ALL_MOCK_TRANSACTIONS);
+
+export interface WhaleTrackerProps {
+  onNavigate?: (route: PageRoute) => void;
+}
+
+export const WhaleTracker: React.FC<WhaleTrackerProps> = ({ onNavigate }) => {
+  const { addToast, setActiveSubMenu, activeSubMenu, setPageCategories } = useAppContext();
+  const [tableData, setTableData] = useState<WhaleTransaction[]>([]);
+  const [fullDataset, setFullDataset] = useState<WhaleTransaction[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [pagination, setPagination] = useState({ page: 1, pageSize: 15 });
-  const [selectedTx, setSelectedTx] = useState<WhaleTx | null>(null);
-  const [analysis, setAnalysis] = useState<InsightResult | null>(null);
-  const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
-  const [walletLabels, setWalletLabels] = useState<Record<string, string>>({});
-  const [editingAddress, setEditingAddress] = useState<string | null>(null);
-  const [tempLabel, setTempLabel] = useState('');
   const [typeFilter, setTypeFilter] = useState<'all' | 'inflow' | 'outflow' | 'transfer'>('all');
 
+  const [macroStats, setMacroStats] = useState<any>(null);
   const [activeView, setActiveView] = useState<'table' | 'alerts'>('table');
 
-  // Load data
+  // Sidebar Registration
   useEffect(() => {
-    const load = async () => {
-      setIsLoading(true);
-      try {
-        const [whaleAlerts] = await Promise.all([fetchWhaleAlerts(), fetchMempoolTxs()]);
-        if (whaleAlerts?.length > 0) {
-          const transformed = whaleAlerts.map((tx: any) => {
-            const from = tx.from?.owner || tx.from?.address || 'Unknown';
-            const to = tx.to?.owner || tx.to?.address || 'Unknown';
-            const type: 'inflow' | 'outflow' | 'transfer' =
-              tx.to?.owner_type === 'exchange' && tx.from?.owner_type !== 'exchange' ? 'inflow' :
-              tx.from?.owner_type === 'exchange' && tx.to?.owner_type !== 'exchange' ? 'outflow' : 'transfer';
-            return {
-              id: tx.id || tx.hash,
-              time: new Date(tx.timestamp * 1000).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-              amount: `${tx.amount.toLocaleString()} ${tx.symbol.toUpperCase()}`,
-              assetCode: tx.symbol.toUpperCase(),
-              value: tx.amount_usd ? `$${(tx.amount_usd / 1e6).toFixed(1)}M` : 'N/A',
-              valueNumeric: tx.amount_usd || 0,
-              amountNumeric: tx.amount,
-              from, to, type,
-            };
-          });
-          setFullDataset(transformed);
-        }
-      } catch (e) {
-        console.error(e);
-      } finally {
+    window.scrollTo(0, 0);
+    if (activeSubMenu !== 'Discovery') {
+       setActiveSubMenu('Discovery');
+    }
+
+    const discoveryItems = [
+      { label: 'Asset Simulation', route: PageRoute.TOOLS, icon: <PieChart size={18} /> },
+      { label: 'DCA Strategy', route: PageRoute.TOOLS, icon: <DollarSign size={18} /> },
+      { label: 'Risk Analysis', route: PageRoute.MACRO_INTEL, icon: <Shield size={18} /> },
+      { label: 'Market Pulse', route: PageRoute.HOME, icon: <Activity size={18} /> }
+    ].sort(() => 0.5 - Math.random());
+
+    setPageCategories(discoveryItems.map(item => ({
+      label: item.label,
+      icon: item.icon,
+      active: false,
+      onClick: () => {}
+    })));
+
+    return () => setPageCategories([]);
+  }, [setActiveSubMenu, activeSubMenu, setPageCategories]);
+
+  // Load data & Initialize Orchestrator
+  useEffect(() => {
+    const orchestrator = new WhaleOrchestrator(
+      {
+        whaleAlertKey: import.meta.env.VITE_WHALE_ALERT_API_KEY || '',
+        etherscanKey: import.meta.env.VITE_ETHERSCAN_API || '',
+      },
+      (data) => {
+        setFullDataset(data.txs);
+        setMacroStats(data.macroStats);
         setIsLoading(false);
+        
+        // Log quota health for administrative visibility
+        console.log('[Whale Tracker] Quota Health:', orchestrator.getQuotaStatus());
       }
+    );
+    
+    orchestrator.start();
+    
+    return () => {
+      orchestrator.stop();
     };
-    load();
   }, []);
 
   // Filter
@@ -302,13 +279,13 @@ export const WhaleTracker: React.FC = () => {
       data = data.filter(tx =>
         tx.from.toLowerCase().includes(q) ||
         tx.to.toLowerCase().includes(q) ||
-        tx.assetCode.toLowerCase().includes(q) ||
+        tx.assetSymbol.toLowerCase().includes(q) ||
         (walletLabels[tx.from] || '').toLowerCase().includes(q) ||
         (walletLabels[tx.to] || '').toLowerCase().includes(q)
       );
     }
     return data;
-  }, [fullDataset, typeFilter, searchQuery, walletLabels]);
+  }, [fullDataset, typeFilter, searchQuery]);
 
   // Paginate
   useEffect(() => {
@@ -316,54 +293,71 @@ export const WhaleTracker: React.FC = () => {
     setTableData(filteredData.slice(start, start + pagination.pageSize));
   }, [pagination, filteredData]);
 
-  // AI analysis on select
-  useEffect(() => {
-    if (!selectedTx) { setAnalysis(null); setEditingAddress(null); return; }
-    const run = async () => {
-      setIsAnalyzing(true);
-      setAnalysis(null);
-      const r = await analyzeAssetMovement(
-        selectedTx.assetCode, selectedTx.type, selectedTx.value,
-        walletLabels[selectedTx.from] || selectedTx.from,
-        walletLabels[selectedTx.to] || selectedTx.to,
-      );
-      setAnalysis(r);
-      setIsAnalyzing(false);
-    };
-    run();
-  }, [selectedTx]);
 
-  const copyAddress = useCallback((addr: string) => {
-    navigator.clipboard.writeText(addr);
-    addToast('Address copied to clipboard', 'success');
-  }, [addToast]);
 
-  const saveLabel = (address: string) => {
-    if (tempLabel.trim()) setWalletLabels(prev => ({ ...prev, [address]: tempLabel.trim() }));
-    else { const n = { ...walletLabels }; delete n[address]; setWalletLabels(n); }
-    setEditingAddress(null);
-  };
+
 
   // Metrics
-  const netFlow = useMemo(() => {
-    const inflows = fullDataset.filter(t => t.type === 'inflow').reduce((s, t) => s + t.valueNumeric, 0);
-    const outflows = fullDataset.filter(t => t.type === 'outflow').reduce((s, t) => s + t.valueNumeric, 0);
-    return { inflows, outflows, net: outflows - inflows };
-  }, [fullDataset]);
+  const { liveFlowData, liveAssetData, liveTotalInflow, liveTotalOutflow } = useMemo(() => {
+    if (!macroStats) return { liveFlowData: FALLBACK_FLOW_DATA, liveAssetData: FALLBACK_ASSET_DATA, liveTotalInflow: 1200000000, liveTotalOutflow: 850000000 };
 
-  const columns: Column<WhaleTx>[] = [
+    // Aggregate BTC and ETH for stats
+    const btcIn = macroStats.btc?.inflow?.reduce((acc: number, item: any) => acc + (parseFloat(item.inflow) || 0), 0) || 0;
+    const btcOut = macroStats.btc?.outflow?.reduce((acc: number, item: any) => acc + (parseFloat(item.outflow) || 0), 0) || 0;
+    const ethIn = macroStats.eth?.inflow?.reduce((acc: number, item: any) => acc + (parseFloat(item.inflow) || 0), 0) || 0;
+    const ethOut = macroStats.eth?.outflow?.reduce((acc: number, item: any) => acc + (parseFloat(item.outflow) || 0), 0) || 0;
+
+    // Estimate total USD (hardcoded price fallback for simplicity/performance in this view)
+    const btcPrice = 64000;
+    const ethPrice = 3400;
+    const totalInUSD = (btcIn * btcPrice) + (ethIn * ethPrice);
+    const totalOutUSD = (btcOut * btcPrice) + (ethOut * ethPrice);
+
+    // Prepare time series for AreaChart
+    const series = macroStats.btc?.inflow?.map((item: any, idx: number) => {
+      const ethItemIn = macroStats.eth?.inflow[idx]?.inflow || 0;
+      const ethItemOut = macroStats.eth?.outflow[idx]?.outflow || 0;
+      return {
+        time: new Date(item.datetime).getHours() + ':00',
+        inflow: (parseFloat(item.inflow) * btcPrice / 1e6) + (parseFloat(ethItemIn) * ethPrice / 1e6),
+        outflow: (parseFloat(macroStats.btc.outflow[idx]?.outflow || 0) * btcPrice / 1e6) + (parseFloat(ethItemOut) * ethPrice / 1e6)
+      };
+    }).reverse() || FALLBACK_FLOW_DATA;
+
+    // Prepare asset breakdown for BarChart
+    const assetData = [
+      { asset: 'BTC', inflow: btcIn * btcPrice / 1e6, outflow: btcOut * btcPrice / 1e6, color: '#F7931A' },
+      { asset: 'ETH', inflow: ethIn * ethPrice / 1e6, outflow: ethOut * ethPrice / 1e6, color: '#627EEA' },
+      { asset: 'SOL', inflow: 190, outflow: 120, color: '#14F195' }, // Fallback for alt stats
+      { asset: 'BSC', inflow: 110, outflow: 140, color: '#F3BA2F' },
+    ];
+
+    return { 
+      liveFlowData: series, 
+      liveAssetData: assetData, 
+      liveTotalInflow: totalInUSD, 
+      liveTotalOutflow: totalOutUSD 
+    };
+  }, [macroStats]);
+
+  const columns: Column<WhaleTransaction>[] = [
     { key: 'time', label: 'Time', width: '8%', render: (v) => <span className="text-xs text-text-muted font-mono">{v}</span> },
-    { key: 'amount', label: 'Asset / Amount', width: '18%', render: (_, item) => (
+    { key: 'amount', label: 'Asset / Amount', width: '20%', render: (_, item) => (
       <div>
-        <span className="font-bold text-sm">{item.assetCode}</span>
+        <span className="font-bold text-sm">{item.assetSymbol}</span>
         <span className="text-xs text-text-muted ml-1.5">{item.amount.split(' ')[0]}</span>
       </div>
     )},
-    { key: 'valueNumeric', label: 'USD Value', width: '12%', sortable: true, align: 'right', render: (_, item) => (
+    { key: 'valueNumeric', label: 'USD Value', width: '15%', sortable: true, align: 'right', render: (_, item) => (
       <span className="font-mono font-bold text-sm">{item.value}</span>
     )},
-    { key: 'from', label: 'From', width: '22%', render: (v) => <AddressCell address={v} labels={walletLabels} onCopy={copyAddress} /> },
-    { key: 'to', label: 'To', width: '22%', render: (v) => <AddressCell address={v} labels={walletLabels} onCopy={copyAddress} /> },
+    { key: 'from', label: 'From', width: '19%', render: (v) => <AddressCell address={v} /> },
+    { key: 'to', label: 'To', width: '19%', render: (v) => <AddressCell address={v} /> },
+    { key: 'chain', label: 'Network', width: '9%', render: (v) => (
+      <span className="px-2 py-0.5 rounded bg-surface border border-border text-[9px] font-bold text-text-muted uppercase">
+        {v}
+      </span>
+    )},
     { key: 'type', label: 'Flow Type', width: '10%', render: (v: string) => (
       <span className={`px-2 py-1 rounded-md text-[10px] font-bold uppercase flex items-center gap-1 w-fit ${
         v === 'inflow' ? 'bg-red-500/10 text-red-400' :
@@ -374,21 +368,15 @@ export const WhaleTracker: React.FC = () => {
         {v}
       </span>
     )},
-    { key: 'id', label: '', width: '8%', isAction: true, render: (_, item) => (
-      <button onClick={(e) => { e.stopPropagation(); setSelectedTx(item); }}
-        className="px-3 py-1.5 text-[10px] font-bold rounded-lg bg-primary/10 text-primary hover:bg-primary hover:text-background transition duration-200 transform-gpu">
-        Analyze
-      </button>
-    )},
   ];
 
   return (
-    <div className="animate-fade-in pb-12">
+    <div className="animate-fade-in">
       <PageMeta title="Whale Tracker" description="Real-time large cryptocurrency transaction alerts and analytics." />
 
-      <div className="space-y-6">
+      <div className="space-y-8">
         {/* ── Hero ── */}
-      <div className="relative overflow-hidden rounded-2xl border border-border bg-surface p-6 lg:p-10">
+      <div className="relative overflow-hidden rounded-2xl border border-border bg-surface p-6 lg:p-10 mb-8">
         <div className="absolute top-0 right-0 w-80 h-80 bg-primary/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none" />
         <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-primary/40 to-transparent" />
         <div className="relative z-10">
@@ -409,22 +397,45 @@ export const WhaleTracker: React.FC = () => {
               <Globe size={13} className="text-primary" /> 15 blockchains
             </div>
             <div className="flex items-center gap-2 px-3 py-2 bg-background/50 border border-border rounded-lg text-xs font-bold text-text-muted">
-              <Clock size={13} className="text-primary" /> Updated every 60s
+              <Clock size={13} className="text-primary" /> Multi-chain Data (1h Cache)
             </div>
           </div>
         </div>
       </div>
 
-      <VaraDisclaimer variant="banner" />
 
 
 
       {/* ── Stat Row ── */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <StatCard label="24h Exchange Inflows" value="$1.2B" sub="Tokens deposited to exchanges" direction="down" icon={<ArrowDownRight size={16} />} />
-        <StatCard label="24h Exchange Outflows" value="$850M" sub="Tokens withdrawn from exchanges" direction="up" icon={<ArrowUpRight size={16} />} />
-        <StatCard label="Net Flow" value="+$350M" sub="Outflows dominating" direction="up" icon={<TrendingUp size={16} />} />
-        <StatCard label="Active Whale Wallets" value="2,847" sub="Last 24 hours" direction="neutral" icon={<Activity size={16} />} />
+        <StatCard 
+          label="24h Exchange Inflows" 
+          value={`$${(liveTotalInflow / 1e9).toFixed(1)}B`} 
+          sub="Institutional deposits" 
+          direction="down" 
+          icon={<ArrowDownRight size={16} />} 
+        />
+        <StatCard 
+          label="24h Exchange Outflows" 
+          value={`$${(liveTotalOutflow / 1e9).toFixed(1)}B`} 
+          sub="Institutional withdrawals" 
+          direction="up" 
+          icon={<ArrowUpRight size={16} />} 
+        />
+        <StatCard 
+          label="Net Flow" 
+          value={`${liveTotalInflow - liveTotalOutflow >= 0 ? '+' : ''}$${((liveTotalInflow - liveTotalOutflow) / 1e6).toFixed(1)}M`} 
+          sub={liveTotalInflow > liveTotalOutflow ? "Inflow Neutral" : "Accumulation Signal"} 
+          direction={liveTotalInflow > liveTotalOutflow ? "down" : "up"} 
+          icon={liveTotalInflow > liveTotalOutflow ? <TrendingDown size={16} /> : <TrendingUp size={16} />} 
+        />
+        <StatCard 
+          label="Whale Alerts (10M+)" 
+          value={fullDataset.filter(tx => tx.valueNumeric > 10000000).length.toString()} 
+          sub="Filtered: Inst. Grade" 
+          direction="neutral" 
+          icon={<Activity size={16} />} 
+        />
       </div>
 
       {/* ── Charts Row ── */}
@@ -432,15 +443,15 @@ export const WhaleTracker: React.FC = () => {
         {/* Flow Velocity */}
         <div className="lg:col-span-2 leather-card rounded-xl p-5">
           <div className="flex items-center justify-between mb-4">
-            <h3 className="font-bold text-sm">Exchange Flow Velocity (24h)</h3>
+            <h3 className="font-bold text-sm">Institutional Flow Velocity (24h)</h3>
             <div className="flex items-center gap-4 text-[10px] font-bold text-text-muted">
-              <div className="flex items-center gap-1.5"><span className="w-2 h-2 rounded-full bg-red-400 inline-block" /> To Exchange</div>
-              <div className="flex items-center gap-1.5"><span className="w-2 h-2 rounded-full bg-emerald-400 inline-block" /> From Exchange</div>
+              <div className="flex items-center gap-1.5"><span className="w-2 h-2 rounded-full bg-red-400 inline-block" /> Inflow (USDm)</div>
+              <div className="flex items-center gap-1.5"><span className="w-2 h-2 rounded-full bg-emerald-400 inline-block" /> Outflow (USDm)</div>
             </div>
           </div>
-          <div className="h-[180px]">
-            <ResponsiveContainer width="100%" height="100%">
-              <AreaChart data={flowData}>
+          <div className="h-[180px] w-full relative">
+            <ResponsiveContainer width="100%" height="100%" minWidth={0} minHeight={0} debounce={50}>
+              <AreaChart data={liveFlowData}>
                 <defs>
                   <linearGradient id="inflowGrad" x1="0" y1="0" x2="0" y2="1">
                     <stop offset="5%" stopColor="#EF4444" stopOpacity={0.3} />
@@ -467,7 +478,7 @@ export const WhaleTracker: React.FC = () => {
                     fontWeight: 600,
                   }}
                   cursor={{ stroke: '#3f3f46', strokeWidth: 1 }}
-                  formatter={(v: number, name: string) => [`$${v}M`, name === 'inflow' ? 'To Exchange' : 'From Exchange']}
+                  formatter={(v: any, name: any) => [`$${v}M`, name === 'inflow' ? 'To Exchange' : 'From Exchange']}
                   labelStyle={{ color: '#a1a1aa', fontSize: '11px', fontWeight: 'bold', marginBottom: '4px' }}
                   itemStyle={{ color: '#f4f4f5', fontWeight: 700 }}
                 />
@@ -479,7 +490,7 @@ export const WhaleTracker: React.FC = () => {
         </div>
 
         {/* Asset Breakdown */}
-        <ExchangeFlowChart />
+        <ExchangeFlowChart data={liveAssetData} />
       </div>
 
       {/* ── What This Data Means ── */}
@@ -560,7 +571,6 @@ export const WhaleTracker: React.FC = () => {
                 totalItems: filteredData.length,
                 onPageChange: (page, pageSize) => setPagination({ page, pageSize }),
               }}
-              onRowClick={setSelectedTx}
               striped
               hoverable
               emptyState={{ title: 'No transactions match', description: 'Try adjusting your search or filter criteria.' }}
@@ -568,7 +578,7 @@ export const WhaleTracker: React.FC = () => {
           </div>
         ) : (
           <div className="animate-fade-in">
-            <AlertFeed />
+            <AlertFeed data={fullDataset} />
           </div>
         )}
       </div>
@@ -602,103 +612,7 @@ export const WhaleTracker: React.FC = () => {
         ))}
       </div>
 
-      {/* ── Transaction Analysis Modal ── */}
-      <Modal isOpen={!!selectedTx} onClose={() => setSelectedTx(null)} title="Transaction Deep-Dive" size="lg">
-        {selectedTx && (
-          <div className="space-y-5">
-            {/* From / To */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {(['from', 'to'] as const).map(dir => {
-                const address = selectedTx[dir];
-                const label = walletLabels[address];
-                const isRaw = address.startsWith('0x');
-                const isEditing = editingAddress === address;
-                return (
-                  <div key={dir} className="p-4 bg-surface border border-border rounded-xl">
-                    <div className="flex items-center justify-between mb-2">
-                      <span className="text-[10px] font-bold uppercase text-text-muted tracking-widest">{dir === 'from' ? '↑ From' : '↓ To'}</span>
-                      {isRaw && (
-                        <button onClick={() => { setEditingAddress(address); setTempLabel(label || ''); }}
-                          className="text-[10px] text-primary font-bold flex items-center gap-1 hover:underline">
-                          <Edit2 size={9} /> {label ? 'Edit' : 'Label'}
-                        </button>
-                      )}
-                    </div>
-                    {isEditing ? (
-                      <div className="flex gap-2 items-center">
-                        <input autoFocus value={tempLabel} onChange={e => setTempLabel(e.target.value)}
-                          onKeyDown={e => e.key === 'Enter' && saveLabel(address)}
-                          className="flex-1 bg-background border border-border rounded px-2 py-1.5 text-xs focus:border-primary focus:outline-none"
-                          placeholder="e.g. Jump Trading" />
-                        <button onClick={() => saveLabel(address)} className="p-1.5 bg-primary/10 text-primary rounded hover:bg-primary hover:text-background transition-colors"><Save size={14} /></button>
-                        <button onClick={() => setEditingAddress(null)} className="p-1.5 text-text-muted hover:text-text"><X size={14} /></button>
-                      </div>
-                    ) : (
-                      <div>
-                        {label && <div className="font-bold text-primary text-sm flex items-center gap-1 mb-0.5"><Tag size={11} /> {label}</div>}
-                        <div className={`break-all flex items-center gap-1.5 ${label ? 'text-text-muted text-xs' : 'text-text text-xs font-mono'}`}>
-                          {address}
-                          {isRaw && <Copy size={11} className="cursor-pointer flex-shrink-0 hover:text-primary text-text-muted" onClick={() => copyAddress(address)} />}
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                );
-              })}
-            </div>
 
-            {/* Tx Details */}
-            <div className="grid grid-cols-3 gap-4 p-4 bg-background/50 rounded-xl border border-border">
-              <div className="text-center">
-                <p className="text-[10px] text-text-muted uppercase font-bold mb-1">Amount</p>
-                <p className="font-bold font-mono text-lg">{selectedTx.amount}</p>
-              </div>
-              <div className="text-center border-x border-border">
-                <p className="text-[10px] text-text-muted uppercase font-bold mb-1">USD Value</p>
-                <p className="font-bold text-primary text-lg">{selectedTx.value}</p>
-              </div>
-              <div className="text-center">
-                <p className="text-[10px] text-text-muted uppercase font-bold mb-1">Flow Type</p>
-                <span className={`text-sm font-bold uppercase ${selectedTx.type === 'inflow' ? 'text-red-400' : selectedTx.type === 'outflow' ? 'text-emerald-400' : 'text-text-muted'}`}>
-                  {selectedTx.type}
-                </span>
-              </div>
-            </div>
-
-            {/* AI Analysis */}
-            <div className="space-y-3">
-              <div className="flex items-center gap-2">
-                <Sparkles size={16} className="text-primary" />
-                <h3 className="font-bold text-sm">AI Movement Analysis</h3>
-              </div>
-              {isAnalyzing ? (
-                <div className="space-y-2 animate-pulse">
-                  {[1, 2, 3].map(i => <div key={i} className="h-4 bg-white/10 rounded w-full last:w-4/6" />)}
-                </div>
-              ) : analysis ? (
-                <div>
-                  <p className="text-sm text-text-muted leading-relaxed">{analysis.text}</p>
-                  {analysis.sources?.length ? (
-                    <div className="mt-3 pt-3 border-t border-border">
-                      <p className="text-[10px] font-bold text-text-muted uppercase mb-2">Sources</p>
-                      {analysis.sources.slice(0, 3).map((s, i) => (
-                        <a key={i} href={s.uri} target="_blank" rel="noopener noreferrer"
-                          className="flex items-center gap-1.5 text-xs text-primary hover:underline mb-1">
-                          <ExternalLink size={10} /> {s.title}
-                        </a>
-                      ))}
-                    </div>
-                  ) : null}
-                </div>
-              ) : (
-                <p className="text-xs text-red-400">Analysis unavailable. Check network connection or API configuration.</p>
-              )}
-            </div>
-
-            <Button isFullWidth onClick={() => setSelectedTx(null)} variant="secondary">Close</Button>
-          </div>
-        )}
-      </Modal>
     </div>
     </div>
   );

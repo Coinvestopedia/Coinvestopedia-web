@@ -1,8 +1,13 @@
 import { PageMeta } from '../components/PageMeta';
-import { VaraDisclaimer } from '../components/VaraDisclaimer';
+
+import { PageRoute } from '../types';
 import React, { useEffect } from 'react';
 import { BookOpen, Clock, ExternalLink } from 'lucide-react';
 
+import { useAppContext } from '../context/AppContext';
+import { ARTICLES } from './Insights';
+import { Card } from '../components/Card';
+import { Button } from '../components/Button';
 
 export interface GlassnodeArticle {
   title: string;
@@ -80,12 +85,105 @@ const GLASSNODE_ARTICLES: GlassnodeArticle[] = [
   },
 ];
 
-export const Research: React.FC = () => {
+
+
+export interface ResearchProps {
+  onNavigate?: (route: PageRoute) => void;
+}
+
+export const Research: React.FC<ResearchProps> = ({ onNavigate }) => {
+  const { setActiveSubMenu, activeSubMenu, setPageCategories } = useAppContext();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    if (activeSubMenu !== 'Knowledge') {
+      setActiveSubMenu('Knowledge');
+    }
+    
+    // Removed pageCategories override so that the sidebar
+    // falls back to the standard Knowledge submenu.
+
+    return () => {
+      setPageCategories([]);
+    };
+  }, [setActiveSubMenu, activeSubMenu, setPageCategories]);
+
   return (
     <div className="animate-fade-in pb-16">
       <PageMeta title="Research Reports" description="In-depth institutional research reports on digital assets." />
 
+
+
       <div className="space-y-12">
+        {/* Research Desk Reports (Internal) */}
+        <section className="space-y-6">
+          <div className="flex items-center gap-4">
+            <h2 className="text-sm font-bold font-heading uppercase tracking-[0.25em] text-primary whitespace-nowrap">
+              Research Desk Reports
+            </h2>
+            <div className="h-[1px] flex-1 bg-gradient-to-r from-primary/30 to-transparent" />
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {ARTICLES.slice(0, 4).map((article) => (
+              <div 
+                key={article.id}
+                onClick={() => onNavigate?.(PageRoute.INSIGHTS)}
+                className="cursor-pointer group"
+              >
+                <Card className="h-full flex flex-col p-0 overflow-hidden hover:border-primary/50 transition-all">
+                  <div className="h-40 overflow-hidden relative">
+                    <img 
+                      src={article.image} 
+                      alt={article.title} 
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                    <div className="absolute top-4 left-4">
+                      <div className="p-2 bg-background/80 backdrop-blur-sm rounded-lg border border-border text-primary">
+                        {article.icon || <BookOpen size={18} />}
+                      </div>
+                    </div>
+                  </div>
+                  <div className="p-6 flex-1 flex flex-col">
+                    <div className="flex items-center gap-2 text-[10px] text-text-muted mb-2 font-bold uppercase tracking-widest">
+                      <span>{article.category}</span>
+                      <span>•</span>
+                      <span>{article.readTime}</span>
+                    </div>
+                    <h3 className="text-lg font-bold mb-2 group-hover:text-primary transition-colors leading-tight">
+                      {article.title}
+                    </h3>
+                    <p className="text-xs text-text-muted line-clamp-2 mb-4 leading-relaxed">
+                      {article.desc}
+                    </p>
+                    <div className="mt-auto pt-4 border-t border-border flex justify-between items-center">
+                      <div className="flex gap-2">
+                        {article.tags?.slice(0, 2).map((tag, i) => (
+                          <span key={i} className="text-[10px] text-text-muted">#{tag}</span>
+                        ))}
+                      </div>
+                      <span className="text-[10px] font-bold text-primary uppercase tracking-widest">
+                        Access Report →
+                      </span>
+                    </div>
+                  </div>
+                </Card>
+              </div>
+            ))}
+          </div>
+          
+          <div className="flex justify-center mt-8">
+            <Button 
+              variant="secondary" 
+              onClick={() => onNavigate?.(PageRoute.INSIGHTS)}
+              className="text-xs"
+            >
+              View Full Archive
+            </Button>
+          </div>
+        </section>
+
+        <div className="h-[1px] w-full bg-border/30" />
       <section className="relative overflow-hidden rounded-2xl lg:rounded-3xl border border-border bg-gradient-to-br from-background to-surface p-8 lg:p-16 mb-12 lg:mb-20 text-center">
         <div className="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full -translate-y-48 translate-x-48 blur-3xl pointer-events-none"></div>
         
@@ -105,7 +203,7 @@ export const Research: React.FC = () => {
         </div>
       </section>
 
-      <VaraDisclaimer variant="banner" />
+
 
 
 

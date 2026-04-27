@@ -1,4 +1,9 @@
-import type { VercelRequest, VercelResponse } from '@vercel/node';
+// Vercel serverless function — forwards subscribe requests to Supabase Edge Function
+// This is a fallback proxy. The frontend now calls Supabase directly.
+type VercelRequest = any;
+type VercelResponse = any;
+
+const SUPABASE_URL = process.env.VITE_SUPABASE_URL || 'https://ahuhejfqbefhkarwohta.supabase.co';
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method !== 'POST') {
@@ -12,35 +17,21 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   }
 
   try {
-    const RESEND_API_KEY = process.env.RESEND_API_KEY;
-    const RESEND_AUDIENCE_ID = process.env.RESEND_AUDIENCE_ID;
-
-    if (!RESEND_API_KEY || !RESEND_AUDIENCE_ID) {
-      console.error('Missing Resend configuration');
-      return res.status(500).json({ error: 'Internal server error' });
-    }
-
-    const response = await fetch(`https://api.resend.com/audiences/${RESEND_AUDIENCE_ID}/contacts`, {
+    const response = await fetch(`${SUPABASE_URL}/functions/v1/subscribe`, {
       method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${RESEND_API_KEY}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        email,
-        unsubscribed: false,
-      }),
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, source: 'website-api-proxy' }),
     });
 
+    const data = await response.json();
+
     if (!response.ok) {
-      const errorData = await response.json();
-      console.error('Resend API error:', errorData);
-      return res.status(response.status).json({ error: 'Failed to subscribe' });
+      return res.status(response.status).json(data);
     }
 
-    return res.status(200).json({ message: 'Subscribed successfully' });
+    return res.status(200).json(data);
   } catch (error) {
-    console.error('Error in subscribe endpoint:', error);
+    console.error('Subscribe proxy error:', error);
     return res.status(500).json({ error: 'Internal server error' });
   }
 }

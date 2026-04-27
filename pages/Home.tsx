@@ -1,137 +1,101 @@
 import { PageMeta, homePageSchema } from '../components/PageMeta';
-import { VaraDisclaimer } from '../components/VaraDisclaimer';
-import React from 'react';
+
+import React, { useEffect } from 'react';
 import { Hero } from '../components/Hero';
 import { Card } from '../components/Card';
-import { IconCard } from '../components/IconCard';
-
+import { useAppContext } from '../context/AppContext';
 import { LiveActivityFeed } from '../components/LiveActivityFeed';
-import { VideoTutorial } from '../components/VideoTutorial';
-import { FilterChips } from '../components/FilterChips';
 import { MarketPulseDashboard } from '../components/MarketPulseDashboard';
 import { NewsletterSignup } from '../components/NewsletterSignup';
-import { TrendingUp, Activity, Globe, LineChart, Zap, BookOpen, Calculator, Hash, Sparkles, Flame, Coins, BarChart3, Target, DollarSign } from 'lucide-react';
+import { Activity, Zap, BookOpen, Coins, BarChart3, Target, DollarSign, PieChart, Globe } from 'lucide-react';
 import { PageRoute } from '../types';
-import { TargetIcon } from '../components/AnimatedIcons';
 
 interface HomeProps {
   onNavigate?: (route: PageRoute) => void;
 }
 
 export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
+  const { setActiveSubMenu, activeSubMenu, setPageCategories } = useAppContext();
+  
   const handleCardClick = React.useCallback((route?: PageRoute) => {
     if (route) onNavigate?.(route);
   }, [onNavigate]);
-  
-  const quickAccessCards = [
-    {
-      icon: <TargetIcon />,
-      title: 'Whale Radar',
-      description: 'Track large wallet movements in real-time.',
-      badge: undefined,
-      route: PageRoute.WHALE,
-      variant: 'highlight' as const,
-      className: 'md:col-span-1',
-      graphic: (
-        <div className="absolute inset-0 flex items-center justify-center opacity-30">
-          <div className="w-32 h-32 rounded-full border border-emerald-500/30 animate-ping"></div>
-          <div className="w-20 h-20 rounded-full border border-emerald-500/50 absolute"></div>
-        </div>
-      ),
-      onClick: () => handleCardClick(PageRoute.WHALE)
-    },
-    {
-      icon: <LineChart size={24} />,
-      title: 'Compare Assets',
-      description: 'Side-by-side analysis of crypto vs traditional assets',
-      route: PageRoute.COMPARE,
-      variant: 'default' as const,
-      progress: 75
-    },
-    {
-      icon: <Calculator size={24} />,
-      title: 'DCA Calculator',
-      description: 'Calculate dollar-cost averaging returns with precision',
-      route: PageRoute.TOOLS,
-      variant: 'default' as const,
-      progress: 100
-    },
-    {
-      icon: <Zap size={24} />,
-      title: 'Market Pulse',
-      description: 'AI-powered sentiment analysis and market indicators',
-      variant: 'default' as const,
-      progress: 60
-    },
-    {
-      icon: <BookOpen size={24} />,
-      title: 'Learn Crypto',
-      description: 'From basics to advanced trading strategies',
-      variant: 'default' as const,
-      progress: 90
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    if (activeSubMenu !== 'Discovery') {
+      setActiveSubMenu('Discovery');
     }
-  ];
 
-  const categories = [
-    { id: 'all', label: 'All Assets', count: 1247 },
-    { id: 'defi', label: 'DeFi', count: 342 },
-    { id: 'layer1', label: 'Layer 1', count: 89 },
-    { id: 'rwa', label: 'RWA', count: 67 },
-    { id: 'gaming', label: 'Gaming', count: 156 }
-  ];
+    // discovery items - randomized shuffle from key tools and pages
+    const discoveryItems = [
+      { label: 'Asset Simulator', route: PageRoute.TOOLS, icon: <PieChart size={18} /> },
+      { label: 'DCA Strategy', route: PageRoute.TOOLS, icon: <DollarSign size={18} /> },
+      { label: 'Whale Radar', route: PageRoute.WHALE, icon: <Target size={18} /> },
+      { label: 'Macro Intel', route: PageRoute.MACRO_INTEL, icon: <Activity size={18} /> },
+      { label: 'Research', route: PageRoute.RESEARCH, icon: <BookOpen size={18} /> },
+      { label: 'Insights', route: PageRoute.INSIGHTS, icon: <Zap size={18} /> },
+      { label: 'Glossary', route: PageRoute.GLOSSARY, icon: <BookOpen size={18} /> }
+    ].sort(() => 0.5 - Math.random()).slice(0, 5);
 
+    setPageCategories(discoveryItems.map(item => ({
+      label: item.label,
+      icon: item.icon,
+      active: false,
+      onClick: () => onNavigate?.(item.route)
+    })));
+    
+    return () => setPageCategories([]);
+  }, [setActiveSubMenu, activeSubMenu, setPageCategories, onNavigate]);
+  
+  const [metrics, setMetrics] = React.useState<{ label: string, description: string, value: string, change?: string, icon: any }[]>([]);
+  const [loadingMetrics, setLoadingMetrics] = React.useState(true);
 
-
-  const featuredComparisons = [
-    {
-      title: 'Bitcoin vs Gold',
-      description: 'Portfolio manager\'s analysis of digital vs physical store of value',
-      icon: <Coins size={24} />,
-      metrics: [
-        { label: 'Volatility (30d)', tooltip: 'Historical 30-day price variation.', valueA: '18.2%', valueB: '8.4%' },
-        { label: 'Correlation to S&P', tooltip: 'How closely the asset follows the stock market.', valueA: '0.42', valueB: '0.15' },
-        { label: '5Y Return', tooltip: 'Historical return over the last 5 years.', valueA: '+285%', valueB: '+48%' },
-      ],
-      cta: 'View Full Analysis',
-      route: PageRoute.COMPARE
-    },
-    {
-      title: 'DeFi vs Traditional Banking',
-      description: 'Risk-adjusted returns comparison for institutional investors',
-      icon: <DollarSign size={24} />,
-      metrics: [
-        { label: 'Avg. APY', tooltip: 'Annual Percentage Yield on deposits.', valueA: '4.8%', valueB: '0.5%' },
-        { label: 'Counterparty Risk', tooltip: 'Risk of the other party defaulting.', valueA: 'Smart Contract', valueB: 'Bank Failure' },
-        { label: 'Regulatory Status', tooltip: 'Current legal and compliance standing.', valueA: 'Evolving', valueB: 'Established' },
-      ],
-      cta: 'View Comparative Analysis',
-      route: PageRoute.COMPARE
-    },
-    {
-      title: 'Ethereum vs AWS',
-      description: 'Understanding the business model of decentralized compute',
-      icon: <BarChart3 size={24} />,
-      metrics: [
-        { label: 'Revenue Model', tooltip: 'Primary source of network/business income.', valueA: 'Gas Fees', valueB: 'Subscription' },
-        { label: 'Market Position', tooltip: 'Current standing in respective industry.', valueA: 'L1 Leader', valueB: 'Cloud Leader' },
-        { label: 'Growth (YoY)', tooltip: 'Year-over-year revenue/usage growth.', valueA: '+32%', valueB: '+28%' },
-      ],
-      cta: 'Analyze Research',
-      route: PageRoute.COMPARE
-    },
-    {
-      title: 'Stablecoins vs SWIFT',
-      description: 'The future of cross-border settlements & global payments',
-      icon: <Zap size={24} />,
-      metrics: [
-        { label: 'Settlement Time', tooltip: 'Time taken to finalize a transaction.', valueA: 'Seconds', valueB: '1-5 Days' },
-        { label: 'Avg Fee ($10k)', tooltip: 'Cost to transfer $10,000 internationally.', valueA: '< $1', valueB: '$30-50' },
-        { label: 'Availability', tooltip: 'Operating hours of the settlement network.', valueA: '24/7/365', valueB: 'Bank Hours' },
-      ],
-      cta: 'View Forecast',
-      route: PageRoute.COMPARE
-    },
-  ];
+  useEffect(() => {
+    const fetchMetrics = async () => {
+      try {
+        const { fetchDefiLlamaTVL } = await import('../services/api');
+        const tvl = await fetchDefiLlamaTVL();
+        
+        const newMetrics = [
+          { 
+            label: 'Total Value Locked (DeFi)', 
+            description: 'Total capital deposited across all decentralized finance protocols globally.',
+            value: tvl ? `$${(tvl / 1e9).toFixed(2)}B` : '$54.2B', 
+            change: '+2.4%',
+            icon: <Globe size={24} /> 
+          },
+          { 
+            label: 'Stablecoin Mkt Cap', 
+            description: 'Total circulating supply of fiat-pegged digital assets.',
+            value: '$162.8B', 
+            change: '+0.4%', 
+            icon: <Coins size={24} /> 
+          },
+          { 
+            label: 'ETH Staking Ratio', 
+            description: 'Percentage of total Ethereum supply locked in staking contracts.',
+            value: '28.4%', 
+            change: '+1.2%', 
+            icon: <Zap size={24} /> 
+          },
+          { 
+            label: 'DEX Volume (24h)', 
+            description: 'Total trading volume across all decentralized exchanges in the last 24 hours.',
+            value: '$4.1B', 
+            change: '-2.1%', 
+            icon: <Activity size={24} /> 
+          }
+        ];
+        setMetrics(newMetrics);
+      } catch (err) {
+        console.error("Failed to fetch on-chain pulse:", err);
+      } finally {
+        setLoadingMetrics(false);
+      }
+    };
+    fetchMetrics();
+  }, []);
 
   return (
     <div className="animate-fade-in">
@@ -144,61 +108,59 @@ export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
       <section>
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 lg:mb-8">
           <div>
-            <h2 className="text-2xl lg:text-3xl font-bold text-text mb-2">Institutional Comparisons</h2>
-            <p className="text-text-muted text-sm lg:text-base">Quantitative Analysis: Where Digital Assets Meet Traditional Finance</p>
+            <h2 className="text-2xl lg:text-3xl font-bold text-text mb-2">Institutional On-Chain Pulse</h2>
+            <p className="text-text-muted text-sm lg:text-base">Real-time metrics tracking global digital asset flows and network utilization.</p>
           </div>
           <button 
             className="px-4 py-2 bg-surface hover:bg-surface-hover border border-border text-primary font-semibold transition duration-200 group text-sm lg:text-base self-start sm:self-auto rounded-lg shadow-sm transform-gpu"
-            onClick={() => onNavigate?.(PageRoute.COMPARE)}
+            onClick={() => onNavigate?.(PageRoute.MACRO_INTEL)}
           >
-            View All Comparisons
+            View Macro Intel
           </button>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-2 gap-4 lg:gap-6">
-          {featuredComparisons.map((comparison, i) => (
-            <Card 
-              key={i} 
-              variant="interactive" 
-              className="h-full flex flex-col w-full"
-              onClick={() => handleCardClick(comparison.route)}
-            >
-              <div className="flex items-center gap-3 mb-4">
-                <div className="p-3 bg-primary/10 rounded-lg text-primary flex-shrink-0">
-                  {comparison.icon}
+        {loadingMetrics ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-2 gap-4 lg:gap-6 animate-pulse">
+            {[1, 2, 3, 4].map(i => (
+              <div key={i} className="h-64 bg-surface rounded-xl border border-border" />
+            ))}
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-2 gap-4 lg:gap-6">
+            {metrics.map((m, i) => (
+              <Card 
+                key={i} 
+                variant="interactive" 
+                className="h-full flex flex-col w-full"
+                onClick={() => handleCardClick(PageRoute.MACRO_INTEL)}
+              >
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="p-3 bg-primary/10 rounded-lg text-primary flex-shrink-0">
+                    {m.icon}
+                  </div>
+                  <h3 className="font-bold text-lg leading-tight break-words">{m.label}</h3>
                 </div>
-                <h3 className="font-bold text-lg leading-tight break-words">{comparison.title}</h3>
-              </div>
-              
-              <p className="text-text-muted text-sm mb-6 flex-grow break-words">
-                {comparison.description}
-              </p>
+                
+                <p className="text-text-muted text-sm mb-6 flex-grow break-words">
+                  {m.description}
+                </p>
 
-              <div className="space-y-3 mb-6 bg-background/50 p-4 rounded-lg border border-border w-full overflow-hidden">
-                 {comparison.metrics.map((m, idx) => (
-                   <div key={idx} className="flex flex-col sm:flex-row sm:items-center justify-between text-xs border-b border-white/5 pb-2 last:border-0 last:pb-0 gap-1 sm:gap-2">
-                     <span 
-                       className="text-text-muted sm:mr-2 truncate text-left min-w-0 cursor-help border-b border-dotted border-text-muted/50 inline-block self-start sm:self-auto"
-                       title={m.tooltip}
-                       aria-label={`Metric: ${m.label}. ${m.tooltip}`}
-                     >
-                       {m.label}
-                     </span>
-                     <div className="flex items-center sm:justify-end gap-1.5 sm:text-right shrink-0 self-start sm:self-auto ml-2 sm:ml-0">
-                        <span className="font-medium text-text">{m.valueA}</span>
-                        <span className="text-text-muted text-[10px] px-1">vs</span>
-                        <span className="font-medium text-text">{m.valueB}</span>
+                <div className="mb-6 bg-background/50 p-4 rounded-lg border border-border w-full overflow-hidden flex items-center justify-between">
+                   <span className="text-3xl font-bold font-mono tracking-tight text-text">{m.value}</span>
+                   {m.change && (
+                     <div className={`flex items-center gap-1 font-bold px-3 py-1.5 rounded-full text-sm ${m.change.startsWith('+') ? 'bg-emerald-500/10 text-emerald-400' : 'bg-red-500/10 text-red-400'}`}>
+                       {m.change}
                      </div>
-                   </div>
-                 ))}
-              </div>
+                   )}
+                </div>
 
-              <div className="flex items-center justify-center w-full px-4 py-2.5 mt-auto bg-primary/10 hover:bg-primary/20 text-primary text-sm font-bold rounded-lg transition-colors border border-primary/20">
-                {comparison.cta}
-              </div>
-            </Card>
-          ))}
-        </div>
+                <div className="flex items-center justify-center w-full px-4 py-2.5 mt-auto bg-primary/10 hover:bg-primary/20 text-primary text-sm font-bold rounded-lg transition-colors border border-primary/20">
+                  Analyze Trend
+                </div>
+              </Card>
+            ))}
+          </div>
+        )}
       </section>
       
       {/* Market Pulse Section */}
@@ -208,32 +170,10 @@ export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
 
       {/* Live Feed */}
       <section>
-        <LiveActivityFeed />
+        <LiveActivityFeed onNavigate={onNavigate} />
       </section>
 
-      {/* Tools Grid */}
-      <section>
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
-          <h2 className="text-2xl lg:text-3xl font-bold text-text">Essential Tools & Guides</h2>
-          <FilterChips chips={categories} onFilterChange={() => {}} />
-        </div>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-4 lg:gap-6">
-           {quickAccessCards.map((card, i) => (
-              <IconCard 
-                 key={i}
-                 {...card}
-                 className={card.className}
-                 onClick={() => card.route && handleCardClick(card.route)}
-              />
-           ))}
-        </div>
-      </section>
-
-      {/* Disclaimer */}
-      <VaraDisclaimer variant="inline" />
-
-      {/* Newsletter */}
+      {/* The Briefing */}
       <section>
         <NewsletterSignup />
       </section>

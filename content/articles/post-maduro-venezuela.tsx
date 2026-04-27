@@ -1,6 +1,6 @@
-import React from 'react';
+
 import { TargetIcon } from '../../components/AnimatedIcons';
-import { Globe, Shield, Activity, Scale, TrendingUp, AlertCircle, Cpu } from 'lucide-react';
+import { Globe, Shield, Scale, TrendingUp, AlertCircle, Cpu } from 'lucide-react';
 import { Article } from '../../pages/Insights';
 
 
@@ -15,10 +15,15 @@ export const postMaduroVenezuelaArticle: Article = {
   desc: 'Following the capture of Nicolás Maduro, the new interim administration moves to reintegrate Venezuela into global finance through a blockchain-based "Intelligent Platform."',
   icon: <Shield className="text-red-400" size={24} />,
   keyInsights: [
-    "The interim government is pitching a blockchain-based 'Intelligent Platform' to manage sovereign funds with algorithmic transparency.",
-    "Shadow crypto reserve estimates range from 120,000 to over 600,000 BTC, largely accrued through sanctioned oil sales.",
-    "The shift from Petro-branded schemes to USDT-denominated oil sales has created a massive, harder-to-freeze digital treasury.",
-    "Bargaining chip: This Bitcoin stash could be weaponized in negotiations with Washington to ease sanctions or access frozen traditional reserves."
+    "Operation Absolute Resolve: Following the removal of the Maduro government in Jan 2026, P2P markets saw a 54:1 buy-to-sell liquidity imbalance.",
+    "Shadow Reserve Estimates: Verified on-chain ties confirm ~120,000 BTC, while intelligence leaks suggest up to 660,000 BTC (3% of global supply).",
+    "Institutional Pivot: The interim administration is deploying an 'Intelligent Platform' using smart contracts for transparent sovereign fund management.",
+    "P2P Concentration: 10 merchants on OKX control 88% of regional dollar liquidity, functioning as de facto MSBs in a sanctioned market."
+  ],
+  faq: [
+    { question: "What is the estimated size of Venezuela's Bitcoin reserves?", answer: "While leaked ledgers suggest up to 660,000 BTC, verified on-chain ties confirm at least 120,000 BTC ($10.8B) accrued via sanctioned oil sales." },
+    { question: "How is the post-Maduro government using blockchain?", answer: "The interim administration is implementing an 'Intelligent Platform' that uses algorithmic smart contracts to manage funds for health and infrastructure with public transparency." },
+    { question: "What is Operation Absolute Resolve?", answer: "The capture of Nicolás Maduro on January 3, 2026, which triggered a massive move into crypto as citizens sought to preserve capital during the transition." }
   ],
   content: (
     <>
@@ -34,7 +39,7 @@ export const postMaduroVenezuelaArticle: Article = {
       </div>
 
       <p className="mb-6">
-        The “$60B Bitcoin question” in post‑Maduro Venezuela sits at the intersection of genuine institutional pivots, speculative narratives, and a long history of sanctions‑driven crypto experiments. Following the capture of Nicolás Maduro by US forces on January 3, 2026, the interim administration under Delcy Rodríguez has moved to reintegrate Venezuela into global finance through an "Intelligent Platform" using smart contracts for sovereign fund management.
+        The “$60B Bitcoin question” in post‑Maduro Venezuela sits at the intersection of genuine institutional pivots and a long history of sanctions‑driven crypto experiments. Following the capture of Nicolás Maduro by US forces on January 3, 2026 ("Operation Absolute Resolve"), the P2P market experienced a 54:1 buy-to-sell liquidity imbalance as citizens moved bolivares into stablecoins.
       </p>
 
       <h2 className="text-2xl font-bold mt-10 mb-4 text-text">Post‑Maduro Political Setup</h2>

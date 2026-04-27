@@ -1,8 +1,8 @@
 import React, { useMemo, useState } from 'react';
 import { AssetData, CHART_MOCK_DATA } from '../../data/assetRegistry';
 import { ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
-import { Button } from '../Button';
-import { ArrowUpDown, Maximize2, Type } from 'lucide-react';
+
+
 
 interface CompareChartProps {
   assets: AssetData[];
@@ -54,7 +54,6 @@ export const CompareChart: React.FC<CompareChartProps> = ({ assets, timeframe, o
   }, [assets, timeframe]);
 
   // Determine if current TF requires Pro
-  const currentTfObj = TIMEFRAMES.find(t => t.label === timeframe);
 
   return (
     <div className="leather-card rounded-xl p-4 lg:p-6 animate-fade-in flex flex-col min-h-[500px]">
@@ -127,7 +126,7 @@ export const CompareChart: React.FC<CompareChartProps> = ({ assets, timeframe, o
                     contentStyle={{ backgroundColor: '#18181B', borderColor: '#27272A', color: '#F4F4F5', borderRadius: '8px' }}
                     itemStyle={{ fontSize: '12px', fontWeight: 'bold' }}
                     labelStyle={{ color: '#A1A1AA', fontSize: '11px', marginBottom: '4px' }}
-                    formatter={(value: number) => [`${value.toFixed(2)}`, undefined]}
+                    formatter={(value: any) => [`${value.toFixed(2)}`, undefined]}
                  />
                  <Legend 
                    iconType="circle" 

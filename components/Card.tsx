@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react';
-import { ArrowRight } from 'lucide-react';
+
 
 interface CardProps {
   children: React.ReactNode;

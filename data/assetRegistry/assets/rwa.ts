@@ -12,7 +12,7 @@ export const ASSETS_RWA: Record<string, AssetData> = {
     cagr3y: 0, maxDrawdown: -65.0, var95: -7.8,
     betaBtc: 1.2, betaSpy: 1.4, correlationBtc: 0.52,
     liquidityScore: 72, socialScore: 85, devActivity: 120, inflationRate: 0,
-    analystSignal: 'BUY',
+    analystSignal: 'OUTPERFORM',
     analystThesis: 'Leading RWA tokenization protocol with $600M+ TVL in tokenized US Treasuries. BlackRock BUIDL fund integration. Key beneficiary of TradFi on-chain trend. High FDV/MCap ratio is the risk.'
   },
 

@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import { Card } from '../../Card';
 import { ProGate, InputField, ResultMetric, fmtUSD, fmtPct } from '../shared/SharedComponents';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, ResponsiveContainer, Tooltip, AreaChart, Area } from 'recharts';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, ResponsiveContainer, Tooltip } from 'recharts';
 import { Sparkles, Info } from 'lucide-react';
 
 export const MonteCarloSimulator: React.FC = () => {
@@ -9,7 +9,7 @@ export const MonteCarloSimulator: React.FC = () => {
   const [years, setYears] = useState('5');
   const [expectedReturn, setExpectedReturn] = useState('12');
   const [annualVolatility, setAnnualVolatility] = useState('25');
-  const [simCount, setSimCount] = useState('100'); // Reduced for UI performance, but labeled as 10k in logic context
+  const [simCount] = useState('100'); // Reduced for UI performance, but labeled as 10k in logic context
 
   const simulations = useMemo(() => {
     const P = parseFloat(initialValue) || 100000;
@@ -72,7 +72,7 @@ export const MonteCarloSimulator: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
           <div className="lg:col-span-4 space-y-6">
             <Card>
-              <h3 className="font-bold text-lg mb-6 flex items-center gap-2">
+              <h3 className="font-bold text-lg mb-6 flex items-center justify-center gap-2 text-center">
                 <Sparkles size={18} className="text-primary"/> Path Parameters
               </h3>
               <div className="space-y-4">
@@ -111,7 +111,7 @@ export const MonteCarloSimulator: React.FC = () => {
             </div>
 
             <Card className="flex-1 min-h-[400px] flex flex-col">
-              <h4 className="font-bold text-sm text-text-muted uppercase tracking-widest mb-6">GBM Stochastic Volatility Pathways</h4>
+              <h4 className="font-bold text-sm text-text-muted uppercase tracking-widest mb-6 text-center">GBM Stochastic Volatility Pathways</h4>
               <div className="flex-1 w-full bg-background/50 rounded-lg p-2 border border-border/50">
                 <ResponsiveContainer width="100%" height="100%">
                   <LineChart data={simulations.chartData} margin={{ top: 10, right: 30, left: 10, bottom: 20 }}>
@@ -120,7 +120,7 @@ export const MonteCarloSimulator: React.FC = () => {
                     <YAxis tick={{ fontSize: 10, fill: '#a1a1aa' }} tickFormatter={v => `$${(v/1000).toFixed(0)}k`} stroke="#3f3f46" />
                     <Tooltip itemStyle={{ color: '#e4e4e7' }} labelStyle={{ color: '#a1a1aa' }}
                       contentStyle={{ backgroundColor: '#18181b', borderColor: '#27272a', borderRadius: 12 }}
-                      formatter={(v: number) => fmtUSD(v)}
+                      formatter={(v: any) => fmtUSD(v)}
                     />
                     {[...Array(10)].map((_, i) => (
                       <Line 

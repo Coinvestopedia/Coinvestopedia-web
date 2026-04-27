@@ -1,6 +1,8 @@
-import { PageMeta } from '../components/PageMeta';
+
+
+import { PageRoute } from '../types';
 import React, { useState, useMemo, useRef, useEffect, useCallback } from 'react';
-import { BookOpen, Search, ChevronUp, Hash, X, ArrowRight } from 'lucide-react';
+import { Search, ChevronUp, Hash, X, ArrowRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 
@@ -600,10 +602,29 @@ const GlossaryEntryCard: React.FC<GlossaryEntryCardProps> = ({ entry, isExpanded
 
 // ── Main Glossary Component ──
 
-export const Glossary: React.FC = () => {
+import { useAppContext } from '../context/AppContext';
+
+
+
+export interface GlossaryProps {
+  onNavigate?: (route: PageRoute) => void;
+}
+
+export const Glossary: React.FC<GlossaryProps> = ({ onNavigate }) => {
+  const { setActiveSubMenu, activeSubMenu, setPageCategories } = useAppContext();
   const [searchQuery, setSearchQuery] = useState('');
   const [activeLetter, setActiveLetter] = useState<string | null>(null);
   const [expandedTerm, setExpandedTerm] = useState<string | null>(null);
+  
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    if (activeSubMenu !== 'Knowledge') {
+      setActiveSubMenu('Knowledge');
+    }
+
+    // Removed pageCategories override so that the sidebar
+    // falls back to the standard Knowledge submenu.
+  }, [setActiveSubMenu, activeSubMenu, setPageCategories]);
   const sectionRefs = useRef<Record<string, HTMLDivElement | null>>({});
   const termRefs = useRef<Record<string, HTMLDivElement | null>>({});
 
@@ -678,9 +699,9 @@ export const Glossary: React.FC = () => {
       }
     };
     window.addEventListener('keydown', handleGlobalKeyDown);
-    return () =>
-      <PageMeta title="Crypto Glossary" description="Comprehensive reference for cryptocurrency and blockchain terminology." />
- window.removeEventListener('keydown', handleGlobalKeyDown);
+    return () => {
+      window.removeEventListener('keydown', handleGlobalKeyDown);
+    };
   }, []);
 
   // Intersection Observer for active letter tracking
@@ -722,9 +743,7 @@ export const Glossary: React.FC = () => {
 
       {/* ── Header ── */}
       <div>
-        <div className="inline-flex items-center gap-2 px-3 py-1 bg-primary/10 border border-primary/20 rounded-full text-primary text-xs font-bold uppercase tracking-wider mb-4">
-          <BookOpen size={14} /> Knowledge — Glossary
-        </div>
+
         <h1 className="text-3xl lg:text-4xl font-heading font-bold mb-4">
           Crypto Glossary
         </h1>
@@ -751,7 +770,7 @@ export const Glossary: React.FC = () => {
       )}
 
       {/* ── Alphabet Navigator ── */}
-      <div className="sticky top-[72px] lg:top-[100px] z-30 py-3 bg-background/80 backdrop-blur-md border-b border-border/50 -mx-1">
+      <div className="sticky top-[80px] lg:top-[100px] z-30 py-3 bg-background/80 backdrop-blur-md border-b border-border/50 -mx-1">
         <div className="flex flex-wrap gap-1 justify-center px-1">
           {ALL_LETTERS.map(letter => {
             const hasResults = filteredSections.some(s => s.letter === letter);

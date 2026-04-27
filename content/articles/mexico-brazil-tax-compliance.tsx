@@ -1,6 +1,6 @@
-import React from 'react';
-import { TargetIcon } from '../../components/AnimatedIcons';
-import { Shield, Activity, Scale, AlertCircle, Database, Zap, Globe } from 'lucide-react';
+
+
+import { Shield, Scale, AlertCircle, Database, Zap } from 'lucide-react';
 import { Article } from '../../pages/Insights';
 
 
@@ -15,11 +15,16 @@ export const mexicoBrazilTaxArticle: Article = {
   desc: "Latin American tax authorities are moving from passive reporting to active surveillance infrastructure, led by Mexico's platform access mandates and Brazil's OECD-aligned DeCripto.",
   icon: <Scale className="text-amber-400" size={24} />,
   keyInsights: [
-    "Mexico's Rule 2.9.21 requires digital platforms to grant tax authorities (SAT) real-time, permanent online access to transaction data.",
-    "Non-compliance in Mexico can trigger a 'kill switch'—the temporary suspension of the platform's internet access within the country.",
-    "Brazil's DeCripto framework, launching July 2026, aligns with OECD CARF standards for automatic tax information exchange.",
-    "The reporting threshold for individual crypto activity in Brazil has been adjusted to BRL 35,000 per month.",
-    "Compliance capability is shifting from a back-office function to a competitive moat for fintechs and exchanges."
+    "Mexico Rule 2.9.21: Digital platforms must grant the SAT real-time, permanent online access to the internal transaction database (April 1, 2026).",
+    "Internet Kill Switch: Failure to provide technical login credentials to the SAT can result in the temporary suspension of a platform's internet access in Mexico.",
+    "Brazil DeCripto: Launching July 2026, it replaces legacy reporting with standardized OECD CARF data exchange for all VASP brokers.",
+    "Individual Thresholds: Brazil's individual reporting cap remains at BRL 35,000/month, but exchanges must now report all B2B and OTC flows regardless of size.",
+    "Compliance Moat: Institutional leaders (Bitso, Mercado Bitcoin) are using proactive compliance to squeeze smaller, unregulated P2P competitors."
+  ],
+  faq: [
+    { question: "What is Rule 2.9.21 in Mexico?", answer: "A regulation effective April 2026 requiring digital service providers to give the SAT continuous query access to their transaction databases for tax surveillance." },
+    { question: "What happens if a platform fails to comply in Mexico?", answer: "The SAT can trigger a 'kill switch,' suspending the platform's internet connectivity within Mexico until compliance is restored." },
+    { question: "How does Brazil's DeCripto affect crypto traders?", answer: "It aligns Brazil with global OECD standards, requiring brokers to report detailed transaction data and facilitating automatic information exchange with other tax jurisdictions." }
   ],
   content: (
     <>

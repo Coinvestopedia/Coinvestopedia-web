@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
 import { AssetData } from '../../data/assetRegistry';
-import { ArrowUpDown, AlertCircle } from 'lucide-react';
+import { AlertCircle } from 'lucide-react';
 import { ProGate } from '../ProGate';
 
 interface CompareTableProps {
@@ -8,25 +7,10 @@ interface CompareTableProps {
   isProUser?: boolean;
 }
 
-export const CompareTable: React.FC<CompareTableProps> = ({ assets, isProUser = false }) => {
-  const [sortField, setSortField] = useState<keyof AssetData>('marketCap');
-  const [sortDesc, setSortDesc] = useState(true);
+export const CompareTable: React.FC<CompareTableProps> = ({ assets }) => {
 
-  // Sorting logic
-  const sortedAssets = [...assets].sort((a, b) => {
-    const valA = a[sortField] as number;
-    const valB = b[sortField] as number;
-    return sortDesc ? valB - valA : valA - valB;
-  });
+  const sortedAssets = assets;
 
-  const handleSort = (field: keyof AssetData) => {
-    if (sortField === field) {
-      setSortDesc(!sortDesc);
-    } else {
-      setSortField(field);
-      setSortDesc(true);
-    }
-  };
 
   // Helper to color-code rows based on relative min/max values
   const getCellColor = (field: keyof AssetData, value: number, invert = false) => {
@@ -53,17 +37,6 @@ export const CompareTable: React.FC<CompareTableProps> = ({ assets, isProUser = 
     return color;
   };
 
-  const renderSortHeader = (label: string, field: keyof AssetData) => (
-    <th 
-      className="p-3 text-right text-xs uppercase tracking-wider text-text-muted font-bold cursor-pointer hover:text-text hover:bg-surface transition-colors"
-      onClick={() => handleSort(field)}
-    >
-      <div className="flex items-center justify-end gap-1">
-        {label}
-        <ArrowUpDown size={12} className={sortField === field ? 'text-primary' : 'text-text-muted/50'} />
-      </div>
-    </th>
-  );
 
   return (
     <div className="animate-fade-in overflow-x-auto leather-card rounded-xl">
@@ -164,7 +137,7 @@ export const CompareTable: React.FC<CompareTableProps> = ({ assets, isProUser = 
       
       {/* Pro Gated Section Built outside the main tbody loop to prevent <tr> nesting issues with blur */}
       <div className="relative border-b border-border/50">
-         <ProGate isUnlocked={isProUser} featureName="Risk Analytics Matrix">
+         <ProGate>
            <table className="w-full text-sm text-left">
               <tbody className="divide-y divide-border/50">
                  <tr>

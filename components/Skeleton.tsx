@@ -74,24 +74,23 @@ export const CardSkeleton = ({ className, variant = 'default' }: CardSkeletonPro
 
 interface TableSkeletonProps {
   rows?: number;
-  columns?: number;
   className?: string;
 }
 
-export const TableSkeleton = ({ rows = 5, columns = 4, className }: TableSkeletonProps) => {
+export const TableSkeleton = ({ rows = 5, className }: TableSkeletonProps) => {
   return (
     <div className={cn('w-full space-y-4', className)}>
       {/* Header */}
-      <div className="grid gap-4" style={{ gridTemplateColumns: `repeat(${columns}, 1fr)` }}>
-        {Array.from({ length: columns }).map((_, i) => (
+      <div className="grid gap-4">
+        {Array.from({ length: 4 }).map((_, i) => (
           <Skeleton key={`header-${i}`} variant="text" height={20} />
         ))}
       </div>
 
       {/* Rows */}
       {Array.from({ length: rows }).map((_, rowIdx) => (
-        <div key={`row-${rowIdx}`} className="grid gap-4" style={{ gridTemplateColumns: `repeat(${columns}, 1fr)` }}>
-          {Array.from({ length: columns }).map((_, colIdx) => (
+        <div key={`row-${rowIdx}`} className="grid gap-4" style={{ gridTemplateColumns: `repeat(4, 1fr)` }}>
+          {Array.from({ length: 4 }).map((_, colIdx) => (
             <Skeleton key={`cell-${rowIdx}-${colIdx}`} variant="text" />
           ))}
         </div>
@@ -102,11 +101,10 @@ export const TableSkeleton = ({ rows = 5, columns = 4, className }: TableSkeleto
 
 interface GridSkeletonProps {
   count?: number;
-  columns?: number;
   className?: string;
 }
 
-export const GridSkeleton = ({ count = 6, columns = 3, className }: GridSkeletonProps) => {
+export const GridSkeleton = ({ count = 6, className }: GridSkeletonProps) => {
   return (
     <div
       className={cn('grid gap-6', className)}

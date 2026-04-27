@@ -1,16 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { Sparkles, ExternalLink, ArrowUpRight, ThumbsUp, ThumbsDown, Hand } from 'lucide-react';
-import { PageRoute } from '../types';
+import { Sparkles, ExternalLink, ThumbsUp, ThumbsDown, Hand } from 'lucide-react';
 
-import { Button } from './Button';
 import { getMarketInsight, InsightResult } from '../services/geminiService';
 
 
 interface SidebarRightProps {
-  onNavigate?: (route: PageRoute) => void;
 }
 
-export const SidebarRight: React.FC<SidebarRightProps> = ({ onNavigate }) => {
+export const SidebarRight: React.FC<SidebarRightProps> = () => {
   const [insight, setInsight] = useState<InsightResult | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -25,7 +22,7 @@ export const SidebarRight: React.FC<SidebarRightProps> = ({ onNavigate }) => {
   }, []);
 
   return (
-    <aside className="hidden lg:flex flex-col gap-8 w-[300px] sticky top-[96px] self-start h-fit">
+    <aside className="hidden lg:flex flex-col gap-8 w-[300px] sticky top-[108px] self-start h-fit">
 
 
       {/* AI Insight Widget */}

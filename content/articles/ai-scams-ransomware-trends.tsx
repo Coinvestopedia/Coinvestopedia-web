@@ -1,6 +1,6 @@
-import React from 'react';
-import { TargetIcon } from '../../components/AnimatedIcons';
-import { Shield, Activity, Lock, AlertTriangle, ShieldCheck, Zap, Globe, Fingerprint } from 'lucide-react';
+
+
+import { Activity, Lock, AlertTriangle, ShieldCheck, Zap, Globe, Fingerprint } from 'lucide-react';
 import { Article } from '../../pages/Insights';
 
 
@@ -15,11 +15,16 @@ export const aiScamsSecurityArticle: Article = {
   desc: "AI-enabled scams have become 4.5x more profitable than traditional methods, while 'double-extortion' ransomware has transformed the risk model for firms in emerging markets.",
   icon: <Lock className="text-red-400" size={24} />,
   keyInsights: [
-    "Profitability Gap: AI-enabled scams extracted an average of $3.2 million per operation in 2025, outperforming manual methods by 4.5x.",
-    "Double-Extortion: Attackers now prioritize data exfiltration (stealing) over simple encryption, rendering traditional backups insufficient.",
-    "Regional hotspots: Latin America and Africa have become preferred proving grounds for high-yield, AI-augmented social engineering campaigns.",
-    "Custody Shifts: The rise of deepfakes (voice/video) has dramatically reduced the reliability of 'human-verified' identity protocols.",
-    "Strategic Defense: Security postures must evolve from 'crypto-only' focus to data-centric, zero-trust architectures."
+    "Profitability Gap: AI-enabled scams extracted an average of $3.2M per operation in 2025, outperforming manual methods by 4.5x.",
+    "Industrialized Fraud: AI impersonation tactics targeting exchange users grew by 1,400% in 2025, driven by hyper-realistic voice and video cloning.",
+    "Double-Extortion: 3,065 attacks per organization per week were recorded across LATAM in late 2025, shifting focus from decryption to data-leak avoidance.",
+    "Regional Risk: Brazil (30%) and Mexico (14%) absorb the heaviest hits from double-extortion groups like Qilin and LockBit.",
+    "Social Engineering BEC: Local-language AI lures have raised Business Email Compromise (BEC) closure rates by 300% since 2024."
+  ],
+  faq: [
+    { question: "How profitable are AI-enabled scams?", answer: "AI-enabled scams are on average 4.5x more profitable than traditional methods, with some operations extracting $3.2 million per campaign in 2025." },
+    { question: "What is double-extortion ransomware?", answer: "A cyberattack where hackers exfiltrate sensitive data before encrypting it, threatening to leak the data even if the victim restores from backups." },
+    { question: "Which regions are most targeted by AI scams?", answer: "Sub-Saharan Africa and Latin America (specifically Brazil and Mexico) have seen the highest growth in AI-augmented social engineering campaigns." }
   ],
   content: (
     <>

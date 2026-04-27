@@ -1,12 +1,10 @@
 import React from 'react';
 import { AssetData, MACRO_THEMES } from '../../data/assetRegistry';
-import { ProGate } from '../../components/ProGate';
 import { Lightbulb, Info } from 'lucide-react';
 import { AssetIcon } from '../AssetIcon';
 
 interface AnalystPanelProps {
   assets: AssetData[];
-  isProUser: boolean;
 }
 
 const getSignalBadge = (signal: string) => {
@@ -18,7 +16,7 @@ const getSignalBadge = (signal: string) => {
   }
 };
 
-export const AnalystPanel: React.FC<AnalystPanelProps> = ({ assets, isProUser }) => {
+export const AnalystPanel: React.FC<AnalystPanelProps> = ({ assets }) => {
   return (
     <div className="space-y-6 animate-fade-in">
       

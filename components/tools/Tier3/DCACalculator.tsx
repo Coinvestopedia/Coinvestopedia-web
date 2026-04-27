@@ -98,7 +98,7 @@ export const DCACalculator: React.FC = () => {
               <Tooltip labelStyle={{ color: '#a1a1aa' }}
                 contentStyle={{ backgroundColor: '#18181b', borderColor: '#27272a', borderRadius: 8, color: '#f4f4f5' }}
                 itemStyle={{ color: '#fff' }}
-                formatter={(v: number) => fmtUSD(v)}
+                formatter={(v: any) => fmtUSD(v)}
               />
               <Legend wrapperStyle={{ fontSize: 11 }} />
               <Line type="monotone" dataKey="invested" name="Total Invested" stroke="#71717a" strokeWidth={2} dot={false} />

@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { Card } from '../../Card';
-import { ProGate, ResultMetric } from '../shared/SharedComponents';
+import { ProGate } from '../shared/SharedComponents';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, ResponsiveContainer, Tooltip, Cell } from 'recharts';
 import { Activity, ShieldAlert, Sparkles } from 'lucide-react';
 
@@ -109,7 +109,7 @@ export const FearGreedComposite: React.FC = () => {
             </Card>
 
             <Card className="p-4 bg-primary/5 border border-primary/20">
-               <h5 className="text-[10px] font-extrabold text-primary mb-3 tracking-widest flex items-center gap-1.5 uppercase leading-none">
+               <h5 className="text-[10px] font-extrabold text-primary mb-3 tracking-widest flex items-center justify-center gap-1.5 uppercase leading-none text-center">
                   <Sparkles size={12} /> Market Outlook
                </h5>
                <p className="text-xs text-text-muted leading-relaxed">
@@ -126,7 +126,7 @@ export const FearGreedComposite: React.FC = () => {
           {/* Controls Right */}
           <div className="lg:col-span-8 flex flex-col gap-6">
             <Card className="flex-1">
-               <h4 className="font-bold text-lg mb-8 flex items-center gap-2">
+               <h4 className="font-bold text-lg mb-8 flex items-center justify-center gap-2 text-center">
                   <ShieldAlert size={18} className="text-primary"/> Signal Weights & Values
                </h4>
                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
@@ -160,8 +160,9 @@ export const FearGreedComposite: React.FC = () => {
                       <XAxis dataKey="name" tick={{ fontSize: 9, fill: '#a1a1aa' }} stroke="#3f3f46" />
                       <YAxis domain={[0, 100]} tick={{ fontSize: 10, fill: '#a1a1aa' }} stroke="#3f3f46" />
                       <Tooltip itemStyle={{ color: '#e4e4e7' }} labelStyle={{ color: '#a1a1aa' }} 
+                        cursor={{ fill: 'rgba(255, 255, 255, 0.03)' }}
                         contentStyle={{ backgroundColor: '#18181b', borderColor: '#27272a', borderRadius: 8 }}
-                        formatter={(v: number) => [v, 'Signal Strength']}
+                        formatter={(v: any) => [v, 'Signal Strength']}
                       />
                       <Bar dataKey="value" radius={[4, 4, 0, 0]} barSize={40}>
                         {stats.chartData.map((d, i) => <Cell key={i} fill={d.color} fillOpacity={0.8} />)}

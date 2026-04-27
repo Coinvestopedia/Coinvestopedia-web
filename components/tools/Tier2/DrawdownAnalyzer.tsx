@@ -4,6 +4,24 @@ import { InputField, ResultMetric, fmtUSD, fmtPct } from '../shared/SharedCompon
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, ResponsiveContainer, Tooltip } from 'recharts';
 import { TrendingDown } from 'lucide-react';
 
+const assetOptions = [
+  { value: 'BTC', label: 'Bitcoin (BTC)' },
+  { value: 'ETH', label: 'Ethereum (ETH)' },
+  { value: 'SOL', label: 'Solana (SOL)' },
+  { value: 'SPY', label: 'S&P 500 (SPY)' },
+  { value: 'QQQ', label: 'Nasdaq 100 (QQQ)' },
+  { value: 'GLD', label: 'Gold (GLD)' },
+];
+
+const assetProfiles: Record<string, { baseDrift: number, volatility: number, shockMultiplier: number }> = {
+  'BTC': { baseDrift: 0.03, volatility: 0.08, shockMultiplier: 1 },
+  'ETH': { baseDrift: 0.04, volatility: 0.10, shockMultiplier: 1.2 },
+  'SOL': { baseDrift: 0.05, volatility: 0.15, shockMultiplier: 1.5 },
+  'SPY': { baseDrift: 0.008, volatility: 0.03, shockMultiplier: 0.3 },
+  'QQQ': { baseDrift: 0.012, volatility: 0.04, shockMultiplier: 0.4 },
+  'GLD': { baseDrift: 0.004, volatility: 0.02, shockMultiplier: 0.1 },
+};
+
 export const DrawdownAnalyzer: React.FC = () => {
   const [asset, setAsset] = useState('BTC');
   const [investment, setInvestment] = useState('10000');
@@ -21,19 +39,20 @@ export const DrawdownAnalyzer: React.FC = () => {
     let peakPrice = initialPrice;
 
     for (let m = 0; m <= 120; m++) {
-      // Deterministic pseudo-random generation to simulate a crypto market cycle
-      let drift = 0.03; // Normal 3% monthly drift
+      const profile = assetProfiles[asset] || assetProfiles['BTC'];
+      // Deterministic pseudo-random generation to simulate a market cycle
+      let drift = profile.baseDrift;
       
       // Inject macro shocks
-      if (m > 12 && m < 24) drift = -0.05; // 2018 bear
-      if (m > 36 && m < 48) drift = 0.15; // 2019 bull
-      if (m === 48) drift = -0.40; // COVID flash crash
-      if (m > 48 && m < 72) drift = 0.08; // 2021 bull
-      if (m > 72 && m < 90) drift = -0.06; // 2022 bear
-      if (m > 90) drift = 0.05; // Recent recovery
+      if (m > 12 && m < 24) drift = -0.05 * profile.shockMultiplier; // 2018 bear
+      if (m > 36 && m < 48) drift = 0.15 * profile.shockMultiplier; // 2019 bull
+      if (m === 48) drift = -0.40 * profile.shockMultiplier; // COVID flash crash
+      if (m > 48 && m < 72) drift = 0.08 * profile.shockMultiplier; // 2021 bull
+      if (m > 72 && m < 90) drift = -0.06 * profile.shockMultiplier; // 2022 bear
+      if (m > 90) drift = 0.05 * profile.shockMultiplier; // Recent recovery
 
       // Add a bit of noise
-      const noise = (Math.sin(m) * 0.08);
+      const noise = (Math.sin(m) * profile.volatility);
       currentPrice = currentPrice * (1 + drift + noise);
       
       if (currentPrice > peakPrice) peakPrice = currentPrice;
@@ -80,8 +99,27 @@ export const DrawdownAnalyzer: React.FC = () => {
             Visualize the historical pain tolerance required to hold highly volatile assets.
           </p>
           <div className="space-y-4">
-             <InputField label="Asset Symbol" value={asset} onChange={setAsset} />
+             <InputField label="Asset Symbol" value={asset} onChange={setAsset} options={assetOptions} />
              <InputField label="Simulated Entry ($)" value={investment} onChange={setInvestment} prefix="$" />
+          </div>
+        </Card>
+
+        {/* Explainer Widget */}
+        <Card className="bg-surface border border-border">
+          <div className="flex flex-col gap-4">
+            <div className="flex items-center gap-3">
+              <div className="p-2 bg-primary/10 rounded-lg shrink-0">
+                <TrendingDown size={16} className="text-primary" />
+              </div>
+              <h4 className="text-sm font-bold text-text">How to read this analysis</h4>
+            </div>
+            <div>
+              <p className="text-xs text-text-muted leading-relaxed">
+                The Drawdown Analyzer helps visualize the severity and duration of historical portfolio declines ("drawdowns") from peak value. 
+                <strong className="text-text"> Max Historical DD</strong> represents the deepest percentage drop, while <strong className="text-text">Longest Underwater</strong> indicates the maximum time the portfolio spent recovering to its previous high. 
+                By selecting different asset classes (e.g., Crypto vs Equities), you can observe how varying volatility and recovery drift affect portfolio survival and psychological pain tolerance during market shocks.
+              </p>
+            </div>
           </div>
         </Card>
       </div>
@@ -104,7 +142,7 @@ export const DrawdownAnalyzer: React.FC = () => {
                  <YAxis tick={{ fontSize: 10, fill: '#a1a1aa' }} tickFormatter={v => `$${(v/1000).toFixed(0)}k`} stroke="#3f3f46" />
                  <Tooltip itemStyle={{ color: '#e4e4e7' }} labelStyle={{ color: '#a1a1aa' }}
                    contentStyle={{ backgroundColor: '#18181b', borderColor: '#27272a', borderRadius: 8 }}
-                   formatter={(v: number) => fmtUSD(v)}
+                   formatter={(v: any) => fmtUSD(v)}
                  />
                  <Area type="monotone" dataKey="portfolioValue" stroke="#10b981" fill="#10b981" fillOpacity={0.15} strokeWidth={2} />
                </AreaChart>
@@ -122,7 +160,7 @@ export const DrawdownAnalyzer: React.FC = () => {
                  <YAxis tick={{ fontSize: 10, fill: '#a1a1aa' }} tickFormatter={v => `${v}%`} stroke="#3f3f46" domain={['dataMin - 5', 0]} />
                  <Tooltip itemStyle={{ color: '#e4e4e7' }} labelStyle={{ color: '#a1a1aa' }}
                    contentStyle={{ backgroundColor: '#18181b', borderColor: '#27272a', borderRadius: 8 }}
-                   formatter={(v: number) => [`${v}%`, 'Drawdown']}
+                   formatter={(v: any) => [`${v}%`, 'Drawdown']}
                  />
                  <Area type="monotone" dataKey="drawdown" stroke="#ef4444" fill="#ef4444" fillOpacity={0.3} strokeWidth={2} />
                </AreaChart>

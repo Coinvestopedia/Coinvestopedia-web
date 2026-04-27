@@ -1,8 +1,8 @@
 import { PageMeta } from '../components/PageMeta';
-import { VaraDisclaimer } from '../components/VaraDisclaimer';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { DEFAULT_ASSETS, AssetData } from '../data/assetRegistry';
 import { useLiveAssetRegistry } from '../hooks/useLiveAssetRegistry';
+import { useAppContext } from '../context/AppContext';
 
 // Components
 import { AssetSelector } from '../components/compare/AssetSelector';
@@ -18,15 +18,22 @@ import { CompareChart } from '../components/compare/CompareChart';
 // Icons
 import { LayoutDashboard, TrendingUp, ShieldAlert, PieChart, GitMerge, Lightbulb, Activity } from 'lucide-react';
 
+
+
 type TabId = 'overview' | 'performance' | 'risk' | 'allocation' | 'correlation' | 'analyst';
 
-export const Compare: React.FC = () => {
+export interface CompareProps {
+  onNavigate?: (route: PageRoute) => void;
+}
+
+export const Compare: React.FC<CompareProps> = ({ onNavigate }) => {
   const isProUser = true; // Set to true for institutional dashboard view
   const [selectedAssetIds, setSelectedAssetIds] = useState<string[]>(DEFAULT_ASSETS);
   const [activeTab, setActiveTab] = useState<TabId>('overview');
   const [chartTimeframe, setChartTimeframe] = useState<string>('1Y');
 
-  const { registry, isHydrating } = useLiveAssetRegistry();
+  const { registry } = useLiveAssetRegistry();
+  const { setPageCategories, setActiveSubMenu, activeSubMenu } = useAppContext();
 
   const selectedAssets = selectedAssetIds
     .map(id => registry[id])
@@ -41,15 +48,39 @@ export const Compare: React.FC = () => {
     { id: 'analyst' as TabId, label: 'Analyst Views', icon: Lightbulb },
   ];
 
-  return (
-    <div className="animate-fade-in">
-      <PageMeta title="Compare Assets" description="Compare cryptocurrency performance, risk metrics, and correlations side-by-side." />
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    const categories = tabs.map(tab => {
+      const Icon = tab.icon;
+      return {
+        label: tab.label,
+        icon: <Icon size={18} />,
+        active: activeTab === tab.id,
+        onClick: () => setActiveTab(tab.id)
+      };
+    });
+    setPageCategories(categories);
 
-      <div className="space-y-6 pt-4 md:pt-0">
+    if (activeSubMenu !== 'Asset Comparison') {
+       setActiveSubMenu('Asset Comparison');
+    }
+
+    return () => {
+      setPageCategories([]);
+    };
+  }, [activeTab, setPageCategories, setActiveSubMenu, activeSubMenu]);
+
+  return (
+    <div className="animate-fade-in relative">
+      <PageMeta title="Asset Comparison" description="Advanced cross-asset analysis and correlation matrices." />
+      
+
+
+      <div className="space-y-6">
 
       
       {/* ─── HERO SECTION (Standardized Design) ─────────────── */}
-      <div className="relative z-30 rounded-2xl lg:rounded-3xl border border-border bg-gradient-to-br from-background to-surface p-8 lg:p-16 mb-12 lg:mb-20">
+      <div className="relative z-30 rounded-2xl lg:rounded-3xl border border-border bg-gradient-to-br from-background to-surface p-8 lg:p-16">
         <div className="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full -translate-y-48 translate-x-48 blur-3xl pointer-events-none"></div>
         
         <div className="relative z-10">
@@ -69,35 +100,25 @@ export const Compare: React.FC = () => {
           <div className="border-t border-border/30 pt-8 mt-4">
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
               <div className="w-full min-w-0">
-                <h3 className="text-xs font-bold uppercase tracking-wider text-text-muted mb-3 flex items-center gap-2">
-                  <Activity size={12} className="text-primary" /> Target Universe
-                </h3>
                 <AssetSelector 
                   selectedIds={selectedAssetIds} 
                   onChange={setSelectedAssetIds} 
                   registry={registry}
                 />
               </div>
-              {isProUser && (
-                <div className="shrink-0 w-full md:w-auto mt-2 md:mt-0">
-                  <button className="flex justify-center md:items-center gap-2 px-6 py-3 w-full md:w-auto bg-primary/10 hover:bg-primary/20 text-primary text-sm font-bold border border-primary/20 rounded-lg transition-colors duration-200 shadow-sm transform-gpu">
-                    Export Data
-                  </button>
-                </div>
-              )}
+
             </div>
           </div>
         </div>
       </div>
 
-      {/* ─── VARA DISCLAIMER ───────────────────────────────────────────────── */}
-      <VaraDisclaimer variant="banner" />
+
 
 
 
 
       {/* ─── TABS & NAVIGATION ─────────────────────────────────────────────── */}
-      <div className="flex overflow-x-auto scrollbar-hide gap-2 md:gap-3 pb-2 scroll-smooth">
+      <div className="flex lg:hidden overflow-x-auto scrollbar-hide gap-2 md:gap-3 pb-2 scroll-smooth">
         {tabs.map(tab => {
           const isActive = activeTab === tab.id;
           const Icon = tab.icon;
@@ -132,10 +153,10 @@ export const Compare: React.FC = () => {
             <PerformancePanel assets={selectedAssets} />
           </div>
         )}
-        {activeTab === 'risk' && <RiskPanel assets={selectedAssets} isProUser={isProUser} />}
+        {activeTab === 'risk' && <RiskPanel assets={selectedAssets} />}
         {activeTab === 'allocation' && <AllocationPanel />}
         {activeTab === 'correlation' && <CorrelationHeatmap assets={selectedAssets} />}
-        {activeTab === 'analyst' && <AnalystPanel assets={selectedAssets} isProUser={isProUser} />}
+        {activeTab === 'analyst' && <AnalystPanel assets={selectedAssets} />}
       </div>
     </div>
     </div>

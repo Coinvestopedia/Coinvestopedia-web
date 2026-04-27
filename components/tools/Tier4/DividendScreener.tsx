@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { Card } from '../../Card';
-import { InputField, ResultMetric, fmtUSD, fmtPct } from '../shared/SharedComponents';
+import { InputField, ResultMetric, fmtUSD } from '../shared/SharedComponents';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell } from 'recharts';
 import { Search, ArrowUpRight, TrendingUp } from 'lucide-react';
 
@@ -79,17 +79,17 @@ export const DividendScreener: React.FC = () => {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
         {/* Results List */}
         <div className="lg:col-span-7">
           <Card className="h-full border border-border">
-            <h3 className="text-xl font-bold mb-6 flex items-center gap-2">
+            <h3 className="text-xl font-bold mb-6 flex items-center justify-center gap-2 text-center">
               <TrendingUp size={20} className="text-primary" /> Yield Rankings
             </h3>
             
             <div className="space-y-3">
               {filteredAssets.map((asset) => (
-                <div key={asset.id} className="group p-4 bg-background/50 border border-border/50 hover:border-primary/50 rounded-xl transition-colors flex items-center justify-between">
+                <div key={asset.id} className="group p-4 bg-background/50 border border-border/50 hover:border-primary/50 hover:bg-white/[0.03] rounded-xl transition-all duration-300 flex items-center justify-between">
                   <div className="flex items-center gap-4">
                     <div className={`w-10 h-10 rounded-lg flex items-center justify-center font-bold text-xs ${
                       asset.category === 'DeFi' ? 'bg-indigo-500/10 text-indigo-400 border border-indigo-500/20' : 
@@ -99,8 +99,8 @@ export const DividendScreener: React.FC = () => {
                       {asset.ticker.slice(0, 3)}
                     </div>
                     <div>
-                      <h4 className="font-bold text-sm group-hover:text-primary transition-colors">{asset.name}</h4>
-                      <p className="text-[10px] text-text-muted font-bold uppercase tracking-widest">{asset.category} • Risk Score: {asset.riskScore}/10</p>
+                      <h4 className="font-bold text-sm group-hover:text-primary transition-colors text-center">{asset.name}</h4>
+                      <p className="text-[10px] text-text-muted font-bold uppercase tracking-widest text-center">{asset.category} • Risk Score: {asset.riskScore}/10</p>
                     </div>
                   </div>
                   <div className="text-right">
@@ -120,45 +120,56 @@ export const DividendScreener: React.FC = () => {
         </div>
 
         {/* Analytics Sidebar */}
-        <div className="lg:col-span-5 space-y-6">
+        <div className="lg:col-span-5 flex flex-col gap-6 h-full">
           <div className="grid grid-cols-2 gap-4">
             <ResultMetric label="Average Yield" value={`${stats.avgYield.toFixed(2)}%`} positive />
             <ResultMetric label="Est. Annual Income" value={fmtUSD(stats.annualIncome)} positive />
           </div>
 
-          <Card className="flex flex-col h-[350px]">
-            <h4 className="font-bold text-sm text-text-muted uppercase tracking-widest mb-6">Yield Comparison</h4>
+          <Card className="flex flex-col flex-[2] min-h-[400px]">
+            <h4 className="font-bold text-sm text-text-muted uppercase tracking-widest mb-6 text-center">Yield Comparison</h4>
             <div className="flex-1 w-full">
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={filteredAssets.slice(0, 6)} layout="vertical" margin={{ left: 0, right: 30 }}>
                   <CartesianGrid strokeDasharray="3 3" stroke="#27272a" horizontal={false} />
                   <XAxis type="number" hide />
                   <YAxis dataKey="ticker" type="category" tick={{ fontSize: 10, fill: '#a1a1aa' }} stroke="#3f3f46" width={50} />
-                  <Tooltip itemStyle={{ color: '#e4e4e7' }} labelStyle={{ color: '#a1a1aa' }}
+                  <Tooltip 
+                    cursor={{ fill: 'rgba(255, 255, 255, 0.03)' }}
+                    itemStyle={{ color: '#e4e4e7' }} 
+                    labelStyle={{ color: '#a1a1aa' }}
                     contentStyle={{ backgroundColor: '#18181b', borderColor: '#27272a', borderRadius: 8 }}
-                    formatter={(v: number) => [`${v}%`, 'Annual Yield']}
+                    formatter={(v: any) => [`${v}%`, 'Annual Yield']}
                   />
-                  <Bar dataKey="yield" radius={[0, 4, 4, 0]} barSize={20}>
+                  <Bar 
+                    dataKey="yield" 
+                    radius={[0, 4, 4, 0]} 
+                    barSize={20}
+                  >
                     {filteredAssets.map((entry, index) => (
-                      <Cell key={index} fill={entry.category === 'DeFi' ? '#818cf8' : entry.category === 'Real Estate' ? '#fbbf24' : '#10b981'} />
+                      <Cell 
+                        key={index} 
+                        fill={entry.category === 'DeFi' ? '#818cf8' : entry.category === 'Real Estate' ? '#fbbf24' : '#10b981'}
+                        className="transition-all duration-300 hover:opacity-80"
+                      />
                     ))}
                   </Bar>
                 </BarChart>
               </ResponsiveContainer>
             </div>
-            <div className="mt-4 flex flex-wrap gap-4 text-[10px] font-bold uppercase tracking-widest">
+            <div className="mt-4 flex flex-wrap justify-center gap-4 text-[10px] font-bold uppercase tracking-widest">
                <div className="flex items-center gap-1.5"><div className="w-2 h-2 rounded-full bg-emerald-400" /> TradFi</div>
                <div className="flex items-center gap-1.5"><div className="w-2 h-2 rounded-full bg-indigo-400" /> DeFi</div>
                <div className="flex items-center gap-1.5"><div className="w-2 h-2 rounded-full bg-amber-400" /> Real Estate</div>
             </div>
           </Card>
 
-          <div className="p-4 rounded-xl border border-border bg-primary/5">
-             <div className="flex items-center gap-2 mb-2 text-primary">
+          <div className="p-8 rounded-xl border border-border bg-primary/5 flex flex-col flex-1 justify-center min-h-[200px]">
+             <div className="flex items-center justify-center gap-2 mb-4 text-primary">
                 <ArrowUpRight size={18} />
-                <h4 className="font-bold text-sm">Wealth Compounding Tip</h4>
+                <h4 className="font-bold text-sm text-center">Wealth Compounding Tip</h4>
              </div>
-             <p className="text-xs text-text-muted leading-relaxed">
+             <p className="text-xs text-text-muted leading-relaxed text-center">
                Reinvesting dividends back into the same asset can significantly accelerate balance growth over long horizons through the power of geometric compounding.
              </p>
           </div>

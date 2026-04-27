@@ -6,9 +6,9 @@ export const ASSETS_MACRO: Record<string, AssetData> = {
   DXY: {
     id: 'DXY', symbol: 'DXY', name: 'US Dollar Index', category: 'Macro', color: '#10B981',
     iconUrl: 'https://s3-symbol-logo.tradingview.com/indices/us-dollar-index.svg',
-    price: 104.2, marketCap: 0, fdv: 0, vol24h: 0,
-    change24h: -0.3, change7d: -0.8, change30d: -1.5, changeYtd: -2.8, change1y: -4.5,
-    ath: 114.7, athDrawdown: -9.1, volatility30d: 6.5, volatility90d: 5.8, sharpe90d: 0.35,
+    price: 98.15, marketCap: 0, fdv: 0, vol24h: 0,
+    change24h: -1.2, change7d: -2.5, change30d: -5.8, changeYtd: -9.2, change1y: -12.5,
+    ath: 114.7, athDrawdown: -14.5, volatility30d: 8.5, volatility90d: 7.8, sharpe90d: -0.12,
     cagr3y: -1.2, maxDrawdown: -15.0, var95: -0.6,
     betaBtc: -0.4, betaSpy: -0.3, correlationBtc: -0.65,
     liquidityScore: 100, socialScore: 40, devActivity: 0, inflationRate: 0,
@@ -30,7 +30,7 @@ export const ASSETS_MACRO: Record<string, AssetData> = {
   UST10Y: {
     id: 'UST10Y', symbol: 'UST10Y', name: '10Y US Treasury', category: 'Macro', color: '#3B82F6',
     iconUrl: 'https://s3-symbol-logo.tradingview.com/indices/us-10y-treasury.svg',
-    price: 4.25, marketCap: 0, fdv: 0, vol24h: 0,
+    price: 4.32, marketCap: 0, fdv: 0, vol24h: 0,
     change24h: -0.02, change7d: -0.08, change30d: -0.15, changeYtd: -0.12, change1y: -0.35,
     ath: 5.0, athDrawdown: -15.0, volatility30d: 8.5, volatility90d: 7.2, sharpe90d: 0.55,
     cagr3y: 0, maxDrawdown: -20.0, var95: -0.8,

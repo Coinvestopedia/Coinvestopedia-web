@@ -76,7 +76,7 @@ const CorrelationRadar: React.FC<{ assets: AssetData[] }> = ({ assets }) => {
             <Tooltip itemStyle={{ color: '#e4e4e7' }} 
               contentStyle={{ backgroundColor: '#18181B', borderColor: '#27272A', borderRadius: '8px' }}
               labelStyle={{ color: '#F4F4F5', fontWeight: 'bold', marginBottom: '8px' }}
-              formatter={(value: number) => [`${value}/100 Score`, 'Relative Correlation']}
+              formatter={(value: any) => [`${value}/100 Score`, 'Relative Correlation']}
             />
           </RadarChart>
         </ResponsiveContainer>
@@ -113,7 +113,7 @@ export const CorrelationHeatmap: React.FC<CorrelationHeatmapProps> = ({ assets }
               
               {/* Header Row */}
               <div className="flex">
-                 <div className="w-[100px] h-10 shrink-0"></div> {/* Corner */}
+                 <div className="w-[100px] h-10 shrink-0 bg-gray-200 dark:bg-zinc-800 border-b border-r border-l border-t border-white dark:border-zinc-900 sticky left-0 z-40 shadow-[2px_0_5px_rgba(0,0,0,0.05)] dark:shadow-[2px_0_5px_rgba(0,0,0,0.3)]"></div> {/* Corner */}
                  {assets.map(asset => (
                    <div key={asset.id} 
                         className="w-[85px] h-10 shrink-0 flex items-center justify-center font-bold text-[11px] bg-gray-200 dark:bg-zinc-800 text-gray-700 dark:text-gray-300 border-b border-r border-white dark:border-zinc-900 border-t">
@@ -126,7 +126,7 @@ export const CorrelationHeatmap: React.FC<CorrelationHeatmapProps> = ({ assets }
               {assets.map((yAsset) => (
                 <div key={yAsset.id} className="flex">
                    {/* Left Header */}
-                   <div className="w-[100px] h-[45px] shrink-0 flex items-center px-4 font-bold text-[11px] bg-gray-200 dark:bg-zinc-800 text-gray-700 dark:text-gray-300 border-b border-r border-l border-white dark:border-zinc-900 sticky left-0 z-10 shadow-[2px_0_5px_rgba(0,0,0,0.05)] dark:shadow-[2px_0_5px_rgba(0,0,0,0.3)]">
+                   <div className="w-[100px] h-[45px] shrink-0 flex items-center px-4 font-bold text-[11px] bg-gray-200 dark:bg-zinc-800 text-gray-700 dark:text-gray-300 border-b border-r border-l border-white dark:border-zinc-900 sticky left-0 z-30 shadow-[2px_0_5px_rgba(0,0,0,0.05)] dark:shadow-[2px_0_5px_rgba(0,0,0,0.3)]">
                      {yAsset.symbol}
                    </div>
                    

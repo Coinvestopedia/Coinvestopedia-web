@@ -1,6 +1,6 @@
-import React from 'react';
-import { TargetIcon } from '../../components/AnimatedIcons';
-import { Building2, TrendingUp, Zap, Layers, BarChart3, Clock, Scale } from 'lucide-react';
+
+
+import { Building2, TrendingUp, Zap, Layers, BarChart3, Scale } from 'lucide-react';
 import { Article } from '../../pages/Insights';
 
 
@@ -11,15 +11,20 @@ export const rwaTokenizationArticle: Article = {
   tags: ['RWAs', 'Markets', 'Institutions', 'Tokenization'],
   readTime: '12 min read',
   date: 'April 14, 2026',
-  image: 'https://images.unsplash.com/photo-1611974714024-462cd937397b?q=80&w=2070&auto=format&fit=crop',
+  image: '/rwa-digital-engine.png',
   desc: "Tokenized RWAs reached a $20B+ market value in early 2026. As major exchanges like the NYSE move toward on-chain settlement, the industry focuses on the reality of post-trade cost compression.",
   icon: <Building2 className="text-emerald-400" size={24} />,
   keyInsights: [
-    "Tokenized RWAs on public chains grew by over 300% between 2024 and 2026, reaching a market value of $20 - $26 billion.",
-    "BlackRock's BUIDL and other Treasury-backed funds have turned tokenization from boutique pilots into standardized institutional products.",
-    "The NYSE and Brazil's B3 are designing on-chain settlement rails aimed at slashing post-trade friction and intermediary costs.",
-    "While '90% cost reduction' is a directional marketing target, current hybrid systems deliver mid-double-digit savings through automation.",
-    "A 'tokenization-versus-liquidity' gap remains, as many RWA tokens exhibit high issuance but low secondary-market turnover."
+    "Market Surge: Institutional RWA tokenization on public chains grew 300% (2024-2026), reaching a validated market value of $20B-$26B.",
+    "Exchange Rails: The NYSE and Brazil's B3 are actively designing on-chain settlement rails to bypass legacy correspondent banking bottlenecks.",
+    "Cost Compression: While '90% reduction' is the marketing target, early hybrid implementations are delivering verified 35-65% savings in post-trade friction.",
+    "Sovereign Instruments: BlackRock's BUIDL has standardized Treasury-backed tokenization, moving it from boutique pilots to core portfolio assets.",
+    "Liquidity Gap: A major 2026 challenge remains the 'issuance-vs-turnover' gap, where secondary market liquidity lags behind primary on-chain issuance."
+  ],
+  faq: [
+    { question: "What is the current market size of tokenized RWAs?", answer: "As of Q1 2026, tokenized Real-World Assets on public blockchains have reached a market valuation between $20 billion and $26 billion." },
+    { question: "Which major stock exchanges are using blockchain?", answer: "The New York Stock Exchange (NYSE) and Brazil's B3 have announced or launched on-chain settlement initiatives for tokenized securities." },
+    { question: "How much cost savings does tokenization offer institutions?", answer: "Institutions are seeing verified post-trade cost reductions of 35% to 65% through automated, on-chain clearing and settlement rails." }
   ],
   content: (
     <>
@@ -28,7 +33,7 @@ export const rwaTokenizationArticle: Article = {
       </p>
 
       <div className="my-10 rounded-2xl overflow-hidden border border-border shadow-2xl">
-         <img src="https://images.unsplash.com/photo-1611974714024-462cd937397b?q=80&w=2070&auto=format&fit=crop" alt="Institutional Tokenization Stack" className="w-full h-[400px] object-cover" />
+         <img src="/rwa-digital-engine.png" alt="Institutional Tokenization Stack" className="w-full h-auto object-cover" />
          <div className="p-4 bg-background/50 text-xs text-center border-t border-border italic text-text-muted">
             The Digital Engine: Tokenized RWAs are now a non-trivial institutional layer of the global financial markets.
          </div>

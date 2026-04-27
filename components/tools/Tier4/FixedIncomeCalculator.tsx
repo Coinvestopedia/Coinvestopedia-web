@@ -82,7 +82,7 @@ export const FixedIncomeCalculator: React.FC = () => {
     <div className="animate-fade-in grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8">
       <div className="lg:col-span-4 space-y-6">
         <Card>
-          <h3 className="font-bold text-lg mb-4 flex items-center gap-2">
+          <h3 className="font-bold text-lg mb-4 flex items-center justify-center gap-2 text-center">
             <ChartIcon size={18} className="text-primary"/> Bond Parameters
           </h3>
           <div className="space-y-4">
@@ -115,7 +115,7 @@ export const FixedIncomeCalculator: React.FC = () => {
            <div className="flex justify-between items-start mb-4">
              <div>
                <h3 className="font-bold text-lg mb-1">Price / Yield Convexity Curve</h3>
-               <p className="text-xs text-text-muted">The non-linear relationship between bond prices and market interest rates.</p>
+               <p className="text-xs text-text-muted text-center">The non-linear relationship between bond prices and market interest rates.</p>
              </div>
              <div className="text-right text-xs">
                 <span className="text-text-muted">Macaulay Duration:</span> <span className="font-bold">{result.macAulayDuration.toFixed(2)} yrs</span>
@@ -141,7 +141,7 @@ export const FixedIncomeCalculator: React.FC = () => {
                  />
                  <Tooltip itemStyle={{ color: '#e4e4e7' }}
                    contentStyle={{ backgroundColor: '#18181b', borderColor: '#27272a', borderRadius: 8 }}
-                   formatter={(v: number) => [fmtUSD(v), 'Bond Price']}
+                   formatter={(v: any) => [fmtUSD(v), 'Bond Price']}
                    labelStyle={{ color: '#a1a1aa' }}
                  />
                  <Line type="monotone" dataKey="price" stroke="#10b981" strokeWidth={3} dot={false} activeDot={{ r: 6 }} />

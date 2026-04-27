@@ -3,6 +3,7 @@ import React, { useState, useCallback } from 'react';
 import { Mail, Sparkles, Check, AlertCircle } from 'lucide-react';
 import { Button } from './Button';
 import { useAppContext } from '../context/AppContext';
+import { subscribeToBriefing, getUtmParams } from '../services/briefing';
 
 interface NewsletterSignupProps {
   className?: string;
@@ -59,31 +60,28 @@ export const NewsletterSignup: React.FC<NewsletterSignupProps> = ({
       if (onSubscribe) {
         await onSubscribe(email);
       } else {
-        const response = await fetch('/api/subscribe', {
-          method: 'POST',
-          headers: {
-             'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({ email })
-        });
+        const utm = getUtmParams();
+        const result = await subscribeToBriefing({ email, source: 'website', ...utm });
         
-        if (!response.ok) throw new Error('Failed to subscribe');
+        if (result.status === 'already_active') {
+          addToast('You\'re already subscribed to The Briefing.', 'info', 4000);
+          setIsSubmitting(false);
+          return;
+        }
       }
       
       setIsSubmitting(false);
       setIsSuccess(true);
-      // Show success toast
-      addToast('Thanks for subscribing! Please check your email to confirm.', 'success', 4000);
+      addToast('Check your email to confirm your subscription.', 'success', 4000);
       setEmail('');
       setTouched(false);
       
-      // Reset success state after 5 seconds
       setTimeout(() => setIsSuccess(false), 5000);
     } catch (err) {
       setIsSubmitting(false);
       setError('Subscription failed. Please try again.');
       addToast('Subscription failed. Please try again later.', 'error', 4000);
-      console.error('Newsletter subscription error:', err);
+      console.error('Briefing subscription error:', err);
     }
   };
 
@@ -97,8 +95,8 @@ export const NewsletterSignup: React.FC<NewsletterSignupProps> = ({
               <Mail size={24} className="text-primary" />
             </div>
             <div className="flex-1 min-w-0 text-left">
-              <h4 className="font-bold text-base text-white truncate">Wall Street Reads Crypto</h4>
-              <p className="text-text-muted text-sm truncate">Weekly digest. No spam.</p>
+              <h4 className="font-bold text-base text-white truncate">The Briefing</h4>
+              <p className="text-text-muted text-sm truncate">Weekly digest. No spam. No ads.</p>
             </div>
           </div>
 
@@ -114,7 +112,7 @@ export const NewsletterSignup: React.FC<NewsletterSignupProps> = ({
                   className={`w-full h-12 bg-background border rounded-lg px-4 text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-colors transition-shadow ${
                     error && touched ? 'border-red-500' : 'border-border'
                   }`}
-                  aria-label="Email address for newsletter subscription"
+                  aria-label="Email address for The Briefing"
                   required
                 />
             </div>
@@ -123,7 +121,7 @@ export const NewsletterSignup: React.FC<NewsletterSignupProps> = ({
               size="md"
               disabled={isSubmitting || isSuccess}
               className="h-12 whitespace-nowrap flex-shrink-0 px-6"
-              aria-label={isSuccess ? 'Successfully subscribed' : 'Subscribe'}
+              aria-label={isSuccess ? 'Successfully subscribed' : 'Subscribe to The Briefing'}
             >
               {isSuccess ? <Check size={20} /> : isSubmitting ? '...' : 'Subscribe'}
             </Button>
@@ -148,15 +146,15 @@ export const NewsletterSignup: React.FC<NewsletterSignupProps> = ({
         <div className="max-w-2xl mx-auto text-center">
           <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 border border-primary/20 rounded-full text-primary text-sm font-semibold mb-6">
             <Sparkles size={16} />
-            <span>Free Weekly Digest</span>
+            <span>Weekly Research Digest</span>
           </div>
           
           <h2 className="text-2xl lg:text-3xl font-bold mb-4">
-            Wall Street Reads Crypto
+            The Briefing
           </h2>
           
           <p className="text-text-muted text-lg mb-8 max-w-xl mx-auto">
-            Get the top 3 crypto stories each Monday, explained in traditional finance terms. No jargon. No hype. Just analysis.
+            Curated macro, digital asset, and cross-market context — delivered every Monday for finance professionals.
           </p>
           
           {isSuccess ? (
@@ -166,26 +164,26 @@ export const NewsletterSignup: React.FC<NewsletterSignupProps> = ({
                   <Check size={24} className="text-primary" />
                 </div>
               </div>
-              <h3 className="text-xl font-bold mb-2">You're subscribed!</h3>
+              <h3 className="text-xl font-bold mb-2">You're in.</h3>
               <p className="text-text-muted">
                 Check your inbox for the confirmation email. Your first issue arrives next Monday.
               </p>
             </div>
           ) : (
-            <form onSubmit={handleSubmit} className="max-w-md mx-auto" aria-label="Newsletter subscription form">
+            <form onSubmit={handleSubmit} className="max-w-md mx-auto" aria-label="Subscribe to The Briefing">
               <div className="flex flex-col sm:flex-row gap-3">
                 <div className="flex-1">
                   <div className="relative">
                     <input
                       type="email"
-                      placeholder="Your professional email"
+                      placeholder="Your email address"
                       value={email}
                       onChange={handleChange}
                       onBlur={handleBlur}
                       className={`w-full bg-background border rounded-xl px-4 py-3 text-text focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent ${
                         error && touched ? 'border-red-500' : 'border-border'
                       }`}
-                      aria-label="Professional email address"
+                      aria-label="Email address"
                       aria-invalid={error && touched ? 'true' : 'false'}
                       aria-describedby={error && touched ? 'email-error' : undefined}
                       required
@@ -203,35 +201,18 @@ export const NewsletterSignup: React.FC<NewsletterSignupProps> = ({
                   size="lg"
                   disabled={isSubmitting || isSuccess || (touched && !!error)}
                   className="whitespace-nowrap min-w-[140px]"
-                  aria-label={isSuccess ? 'Successfully subscribed' : 'Get free newsletter issues'}
+                  aria-label={isSuccess ? 'Successfully subscribed' : 'Subscribe to The Briefing'}
                 >
-                  {isSuccess ? <Check size={20} aria-hidden="true" /> : isSubmitting ? 'Subscribing...' : 'Get Free Issues'}
+                  {isSuccess ? <Check size={20} aria-hidden="true" /> : isSubmitting ? 'Subscribing...' : 'Subscribe'}
                 </Button>
               </div>
               {(!error || !touched) && (
                 <p className="text-text-muted text-sm mt-3">
-                  Join 15,000+ finance professionals. Unsubscribe anytime.
+                  One email per week. No ads. Unsubscribe anytime.
                 </p>
               )}
             </form>
           )}
-          
-          <div className="mt-8 pt-8 border-t border-border/50">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-sm" role="list" aria-label="Newsletter statistics">
-                <div className="text-center" role="listitem">
-                  <div className="text-primary font-bold text-lg mb-1" aria-label="15,000 plus">15K+</div>
-                  <div className="text-text-muted">Finance Professionals</div>
-                </div>
-                <div className="text-center" role="listitem">
-                  <div className="text-primary font-bold text-lg mb-1" aria-label="92 percent">92%</div>
-                  <div className="text-text-muted">Open Rate</div>
-                </div>
-                <div className="text-center" role="listitem">
-                  <div className="text-primary font-bold text-lg mb-1" aria-label="Free">Free</div>
-                  <div className="text-text-muted">Always No Cost</div>
-                </div>
-              </div>
-          </div>
         </div>
       </div>
     </section>

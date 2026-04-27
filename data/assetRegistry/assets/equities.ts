@@ -6,9 +6,9 @@ export const ASSETS_EQUITIES: Record<string, AssetData> = {
   SPY: {
     id: 'SPY', symbol: 'SPY', name: 'S&P 500 ETF', category: 'Equity', color: '#00A859',
     iconUrl: 'https://logo.clearbit.com/ssga.com',
-    price: 556.2, marketCap: 53000, fdv: 53000, vol24h: 42.5,
-    change24h: -0.8, change7d: -2.5, change30d: -4.2, changeYtd: -6.1, change1y: 8.5,
-    ath: 610, athDrawdown: -8.8, volatility30d: 18.5, volatility90d: 16.2, sharpe90d: 0.85,
+    price: 694.10, marketCap: 65000, fdv: 65000, vol24h: 42.5,
+    change24h: 0.1, change7d: 1.2, change30d: 4.5, changeYtd: 12.8, change1y: 22.5,
+    ath: 695, athDrawdown: -0.1, volatility30d: 18.5, volatility90d: 16.2, sharpe90d: 1.15,
     cagr3y: 8.2, maxDrawdown: -34.0, var95: -1.8,
     betaBtc: 0.4, betaSpy: 1.0, correlationBtc: 0.42,
     liquidityScore: 100, socialScore: 65, devActivity: 0, inflationRate: 0,
@@ -18,9 +18,9 @@ export const ASSETS_EQUITIES: Record<string, AssetData> = {
   QQQ: {
     id: 'QQQ', symbol: 'QQQ', name: 'Nasdaq 100 ETF', category: 'Equity', color: '#0072C6',
     iconUrl: 'https://logo.clearbit.com/invesco.com',
-    price: 458.5, marketCap: 25000, fdv: 25000, vol24h: 35.2,
-    change24h: -1.2, change7d: -3.8, change30d: -6.5, changeYtd: -9.3, change1y: 4.2,
-    ath: 540, athDrawdown: -15.0, volatility30d: 24.5, volatility90d: 22.0, sharpe90d: 0.62,
+    price: 624.77, marketCap: 35000, fdv: 35000, vol24h: 35.2,
+    change24h: 0.2, change7d: 0.8, change30d: 5.2, changeYtd: 15.5, change1y: 28.2,
+    ath: 625, athDrawdown: -0.05, volatility30d: 24.5, volatility90d: 22.0, sharpe90d: 0.98,
     cagr3y: 10.5, maxDrawdown: -35.0, var95: -2.4,
     betaBtc: 0.55, betaSpy: 1.2, correlationBtc: 0.48,
     liquidityScore: 100, socialScore: 72, devActivity: 0, inflationRate: 0,
@@ -36,8 +36,8 @@ export const ASSETS_EQUITIES: Record<string, AssetData> = {
     cagr3y: 85.0, maxDrawdown: -66.0, var95: -4.5,
     betaBtc: 0.8, betaSpy: 1.6, correlationBtc: 0.38,
     liquidityScore: 99, socialScore: 95, devActivity: 0, inflationRate: 0,
-    analystSignal: 'BUY',
-    analystThesis: 'Best-in-class AI infrastructure. Blackwell ramp driving record datacenter revenue. Down 18% YTD on broader tech selloff — secular AI trend intact. Dip buying opportunity for long-term holders.'
+    analystSignal: 'OUTPERFORM',
+    analystThesis: 'Best-in-class AI infrastructure. Blackwell ramp driving record datacenter revenue. Down 18% YTD on broader tech selloff — secular AI trend intact. Potential structural accumulation zone for long-term horizon.'
   },
   AAPL: {
     id: 'AAPL', symbol: 'AAPL', name: 'Apple Inc', category: 'Equity', color: '#A2AAAD',

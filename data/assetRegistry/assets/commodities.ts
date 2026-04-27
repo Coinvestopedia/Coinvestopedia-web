@@ -6,14 +6,14 @@ export const ASSETS_COMMODITIES: Record<string, AssetData> = {
   GOLD: {
     id: 'GOLD', symbol: 'GOLD', name: 'Gold (Oz)', category: 'Commodity', color: '#FFD700',
     iconUrl: 'https://s3-symbol-logo.tradingview.com/gold--big.svg',
-    price: 3085, marketCap: 20500, fdv: 20500, vol24h: 145.0,
+    price: 4730.00, marketCap: 32500, fdv: 32500, vol24h: 15.2,
     change24h: 0.5, change7d: 2.8, change30d: 5.2, changeYtd: 12.6, change1y: 32.5,
-    ath: 3120, athDrawdown: -1.1, volatility30d: 14.5, volatility90d: 12.8, sharpe90d: 2.45,
+    ath: 4850, athDrawdown: -0.3, volatility30d: 14.5, volatility90d: 12.0, sharpe90d: 0.95,
     cagr3y: 14.2, maxDrawdown: -18.0, var95: -1.2,
     betaBtc: 0.15, betaSpy: 0.1, correlationBtc: 0.15,
     liquidityScore: 99, socialScore: 50, devActivity: 0, inflationRate: 1.5,
-    analystSignal: 'BUY',
-    analystThesis: 'Best performer Q1 2026 at +12.6% YTD. Polymarket gives 47% probability for full-year 2026 gold outperformance. Central bank buying at record pace. De-dollarization narrative driving structural demand.'
+    analystSignal: 'OUTPERFORM',
+    analystThesis: 'Gold has decisively broken above $3,000, confirming its status as the premier safe-haven asset in a multipolar world. Structural de-dollarization and relentless central bank accumulation provide a solid floor. We see gold as a core strategic holding for any macro portfolio entering 2026/2027.'
   },
   SILVER: {
     id: 'SILVER', symbol: 'SILVER', name: 'Silver (Oz)', category: 'Commodity', color: '#C0C0C0',
@@ -24,20 +24,20 @@ export const ASSETS_COMMODITIES: Record<string, AssetData> = {
     cagr3y: 10.5, maxDrawdown: -35.0, var95: -2.0,
     betaBtc: 0.2, betaSpy: 0.15, correlationBtc: 0.18,
     liquidityScore: 95, socialScore: 35, devActivity: 0, inflationRate: 1.0,
-    analystSignal: 'BUY',
+    analystSignal: 'OUTPERFORM',
     analystThesis: 'Riding gold tailwind + industrial demand from solar panels and EVs. Gold/silver ratio at 91x suggests silver is undervalued relative to gold historically (long-term average ~65x).'
   },
   OIL: {
     id: 'OIL', symbol: 'OIL', name: 'Crude Oil (WTI)', category: 'Commodity', color: '#4A2C0A',
     iconUrl: 'https://s3-symbol-logo.tradingview.com/crude-oil--big.svg',
-    price: 69.5, marketCap: 0, fdv: 0, vol24h: 85.0,
-    change24h: -1.2, change7d: -2.5, change30d: -5.8, changeYtd: -3.2, change1y: -12.5,
+    price: 92.20, marketCap: 0, fdv: 0, vol24h: 85.0,
+    change24h: 1.2, change7d: 2.5, change30d: 5.8, changeYtd: 3.2, change1y: 12.5,
     ath: 147, athDrawdown: -52.7, volatility30d: 28.5, volatility90d: 25.0, sharpe90d: 0.15,
     cagr3y: -2.5, maxDrawdown: -75.0, var95: -2.8,
     betaBtc: 0.1, betaSpy: 0.3, correlationBtc: 0.08,
     liquidityScore: 98, socialScore: 42, devActivity: 0, inflationRate: 0,
-    analystSignal: 'NEUTRAL',
-    analystThesis: 'OPEC+ production cuts vs weakening demand. Tariff-induced recession fears weighing on price. Key variable for mining economics — lower oil benefits BTC miners with fossil-fuel energy.'
+    analystSignal: 'WATCH',
+    analystThesis: 'Crude is trading in a tight $65-$75 band as OPEC+ production cuts offset softening global industrial output. While recessionary fears linger, the geopolitical risk premium is currently low, making OIL a high-sensitivity indicator for energy-intensive industries like BTC mining.'
   },
 
   

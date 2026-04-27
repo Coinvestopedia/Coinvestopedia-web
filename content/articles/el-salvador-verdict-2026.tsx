@@ -1,6 +1,6 @@
-import React from 'react';
-import { TargetIcon } from '../../components/AnimatedIcons';
-import { Shield, Activity, Scale, AlertCircle, BookOpen, Brain, Globe, TrendingUp } from 'lucide-react';
+
+
+import { Shield, Activity, AlertCircle, BookOpen, Brain, Globe, TrendingUp } from 'lucide-react';
 import { Article } from '../../pages/Insights';
 
 
@@ -15,11 +15,16 @@ export const elSalvadorVerdictArticle: Article = {
   desc: "After five years of experiment, El Salvador de-risks Bitcoin as a mandatory currency while doubling down on its position as a sovereign BTC reserve and national AI educational hub.",
   icon: <Activity className="text-primary" size={24} />,
   keyInsights: [
-    "Abolition of Mandatory Status: In early 2025, El Salvador made Bitcoin acceptance optional to secure a $1.4B IMF loan agreement.",
-    "Treasury-Style Reserves: The state continues to accumulate BTC as a sovereign asset, with holdings estimated at ~7,585 BTC ($680M+).",
-    "The AI Pivot: El Salvador has partnered with xAI to deploy Grok AI models across 5,000 public schools, targeting over 1 million students.",
-    "Dual-Track Strategy: The government is de-risking the Bitcoin currency experiment while keeping it as a high-visibility branding asset and technological signal.",
-    "Symbolism vs. Execution: The long-run verdict depends on translating BTC reserves and AI education into measurable macroeconomic gains."
+    "Monetary Reform: In early 2025, El Salvador removed the 'mandatory' clause for Bitcoin acceptance to secure a $1.4B IMF financing deal.",
+    "Sovereign Reserve: The state treasury currently holds 7,519 BTC ($680M+), continuing its daily 1-BTC-buy policy as a sovereign hedge.",
+    "Remittance Surge: Blockchain-based remittance volume grew by 146% in 2025, even as daily retail BTC usage slowed among the general population.",
+    "The AI Shift: Partnering with xAI, El Salvador is deploying Grok models in 5,000 public schools, rebranding the nation as a technological hub.",
+    "Maturity vs. Symbolism: The 2026 posture prioritizes institutional fiscal stability (IMF) over the original 2021 vision of radical monetary replacement."
+  ],
+  faq: [
+    { question: "Is Bitcoin still mandatory in El Salvador?", answer: "No. As of early 2025, El Salvador modified its Bitcoin Law to make acceptance optional for businesses, a move made to satisfy conditions for a $1.4 billion IMF loan." },
+    { question: "How many Bitcoins does El Salvador hold?", answer: "As of early 2026, El Salvador's sovereign treasury holds approximately 7,519 BTC, valued at over $680 million." },
+    { question: "What is El Salvador's AI initiative?", answer: "The government has partnered with xAI to integrate Grok AI models into the curriculum of 5,000 public schools, reaching roughly 1 million students." }
   ],
   content: (
     <>

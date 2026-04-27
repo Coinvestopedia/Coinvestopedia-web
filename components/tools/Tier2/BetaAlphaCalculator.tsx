@@ -5,9 +5,18 @@ import { ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, Tooltip as Recharts
 import { BarChart3 } from 'lucide-react';
 import { linearRegression, linearRegressionLine, rSquared } from 'simple-statistics';
 
+const assetOptions = [
+  { value: 'BTC', label: 'Bitcoin (BTC)' },
+  { value: 'ETH', label: 'Ethereum (ETH)' },
+  { value: 'SOL', label: 'Solana (SOL)' },
+  { value: 'SPY', label: 'S&P 500 (SPY)' },
+  { value: 'QQQ', label: 'Nasdaq 100 (QQQ)' },
+  { value: 'GLD', label: 'Gold (GLD)' },
+];
+
 export const BetaAlphaCalculator: React.FC = () => {
   const [assetName, setAssetName] = useState('BTC');
-  const [benchmarkName, setBenchmarkName] = useState('S&P 500');
+  const [benchmarkName, setBenchmarkName] = useState('SPY');
   const [volatilityMultiplier, setVolatilityMultiplier] = useState('3'); // Higher = more volatile than benchmark
 
   const result = useMemo(() => {
@@ -70,8 +79,8 @@ export const BetaAlphaCalculator: React.FC = () => {
              Measure systemic risk (Beta) and idosyncratic excess return (Alpha).
           </p>
           <div className="space-y-4">
-             <InputField label="Asset Ticker" value={assetName} onChange={setAssetName} />
-             <InputField label="Benchmark Ticker" value={benchmarkName} onChange={setBenchmarkName} />
+             <InputField label="Asset Ticker" value={assetName} onChange={setAssetName} options={assetOptions} />
+             <InputField label="Benchmark Ticker" value={benchmarkName} onChange={setBenchmarkName} options={assetOptions} />
              <div className="mt-4 p-3 bg-surface border border-border rounded-lg">
                 <label className="text-xs font-bold text-text-muted mb-2 block">Synthetic Volatility Core (Testing)</label>
                 <input 
@@ -90,7 +99,7 @@ export const BetaAlphaCalculator: React.FC = () => {
       </div>
 
       <div className="lg:col-span-8 flex flex-col gap-6">
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-3 gap-4">
            <ResultMetric label={`${assetName} Beta`} value={result.beta.toFixed(2)} neutral />
            <ResultMetric label="Annualized Alpha" value={`${result.annualizedAlpha > 0 ? '+' : ''}${result.annualizedAlpha.toFixed(2)}%`} positive={result.annualizedAlpha > 0} negative={result.annualizedAlpha < 0} />
            <ResultMetric label="R-Squared (Fit)" value={result.r2.toFixed(2)} neutral />
@@ -128,7 +137,7 @@ export const BetaAlphaCalculator: React.FC = () => {
                  <RechartsTooltip 
                    cursor={{ strokeDasharray: '3 3', stroke: '#71717a' }}
                    contentStyle={{ backgroundColor: '#18181b', borderColor: '#27272a', borderRadius: 8 }}
-                   formatter={(v: number, name: string) => [v.toFixed(2) + '%', name]}
+                   formatter={(v: any, name: any) => [v.toFixed(2) + '%', name]}
                  />
 
                  {/* Trendline */}

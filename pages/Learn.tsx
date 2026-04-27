@@ -1,9 +1,10 @@
 import { PageMeta } from '../components/PageMeta';
-import { VaraDisclaimer } from '../components/VaraDisclaimer';
+
+
 import React, { useState } from 'react';
 import { Card } from '../components/Card';
 import { Button } from '../components/Button';
-import { BookOpen, Video, FileText, PlayCircle, Star, Award, TrendingUp, Shield, ArrowLeft, Lock, Unlock, Clock, BarChart2 } from 'lucide-react';
+import { BookOpen, Video, FileText, PlayCircle, Star, TrendingUp, Shield, Clock, BarChart2 } from 'lucide-react';
 import { TargetIcon } from '../components/AnimatedIcons';
 import { PageRoute } from '../types';
 
@@ -32,12 +33,14 @@ interface Category {
   icon: React.ReactNode;
   desc: string;
   resources: Resource[];
+  comingSoon?: boolean;
 }
 
 const KNOWLEDGE_CATEGORIES: Category[] = [
   {
     id: 'defi',
     name: 'DeFi Strategies',
+    comingSoon: true,
     icon: <TrendingUp size={24} />,
     desc: 'Master decentralized finance, liquidity provision, lending protocols, and yield generation strategies.',
     resources: [
@@ -50,6 +53,7 @@ const KNOWLEDGE_CATEGORIES: Category[] = [
   {
     id: 'ta',
     name: 'Technical Analysis',
+    comingSoon: true,
     icon: <TargetIcon className="w-6 h-6" />,
     desc: 'Read charts like an institutional trader using advanced indicators, order flow, and market profiling.',
     resources: [
@@ -62,6 +66,7 @@ const KNOWLEDGE_CATEGORIES: Category[] = [
   {
     id: 'sec',
     name: 'Security & Custody',
+    comingSoon: true,
     icon: <Shield size={24} />,
     desc: 'Protect your digital assets with enterprise-grade operational security and custody solutions.',
     resources: [
@@ -74,6 +79,7 @@ const KNOWLEDGE_CATEGORIES: Category[] = [
   {
     id: 'psy',
     name: 'Market Psychology',
+    comingSoon: true,
     icon: <BookOpen size={24} />,
     desc: 'Master the mental game of trading by recognizing cognitive biases and managing emotions.',
     resources: [
@@ -90,23 +96,45 @@ export interface LearnProps {
 }
 
 export const Learn: React.FC<LearnProps> = ({ onNavigate }) => {
-  const { addToast } = useAppContext();
+  const { addToast, setPageCategories, setActiveSubMenu, activeSubMenu } = useAppContext();
   const [activeCategoryId, setActiveCategoryId] = useState<string | null>(null);
 
-  const featuredCourse = {
-    title: 'Institutional Crypto Investing Masterclass',
-    description: 'Learn the advanced strategies used by hedge funds to navigate market cycles, manage risk, and identify asymmetric opportunities.',
-    duration: '4.5 Hours',
-    modules: 12,
-    level: 'Advanced',
-    image: 'https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?q=80&w=2070&auto=format&fit=crop'
-  };
 
-  const recentArticles = [
-    { title: 'Understanding Impermanent Loss in AMMs', type: 'Article', readTime: '8 min read', icon: <FileText size={16} />, tag: 'DeFi', catId: 'defi' },
-    { title: 'How to Read On-Chain Order Books', type: 'Video Series', readTime: '45 mins', icon: <Video size={16} />, tag: 'Trading', catId: 'ta' },
-    { title: 'The Evolution of Layer 2 Rollups', type: 'Deep Dive', readTime: '15 min read', icon: <FileText size={16} />, tag: 'Technology', catId: 'sec' }
-  ];
+
+
+
+  // --- Sidebar Registration ---
+  React.useEffect(() => {
+    if (activeSubMenu !== 'Knowledge') {
+      setActiveSubMenu('Knowledge');
+    }
+
+    const categories = [
+      { id: 'research', label: 'Research & Reports', icon: <FileText size={18} />, active: false, onClick: () => onNavigate?.(PageRoute.RESEARCH) },
+      { id: 'insights', label: 'Institutional Insights', icon: <TargetIcon className="w-[18px] h-[18px]" />, active: false, onClick: () => onNavigate?.(PageRoute.INSIGHTS) },
+      { id: 'exchanges', label: 'Exchange Intelligence', icon: <BarChart2 size={18} />, active: false, onClick: () => onNavigate?.(PageRoute.EXCHANGES) },
+      { id: 'glossary', label: 'Crypto Glossary', icon: <BookOpen size={18} />, active: false, onClick: () => onNavigate?.(PageRoute.GLOSSARY) },
+      ...KNOWLEDGE_CATEGORIES.map(cat => ({
+        id: cat.id,
+        label: cat.name,
+        icon: cat.icon,
+        active: activeCategoryId === cat.id,
+        comingSoon: cat.comingSoon,
+        onClick: () => {
+          if (cat.comingSoon) {
+            addToast(`${cat.name} is coming soon to the Coinvestopedia Academy!`, 'info');
+            return;
+          }
+          setActiveCategoryId(cat.id);
+        }
+      }))
+    ];
+    setPageCategories(categories);
+
+    return () => {
+      setPageCategories([]);
+    };
+  }, [activeCategoryId, setActiveSubMenu, setPageCategories, activeSubMenu]);
 
   // --- Scroll to Top on View Change ---
   React.useEffect(() => {
@@ -117,18 +145,16 @@ export const Learn: React.FC<LearnProps> = ({ onNavigate }) => {
 
   if (activeCategoryId) {
     const category = KNOWLEDGE_CATEGORIES.find(c => c.id === activeCategoryId);
-    if (!category) return null;
+    if (!category || category.comingSoon) {
+      if (category?.comingSoon) setActiveCategoryId(null);
+      return null;
+    }
 
     return (
       <div className="animate-fade-in space-y-8 pb-12">
       <PageMeta title="Learn Crypto" description="Educational resources and tutorials for modern cryptocurrency investing." />
 
-        <button 
-          onClick={() => setActiveCategoryId(null)}
-          className="flex items-center gap-2 text-text-muted hover:text-primary transition-colors text-sm font-bold group"
-        >
-          <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" /> Back to Knowledge
-        </button>
+
 
         <div>
           <div className="inline-flex items-center justify-center p-4 bg-primary/10 text-primary rounded-2xl mb-6">
@@ -175,9 +201,7 @@ export const Learn: React.FC<LearnProps> = ({ onNavigate }) => {
           ))}
         </div>
 
-        <div className="mt-12">
-          <VaraDisclaimer variant="inline" />
-        </div>
+
       </div>
     );
   }
@@ -186,6 +210,10 @@ export const Learn: React.FC<LearnProps> = ({ onNavigate }) => {
 
   return (
     <div className="animate-fade-in space-y-12 lg:space-y-16 pb-12">
+      <PageMeta title="Crypto Academy" description="Curated education from industry professionals." />
+
+
+
       {/* Hero */}
       <section className="relative overflow-hidden rounded-2xl lg:rounded-3xl border border-border bg-gradient-to-br from-background to-surface p-8 lg:p-16 mb-12 lg:mb-20 text-center">
         <div className="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full -translate-y-48 translate-x-48 blur-3xl pointer-events-none"></div>
@@ -265,34 +293,6 @@ export const Learn: React.FC<LearnProps> = ({ onNavigate }) => {
             </div>
          </div>
 
-         {/* Crypto Glossary Card */}
-         <div 
-            className="leather-card rounded-2xl p-8 lg:p-12 bg-gradient-to-br from-surface to-background relative overflow-hidden group cursor-pointer border border-border hover:border-primary/50 transition-colors flex flex-col md:flex-row items-center gap-8 shadow-xl"
-            onClick={() => onNavigate?.(PageRoute.GLOSSARY)}
-          >
-             <div className="absolute top-1/2 left-0 w-64 h-64 bg-primary/10 rounded-full blur-[80px] -translate-y-1/2 -translate-x-1/2 pointer-events-none group-hover:bg-primary/20 transition-colors duration-700"></div>
-             
-             <div className="flex-shrink-0 relative z-10 w-20 h-20 bg-surface border border-border rounded-2xl flex items-center justify-center text-primary group-hover:scale-110 group-hover:bg-primary/5 transition-colors transition-transform transform-gpu duration-500 shadow-inner">
-                <FileText size={40} className="group-hover:animate-pulse" />
-             </div>
-             
-             <div className="relative z-10 flex-1 text-center md:text-left">
-                <div className="inline-flex items-center gap-2 px-3 py-1 bg-primary/10 border border-primary/20 rounded-full text-primary text-[10px] font-bold uppercase tracking-[0.2em] mb-4">
-                  Reference
-                </div>
-                <h2 className="text-2xl md:text-3xl font-bold mb-3 group-hover:text-primary transition-colors">Crypto Glossary</h2>
-                <p className="text-text-muted md:text-lg max-w-2xl leading-relaxed">
-                   Wall Street Edition — 100+ institutional-grade crypto terms with traditional finance analogies. Your complete reference guide.
-                </p>
-             </div>
-             
-             <div className="relative z-10 flex-shrink-0">
-                <Button variant="secondary" className="group-hover:bg-primary group-hover:text-background group-hover:border-primary transition-colors">
-                  Browse Glossary
-                </Button>
-             </div>
-          </div>
-
           {/* ClearRate™ Exchange Intelligence Card */}
           <div 
              className="leather-card rounded-2xl p-8 lg:p-12 bg-gradient-to-br from-surface to-background relative overflow-hidden group cursor-pointer border border-border hover:border-primary/50 transition-colors flex flex-col md:flex-row items-center gap-8 shadow-xl"
@@ -320,6 +320,34 @@ export const Learn: React.FC<LearnProps> = ({ onNavigate }) => {
                  </Button>
               </div>
            </div>
+
+          {/* Crypto Glossary Card */}
+          <div 
+             className="leather-card rounded-2xl p-8 lg:p-12 bg-gradient-to-br from-surface to-background relative overflow-hidden group cursor-pointer border border-border hover:border-primary/50 transition-colors flex flex-col md:flex-row items-center gap-8 shadow-xl"
+             onClick={() => onNavigate?.(PageRoute.GLOSSARY)}
+           >
+              <div className="absolute top-1/2 left-0 w-64 h-64 bg-primary/10 rounded-full blur-[80px] -translate-y-1/2 -translate-x-1/2 pointer-events-none group-hover:bg-primary/20 transition-colors duration-700"></div>
+              
+              <div className="flex-shrink-0 relative z-10 w-20 h-20 bg-surface border border-border rounded-2xl flex items-center justify-center text-primary group-hover:scale-110 group-hover:bg-primary/5 transition-colors transition-transform transform-gpu duration-500 shadow-inner">
+                 <FileText size={40} className="group-hover:animate-pulse" />
+              </div>
+              
+              <div className="relative z-10 flex-1 text-center md:text-left">
+                 <div className="inline-flex items-center gap-2 px-3 py-1 bg-primary/10 border border-primary/20 rounded-full text-primary text-[10px] font-bold uppercase tracking-[0.2em] mb-4">
+                   Reference
+                 </div>
+                 <h2 className="text-2xl md:text-3xl font-bold mb-3 group-hover:text-primary transition-colors">Crypto Glossary</h2>
+                 <p className="text-text-muted md:text-lg max-w-2xl leading-relaxed">
+                    Wall Street Edition — 100+ institutional-grade crypto terms with traditional finance analogies. Your complete reference guide.
+                 </p>
+              </div>
+              
+              <div className="relative z-10 flex-shrink-0">
+                 <Button variant="secondary" className="group-hover:bg-primary group-hover:text-background group-hover:border-primary transition-colors">
+                   Browse Glossary
+                 </Button>
+              </div>
+           </div>
       </section>
 
       {/* Categories Grid */}
@@ -329,14 +357,37 @@ export const Learn: React.FC<LearnProps> = ({ onNavigate }) => {
           {KNOWLEDGE_CATEGORIES.map((cat) => (
              <div 
                key={cat.id} 
-               onClick={() => setActiveCategoryId(cat.id)}
-               className="leather-card rounded-xl p-6 cursor-pointer hover:border-primary/50 group flex items-center gap-6 transition-colors"
+               onClick={() => {
+                 if (cat.comingSoon) {
+                    addToast(`${cat.name} is coming soon to the Coinvestopedia Academy!`, 'info');
+                    return;
+                 }
+                 setActiveCategoryId(cat.id);
+               }}
+               className={`leather-card rounded-xl p-6 flex items-center gap-6 transition-all duration-300 relative group overflow-hidden
+                 ${cat.comingSoon ? 'opacity-75 cursor-not-allowed border-dashed grayscale-[0.5]' : 'cursor-pointer hover:border-primary/50'}
+               `}
              >
-                <div className="p-4 bg-surface rounded-xl text-primary group-hover:bg-primary/20 transition-colors flex-shrink-0">
+                {cat.comingSoon && (
+                  <div className="absolute top-4 right-4 z-20">
+                    <span className="px-2 py-1 bg-primary/20 border border-primary/30 text-primary text-[10px] font-black uppercase tracking-tighter rounded">
+                      Coming Soon
+                    </span>
+                  </div>
+                )}
+                
+                <div className={`p-4 bg-surface rounded-xl text-primary transition-colors flex-shrink-0
+                   ${cat.comingSoon ? '' : 'group-hover:bg-primary/20'}
+                `}>
                    {cat.icon}
                 </div>
                 <div className="flex-1">
-                   <h3 className="text-xl font-bold group-hover:text-primary transition-colors">{cat.name}</h3>
+                   <div className="flex items-center gap-2">
+                     <h3 className={`text-xl font-bold transition-colors ${cat.comingSoon ? 'text-text-muted' : 'group-hover:text-primary'}`}>
+                       {cat.name}
+                     </h3>
+                     {cat.comingSoon && <Shield size={14} className="text-primary/50" />}
+                   </div>
                    <p className="text-sm text-text-muted mt-1">{cat.resources.length} Modules & Resources</p>
                 </div>
              </div>
@@ -344,48 +395,7 @@ export const Learn: React.FC<LearnProps> = ({ onNavigate }) => {
         </div>
       </section>
 
-      {/* Latest Resources */}
-      <section>
-        <div className="flex items-center justify-between mb-6">
-           <h2 className="text-2xl font-bold">Latest Free Resources</h2>
-        </div>
-        
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-           {recentArticles.map((article, i) => (
-              <Card 
-                key={i} 
-                className="flex flex-col cursor-pointer group hover:border-primary/40"
-                onClick={() => setActiveCategoryId(article.catId)}
-              >
-                 <div className="flex justify-between items-start mb-4">
-                    <span className="px-2 py-1 bg-surface border border-border text-xs rounded font-medium text-text-muted uppercase">
-                       {article.tag}
-                    </span>
-                    <div className="flex items-center gap-1.5 text-xs text-primary font-bold">
-                       {article.icon} {article.type}
-                    </div>
-                 </div>
-                 
-                 <h3 className="text-lg font-bold mb-4 group-hover:text-primary transition-colors pr-4">
-                    {article.title}
-                 </h3>
-                 
-                 <div className="mt-auto flex items-center justify-between text-xs text-text-muted font-medium pt-4 border-t border-border">
-                    <span>{article.readTime}</span>
-                                        <button 
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        setActiveCategoryId(article.catId);
-                      }}
-                      className="flex items-center gap-1 text-primary hover:underline font-bold transition-colors"
-                    >
-                      Read Now →
-                    </button>
-                 </div>
-              </Card>
-           ))}
-        </div>
-      </section>
+
 
 
       
@@ -401,21 +411,26 @@ export const Learn: React.FC<LearnProps> = ({ onNavigate }) => {
                <p className="text-text-muted mb-8">
                   Take our comprehensive 50-question assessment to identify gaps in your crypto knowledge and get personalized course recommendations.
                </p>
-               <Button 
-                 size="lg" 
-                 variant="primary"
-                 onClick={() => addToast('The Coinvestopedia Knowledge Assessment is launching next month! Join the waitlist in the newsletter.', 'info')}
-                 className="shadow-xl"
-               >
-                 Join Assessment Waitlist
-               </Button>
+               <div className="relative">
+                 <Button 
+                   size="lg" 
+                   variant="primary"
+                   onClick={() => addToast('The Coinvestopedia Knowledge Assessment is launching next month! Subscribe to The Briefing for updates.', 'info')}
+                   className="shadow-xl opacity-80"
+                 >
+                   Join Assessment Waitlist
+                 </Button>
+                 <div className="absolute -top-3 -right-3 z-20">
+                   <span className="px-2 py-1 bg-primary text-background text-[10px] font-black uppercase tracking-tighter rounded shadow-lg">
+                     Coming Soon
+                   </span>
+                 </div>
+               </div>
             </div>
          </div>
       </section>
 
-      <div className="mt-12">
-        <VaraDisclaimer variant="inline" />
-      </div>
+
     </div>
   );
 };

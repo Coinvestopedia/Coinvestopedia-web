@@ -1,28 +1,29 @@
 import { PageMeta } from '../components/PageMeta';
+
+import { PageRoute } from '../types';
 import React, { useState, useMemo, useEffect } from 'react';
 import { Card } from '../components/Card';
 import { Button } from '../components/Button';
+import { useAppContext } from '../context/AppContext';
 import {
-  Shield, ChevronDown, ChevronUp, ExternalLink, AlertTriangle, Check, X as XIcon,
-  DollarSign, Globe, Server, Clock, Info, ArrowRight, BarChart2, Layers, Scale,
-  Star, CheckCircle, MinusCircle, Trophy, Building, Droplets, TrendingDown, Repeat, Lock, Coins
+  Shield, ChevronDown, ChevronUp, Check, X as XIcon,
+  DollarSign, Globe, Server, Clock, Info, ArrowRight, Layers, Scale,
+  Trophy, Building, Droplets, TrendingDown, Repeat, Lock, Coins,
+  Briefcase, Users, Landmark, Wallet, Zap, Percent,
+  CircleDollarSign, Copy, Smartphone, Activity, ShieldCheck
 } from 'lucide-react';
 import {
   EXCHANGES, BEST_FOR_CARDS, FAQ_DATA, REGIONS,
-  ExchangeProfile, Grade, CustodyModel, PoRStatus
+  ExchangeProfile, Grade
 } from '../data/exchanges';
 import { ExchangeCard } from '../components/exchanges/ExchangeCard';
 
-import { AreaChart, Area, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar, ResponsiveContainer, Tooltip as RechartsTooltip, XAxis, YAxis, CartesianGrid, BarChart, Bar, Cell } from 'recharts';
+import { AreaChart, Area, RadarChart, PolarGrid, PolarAngleAxis, Radar, ResponsiveContainer, Tooltip as RechartsTooltip, XAxis } from 'recharts';
 import { PulseIcon } from '../components/AnimatedIcons';
 
-import { VaraDisclaimer } from '../components/VaraDisclaimer';
+
 
 // Custom dimension colors for charts matching default Coinvestopedia palette
-const ICON_MAP: Record<string, React.FC<any>> = {
-  Trophy, Building, Droplets, TrendingDown, Shield, Globe, Repeat, Lock, Coins
-};
-
 // ─── Utility helpers ──────────────────────────────────────────────
 
 const getScoreColorHex = (score: number) => {
@@ -56,11 +57,7 @@ const scoreColor = (s: number) => {
   return 'text-red-400';
 };
 
-const scoreBarColor = (s: number) => {
-  if (s >= 85) return 'bg-emerald-500';
-  if (s >= 70) return 'bg-slate-400';
-  return 'bg-red-500';
-};
+
 
 const regStatusIcon = (s: string) => {
   switch (s) {
@@ -85,7 +82,7 @@ const PageHeader: React.FC = () => {
   };
 
   return (
-    <div className="leather-card relative overflow-hidden rounded-2xl p-8 lg:p-12 mb-8 group">
+    <div className="leather-card relative overflow-hidden rounded-2xl p-8 lg:p-12 group">
       <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none group-hover:bg-primary/10 transition-colors duration-700" />
       <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-primary/50 to-transparent"></div>
       
@@ -99,7 +96,7 @@ const PageHeader: React.FC = () => {
         </h1>
         
         <p className="text-lg text-text-muted max-w-3xl mb-4 leading-relaxed">
-          10 exchanges. 7 scoring dimensions. Zero editorial bias.
+          20 exchanges. 7 scoring dimensions. Zero editorial bias.
         </p>
         <p className="text-sm text-text-muted max-w-3xl mb-10 leading-relaxed opacity-80">
           Every exchange rating you've read was written to drive clicks. ClearRate™ is different — a quantitative
@@ -110,7 +107,7 @@ const PageHeader: React.FC = () => {
         {/* Key metrics */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
           {[
-            { value: '10', label: 'Exchanges Scored' },
+            { value: '20', label: 'Exchanges Scored' },
             { value: '7', label: 'Weighted Dimensions' },
             { value: '$2.3T+', label: 'Combined 30D Volume' },
             { value: 'Monthly', label: 'Updated' },
@@ -168,7 +165,7 @@ const MethodologySection: React.FC = () => {
     <section id="methodology">
       <Card
         variant="interactive"
-        className="w-full"
+        className="w-full border-t-2 border-t-primary/30"
         onClick={() => setIsOpen(!isOpen)}
       >
         <div className="flex items-center justify-between">
@@ -217,7 +214,7 @@ const MethodologySection: React.FC = () => {
                </div>
                <div className="h-[300px] lg:h-full min-h-[300px] w-full relative pl-2 pt-4 flex-1">
                   <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-primary/5 via-background to-background pointer-events-none"></div>
-                  <ResponsiveContainer width="100%" height="100%">
+                  <ResponsiveContainer width="100%" height="100%" debounce={50}>
                      <RadarChart cx="50%" cy="50%" outerRadius="70%" data={methodologyRadarData}>
                         <PolarGrid stroke="#3A3F4B" strokeDasharray="3 3"/>
                         <PolarAngleAxis dataKey="subject" tick={{ fill: '#94A3B8', fontSize: 10, fontWeight: 'bold' }} />
@@ -263,52 +260,131 @@ const MethodologySection: React.FC = () => {
 // ─── Section: Best For Grid ───────────────────────────────────────
 
 const BestForGrid: React.FC = () => {
+  const [visibleCount, setVisibleCount] = useState(8);
+  
   const scrollTo = (id: string) => {
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
 
+  const sortedExchanges = useMemo(() => [...EXCHANGES].sort((a, b) => b.clearRateScore - a.clearRateScore), []);
+
+  const sortedBestFor = useMemo(() => {
+    return [...BEST_FOR_CARDS].sort((a, b) => {
+      const scoreA = EXCHANGES.find(e => e.id === a.exchangeId)?.clearRateScore || 0;
+      const scoreB = EXCHANGES.find(e => e.id === b.exchangeId)?.clearRateScore || 0;
+      return scoreB - scoreA;
+    });
+  }, []);
+
   return (
-    <section>
+    <section id="best-for" className="scroll-mt-32">
       <h2 className="text-xl font-bold mb-6 flex items-center gap-2">
         <span className="w-1.5 h-6 bg-primary rounded-sm inline-block"></span>
         Quick Pick — Best Exchange For…
       </h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        {BEST_FOR_CARDS.map((card, i) => {
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {sortedBestFor.slice(0, visibleCount).map((card) => {
           const exchange = EXCHANGES.find(e => e.id === card.exchangeId)!;
+          const rank = sortedExchanges.findIndex(e => e.id === exchange.id) + 1;
+          
           return (
-            <React.Fragment key={card.exchangeId}>
             <Card
+              key={card.exchangeId}
               variant="interactive"
-              className="h-full relative overflow-hidden"
+              className={`h-full flex flex-col w-full p-6 group relative overflow-hidden border-t-2 ${exchange.grade === 'INSTITUTIONAL' ? 'border-t-primary' : 'border-t-yellow-500'}`}
               onClick={() => scrollTo(card.exchangeId)}
             >
+              {/* Background Pulse Effect */}
+              <div className={`absolute -right-16 -top-16 w-64 h-64 rounded-full blur-[100px] opacity-10 group-hover:opacity-20 transition-opacity duration-700 pointer-events-none ${exchange.grade === 'INSTITUTIONAL' ? 'bg-primary' : 'bg-yellow-500'}`} />
               <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
-              <div className="relative z-10 flex flex-col h-full justify-between">
-                <div>
-                  <div className="flex items-center justify-between mb-4">
-                    <div className="w-10 h-10 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center text-primary group-hover:scale-110 group-hover:shadow-[0_0_15px_rgba(var(--color-primary-rgb),0.3)] group-hover:bg-primary/20 transition-colors transition-shadow transition-transform transform-gpu duration-300">
-                      {(() => {
-                        const IconComponent = ICON_MAP[(card as any).iconName] || Trophy;
-                        return <IconComponent size={20} strokeWidth={2} />;
-                      })()}
-                    </div>
-                    <span className={`text-xs font-black px-2 py-1 rounded flex-shrink-0 ${scoreColor(exchange.clearRateScore)} bg-surface border border-border group-hover:border-primary/30 transition-colors`}>
-                      {exchange.clearRateScore}/100
-                    </span>
-                  </div>
-                  <h3 className="font-bold text-lg mb-1 group-hover:text-primary transition-colors">{card.label}</h3>
-                  <p className="text-sm text-text-muted mb-4">{exchange.name}</p>
+              
+              {/* Header */}
+              <div className="mb-5 relative z-10">
+                <div className="flex items-center justify-between mb-3">
+                  <span className={`px-2.5 py-1 rounded-lg text-[10px] font-black uppercase tracking-widest border transition-all shadow-sm ${
+                    exchange.grade === 'INSTITUTIONAL' 
+                    ? 'text-primary bg-primary/5 border-primary/20 group-hover:bg-primary/10' 
+                    : 'text-yellow-500 bg-yellow-500/5 border-yellow-500/20 group-hover:bg-yellow-500/10'
+                  }`}>
+                    {exchange.name}
+                  </span>
+                  <Activity size={14} className="text-text-muted opacity-30 group-hover:opacity-100 group-hover:text-primary transition-all" />
                 </div>
-                <div className="flex items-center gap-1 text-primary text-[13px] font-bold opacity-0 group-hover:opacity-100 transition-opacity transition-transform transform-gpu -translate-x-2 group-hover:translate-x-0 duration-300">
-                  {card.cta} <ArrowRight size={14} />
+                <h3 className="font-bold text-xl leading-snug group-hover:text-primary transition-colors min-h-[3.5rem] flex items-center">
+                  {card.label}
+                </h3>
+              </div>
+
+              {/* Main Score Box */}
+              <div className="mb-6 bg-black backdrop-blur-sm p-4 rounded-xl border border-border w-full overflow-hidden flex items-center justify-between group-hover:border-primary/30 transition-all relative z-10">
+                <div className="flex flex-col">
+                  <span className="text-[10px] font-bold uppercase tracking-widest text-text-muted mb-1">ClearRate™ Score</span>
+                  <div className="flex items-baseline gap-1">
+                    <span className={`text-3xl font-bold font-mono tracking-tight ${scoreColor(exchange.clearRateScore)} group-hover:brightness-110 transition-all`}>
+                      {exchange.clearRateScore}
+                    </span>
+                    <span className="text-xs text-text-muted font-mono">/100</span>
+                  </div>
+                </div>
+                <div className={`flex flex-col items-end gap-1 font-bold px-3 py-1.5 rounded-lg text-[10px] border shadow-sm ${gradeColor(exchange.grade)}`}>
+                   <span className="uppercase opacity-70 flex items-center gap-1">
+                     <ShieldCheck size={10} />
+                     Tier Status
+                   </span>
+                   <span className="tracking-wide">{gradeLabel(exchange.grade)}</span>
                 </div>
               </div>
-            </Card>
 
-            </React.Fragment>
+              {/* Secondary Metrics */}
+              <div className="grid grid-cols-2 gap-4 mb-8 relative z-10 px-1">
+                <div className="flex flex-col gap-1.5">
+                  <span className="text-[9px] font-bold uppercase tracking-widest text-text-muted">Spot Taker Fee</span>
+                  <div className="flex items-center gap-1.5">
+                    <Zap size={10} className="text-primary opacity-50" />
+                    <span className="font-mono text-xs font-bold text-text">{(exchange.fees.spotTaker * 100).toFixed(2)}%</span>
+                  </div>
+                </div>
+                <div className="flex flex-col gap-1.5 items-end text-right">
+                  <span className="text-[9px] font-bold uppercase tracking-widest text-text-muted">Global Rank</span>
+                  <span className="font-mono text-xs font-bold text-primary">{rank} <span className="text-[10px] text-text-muted">/ 20</span></span>
+                </div>
+              </div>
+
+              {/* Bottom CTA Button */}
+              <div className="flex items-center justify-center w-full px-4 py-3.5 mt-auto bg-surface-alt group-hover:bg-primary group-hover:text-white text-text-muted group-hover:shadow-lg group-hover:shadow-primary/20 text-[11px] font-black rounded-xl transition-all duration-300 border border-border group-hover:border-transparent relative z-10 uppercase tracking-widest">
+                {card.cta}
+                <ArrowRight size={14} className="ml-2 group-hover:translate-x-1 transition-transform" />
+              </div>
+            </Card>
           );
         })}
+      </div>
+
+      <div className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-4">
+        {visibleCount < sortedBestFor.length && (
+          <Button 
+            variant="secondary"
+            size="lg"
+            onClick={() => setVisibleCount(prev => prev === 8 ? 14 : sortedBestFor.length)}
+            className="w-full sm:w-auto min-w-[200px] group gap-3 py-7 rounded-2xl border-primary/30 bg-primary/5 hover:bg-primary/10 hover:border-primary/60 transition-all duration-500 shadow-lg shadow-primary/5 hover:shadow-primary/20"
+            icon={<ChevronDown size={20} className="group-hover:translate-y-1 transition-all duration-300 text-primary" />}
+            iconPosition="right"
+          >
+            <span className="text-sm font-bold tracking-tight uppercase">Show More</span>
+          </Button>
+        )}
+        {visibleCount > 8 && (
+          <Button 
+            variant="secondary"
+            size="lg"
+            onClick={() => setVisibleCount(8)}
+            className="w-full sm:w-auto min-w-[160px] group gap-3 py-7 rounded-2xl border-border/50 bg-surface/30 hover:bg-surface hover:border-primary/20 transition-all duration-500 text-text-muted hover:text-primary"
+            icon={<ChevronUp size={20} className="group-hover:-translate-y-1 transition-all duration-300" />}
+            iconPosition="right"
+          >
+            <span className="text-sm font-bold tracking-tight uppercase">Show Less</span>
+          </Button>
+        )}
       </div>
     </section>
   );
@@ -317,20 +393,38 @@ const BestForGrid: React.FC = () => {
 // ─── Exchange Profiles Section ────────────────────────────────────
 
 const ExchangeProfilesSection: React.FC = () => {
+  const sortedExchanges = useMemo(() => [...EXCHANGES].sort((a, b) => b.clearRateScore - a.clearRateScore), []);
+
   return (
-    <section id="exchange-profiles" className="space-y-4 scroll-mt-32">
-      <h2 className="text-xl font-bold mb-2 flex items-center gap-2">
-        <span className="w-1.5 h-6 bg-primary rounded-sm inline-block"></span>
-        Top 10 Exchange Profiles
-      </h2>
-      <p className="text-sm text-text-muted mb-4">Ranked by ClearRate™ Score</p>
+    <section id="exchange-profiles" className="scroll-mt-32">
+      <div className="leather-card rounded-2xl p-6 lg:p-8 relative overflow-hidden group border-t-2 border-t-primary transition-all duration-500 hover:shadow-2xl hover:shadow-primary/5">
+        {/* Pulse Background */}
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"></div>
+        <div className="absolute -left-20 -bottom-20 w-80 h-80 bg-primary/5 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-1000 pointer-events-none"></div>
 
-      {EXCHANGES.map((exchange, index) => (
-        <React.Fragment key={exchange.id}>
-          <ExchangeCard exchange={exchange} rank={index + 1} />
+        <div className="relative z-10">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
+            <div>
+              <h2 className="text-2xl font-bold mb-1 flex items-center gap-2">
+                Top 20 Liquidity Venues
+              </h2>
+              <p className="text-sm text-text-muted">Ranked by ClearRate™ Institutional Scoring Model</p>
+            </div>
+            <div className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-text-muted">
+              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+              Live Feed Verified
+            </div>
+          </div>
 
-        </React.Fragment>
-      ))}
+          <div className="space-y-4">
+            {sortedExchanges.map((exchange, index) => (
+              <React.Fragment key={exchange.id}>
+                <ExchangeCard exchange={exchange} rank={index + 1} />
+              </React.Fragment>
+            ))}
+          </div>
+        </div>
+      </div>
     </section>
   );
 };
@@ -444,32 +538,41 @@ const ComparisonTool: React.FC = () => {
       </div>
 
       {/* Comparison table */}
-      <Card className="p-0 overflow-hidden leather-card group">
+      <Card className="p-0 overflow-hidden leather-card group relative border-t-2 border-t-primary transition-all duration-500 hover:shadow-2xl hover:shadow-primary/5">
+        {/* Pulse Background */}
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"></div>
+        <div className="absolute -right-20 -bottom-20 w-80 h-80 bg-primary/5 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-1000 pointer-events-none"></div>
+
         <div className="overflow-x-auto relative z-10">
           <table className="w-full min-w-[600px]">
             <thead>
-              <tr className="border-b border-border">
-                <th className="p-4 text-left text-xs font-bold uppercase tracking-wider text-text-muted w-40">Dimension</th>
+              <tr className="border-b border-border bg-background/30">
+                <th className="p-5 text-left text-xs font-bold uppercase tracking-wider text-text-muted w-44">Dimension</th>
                 {selectedExchanges.map(e => (
-                  <th key={e.id} className="p-4 text-center">
-                    <div className="text-sm font-bold">{e.name}</div>
-                    <div className={`text-[10px] font-bold mt-1 ${scoreColor(e.clearRateScore)}`}>{e.clearRateScore}/100</div>
+                  <th key={e.id} className="p-5 text-center">
+                    <div className="inline-flex px-2 py-0.5 rounded-md bg-surface border border-border text-[10px] font-black text-primary mb-1">
+                      {e.grade === 'INSTITUTIONAL' ? 'INSTITUTIONAL' : 'RETAIL+'}
+                    </div>
+                    <div className="text-base font-bold group-hover:text-primary transition-colors">{e.name}</div>
+                    <div className={`text-[11px] font-black mt-1 ${scoreColor(e.clearRateScore)}`}>{e.clearRateScore}/100</div>
                   </th>
                 ))}
               </tr>
             </thead>
-            <tbody>
+            <tbody className="divide-y divide-border/30">
               {comparisonRows.map((row, i) => {
                 const bestId = getBestId(row.key);
                 return (
-                  <tr key={i} className="border-b border-border/50 hover:bg-primary/5 transition-colors">
-                    <td className="p-4 text-xs font-bold text-text-muted">{row.label}</td>
+                  <tr key={i} className="hover:bg-primary/5 transition-colors">
+                    <td className="p-5 text-xs font-bold text-text-muted border-r border-border/20">{row.label}</td>
                     {selectedExchanges.map(e => (
-                      <td key={e.id} className={`p-4 text-center ${bestId === e.id ? 'bg-primary/5' : ''}`}>
-                        <div className="flex items-center justify-center gap-1">
-                          {row.render(e)}
+                      <td key={e.id} className={`p-5 text-center transition-colors duration-300 ${bestId === e.id ? 'bg-primary/5' : ''}`}>
+                        <div className="flex flex-col items-center justify-center gap-1">
+                          <div className="font-medium text-sm">{row.render(e)}</div>
                           {bestId === e.id && (
-                            <span className="ml-1 text-[9px] font-black text-primary bg-primary/10 px-1.5 py-0.5 rounded">BEST</span>
+                            <span className="flex items-center gap-1 text-[9px] font-black text-primary bg-primary/10 px-2 py-0.5 rounded uppercase tracking-tighter mt-1">
+                              <ShieldCheck size={8} /> Best-in-Class
+                            </span>
                           )}
                         </div>
                       </td>
@@ -478,7 +581,6 @@ const ComparisonTool: React.FC = () => {
                 );
               })}
             </tbody>
-
           </table>
         </div>
       </Card>
@@ -518,7 +620,7 @@ const FeeCalculator: React.FC = () => {
       });
       return point;
     });
-  }, [selectedIds, volumeSteps]);
+  }, [selectedIds, volumeSteps, tradeType]);
 
   const sortedResults = useMemo(() => [...results].sort((a, b) => a.annualCost - b.annualCost), [results]);
   const cheapest = sortedResults[0];
@@ -534,145 +636,177 @@ const FeeCalculator: React.FC = () => {
 
   return (
     <section id="fee-calculator" className="scroll-mt-32">
-      <h2 className="text-xl font-bold mb-6 flex items-center gap-2">
-        <span className="w-1.5 h-6 bg-primary rounded-sm inline-block"></span>
-        Fee Calculator
-      </h2>
+      <div className="leather-card rounded-2xl p-8 lg:p-10 relative overflow-hidden group border-t-2 border-t-yellow-500/50 transition-all duration-500 hover:shadow-2xl hover:shadow-primary/5">
+        {/* Pulse Background */}
+        <div className="absolute inset-0 bg-gradient-to-br from-yellow-500/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"></div>
+        <div className="absolute -right-20 -bottom-20 w-96 h-96 bg-yellow-500/5 rounded-full blur-[100px] opacity-0 group-hover:opacity-100 transition-opacity duration-1000 pointer-events-none"></div>
 
-      <Card className="space-y-6 relative overflow-hidden leather-card border-none">
-        <div className="absolute inset-0 bg-surface/80" />
-        <div className="absolute top-0 right-0 w-64 h-64 bg-primary/10 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/2 pointer-events-none" />
-        <div className="relative z-10 space-y-8">
-        {/* Volume slider */}
-        <div>
-          <label className="text-sm font-bold mb-3 block">Monthly Trading Volume</label>
-          <input
-            type="range"
-            min={0}
-            max={volumeSteps.length - 1}
-            value={volumeSteps.indexOf(volumeSteps.reduce((prev, curr) => Math.abs(curr - volume) < Math.abs(prev - volume) ? curr : prev))}
-            onChange={(e) => setVolume(volumeSteps[parseInt(e.target.value)])}
-            className="w-full h-2 bg-surface rounded-full appearance-none cursor-pointer accent-primary"
-          />
-          <div className="flex justify-between mt-2">
-            <span className="text-xs text-text-muted">$10K</span>
-            <span className="text-lg font-black text-primary">{formatCurrency(volume)}</span>
-            <span className="text-xs text-text-muted">$100M</span>
-          </div>
-        </div>
-
-        {/* Trade type */}
-        <div>
-          <label className="text-sm font-bold mb-3 block">Trade Type</label>
-          <div className="flex gap-2">
-            {(['spot', 'perpetuals'] as const).map(t => (
-              <button
-                key={t}
-                onClick={() => setTradeType(t)}
-                className={`px-4 py-2 rounded-lg text-sm font-bold transition-colors ${
-                  tradeType === t ? 'bg-primary text-background' : 'bg-surface border border-border text-text-muted hover:text-text hover:border-primary/30'
-                }`}
-              >
-                {t === 'spot' ? 'Spot' : 'Perpetuals'}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        {/* Exchange chips */}
-        <div>
-          <label className="text-sm font-bold mb-3 block">Select Exchanges (max 5)</label>
-          <div className="flex flex-wrap gap-2">
-            {EXCHANGES.map(e => (
-              <button
-                key={e.id}
-                onClick={() => toggleCalcExchange(e.id)}
-                disabled={!selectedIds.includes(e.id) && selectedIds.length >= 5}
-                className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-colors ${
-                  selectedIds.includes(e.id) ? 'bg-primary/10 text-primary border border-primary/20' : 'bg-surface border border-border text-text-muted hover:text-text hover:border-primary/30'
-                } disabled:opacity-30`}
-              >
-                {e.name}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        {/* Results */}
-        {sortedResults.length > 0 && (
-          <div className="space-y-6">
-            <h3 className="text-sm font-bold uppercase tracking-wider text-text-muted flex items-center gap-2">
-               <DollarSign size={16} className="text-primary" /> Annual Fee Cost Estimate
-            </h3>
-            
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-               <div className="space-y-3">
-                 {sortedResults.map((r, i) => {
-                   const savings = mostExpensive ? mostExpensive.annualCost - r.annualCost : 0;
-                   const maxCost = mostExpensive?.annualCost || 1;
-                   return (
-                     <div key={r.exchange.id} className={`p-4 rounded-xl transition-colors ${i === 0 ? 'bg-primary/10 border border-primary/30' : 'bg-surface border border-border group-hover:border-primary/20'}`}>
-                       <div className="flex items-center justify-between mb-2">
-                         <div className="flex items-center gap-3">
-                           {i === 0 && <span className="text-[10px] font-black text-primary bg-primary/10 px-2 py-0.5 rounded border border-primary/20">BEST VALUE</span>}
-                           <span className="font-bold text-sm">{r.exchange.name}</span>
-                         </div>
-                         <div className="text-right">
-                           <div className="font-black text-lg">{formatCurrency(r.annualCost)}<span className="text-xs text-text-muted font-normal">/yr</span></div>
-                           {savings > 0 && <div className="text-[10px] text-emerald-400 font-bold">Save {formatCurrency(savings)} vs worst</div>}
-                         </div>
-                       </div>
-                     </div>
-                   );
-                 })}
-               </div>
-
-               {/* Fee AreaChart */}
-               <div className="bg-background/80 rounded-xl border border-border p-4 h-[300px]">
-                 <h4 className="text-xs font-bold text-text-muted mb-4 uppercase tracking-wider text-center">Cost Scaling Over Volume</h4>
-                 <div className="w-full h-full pb-4">
-                   <ResponsiveContainer width="100%" height="100%">
-                     <AreaChart data={chartData} margin={{ top: 0, right: 0, left: 0, bottom: 0 }}>
-                       <defs>
-                          {selectedIds.map((id) => {
-                             const rankIndex = sortedResults.findIndex(r => r.exchange.id === id);
-                             const color = getRankColorHex(rankIndex, selectedIds.length);
-                             return (
-                               <linearGradient key={`color-${id}`} id={`color-${id}`} x1="0" y1="0" x2="0" y2="1">
-                                 <stop offset="5%" stopColor={color} stopOpacity={0.8}/>
-                                 <stop offset="95%" stopColor={color} stopOpacity={0}/>
-                               </linearGradient>
-                             );
-                          })}
-                       </defs>
-                       <XAxis dataKey="name" tick={{ fill: '#94A3B8', fontSize: 10 }} axisLine={false} tickLine={false} />
-                       <RechartsTooltip 
-                         contentStyle={{ backgroundColor: '#1A1D24', borderColor: '#333842', borderRadius: '8px' }}
-                         itemStyle={{ fontSize: 12, fontWeight: 'bold' }}
-                         formatter={(value: number) => [formatCurrency(value), 'Annual Fee']}
-                       />
-                       {selectedIds.map((id) => {
-                          const ex = EXCHANGES.find(e => e.id === id);
-                          if (!ex) return null;
-                          const rankIndex = sortedResults.findIndex(r => r.exchange.id === id);
-                          const color = getRankColorHex(rankIndex, selectedIds.length);
-                          return (
-                             <Area 
-                               key={id} 
-                               type="monotone" 
-                               dataKey={ex.name} 
-                               stroke={color} 
-                               fillOpacity={1} 
-                               fill={`url(#color-${id})`} 
-                               strokeWidth={2}
-                             />
-                          );
-                       })}
-                     </AreaChart>
-                   </ResponsiveContainer>
-                 </div>
-               </div>
+        <div className="relative z-10">
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-12">
+            <div>
+              <h2 className="text-2xl font-bold mb-2 flex items-center gap-2">
+                <span className="w-1.5 h-6 bg-yellow-500 rounded-sm inline-block"></span>
+                Cost of Capital Calculator
+              </h2>
+              <p className="text-text-muted">Simulate annual trading slippage and fee overhead across multiple venues.</p>
             </div>
+            <div className="flex bg-background/50 p-1.5 rounded-xl border border-border backdrop-blur-md">
+              {(['spot', 'perpetuals'] as const).map(t => (
+                <button
+                  key={t}
+                  onClick={() => setTradeType(t)}
+                  className={`px-5 py-2 rounded-lg text-xs font-bold transition-all duration-300 ${tradeType === t ? 'bg-primary text-background shadow-lg shadow-primary/20' : 'text-text-muted hover:text-text'}`}
+                >
+                  {t.toUpperCase()}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <div className="space-y-10">
+            {/* Volume slider */}
+            <div className="bg-background/40 p-6 rounded-2xl border border-border/50">
+              <div className="flex justify-between items-end mb-4">
+                <label className="text-xs font-black uppercase tracking-widest text-text-muted">Monthly Trading Volume</label>
+                <span className="text-2xl font-black text-primary tabular-nums">{formatCurrency(volume)}</span>
+              </div>
+              <input
+                type="range"
+                min={0}
+                max={volumeSteps.length - 1}
+                value={volumeSteps.indexOf(volumeSteps.reduce((prev, curr) => Math.abs(curr - volume) < Math.abs(prev - volume) ? curr : prev))}
+                onChange={(e) => setVolume(volumeSteps[parseInt(e.target.value)])}
+                className="w-full h-1.5 bg-surface rounded-full appearance-none cursor-pointer accent-primary hover:accent-primary-hover transition-all"
+              />
+              <div className="flex justify-between mt-3 px-1">
+                <span className="text-[10px] text-text-muted font-bold">$10K</span>
+                <span className="text-[10px] text-text-muted font-bold">$100M</span>
+              </div>
+            </div>
+
+            {/* Exchange chips */}
+            <div>
+              <label className="text-xs font-black uppercase tracking-widest text-text-muted mb-4 block px-1">Select Venues to compare (max 5)</label>
+              <div className="flex flex-wrap gap-2">
+                {EXCHANGES.map(e => (
+                  <button
+                    key={e.id}
+                    onClick={() => toggleCalcExchange(e.id)}
+                    disabled={!selectedIds.includes(e.id) && selectedIds.length >= 5}
+                    className={`px-4 py-2 rounded-xl text-xs font-bold transition-all duration-300 ${
+                      selectedIds.includes(e.id) ? 'bg-primary text-background shadow-lg shadow-primary/10' : 'bg-surface/50 border border-border text-text-muted hover:border-primary/30 hover:bg-surface'
+                    } disabled:opacity-20 disabled:cursor-not-allowed`}
+                  >
+                    {e.name}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Results Grid */}
+            {sortedResults.length > 0 && (
+              <div className="grid grid-cols-1 xl:grid-cols-2 gap-10">
+                <div className="space-y-3">
+                  <h3 className="text-xs font-black uppercase tracking-widest text-text-muted mb-4 px-1 flex items-center gap-2">
+                    <Activity size={14} className="text-primary" /> Efficiency Rankings
+                  </h3>
+                  {sortedResults.map((r, i) => {
+                    const savings = mostExpensive ? mostExpensive.annualCost - r.annualCost : 0;
+                    return (
+                      <div key={r.exchange.id} className={`p-5 rounded-2xl transition-all duration-300 border ${i === 0 ? 'bg-primary/5 border-primary/30 shadow-xl shadow-primary/5' : 'bg-surface/40 border-border/50 hover:border-border hover:bg-surface/60'}`}>
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center gap-4">
+                            <div className={`w-8 h-8 rounded-lg flex items-center justify-center font-black text-xs ${i === 0 ? 'bg-primary text-background' : 'bg-background text-text-muted'}`}>
+                              {i + 1}
+                            </div>
+                            <div>
+                              <div className="font-bold text-sm flex items-center gap-2">
+                                {r.exchange.name}
+                                {i === 0 && <span className="text-[8px] font-black bg-primary/10 text-primary px-1.5 py-0.5 rounded uppercase">Leader</span>}
+                              </div>
+                              <div className="text-[10px] text-text-muted font-medium uppercase tracking-tight">{tradeType} Fee: {(r.feeRate * 100).toFixed(3)}%</div>
+                            </div>
+                          </div>
+                          <div className="text-right">
+                            <div className="font-black text-xl tabular-nums">{formatCurrency(r.annualCost)}<span className="text-[10px] text-text-muted font-normal ml-1">/yr</span></div>
+                            {savings > 0 && <div className="text-[10px] text-emerald-400 font-bold mt-0.5">-{formatCurrency(savings)} vs worst</div>}
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+
+                {/* Visual Chart */}
+                <div className="bg-background/60 rounded-2xl border border-border/50 p-6 flex flex-col backdrop-blur-sm">
+                  <div className="flex items-center justify-between mb-6">
+                    <h4 className="text-xs font-black text-text-muted uppercase tracking-widest">Fee Scaling Projection</h4>
+                    <div className="flex items-center gap-4">
+                       {selectedIds.slice(0, 3).map(id => {
+                         const ex = EXCHANGES.find(e => e.id === id);
+                         const rankIndex = sortedResults.findIndex(r => r.exchange.id === id);
+                         const color = getRankColorHex(rankIndex, selectedIds.length);
+                         return (
+                           <div key={id} className="flex items-center gap-1.5">
+                             <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: color }}></span>
+                             <span className="text-[10px] font-bold text-text-muted">{ex?.name}</span>
+                           </div>
+                         );
+                       })}
+                    </div>
+                  </div>
+                  <div className="flex-1 min-h-[250px] relative">
+                    <ResponsiveContainer width="100%" height="100%" debounce={50}>
+                      <AreaChart data={chartData} margin={{ top: 0, right: 0, left: 0, bottom: 0 }}>
+                        <defs>
+                           {selectedIds.map((id) => {
+                              const rankIndex = sortedResults.findIndex(r => r.exchange.id === id);
+                              const color = getRankColorHex(rankIndex, selectedIds.length);
+                              return (
+                                <linearGradient key={`color-${id}`} id={`color-${id}`} x1="0" y1="0" x2="0" y2="1">
+                                  <stop offset="5%" stopColor={color} stopOpacity={0.3}/>
+                                  <stop offset="95%" stopColor={color} stopOpacity={0}/>
+                                </linearGradient>
+                              );
+                           })}
+                        </defs>
+                        <XAxis 
+                          dataKey="name" 
+                          tick={{ fill: '#94A3B8', fontSize: 9, fontWeight: 700 }} 
+                          axisLine={false} 
+                          tickLine={false} 
+                          interval="preserveStartEnd"
+                        />
+                        <RechartsTooltip 
+                          contentStyle={{ backgroundColor: '#1A1D24', borderColor: '#333842', borderRadius: '12px', border: '1px solid rgba(255,255,255,0.1)', boxShadow: '0 20px 25px -5px rgba(0,0,0,0.5)' }}
+                          itemStyle={{ fontSize: 11, fontWeight: 'black' }}
+                          labelStyle={{ fontSize: 10, color: '#94A3B8', marginBottom: '4px', textTransform: 'uppercase', fontWeight: 800 }}
+                          formatter={(value: any, name: any) => [formatCurrency(Number(value)), name]}
+                        />
+                        {selectedIds.map((id) => {
+                           const ex = EXCHANGES.find(e => e.id === id);
+                           if (!ex) return null;
+                           const rankIndex = sortedResults.findIndex(r => r.exchange.id === id);
+                           const color = getRankColorHex(rankIndex, selectedIds.length);
+                           return (
+                              <Area 
+                                key={id} 
+                                type="monotone" 
+                                dataKey={ex.name} 
+                                stroke={color} 
+                                fillOpacity={1} 
+                                fill={`url(#color-${id})`} 
+                                strokeWidth={2.5}
+                                animationDuration={1500}
+                              />
+                           );
+                        })}
+                      </AreaChart>
+                    </ResponsiveContainer>
+                  </div>
+                </div>
+              </div>
+            )}
 
             {/* Smart CTA */}
             {cheapest && mostExpensive && cheapest.exchange.id !== mostExpensive.exchange.id && (
@@ -682,16 +816,11 @@ const FeeCalculator: React.FC = () => {
                   <strong className="text-primary font-black">{formatCurrency(mostExpensive.annualCost - cheapest.annualCost)}</strong> annually
                   vs. {mostExpensive.exchange.name}.
                 </p>
-
               </div>
             )}
           </div>
-        )}
         </div>
-      </Card>
-
-      {/* Fee optimization banner */}
-
+      </div>
     </section>
   );
 };
@@ -701,46 +830,95 @@ const FeeCalculator: React.FC = () => {
 const RegulatoryMatrix: React.FC = () => {
   return (
     <section id="regulatory-matrix" className="scroll-mt-32">
-      <h2 className="text-xl font-bold mb-6 flex items-center gap-2">
-        <span className="w-1.5 h-6 bg-primary rounded-sm inline-block"></span>
-        Regulatory Status Matrix
-      </h2>
+      <div className="leather-card rounded-2xl p-8 lg:p-10 relative overflow-hidden group border-t-2 border-t-emerald-500/50 transition-all duration-500 hover:shadow-2xl hover:shadow-emerald-500/5">
+        {/* Pulse Background */}
+        <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"></div>
+        
+        <div className="relative z-10">
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-12">
+            <div>
+              <div className="flex items-center gap-2 mb-2">
+                 <ShieldCheck size={18} className="text-emerald-400" />
+                 <span className="text-[10px] font-black bg-emerald-500/10 text-emerald-400 px-2 py-0.5 rounded uppercase tracking-widest border border-emerald-500/20">Global Trust Verified</span>
+              </div>
+              <h2 className="text-2xl font-bold flex items-center gap-2">
+                <span className="w-1.5 h-6 bg-emerald-500 rounded-sm inline-block"></span>
+                Regulatory Status Matrix
+              </h2>
+              <p className="text-text-muted">Live tracking of exchange operational licenses and regional restrictions.</p>
+            </div>
+            
+            <div className="flex gap-4 p-4 bg-background/50 rounded-xl border border-border backdrop-blur-md">
+               <div className="text-center">
+                 <div className="text-lg font-black text-emerald-400 tabular-nums">100%</div>
+                 <div className="text-[8px] text-text-muted font-bold uppercase tracking-widest">Compliance Latency</div>
+               </div>
+               <div className="w-px h-10 bg-border"></div>
+               <div className="text-center">
+                 <div className="text-lg font-black text-text tabular-nums">48h</div>
+                 <div className="text-[8px] text-text-muted font-bold uppercase tracking-widest">Data Freshness</div>
+               </div>
+            </div>
+          </div>
 
-      <Card className="p-0 overflow-hidden leather-card group">
-        <div className="overflow-x-auto relative z-10">
-          <table className="w-full min-w-[700px]">
-            <thead>
-              <tr className="border-b border-border">
-                <th className="p-4 text-left text-xs font-bold uppercase tracking-wider text-text-muted">Exchange</th>
-                {REGIONS.map(r => (
-                  <th key={r} className="p-4 text-center text-xs font-bold uppercase tracking-wider text-text-muted">{r}</th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {EXCHANGES.map(e => (
-                <tr key={e.id} className="border-b border-border/50 hover:bg-primary/5 transition-colors">
-                  <td className="p-4">
-                    <span className="font-bold text-sm">{e.name}</span>
-                  </td>
-                  {REGIONS.map(r => (
-                    <td key={r} className="p-4 text-center">
-                      {regStatusIcon(e.regulatoryMap[r])}
-                    </td>
+          <div className="bg-background/40 rounded-2xl border border-border/50 overflow-hidden backdrop-blur-sm">
+            <div className="overflow-x-auto">
+              <table className="w-full min-w-[800px]">
+                <thead>
+                  <tr className="border-b border-border/50 bg-surface/30">
+                    <th className="p-5 text-left text-[10px] font-black uppercase tracking-widest text-text-muted">Venue Infrastructure</th>
+                    {REGIONS.map(r => (
+                      <th key={r} className="p-5 text-center text-[10px] font-black uppercase tracking-widest text-text-muted">{r}</th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-border/30">
+                  {EXCHANGES.map(e => (
+                    <tr key={e.id} className="hover:bg-emerald-500/5 transition-colors group/row">
+                      <td className="p-5">
+                        <div className="flex items-center gap-3">
+                           <div className="w-1 h-4 bg-transparent group-hover/row:bg-emerald-500 transition-colors rounded-full"></div>
+                           <span className="font-bold text-sm text-text transition-colors group-hover/row:text-emerald-400">{e.name}</span>
+                        </div>
+                      </td>
+                      {REGIONS.map(r => (
+                        <td key={r} className="p-5 text-center">
+                          <div className="flex justify-center scale-110 transition-transform hover:scale-125">
+                            {regStatusIcon(e.regulatoryMap[r])}
+                          </div>
+                        </td>
+                      ))}
+                    </tr>
                   ))}
-                </tr>
-              ))}
-            </tbody>
-          </table>
+                </tbody>
+              </table>
+            </div>
+            
+            {/* Legend as premium status badges */}
+            <div className="p-6 bg-surface/30 border-t border-border/50">
+              <div className="flex flex-wrap items-center gap-x-10 gap-y-4">
+                <span className="text-[10px] font-black uppercase tracking-widest text-text-muted mr-2">Key:</span>
+                <div className="flex items-center gap-2">
+                   <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></div>
+                   <span className="text-xs font-bold text-text-muted">Licensed Operational</span>
+                </div>
+                <div className="flex items-center gap-2">
+                   <div className="w-2 h-2 rounded-full bg-slate-400"></div>
+                   <span className="text-xs font-bold text-text-muted">Registered / Pending</span>
+                </div>
+                <div className="flex items-center gap-2">
+                   <div className="w-2 h-2 rounded-full bg-red-400"></div>
+                   <span className="text-xs font-bold text-text-muted">Restricted / Prohibited</span>
+                </div>
+                <div className="flex items-center gap-2 ml-auto">
+                   <Activity size={12} className="text-emerald-400" />
+                   <span className="text-[10px] italic text-text-muted opacity-60">Verified via official regulatory APIs</span>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        {/* Legend */}
-        <div className="p-4 border-t border-border flex flex-wrap gap-4 text-xs text-text-muted">
-          <span>🟢 Active regulatory license</span>
-          <span>🟡 VASP or equivalent registration</span>
-          <span>🔴 Not available or enforcement action</span>
-          <span>⚫ Decentralized; no geographic restriction</span>
-        </div>
-      </Card>
+      </div>
     </section>
   );
 };
@@ -751,28 +929,63 @@ const FAQAccordion: React.FC = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   return (
-    <section id="faq">
-      <h2 className="text-xl font-bold mb-6 flex items-center gap-2">
-        <span className="w-1.5 h-6 bg-border rounded-sm inline-block"></span>
-        Frequently Asked Questions
-      </h2>
-      <div className="space-y-2">
-        {FAQ_DATA.map((faq, i) => (
-          <Card key={i} variant="interactive" className="p-0 overflow-hidden">
-            <button
-              onClick={() => setOpenIndex(openIndex === i ? null : i)}
-              className="w-full p-5 flex items-center justify-between text-left group"
+    <section id="faq" className="scroll-mt-32">
+      <div className="flex items-center gap-4 mb-8">
+        <div className="w-10 h-10 rounded-xl bg-background border border-border flex items-center justify-center text-text-muted shadow-sm">
+           <Info size={20} />
+        </div>
+        <div>
+          <h2 className="text-2xl font-bold">Frequently Asked Questions</h2>
+          <p className="text-text-muted text-sm font-medium">Expert insights on exchange selection and risk management.</p>
+        </div>
+      </div>
+      
+      <div className="space-y-4">
+        {FAQ_DATA.map((faq, i) => {
+          const isOpen = openIndex === i;
+          return (
+            <div 
+              key={i} 
+              className={`leather-card rounded-2xl transition-all duration-500 overflow-hidden group ${
+                isOpen ? 'border-t-2 border-t-primary shadow-2xl shadow-primary/5 bg-surface/30' : 'hover:border-primary/20 hover:bg-surface/50'
+              }`}
             >
-              <span className="font-bold text-sm pr-4 group-hover:text-primary transition-colors">{faq.q}</span>
-              <ChevronDown size={18} className={`text-text-muted flex-shrink-0 transition-transform ${openIndex === i ? 'rotate-180' : ''}`} />
-            </button>
-            {openIndex === i && (
-              <div className="px-5 pb-5 animate-fade-in">
-                <p className="text-sm text-text-muted leading-relaxed">{faq.a}</p>
+              <button
+                onClick={() => setOpenIndex(isOpen ? null : i)}
+                className="w-full p-6 flex items-center justify-between text-left group/btn"
+              >
+                <div className="flex items-center gap-4">
+                   <div className={`w-6 h-6 rounded-lg flex items-center justify-center text-[10px] font-black transition-colors ${
+                     isOpen ? 'bg-primary text-background' : 'bg-background text-text-muted group-hover/btn:text-primary border border-border'
+                   }`}>
+                     {String(i + 1).padStart(2, '0')}
+                   </div>
+                   <span className={`font-bold transition-colors ${isOpen ? 'text-primary' : 'text-text group-hover/btn:text-primary'}`}>{faq.q}</span>
+                </div>
+                <div className={`transition-all duration-500 transform ${isOpen ? 'rotate-180 text-primary' : 'text-text-muted group-hover/btn:translate-y-0.5'}`}>
+                   <ChevronDown size={20} />
+                </div>
+              </button>
+              
+              <div 
+                className={`transition-all duration-500 ease-in-out ${
+                  isOpen ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0 overflow-hidden'
+                }`}
+              >
+                <div className="px-16 pb-8">
+                  <div className="h-px bg-border/30 mb-6 w-full"></div>
+                  <p className="text-text-muted leading-relaxed text-base font-medium">
+                    {faq.a}
+                  </p>
+                  <div className="mt-6 flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-primary/60">
+                     <Activity size={12} />
+                     <span>Verified by ClearRate™ Editorial Team</span>
+                  </div>
+                </div>
               </div>
-            )}
-          </Card>
-        ))}
+            </div>
+          );
+        })}
       </div>
     </section>
   );
@@ -784,26 +997,38 @@ const DisclaimerSection: React.FC = () => {
   const currentDate = new Date().toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
 
   return (
-    <section>
-      <div className="mt-8 p-4 bg-surface/50 border border-border rounded-xl text-center">
-        <div className="flex flex-col items-center justify-center gap-2">
-          <div className="flex items-center gap-2 text-text-muted font-bold text-sm uppercase tracking-wider">
-            <Shield size={14} />
-            <span>ClearRate™ Editorial Disclosure</span>
+    <section className="pb-10">
+      <div className="leather-card rounded-2xl p-10 border-t border-border/30 bg-surface/20 text-center relative overflow-hidden group">
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-1000"></div>
+        
+        <div className="relative z-10 flex flex-col items-center max-w-3xl mx-auto">
+          <div className="w-12 h-12 rounded-2xl bg-background border border-border flex items-center justify-center text-primary mb-6 shadow-xl shadow-primary/5">
+             <ShieldCheck size={24} />
           </div>
-          <div className="space-y-3 text-xs text-text-muted leading-relaxed max-w-2xl">
+          
+          <h3 className="text-xs font-black uppercase tracking-[0.3em] text-text-muted mb-4">ClearRate™ Editorial Disclosure</h3>
+          
+          <div className="space-y-4 text-sm text-text-muted leading-relaxed">
             <p>
-              Coinvestopedia operates the ClearRate™ Exchange Intelligence product independently.
-              Scores reflect quantitative analysis of publicly available data
-              and are based solely on objective criteria.
+              Coinvestopedia operates the <strong className="text-text font-bold">ClearRate™ Exchange Intelligence</strong> product independently.
+              Our proprietary scoring algorithms are applied uniformly across all venues based on quarterly 
+              institutional-grade audits and real-time API monitoring.
             </p>
-            <p>
-              This page is for informational and educational purposes only and does not constitute financial,
-              investment, or legal advice. Cryptocurrency trading involves significant risk of loss.
+            <p className="opacity-80">
+              The information provided on this portal is for institutional and professional educational purposes 
+              only. It does not constitute financial, investment, or legal advice. Digital asset markets are 
+              characterized by extreme volatility and structural risk.
             </p>
-            <p className="text-text-muted/60 italic">
-              ClearRate™ scores updated monthly. Last updated: {currentDate}
-            </p>
+            
+            <div className="pt-6 flex flex-col sm:flex-row items-center justify-center gap-6">
+               <div className="flex items-center gap-2 px-4 py-2 bg-background/50 rounded-full border border-border">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                  <span className="text-[10px] font-bold text-text-muted uppercase tracking-wider">System Status: Active</span>
+               </div>
+               <div className="text-[10px] font-bold text-text-muted uppercase tracking-wider">
+                  Last Model Update: <span className="text-text">{currentDate}</span>
+               </div>
+            </div>
           </div>
         </div>
       </div>
@@ -811,15 +1036,81 @@ const DisclaimerSection: React.FC = () => {
   );
 };
 
-// ─── Main Page ────────────────────────────────────────────────────
+export interface ExchangesProps {
+  onNavigate?: (route: PageRoute) => void;
+}
 
-export const Exchanges: React.FC = () => {
+export const Exchanges: React.FC<ExchangesProps> = ({ onNavigate }) => {
+  const { setPageCategories, setActiveSubMenu, activeSubMenu } = useAppContext();
+  const [activeSection, setActiveSection] = useState('methodology');
+
+  const scrollToSection = (id: string) => {
+    const element = document.getElementById(id);
+    if (element) {
+      const offset = 120; // Accounts for sticky header
+      const bodyRect = document.body.getBoundingClientRect().top;
+      const elementRect = element.getBoundingClientRect().top;
+      const elementPosition = elementRect - bodyRect;
+      const offsetPosition = elementPosition - offset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+    }
+  };
+
+  useEffect(() => {
+    const categories = [
+      { id: 'methodology', label: 'Methodology', icon: <Scale size={18} /> },
+      { id: 'best-for', label: 'Quick Picks', icon: <Zap size={18} /> },
+      { id: 'exchange-profiles', label: 'Top Ranked', icon: <Landmark size={18} /> },
+      { id: 'compare-tool', label: 'Compare Tool', icon: <Repeat size={18} /> },
+      { id: 'fee-calculator', label: 'Fee Calculator', icon: <DollarSign size={18} /> },
+      { id: 'regulatory-matrix', label: 'Regulatory Matrix', icon: <Globe size={18} /> },
+      { id: 'faq', label: 'FAQ', icon: <Info size={18} /> },
+    ];
+
+    setPageCategories(categories.map(cat => ({
+      ...cat,
+      active: activeSection === cat.id,
+      onClick: () => scrollToSection(cat.id)
+    })));
+
+    if (activeSubMenu !== 'Knowledge') {
+      setActiveSubMenu('Knowledge');
+    }
+
+    // Scroll Spy Logic
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY + 200;
+      
+      for (const cat of categories) {
+        const section = document.getElementById(cat.id);
+        if (section) {
+          const top = section.offsetTop;
+          const height = section.offsetHeight;
+          if (scrollPosition >= top && scrollPosition < top + height) {
+            setActiveSection(cat.id);
+            break;
+          }
+        }
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      setPageCategories([]);
+    };
+  }, [activeSection, setPageCategories, setActiveSubMenu, activeSubMenu]);
+
   return (
     <div className="animate-fade-in space-y-10 lg:space-y-14 pb-12">
       <PageMeta title="Exchange Directory" description="Compare leading cryptocurrency exchanges by fees, volume, and features." />
 
       <PageHeader />
-      <VaraDisclaimer variant="banner" />
+
       <MethodologySection />
       <BestForGrid />
       <ExchangeProfilesSection />

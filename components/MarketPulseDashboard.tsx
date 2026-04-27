@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Clock, BookOpen, Activity, Globe, Eye, LineChart as LineChartIcon, BarChart3, Newspaper } from 'lucide-react';
-import { fetchFearAndGreed, generateMarketPulseInsights, fetchSectorPerformance } from '../services/api';
+import { Clock, BookOpen, Globe, BarChart3, Newspaper } from 'lucide-react';
+import { fetchFearAndGreed, fetchSectorPerformance } from '../services/api';
 import { 
   TradingViewTimelineNews
 } from './TradingViewWidgets';

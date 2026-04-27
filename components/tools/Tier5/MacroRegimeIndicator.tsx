@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import { Card } from '../../Card';
 import { ProGate, InputField, ResultMetric, fmtPct } from '../shared/SharedComponents';
-import { ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, ResponsiveContainer, Tooltip, ReferenceArea } from 'recharts';
+import { ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, ResponsiveContainer, ReferenceArea } from 'recharts';
 import { Globe, TrendingUp, TrendingDown, Sun, CloudRain } from 'lucide-react';
 
 export const MacroRegimeIndicator: React.FC = () => {
@@ -36,7 +36,7 @@ export const MacroRegimeIndicator: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
           <div className="lg:col-span-4 space-y-6">
             <Card>
-              <h3 className="font-bold text-lg mb-6 flex items-center gap-2">
+              <h3 className="font-bold text-lg mb-6 flex items-center justify-center gap-2 text-center">
                  <Globe size={18} className="text-primary"/> Macro Inputs
               </h3>
               <div className="space-y-4">
@@ -53,9 +53,9 @@ export const MacroRegimeIndicator: React.FC = () => {
                <h4 className={`text-lg lg:text-xl font-bold font-heading ${currentRegime.color}`}>{currentRegime.name}</h4>
             </div>
             
-            <Card className="p-4 border-primary/20 bg-primary/5">
+            <Card className="p-4 border-primary/20 bg-primary/5 flex flex-col items-center text-center">
                 <h5 className="font-bold text-xs text-primary uppercase tracking-widest mb-2">Optimal Allocation Guide</h5>
-                <ul className="text-xs text-text-muted space-y-2 list-disc pl-4 leading-relaxed">
+                <ul className="text-xs text-text-muted space-y-2 leading-relaxed">
                    {currentRegime.quadrant === 1 && <li>Overweight: Growth Equities, Tech, Crypto</li>}
                    {currentRegime.quadrant === 2 && <li>Overweight: Commodities, Real Estate, Value Stocks</li>}
                    {currentRegime.quadrant === 3 && <li>Overweight: Gold, Cash, Defensives</li>}
@@ -71,38 +71,43 @@ export const MacroRegimeIndicator: React.FC = () => {
              </div>
 
              <Card className="flex-1 min-h-[450px] flex flex-col">
-                <h4 className="font-bold text-sm text-text-muted uppercase tracking-widest mb-6 px-1">Ray Dalio / Bridgewater Style 4-Quadrant Matrix</h4>
-                <div className="flex-1 w-full bg-background border border-border/50 rounded-2xl overflow-hidden relative p-4">
-                   <ResponsiveContainer width="100%" height="100%">
-                      <ScatterChart margin={{ top: 20, right: 20, bottom: 20, left: 20 }}>
-                         <CartesianGrid strokeDasharray="3 3" stroke="#27272a" strokeOpacity={0.5} />
-                         <XAxis 
-                            type="number" dataKey="x" domain={[-2, 6]} hide 
-                         />
-                         <YAxis 
-                            type="number" dataKey="y" domain={[0, 8]} hide
-                         />
-                         
-                         {/* Quadrant Labels */}
-                         <ReferenceArea x1={2} x2={6} y1={0} y2={3} fill="#10b981" fillOpacity={0.05} label={{ position: 'top', value: 'GOLDILOCKS (I)', fill: '#10b981', fontSize: 10, fontWeight: 'bold' }} />
-                         <ReferenceArea x1={2} x2={6} y1={3} y2={8} fill="#3b82f6" fillOpacity={0.05} label={{ position: 'top', value: 'EXPANSION (II)', fill: '#3b82f6', fontSize: 10, fontWeight: 'bold' }} />
-                         <ReferenceArea x1={-2} x2={2} y1={3} y2={8} fill="#ef4444" fillOpacity={0.05} label={{ position: 'top', value: 'STAGFLATION (III)', fill: '#ef4444', fontSize: 10, fontWeight: 'bold' }} />
-                         <ReferenceArea x1={-2} x2={2} y1={0} y2={3} fill="#f59e0b" fillOpacity={0.05} label={{ position: 'top', value: 'BUST (IV)', fill: '#f59e0b', fontSize: 10, fontWeight: 'bold' }} />
-
-                         {/* No Tooltip needed for matrix visual */}
-                         
-                         <Scatter name="Current Position" data={scatterPoint} fill="#10b981" shape="circle" />
-                      </ScatterChart>
-                   </ResponsiveContainer>
+                <h4 className="font-bold text-sm text-text-muted uppercase tracking-widest mb-6 px-1 text-center">Ray Dalio / Bridgewater Style 4-Quadrant Matrix</h4>
+                <div className="flex-1 w-full flex relative pb-4">
+                   {/* Left Label: Low Inflation */}
+                   <div className="w-8 flex items-center justify-center shrink-0">
+                      <span className="-rotate-90 text-[10px] font-bold text-text-muted/40 uppercase tracking-widest whitespace-nowrap">Low Inflation</span>
+                   </div>
                    
-                   {/* Axis Labels (Manual because hide is true for standard axes) */}
-                   <div className="absolute inset-0 pointer-events-none p-4 flex flex-col justify-between items-center text-xs font-bold text-text-muted/40 uppercase tracking-widest">
-                      <div className="w-full flex justify-between px-24">
-                         <span>Low Growth</span>
-                         <span>High Growth</span>
+                   <div className="flex-1 flex flex-col relative h-full">
+                      {/* Top Labels: Low/High Growth */}
+                      <div className="flex justify-around items-center h-8 shrink-0">
+                         <span className="text-[10px] font-bold text-text-muted/40 uppercase tracking-widest">Low Growth</span>
+                         <span className="text-[10px] font-bold text-text-muted/40 uppercase tracking-widest">High Growth</span>
                       </div>
-                      <div className="absolute top-1/2 left-0 -translate-x-12 -translate-y-1/2 -rotate-90">Low Inflation</div>
-                      <div className="absolute top-1/2 right-0 translate-x-12 -translate-y-1/2 rotate-90 text-red-500/50">High Inflation</div>
+                      
+                      {/* Chart Area */}
+                      <div className="flex-1 w-full bg-background border border-border/50 rounded-2xl overflow-hidden p-4 relative">
+                         <ResponsiveContainer width="100%" height="100%">
+                            <ScatterChart margin={{ top: 20, right: 20, bottom: 20, left: 20 }}>
+                               <CartesianGrid strokeDasharray="3 3" stroke="#27272a" strokeOpacity={0.5} />
+                               <XAxis type="number" dataKey="x" domain={[-2, 6]} hide />
+                               <YAxis type="number" dataKey="y" domain={[0, 8]} hide />
+                               
+                               {/* Quadrant Labels */}
+                               <ReferenceArea x1={2} x2={6} y1={0} y2={3} fill="#10b981" fillOpacity={0.05} label={{ position: 'bottom', value: 'GOLDILOCKS (I)', fill: '#10b981', fontSize: 10, fontWeight: 'bold' }} />
+                               <ReferenceArea x1={2} x2={6} y1={3} y2={8} fill="#3b82f6" fillOpacity={0.05} label={{ position: 'top', value: 'EXPANSION (II)', fill: '#3b82f6', fontSize: 10, fontWeight: 'bold' }} />
+                               <ReferenceArea x1={-2} x2={2} y1={3} y2={8} fill="#ef4444" fillOpacity={0.05} label={{ position: 'top', value: 'STAGFLATION (III)', fill: '#ef4444', fontSize: 10, fontWeight: 'bold' }} />
+                               <ReferenceArea x1={-2} x2={2} y1={0} y2={3} fill="#f59e0b" fillOpacity={0.05} label={{ position: 'bottom', value: 'BUST (IV)', fill: '#f59e0b', fontSize: 10, fontWeight: 'bold' }} />
+
+                               <Scatter name="Current Position" data={scatterPoint} fill="#10b981" shape="circle" />
+                            </ScatterChart>
+                         </ResponsiveContainer>
+                      </div>
+                   </div>
+                   
+                   {/* Right Label: High Inflation */}
+                   <div className="w-8 flex items-center justify-center shrink-0">
+                      <span className="rotate-90 text-[10px] font-bold text-red-500/50 uppercase tracking-widest whitespace-nowrap">High Inflation</span>
                    </div>
                 </div>
                 

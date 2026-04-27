@@ -1,5 +1,5 @@
 import React, { memo, useCallback } from 'react';
-import { ArrowRight } from 'lucide-react';
+
 
 interface IconCardProps {
   icon: React.ReactNode;
@@ -9,7 +9,6 @@ interface IconCardProps {
   href?: string;
   onClick?: () => void;
   variant?: 'default' | 'highlight';
-  progress?: number;
   className?: string;
   graphic?: React.ReactNode;
 }
@@ -22,7 +21,6 @@ const IconCardComponent: React.FC<IconCardProps> = ({
   href,
   onClick,
   variant = 'default',
-  progress,
   className = '',
   graphic
 }) => {

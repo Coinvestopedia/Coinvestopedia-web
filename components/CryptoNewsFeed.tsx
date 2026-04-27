@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Newspaper, ExternalLink, ChevronDown, ChevronUp } from 'lucide-react';
+import { Newspaper, ChevronDown, ChevronUp } from 'lucide-react';
 import { fetchCryptoRSSFeeds, RSSNewsItem } from '../services/api';
 
 const formatTimeAgo = (dateStr: string): string => {

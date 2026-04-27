@@ -13,7 +13,7 @@ export const ASSETS_L2: Record<string, AssetData> = {
     betaBtc: 1.5, betaSpy: 2.1, correlationBtc: 0.65,
     liquidityScore: 80, socialScore: 68, devActivity: 410, inflationRate: 8.5,
     analystSignal: 'WATCH',
-    analystThesis: 'Significant token unlock pressure through 2026. However, Arbitrum leads L2 TVL and sequencer revenue. Buy on capitulation if token unlock selling exhausts.'
+    analystThesis: 'Significant token unlock pressure through 2026. However, Arbitrum leads L2 TVL and sequencer revenue. Potential for accumulation on extreme capitulation if token unlock selling exhausts.'
   },
   MATIC: {
     id: 'matic-network', symbol: 'POL', name: 'Polygon', category: 'L2', color: '#8247E5',

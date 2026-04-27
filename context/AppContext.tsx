@@ -18,6 +18,10 @@ interface AppContextType {
   toggleTheme: () => void;
   isProUser: boolean;
   setIsProUser: (val: boolean) => void;
+  activeSubMenu: string | null;
+  setActiveSubMenu: (name: string | null) => void;
+  pageCategories: any[];
+  setPageCategories: (categories: any[]) => void;
 }
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
@@ -25,15 +29,7 @@ const AppContext = createContext<AppContextType | undefined>(undefined);
 export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [toasts, setToasts] = useState<Toast[]>([]);
   // Initialize theme from localStorage or default to dark
-  const [theme, setTheme] = useState<Theme>(() => {
-    if (typeof window !== 'undefined') {
-      const savedTheme = localStorage.getItem('theme') as Theme;
-      if (savedTheme) return savedTheme;
-      // Default to dark mode as requested
-      return 'dark';
-    }
-    return 'dark';
-  });
+  const [theme] = useState<Theme>('dark');
 
   useEffect(() => {
     const root = window.document.documentElement;
@@ -46,7 +42,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   }, [theme]);
 
   const toggleTheme = useCallback(() => {
-    setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'));
+    // Theme toggle disabled, keeping it dark mode permanently
   }, []);
 
   const removeToast = useCallback((id: string) => {
@@ -65,9 +61,14 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   }, [removeToast]);
 
   const [isProUser, setIsProUser] = useState<boolean>(true); // Mock true for now
+  const [activeSubMenu, setActiveSubMenu] = useState<string | null>(null);
+  const [pageCategories, setPageCategories] = useState<any[]>([]);
 
   return (
-    <AppContext.Provider value={{ toasts, addToast, removeToast, theme, toggleTheme, isProUser, setIsProUser }}>
+    <AppContext.Provider value={{ 
+      toasts, addToast, removeToast, theme, toggleTheme, isProUser, setIsProUser,
+      activeSubMenu, setActiveSubMenu, pageCategories, setPageCategories 
+    }}>
       {children}
     </AppContext.Provider>
   );

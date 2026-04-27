@@ -25,7 +25,8 @@ export const MarketPulseMetric: React.FC<MarketPulseMetricProps> = ({ label, val
        </div>
        
        <div className="absolute inset-x-2 bottom-0 h-12 opacity-80">
-         <ResponsiveContainer width="100%" height="100%">
+         <div className="h-full w-full relative">
+           <ResponsiveContainer width="100%" height="100%" debounce={50}>
            <LineChart data={chartData}>
              <Line 
                type="monotone" 
@@ -37,7 +38,8 @@ export const MarketPulseMetric: React.FC<MarketPulseMetricProps> = ({ label, val
              />
            </LineChart>
          </ResponsiveContainer>
-       </div>
+        </div>
+      </div>
 
        <div className="absolute bottom-4 right-4 z-10 flex flex-col items-end">
           {isPositive ? <ArrowUp size={14} className={colorClass} strokeWidth={3} /> : <ArrowDown size={14} className={colorClass} strokeWidth={3} />}

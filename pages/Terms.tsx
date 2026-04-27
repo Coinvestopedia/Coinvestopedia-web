@@ -1,10 +1,24 @@
 import React from 'react';
 import { FileText, Scale, Gavel, UserCheck } from 'lucide-react';
+import { PageMeta } from '../components/PageMeta';
 
-export const Terms: React.FC = () => {
+
+import { PageRoute } from '../types';
+
+export interface TermsProps {
+  onNavigate?: (route: PageRoute) => void;
+}
+
+export const Terms: React.FC<TermsProps> = ({ onNavigate }) => {
   return (
     <div className="animate-fade-in max-w-[800px] mx-auto pb-16">
-      <div className="mb-12">
+      <PageMeta
+        title="Terms of Service"
+        description="Read the Terms of Service for Coinvestopedia. Understand your rights and responsibilities when using our crypto analytics platform."
+        canonical="/terms"
+        keywords="coinvestopedia terms of service, user agreement, legal terms"
+      />
+      <div className="mb-12 mt-6">
         <div className="flex items-center gap-3 text-primary mb-4">
           <FileText size={32} />
           <h1 className="text-4xl lg:text-5xl font-heading font-bold text-text">Terms of Service</h1>

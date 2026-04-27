@@ -1,8 +1,7 @@
 import React from 'react';
 import { AssetData } from '../../data/assetRegistry';
-import { Award, TrendingUp, TrendingDown } from 'lucide-react';
 import { AssetIcon } from '../AssetIcon';
-import { ResponsiveContainer, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Cell, ReferenceLine } from 'recharts';
+import { ResponsiveContainer, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ReferenceLine } from 'recharts';
 
 interface PerformancePanelProps {
   assets: AssetData[];
@@ -102,10 +101,12 @@ const ReturnComparisonChart: React.FC<{ assets: AssetData[] }> = ({ assets }) =>
             <CartesianGrid strokeDasharray="3 3" stroke="#27272A" vertical={false} />
             <XAxis dataKey="symbol" stroke="#52525B" tick={{ fill: '#A1A1AA', fontSize: 11, fontWeight: 700 }} />
             <YAxis stroke="#52525B" tick={{ fill: '#71717A', fontSize: 11 }} tickFormatter={(v) => `${v}%`} />
-            <Tooltip itemStyle={{ color: '#e4e4e7' }}
+            <Tooltip 
               contentStyle={{ backgroundColor: '#18181B', borderColor: '#27272A', color: '#F4F4F5', borderRadius: '8px' }}
-              formatter={(value: number, name: string) => [`${value > 0 ? '+' : ''}${value.toFixed(1)}%`, name]}
-              labelStyle={{ color: '#A1A1AA', fontSize: '11px' }}
+              itemStyle={{ fontSize: '12px', fontWeight: 'bold' }}
+              labelStyle={{ color: '#A1A1AA', fontSize: '11px', marginBottom: '4px' }}
+              formatter={(value: any) => [`${(value as number).toFixed(2)}%`, undefined]}
+              cursor={{ fill: 'rgba(255, 255, 255, 0.03)' }}
             />
             <Legend wrapperStyle={{ fontSize: '12px', paddingTop: '10px' }} />
             <ReferenceLine y={0} stroke="#52525B" />

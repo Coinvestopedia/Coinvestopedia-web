@@ -1,6 +1,7 @@
 import React from 'react';
-import { Activity, Hash, Lock, ArrowRight } from 'lucide-react';
+import { Activity, Hash, ArrowRight } from 'lucide-react';
 import { Card } from './Card';
+import { PageRoute } from '../types';
 
 interface ActivityItem {
   user: string;
@@ -13,9 +14,11 @@ interface ActivityItem {
 
 interface LiveActivityFeedProps {
   activities?: ActivityItem[];
+  onNavigate?: (route: PageRoute) => void;
 }
 
 const LiveActivityFeedComponent: React.FC<LiveActivityFeedProps> = ({ 
+  onNavigate,
   activities = [
     { user: 'Whale Alert', action: 'bought', amount: '$50M', asset: 'ETH', time: '2m ago', severity: 'extreme' as const },
     { user: 'Smart Money', action: 'sold', amount: '$30M', asset: 'BTC', time: '5m ago', severity: 'high' as const },
@@ -46,7 +49,7 @@ const LiveActivityFeedComponent: React.FC<LiveActivityFeedProps> = ({
         </div>
         <div className="flex items-center gap-2">
           <div className="w-2 h-2 bg-primary rounded-full animate-pulse"></div>
-          <span className="text-xs text-primary font-semibold">LIVE</span>
+          <span className="text-xs text-primary font-semibold uppercase tracking-wider">SAMPLE</span>
         </div>
       </div>
       
@@ -79,9 +82,11 @@ const LiveActivityFeedComponent: React.FC<LiveActivityFeedProps> = ({
         ))}
       </div>
 
-      <button className="w-full mt-4 px-4 py-3 bg-primary/10 border border-primary/30 rounded-xl text-primary font-semibold hover:bg-primary hover:text-white transition-colors flex items-center justify-center gap-2 group">
-        <Lock size={16} />
-        <span>Unlock Real-Time Feed</span>
+      <button 
+        onClick={() => onNavigate?.(PageRoute.WHALE)}
+        className="w-full mt-4 px-4 py-3 bg-primary/10 border border-primary/30 rounded-xl text-primary font-semibold hover:bg-primary hover:text-white transition-colors flex items-center justify-center gap-2 group"
+      >
+        <span>Live Tracking</span>
         <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform transform-gpu" />
       </button>
     </Card>

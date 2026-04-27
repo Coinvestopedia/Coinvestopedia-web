@@ -12,8 +12,8 @@ export const ASSETS_L1: Record<string, AssetData> = {
     cagr3y: 28.4, maxDrawdown: -77.0, var95: -4.8,
     betaBtc: 1.0, betaSpy: 1.4, correlationBtc: 1.0,
     liquidityScore: 98, socialScore: 88, devActivity: 450, inflationRate: 1.7,
-    analystSignal: 'NEUTRAL',
-    analystThesis: 'BTC flat YTD (+0.3%), trading as a risk asset with 0.68 Nasdaq correlation. Post-halving supply reduction constructive for H2 2026, but macro headwinds (tariffs, strong dollar) keep near-term range-bound. Watch ETF flow direction for trend signal.'
+    analystSignal: 'OUTPERFORM',
+    analystThesis: 'BTC up +48.5% YTD, currently testing the $85k psychological resistance. ETF flows remain structurally positive ($12B net YTD), absorbing macro volatility. While DXY strength is a headwind, the network hashrate and liquid supply metrics suggest a potential supply squeeze in Q3 2026.'
   },
   ETH: {
     id: 'ethereum', symbol: 'ETH', name: 'Ethereum', category: 'L1', color: '#627EEA',
@@ -24,8 +24,8 @@ export const ASSETS_L1: Record<string, AssetData> = {
     cagr3y: -8.2, maxDrawdown: -82.0, var95: -6.2,
     betaBtc: 1.15, betaSpy: 1.6, correlationBtc: 0.85,
     liquidityScore: 95, socialScore: 72, devActivity: 850, inflationRate: -0.2,
-    analystSignal: 'UNDERWEIGHT',
-    analystThesis: 'Worst major asset at −38% YTD. Negative Sharpe (−0.14) signals poor risk-adjusted returns. L2 cannibalization of fee revenue + declining NFT activity. Structural thesis intact long-term but near-term underperformance likely continues vs BTC.'
+    analystSignal: 'WATCH',
+    analystThesis: 'Consolidating at $1,880 after a challenging Q1. L2 scaling remains the primary long-term fundamental driver, but the ETH/BTC ratio has hit a multi-year low of 0.022. Watching for institutional adoption of EigenLayer and restaking primitives as potentially corrective catalysts for the rest of 2026.'
   },
   SOL: {
     id: 'solana', symbol: 'SOL', name: 'Solana', category: 'L1', color: '#14F195',

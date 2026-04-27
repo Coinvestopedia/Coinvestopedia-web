@@ -1,6 +1,6 @@
 import React from 'react';
 import { GLOBAL_MARKET_CAP_DATA, MODEL_PORTFOLIOS } from '../../data/assetRegistry';
-import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip as RechartsTooltip, Legend } from 'recharts';
+import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip as RechartsTooltip } from 'recharts';
 
 export const AllocationPanel: React.FC = () => {
   return (
@@ -46,7 +46,7 @@ export const AllocationPanel: React.FC = () => {
                 ))}
               </Pie>
               <RechartsTooltip 
-                formatter={(value: number) => [`$${value}T`, 'Market Cap']}
+                formatter={(value: any) => [`$${value}T`, 'Market Cap']}
                 contentStyle={{ backgroundColor: '#171717', borderColor: '#2a2a2a', color: '#f4f4f5', borderRadius: '10px', border: '1px solid #2a2a2a', padding: '10px 14px', boxShadow: '0 10px 40px rgba(0,0,0,0.5)' }}
                 itemStyle={{ color: '#f4f4f5', fontSize: '12px', fontWeight: 'bold' }}
                 labelStyle={{ color: '#a1a1aa' }}
@@ -65,7 +65,7 @@ export const AllocationPanel: React.FC = () => {
           {MODEL_PORTFOLIOS.map((portfolio, idx) => (
             <div key={idx} className="bg-surface border border-border rounded-xl p-5 hover:border-primary/50 hover:bg-surface-alt transition-colors duration-300 group flex flex-col">
               {/* Header */}
-              <div className="mb-3">
+              <div className="mb-3 flex-grow">
                 <h4 className="font-bold text-base text-primary mb-1">{portfolio.name}</h4>
                 <p className="text-xs text-text-muted leading-relaxed">{portfolio.description}</p>
               </div>

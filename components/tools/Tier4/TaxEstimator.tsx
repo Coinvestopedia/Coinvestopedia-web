@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { Card } from '../../Card';
-import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from 'recharts';
+import { PieChart, Pie, Cell, Tooltip } from 'recharts';
 import { Percent, Info } from 'lucide-react';
 import { InputField, ResultMetric, fmtUSD, fmtPct } from '../shared/SharedComponents';
 
@@ -104,9 +104,9 @@ export const TaxEstimator: React.FC = () => {
   const COLORS = ['#EF4444', '#F59E0B', '#8B5CF6'];
 
   return (
-    <div className="animate-fade-in grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
-      <Card>
-        <h3 className="text-xl font-bold mb-6 flex items-center gap-2">
+    <div className="animate-fade-in grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 items-stretch">
+      <Card className="h-full">
+        <h3 className="text-xl font-bold mb-6 flex items-center justify-center gap-2 text-center">
           <Percent size={20} className="text-primary" /> US Crypto Tax Estimator 2024
         </h3>
         <div className="space-y-5">
@@ -125,8 +125,8 @@ export const TaxEstimator: React.FC = () => {
         </div>
       </Card>
 
-      <Card variant="featured" className="flex flex-col">
-        <h3 className="text-xl font-bold mb-6">Tax Liability Breakdown</h3>
+      <Card variant="featured" className="flex flex-col h-full">
+        <h3 className="text-xl font-bold mb-6 text-center">Tax Liability Breakdown</h3>
         <div className="grid grid-cols-2 gap-4 mb-6">
           <ResultMetric label="Total Tax Owed" value={fmtUSD(result.totalTax)} large negative />
           <ResultMetric label="Effective Rate" value={fmtPct(result.effectiveRate)} negative />
@@ -157,7 +157,7 @@ export const TaxEstimator: React.FC = () => {
               <Tooltip labelStyle={{ color: '#a1a1aa' }}
                 contentStyle={{ backgroundColor: '#18181b', borderColor: '#27272a', borderRadius: 8, color: '#f4f4f5' }}
                 itemStyle={{ color: '#fff' }}
-                formatter={(v: number) => fmtUSD(v)}
+                formatter={(v: any) => fmtUSD(v)}
               />
             </PieChart>
             <div className="flex flex-col gap-2">

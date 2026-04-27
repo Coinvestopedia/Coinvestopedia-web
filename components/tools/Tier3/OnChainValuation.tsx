@@ -62,7 +62,7 @@ export const OnChainValuation: React.FC = () => {
         <div className="space-y-6">
           <Card>
             <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
-               <h3 className="font-bold text-lg flex items-center gap-2">
+               <h3 className="font-bold text-lg flex items-center justify-center gap-2 text-center w-full">
                  <Globe size={18} className="text-primary"/> On-Chain Valuation Models
                </h3>
                
@@ -109,7 +109,7 @@ export const OnChainValuation: React.FC = () => {
                   positive={currentData.mvrvZ < 1} 
                   neutral={currentData.mvrvZ >= 1 && currentData.mvrvZ <= 5} 
                 />
-                <div className="p-4 bg-primary/5 rounded-xl border border-primary/20 flex flex-col justify-center text-[10px] font-bold text-primary">
+                <div className="p-4 bg-primary/5 rounded-xl border border-primary/20 flex flex-col items-center justify-center text-[10px] font-bold text-primary text-center">
                   <span>Green zone: Z &lt; 0 (Undervalued)</span>
                   <span className="text-red-400 mt-1">Red zone: Z &gt; 7 (Overvalued)</span>
                 </div>
@@ -133,7 +133,7 @@ export const OnChainValuation: React.FC = () => {
 
                    <Tooltip itemStyle={{ color: '#e4e4e7' }}
                      contentStyle={{ backgroundColor: '#18181b', borderColor: '#27272a', borderRadius: 8 }}
-                     formatter={(v: number, name: string) => {
+                     formatter={(v: any, name: any) => {
                        if (name === 'MVRV Z-Score') return [v.toFixed(2), name];
                        return [fmtUSD(v), name];
                      }}

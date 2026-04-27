@@ -3,7 +3,7 @@ import { Layers, Cuboid, TrendingUp, BarChart3, Fingerprint, Image, Database, Za
 
 export type AssetCategory = 'L1' | 'L2' | 'DeFi' | 'AI' | 'RWA' | 'Equity' | 'Commodity' | 'Macro' | 'NFT';
 
-export type AnalystSignal = 'BUY' | 'NEUTRAL' | 'WATCH' | 'UNDERWEIGHT';
+export type AnalystSignal = 'OUTPERFORM' | 'NEUTRAL' | 'WATCH' | 'UNDERWEIGHT';
 
 export interface AssetData {
   id: string;

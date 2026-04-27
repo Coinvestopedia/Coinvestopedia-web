@@ -30,7 +30,7 @@ export const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
             Analyze Assets
           </Button>
           <Button variant="secondary" size="lg" onClick={() => onNavigate?.(PageRoute.NEWSLETTER)}>
-            View Market Intelligence
+            Read The Briefing
           </Button>
         </div>
       </div>

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
-import { ChevronUp, ChevronDown, Database, Search } from 'lucide-react';
+import { ChevronLeft, ChevronRight, ChevronUp, ChevronDown, Database } from 'lucide-react';
 import { cn } from '../utils/helpers';
 
 export interface Column<T> {

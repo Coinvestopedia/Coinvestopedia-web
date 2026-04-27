@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { X, Plus, Search } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ASSET_REGISTRY, AssetData, getCategoryIcon } from '../../data/assetRegistry';
+import { AssetData } from '../../data/assetRegistry';
 import { AssetIcon } from '../AssetIcon';
 
 interface AssetSelectorProps {
@@ -17,14 +17,14 @@ export const AssetSelector: React.FC<AssetSelectorProps> = ({ selectedIds, onCha
   const dropdownRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const availableAssets = Object.values(registry);
+  const availableAssets = Object.entries(registry).map(([key, asset]) => ({ key, ...asset }));
   const categories = ['All', ...Array.from(new Set(availableAssets.map(a => a.category)))];
 
   const filteredAssets = availableAssets.filter(asset => {
     const matchesSearch = asset.symbol.toLowerCase().includes(searchTerm.toLowerCase()) || 
                           asset.name.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesCategory = activeCategory === 'All' || asset.category === activeCategory;
-    const notSelected = !selectedIds.includes(asset.id);
+    const notSelected = !selectedIds.includes(asset.key);
     return matchesSearch && matchesCategory && notSelected;
   });
 
@@ -72,7 +72,7 @@ export const AssetSelector: React.FC<AssetSelectorProps> = ({ selectedIds, onCha
       {/* Selected Pills */}
       <div className="flex flex-wrap items-center gap-2">
          {selectedIds.map(id => {
-           const asset = Object.values(registry).find(a => a.id === id);
+           const asset = registry[id];
            if (!asset) return null;
            return (
              <div key={id} className="flex items-center gap-2 bg-surface border border-border rounded-full pl-1.5 pr-1 py-1 group transition hover:border-primary/30">
@@ -118,11 +118,11 @@ export const AssetSelector: React.FC<AssetSelectorProps> = ({ selectedIds, onCha
                 
                 {/* Dropdown */}
                 <motion.div 
-                  initial={{ opacity: 0, scale: 0.95, y: -10 }}
-                  animate={{ opacity: 1, scale: 1, y: 0 }}
-                  exit={{ opacity: 0, scale: 0.95, y: -10 }}
+                  initial={{ opacity: 0, scale: 0.95, y: -10, x: "-50%" }}
+                  animate={{ opacity: 1, scale: 1, y: 0, x: "-50%" }}
+                  exit={{ opacity: 0, scale: 0.95, y: -10, x: "-50%" }}
                   transition={{ duration: 0.15, ease: "easeOut" }}
-                  className="absolute top-12 left-0 w-[340px] sm:w-[400px] rounded-xl z-[100] flex flex-col overflow-hidden bg-surface border border-border shadow-2xl"
+                  className="absolute top-12 left-1/2 w-[360px] sm:w-[480px] md:w-[540px] rounded-xl z-[100] flex flex-col overflow-hidden bg-surface border border-border shadow-2xl origin-top"
                 >
                  {/* Search */}
                  <div className="px-4 pt-4 pb-3 bg-surface">
@@ -169,8 +169,8 @@ export const AssetSelector: React.FC<AssetSelectorProps> = ({ selectedIds, onCha
                     ) : (
                       filteredAssets.map(asset => (
                         <button 
-                          key={asset.id}
-                          onClick={() => handleAdd(asset.id)}
+                          key={asset.key}
+                          onClick={() => handleAdd(asset.key)}
                           className="flex items-center justify-between px-3 py-2.5 rounded-lg transition w-full text-left group active:scale-[0.98] bg-surface hover:bg-background transform-gpu"
                         >
                            <div className="flex items-center gap-3 min-w-0">

@@ -1,15 +1,18 @@
-import { PageMeta, articleSchema } from '../components/PageMeta';
-import { VaraDisclaimer } from '../components/VaraDisclaimer';
+import { PageMeta, articleSchema, faqSchema } from '../components/PageMeta';
+
+import { PageRoute } from '../types';
+
 import { KeyInsights } from '../components/KeyInsights';
 import React, { useState, useEffect } from 'react';
 import { Card } from '../components/Card';
 import { Button } from '../components/Button';
-import { Search, ArrowLeft, Clock, Share2, BookmarkPlus, Globe, Shield, Building2, Scale } from 'lucide-react';
+import { NewsletterSignup } from '../components/NewsletterSignup';
+import { ArrowLeft, Clock, Share2, BookmarkPlus, Globe, Shield, Building2, Scale } from 'lucide-react';
 import { TargetIcon } from '../components/AnimatedIcons';
 import { useAppContext } from '../context/AppContext';
 
 
-const CATEGORIES = ['All', 'Sovereignty', 'Regulation', 'Institutions', 'Markets', 'Geopolitics', 'Africa', 'Europe', 'LatAm'];
+
 
 export interface Article {
   id: string;
@@ -22,6 +25,7 @@ export interface Article {
   desc: string;
   icon?: React.ReactNode;
   keyInsights?: string[];
+  faq?: { question: string; answer: string }[]; // Added for GEO Optimization
   content: React.ReactNode;
 }
 
@@ -32,8 +36,14 @@ import { mexicoBrazilTaxArticle } from '../content/articles/mexico-brazil-tax-co
 import { rwaTokenizationArticle } from '../content/articles/rwa-tokenization-stack';
 import { elSalvadorVerdictArticle } from '../content/articles/el-salvador-verdict-2026';
 import { aiScamsSecurityArticle } from '../content/articles/ai-scams-ransomware-trends';
+import { cme247Article } from '../content/articles/cme-24-7-structural-shift';
+import { morganStanleyArticle } from '../content/articles/morgan-stanley-bitcoin-trust';
+import { geoFrameworkArticle } from '../content/articles/geo-framework-bitcoin-analysis';
 
 export const ARTICLES: Article[] = [
+  geoFrameworkArticle,
+  morganStanleyArticle,
+  cme247Article,
   postMaduroVenezuelaArticle,
   mexicoBrazilTaxArticle,
   rwaTokenizationArticle,
@@ -54,6 +64,10 @@ export const ARTICLES: Article[] = [
       "The region processed nearly $1.5 trillion in transaction volume between 2022 and 2025.",
       "Regulatory frameworks in Brazil and Argentina are serving as templates for other emerging economies.",
       "Stablecoins represent over 40% of all crypto-asset inflows in the region's major economies."
+    ],
+    faq: [
+      { question: "What is the primary driver of crypto adoption in Latin America?", answer: "Stablecoin demand for inflation hedging represents over 40% of all crypto-asset inflows in major regional economies like Argentina." },
+      { question: "How much crypto volume does Latin America process?", answer: "The region processed nearly $1.5 trillion in transaction volume between 2022 and 2025, maintaining a 63% adoption growth rate." }
     ],
     content: (
       <>
@@ -423,6 +437,16 @@ export const ARTICLES: Article[] = [
     image: '/africa-crypto-featured.png',
     desc: 'Sub-Saharan Africa is the third fastest-growing crypto region globally, driven by infrastructure needs, financial inclusion, and FX stability.',
     icon: <Globe className="text-emerald-400" size={24} />,
+    keyInsights: [
+      "Rapid Growth: Sub-Saharan Africa saw a 52% YoY increase in on-chain value ($205B) by June 2025.",
+      "Regulatory Hubs: Mauritius and South Africa lead with mature frameworks like the VAITOS Act and CASP licensing.",
+      "Stability Premium: In Nigeria, the Naira's 200% devaluation in 2023-24 turned stablecoins into an essential store of value.",
+      "AfCFTA Synergy: Digital rails are supplementing the PAPSS system to bypass correspondent banking bottlenecks for 1.4B people."
+    ],
+    faq: [
+      { question: "Why is Nigeria leading crypto adoption in Africa?", answer: "The Naira's 200% devaluation in 2023-24 made stablecoins an essential infrastructure for capital preservation and commerce." },
+      { question: "What is the role of Mauritius and South Africa in African crypto?", answer: "They serve as the continent's primary regulatory hubs, with Mauritius using the VAITOS Act and South Africa approving over 138 CASP licenses." }
+    ],
     content: (
       <>
         <p className="text-xl text-text-muted mb-8 italic">
@@ -693,6 +717,16 @@ export const ARTICLES: Article[] = [
     image: '/europe-crypto-featured.png',
     desc: 'MiCA enters full enforcement in 2026, making Europe the first jurisdiction with a unified digital asset framework spanning 27 member states.',
     icon: <Scale className="text-blue-400" size={24} />,
+    keyInsights: [
+      "MiCA Dominance: July 1, 2026 marks full enforcement, creating a unified digital asset market across 27 member states.",
+      "Compliance Costs: Start-up compliance expenses now exceed €60,000, accelerating market consolidation.",
+      "Safety Dividend: Regulated products under MiCA show 90% fewer exploits due to mandatory 1:1 reserve requirements.",
+      "Tax Havens: Switzerland, Germany, and Portugal maintain a competitive edge with 0% capital gains for long-term holders."
+    ],
+    faq: [
+      { question: "What is MiCA and when does it start?", answer: "MiCA (Markets in Crypto-Assets) is a unified EU digital asset framework entering full enforcement on July 1, 2026." },
+      { question: "How much does it cost to get a MiCA license?", answer: "Start-up compliance and licensing costs are estimated to exceed €60,000 for standard CASPs." }
+    ],
     content: (
       <>
         <p className="text-xl text-text-muted mb-8 italic">
@@ -1021,6 +1055,16 @@ export const ARTICLES: Article[] = [
     image: '/correspondent-1.png',
     desc: 'Why small nations cant access global finance and how crypto acts as an alternative rail.',
     icon: <Globe className="text-blue-400" size={24} />,
+    keyInsights: [
+      "De-Risking Fallout: Global banks are exiting emerging markets to avoid disproportionate compliance costs relative to revenue.",
+      "The Caribbean Deficit: 13 of 16 jurisdictions lost over 50% of correspondent relationships, doubling transaction times.",
+      "Efficiency Paradox: Stablecoins on Polygon settle in 2-15 minutes for $0.01, vs. traditional wires taking 5 days and costing $60+.",
+      "The mBridge Pivot: Central Bank Digital Currencies (CBDCs) allow direct settlement, bypassing legacy commercial banking gatekeepers."
+    ],
+    faq: [
+      { question: "What is the mBridge project?", answer: "A multi-central bank digital currency (mBridge) platform that enables direct cross-border settlement, reducing costs by 90% vs SWIFT." },
+      { question: "How has de-risking affected the Caribbean?", answer: "13 of 16 Caribbean nations lost over 50% of their correspondent banking relationships by 2020, doubling transaction costs." }
+    ],
     content: (
       <>
         <p className="text-xl text-text-muted mb-8 italic">
@@ -1169,6 +1213,16 @@ export const ARTICLES: Article[] = [
     image: '/capital-controls-1.png',
     desc: 'Understanding currency exchange restrictions, bank rationing, and evasion methods in distressed economies.',
     icon: <Shield className="text-emerald-400" size={24} />,
+    keyInsights: [
+      "Wealth Destruction: Middle-class savings in Argentina lost up to 70% of value within months during the 2001 'Corralito'.",
+      "Rationing Tiers: Distressed regimes prioritize essential imports and state-approved transfers over individual capital mobility.",
+      "Early Warning: FX reserves falling below 3 months of import cover is a 95% reliable indicator of imminent capital controls.",
+      "Mitigation Strategy: Off-shore accounts, self-custody crypto, and hardware wallets remain the most effective defenses against asset freezes."
+    ],
+    faq: [
+      { question: "What is a 'Corralito'?", answer: "A banking restriction first used in Argentina in 2001 that limited withdrawals and froze accounts, leading to a 70% loss in middle-class savings value." },
+      { question: "What are the early warning signs of capital controls?", answer: "Key indicators include central bank reserves falling below 3 months of import cover and parallel market spreads exceeding 20%." }
+    ],
     content: (
       <>
         <p className="text-xl text-text-muted mb-8 italic">
@@ -1251,7 +1305,7 @@ export const ARTICLES: Article[] = [
         </ul>
 
         <div className="my-10 rounded-2xl overflow-hidden border border-border shadow-2xl">
-           <img src="/mitigation-strategies-1.png" alt="Diversification Strategy" className="w-full h-auto object-cover" />
+           <img src="/tiered-diversification.jpg" alt="Diversification Strategy" className="w-full h-auto object-cover" />
            <div className="p-4 bg-background/50 text-xs text-center border-t border-border italic text-text-muted">
               Tiered accounts and hard assets offer robust diversification.
            </div>
@@ -1268,6 +1322,16 @@ export const ARTICLES: Article[] = [
     image: 'https://images.unsplash.com/photo-1621416894569-0f39ed31d247?q=80&w=2070&auto=format&fit=crop',
     desc: 'US state-by-state licensing vs EU MiCA vs Offshore Caymans models.',
     icon: <Shield className="text-emerald-400" size={24} />,
+    keyInsights: [
+      "The US Standard: NYDFS BitLicense remains the most stringent regional model, while federal legislation (CLARITY Act) seeks to unify it.",
+      "The MiCA Benchmark: Europe sets the global safety standard with mandatory 1:1 liquid reserves and independent audit requirements.",
+      "Offshore Resilience: Cayman and BVI models still process 70% of global liquidity due to their robust 'unbanked' crypto rails.",
+      "Regulatory Arbitrage: Issuers are moving to 'Safe Harbors' like UAE and Bermuda to maintain profit margins while remaining compliant."
+    ],
+    faq: [
+      { question: "How does the EU regulate stablecoins?", answer: "Under MiCA, issuers must maintain 1:1 liquid reserves and are prohibited from offering yield-bearing features." },
+      { question: "What are the differences between US and EU stablecoin models?", answer: "The US uses a fragmented state-by-state approach (like NYDFS), whereas the EU uses a single unified framework (MiCA)." }
+    ],
     content: (
       <>
         <p className="text-xl text-text-muted mb-8 italic">
@@ -1356,6 +1420,16 @@ export const ARTICLES: Article[] = [
     image: '/pension-risk-report.png',
     desc: 'Fiduciary constraints, qualified custodian requirements, and accounting treatment blockers.',
     icon: <Building2 className="text-amber-400" size={24} />,
+    keyInsights: [
+      "Fiduciary Friction: Prudent Person Rules (ERISA) currently view Bitcoin's volatility as inconsistent with conservative fund mandates.",
+      "Custodial Gap: Pension funds require SEC-qualified custodians with insurance layers that do not yet exist at scale for BTC.",
+      "Accounting Blockers: While FASB updated fair value rules in 2024, international IFRS standards still treat BTC as an intangible asset.",
+      "The ETF Proxy: 85% of institutional interest is flowing through spot ETFs to avoid the risks of direct private key management."
+    ],
+    faq: [
+      { question: "Why don't pension funds invest in Bitcoin?", answer: "Primary barriers include fiduciary constraints (ERISA), a lack of SEC-qualified custodians with sufficient insurance, and complex accounting rules." },
+      { question: "How are pension funds currently getting Bitcoin exposure?", answer: "Most institutional interest is currently channeled through regulated spot ETFs to avoid the operational risks of direct custody." }
+    ],
     content: (
       <>
         <p className="text-xl text-text-muted mb-8 italic">
@@ -1435,11 +1509,34 @@ export const ARTICLES: Article[] = [
   }
 ];
 
-export const Insights: React.FC = () => {
-  const { addToast } = useAppContext();
+
+
+export interface InsightsProps {
+  onNavigate?: (route: PageRoute) => void;
+}
+
+export const Insights: React.FC<InsightsProps> = ({ onNavigate }) => {
+  const { addToast, setActiveSubMenu, activeSubMenu } = useAppContext();
   const [activeArticleId, setActiveArticleId] = useState<string | null>(null);
   const [activeCategory, setActiveCategory] = useState('All');
-  const [searchQuery, setSearchQuery] = useState('');
+
+  const [featuredIndex, setFeaturedIndex] = useState(0);
+
+  // Pick a random featured article on mount
+  useEffect(() => {
+    const randomIdx = Math.floor(Math.random() * ARTICLES.length);
+    setFeaturedIndex(randomIdx);
+    
+    // Automatically show the relevant menu if not already open
+    if (activeSubMenu !== 'Knowledge') {
+       setActiveSubMenu('Knowledge');
+    }
+  }, [setActiveSubMenu, activeSubMenu]);
+
+  useEffect(() => {
+    // Removed pageCategories override so that the sidebar
+    // falls back to the standard Knowledge submenu.
+  }, []);
 
   // Handle URL Hash for deep linking
   useEffect(() => {
@@ -1474,27 +1571,25 @@ export const Insights: React.FC = () => {
   };
 
   if (activeArticle) {
-    const articleFullUrl = `${window.location.origin}/insights#${activeArticle.id}`;
-    
     return (
       <div className="animate-fade-in max-w-[800px] mx-auto pb-16">
         <PageMeta 
-          title={activeArticle.title} 
+          title={`${activeArticle.title} | Coinvestopedia Insights`}
           description={activeArticle.desc}
-          structuredData={articleSchema({
-            title: activeArticle.title,
-            description: activeArticle.desc,
-            datePublished: activeArticle.date,
-            authorName: "Coinvestopedia Research Team",
-            url: articleFullUrl
-          })}
+          structuredData={[
+            articleSchema({
+              title: activeArticle.title,
+              description: activeArticle.desc,
+              authorName: "Coinvestopedia Research Team",
+              datePublished: new Date(activeArticle.date).toISOString(),
+              image: activeArticle.image.startsWith('http') ? activeArticle.image : `https://coinvestopedia.com${activeArticle.image}`,
+              url: `https://coinvestopedia.com/insights#${activeArticle.id}`
+            }),
+            ...(activeArticle.faq ? [faqSchema(activeArticle.faq.map(f => ({ q: f.question, a: f.answer })))] : [])
+          ]}
         />
-        <button 
-          onClick={handleBackToList}
-          className="flex items-center gap-2 text-text-muted hover:text-primary transition-colors text-sm font-bold group mb-8"
-        >
-          <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" /> Back to Insights
-        </button>
+        
+
 
         <div className="mb-8">
           <div className="flex items-center gap-3 text-xs font-bold text-text-muted tracking-wider uppercase mb-4">
@@ -1534,46 +1629,32 @@ export const Insights: React.FC = () => {
           {activeArticle.content}
         </article>
 
-        <div className="mt-12">
-          <VaraDisclaimer variant="inline" />
-        </div>
 
 
 
-        {/* Newsletter Callout */}
-        <div className="mt-16 p-8 bg-surface border border-primary/20 rounded-2xl text-center relative overflow-hidden">
-           <div className="absolute top-0 right-0 p-8 transform translate-x-1/2 -translate-y-1/2">
-              <div className="w-32 h-32 bg-primary/20 blur-3xl rounded-full"></div>
-           </div>
-           <h3 className="text-2xl font-bold mb-3">Subscribe to Institutional Research</h3>
-           <p className="text-text-muted mb-6 max-w-lg mx-auto">
-              Join 15,000+ institutional allocators receiving our weekly market intelligence.
-           </p>
-           <div className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
-              <input type="email" placeholder="Your work email" className="flex-1 bg-background border border-border rounded-lg px-4 py-3 focus:outline-none focus:border-primary text-sm" />
-              <Button>Get Intelligence</Button>
-           </div>
+
+        {/* The Briefing Callout */}
+        <div className="mt-16">
+          <NewsletterSignup />
         </div>
       </div>
     );
   }
 
   const filteredArticles = ARTICLES.filter(a => {
-    const matchesCategory = activeCategory === 'All' || 
-                          a.category === activeCategory ||
-                          (a.tags && a.tags.includes(activeCategory));
-    const matchesSearch = a.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
-                         a.desc.toLowerCase().includes(searchQuery.toLowerCase());
-    return matchesCategory && matchesSearch;
+    return activeCategory === 'All' || 
+           a.category === activeCategory ||
+           (a.tags && a.tags.includes(activeCategory));
   });
 
-  const featuredArticle = ARTICLES[0];
+  const featuredArticle = ARTICLES[featuredIndex] || ARTICLES[0];
   const listArticles = filteredArticles.filter(a => a.id !== featuredArticle.id);
 
   return (
     <div className="animate-fade-in space-y-10 lg:space-y-14 pb-12">
+
       {/* Hero */}
-      <section className="relative overflow-hidden rounded-2xl lg:rounded-3xl border border-border bg-gradient-to-br from-background to-surface p-8 lg:p-16 mb-12 lg:mb-20 text-center">
+      <section className="relative overflow-hidden rounded-2xl lg:rounded-3xl border border-border bg-gradient-to-br from-background to-surface p-8 lg:p-16 text-center">
         <div className="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full -translate-y-48 translate-x-48 blur-3xl pointer-events-none"></div>
         
         <div className="relative z-10">
@@ -1593,25 +1674,23 @@ export const Insights: React.FC = () => {
       </section>
 
       {/* Category Pills */}
-      <div className="flex items-center gap-2 overflow-x-auto pb-4 scrollbar-hide">
-         <div className="flex gap-2">
-            {CATEGORIES.map(cat => (
-               <button
-                  key={cat}
-                  onClick={() => setActiveCategory(cat)}
-                  className={`px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-colors ${
-                     activeCategory === cat 
-                        ? 'bg-primary text-background' 
-                        : 'bg-surface border border-border text-text hover:border-primary/50'
-                  }`}
-               >
-                  {cat}
-               </button>
-            ))}
-         </div>
-      </div>
-
-
+      <section className="mb-12 border-b border-border/50 pb-4">
+        <div className="flex items-center gap-2 overflow-x-auto hide-scrollbar pb-2">
+          {['All', 'Sovereignty', 'Institutions', 'Regulation', 'Technology'].map(cat => (
+             <button
+                key={cat}
+                onClick={() => setActiveCategory(cat)}
+                className={`px-4 py-2 rounded-full text-sm font-bold whitespace-nowrap transition-all duration-200 ${
+                  activeCategory === cat 
+                    ? 'bg-primary text-background' 
+                    : 'bg-surface border border-border text-text-muted hover:text-text hover:border-primary/50'
+                }`}
+             >
+                {cat}
+             </button>
+          ))}
+        </div>
+      </section>
 
       {/* Featured Article */}
       <section>
@@ -1662,7 +1741,7 @@ export const Insights: React.FC = () => {
             Latest Intelligence
          </h2>
          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {listArticles.map((article, index) => (
+            {listArticles.map((article, _index) => (
                <React.Fragment key={article.id}>
                  <Card 
                     className="flex flex-col group hover:border-primary/40 cursor-pointer h-full transition-all duration-300 transform-gpu hover:-translate-y-1 hover:shadow-xl hover:shadow-primary/5"
@@ -1697,9 +1776,7 @@ export const Insights: React.FC = () => {
          </div>
       </section>
 
-      <div className="mt-16">
-        <VaraDisclaimer variant="inline" />
-      </div>
+
       
       <div className="flex justify-center mt-8">
          <Button 

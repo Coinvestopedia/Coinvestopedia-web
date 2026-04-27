@@ -1,6 +1,7 @@
-import React from 'react';
+
 import { TargetIcon } from '../../components/AnimatedIcons';
 import { Article } from '../../pages/Insights';
+import { Globe } from 'lucide-react';
 
 export const crossBorderPortabilityArticle: Article = {
   id: 'cross-border-portability',
@@ -9,7 +10,20 @@ export const crossBorderPortabilityArticle: Article = {
   readTime: '12 min read',
   date: 'March 24, 2026',
   image: '/cross-border-featured.png',
-  desc: 'Hardware wallets plus seed phrase backup eliminates exchange dependency. Explore how traditional wealth storage fails during geopolitical instability.',
+  desc: "In conflict zones, traditional banking is the first casualty. Understanding self-custody and P2P liquidity corridors is the difference between trapped wealth and mobility.",
+  icon: <Globe className="text-primary" size={24} />,
+  keyInsights: [
+    "Sovereign Mobility: Self-custody eliminates the 'jurisdictional trap,' allowing wealth to move faster than physical conflict escalates.",
+    "Ukraine Case Study: In the first 48 hours of the 2022 invasion, $100M+ in crypto donations were processed while traditional bank networks were disrupted.",
+    "Banking Vulnerability: SWIFT disconnections (Russia 2022) and hyperinflation-driven bank runs (Lebanon 2019) prove that legacy rails are the first casualty of instability.",
+    "Exchange Dependency Risk: Centralized exchanges introduce geographic compliance variation (e.g., $5,000 withdrawal caps in Turkey vs. $100,000+ in UAE).",
+    "P2P Lifeline: In conflict zones, P2P liquidity is the only viable exit ramp when ATMs empty and card networks collapse."
+  ],
+  faq: [
+    { question: "How does crypto help in conflict zones?", answer: "Crypto enables borderless wealth transfer through self-custody, bypassing traditional banking freezes, SWIFT disconnections, and physical border confiscation risk." },
+    { question: "What happened to crypto usage during the Ukraine invasion?", answer: "Over $100 million in crypto donations were received within 48 hours, and citizens used digital assets to preserve capital against hryvnia volatility when ATMs and banks failed." },
+    { question: "Why is self-custody better than exchange-custody in instability?", answer: "Exchanges are subject to local jurisdictional laws and can freeze accounts or limit withdrawals (e.g., $5,000 caps in Turkey) during political transitions, whereas self-custody remains under the user's direct control." }
+  ],
   content: (
     <>
       <p className="text-xl text-text-muted mb-8 italic">
@@ -34,9 +48,9 @@ export const crossBorderPortabilityArticle: Article = {
       </ul>
 
       <div className="my-10 rounded-2xl overflow-hidden border border-border shadow-2xl">
-         <img src="/cross-border-2.png" alt="Letter of Credit Rejected" className="w-full h-auto object-cover" />
+         <img src="/cross-border-featured.png" alt="Global Supply Chain Disruption" className="w-full h-auto object-cover" />
          <div className="p-4 bg-background/50 text-xs text-center border-t border-border italic text-text-muted">
-            Trade finance breakdown: Letters of credit are often the first casualty of banking restrictions.
+            Sovereign Asset Portability: Self-custody serves as a digital corridor, enabling wealth to move across borders when physical and banking systems fail.
          </div>
       </div>
 
@@ -63,9 +77,9 @@ export const crossBorderPortabilityArticle: Article = {
       </div>
 
       <div className="my-10 rounded-2xl overflow-hidden border border-border shadow-2xl">
-         <img src="/cross-border-1.png" alt="Empty Supermarket Shelves" className="w-full h-auto object-cover" />
+         <img src="/cross-border-2.png" alt="Letter of Credit Rejected" className="w-full h-auto object-cover" />
          <div className="p-4 bg-background/50 text-xs text-center border-t border-border italic text-text-muted">
-            System shocks: Supply chain collapses outpace traditional banking mobility in conflict zones.
+            Trade finance breakdown: Letters of credit are often the first casualty of banking restrictions.
          </div>
       </div>
 

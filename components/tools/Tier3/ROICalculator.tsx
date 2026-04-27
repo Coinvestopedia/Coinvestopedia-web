@@ -79,11 +79,11 @@ export const ROICalculator: React.FC = () => {
               <Tooltip itemStyle={{ color: '#e4e4e7' }} labelStyle={{ color: '#a1a1aa' }}
                 contentStyle={{ backgroundColor: '#18181b', borderColor: '#27272a', borderRadius: 8, color: '#f4f4f5' }}
                 cursor={{ fill: '#27272a', opacity: 0.4 }}
-                formatter={(v: number) => fmtUSD(v)}
+                formatter={(v: any) => fmtUSD(v)}
               />
               <ReferenceLine y={parseFloat(investment) || 0} stroke="#71717a" strokeDasharray="4 4" />
               <Bar dataKey="value" radius={[6, 6, 0, 0]}>
-                {result.chartData.map((entry, i) => (
+                {result.chartData.map((_, i) => (
                   <Cell key={i} fill={i === 2 && !isProfit ? '#ef4444' : i === 0 ? '#71717a' : '#10b981'} />
                 ))}
               </Bar>

@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Card } from './Card';
-import { calculateSmartMoneyConfidence, getMockedSmartMoneyConfidence } from '../utils/smartMoneyScore';
+import { calculateSmartMoneyConfidence, getFallbackSmartMoneyConfidence } from '../utils/smartMoneyScore';
 import { fetchGlassnodeMetrics, fetchCryptoQuantReserves, fetchFearAndGreed } from '../services/api';
 import { Activity, ShieldCheck, AlertTriangle, Info } from 'lucide-react';
 
@@ -19,26 +19,25 @@ export const SmartMoneyConfidenceWidget: React.FC = () => {
           fetchCryptoQuantReserves()
         ]);
 
-        // Note: the endpoints will gracefully fall-back to null or empty if API keys are missing.
-        if (!glassnodeData || !cryptoQuantData) {
-          // If keys are missing (as expected initially), use the highly detailed mock generator.
-          const mockScore = getMockedSmartMoneyConfidence();
-          setScore(mockScore);
+        // Compute true live score from proprietary APIs when available
+        const metrics = {
+          fearAndGreed: fearAndGreedData?.[0]?.value ? parseInt(fearAndGreedData[0].value) : 50,
+          sopr: glassnodeData?.sopr || 1.0, 
+          netFlow: glassnodeData?.netFlow || 0,
+          exchangeOutflow: glassnodeData?.exchangeOutflow || 0,
+          minerOutflow: cryptoQuantData?.minerOutflow || 50
+        };
+        
+        // If we have no real on-chain signals, use the robust fallback system
+        if (!glassnodeData && !cryptoQuantData) {
+          setScore(getFallbackSmartMoneyConfidence());
         } else {
-          // Compute true live score from proprietary APIs when available
-          const metrics = {
-            fearAndGreed: fearAndGreedData?.[0]?.value ? parseInt(fearAndGreedData[0].value) : 50,
-            sopr: glassnodeData?.sopr || 1.0, 
-            netFlow: glassnodeData?.netFlow || 0,
-            exchangeOutflow: glassnodeData?.exchangeOutflow || 0,
-            minerOutflow: cryptoQuantData?.minerOutflow || 50
-          };
           const liveScore = calculateSmartMoneyConfidence(metrics);
           setScore(liveScore);
         }
       } catch (err) {
         console.error('Error computing Smart Money Score:', err);
-        setScore(getMockedSmartMoneyConfidence());
+        setScore(getFallbackSmartMoneyConfidence());
       } finally {
         setIsLoading(false);
       }

@@ -47,9 +47,9 @@ export const InflationAdjusted: React.FC = () => {
 
   return (
     <div className="animate-fade-in grid grid-cols-1 lg:col-span-12 gap-8">
-      <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 items-stretch">
         <div className="lg:col-span-1 space-y-6">
-          <Card>
+          <Card className="h-full">
             <h3 className="font-bold text-lg mb-6 flex items-center gap-2">
               <TrendingUp size={18} className="text-primary"/> Real Return Model
             </h3>
@@ -71,7 +71,7 @@ export const InflationAdjusted: React.FC = () => {
           </Card>
         </div>
 
-        <div className="lg:col-span-3 flex flex-col gap-6">
+        <div className="lg:col-span-3 flex flex-col gap-6 h-full">
           <div className="grid grid-cols-2 gap-4">
             <ResultMetric label="Real Annual Return" value={fmtPct(result.realReturn)} positive={result.realReturn > 0} negative={result.realReturn < 0} />
             <ResultMetric label="Final Nominal Value" value={fmtUSD(result.finalNominal)} neutral />
@@ -80,7 +80,7 @@ export const InflationAdjusted: React.FC = () => {
           </div>
 
           <Card className="flex-1 flex flex-col min-h-[400px]">
-            <h4 className="font-bold text-sm text-text-muted uppercase tracking-widest mb-6">Nominal vs Purchasing Power Over Time</h4>
+            <h4 className="font-bold text-sm text-text-muted uppercase tracking-widest mb-6 text-center">Nominal vs Purchasing Power Over Time</h4>
             <div className="flex-1 relative">
               <ResponsiveContainer width="100%" height="100%">
                 <AreaChart data={result.chartData} margin={{ top: 10, right: 30, left: 20, bottom: 20 }}>
@@ -89,7 +89,7 @@ export const InflationAdjusted: React.FC = () => {
                   <YAxis tick={{ fontSize: 10, fill: '#a1a1aa' }} tickFormatter={v => `$${(v/1000).toFixed(0)}k`} stroke="#3f3f46" />
                   <Tooltip itemStyle={{ color: '#e4e4e7' }}
                     contentStyle={{ backgroundColor: '#18181b', borderColor: '#27272a', borderRadius: 12, boxShadow: '0 10px 15px rgba(0,0,0,0.5)' }}
-                    formatter={(v: number) => fmtUSD(v)}
+                    formatter={(v: any) => fmtUSD(v)}
                     labelStyle={{ color: '#a1a1aa', fontWeight: 'bold', marginBottom: 6 }}
                   />
                   <Legend iconType="circle" wrapperStyle={{ fontSize: '11px', paddingTop: '20px' }} />

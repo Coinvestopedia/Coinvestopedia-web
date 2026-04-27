@@ -1,4 +1,4 @@
-import React from 'react';
+// Toast component imports cleanup
 import { AlertCircle, CheckCircle, Info, X, AlertTriangle } from 'lucide-react';
 import { useAppContext } from '../context/AppContext';
 import { cn } from '../utils/helpers';

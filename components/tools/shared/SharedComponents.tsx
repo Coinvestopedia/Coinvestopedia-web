@@ -1,7 +1,6 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import ReactDOM from 'react-dom';
-import { Lock, Info, ChevronDown } from 'lucide-react';
-import { useAppContext } from '../../../context/AppContext';
+import { Info, ChevronDown } from 'lucide-react';
 
 // ─── Info Tooltip Component (Portal-based to escape leather-card stacking context) ─
 const InfoTooltip: React.FC<{ text: React.ReactNode; isOpen?: boolean; onToggle?: (state: boolean) => void }> = ({ text, isOpen, onToggle }) => {
@@ -116,8 +115,8 @@ export const InputField: React.FC<{
     className={`input-field-wrapper relative flex flex-col gap-1.5 min-w-0 transition-colors transition-shadow ${infoOpen ? 'ring-1 ring-primary/20 bg-primary/5 rounded-lg' : 'hover:z-[90] focus-within:z-[90]'}`}
     style={{ zIndex: infoOpen ? 9999 : undefined }}
   >
-    <div className="relative flex items-center justify-between gap-2 z-20">
-      <label className="text-xs font-bold text-text-muted/80 uppercase tracking-widest">{label}</label>
+    <div className="relative flex items-center justify-center gap-2 z-20">
+      <label className="text-xs font-bold text-text-muted/80 uppercase tracking-widest text-center">{label}</label>
       {helpText && <InfoTooltip text={helpText} isOpen={infoOpen} onToggle={setInfoOpen} />}
     </div>
     
@@ -127,9 +126,9 @@ export const InputField: React.FC<{
           <select
             value={value}
             onChange={e => onChange(e.target.value)}
-            className="w-full bg-input-bg dark:bg-[#18181b] border border-border rounded-lg py-2.5 px-4 text-sm text-text focus:border-primary focus:ring-1 focus:ring-primary/20 focus:outline-none appearance-none cursor-pointer transition-colors transition-shadow hover:border-text-muted/50"
+            className="w-full bg-input-bg dark:bg-[#18181b] border border-border rounded-lg py-2.5 px-4 text-sm text-text focus:border-primary focus:ring-1 focus:ring-primary/20 focus:outline-none appearance-none cursor-pointer transition-colors transition-shadow hover:border-text-muted/50 text-center"
           >
-            {options.map(o => <option key={o.value} value={o.value}>{o.label}</option>)}
+            {options.map(o => <option key={o.value} value={o.value} className="text-center">{o.label}</option>)}
           </select>
           <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-text-muted">
             <ChevronDown size={14} />
@@ -138,7 +137,7 @@ export const InputField: React.FC<{
       ) : (
         <div className="flex items-center relative">
           {prefix && (
-            <div className="absolute left-3 text-text-muted text-sm font-medium pointer-events-none">
+            <div className="absolute left-2.5 text-text-muted text-sm font-medium pointer-events-none">
               {prefix}
             </div>
           )}
@@ -149,7 +148,7 @@ export const InputField: React.FC<{
             min={min} 
             max={max} 
             step={step}
-            className={`w-full bg-input-bg/60 dark:bg-[#18181b]/60 backdrop-blur-md border border-border/80 rounded-lg py-2.5 text-sm font-medium text-text focus:border-primary focus:ring-2 focus:ring-primary/40 focus:outline-none transition-colors transition-shadow hover:border-text-muted/60 ${prefix ? 'pl-9' : 'pl-4'} ${suffix ? 'pr-12' : 'pr-4'}`}
+            className={`w-full bg-input-bg/60 dark:bg-[#18181b]/60 backdrop-blur-md border border-border/80 rounded-lg py-2.5 text-sm font-medium text-text focus:border-primary focus:ring-2 focus:ring-primary/40 focus:outline-none transition-colors transition-shadow hover:border-text-muted/60 text-center px-4`}
           />
           {suffix && (
             <div className="absolute right-3.5 text-text-muted text-[10px] font-extrabold uppercase tracking-widest pointer-events-none bg-input-bg dark:bg-[#18181b] pl-1">
@@ -164,15 +163,16 @@ export const InputField: React.FC<{
 };
 
 // ─── Result Metric ─────────────────────────────────────────────────────────────
-export const ResultMetric: React.FC<{
+export const ResultMetric: React.FC<{ 
   label: string; 
-  value: React.ReactNode; 
-  sub?: string;
+  value: string | number; 
+  sub?: string; 
   positive?: boolean; 
   negative?: boolean; 
   large?: boolean; 
   neutral?: boolean;
-}> = ({ label, value, sub, positive, negative, large, neutral }) => {
+  centered?: boolean;
+}> = ({ label, value, sub, positive, negative, large, centered = true }) => {
   const getStringValue = (): string => {
       if (typeof value === 'string') return value;
       if (typeof value === 'number') return value.toString();
@@ -180,7 +180,6 @@ export const ResultMetric: React.FC<{
   };
   
   const valStr = getStringValue();
-  const numericOnly = valStr.replace(/[^0-9]/g, '');
   const charLength = valStr.length; // use complete string length as stronger baseline
   
   // Stricter sizing logic based on full string length (including symbols like +$ %)
@@ -189,11 +188,11 @@ export const ResultMetric: React.FC<{
   const isMediumNumber = charLength >= 7; 
 
   return (
-    <div className="p-4 rounded-xl border border-border bg-surface dark:bg-[#18181b] hover:border-primary/40 hover:bg-primary/5 dark:hover:bg-[#1a1a1e] transition-colors group"
+    <div className={`p-4 rounded-xl border border-border bg-surface dark:bg-[#18181b] hover:border-primary/40 hover:bg-primary/5 dark:hover:bg-[#1a1a1e] transition-colors group flex flex-col ${centered ? 'items-center text-center' : ''}`}
       title={valStr}
     >
       <p className="text-[10px] font-bold text-text-muted uppercase tracking-widest">{label}</p>
-      <div className="flex items-baseline gap-1.5 min-w-0 flex-wrap mt-auto">
+      <div className={`flex items-baseline gap-1.5 min-w-0 flex-wrap mt-auto ${centered ? 'justify-center w-full' : ''}`}>
         <p className={`font-bold font-heading transition-colors leading-tight truncate overflow-hidden max-w-full
           ${isExtremelyLarge ? 'text-xs sm:text-sm tracking-tighter' : 
             isLargeNumber ? 'text-sm sm:text-base tracking-tight' : 
@@ -203,7 +202,7 @@ export const ResultMetric: React.FC<{
         `}>
           {value}
         </p>
-        {sub && <span className="text-[10px] font-bold text-text-muted/70 whitespace-normal mt-1 w-full sm:w-auto">{sub}</span>}
+        {sub && <span className={`text-[10px] font-bold text-text-muted/70 whitespace-normal mt-1 w-full ${centered ? 'text-center' : ''}`}>{sub}</span>}
       </div>
     </div>
   );
@@ -222,6 +221,3 @@ export const ProGate: React.FC<{ children: React.ReactNode; title: string; descr
   return <>{children}</>;
 };
 
-const Sparkles: React.FC<{size?: number}> = ({size = 16}) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>
-);

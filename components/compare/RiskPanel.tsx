@@ -1,12 +1,10 @@
 import React from 'react';
 import { AssetData } from '../../data/assetRegistry';
-import { ProGate } from '../../components/ProGate';
 import { AlertCircle, ShieldAlert, ShieldCheck, Shield } from 'lucide-react';
 import { AssetIcon } from '../AssetIcon';
 
 interface RiskPanelProps {
   assets: AssetData[];
-  isProUser: boolean;
 }
 
 const getRiskTag = (vol: number) => {
@@ -15,7 +13,7 @@ const getRiskTag = (vol: number) => {
   return { label: 'LOW', color: 'text-emerald-400', bg: 'bg-emerald-500/10', border: 'border-emerald-500/30', icon: ShieldCheck };
 };
 
-export const RiskPanel: React.FC<RiskPanelProps> = ({ assets, isProUser }) => {
+export const RiskPanel: React.FC<RiskPanelProps> = ({ assets }) => {
   return (
     <div className="space-y-6 animate-fade-in">
       <div className="leather-card rounded-xl p-4 lg:p-6">

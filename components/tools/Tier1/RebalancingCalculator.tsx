@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { Card } from '../../Card';
-import { InputField, ResultMetric, fmtUSD, fmtPct } from '../shared/SharedComponents';
+import { ResultMetric, fmtUSD } from '../shared/SharedComponents';
 import { Target, Plus, Trash2, ArrowRight } from 'lucide-react';
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip as RechartsTooltip, Legend } from 'recharts';
 
@@ -113,7 +113,7 @@ export const RebalancingCalculator: React.FC = () => {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-border/50">
-                  {holdings.map((h, i) => (
+                  {holdings.map((h) => (
                     <tr key={h.id} className="group">
                       <td className="py-4 pr-2">
                         <input
@@ -127,24 +127,24 @@ export const RebalancingCalculator: React.FC = () => {
                       <td className="py-4 pr-4">
                          <div className="relative group/input flex-1 min-w-[120px] max-w-[200px]">
                            <span className="absolute left-3 top-1/2 -translate-y-1/2 text-text-muted text-xs font-bold">$</span>
-                           <input
-                             type="number"
-                             value={h.value}
-                             onChange={e => updateHolding(h.id, 'value', e.target.value)}
-                             className="w-full bg-background border border-border rounded-md pl-8 pr-3 py-2 focus:border-primary focus:outline-none transition-colors"
-                             min={0}
-                           />
+                            <input
+                              type="number"
+                              value={h.value}
+                              onChange={e => updateHolding(h.id, 'value', e.target.value)}
+                              className="w-full bg-background border border-border rounded-md px-4 py-2 focus:border-primary focus:outline-none transition-colors text-center"
+                              min={0}
+                            />
                          </div>
                       </td>
                       <td className="py-4 pr-4 text-right flex justify-end">
                          <div className="relative inline-block w-full max-w-[140px]">
-                           <input
-                             type="number"
-                             value={h.targetWeight}
-                             onChange={e => updateHolding(h.id, 'targetWeight', e.target.value)}
-                             className="w-full bg-background border border-border rounded-md pr-8 pl-3 py-2 focus:border-primary focus:outline-none text-right font-mono font-bold"
-                             min={0} max={100}
-                           />
+                            <input
+                              type="number"
+                              value={h.targetWeight}
+                              onChange={e => updateHolding(h.id, 'targetWeight', e.target.value)}
+                              className="w-full bg-background border border-border rounded-md px-4 py-2 focus:border-primary focus:outline-none text-center font-mono font-bold"
+                              min={0} max={100}
+                            />
                            <span className="absolute right-3 top-1/2 -translate-y-1/2 text-text-muted text-xs font-bold">%</span>
                          </div>
                       </td>
@@ -220,7 +220,7 @@ export const RebalancingCalculator: React.FC = () => {
                     {result.pieDataCurrent.map((_, i) => <Cell key={i} fill={COLORS[i % COLORS.length]} />)}
                   </Pie>
                   <RechartsTooltip 
-                    formatter={(v: number) => fmtUSD(v)} 
+                    formatter={(v: any) => fmtUSD(v)} 
                     contentStyle={{ backgroundColor: '#18181b', borderColor: '#27272a', borderRadius: 8, color: '#f4f4f5' }}
                     itemStyle={{ color: '#fff' }}
                   />
@@ -239,7 +239,7 @@ export const RebalancingCalculator: React.FC = () => {
                     {result.pieDataTarget.map((_, i) => <Cell key={i} fill={COLORS[i % COLORS.length]} />)}
                   </Pie>
                   <RechartsTooltip 
-                    formatter={(v: number) => fmtUSD(v)} 
+                    formatter={(v: any) => fmtUSD(v)} 
                     contentStyle={{ backgroundColor: '#18181b', borderColor: '#27272a', borderRadius: 8, color: '#f4f4f5' }}
                     itemStyle={{ color: '#fff' }}
                   />

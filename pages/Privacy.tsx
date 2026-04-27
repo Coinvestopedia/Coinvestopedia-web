@@ -1,10 +1,25 @@
 import React from 'react';
 import { Shield, Lock, Eye, FileText } from 'lucide-react';
+import { PageMeta } from '../components/PageMeta';
 
-export const Privacy: React.FC = () => {
+
+import { PageRoute } from '../types';
+
+export interface PrivacyProps {
+  onNavigate?: (route: PageRoute) => void;
+}
+
+export const Privacy: React.FC<PrivacyProps> = ({ onNavigate }) => {
   return (
     <div className="animate-fade-in max-w-[800px] mx-auto pb-16">
-      <div className="mb-12">
+      <PageMeta
+        title="Privacy Policy"
+        description="Learn how Coinvestopedia collects, uses, and protects your personal information. Read our full privacy policy."
+        canonical="/privacy"
+        keywords="coinvestopedia privacy policy, data protection, personal information"
+      />
+
+      <div className="mb-12 mt-6">
         <div className="flex items-center gap-3 text-primary mb-4">
           <Shield size={32} />
           <h1 className="text-4xl lg:text-5xl font-heading font-bold text-text">Privacy Policy</h1>
@@ -21,7 +36,7 @@ export const Privacy: React.FC = () => {
             At Coinvestopedia, we collect information to providing better services to all our users. The types of personal information we collect include:
           </p>
           <ul className="list-disc pl-6 mt-4 space-y-2">
-            <li><strong>Personal Identifiers:</strong> Name, email address, and account preferences when you register for an account or subscribe to our newsletter.</li>
+            <li><strong>Personal Identifiers:</strong> Name, email address, and account preferences when you register for an account or subscribe to our weekly digest (The Briefing).</li>
             <li><strong>Usage Data:</strong> Information about how you use our website, such as pages visited, time spent, and links clicked.</li>
             <li><strong>Technical Data:</strong> IP address, browser type, device information, and operating system.</li>
           </ul>

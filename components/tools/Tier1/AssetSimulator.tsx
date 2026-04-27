@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import { Card } from '../../Card';
 import { InputField, ResultMetric, fmtUSD, fmtPct } from '../shared/SharedComponents';
-import { PieChart, LineChart, Line, XAxis, YAxis, CartesianGrid, ResponsiveContainer, Tooltip, AreaChart, Area } from 'recharts';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, ResponsiveContainer, Tooltip, AreaChart, Area } from 'recharts';
 import { Activity } from 'lucide-react';
 
 const ASSET_CLASSES = [
@@ -111,10 +111,10 @@ export const AssetSimulator: React.FC = () => {
   }, [initialInvestment, horizonYears, weights]);
 
   return (
-    <div className="animate-fade-in grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8">
+    <div className="animate-fade-in grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-stretch">
       {/* Sidebar Controls */}
-      <div className="lg:col-span-4 space-y-6">
-        <Card>
+      <div className="lg:col-span-4 space-y-6 h-full flex flex-col">
+        <Card className="h-full">
           <h3 className="font-bold text-lg mb-4 flex items-center gap-2">
             <Activity size={18} className="text-primary"/> Simulation Settings
           </h3>
@@ -155,10 +155,10 @@ export const AssetSimulator: React.FC = () => {
       {/* Main Charts */}
       <div className="lg:col-span-8 flex flex-col gap-6">
         <div className="grid grid-cols-2 gap-4">
-           <ResultMetric label="Projected Value" value={fmtUSD(result.finalValue)} positive />
-           <ResultMetric label="Expected CAGR" value={fmtPct(result.portReturn * 100)} neutral />
-           <ResultMetric label="Max Drawdown" value={fmtPct(result.maxDrawdown)} negative />
-           <ResultMetric label="Sharpe Ratio" value={result.sharpe.toFixed(2)} neutral />
+           <ResultMetric label="Projected Value" value={fmtUSD(result.finalValue)} positive centered />
+           <ResultMetric label="Expected CAGR" value={fmtPct(result.portReturn * 100)} neutral centered />
+           <ResultMetric label="Max Drawdown" value={fmtPct(result.maxDrawdown)} negative centered />
+           <ResultMetric label="Sharpe Ratio" value={result.sharpe.toFixed(2)} neutral centered />
         </div>
 
         <Card className="flex-1 flex flex-col min-h-[300px]">
@@ -173,7 +173,7 @@ export const AssetSimulator: React.FC = () => {
                  <YAxis tick={{ fontSize: 10, fill: '#a1a1aa' }} tickFormatter={v => `$${(v/1000).toFixed(0)}k`} stroke="#3f3f46" />
                  <Tooltip itemStyle={{ color: '#e4e4e7' }} labelStyle={{ color: '#a1a1aa' }}
                    contentStyle={{ backgroundColor: '#18181b', borderColor: '#27272a', borderRadius: 8 }}
-                   formatter={(v: number) => fmtUSD(v)}
+                   formatter={(v: any) => fmtUSD(v)}
                  />
                  <Line type="monotone" dataKey="portfolio" name="Your Portfolio" stroke="#10b981" strokeWidth={3} dot={false} />
                  <Line type="monotone" dataKey="benchmark" name="60/40 Benchmark" stroke="#71717a" strokeWidth={2} strokeDasharray="5 5" dot={false} />
@@ -192,7 +192,7 @@ export const AssetSimulator: React.FC = () => {
                  <YAxis hide domain={['dataMin', 0]} />
                  <Tooltip itemStyle={{ color: '#e4e4e7' }} labelStyle={{ color: '#a1a1aa' }}
                    contentStyle={{ backgroundColor: '#18181b', borderColor: '#27272a', borderRadius: 8 }}
-                   formatter={(v: number) => [`${v}%`, 'Drawdown']}
+                   formatter={(v: any) => [`${v}%`, 'Drawdown']}
                  />
                  <Area type="monotone" dataKey="drawdown" stroke="#EF4444" fill="#EF4444" fillOpacity={0.2} />
                </AreaChart>

@@ -1,6 +1,6 @@
 import React from 'react';
-import { AssetData, getCategoryIcon, ASSET_REGISTRY } from '../../data/assetRegistry';
-import { TrendingUp, TrendingDown, ArrowUpDown } from 'lucide-react';
+import { AssetData } from '../../data/assetRegistry';
+import { ArrowUpDown } from 'lucide-react';
 import { AssetIcon } from '../AssetIcon';
 import { ResponsiveContainer, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Cell, ReferenceLine } from 'recharts';
 
@@ -8,35 +8,6 @@ interface OverviewPanelProps {
   assets: AssetData[];
 }
 
-// ─── MACRO STRIP ──────────────────────────────────────────────────────────────
-
-const MACRO_KEYS = ['BTC', 'GOLD', 'SPY', 'UST10Y', 'VIX', 'DXY'];
-
-const MacroStrip: React.FC<{ allAssets: Record<string, AssetData> }> = ({ allAssets }) => {
-  const macroAssets = MACRO_KEYS.map(k => allAssets[k]).filter(Boolean);
-
-  return (
-    <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-hide">
-      {macroAssets.map(asset => (
-        <div key={asset.symbol} className="flex items-center gap-3 px-4 py-2.5 bg-surface rounded-xl border border-border whitespace-nowrap min-w-[155px] hover:border-primary/50 hover:bg-surface-alt hover:scale-[1.03] hover:shadow-lg hover:shadow-primary/5 transition-colors transition-transform transition-shadow transform-gpu duration-300 group cursor-default">
-          <AssetIcon symbol={asset.symbol} size={24} />
-          <div className="flex flex-col">
-            <span className="text-[10px] text-text-muted font-bold uppercase tracking-wider">{asset.symbol}</span>
-            <div className="flex items-center gap-2">
-              <span className="text-sm font-mono font-bold">
-                {asset.symbol === 'UST10Y' ? `${asset.price}%` : asset.symbol === 'VIX' || asset.symbol === 'DXY' ? asset.price.toFixed(1) : `$${asset.price.toLocaleString()}`}
-              </span>
-              <span className={`flex items-center text-[10px] font-bold ${asset.change24h >= 0 ? 'text-emerald-400' : 'text-red-400'}`}>
-                {asset.change24h >= 0 ? <TrendingUp size={10} /> : <TrendingDown size={10} />}
-                <span className="ml-0.5">{Math.abs(asset.change24h).toFixed(2)}%</span>
-              </span>
-            </div>
-          </div>
-        </div>
-      ))}
-    </div>
-  );
-};
 
 // ─── YTD PERFORMANCE BAR CHART ────────────────────────────────────────────────
 
@@ -71,7 +42,7 @@ const YtdBarChart: React.FC<{ assets: AssetData[] }> = ({ assets }) => {
                 fontWeight: 600,
               }}
               cursor={{ fill: '#3f3f46', fillOpacity: 0.15 }}
-              formatter={(value: number) => [`${value > 0 ? '+' : ''}${value.toFixed(1)}%`, 'YTD Return']}
+              formatter={(value: any) => [`${value > 0 ? '+' : ''}${value.toFixed(1)}%`, 'YTD Return']}
               labelStyle={{ color: '#a1a1aa', fontSize: '11px', fontWeight: 'bold', marginBottom: '4px' }}
               itemStyle={{ color: '#f4f4f5', fontWeight: 700 }}
             />

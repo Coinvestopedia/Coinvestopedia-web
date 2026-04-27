@@ -4,7 +4,38 @@ export const generateChartMockData = () => {
   let startDate = new Date();
   startDate.setFullYear(startDate.getFullYear() - 3);
 
-  let btc = 35000, eth = 2000, sol = 30, gold = 1800, spy = 400, qqq = 320;
+  // Expanded symbol list to cover all categories
+  const symbols = [
+    // L1
+    'BTC', 'ETH', 'SOL', 'BNB', 'ADA', 'AVAX', 'DOT', 'NEAR', 'TON', 'TRX', 'LINK',
+    // L2 & DeFi
+    'ARB', 'OP', 'MATIC', 'UNI', 'AAVE', 'MKR', 'PENDLE', 'JUP', 'LDO', 'IMX', 'MANTLE',
+    // AI & RWA
+    'TAO', 'RNDR', 'FET', 'ONDO', 'POL', 'PEPE', 'WIF', 'BONK',
+    // Equities
+    'AAPL', 'TSLA', 'NVDA', 'MSFT', 'GOOGL', 'AMZN', 'META',
+    // Commodities & Macro
+    'GOLD', 'SILVER', 'OIL', 'SPY', 'QQQ', 'DXY', 'VIX', 'UST10Y'
+  ];
+
+  // Initialize base prices and volatilities
+  const assetStates: Record<string, { price: number; vol: number }> = {
+    BTC: { price: 35000, vol: 0.15 },
+    ETH: { price: 2000, vol: 0.18 },
+    SOL: { price: 30, vol: 0.25 },
+    GOLD: { price: 1800, vol: 0.03 },
+    SPY: { price: 400, vol: 0.05 },
+    QQQ: { price: 320, vol: 0.06 },
+    DXY: { price: 100, vol: 0.02 },
+    OIL: { price: 75, vol: 0.08 },
+  };
+
+  // Provide defaults for others
+  symbols.forEach(s => {
+    if (!assetStates[s]) {
+      assetStates[s] = { price: 100, vol: 0.12 }; // Generic default
+    }
+  });
 
   const seededRandom = (seed: number) => {
     const x = Math.sin(seed) * 10000;
@@ -15,22 +46,19 @@ export const generateChartMockData = () => {
     const date = new Date(startDate);
     date.setDate(date.getDate() + (i * 7));
 
-    btc = btc * (1 + (seededRandom(i + 1) * 0.15 - 0.07));
-    eth = eth * (1 + (seededRandom(i + 2) * 0.18 - 0.08));
-    sol = sol * (1 + (seededRandom(i + 3) * 0.25 - 0.11));
-    gold = gold * (1 + (seededRandom(i + 4) * 0.03 - 0.012));
-    spy = spy * (1 + (seededRandom(i + 5) * 0.05 - 0.02));
-    qqq = qqq * (1 + (seededRandom(i + 6) * 0.06 - 0.025));
-
-    data.push({
+    const dataPoint: any = {
       date: date.toISOString().split('T')[0],
-      BTC: Math.max(1000, btc),
-      ETH: Math.max(100, eth),
-      SOL: Math.max(5, sol),
-      GOLD: Math.max(1500, gold),
-      SPY: Math.max(250, spy),
-      QQQ: Math.max(200, qqq),
+    };
+
+    symbols.forEach((symbol, index) => {
+      const state = assetStates[symbol];
+      // Walk the price
+      const change = seededRandom(i * symbols.length + index) * state.vol * 2 - state.vol;
+      state.price = state.price * (1 + change);
+      dataPoint[symbol] = Math.max(state.price, 0.01);
     });
+
+    data.push(dataPoint);
   }
   return data;
 };

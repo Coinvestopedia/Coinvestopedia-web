@@ -24,7 +24,7 @@ export const ASSETS_DEFI: Record<string, AssetData> = {
     cagr3y: 5.2, maxDrawdown: -88.0, var95: -5.8,
     betaBtc: 1.1, betaSpy: 1.5, correlationBtc: 0.72,
     liquidityScore: 88, socialScore: 75, devActivity: 450, inflationRate: 4.5,
-    analystSignal: 'BUY',
+    analystSignal: 'OUTPERFORM',
     analystThesis: 'CCIP (cross-chain protocol) adoption accelerating with SWIFT partnership. RWA tokenization thesis makes LINK infrastructure-critical. Best-positioned DeFi token for institutional adoption. Staking revenue growing.'
   },
   AAVE: {
@@ -36,7 +36,7 @@ export const ASSETS_DEFI: Record<string, AssetData> = {
     cagr3y: 8.5, maxDrawdown: -92.0, var95: -6.5,
     betaBtc: 1.2, betaSpy: 1.6, correlationBtc: 0.70,
     liquidityScore: 85, socialScore: 72, devActivity: 280, inflationRate: 0,
-    analystSignal: 'BUY',
+    analystSignal: 'OUTPERFORM',
     analystThesis: 'Dominant lending protocol with $12B+ TVL across 8 chains. GHO stablecoin generating protocol revenue. Fee switch activated — real yield accruing to AAVE stakers. Best DeFi blue-chip.'
   },
 

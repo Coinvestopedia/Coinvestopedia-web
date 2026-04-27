@@ -1,14 +1,19 @@
-import { PageMeta } from '../components/PageMeta';
-import { VaraDisclaimer } from '../components/VaraDisclaimer';
+import { PageMeta, articleSchema, faqSchema } from '../components/PageMeta';
+import { KeyInsights } from '../components/KeyInsights';
 import React, { useState, useEffect } from 'react';
 import { Card } from '../components/Card';
-import { Button } from '../components/Button';
-import { 
-  ArrowLeft, Clock, Globe, TrendingUp, Shield, BarChart3, 
+import {
+  Clock, Globe, TrendingUp, Shield, BarChart3, 
   AlertTriangle, Eye, Database, Layers, Archive as ArchiveIcon, 
-  ChevronRight, Lock, Zap, ArrowUpRight, ArrowDownRight
+  Lock, Zap, ArrowUpRight, ArrowDownRight, HelpCircle,
+  Activity, Sparkles, Calendar, ChevronRight, Maximize2,
+  ChevronDown, Filter, Search, Download
 } from 'lucide-react';
-import { fetchMacroIndicators } from '../services/api';
+import { fetchMacroIndicators, fetchDefiLlamaTVL } from '../services/api';
+import { LivePrice } from '../components/LivePrice';
+
+import { useAppContext } from '../context/AppContext';
+import { PageRoute } from '../types';
 
 
 // ─── TYPES ────────────────────────────────────────────────────────────────────
@@ -29,8 +34,10 @@ interface MacroReport {
   date: string;
   readTime: string;
   confidenceLevel: 'High' | 'Medium' | 'Low';
-  keyMetrics: { label: string; value: string; direction: 'up' | 'down' | 'neutral' }[];
+  keyMetrics: { label: string; value?: string; direction?: 'up' | 'down' | 'neutral'; symbol?: string; format?: 'currency' | 'number' | 'percent' }[];
+  keyInsights: string[];
   sections: ReportSection[];
+  faq?: { question: string; answer: string }[];
 }
 
 // ─── TABS ─────────────────────────────────────────────────────────────────────
@@ -55,10 +62,16 @@ const REPORTS: MacroReport[] = [
     readTime: '14 min read',
     confidenceLevel: 'High',
     keyMetrics: [
-      { label: 'DXY (Dollar Index)', value: '106.4', direction: 'up' },
+      { label: 'DXY (Dollar Index)', value: '106.4', direction: 'up', symbol: 'DXY', format: 'number' },
       { label: 'Fed Rate', value: '5.25%', direction: 'neutral' },
-      { label: 'BTC (Bitcoin)', value: '$67,200', direction: 'down' },
-      { label: '10Y Yield', value: '4.32%', direction: 'up' },
+      { label: 'BTC (Bitcoin)', value: '$90,400', direction: 'down', symbol: 'BTC' },
+      { label: '10Y Yield', value: '4.32%', direction: 'up', symbol: 'UST10Y', format: 'percent' },
+    ],
+    keyInsights: [
+      "DXY breakout above 106 creates a 7-12 day lag for crypto transmission.",
+      "ETF inflows provide a structural bid that partially offsets macro headwinds.",
+      "BTC/Gold ratio compression suggests a shift toward risk-off sentiment.",
+      "Fed rate cut probabilities remain the primary catalyst for a regime shift."
     ],
     sections: [
       {
@@ -74,7 +87,7 @@ const REPORTS: MacroReport[] = [
               <li><strong>Safe-haven demand:</strong> Geopolitical tensions in Europe and the Middle East are driving risk-averse capital into the dollar.</li>
               <li><strong>Energy independence:</strong> US energy exports create structural dollar demand that didn't exist a decade ago.</li>
             </ul>
-            <p>Traditional markets: S&P 500 trading at 5,200 (-2.1% this week), Gold at $2,340 (+0.8%), 10Y Treasury yield at 4.32%.</p>
+            <p>Traditional markets: S&P 500 trading at <LivePrice symbol="SPY" fallback="5,200" format="number" /> (-2.1% this week), Gold at <LivePrice symbol="GOLD" fallback="$4,730" /> (+0.8%), 10Y Treasury yield at <LivePrice symbol="UST10Y" fallback="4.32%" format="percent" />.</p>
           </>
         ),
       },
@@ -134,7 +147,7 @@ const REPORTS: MacroReport[] = [
                 <span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" />
                 <div>
                   <strong className="text-text">Gold-BTC relative performance:</strong>
-                  <span className="text-text-muted"> Gold outperforming BTC during dollar strength suggests BTC is still trading as a risk asset, not a safe haven. The BTC/Gold ratio is at 28.7, down from 32.1 three weeks ago.</span>
+                  <span className="text-text-muted"> Gold outperforming BTC during dollar strength suggests BTC is still trading as a risk asset, not a safe haven. The BTC/Gold ratio is at 19.1, down from 22.5 three weeks ago.</span>
                 </div>
               </li>
             </ul>
@@ -207,7 +220,7 @@ const REPORTS: MacroReport[] = [
                 </tbody>
               </table>
             </div>
-            <p className="mt-4 text-sm text-text-muted"><strong>Thesis invalidation:</strong> If BTC holds above $65,000 despite DXY above 107 for 3+ weeks, it suggests structural demand (ETFs) is overcoming macro headwinds — a development worth monitoring closely.</p>
+            <p className="mt-4 text-sm text-text-muted"><strong>Thesis invalidation:</strong> If BTC holds above <LivePrice symbol="BTC" fallback="$65,000" /> despite DXY above 107 for 3+ weeks, it suggests structural demand (ETFs) is overcoming macro headwinds — a development worth monitoring closely.</p>
           </>
         ),
       },
@@ -243,10 +256,16 @@ const REPORTS: MacroReport[] = [
     readTime: '11 min read',
     confidenceLevel: 'Medium',
     keyMetrics: [
-      { label: 'Gold', value: '$2,340', direction: 'up' },
-      { label: 'BTC', value: '$67,200', direction: 'down' },
-      { label: 'VIX (Volatility)', value: '18.4', direction: 'up' },
-      { label: 'BTC/Gold', value: '28.7x', direction: 'down' },
+      { label: 'Gold', value: '$4,730', direction: 'up', symbol: 'GOLD' },
+      { label: 'BTC', value: '$90,400', direction: 'down', symbol: 'BTC' },
+      { label: 'VIX (Volatility)', value: '18.4', direction: 'up', symbol: 'VIX', format: 'number' },
+      { label: 'BTC/Gold', value: '19.1x', direction: 'down' },
+    ],
+    keyInsights: [
+      "BTC acts as a risk asset during liquidity crises but a safe haven during banking/monetary stress.",
+      "Tiered safe haven framework: Gold leads in 0-72 hours, BTC follows in 3-14 days.",
+      "BTC/Gold ratio at 25x is a historical floor for BTC underperformance.",
+      "Institutional adoption is shifting BTC toward a complementary hedge alongside gold."
     ],
     sections: [
       {
@@ -254,7 +273,7 @@ const REPORTS: MacroReport[] = [
         title: 'Macro Context',
         content: (
           <>
-            <p className="mb-4">Geopolitical risk remains high across multiple theaters: Middle East escalation, China-Taiwan tensions, and European energy security concerns. The VIX (CBOE Volatility Index) has risen from 13 to 18.4 over two weeks, and gold is testing all-time highs above $2,300.</p>
+            <p className="mb-4">Geopolitical risk remains high across multiple theaters: Middle East escalation, China-Taiwan tensions, and European energy security concerns. The VIX (CBOE Volatility Index) has risen from 13 to <LivePrice symbol="VIX" fallback="18.4" format="number" /> over two weeks, and gold is testing all-time highs above $2,300.</p>
             <p className="mb-4">The fundamental question: <em>Is Bitcoin a risk asset or a safe-haven asset?</em> The answer, historically, is "it depends on the type of crisis."</p>
             <div className="p-5 bg-surface border border-border rounded-xl mb-4">
               <h4 className="font-bold text-sm mb-3">Historical Crisis Performance (BTC vs Gold, first 30 days)</h4>
@@ -324,7 +343,7 @@ const REPORTS: MacroReport[] = [
           <ul className="space-y-4">
             <li className="flex items-start gap-3">
               <span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" />
-              <div><strong className="text-text">BTC/Gold ratio at 25x or below:</strong><span className="text-text-muted"> This level has historically marked the floor of BTC underperformance vs. gold in crisis regimes. A bounce from here would confirm the "digital gold" bid is intact.</span></div>
+              <div><strong className="text-text">BTC/Gold ratio at 18x or below:</strong><span className="text-text-muted"> This level has historically marked the floor of BTC underperformance vs. gold in crisis regimes. A bounce from here would confirm the "digital gold" bid is intact.</span></div>
             </li>
             <li className="flex items-start gap-3">
               <span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" />
@@ -362,6 +381,26 @@ const REPORTS: MacroReport[] = [
           </div>
         ),
       },
+      {
+        icon: <HelpCircle size={18} />,
+        title: 'FAQ',
+        content: (
+          <div className="space-y-4">
+            <div>
+              <h4 className="font-bold text-sm mb-1">Is BTC a safe haven?</h4>
+              <p className="text-sm text-text-muted">Historically, BTC acts as a risk asset during liquidity crises but a safe haven during banking/monetary stress.</p>
+            </div>
+            <div>
+              <h4 className="font-bold text-sm mb-1">What is the BTC/Gold ratio floor?</h4>
+              <p className="text-sm text-text-muted">The 25x level has historically marked the floor of BTC underperformance vs. gold in crisis regimes.</p>
+            </div>
+          </div>
+        ),
+      },
+    ],
+    faq: [
+      { question: "Is Bitcoin better than Gold in a crisis?", answer: "Bitcoin outperforms gold during banking and monetary stress (e.g., SVB collapse +42.1% vs gold +9.2%) but acts as a risk asset during broader liquidity crunches." },
+      { question: "What is the BTC/Gold ratio floor?", answer: "Historically, the 25x ratio has marked the floor for Bitcoin underperformance versus gold in distress regimes." }
     ],
   },
   {
@@ -373,10 +412,16 @@ const REPORTS: MacroReport[] = [
     readTime: '13 min read',
     confidenceLevel: 'Medium',
     keyMetrics: [
-      { label: 'Oil', value: '$87.40', direction: 'up' },
-      { label: 'Gold', value: '$2,340', direction: 'up' },
+      { label: 'Oil', value: '$87.40', direction: 'up', symbol: 'OIL' },
+      { label: 'Gold', value: '$4,730', direction: 'up', symbol: 'GOLD' },
       { label: 'USDT P2P Premium', value: '+4.2%', direction: 'up' },
       { label: 'BTC Volatility', value: '62%', direction: 'up' },
+    ],
+    keyInsights: [
+      "MENA stablecoin volumes increased 340% vs. 30-day average.",
+      "USDT P2P premiums in Turkey/Lebanon indicate significant capital flight.",
+      "Oil price spikes create margin compression for energy-dependent miners.",
+      "Regulatory risk remains high regarding crypto as a sanctions circumvention tool."
     ],
     sections: [
       {
@@ -429,7 +474,7 @@ const REPORTS: MacroReport[] = [
             </li>
             <li className="flex items-start gap-3">
               <span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" />
-              <div><strong className="text-text">Brent crude above $90:</strong><span className="text-text-muted"> This is the level where mining economics begin to materially deteriorate for non-renewable energy miners. Hash rate may begin declining within 2-3 weeks.</span></div>
+              <div><strong className="text-text">Brent crude above <LivePrice symbol="OIL" fallback="$90" />:</strong><span className="text-text-muted"> This is the level where mining economics begin to materially deteriorate for non-renewable energy miners. Hash rate may begin declining within 2-3 weeks.</span></div>
             </li>
             <li className="flex items-start gap-3">
               <span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" />
@@ -474,10 +519,16 @@ const REPORTS: MacroReport[] = [
     readTime: '18 min read',
     confidenceLevel: 'High',
     keyMetrics: [
-      { label: 'Fed Balance Sheet', value: '$6.6T', direction: 'down' },
-      { label: 'Bank Reserves', value: '$3.0T', direction: 'neutral' },
-      { label: 'TGA Balance', value: '$875B', direction: 'up' },
-      { label: 'Net Liquidity Index', value: '+1.2%', direction: 'up' },
+      { label: 'OIS 3M Rate', value: '4.85%', direction: 'down' },
+      { label: 'PCE Delta', value: '-0.2%', direction: 'down' },
+      { label: 'Real Yield 10Y', value: '1.42%', direction: 'up', symbol: 'UST10Y', format: 'percent' },
+      { label: 'BTC/USD Liquidity', value: '$2.4B', direction: 'up' },
+    ],
+    keyInsights: [
+      "Federal Reserve Liquidity: No debt-ceiling volatility expected until 2027 due to the $5T liquidity reprieve.",
+      "Yield Curve Normalization: Capital is rotating from cash-equivalents back into risk-on sectors like Bitcoin.",
+      "Strategic Range: Q1 2026 represents a 'Goldilocks' entry point if growth remains stable.",
+      "Anti-Dollar Bid: Debt/GDP at 101% ensures a persistent structural bid for scarce assets."
     ],
     sections: [
       {
@@ -625,10 +676,16 @@ const REPORTS: MacroReport[] = [
     readTime: '15 min read',
     confidenceLevel: 'Medium',
     keyMetrics: [
-      { label: 'DXY Index', value: '104.2', direction: 'down' },
+      { label: 'DXY Index', value: '104.2', direction: 'down', symbol: 'DXY', format: 'number' },
       { label: 'BRICS Local Sett.', value: '+22%', direction: 'up' },
-      { label: 'Gold', value: '$2,340', direction: 'up' },
-      { label: 'BTC/USD', value: '$68,400', direction: 'neutral' },
+      { label: 'Gold', value: '$4,730', direction: 'up', symbol: 'GOLD' },
+      { label: 'BTC/USD', value: '$90,400', direction: 'neutral', symbol: 'BTC' },
+    ],
+    keyInsights: [
+      "BRICS de-dollarization is becoming more operational through local-currency settlement.",
+      "Fed cutting cycle in 2026 creates a softer DXY environment, favoring hard assets.",
+      "Fiscal dominance and $50T US debt wall drive anti-dollar trades into Gold and BTC.",
+      "CBDC corridors like mBridge are reducing global reliance on the dollar liquidity vacuum."
     ],
     sections: [
       {
@@ -756,6 +813,12 @@ const REPORTS: MacroReport[] = [
       { label: 'Debt Ceiling', value: '+$5.0T', direction: 'neutral' },
       { label: '2026 Deficit', value: '$1.9T', direction: 'down' },
       { label: 'Debt/GDP', value: '101%', direction: 'up' },
+    ],
+    keyInsights: [
+      "The 2-30Y yield curve steepening reflects front-end easing and long-end fiscal concerns.",
+      "The 2025 Debt Act delayed the next debt ceiling shock until 2027, stabilizing markets.",
+      "Sticky long-end yields highlight institutional anxiety over US fiscal dominance.",
+      "Bitcoin and Gold act as structural hedges against the eventual monetization of sovereign debt."
     ],
     sections: [
       {
@@ -885,6 +948,12 @@ const REPORTS: MacroReport[] = [
       { label: 'Core CPI', value: '3.2%', direction: 'down' },
       { label: 'BTC Volatility', value: '62%', direction: 'up' },
     ],
+    keyInsights: [
+      "NFP Impulse: Strong beats (130k vs 55k est) act as immediate headwinds for BTC liquidity.",
+      "Correlation Regime: In early 2026, BTC is trading less like digital gold and more like a high-beta macro asset.",
+      "PCE vs CPI: Markets cheer soft CPI, but BTC price corrections occur if core PCE remains sticky above 2%.",
+      "Rate-Cut odds: median 2.4% drawdown triggered in BTC within 4 hours of strong labor prints."
+    ],
     sections: [
       {
         icon: <Zap size={18} />,
@@ -1011,8 +1080,13 @@ const REPORTS: MacroReport[] = [
     keyMetrics: [
       { label: 'LatAm Volume', value: '$730B', direction: 'up' },
       { label: 'Brazil Share', value: '44%', direction: 'neutral' },
-      { label: 'Arg. Adoption', value: '20%', direction: 'up' },
       { label: 'Remittance Fee', value: '<1%', direction: 'down' },
+    ],
+    keyInsights: [
+      "LatAm processed nearly $1.5 trillion in crypto volume between 2022 and 2025.",
+      "Brazil anchors the regional market with $318.8 billion, supported by the DeCripto framework.",
+      "Argentina remains the capital of survival adoption, with 20% holding digital assets as an inflation hedge.",
+      "The US-Mexico remittance corridor demonstrates a cost reduction from 7% to under 1% via blockchain rails."
     ],
     sections: [
       {
@@ -1120,8 +1194,13 @@ const REPORTS: MacroReport[] = [
     keyMetrics: [
       { label: 'mBridge Volume', value: '$4.5B', direction: 'up' },
       { label: 'UAE VASP Hub', value: '+140%', direction: 'up' },
-      { label: 'Non-USD Trade', value: '12%', direction: 'up' },
       { label: 'Gulf Crypto AUM', value: '$125B', direction: 'up' },
+    ],
+    keyInsights: [
+      "Project mBridge has reached MVP, enabling real-time cross-border payments among UAE, China, and Thailand.",
+      "Dubai's VARA remains the global leader in regulatory velocity, attracting high-fidelity institutional capital.",
+      "Saudi Arabia has joined the mBridge steering committee, signaling a shift toward digital sovereignty.",
+      "BRICS is building a modular settlement stack (mBridge) to diversify away from legacy US-centric plumbing."
     ],
     sections: [
       {
@@ -1237,8 +1316,13 @@ const REPORTS: MacroReport[] = [
     keyMetrics: [
       { label: 'Russia A7A5 Vol.', value: '$93.3B', direction: 'up' },
       { label: 'Pakistan P2P Est.', value: '$2.5B', direction: 'up' },
-      { label: 'IMF Requirement', value: 'High', direction: 'neutral' },
       { label: 'Sanctions Risk', value: 'Critical', direction: 'up' },
+    ],
+    keyInsights: [
+      "Pakistan processes over $2 billion in unregulated crypto P2P remittances annually despite policy bottlenecks.",
+      "IMF conditionality prevents formal Bitcoin adoption in Pakistan due to AML/CFT safeguarding requirements.",
+      "Russia's A7A5 stablecoin network processed over $93 billion in 2025 to bypass Western trade sanctions.",
+      "The industrialization of crypto as a settlement layer is a direct response to macroeconomic isolation."
     ],
     sections: [
       {
@@ -1341,16 +1425,22 @@ const REPORTS: MacroReport[] = [
   {
     id: 'nasdaq-btc-decoupling-2026',
     title: 'Nasdaq-BTC Decoupling & Oil Transmission',
-    subtitle: 'Analyzing the episodic breakdown of the BTC-Nasdaq correlation and the indirect impact of $90+ oil on hashrate.',
+    subtitle: 'Analyzing the episodic breakdown of the BTC-Nasdaq correlation and the indirect impact of <LivePrice symbol="OIL" fallback="$90" />+ oil on hashrate.',
     tab: 'cross-market',
     date: 'April 14, 2026',
     readTime: '11 min read',
     confidenceLevel: 'Medium',
     keyMetrics: [
       { label: 'BTC/Nasdaq Corr.', value: '0.13', direction: 'down' },
-      { label: 'Oil (WTI)', value: '$92.50', direction: 'up' },
+      { label: 'Oil (WTI)', value: '$92.50', direction: 'up', symbol: 'OIL' },
       { label: 'Oil-Linked Hash', value: '9%', direction: 'neutral' },
       { label: 'Real Yields', value: '+1.4%', direction: 'up' },
+    ],
+    keyInsights: [
+      "BTC-Nasdaq correlation dropped from 1.0 to 0.13 during 2026 regional stress events.",
+      "Bitcoin acts as a conditional hedge during geopolitical shocks, decoupling from tech.",
+      "Oil price sensitivity in mining remains low, with only 9% of hashrate linked to oil grids.",
+      "Real yields and ETF flows remain the primary structural drivers for long-term BTC trend."
     ],
     sections: [
       {
@@ -1455,11 +1545,17 @@ const REPORTS: MacroReport[] = [
         ),
       },
     ],
+    faq: [
+      { question: "Why is USDT usage high in Lebanon?", answer: "Following the 98% devaluation of the Lebanese pound, Tether (USDT) has become a functional substitute for daily commerce, payroll, and wealth preservation." },
+      { question: "What is the USDT P2P premium in Turkey?", answer: "During periods of currency volatility, USDT often trades at a 4.2%+ premium on P2P markets in Turkey as citizens hedge against lira devaluation." }
+    ],
   },
 ];
 
 
 // ─── COMPONENTS ───────────────────────────────────────────────────────────────
+
+
 
 const LiveMacroBar: React.FC = () => {
   const [data, setData] = useState<any[]>([]);
@@ -1477,35 +1573,36 @@ const LiveMacroBar: React.FC = () => {
   }, []);
 
   if (loading) return (
-    <div className="flex gap-4 overflow-x-auto pb-4 scrollbar-hide">
-      {[1, 2, 3, 4].map(i => (
-        <div key={i} className="min-w-[120px] h-12 bg-surface animate-pulse rounded-lg border border-border" />
+    <div className="flex flex-wrap justify-center gap-3 sm:gap-4 max-w-[900px] mx-auto mt-8 lg:mt-12">
+      {[1, 2, 3, 4, 5, 6, 7].map(i => (
+        <div key={i} className="w-[calc(50%-6px)] sm:w-[calc(33.333%-11px)] lg:w-[calc(25%-12px)] min-w-[160px] h-16 bg-surface animate-pulse rounded-xl border border-border" />
       ))}
     </div>
   );
 
   return (
-    <div className="flex gap-3 overflow-x-auto pb-4 scrollbar-hide">
-      {data.map((item) => (
-        <div key={item.symbol} className="flex items-center gap-3 px-4 py-2 bg-surface rounded-xl border border-border whitespace-nowrap">
-          <div className="flex flex-col">
-            <span className="text-[10px] text-text-muted font-bold uppercase tracking-wider">
-              {item.name?.replace('Index', '').trim() || item.symbol}
+    <div className="flex flex-wrap justify-center gap-3 sm:gap-4 max-w-[900px] mx-auto mt-8 lg:mt-12">
+      {data.slice(0, 7).map((item) => (
+        <div key={item.symbol} className="flex flex-col items-center justify-center w-[calc(50%-6px)] sm:w-[calc(33.333%-11px)] lg:w-[calc(25%-12px)] min-w-[160px] px-4 py-3 bg-background/60 backdrop-blur-md rounded-xl border border-border whitespace-nowrap hover:border-primary/50 transition-colors shadow-lg">
+          <span className="text-[10px] text-text-muted font-bold uppercase tracking-wider mb-1 text-center">
+            {item.name?.replace('Index', '').trim() || item.symbol}
+          </span>
+          <div className="flex items-center justify-center gap-1.5">
+            <span className="text-sm font-mono font-bold text-text">
+              {item.isCurrency ? `$${(item.price / 1e9).toFixed(1)}B` : item.price?.toLocaleString(undefined, { minimumFractionDigits: item.price < 100 ? 2 : 0, maximumFractionDigits: 2 })}
             </span>
-            <div className="flex items-center gap-2">
-              <span className="text-sm font-mono font-bold">{item.price?.toLocaleString()}</span>
+            {item.changesPercentage !== 0 && (
               <span className={`flex items-center text-[10px] font-bold ${item.changesPercentage >= 0 ? 'text-emerald-400' : 'text-red-400'}`}>
-                {item.changesPercentage >= 0 ? <ArrowUpRight size={10} /> : <ArrowDownRight size={10} />}
+                {item.changesPercentage >= 0 ? <ArrowUpRight size={12} /> : <ArrowDownRight size={12} />}
                 {Math.abs(item.changesPercentage).toFixed(2)}%
               </span>
-            </div>
+            )}
           </div>
         </div>
       ))}
     </div>
   );
 };
-
 const ReportCard: React.FC<{ report: MacroReport; onClick: () => void }> = ({ report, onClick }) => (
   <Card className="flex flex-col group hover:border-primary/40 cursor-pointer h-full transition duration-300 transform-gpu" onClick={onClick}>
     <div className="flex justify-between items-start mb-4">
@@ -1534,8 +1631,13 @@ const ReportCard: React.FC<{ report: MacroReport; onClick: () => void }> = ({ re
       {report.keyMetrics.map(m => (
         <div key={m.label} className="text-center p-2 bg-surface rounded-lg border border-border">
           <p className="text-[9px] text-text-muted uppercase font-bold tracking-wider">{m.label}</p>
-          <p className={`text-sm font-bold font-mono mt-0.5 ${m.direction === 'up' ? 'text-emerald-400' : m.direction === 'down' ? 'text-red-400' : 'text-text'}`}>
-            {m.value}
+          <p className={`text-sm font-bold font-mono mt-0.5 ${
+            m.value === 'Critical' ? 'text-red-400' :
+            m.direction === 'up' ? 'text-emerald-400' : 
+            m.direction === 'down' ? 'text-red-400' : 
+            'text-text'
+          }`}>
+            {m.symbol ? <LivePrice symbol={m.symbol} fallback={m.value || ''} format={m.format} /> : m.value}
           </p>
         </div>
       ))}
@@ -1553,32 +1655,67 @@ const ReportCard: React.FC<{ report: MacroReport; onClick: () => void }> = ({ re
 
 // ─── MAIN PAGE ────────────────────────────────────────────────────────────────
 
-export const MacroIntel: React.FC = () => {
-  const [activeTab, setActiveTab] = useState<MacroTab>('weekly');
+
+export interface MacroIntelProps {
+  onNavigate?: (route: PageRoute) => void;
+}
+
+export const MacroIntel: React.FC<MacroIntelProps> = ({ onNavigate }) => {
   const [activeReportId, setActiveReportId] = useState<string | null>(null);
+  const [activeTab, setActiveTab] = useState<MacroTab>('weekly');
 
+  const { setActiveSubMenu, setPageCategories, activeSubMenu } = useAppContext();
   const activeReport = REPORTS.find(r => r.id === activeReportId);
-
-  const filteredReports = activeTab === 'archive'
-    ? REPORTS
-    : REPORTS.filter(r => r.tab === activeTab);
+  const filteredReports = REPORTS ? REPORTS.filter(r => r.tab === activeTab) : [];
 
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, [activeReportId]);
+    // Register categories with universal menu
+    const categories = TABS.map(tab => ({
+      id: tab.id,
+      label: tab.label,
+      icon: tab.icon,
+      active: activeTab === tab.id,
+      onClick: () => {
+        setActiveTab(tab.id as MacroTab);
+        setActiveReportId(null); // Return to list view
+      }
+    }));
+    setPageCategories(categories);
+    
+    // Automatically show the relevant menu if not already open
+    if (activeSubMenu !== 'Macro Intel') {
+       setActiveSubMenu('Macro Intel');
+    }
+
+    return () => {
+      setPageCategories([]);
+    };
+  }, [activeTab, setPageCategories, setActiveSubMenu, activeSubMenu, activeReportId]);
 
   // ── REPORT READER VIEW ──
   if (activeReport) {
     return (
       <div className="animate-fade-in max-w-[800px] mx-auto pb-16">
-      <PageMeta title="Macro Intel" description="Macroeconomic indicators mapped against crypto market performance." />
+      <PageMeta 
+        title={`${activeReport.title} | Coinvestopedia Macro`}
+        description={activeReport.subtitle}
+        structuredData={[
+          articleSchema({
+            title: activeReport.title,
+            description: activeReport.subtitle,
+            authorName: "Coinvestopedia Research",
+            datePublished: new Date(activeReport.date).toISOString(),
+            url: `https://coinvestopedia.com/macro-intel#${activeReport.id}`
+          }),
+          faqSchema(activeReport.faq?.map(f => ({
+            q: f.question,
+            a: f.answer
+          })) || [])
+        ]}
+      />
 
-        <button
-          onClick={() => setActiveReportId(null)}
-          className="flex items-center gap-2 text-text-muted hover:text-primary transition-colors text-sm font-bold group mb-8"
-        >
-          <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform transform-gpu" /> Back to Macro Intel
-        </button>
+
 
         {/* Report Header */}
         <div className="mb-10">
@@ -1594,16 +1731,24 @@ export const MacroIntel: React.FC = () => {
         </div>
 
         {/* Key Metrics Bar */}
-        <div className="grid grid-cols-2 gap-4 mb-10 p-4 bg-surface rounded-xl border border-border">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-10 p-4 bg-surface rounded-xl border border-border">
           {activeReport.keyMetrics.map(m => (
-            <div key={m.label} className="text-center">
-              <p className="text-[10px] text-text-muted uppercase font-bold tracking-wider">{m.label}</p>
-              <p className={`text-xl font-bold font-mono mt-1 ${m.direction === 'up' ? 'text-emerald-400' : m.direction === 'down' ? 'text-red-400' : 'text-text'}`}>
-                {m.value}
+            <div key={m.label} className="text-center group">
+              <p className="text-[10px] text-text-muted uppercase font-bold tracking-wider mb-1 group-hover:text-primary transition-colors">{m.label}</p>
+              <p className={`text-lg font-bold font-mono ${
+                m.value === 'Critical' ? 'text-red-400' :
+                m.direction === 'up' ? 'text-emerald-400' : 
+                m.direction === 'down' ? 'text-red-400' : 
+                'text-text'
+              }`}>
+                {m.symbol ? <LivePrice symbol={m.symbol} fallback={m.value || ''} format={m.format} /> : m.value}
               </p>
             </div>
           ))}
         </div>
+
+        {/* GEO Optimization: Key Insights Box */}
+        <KeyInsights insights={activeReport.keyInsights} />
 
         {/* Report Sections */}
         <div className="space-y-10">
@@ -1634,9 +1779,11 @@ export const MacroIntel: React.FC = () => {
     <div className="animate-fade-in">
       <PageMeta title="Macro Intelligence | Coinvestopedia" description="Professional-grade analysis of global market trends, geopolitical shifts, and institutional capital flows." />
       
+
+
       <div className="space-y-8">
         {/* Hero */}
-        <section className="relative overflow-hidden rounded-2xl lg:rounded-3xl border border-border bg-gradient-to-br from-background to-surface p-8 lg:p-16 mb-4 lg:mb-8 text-center">
+        <section className="relative overflow-hidden rounded-2xl lg:rounded-3xl border border-border bg-gradient-to-br from-background to-surface p-8 lg:p-16 text-center">
         <div className="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full -translate-y-48 translate-x-48 blur-3xl pointer-events-none"></div>
         
         <div className="relative z-10">
@@ -1644,41 +1791,22 @@ export const MacroIntel: React.FC = () => {
             <Globe size={16} />
             <span>Pro-Level Macro Analysis</span>
           </div>
-          
           <h1 className="text-3xl lg:text-5xl font-bold mb-6">
             Macro <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-primary-dark">Intelligence</span>
           </h1>
           
-          <p className="text-xl text-text-muted mb-10 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-xl text-text-muted mb-6 max-w-2xl mx-auto leading-relaxed">
             Professional-grade analysis of global market trends, geopolitical shifts, and institutional capital flows across traditional and digital assets.
           </p>
         </div>
       </section>
 
-      <LiveMacroBar />
-
-      <VaraDisclaimer variant="banner" />
 
 
 
-      {/* Tab Navigation */}
-      <div className="flex overflow-x-auto no-scrollbar gap-2 md:gap-3 pb-2 scroll-smooth">
-        {TABS.map(tab => (
-          <button
-            key={tab.id}
-            onClick={() => setActiveTab(tab.id)}
-            className={`flex items-center justify-center gap-2 px-6 py-3.5 text-sm font-bold rounded-xl border transition duration-300 whitespace-nowrap shrink-0 transform-gpu
-              ${activeTab === tab.id
-                ? 'border-primary/50 text-primary bg-primary/10 shadow-[0_0_15px_rgba(255,215,0,0.1)]'
-                : 'border-border text-text-muted hover:text-text hover:bg-surface hover:border-primary/30'
-              }`}
-          >
-            {tab.icon}
-            {tab.label}
 
-          </button>
-        ))}
-      </div>
+      {/* On-Page Navigation handled by global component */}
+      <div className="h-4" /> {/* Spacer */}
 
       {/* Reports Grid */}
       {filteredReports.length > 0 ? (

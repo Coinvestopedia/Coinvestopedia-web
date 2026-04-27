@@ -172,3 +172,23 @@
       0 4px 6px -2px rgba(0, 0, 0, 0.4);
   }
 }
+
+/* Force center alignment for all tool input fields - High Specificity Escape Hatch */
+.input-field-wrapper input[type="number"],
+.input-field-wrapper input[type="text"],
+.input-field-wrapper input {
+  text-align: center !important;
+}
+
+/* Global centering for tool headings (h3, h4, h5) within tool containers */
+.animate-fade-in h3,
+.animate-fade-in h4,
+.animate-fade-in h5 {
+  text-align: center !important;
+}
+
+.animate-fade-in h3.flex,
+.animate-fade-in h4.flex,
+.animate-fade-in h5.flex {
+  justify-content: center !important;
+}

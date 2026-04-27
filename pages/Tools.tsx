@@ -1,12 +1,10 @@
 import { PageMeta, toolsPageSchema } from '../components/PageMeta';
-import { VaraDisclaimer } from '../components/VaraDisclaimer';
 import React, { useState, useEffect } from 'react';
-import { Card } from '../components/Card';
-import { 
-  Calculator, DollarSign, TrendingUp, TrendingDown, AlertTriangle, Percent,
-  ArrowLeft, Lock, BarChart3, PieChart, Activity, Search, Shield,
-  LineChart, Sparkles, Globe, Target, Calendar,
-  BookOpen, Clock, ExternalLink
+
+import {
+  Calculator, DollarSign, TrendingUp, TrendingDown, AlertTriangle,
+  BarChart3, PieChart, Activity, Search, Shield,
+  LineChart, Sparkles, Globe, Target, Calendar
 } from 'lucide-react';
 import { useAppContext } from '../context/AppContext';
 
@@ -15,7 +13,7 @@ import { useAppContext } from '../context/AppContext';
 import { DCACalculator } from '../components/tools/Tier3/DCACalculator';
 import { ROICalculator } from '../components/tools/Tier3/ROICalculator';
 import { ILCalculator } from '../components/tools/Tier3/ILCalculator';
-import { TaxEstimator } from '../components/tools/Tier4/TaxEstimator';
+
 import { AssetSimulator } from '../components/tools/Tier1/AssetSimulator';
 import { RebalancingCalculator } from '../components/tools/Tier1/RebalancingCalculator';
 import { DrawdownAnalyzer } from '../components/tools/Tier2/DrawdownAnalyzer';
@@ -28,7 +26,7 @@ import { ForexHeatMap } from '../components/tools/Tier4/ForexHeatMap';
 import { MonteCarloSimulator } from '../components/tools/Tier5/MonteCarloSimulator';
 import { RiskAdjustedReturns } from '../components/tools/Tier5/RiskAdjustedReturns';
 import { MacroRegimeIndicator } from '../components/tools/Tier5/MacroRegimeIndicator';
-import { FearGreedComposite } from '../components/tools/Tier5/FearGreedComposite';
+
 import RelativeUnrealizedProfit from '../components/tools/onchain/RelativeUnrealizedProfit';
 
 // Tool Registry
@@ -53,10 +51,10 @@ export const TOOLS_REGISTRY: ToolDefinition[] = [
   // Tier 2
   { id: 'drawdown', name: 'Drawdown Analyzer', description: 'Analyze historical underwater equity curves and recovery durations.', icon: <TrendingDown size={18} />, tier: 'Tier 2', category: 'Risk Analytics', isPro: false, component: DrawdownAnalyzer },
   { id: 'beta-alpha', name: 'Beta & Alpha Calculator', description: 'Measure systematic risk and excess returns relative to benchmarks.', icon: <BarChart3 size={18} />, tier: 'Tier 2', category: 'Risk Analytics', isPro: false, component: BetaAlphaCalculator },
+  { id: 'dca', name: 'DCA Strategy Simulator', description: 'Project portfolio value over time using dollar-cost averaging.', icon: <DollarSign size={18} />, tier: 'Tier 2', category: 'Risk Analytics', isPro: false, component: DCACalculator },
   
   // Tier 3
   { id: 'on-chain-valuation', name: 'Bitcoin On-Chain Valuation', description: 'Fidelity/ARK style models: S2F, MVRV Z-Score, Realized Price.', icon: <Globe size={18} />, tier: 'Tier 3', category: 'Crypto Analytics', isPro: false, component: OnChainValuation },
-  { id: 'dca', name: 'DCA Strategy Simulator', description: 'Project portfolio value over time using dollar-cost averaging.', icon: <DollarSign size={18} />, tier: 'Tier 3', category: 'Crypto Analytics', isPro: false, component: DCACalculator },
   { id: 'roi', name: 'ROI & Trade Simulator', description: 'Model hypothetical returns, break-even points, and annualized performance with fees.', icon: <TrendingUp size={18} />, tier: 'Tier 3', category: 'Crypto Analytics', isPro: false, component: ROICalculator },
   { id: 'il', name: 'Impermanent Loss Simulator', description: 'Simulate LP impermanent loss and break-even thresholds.', icon: <AlertTriangle size={18} />, tier: 'Tier 3', category: 'Crypto Analytics', isPro: false, component: ILCalculator },
   
@@ -64,14 +62,14 @@ export const TOOLS_REGISTRY: ToolDefinition[] = [
   { id: 'fixed-income', name: 'Fixed Income Yield Simulator', description: 'Simulate YTM, Macaulay duration, and convexity for bonds.', icon: <LineChart size={18} />, tier: 'Tier 4', category: 'Traditional Assets', isPro: false, component: FixedIncomeCalculator },
   { id: 'dividend-screen', name: 'Yield & Income Screener', description: 'Rank TradFi dividend yields alongside DeFi stablecoin APYs.', icon: <Search size={18} />, tier: 'Tier 4', category: 'Traditional Assets', isPro: false, component: DividendScreener },
   { id: 'inflation-adj', name: 'Inflation-Adjusted Returns', description: 'Calculate real purchasing power by offsetting nominal CPI inflation.', icon: <Activity size={18} />, tier: 'Tier 4', category: 'Traditional Assets', isPro: false, component: InflationAdjusted },
-  { id: 'tax', name: 'US Tax Estimator 2024', description: 'Estimate STCG, LTCG, and NIIT tax liabilities across income brackets.', icon: <Percent size={18} />, tier: 'Tier 4', category: 'Traditional Assets', isPro: false, component: TaxEstimator },
+
   { id: 'forex-heatmap', name: 'Forex Heat Map', description: 'Cross-currency strength matrix across 28 major pairs. Real-time visualization for DXY and macro analysis.', icon: <Globe size={18} />, tier: 'Tier 4', category: 'Traditional Assets', isPro: false, component: ForexHeatMap },
   
   // Tier 5
   { id: 'monte-carlo', name: 'Monte Carlo Simulator', description: '10,000 geometric Brownian motion paths forecasting target probability.', icon: <Sparkles size={18} />, tier: 'Tier 5', category: 'Advanced Pro Tools', isPro: false, component: MonteCarloSimulator },
   { id: 'risk-adjusted', name: 'Sharpe & Sortino Simulator', description: 'Comprehensive risk-adjusted return suite evaluating portfolio efficiency.', icon: <Shield size={18} />, tier: 'Tier 5', category: 'Advanced Pro Tools', isPro: false, component: RiskAdjustedReturns },
   { id: 'macro-regime', name: 'Macro Regime Indicator', description: '4-quadrant Growth/Inflation matrix illustrating economic environment shifts.', icon: <Globe size={18} />, tier: 'Tier 5', category: 'Advanced Pro Tools', isPro: false, component: MacroRegimeIndicator },
-  { id: 'fear-greed', name: 'Fear & Greed Index Composite', description: 'Proprietary 0-100 institutional sentiment gauge.', icon: <Activity size={18} />, tier: 'Tier 5', category: 'Advanced Pro Tools', isPro: false, component: FearGreedComposite },
+
   
   // On-Chain Analytics
   { id: 'rup', name: 'Relative Unrealized Profit', description: 'Measure total unrealized profit held by all BTC market participants relative to market cap.', icon: <TrendingUp size={18} />, tier: 'Tier 3', category: 'Crypto Analytics', isPro: false, component: RelativeUnrealizedProfit },
@@ -89,17 +87,58 @@ const PlaceholderTool: React.FC<{ tool: ToolDefinition }> = ({ tool }) => (
   </div>
 );
 
-export const Tools: React.FC = () => {
+
+import { PageRoute } from '../types';
+
+export interface ToolsProps {
+  onNavigate?: (route: PageRoute) => void;
+}
+
+export const Tools: React.FC<ToolsProps> = ({ onNavigate }) => {
+  const { setActiveSubMenu, activeSubMenu, setPageCategories } = useAppContext();
   const [activeToolId, setActiveToolId] = useState<string | null>(null);
-  const { isProUser } = useAppContext();
 
   // Scroll top on navigate
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, [activeToolId]);
+    // Automatically show the relevant menu if not already open
+    if (activeSubMenu !== 'Tools & Calculators') {
+       setActiveSubMenu('Tools & Calculators');
+    }
+
+    const categories = TOOLS_REGISTRY.map(tool => ({
+      label: tool.name,
+      icon: tool.icon,
+      active: activeToolId === tool.id,
+      onClick: () => {
+         setActiveToolId(tool.id);
+         window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    }));
+
+    setPageCategories([
+      {
+         label: 'Tools Dashboard',
+         icon: <Calculator size={18} />,
+         active: activeToolId === null,
+         onClick: () => {
+           setActiveToolId(null);
+           window.scrollTo({ top: 0, behavior: 'smooth' });
+         }
+      },
+      ...categories
+    ]);
+
+    return () => setPageCategories([]);
+  }, [setActiveSubMenu, activeSubMenu, activeToolId, setPageCategories]);
 
   const activeTool = TOOLS_REGISTRY.find(t => t.id === activeToolId);
   const ActiveComponent = activeTool?.component || null;
+
+  const handleBackToDashboard = () => {
+    setActiveToolId(null);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   // View: Single Tool
   if (activeTool) {
@@ -107,12 +146,7 @@ export const Tools: React.FC = () => {
       <div className="animate-fade-in pb-12">
       <PageMeta title={`${activeTool.name} | Coinvestopedia Simulators`} description={activeTool.description} structuredData={toolsPageSchema} />
 
-        <button
-          onClick={() => setActiveToolId(null)}
-          className="flex items-center gap-2 text-text-muted hover:text-primary transition-colors text-sm font-bold group mb-8"
-        >
-          <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform transform-gpu" /> Back to Dashboard
-        </button>
+
 
         <div className="mb-8 border-b border-border pb-6">
           <div className="flex items-center gap-3 text-xs font-bold uppercase tracking-wider text-text-muted mb-3">
@@ -143,6 +177,9 @@ export const Tools: React.FC = () => {
         description="Institutional-grade financial simulators: ROI, DCA, Sharpe ratio, and position sizing. Professional quantitative support for digital assets." 
         structuredData={toolsPageSchema} 
       />
+
+
+
       {/* Hero */}
       <section className="relative overflow-hidden rounded-2xl lg:rounded-3xl border border-border bg-gradient-to-br from-background to-surface p-8 lg:p-16 mb-12 lg:mb-20 text-center">
         <div className="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full -translate-y-48 translate-x-48 blur-3xl pointer-events-none"></div>
@@ -164,7 +201,7 @@ export const Tools: React.FC = () => {
         </div>
       </section>
 
-      <VaraDisclaimer variant="banner" />
+
 
 
 

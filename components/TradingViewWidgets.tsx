@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, memo } from 'react';
+import { useState, useEffect, useRef, memo  } from 'react';
 
 export const TradingViewTimelineNews = memo(() => {
   const container = useRef<HTMLDivElement>(null);

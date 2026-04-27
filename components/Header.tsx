@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, ChevronDown, Sun, Moon } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { PageRoute } from '../types';
 import { Button } from './Button';
 
 import { useAppContext } from '../context/AppContext';
-import { NotificationIcon } from './AnimatedIcons';
+
 
 interface HeaderProps {
   onNavigate: (route: PageRoute) => void;
@@ -20,46 +20,15 @@ export const Header: React.FC<HeaderProps> = ({
   isMobileMenuOpen,
   onToggleMobileMenu
 }) => {
-  const { theme, toggleTheme, addToast } = useAppContext();
-  const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+  const { addToast } = useAppContext();
   
   const navLinks = [
-    { label: 'Asset Comparison', route: PageRoute.COMPARE, options: [] },
-    { 
-      label: 'Macro Intel', 
-      route: PageRoute.MACRO_INTEL, 
-      options: [
-        { label: 'Weekly Briefing', route: PageRoute.MACRO_INTEL },
-        { label: 'Geopolitical Decoder', route: PageRoute.MACRO_INTEL },
-        { label: 'Cross-Market Analysis', route: PageRoute.MACRO_INTEL },
-        { label: 'Institutional Lens', route: PageRoute.MACRO_INTEL },
-        { label: 'Archive', route: PageRoute.MACRO_INTEL }
-      ]
-    },
-    { 
-      label: 'Tools & Calculators', 
-      route: PageRoute.TOOLS, 
-      options: [
-        { label: 'DCA Calculator', route: PageRoute.TOOLS },
-        { label: 'ROI Calculator', route: PageRoute.TOOLS },
-        { label: 'Impermanent Loss', route: PageRoute.TOOLS },
-        { label: 'Tax Estimator', route: PageRoute.TOOLS }
-      ]
-    },
-    { 
-      label: 'Knowledge', 
-      route: PageRoute.LEARN, 
-      options: [
-        { label: 'DeFi Strategies', route: PageRoute.LEARN },
-        { label: 'Security & Custody', route: PageRoute.LEARN },
-        { label: 'Research', route: PageRoute.RESEARCH },
-        { label: 'Technical Analysis', route: PageRoute.LEARN },
-        { label: 'Insights', route: PageRoute.INSIGHTS },
-        { label: 'Crypto Glossary', route: PageRoute.GLOSSARY },
-        { label: 'Exchange Intelligence', route: PageRoute.EXCHANGES }
-      ] 
-    },
-    { label: 'Newsletter', route: PageRoute.NEWSLETTER, options: [] },
+    { label: 'Home', route: PageRoute.HOME },
+    { label: 'Asset Comparison', route: PageRoute.COMPARE },
+    { label: 'Macro Intel', route: PageRoute.MACRO_INTEL },
+    { label: 'Tools & Calculators', route: PageRoute.TOOLS },
+    { label: 'Knowledge', route: PageRoute.LEARN },
+    { label: 'The Briefing', route: PageRoute.NEWSLETTER },
   ];
   
   const featuredLinks = [
@@ -69,41 +38,30 @@ export const Header: React.FC<HeaderProps> = ({
   const handleNavClick = (route: PageRoute) => {
     onNavigate(route);
     onToggleMobileMenu(false);
-    setActiveDropdown(null);
   };
 
-  const handleNotificationClick = () => {
-    addToast('You have 3 unread market alerts', 'info');
-  };
+
 
   return (
-    <header className={`fixed top-0 left-0 right-0 z-50 transition-colors duration-200 h-[72px] lg:h-[88px] ${isMobileMenuOpen ? 'bg-background' : 'glass-nav'}`}>
-      <div className="max-w-container mx-auto px-6 h-full flex items-center justify-between">
+    <header className={`fixed top-0 left-0 right-0 z-50 transition-colors duration-200 h-[80px] lg:h-[100px] ${isMobileMenuOpen ? 'bg-background' : 'glass-nav'}`}>
+      <div className="max-w-container mx-auto px-6 h-full flex items-center justify-between xl:justify-start xl:gap-16">
         
         {/* Logo */}
         <div
           className="flex items-center cursor-pointer group flex-shrink-0 py-1"
           onClick={() => handleNavClick(PageRoute.HOME)}
         >
-          {/* ── Dark mode, Desktop ── */}
+          {/* ── Desktop Logo ── */}
           <img
             src="/logo-transparent-dark-desktop.png"
             alt="Coinvestopedia"
-            className={`h-14 lg:h-[76px] w-auto object-contain transition-transform duration-200 group-hover:scale-105
-              ${theme === 'dark' ? 'hidden md:block' : 'hidden'}`}
+            className="h-16 lg:h-[88px] w-auto object-contain transition-transform duration-200 group-hover:scale-105 hidden md:block"
           />
-          {/* ── Light mode, Desktop ── */}
-          <img
-            src="/logo-transparent-light-desktop.png"
-            alt="Coinvestopedia"
-            className={`h-14 lg:h-[76px] w-auto object-contain transition-transform duration-200 group-hover:scale-105
-              ${theme !== 'dark' ? 'hidden md:block' : 'hidden'}`}
-          />
-          {/* ── Mobile (Universal) ── */}
+          {/* ── Mobile Logo ── */}
           <img
             src="/logo-transparent-mobile.png"
             alt="Coinvestopedia"
-            className="h-12 lg:h-14 w-auto object-contain transition-transform duration-200 group-hover:scale-105 block md:hidden"
+            className="h-16 w-auto object-contain transition-transform duration-200 group-hover:scale-105 block md:hidden"
           />
         </div>
 
@@ -113,8 +71,6 @@ export const Header: React.FC<HeaderProps> = ({
             <div 
               key={link.label}
               className="relative h-full flex items-center group"
-              onMouseEnter={() => setActiveDropdown(link.label)}
-              onMouseLeave={() => setActiveDropdown(null)}
             >
               <div 
                 className={`flex items-center gap-1 cursor-pointer transition-colors font-medium text-sm py-2 whitespace-nowrap relative ${currentRoute === link.route ? 'text-primary' : 'text-text-muted hover:text-text'}`}
@@ -122,25 +78,10 @@ export const Header: React.FC<HeaderProps> = ({
                 aria-label={link.label}
               >
                 {link.label}
-                {link.options.length > 0 && <ChevronDown size={14} className={`mt-[2px] transition-transform ${activeDropdown === link.label ? 'rotate-180' : ''}`} aria-hidden="true" />}
                 
                 {/* Active Indicator Line */}
                 <span className={`absolute -bottom-1 left-0 h-[2px] w-full bg-primary transition-transform duration-300 origin-left ${currentRoute === link.route ? 'scale-x-100 opacity-100' : 'scale-x-0 group-hover:scale-x-100 opacity-50'}`} aria-hidden="true" />
               </div>
-              
-              {link.options.length > 0 && activeDropdown === link.label && (
-                <div className="absolute top-[60px] left-1/2 -translate-x-1/2 w-48 py-2 bg-surface border border-border rounded-xl shadow-xl animate-fade-in z-50 overflow-hidden">
-                  {link.options.map((opt, i) => (
-                    <div 
-                      key={i} 
-                      className="px-4 py-3 text-sm font-medium text-text-muted hover:text-primary hover:bg-background cursor-pointer transition-colors"
-                      onClick={() => handleNavClick(opt.route)}
-                    >
-                      {opt.label}
-                    </div>
-                  ))}
-                </div>
-              )}
             </div>
           ))}
           
@@ -158,24 +99,11 @@ export const Header: React.FC<HeaderProps> = ({
         </nav>
 
         {/* Actions */}
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-3 ml-auto">
 
           
-          <button 
-             onClick={handleNotificationClick}
-             className="p-2 rounded-lg hover:bg-surface transition-colors"
-             aria-label="Notifications"
-          >
-             <NotificationIcon hasNotification={true} />
-          </button>
+          {/* Area kept empty for future social icons */}
 
-          <button 
-            onClick={toggleTheme}
-            className="p-2 rounded-lg text-text-muted hover:text-primary hover:bg-surface transition-colors"
-            aria-label="Toggle theme"
-          >
-            {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
-          </button>
 
           {/* Hamburger: Hidden on mobile (< md) because bottom nav exists. Visible on tablet (md-xl). Hidden on desktop (> xl). */}
           <button className="hidden md:block xl:hidden text-text p-1" onClick={() => onToggleMobileMenu(!isMobileMenuOpen)}>
@@ -192,74 +120,53 @@ export const Header: React.FC<HeaderProps> = ({
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.2 }}
-            className="xl:hidden fixed inset-0 top-[72px] lg:top-[88px] bg-background/95 backdrop-blur-md z-40 overflow-y-auto pb-32 border-t border-border"
+            className="xl:hidden fixed inset-0 top-[80px] lg:top-[100px] bg-background/95 backdrop-blur-md z-40 overflow-y-auto pb-32 border-t border-border"
           >
             <div className="p-6 flex flex-col gap-6">
 
 
-              <div className="flex flex-col gap-2">
-                 <h3 className="text-xs font-bold text-text-muted uppercase tracking-widest mb-2">Navigation</h3>
+              <div className="flex flex-col gap-3">
+                 <h3 className="text-[10px] font-bold text-text-muted uppercase tracking-[0.2em] mb-2 px-1">Institutional Navigation</h3>
                  
                  {/* Featured Whale Radar in mobile */}
                  {featuredLinks.map((link) => (
                    <div 
                      key={link.label}
-                     className="py-4 border-b border-primary/30 text-xl font-medium text-primary flex items-center justify-between bg-primary/5 rounded-lg px-4 mb-2 active:bg-primary/20 transition-colors"
+                     className={`group relative py-4 px-5 rounded-xl border transition-all duration-200 flex items-center justify-between overflow-hidden ${currentRoute === link.route ? 'border-primary bg-primary/10 shadow-[0_0_20px_rgba(16,185,129,0.1)]' : 'border-border/40 bg-surface/30 active:bg-surface/50'}`}
                      onClick={() => handleNavClick(link.route)}
                    >
-                     <div className="flex items-center gap-3">
-                         <span>{link.icon}</span>
-                         {link.label}
+                     <div className="flex items-center gap-4 relative z-10">
+                        <span className={`text-lg font-bold tracking-tight ${currentRoute === link.route ? 'text-primary' : 'text-text'}`}>{link.label}</span>
                      </div>
-                     <span className="text-xs bg-primary/20 text-primary px-2 py-1 rounded">Featured</span>
+
+                     <div className="relative z-10">
+                        <span className="text-[10px] bg-primary/10 text-primary px-2 py-0.5 rounded-full font-bold uppercase tracking-wider border border-primary/20">Featured</span>
+                     </div>
+                     
+                     {/* Decorative background element */}
+                     <div className="absolute top-0 right-0 w-32 h-full bg-gradient-to-l from-primary/5 to-transparent pointer-events-none" />
                    </div>
                  ))}
                  
-                 {navLinks.map((link) => (
-                   <div key={link.label} className="border-b border-border/50">
-                      <div 
-                        className="py-4 text-xl font-medium text-text flex items-center justify-between active:text-primary transition-colors cursor-pointer"
-                        onClick={() => {
-                          if (link.options.length > 0) {
-                            setActiveDropdown(activeDropdown === link.label ? null : link.label);
-                          } else {
-                            handleNavClick(link.route);
-                          }
-                        }}
-                      >
-                        <div className="flex items-center gap-3">
+                 <div className="grid grid-cols-1 gap-2 mt-2">
+                    {navLinks.map((link) => {
+                      const isActive = currentRoute === link.route;
+                      return (
+                        <div 
+                          key={link.label}
+                          className={`group py-4 px-5 rounded-xl border transition-all duration-200 flex items-center justify-between cursor-pointer ${isActive ? 'border-primary/40 bg-primary/5' : 'border-border/30 bg-surface/10 active:bg-surface/30'}`}
+                          onClick={() => handleNavClick(link.route)}
+                        >
+                          <span className={`text-base font-semibold tracking-tight transition-colors ${isActive ? 'text-primary' : 'text-text group-hover:text-primary'}`}>
                             {link.label}
+                          </span>
+                          {isActive && (
+                            <div className="w-1.5 h-1.5 rounded-full bg-primary shadow-[0_0_8px_rgba(16,185,129,0.5)]" />
+                          )}
                         </div>
-                        {link.options.length > 0 && <ChevronDown size={20} className={`transition-transform duration-200 ${activeDropdown === link.label ? 'rotate-180' : ''}`} />}
-                      </div>
-                      
-                      {/* Expandable Mobile Sub-options */}
-                      <AnimatePresence>
-                        {link.options.length > 0 && activeDropdown === link.label && (
-                          <motion.div 
-                            initial={{ opacity: 0, height: 0 }}
-                            animate={{ opacity: 1, height: 'auto' }}
-                            exit={{ opacity: 0, height: 0 }}
-                            className="pl-4 pb-4 flex flex-col gap-3 overflow-hidden"
-                          >
-                            {link.options.map((opt, i) => (
-                              <div 
-                                key={i} 
-                                className="text-lg font-medium text-text-muted active:text-primary py-2 cursor-pointer transition-colors"
-                                onClick={() => handleNavClick(opt.route)}
-                              >
-                                {opt.label}
-                              </div>
-                            ))}
-                          </motion.div>
-                        )}
-                      </AnimatePresence>
-                   </div>
-                 ))}
-              </div>
-              
-              <div className="mt-4 pb-8 text-center px-6">
-                 <Button className="w-full justify-center py-4 text-lg">Sign In / Sign Up</Button>
+                      );
+                    })}
+                 </div>
               </div>
             </div>
           </motion.div>

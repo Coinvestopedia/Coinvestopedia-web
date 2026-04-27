@@ -7,4 +7,3 @@
  *   - UAE Media Council (Non-promotional educational status)
  *   - VARA Dubai (Educational Exemption — Pure Research/Analysis)
  */
-export const AD_MONETIZATION_ENABLED = false;

@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavItem, PageRoute } from '../types';
+import { PageRoute } from '../types';
 import { BookOpen, BarChart2, Calculator, Globe } from 'lucide-react';
 import { TargetIcon } from './AnimatedIcons';
 

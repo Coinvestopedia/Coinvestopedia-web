@@ -102,7 +102,7 @@ export const ILCalculator: React.FC = () => {
               <Tooltip labelStyle={{ color: '#a1a1aa' }}
                 contentStyle={{ backgroundColor: '#18181b', borderColor: '#27272a', borderRadius: 8, color: '#f4f4f5' }}
                 itemStyle={{ color: '#fff' }}
-                formatter={(v: number) => [`${fmt(v, 2)}%`, 'Impermanent Loss']}
+                formatter={(v: any) => [`${fmt(v, 2)}%`, 'Impermanent Loss']}
               />
               <ReferenceLine y={0} stroke="#71717a" />
               <Line type="monotone" dataKey="il" stroke="#ef4444" strokeWidth={2} dot={false} />

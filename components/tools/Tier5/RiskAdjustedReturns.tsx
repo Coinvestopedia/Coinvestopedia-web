@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { Card } from '../../Card';
-import { ProGate, InputField, ResultMetric, fmtPct } from '../shared/SharedComponents';
+import { ProGate, InputField, ResultMetric } from '../shared/SharedComponents';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, ResponsiveContainer, Tooltip, Cell, ReferenceLine } from 'recharts';
 import { Shield, ShieldCheck, AlertCircle } from 'lucide-react';
 
@@ -49,7 +49,7 @@ export const RiskAdjustedReturns: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
           <div className="lg:col-span-4 space-y-6">
             <Card>
-              <h3 className="font-bold text-lg mb-6 flex items-center gap-2">
+              <h3 className="font-bold text-lg mb-6 flex items-center justify-center gap-2 text-center">
                  <Shield size={18} className="text-primary"/> Performance Inputs
               </h3>
               <div className="space-y-4">
@@ -69,15 +69,15 @@ export const RiskAdjustedReturns: React.FC = () => {
           </div>
 
           <div className="lg:col-span-8 flex flex-col gap-6">
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-3 gap-4">
                <ResultMetric label="Sharpe Ratio" value={stats.sharpe.toFixed(2)} positive={stats.sharpe > 1} neutral={stats.sharpe <= 1} />
                <ResultMetric label="Sortino Ratio" value={stats.sortino.toFixed(2)} positive={stats.sortino > 1.5} neutral={stats.sortino <= 1.5} />
                <ResultMetric label="Calmar Ratio" value={stats.calmar.toFixed(2)} positive={stats.calmar > 2} neutral={stats.calmar <= 2} />
             </div>
 
-            <Card className="flex-1 flex flex-col h-[400px]">
-               <h4 className="font-bold text-sm text-text-muted uppercase tracking-widest mb-8">Efficiency Benchmark Comparison</h4>
-               <div className="flex-1 w-full bg-background/50 p-6 rounded-2xl border border-border/50">
+            <Card className="flex-1 flex flex-col min-h-[450px]">
+               <h4 className="font-bold text-sm text-text-muted uppercase tracking-widest mb-8 text-center">Efficiency Benchmark Comparison</h4>
+               <div className="flex-1 w-full bg-background/50 p-6 rounded-2xl border border-border/50 min-h-[300px]">
                  <ResponsiveContainer width="100%" height="100%">
                    <BarChart data={stats.chartData} layout="vertical" margin={{ left: 20, right: 40 }}>
                      <CartesianGrid strokeDasharray="3 3" stroke="#27272a" horizontal={false} />
@@ -86,7 +86,7 @@ export const RiskAdjustedReturns: React.FC = () => {
                      <Tooltip itemStyle={{ color: '#e4e4e7' }} labelStyle={{ color: '#a1a1aa' }} 
                         cursor={{ fill: 'transparent' }}
                         contentStyle={{ backgroundColor: '#18181b', borderColor: '#27272a', borderRadius: 12 }}
-                        formatter={(v: number, name: string, props: any) => [v, props.payload.desc]}
+                        formatter={(v: any, _name: any, props: any) => [v, props.payload.desc]}
                      />
                      <ReferenceLine x={1} stroke="#ef4444" strokeDasharray="3 3" label={{ position: 'top', value: 'Min. Standard', fill: '#ef4444', fontSize: 10 }} />
                      <Bar dataKey="value" radius={[0, 4, 4, 0]} barSize={35}>

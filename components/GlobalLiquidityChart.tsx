@@ -6,7 +6,7 @@ export const GlobalLiquidityChart: React.FC = () => {
   // moving averages and volume/price bars
   const data = useMemo(() => {
     let base = 100;
-    return Array.from({ length: 40 }).map((_, i) => {
+    return Array.from({ length: 40 }).map((_) => {
       // Create a downward trending baseline
       base -= Math.random() * 2;
       return {
@@ -24,7 +24,8 @@ export const GlobalLiquidityChart: React.FC = () => {
   return (
     <div className="relative w-full h-[300px] lg:h-full lg:aspect-square bg-surface dark:bg-[#0a0a0c] rounded-2xl border border-border dark:border-white/5 overflow-hidden flex flex-col group">
        <div className="flex-1 opacity-70 group-hover:opacity-100 transition-opacity duration-700 pt-8 pl-4 pr-12 pb-16">
-         <ResponsiveContainer width="100%" height="100%">
+         <div className="h-full w-full relative">
+           <ResponsiveContainer width="100%" height="100%" debounce={50}>
            <ComposedChart data={data}>
               {/* Faint trend lines mimicking EMAs */}
               <Line type="monotone" dataKey="ma1" stroke="currentColor" className="text-text-muted/40" strokeWidth={1} dot={false} isAnimationActive={false} />
@@ -36,7 +37,8 @@ export const GlobalLiquidityChart: React.FC = () => {
               <Bar dataKey="candleClose" fill="#10B981" fillOpacity={0.4} barSize={4} isAnimationActive={false} />
            </ComposedChart>
          </ResponsiveContainer>
-       </div>
+        </div>
+      </div>
        
        <div className="absolute bottom-0 inset-x-0 p-5 md:p-6 bg-gradient-to-t from-surface dark:from-[#0a0a0c] via-surface/90 dark:via-[#0a0a0c]/90 to-transparent">
           <div className="text-base md:text-xl font-bold text-text mb-3 font-heading tracking-wide">
