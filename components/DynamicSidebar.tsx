@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useAppContext } from '../context/AppContext';
 import { navLinks, discoveryPool } from '../data/navigation';
 import { PageRoute } from '../types';
+import { trackEvent } from '../utils/analytics';
 
 interface DynamicSidebarProps {
   onNavigate: (route: PageRoute) => void;
@@ -25,6 +26,11 @@ export const DynamicSidebar: React.FC<DynamicSidebarProps> = ({ onNavigate, curr
          return;
       }
     }
+    trackEvent('cta_clicked', {
+      button_text: item.label,
+      location: 'sidebar_nav',
+      target_route: item.route
+    });
     onNavigate(item.route);
   };
 
@@ -52,7 +58,17 @@ export const DynamicSidebar: React.FC<DynamicSidebarProps> = ({ onNavigate, curr
             return (
               <button
                 key={item.label || i}
-                onClick={() => type === 'category' ? item.onClick?.() : handleLinkClick(item)}
+                onClick={() => {
+                  if (type === 'category') {
+                    trackEvent('cta_clicked', {
+                      button_text: item.label,
+                      location: 'sidebar_category'
+                    });
+                    item.onClick?.();
+                  } else {
+                    handleLinkClick(item);
+                  }
+                }}
                 className={`w-full flex items-center gap-4 px-4 py-3.5 rounded-full text-[15px] transition-all duration-200 group relative overflow-hidden outline-none focus-visible:ring-2 focus-visible:ring-primary/50
                   ${isActive 
                     ? 'font-bold text-text bg-white/10 shadow-sm' 

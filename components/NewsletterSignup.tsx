@@ -4,6 +4,7 @@ import { Mail, Sparkles, Check, AlertCircle } from 'lucide-react';
 import { Button } from './Button';
 import { useAppContext } from '../context/AppContext';
 import { subscribeToBriefing, getUtmParams } from '../services/briefing';
+import { trackEvent } from '../utils/analytics';
 
 interface NewsletterSignupProps {
   className?: string;
@@ -72,6 +73,14 @@ export const NewsletterSignup: React.FC<NewsletterSignupProps> = ({
       
       setIsSubmitting(false);
       setIsSuccess(true);
+      
+      // Track signup event
+      trackEvent('signup_completed', {
+        method: 'email',
+        source: 'briefing_signup',
+        location: variant === 'compact' ? 'footer/sidebar' : 'hero_section'
+      });
+
       addToast('Check your email to confirm your subscription.', 'success', 4000);
       setEmail('');
       setTouched(false);

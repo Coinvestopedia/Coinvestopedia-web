@@ -2,6 +2,7 @@ import React from 'react';
 import { Activity, Hash, ArrowRight } from 'lucide-react';
 import { Card } from './Card';
 import { PageRoute } from '../types';
+import { trackEvent } from '../utils/analytics';
 
 interface ActivityItem {
   user: string;
@@ -83,7 +84,14 @@ const LiveActivityFeedComponent: React.FC<LiveActivityFeedProps> = ({
       </div>
 
       <button 
-        onClick={() => onNavigate?.(PageRoute.WHALE)}
+        onClick={() => {
+          trackEvent('cta_clicked', {
+            button_text: 'Live Tracking',
+            location: 'live_activity_feed',
+            target_route: PageRoute.WHALE
+          });
+          onNavigate?.(PageRoute.WHALE);
+        }}
         className="w-full mt-4 px-4 py-3 bg-primary/10 border border-primary/30 rounded-xl text-primary font-semibold hover:bg-primary hover:text-white transition-colors flex items-center justify-center gap-2 group"
       >
         <span>Live Tracking</span>

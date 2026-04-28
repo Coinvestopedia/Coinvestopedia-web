@@ -3,6 +3,7 @@ import { X, Plus, Search } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { AssetData } from '../../data/assetRegistry';
 import { AssetIcon } from '../AssetIcon';
+import { trackEvent } from '../../utils/analytics';
 
 interface AssetSelectorProps {
   selectedIds: string[];
@@ -50,12 +51,36 @@ export const AssetSelector: React.FC<AssetSelectorProps> = ({ selectedIds, onCha
 
   const handleAdd = (id: string) => {
     if (selectedIds.length >= 10) return;
+    
+    // Track asset addition
+    const asset = registry[id];
+    if (asset) {
+      trackEvent('asset_added', {
+        asset_symbol: asset.symbol,
+        asset_name: asset.name,
+        asset_category: asset.category,
+        total_selected: selectedIds.length + 1
+      });
+    }
+
     onChange([...selectedIds, id]);
     setSearchTerm('');
   };
 
   const handleRemove = (id: string) => {
     if (selectedIds.length <= 1) return;
+    
+    // Track asset removal
+    const asset = registry[id];
+    if (asset) {
+      trackEvent('asset_removed', {
+        asset_symbol: asset.symbol,
+        asset_name: asset.name,
+        asset_category: asset.category,
+        total_selected: selectedIds.length - 1
+      });
+    }
+
     onChange(selectedIds.filter(selectedId => selectedId !== id));
   };
 

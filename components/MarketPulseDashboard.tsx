@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Clock, BookOpen, Globe, BarChart3, Newspaper } from 'lucide-react';
+import { trackEvent } from '../utils/analytics';
 import { fetchFearAndGreed, fetchSectorPerformance } from '../services/api';
 import { 
   TradingViewTimelineNews
@@ -92,6 +93,13 @@ const MarketInsights: React.FC<{ onNavigate?: (route: PageRoute) => void }> = ({
   
   const handleArticleClick = () => {
     if (article && onNavigate) {
+      trackEvent('cta_clicked', {
+        button_text: 'View Insight',
+        article_title: article.title,
+        article_category: article.category,
+        location: 'market_pulse_dashboard',
+        target_route: PageRoute.INSIGHTS
+      });
       window.location.hash = `#${article.id}`;
       onNavigate(PageRoute.INSIGHTS);
     }

@@ -1,6 +1,7 @@
 import React from 'react';
 import { PageRoute } from '../types';
 import { Button } from './Button';
+import { trackEvent } from '../utils/analytics';
 
 interface HeroProps {
   onNavigate?: (route: PageRoute) => void;
@@ -26,10 +27,24 @@ export const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
           Bridging traditional capital markets and digital assets with quantitative research, real-time data flows, and institutional-grade analysis.
         </p>
         <div className="flex flex-col sm:flex-row items-center justify-center gap-3 lg:gap-4">
-          <Button size="lg" onClick={() => onNavigate?.(PageRoute.COMPARE)}>
+          <Button size="lg" onClick={() => {
+            trackEvent('cta_clicked', {
+              button_text: 'Analyze Assets',
+              location: 'hero',
+              target_route: PageRoute.COMPARE
+            });
+            onNavigate?.(PageRoute.COMPARE);
+          }}>
             Analyze Assets
           </Button>
-          <Button variant="secondary" size="lg" onClick={() => onNavigate?.(PageRoute.NEWSLETTER)}>
+          <Button variant="secondary" size="lg" onClick={() => {
+            trackEvent('cta_clicked', {
+              button_text: 'Read The Briefing',
+              location: 'hero',
+              target_route: PageRoute.NEWSLETTER
+            });
+            onNavigate?.(PageRoute.NEWSLETTER);
+          }}>
             Read The Briefing
           </Button>
         </div>
