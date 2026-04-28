@@ -44,7 +44,6 @@ export const TradingViewTimelineNews = memo(() => {
 
   return (
     <div className="tradingview-widget-container h-full w-full rounded-xl overflow-hidden border border-border bg-surface" ref={container}>
-      <div className="tradingview-widget-container__widget h-full w-full"></div>
     </div>
   );
 });

@@ -41,6 +41,38 @@
   ],
   "rewrites": [
     {
+      "source": "/api/yahoo/:path*",
+      "destination": "https://query1.finance.yahoo.com/:path*"
+    },
+    {
+      "source": "/api/cryptopanic/:path*",
+      "destination": "https://cryptopanic.com/:path*"
+    },
+    {
+      "source": "/rss/coindesk",
+      "destination": "https://www.coindesk.com/arc/outboundfeeds/rss/"
+    },
+    {
+      "source": "/rss/cointelegraph",
+      "destination": "https://cointelegraph.com/rss"
+    },
+    {
+      "source": "/rss/decrypt",
+      "destination": "https://decrypt.co/feed"
+    },
+    {
+      "source": "/api/cryptoquant/:path*",
+      "destination": "https://api.cryptoquant.com/:path*"
+    },
+    {
+      "source": "/api/bitquery/:path*",
+      "destination": "https://streaming.bitquery.io/:path*"
+    },
+    {
+      "source": "/api/thegraph/:path*",
+      "destination": "https://api.studio.thegraph.com/:path*"
+    },
+    {
       "source": "/((?!api/.*).*)",
       "destination": "/index.html"
     }
