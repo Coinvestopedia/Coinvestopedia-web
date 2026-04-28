@@ -55,12 +55,18 @@ export const Header: React.FC<HeaderProps> = ({
           <img
             src="/logo-transparent-dark-desktop.png"
             alt="Coinvestopedia"
+            width={88}
+            height={88}
+            decoding="async"
             className="h-16 lg:h-[88px] w-auto object-contain transition-transform duration-200 group-hover:scale-105 hidden md:block"
           />
           {/* ── Mobile Logo ── */}
           <img
             src="/logo-transparent-mobile.png"
             alt="Coinvestopedia"
+            width={64}
+            height={64}
+            decoding="async"
             className="h-16 w-auto object-contain transition-transform duration-200 group-hover:scale-105 block md:hidden"
           />
         </div>
@@ -109,7 +115,7 @@ export const Header: React.FC<HeaderProps> = ({
 
 
           {/* Hamburger: Hidden on mobile (< md) because bottom nav exists. Visible on tablet (md-xl). Hidden on desktop (> xl). */}
-          <button className="hidden md:block xl:hidden text-text p-1" onClick={() => onToggleMobileMenu(!isMobileMenuOpen)}>
+          <button className="hidden md:block xl:hidden text-text p-2.5 min-w-[44px] min-h-[44px] flex items-center justify-center" onClick={() => onToggleMobileMenu(!isMobileMenuOpen)}>
             {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>

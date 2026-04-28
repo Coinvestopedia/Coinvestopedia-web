@@ -1,4 +1,5 @@
 const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL || 'https://ahuhejfqbefhkarwohta.supabase.co';
+const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY || '';
 
 interface SubscribeParams {
   email: string;
@@ -15,9 +16,14 @@ interface SubscribeResponse {
 }
 
 export async function subscribeToBriefing(params: SubscribeParams): Promise<SubscribeResponse> {
+  console.log("DEBUG - Loaded ANON KEY:", SUPABASE_ANON_KEY ? "KEY IS PRESENT" : "KEY IS MISSING (Empty/Undefined)");
+  
   const response = await fetch(`${SUPABASE_URL}/functions/v1/subscribe`, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    headers: { 
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
+    },
     body: JSON.stringify(params),
   });
 

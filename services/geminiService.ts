@@ -57,16 +57,16 @@ const tryGemini = async (apiKey: string, prompt: string, modelName: string = "ge
 // burning two API calls for the same topic simultaneously.
 const _inflight = new Map<string, Promise<InsightResult>>();
 
-export const getMarketInsight = (topic: string): Promise<InsightResult> => {
+export const getMarketInsight = (topic: string, signal?: AbortSignal): Promise<InsightResult> => {
   const existing = _inflight.get(topic);
   if (existing) return existing;
 
-  const promise = _getMarketInsightInner(topic).finally(() => _inflight.delete(topic));
+  const promise = _getMarketInsightInner(topic, signal).finally(() => _inflight.delete(topic));
   _inflight.set(topic, promise);
   return promise;
 };
 
-const _getMarketInsightInner = async (topic: string): Promise<InsightResult> => {
+const _getMarketInsightInner = async (topic: string, signal?: AbortSignal): Promise<InsightResult> => {
   const cacheKey = `${CACHE_KEY_PREFIX}${topic.replace(/\s+/g, '_')}`;
   let staleData: InsightResult | null = null;
 
@@ -93,7 +93,7 @@ const _getMarketInsightInner = async (topic: string): Promise<InsightResult> => 
   if (!isLocalDev) {
     console.log(`[AI Overview] Fetching globally cached insight from Vercel Edge...`);
     try {
-      const res = await fetch(`/api/market-insight?topic=${encodeURIComponent(topic)}`);
+      const res = await fetch(`/api/market-insight?topic=${encodeURIComponent(topic)}`, { signal });
       if (res.ok) {
         const data = await res.json();
         try {
@@ -164,7 +164,8 @@ export const analyzeAssetMovement = async (
   movementType: string, 
   amount: string,
   fromAddress?: string,
-  toAddress?: string
+  toAddress?: string,
+  signal?: AbortSignal
 ): Promise<InsightResult> => {
   const fromStr = fromAddress || 'Unknown Wallet';
   const toStr = toAddress || 'Unknown Wallet';

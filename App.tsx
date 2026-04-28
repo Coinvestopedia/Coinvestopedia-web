@@ -27,6 +27,9 @@ const Newsletter = React.lazy(() => import('./pages/Newsletter').then(module => 
 const Privacy = React.lazy(() => import('./pages/Privacy').then(module => ({ default: module.Privacy })));
 const Terms = React.lazy(() => import('./pages/Terms').then(module => ({ default: module.Terms })));
 const Cookies = React.lazy(() => import('./pages/Cookies').then(module => ({ default: module.Cookies })));
+const Disclaimer = React.lazy(() => import('./pages/Disclaimer'));
+const AffiliateDisclosure = React.lazy(() => import('./pages/AffiliateDisclosure'));
+const NotFound = React.lazy(() => import('./pages/NotFound').then(module => ({ default: module.NotFound })));
 
 import { PageRoute } from './types';
 import { AppProvider, useAppContext } from './context/AppContext';
@@ -90,7 +93,13 @@ const AppContent: React.FC = () => {
     let page;
     switch (currentRoute) {
       case PageRoute.HOME:
-        page = <Home onNavigate={handleNavigate} />;
+        // Detect true 404: pathnameToRoute maps unknown paths to HOME,
+        // but the actual browser URL won't be '/' in that case.
+        if (window.location.pathname !== '/' && window.location.pathname !== '') {
+          page = <NotFound onNavigate={handleNavigate} />;
+        } else {
+          page = <Home onNavigate={handleNavigate} />;
+        }
         break;
       case PageRoute.WHALE:
         page = <WhaleTracker onNavigate={handleNavigate} />;
@@ -130,6 +139,12 @@ const AppContent: React.FC = () => {
         break;
       case PageRoute.COOKIES:
         page = <Cookies onNavigate={handleNavigate} />;
+        break;
+      case PageRoute.DISCLAIMER:
+        page = <Disclaimer />;
+        break;
+      case PageRoute.AFFILIATE:
+        page = <AffiliateDisclosure />;
         break;
       default:
         page = <Home onNavigate={handleNavigate} />;
@@ -239,6 +254,18 @@ const AppContent: React.FC = () => {
                 className={`transition-colors whitespace-nowrap ${currentRoute === PageRoute.PRIVACY ? 'text-primary' : 'text-text-muted hover:text-primary'}`}
               >
                 Privacy Policy
+              </button>
+              <button 
+                onClick={() => handleNavigate(PageRoute.DISCLAIMER)} 
+                className={`transition-colors whitespace-nowrap ${currentRoute === PageRoute.DISCLAIMER ? 'text-primary' : 'text-text-muted hover:text-primary'}`}
+              >
+                Disclaimer
+              </button>
+              <button 
+                onClick={() => handleNavigate(PageRoute.AFFILIATE)} 
+                className={`transition-colors whitespace-nowrap ${currentRoute === PageRoute.AFFILIATE ? 'text-primary' : 'text-text-muted hover:text-primary'}`}
+              >
+                Affiliate Disclosure
               </button>
               <button 
                 onClick={() => handleNavigate(PageRoute.TERMS)} 

@@ -14,6 +14,7 @@ interface PageMetaProps {
   ogType?: 'website' | 'article';
   noIndex?: boolean;
   structuredData?: object;
+  additionalStructuredData?: object[];
 }
 
 const SITE_NAME = 'Coinvestopedia';
@@ -29,6 +30,7 @@ export function PageMeta({
   ogType = 'website',
   noIndex = false,
   structuredData,
+  additionalStructuredData,
 }: PageMetaProps) {
   const fullTitle = `${title} | ${SITE_NAME}`;
   const canonicalUrl = canonical
@@ -64,6 +66,11 @@ export function PageMeta({
           {JSON.stringify(structuredData)}
         </script>
       )}
+      {additionalStructuredData?.map((data, i) => (
+        <script key={i} type="application/ld+json">
+          {JSON.stringify(data)}
+        </script>
+      ))}
     </Helmet>
   );
 }
@@ -144,5 +151,34 @@ export const faqSchema = (questions: { q: string; a: string }[]) => ({
       '@type': 'Answer',
       text: q.a,
     },
+  })),
+});
+
+export const organizationSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: SITE_NAME,
+  url: BASE_URL,
+  logo: `${BASE_URL}/logo-dark-full.png`,
+  description: 'World-class institutional crypto data, analysis, and investment tools.',
+  sameAs: [
+    'https://twitter.com/coinvestopedia',
+  ],
+  foundingDate: '2024',
+  contactPoint: {
+    '@type': 'ContactPoint',
+    contactType: 'customer support',
+    url: `${BASE_URL}/newsletter`,
+  },
+};
+
+export const itemListSchema = (items: { name: string; url: string; position: number }[]) => ({
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  itemListElement: items.map((item) => ({
+    '@type': 'ListItem',
+    position: item.position,
+    name: item.name,
+    url: item.url,
   })),
 });

@@ -3,6 +3,7 @@ import { Card } from './Card';
 import { calculateSmartMoneyConfidence, getFallbackSmartMoneyConfidence } from '../utils/smartMoneyScore';
 import { fetchGlassnodeMetrics, fetchCryptoQuantReserves, fetchFearAndGreed } from '../services/api';
 import { Activity, ShieldCheck, AlertTriangle, Info } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 export const SmartMoneyConfidenceWidget: React.FC = () => {
   const [score, setScore] = useState<number>(50);
@@ -71,31 +72,59 @@ export const SmartMoneyConfidenceWidget: React.FC = () => {
   const borderColorClass = score >= 60 ? 'border-primary' : score <= 40 ? 'border-[#EF4444]' : 'border-yellow-500';
 
   return (
-    <Card className={`p-6 h-full flex flex-col md:flex-row md:items-center justify-between border-t-2 overflow-hidden relative ${borderColorClass}`}>
+    <Card className={`p-6 min-h-[320px] md:h-full flex flex-col md:flex-row md:items-center justify-between border-t-2 overflow-hidden relative ${borderColorClass}`}>
         {/* Animated Background Pulse */}
         <div className={`absolute -right-12 -top-12 w-48 h-48 md:w-64 md:h-64 rounded-full blur-3xl opacity-20 pointer-events-none ${score >= 60 ? 'bg-primary' : score <= 40 ? 'bg-[#EF4444]' : 'bg-yellow-500'}`} />
 
-      <div className="flex justify-between items-start mb-4 md:mb-0 relative z-20 md:w-1/2">
+      <div className="flex justify-between items-start mb-8 md:mb-0 relative z-20 md:w-1/2">
         <div>
-          <h2 className="text-lg font-bold text-text flex items-center gap-2">
+          <h2 className="text-xl md:text-lg font-bold text-text flex items-center gap-2">
              Smart Money Confidence
           </h2>
-          <p className="text-text-muted text-xs mt-1 max-w-[200px] md:max-w-[300px]">Proprietary composite of Exchange Flows, SOPR, and Miner Reserves</p>
+          <p className="text-text-muted text-xs mt-2 max-w-[250px] md:max-w-[300px] leading-relaxed">
+            Proprietary composite of Exchange Flows, SOPR, and Miner Reserves. Measures institutional positioning in real-time.
+          </p>
         </div>
         <div className="tooltip-container relative">
            <button 
-             onClick={() => setShowTooltip(!showTooltip)}
-             onBlur={() => setTimeout(() => setShowTooltip(false), 200)}
-             className="focus:outline-none"
+             onClick={(e) => {
+               e.stopPropagation();
+               setShowTooltip(!showTooltip);
+             }}
+             className={`w-8 h-8 rounded-full flex items-center justify-center transition-colors ${showTooltip ? 'bg-primary text-background' : 'bg-surface border border-border text-text-muted hover:text-text'}`}
              aria-label="More information"
            >
-             <Info size={16} className={`transition-colors ${showTooltip ? 'text-primary' : 'text-text-muted hover:text-text'}`} />
+             <Info size={16} />
            </button>
-            <div className={`absolute right-0 md:left-0 top-6 w-48 p-2 bg-surface text-xs text-text border border-border rounded shadow-lg transition-all z-50 ${
-              showTooltip ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible -translate-y-1'
-            }`}>
-               Aggregates data from Glassnode, CryptoQuant, Whale Alert, and Alternative.me.
-            </div>
+           
+           <AnimatePresence>
+             {showTooltip && (
+               <motion.div 
+                 initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                 animate={{ opacity: 1, y: 0, scale: 1 }}
+                 exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                 className="absolute right-0 top-10 w-64 p-4 bg-surface border border-primary/30 rounded-xl shadow-2xl z-50 text-xs leading-relaxed"
+               >
+                  <div className="font-bold text-primary mb-2 flex items-center gap-2">
+                    <Activity size={12} /> Methodology Details
+                  </div>
+                  <p className="text-text mb-3">
+                    Aggregates high-fidelity signals from Glassnode, CryptoQuant, and Whale Alert. 
+                  </p>
+                  <ul className="space-y-1 text-text-muted">
+                    <li>• Exchange Inflow/Outflow dynamics</li>
+                    <li>• Long-term holder SOPR variance</li>
+                    <li>• Miner reserve exhaustion levels</li>
+                  </ul>
+                  <button 
+                    onClick={() => setShowTooltip(false)}
+                    className="mt-3 w-full py-1.5 bg-primary/10 hover:bg-primary/20 text-primary font-bold rounded-lg transition-colors"
+                  >
+                    Close
+                  </button>
+               </motion.div>
+             )}
+           </AnimatePresence>
         </div>
       </div>
 
@@ -109,7 +138,7 @@ export const SmartMoneyConfidenceWidget: React.FC = () => {
           <>
             <div className="relative flex items-center justify-center mb-6 mt-2">
                 {/* SVG Gauge Implementation */}
-                <svg width="140" height="140" viewBox="0 0 100 100" className="transform -rotate-90">
+                <svg width="150" height="150" viewBox="0 0 100 100" className="transform -rotate-90 drop-shadow-2xl">
                     <circle cx="50" cy="50" r="45" fill="none" stroke="currentColor" strokeWidth="8" className="text-surface" />
                     <circle 
                         cx="50" cy="50" r="45" fill="none" 
@@ -122,12 +151,12 @@ export const SmartMoneyConfidenceWidget: React.FC = () => {
                     />
                 </svg>
                 <div className="absolute inset-0 flex flex-col items-center justify-center transform translate-y-1">
-                    <span className="text-4xl font-bold font-mono tracking-tighter">{score.toFixed(0)}</span>
+                    <span className="text-4xl md:text-5xl font-bold font-mono tracking-tighter">{score.toFixed(0)}</span>
                     <span className="text-[10px] text-text-muted uppercase font-bold tracking-widest mt-1 text-center leading-tight">out of<br/>100</span>
                 </div>
             </div>
 
-            <div className={`flex items-center gap-2 px-4 py-2 rounded-full border ${getStatusColor(score)} font-bold text-sm uppercase tracking-wide`}>
+            <div className={`flex items-center gap-2 px-6 py-2.5 rounded-full border shadow-lg ${getStatusColor(score)} font-bold text-sm uppercase tracking-wide transition-all hover:scale-105 cursor-default`}>
               {getStatusIcon(score)}
               {getStatusText(score)}
             </div>

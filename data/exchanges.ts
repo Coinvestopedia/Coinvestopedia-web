@@ -1000,8 +1000,8 @@ export const FAQ_DATA = [
     a: 'Traditional futures have an expiration date and settle at a fixed price. Perpetual futures (perps) have no expiration — they trade continuously with a funding rate mechanism that keeps the perpetual price anchored to the spot price. Positive funding means longs pay shorts; negative funding means shorts pay longs. Perpetuals are the dominant derivative instrument in crypto, with daily volume exceeding spot markets.',
   },
   {
-    q: 'What does ClearRate™ score mean and how is it calculated?',
-    a: 'ClearRate™ is Coinvestopedia\'s proprietary 100-point institutional exchange scoring model. It evaluates exchanges across 7 weighted dimensions: Regulatory Compliance (25%), Liquidity Depth (20%), Fee Structure (20%), Custody & Security (15%), Asset Coverage (10%), Institutional Infrastructure (5%), and Operational Track Record (5%). Scores of 90+ indicate institutional grade; 80-89 professional grade; 70-79 active trader grade; below 70 indicates elevated risk.',
+    q: 'What does the Coinvesto AI Score™ mean and how is it calculated?',
+    a: 'The Coinvesto AI Score™ is Coinvestopedia\'s proprietary 100-point institutional exchange scoring model. It evaluates exchanges across 7 weighted dimensions: Security Architecture (25%), Regulatory Compliance (20%), Counterparty Quality (15%), Liquidity Integrity (15%), Fee Efficiency (10%), Operational Continuity (10%), and Institutional Tooling (5%). Scores of 90+ indicate institutional grade; 80-89 professional grade; 70-79 active trader grade; below 70 indicates elevated risk.',
   },
   {
     q: 'Which crypto exchange is best for a family office or RIA?',
@@ -1021,7 +1021,7 @@ export const AFFILIATE_BANNERS = [
   {
     id: 'fee-optimization',
     title: 'Most institutional traders overpay by $40K–$200K annually on exchange fees.',
-    body: 'The ClearRate™ Fee Calculator shows exactly where the savings are.',
+    body: 'The Coinvesto AI Score™ Fee Calculator shows exactly where the savings are.',
     cta: 'Run Your Fee Analysis →',
     ctaUrl: '#fee-calculator',
     placement: 'after-calculator',

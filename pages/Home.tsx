@@ -1,4 +1,4 @@
-import { PageMeta, homePageSchema } from '../components/PageMeta';
+import { PageMeta, homePageSchema, organizationSchema } from '../components/PageMeta';
 
 import React, { useEffect } from 'react';
 import { Hero } from '../components/Hero';
@@ -99,7 +99,7 @@ export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
 
   return (
     <div className="animate-fade-in">
-      <PageMeta title="Institutional Crypto Data" description="World-class institutional crypto data, analysis, and investment tools." structuredData={homePageSchema} />
+      <PageMeta title="Institutional Crypto Data" description="World-class institutional crypto data, analysis, and investment tools." structuredData={homePageSchema} additionalStructuredData={[organizationSchema]} />
       
       <div className="space-y-12 lg:space-y-16">
         <Hero onNavigate={onNavigate} />

@@ -49,5 +49,7 @@ export enum PageRoute {
   TERMS = '/terms',
   GLOSSARY = '/glossary',
   EXCHANGES = '/exchanges',
-  COOKIES = '/cookies'
+  COOKIES = '/cookies',
+  DISCLAIMER = '/disclaimer',
+  AFFILIATE = '/affiliate-disclosure'
 }

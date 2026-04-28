@@ -1,9 +1,8 @@
-
-
 import { PageRoute } from '../types';
 import React, { useState, useMemo, useRef, useEffect, useCallback } from 'react';
 import { Search, ChevronUp, Hash, X, ArrowRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useAppContext } from '../context/AppContext';
 
 
 // ── Glossary Data ──
@@ -601,8 +600,6 @@ const GlossaryEntryCard: React.FC<GlossaryEntryCardProps> = ({ entry, isExpanded
 
 
 // ── Main Glossary Component ──
-
-import { useAppContext } from '../context/AppContext';
 
 
 

@@ -71,7 +71,5 @@ Disallow: /api/
 Disallow: /.env
 Disallow: /node_modules/
  
-# Priority sitemaps for AI crawlers
+# Sitemap (single canonical source — no phantom sitemaps)
 Sitemap: https://coinvestopedia.com/sitemap.xml
-Sitemap: https://coinvestopedia.com/sitemap-research.xml
-Sitemap: https://coinvestopedia.com/sitemap-tools.xml

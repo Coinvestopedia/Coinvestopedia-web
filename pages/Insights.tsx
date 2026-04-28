@@ -76,7 +76,7 @@ export const ARTICLES: Article[] = [
         </p>
 
         <div className="my-10 rounded-2xl overflow-hidden border border-border shadow-2xl">
-           <img src="/NRZmJ.jpg" alt="Global Digital Asset Dynamics" className="w-full h-auto object-cover" />
+           <img src="/NRZmJ.jpg" alt="Global Digital Asset Dynamics" loading="lazy" decoding="async" className="w-full h-auto object-cover" />
            <div className="p-4 bg-background/50 text-xs text-center border-t border-border italic text-text-muted">
               Regional Momentum: Latin America recorded nearly $1.5 trillion in transaction volume between 2022 and 2025.
            </div>
@@ -155,7 +155,7 @@ export const ARTICLES: Article[] = [
         </div>
 
         <div className="my-10 rounded-2xl overflow-hidden border border-border shadow-2xl">
-           <img src="/62d2Q.jpg" alt="Argentina Market Dynamics" className="w-full h-auto object-cover" />
+           <img src="/62d2Q.jpg" alt="Argentina Market Dynamics" loading="lazy" decoding="async" className="w-full h-auto object-cover" />
            <div className="p-4 bg-background/50 text-xs text-center border-t border-border italic text-text-muted">
               Argentine Response: Millions of citizens view holding local currency as a "slow act of self-destruction," driving record adoption of dollar-pegged stablecoins.
            </div>
@@ -282,7 +282,7 @@ export const ARTICLES: Article[] = [
         </div>
 
         <div className="my-10 rounded-2xl overflow-hidden border border-border shadow-2xl">
-           <img src="/JNa2U.jpg" alt="Mexico Remittance Flow" className="w-full h-auto object-cover" />
+           <img src="/JNa2U.jpg" alt="Mexico Remittance Flow" loading="lazy" decoding="async" className="w-full h-auto object-cover" />
            <div className="p-4 bg-background/50 text-xs text-center border-t border-border italic text-text-muted">
               Remittance Efficiency: In the US-Mexico corridor ($64.7B in 2024), stablecoin model fees have dropped to under 1% for retail users.
            </div>
@@ -364,7 +364,7 @@ export const ARTICLES: Article[] = [
         </div>
 
         <div className="my-10 rounded-2xl overflow-hidden border border-border shadow-2xl">
-           <img src="/lL01V.jpg" alt="Security Map 2026" className="w-full h-auto object-cover" />
+           <img src="/lL01V.jpg" alt="Security Map 2026" loading="lazy" decoding="async" className="w-full h-auto object-cover" />
            <div className="p-4 bg-background/50 text-xs text-center border-t border-border italic text-text-muted">
               Cyber Risk Spectrum: Brazil (30%) and Mexico (14%) absorb the heaviest hits from double-extortion ransomware groups like Qilin and LockBit.
            </div>
@@ -459,7 +459,7 @@ export const ARTICLES: Article[] = [
         </p>
 
         <div className="my-10 rounded-2xl overflow-hidden border border-border shadow-2xl">
-           <img src="/africa-crypto-featured.png" alt="Africa Crypto Infrastructure" className="w-full h-auto object-cover" />
+           <img src="/africa-crypto-featured.png" alt="Africa Crypto Infrastructure" loading="lazy" decoding="async" className="w-full h-auto object-cover" />
            <div className="p-4 bg-background/50 text-xs text-center border-t border-border italic text-text-muted">
               Digital Finance Evolution: Stylized visualization of Africa's emerging crypto infrastructure and cross-border nodes.
            </div>

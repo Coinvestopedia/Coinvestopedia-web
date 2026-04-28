@@ -12,13 +12,21 @@ export const SidebarRight: React.FC<SidebarRightProps> = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
+    const controller = new AbortController();
     const fetchInsight = async () => {
-      setIsLoading(true);
-      const result = await getMarketInsight('current crypto market');
-      setInsight(result);
-      setIsLoading(false);
+      try {
+        setIsLoading(true);
+        const result = await getMarketInsight('current crypto market', controller.signal);
+        setInsight(result);
+      } catch (err: any) {
+        if (err.name === 'AbortError') return;
+        console.error('Failed to fetch insight:', err);
+      } finally {
+        setIsLoading(false);
+      }
     };
     fetchInsight();
+    return () => controller.abort();
   }, []);
 
   return (

@@ -21,9 +21,9 @@ interface SelectProps {
 }
 
 const sizeClasses = {
-  sm: 'px-3 py-1.5 text-sm',
-  md: 'px-4 py-2 text-sm',
-  lg: 'px-4 py-3 text-base',
+  sm: 'px-3 py-2 text-xs min-h-[36px]',
+  md: 'px-4 py-2.5 text-sm min-h-[44px]',
+  lg: 'px-4 py-3 text-base min-h-[52px]',
 };
 
 export const Select = ({
@@ -105,7 +105,7 @@ export const Select = ({
                   setIsOpen(false);
                 }}
                 className={cn(
-                  'w-full px-4 py-2.5 text-left text-sm flex items-center gap-2 transition-colors',
+                  'w-full px-4 py-2.5 min-h-[44px] text-left text-sm flex items-center gap-2 transition-colors',
                   'hover:bg-primary/5 focus:bg-primary/5 focus:outline-none text-text',
                   value === option.value && 'bg-primary/10 text-primary font-semibold'
                 )}
