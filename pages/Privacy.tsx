@@ -60,7 +60,21 @@ export const Privacy: React.FC<PrivacyProps> = ({ onNavigate }) => {
 
         <section>
           <h2 className="text-2xl font-bold text-text mb-4 flex items-center gap-2">
-            <Shield className="text-primary" size={24} /> 3. Data Security
+            <Eye className="text-primary" size={24} /> 3. Cookies and Analytics
+          </h2>
+          <p>
+            We use cookies and similar tracking technologies (such as Google Tag Manager and Google Analytics 4) to analyze our traffic and improve user experience. 
+          </p>
+          <ul className="list-disc pl-6 mt-4 space-y-2">
+            <li><strong>Industry Classification:</strong> We classify our business under the 'Finance' category in analytics platforms to receive relevant industry benchmarks. We do not use this data for sensitive interest-based targeting or predatory marketing.</li>
+            <li><strong>Anonymous Data:</strong> Most of the data we collect via analytics is aggregated and anonymous. We use it to understand which research topics and tools (like our Whale Tracker or ROI Simulators) are most valuable to our users.</li>
+            <li><strong>Opt-Out:</strong> You can manage your cookie preferences through our Cookie Policy page or by using browser extensions that block analytics scripts.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2 className="text-2xl font-bold text-text mb-4 flex items-center gap-2">
+            <Shield className="text-primary" size={24} /> 4. Data Security
           </h2>
           <p>
             We implement a variety of security measures to maintain the safety of your personal information. We use state-of-the-art encryption to protect sensitive data transmitted online. While we strive to use commercially acceptable means to protect your personal information, we cannot guarantee its absolute security.
@@ -69,7 +83,7 @@ export const Privacy: React.FC<PrivacyProps> = ({ onNavigate }) => {
 
         <section>
           <h2 className="text-2xl font-bold text-text mb-4 flex items-center gap-2">
-            <FileText className="text-primary" size={24} /> 4. Your Rights
+            <FileText className="text-primary" size={24} /> 5. Your Rights
           </h2>
           <p>
             Depending on your location, you may have certain rights regarding your personal information, including the right to access, correct, or delete the data we have collected about you. To exercise these rights, please contact us at privacy@coinvestopedia.com.

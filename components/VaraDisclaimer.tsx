@@ -24,10 +24,10 @@ export const VaraDisclaimer: React.FC<VaraDisclaimerProps> = ({ variant = 'banne
         <div className="flex items-start gap-3">
           <Info size={16} className="text-amber-400 shrink-0 mt-0.5" />
           <p className="text-[11px] text-text-muted leading-relaxed">
-            <strong className="text-amber-400/80">Disclaimer:</strong> Virtual assets are highly volatile and may lose value. 
-            This content is for educational purposes only and does not constitute financial, investment, or legal advice. 
-            Coinvestopedia does not recommend specific exchanges, tokens, or investment strategies. 
-            All simulators and tools are for illustrative purposes only.
+            <strong className="text-amber-400/80">Important Disclosure:</strong> Virtual assets are highly volatile and speculative. Your capital is at risk. 
+            Coinvestopedia is a financial intelligence and educational platform. We are not a regulated financial advisor, broker, or dealer. 
+            The content, simulators, and tools provided are for educational purposes only and do not constitute financial, investment, or legal advice. 
+            Past performance is not indicative of future results.
           </p>
         </div>
       </div>
@@ -44,12 +44,13 @@ export const VaraDisclaimer: React.FC<VaraDisclaimerProps> = ({ variant = 'banne
           <AlertTriangle size={18} className="text-amber-400" />
         </div>
         <div>
-          <h4 className="text-sm font-bold text-amber-400 mb-1.5 uppercase tracking-wider">Educational Content Disclaimer</h4>
+          <h4 className="text-sm font-bold text-amber-400 mb-1.5 uppercase tracking-wider">Educational & Risk Disclosure</h4>
           <p className="text-sm text-text-muted leading-relaxed">
-            Virtual assets are highly volatile and may lose value. This content is for educational purposes only 
-            and does not constitute financial, investment, or legal advice. Coinvestopedia does not recommend 
-            specific exchanges, tokens, or investment strategies. All simulators and analytical tools presented 
-            on this platform are for illustrative and educational purposes only.
+            <strong>Virtual assets are highly volatile and your capital is at risk.</strong> Coinvestopedia provides 
+            financial intelligence, educational simulators, and research for informational purposes only. 
+            We do not provide regulated investment advice, and no content on this platform should be construed as 
+            a recommendation to buy, sell, or hold any specific asset. All analytical tools and simulators are 
+            provided for illustrative purposes only. Use of this site constitutes acceptance of our Terms and Risk Disclosures.
           </p>
         </div>
       </div>
