@@ -92,11 +92,10 @@ export const initializeConsent = () => {
   if (typeof window !== 'undefined') {
     const saved = getSavedConsent();
     if (saved) {
+      // If we have a saved preference, ensure GTM is updated.
+      // Note: index.html already sets this as 'default', but this ensures
+      // any dynamically loaded tags or re-evaluations are handled.
       updateGtmConsent(saved);
-    } else {
-      // If no saved preference, set defaults in GTM (if not already handled in index.html)
-      // Note: Best practice is to set defaults in index.html, but we handle it here too.
-      updateGtmConsent(DEFAULT_CONSENT);
     }
   }
 };
