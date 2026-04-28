@@ -32,6 +32,8 @@ import { PageRoute } from './types';
 import { AppProvider, useAppContext } from './context/AppContext';
 import { AssetRegistryProvider } from './context/AssetRegistryContext';
 import { ToastContainer } from './components/Toast';
+import { initializeConsent } from './utils/consent';
+import { CookieBanner } from './components/CookieBanner';
 
 
 /**
@@ -64,6 +66,11 @@ const AppContent: React.FC = () => {
 
     window.addEventListener('popstate', handlePopState);
     return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
+
+  // Initialize Google Consent Mode v2
+  useEffect(() => {
+    initializeConsent();
   }, []);
 
   const handleNavigate = useCallback((route: PageRoute) => {
@@ -153,6 +160,7 @@ const AppContent: React.FC = () => {
       
       <Background />
       <ToastContainer />
+      <CookieBanner />
       
       <div className="relative z-10">
         <Header 
