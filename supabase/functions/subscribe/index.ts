@@ -49,15 +49,16 @@ async function sendConfirmationEmail(resendApiKey: string, email: string, token:
         <!DOCTYPE html>
         <html>
         <head>
+          <meta charset="utf-8">
           <style>
             body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; margin: 0; padding: 0; background-color: #050505; color: #ffffff; }
             .container { max-width: 600px; margin: 0 auto; padding: 60px 40px; background-color: #0a0a0a; border-radius: 24px; border: 1px solid rgba(255, 255, 255, 0.05); }
             .logo { display: block; margin: 0 auto 40px; height: 80px; width: auto; }
-            .label { color: #D4AF37; font-size: 11px; font-weight: 800; letter-spacing: 0.25em; text-transform: uppercase; text-align: center; margin-bottom: 16px; }
+            .label { color: #10B981; font-size: 11px; font-weight: 800; letter-spacing: 0.25em; text-transform: uppercase; text-align: center; margin-bottom: 16px; }
             h1 { font-size: 28px; font-weight: 700; text-align: center; margin: 0 0 24px; letter-spacing: -0.02em; color: #ffffff; }
             p { font-size: 16px; line-height: 1.6; text-align: center; margin-bottom: 40px; color: #999999; }
             .btn-wrapper { text-align: center; }
-            .btn { background-color: #D4AF37; color: #000000; padding: 18px 40px; text-decoration: none; border-radius: 12px; font-weight: 700; font-size: 15px; display: inline-block; transition: all 0.2s ease; }
+            .btn { background-color: #10B981; color: #000000; padding: 18px 40px; text-decoration: none; border-radius: 12px; font-weight: 700; font-size: 15px; display: inline-block; transition: all 0.2s ease; }
             .footer { font-size: 12px; color: #444444; text-align: center; margin-top: 60px; letter-spacing: 0.1em; font-weight: 600; text-transform: uppercase; }
           </style>
         </head>
