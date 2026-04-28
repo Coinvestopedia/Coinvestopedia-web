@@ -86,11 +86,11 @@ export const NewsletterSignup: React.FC<NewsletterSignupProps> = ({
       setTouched(false);
       
       setTimeout(() => setIsSuccess(false), 5000);
-    } catch (err) {
+    } catch (err: any) {
+      setError(err.message || 'Subscription failed. Please try again.');
+      addToast(err.message || 'Subscription failed. Please try again later.', 'error', 4000);
+    } finally {
       setIsSubmitting(false);
-      setError('Subscription failed. Please try again.');
-      addToast('Subscription failed. Please try again later.', 'error', 4000);
-      console.error('Briefing subscription error:', err);
     }
   };
 
