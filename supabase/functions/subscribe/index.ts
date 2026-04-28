@@ -45,40 +45,65 @@ async function sendConfirmationEmail(resendApiKey: string, email: string, token:
       from: "The Briefing <newsletter@coinvestopedia.com>",
       to: email,
       subject: "Confirm your subscription to The Briefing",
-      html: `
+      html: \`
         <!DOCTYPE html>
         <html>
         <head>
           <meta charset="utf-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
           <style>
-            body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; margin: 0; padding: 0; background-color: #050505; color: #ffffff; }
-            .container { max-width: 600px; margin: 0 auto; padding: 60px 40px; background-color: #0a0a0a; border-radius: 24px; border: 1px solid rgba(255, 255, 255, 0.05); }
-            .logo { display: block; margin: 0 auto 40px; height: 80px; width: auto; }
-            .label { color: #10B981; font-size: 11px; font-weight: 800; letter-spacing: 0.25em; text-transform: uppercase; text-align: center; margin-bottom: 16px; }
-            h1 { font-size: 28px; font-weight: 700; text-align: center; margin: 0 0 24px; letter-spacing: -0.02em; color: #ffffff; }
-            p { font-size: 16px; line-height: 1.6; text-align: center; margin-bottom: 40px; color: #999999; }
+            body { font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; margin: 0; padding: 0; background-color: #000000; color: #ffffff; -webkit-font-smoothing: antialiased; }
+            .container { max-width: 600px; margin: 0 auto; background-color: #0a0a0a; border-radius: 16px; border: 1px solid #1a1a1a; overflow: hidden; }
+            .content { padding: 48px 40px; }
+            .logo-wrapper { text-align: center; margin-bottom: 40px; }
+            .logo { display: inline-block; max-width: 220px; height: auto; outline: none; border: none; text-decoration: none; }
+            .label { color: #10B981; font-size: 12px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; text-align: center; margin-bottom: 16px; }
+            h1 { font-size: 24px; font-weight: 600; text-align: center; margin: 0 0 16px; letter-spacing: -0.02em; color: #ffffff; }
+            p { font-size: 16px; line-height: 1.6; text-align: center; margin: 0 0 40px; color: #a1a1aa; }
             .btn-wrapper { text-align: center; }
-            .btn { background-color: #10B981; color: #000000; padding: 18px 40px; text-decoration: none; border-radius: 12px; font-weight: 700; font-size: 15px; display: inline-block; transition: all 0.2s ease; }
-            .footer { font-size: 12px; color: #444444; text-align: center; margin-top: 60px; letter-spacing: 0.1em; font-weight: 600; text-transform: uppercase; }
+            .btn { background-color: #10B981; color: #022C22 !important; padding: 16px 36px; text-decoration: none !important; border-radius: 8px; font-weight: 600; font-size: 15px; display: inline-block; transition: background-color 0.2s ease; }
+            .btn:hover { background-color: #059669; }
+            .divider { height: 1px; background-color: #1a1a1a; margin: 40px 0; }
+            .footer { font-size: 12px; color: #52525b; text-align: center; }
+            .footer p { margin: 0 0 8px; font-size: 12px; color: #52525b; text-align: center; }
           </style>
         </head>
-        <body>
-          <div style="padding: 40px 20px;">
-            <div class="container">
-              <img src="https://coinvestopedia.com/logo-transparent-dark-desktop.png" alt="Coinvestopedia" class="logo">
-              <div class="label">The Briefing</div>
-              <h1>Verify your access</h1>
-              <p>Thank you for requesting enrollment in our weekly research digest. Please confirm your email address to activate your access.</p>
-              <div class="btn-wrapper">
-                <a href="${confirmUrl}" class="btn">Confirm Subscription</a>
+        <body style="background-color: #000000; margin: 0; padding: 40px 20px;">
+          <!-- Fallback styles added directly to HTML elements for maximum email client compatibility -->
+          <div style="max-width: 600px; margin: 0 auto; background-color: #0a0a0a; border-radius: 16px; border: 1px solid #1a1a1a; overflow: hidden;">
+            <div style="padding: 48px 40px;">
+              
+              <!-- Logo -->
+              <div style="text-align: center; margin-bottom: 40px;">
+                <img src="https://coinvestopedia.com/logo-dark-new.png" alt="Coinvestopedia" style="display: inline-block; max-width: 220px; height: auto; outline: none; border: none; text-decoration: none;">
               </div>
-              <div class="footer">Coinvestopedia Intelligence</div>
+              
+              <!-- Content -->
+              <div style="text-align: center; margin-bottom: 16px;">
+                <span style="color: #10B981; font-size: 12px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase;">The Briefing</span>
+              </div>
+              <h1 style="font-size: 24px; font-weight: 600; text-align: center; margin: 0 0 16px; color: #ffffff; letter-spacing: -0.02em;">Verify your access</h1>
+              <p style="font-size: 16px; line-height: 1.6; text-align: center; margin: 0 0 40px; color: #a1a1aa;">Thank you for requesting enrollment in our weekly research digest. Please confirm your email address to activate your access.</p>
+              
+              <!-- CTA - Colors hardcoded to ensure it never renders blue -->
+              <div style="text-align: center;">
+                <a href="\${confirmUrl}" style="background-color: #10B981; color: #022C22; padding: 16px 36px; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 15px; display: inline-block;">Confirm Subscription</a>
+              </div>
+              
+              <!-- Divider -->
+              <div style="height: 1px; background-color: #1a1a1a; margin: 40px 0;"></div>
+              
+              <!-- Footer -->
+              <div style="font-size: 12px; color: #52525b; text-align: center;">
+                <p style="margin: 0 0 8px; font-size: 12px; color: #52525b; text-align: center;">Coinvestopedia Intelligence</p>
+                <p style="margin: 0; font-size: 12px; color: #52525b; text-align: center;">If you didn't request this, you can safely ignore this email.</p>
+              </div>
+              
             </div>
-            <p style="text-align: center; font-size: 12px; color: #333333; margin-top: 24px;">If you didn't request this, you can safely ignore this email.</p>
           </div>
         </body>
         </html>
-      `,
+      \`,
     }),
   });
   if (!res.ok) throw new Error(await res.text());
