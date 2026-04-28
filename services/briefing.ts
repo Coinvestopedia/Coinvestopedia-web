@@ -1,4 +1,4 @@
-const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL as string;
+const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL || 'https://ahuhejfqbefhkarwohta.supabase.co';
 
 interface SubscribeParams {
   email: string;
