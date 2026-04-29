@@ -197,10 +197,13 @@ export const Newsletter: React.FC<NewsletterProps> = ({ onNavigate }) => {
             <p className="text-xs text-text-muted/60 italic">
               Sample content for illustration purposes. Actual issues reflect current market conditions.
             </p>
-            <div className="flex items-center gap-1.5 text-primary text-sm font-semibold cursor-default">
+            <button 
+              onClick={() => document.getElementById('final-cta')?.scrollIntoView({ behavior: 'smooth' })}
+              className="flex items-center gap-1.5 text-primary text-sm font-semibold cursor-pointer hover:opacity-80 transition-opacity"
+            >
               <span>Subscribe to read full issues</span>
               <ArrowRight size={14} />
-            </div>
+            </button>
           </div>
         </Card>
       </section>
@@ -281,7 +284,7 @@ export const Newsletter: React.FC<NewsletterProps> = ({ onNavigate }) => {
       </section>
 
       {/* Final CTA */}
-      <section>
+      <section id="final-cta" className="scroll-mt-24">
         <div className="text-center">
           <h2 className="text-2xl lg:text-3xl font-bold mb-4">
             Stay Informed. Nothing More.
