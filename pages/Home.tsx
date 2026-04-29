@@ -9,6 +9,7 @@ import { MarketPulseDashboard } from '../components/MarketPulseDashboard';
 import { NewsletterSignup } from '../components/NewsletterSignup';
 import { Activity, Zap, BookOpen, Coins, BarChart3, Target, DollarSign, PieChart, Globe } from 'lucide-react';
 import { PageRoute } from '../types';
+import { AIMarketOverview } from '../components/AIMarketOverview';
 
 interface HomeProps {
   onNavigate?: (route: PageRoute) => void;
@@ -131,24 +132,24 @@ export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
               <Card 
                 key={i} 
                 variant="interactive" 
-                className="h-full flex flex-col w-full"
+                className="h-full flex flex-col items-center text-center w-full"
                 onClick={() => handleCardClick(PageRoute.MACRO_INTEL)}
               >
-                <div className="flex items-center gap-3 mb-4">
+                <div className="flex flex-col items-center gap-3 mb-4">
                   <div className="p-3 bg-primary/10 rounded-lg text-primary flex-shrink-0">
                     {m.icon}
                   </div>
-                  <h3 className="font-bold text-lg leading-tight break-words">{m.label}</h3>
+                  <h3 className="font-bold text-lg leading-tight">{m.label}</h3>
                 </div>
                 
                 <p className="text-text-muted text-sm mb-6 flex-grow break-words">
                   {m.description}
                 </p>
 
-                <div className="mb-6 bg-background/50 p-4 rounded-lg border border-border w-full overflow-hidden flex items-center justify-between">
-                   <span className="text-3xl font-bold font-mono tracking-tight text-text">{m.value}</span>
+                <div className="mb-6 bg-background/50 p-6 rounded-xl border border-border w-full flex flex-col items-center justify-center text-center group-hover:bg-background/80 transition-colors">
+                   <div className="text-4xl font-bold font-mono tracking-tight text-text mb-2 w-full text-center">{m.value}</div>
                    {m.change && (
-                     <div className={`flex items-center gap-1 font-bold px-3 py-1.5 rounded-full text-sm ${m.change.startsWith('+') ? 'bg-emerald-500/10 text-emerald-400' : 'bg-red-500/10 text-red-400'}`}>
+                     <div className={`flex items-center justify-center gap-1 font-bold px-3 py-1.5 rounded-full text-sm mx-auto ${m.change.startsWith('+') ? 'bg-emerald-500/10 text-emerald-400' : 'bg-red-500/10 text-red-400'}`}>
                        {m.change}
                      </div>
                    )}
@@ -161,6 +162,17 @@ export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
             ))}
           </div>
         )}
+      </section>
+      
+      {/* AI Market Overview - Mobile Only */}
+      <section className="lg:hidden">
+        <div className="flex items-center gap-2.5 mb-6">
+          <h2 className="text-2xl font-bold text-text">AI Market Overview</h2>
+          <span className="flex items-center gap-1 px-2 py-0.5 bg-primary/10 border border-primary/20 rounded-full text-[10px] text-primary font-bold">
+            INSIGHT
+          </span>
+        </div>
+        <AIMarketOverview />
       </section>
       
       {/* Market Pulse Section */}

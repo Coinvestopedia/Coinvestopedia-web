@@ -82,7 +82,7 @@ const PageHeader: React.FC = () => {
   };
 
   return (
-    <div className="leather-card relative overflow-hidden rounded-2xl p-8 lg:p-12 group">
+    <div className="leather-card relative overflow-hidden rounded-2xl p-6 lg:p-12 group">
       <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none group-hover:bg-primary/10 transition-colors duration-700" />
       <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-primary/50 to-transparent"></div>
       
@@ -396,7 +396,7 @@ const ExchangeProfilesSection: React.FC = () => {
   const sortedExchanges = useMemo(() => [...EXCHANGES].sort((a, b) => b.coinvestoAIScore - a.coinvestoAIScore), []);
 
   return (
-    <section id="exchange-profiles" className="scroll-mt-32">
+    <section id="exchange-profiles" className="scroll-mt-24">
       <div className="leather-card rounded-2xl p-6 lg:p-8 relative overflow-hidden group border-t-2 border-t-primary transition-all duration-500 hover:shadow-2xl hover:shadow-primary/5">
         {/* Pulse Background */}
         <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"></div>
@@ -489,7 +489,7 @@ const ComparisonTool: React.FC = () => {
   };
 
   return (
-    <section id="compare-tool" className="scroll-mt-32">
+    <section id="compare-tool" className="scroll-mt-24">
       <h2 className="text-xl font-bold mb-6 flex items-center gap-2">
         <span className="w-1.5 h-6 bg-primary rounded-sm inline-block"></span>
         Side-by-Side Comparison Tool
@@ -521,15 +521,15 @@ const ComparisonTool: React.FC = () => {
               <button
                 key={e.id}
                 onClick={() => toggleExchange(e.id)}
-                className={`w-full flex items-center justify-between p-3 rounded-lg text-sm hover:bg-background transition-colors ${
-                  selected.includes(e.id) ? 'text-primary' : 'text-text-muted'
+                className={`w-full flex items-center justify-between p-4 rounded-lg text-sm hover:bg-background transition-colors ${
+                  selected.includes(e.id) ? 'text-primary bg-primary/5' : 'text-text-muted'
                 }`}
                 disabled={!selected.includes(e.id) && selected.length >= 4}
               >
-                <span className="font-medium">{e.name}</span>
-                <div className="flex items-center gap-2">
-                  <span className={`text-xs font-bold ${scoreColor(e.coinvestoAIScore)}`}>{e.coinvestoAIScore}</span>
-                  {selected.includes(e.id) && <Check size={16} className="text-primary" />}
+                <span className="font-bold">{e.name}</span>
+                <div className="flex items-center gap-3">
+                  <span className={`text-xs font-bold font-mono ${scoreColor(e.coinvestoAIScore)}`}>{e.coinvestoAIScore}</span>
+                  {selected.includes(e.id) && <Check size={18} className="text-primary" />}
                 </div>
               </button>
             ))}
@@ -543,7 +543,14 @@ const ComparisonTool: React.FC = () => {
         <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"></div>
         <div className="absolute -right-20 -bottom-20 w-80 h-80 bg-primary/5 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-1000 pointer-events-none"></div>
 
-        <div className="overflow-x-auto relative z-10">
+        {selectedExchanges.length > 1 && (
+          <div className="md:hidden flex items-center justify-center gap-1.5 py-3 bg-surface/50 border-b border-border text-xs text-text-muted font-medium w-full relative z-10">
+            <ArrowLeftRight size={14} className="opacity-70" />
+            <span>Swipe horizontally to compare</span>
+          </div>
+        )}
+
+        <div className="overflow-x-auto relative z-10 custom-scrollbar">
           <table className="w-full min-w-[600px]">
             <thead>
               <tr className="border-b border-border bg-background/30">

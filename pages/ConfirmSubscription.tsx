@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { PageMeta } from '../components/PageMeta';
 import { Card } from '../components/Card';
 import { CheckCircle2, XCircle, Loader2, Mail, ArrowRight } from 'lucide-react';

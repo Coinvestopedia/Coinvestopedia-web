@@ -102,10 +102,10 @@ export const ExchangeCard: React.FC<ExchangeCardProps> = ({ exchange, rank }) =>
             </div>
           </div>
           
-          <div className="text-text-muted group-hover:text-primary transition-colors p-1 shrink-0 ml-auto md:ml-0">
+          <div className="text-text-muted group-hover:text-primary transition-colors p-2 shrink-0 ml-auto md:ml-0 flex items-center justify-center min-w-[44px] min-h-[44px]">
             <ChevronDown
-              size={20}
-              className={`transition-transform ${expanded ? 'rotate-180' : ''}`}
+              size={24}
+              className={`transition-transform duration-300 ${expanded ? 'rotate-180' : ''}`}
             />
           </div>
         </div>
@@ -143,7 +143,7 @@ export const ExchangeCard: React.FC<ExchangeCardProps> = ({ exchange, rank }) =>
                    { label: 'Perp Maker', value: formatFee(exchange.fees.perpMaker), status: getFeeStatus(exchange.fees.perpMaker, false, true) },
                    { label: 'Perp Taker', value: formatFee(exchange.fees.perpTaker), status: getFeeStatus(exchange.fees.perpTaker, true, true) }
                  ].map(item => (
-                   <div key={item.label} className="flex flex-col items-center justify-center p-2 bg-surface rounded-lg border border-border hover:border-primary/50 transition-colors cursor-default group/fee relative overflow-hidden">
+                    <div key={item.label} className="flex flex-col items-center justify-center p-3 bg-surface rounded-lg border border-border hover:border-primary/50 transition-colors cursor-default group/fee relative overflow-hidden min-h-[60px]">
                      {/* subtle background tint based on status */}
                      <div className={`absolute inset-0 opacity-0 group-hover/fee:opacity-5 transition-opacity ${item.status.indicator}`}></div>
                      <p className="text-[9px] text-text-muted font-bold uppercase mb-1 relative z-10">{item.label}</p>
@@ -171,22 +171,22 @@ export const ExchangeCard: React.FC<ExchangeCardProps> = ({ exchange, rank }) =>
                        <span className="leading-tight">{pro}</span>
                      </li>
                    ))}
-                   {exchange.pros.length > 3 && !expandedPros && (
-                     <li 
-                       className="text-[10px] text-primary italic ml-4 cursor-pointer hover:underline"
-                       onClick={() => setExpandedPros(true)}
-                     >
-                       + {exchange.pros.length - 3} more
-                     </li>
-                   )}
-                   {exchange.pros.length > 3 && expandedPros && (
-                     <li 
-                       className="text-[10px] text-text-muted italic ml-4 cursor-pointer hover:underline"
-                       onClick={() => setExpandedPros(false)}
-                     >
-                       Show less
-                     </li>
-                   )}
+                    {exchange.pros.length > 3 && !expandedPros && (
+                      <li 
+                        className="text-xs text-primary font-bold italic ml-4 py-2 cursor-pointer hover:underline"
+                        onClick={(e) => { e.stopPropagation(); setExpandedPros(true); }}
+                      >
+                        + {exchange.pros.length - 3} more
+                      </li>
+                    )}
+                    {exchange.pros.length > 3 && expandedPros && (
+                      <li 
+                        className="text-xs text-text-muted font-bold italic ml-4 py-2 cursor-pointer hover:underline"
+                        onClick={(e) => { e.stopPropagation(); setExpandedPros(false); }}
+                      >
+                        Show less
+                      </li>
+                    )}
                  </ul>
                </div>
                <div>
@@ -202,16 +202,16 @@ export const ExchangeCard: React.FC<ExchangeCardProps> = ({ exchange, rank }) =>
                    ))}
                    {exchange.cons.length > 3 && !expandedCons && (
                      <li 
-                       className="text-[10px] text-primary italic ml-4 cursor-pointer hover:underline"
-                       onClick={() => setExpandedCons(true)}
+                       className="text-xs text-primary font-bold italic ml-4 py-2 cursor-pointer hover:underline"
+                       onClick={(e) => { e.stopPropagation(); setExpandedCons(true); }}
                      >
                        + {exchange.cons.length - 3} more
                      </li>
                    )}
                    {exchange.cons.length > 3 && expandedCons && (
                      <li 
-                       className="text-[10px] text-text-muted italic ml-4 cursor-pointer hover:underline"
-                       onClick={() => setExpandedCons(false)}
+                       className="text-xs text-text-muted font-bold italic ml-4 py-2 cursor-pointer hover:underline"
+                       onClick={(e) => { e.stopPropagation(); setExpandedCons(false); }}
                      >
                        Show less
                      </li>

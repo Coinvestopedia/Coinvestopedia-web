@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { ChevronLeft, ChevronRight, ChevronUp, ChevronDown, Database } from 'lucide-react';
 import { cn } from '../utils/helpers';
 
@@ -51,11 +51,66 @@ function TableComponent<T extends Record<string, any>>({
   ariaLabel,
   pagination = null,
 }: TableProps<T>) {
+  // Sorting and Pagination logic must come before effects that depend on sortedData
   const [sortKey, setSortKey] = useState<keyof T | string | null>(null);
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc');
-
   const [sortMessage, setSortMessage] = useState('');
   const [pageMessage, setPageMessage] = useState('');
+
+  let sortedData = [...data];
+  if (sortKey) {
+    sortedData.sort((a, b) => {
+      const aVal = (a as any)[sortKey as any];
+      const bVal = (b as any)[sortKey as any];
+
+      if (aVal < bVal) return sortOrder === 'asc' ? -1 : 1;
+      if (aVal > bVal) return sortOrder === 'asc' ? 1 : -1;
+      return 0;
+    });
+  }
+
+  const hasPagination = !!pagination;
+  const isServerSide = typeof pagination?.totalItems === 'number';
+  const defaultPageSize = pagination?.defaultPageSize ?? (pagination?.pageSizeOptions && pagination?.pageSizeOptions.length ? pagination.pageSizeOptions[0] : 10);
+  const [pageSize, setPageSize] = useState<number>(defaultPageSize || 10);
+  const [currentPage, setCurrentPage] = useState<number>(1);
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [pageSize]);
+
+  const totalRows = isServerSide ? (pagination?.totalItems || 0) : sortedData.length;
+  const visibleStart = hasPagination ? (currentPage - 1) * pageSize + 1 : 1;
+  const visibleEnd = hasPagination ? Math.min(visibleStart + pageSize - 1, totalRows) : totalRows;
+  const totalPages = hasPagination ? Math.max(1, Math.ceil(totalRows / pageSize)) : 1;
+
+  if (hasPagination && !isServerSide) {
+    const start = (currentPage - 1) * pageSize;
+    sortedData = sortedData.slice(start, start + pageSize);
+  }
+
+  const containerRef = React.useRef<HTMLDivElement>(null);
+  const [scrollState, setScrollState] = useState({ left: false, right: false });
+
+  const checkScroll = useCallback(() => {
+    const el = containerRef.current;
+    if (!el) return;
+    const hasLeft = el.scrollLeft > 10;
+    const hasRight = el.scrollLeft < el.scrollWidth - el.clientWidth - 10;
+    setScrollState({ left: hasLeft, right: hasRight });
+  }, []);
+
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+    el.addEventListener('scroll', checkScroll);
+    checkScroll();
+    window.addEventListener('resize', checkScroll);
+    return () => {
+      el.removeEventListener('scroll', checkScroll);
+      window.removeEventListener('resize', checkScroll);
+    };
+  }, [checkScroll, sortedData]);
 
   const handleSort = (key: keyof T | string) => {
     if (sortKey === key) {
@@ -71,44 +126,6 @@ function TableComponent<T extends Record<string, any>>({
     const readableColumn = columns.find(c => c.key === sortKey)?.label || String(sortKey);
     setSortMessage(`Sorted by ${readableColumn}, ${sortOrder === 'asc' ? 'ascending' : 'descending'}`);
   }, [sortKey, sortOrder, columns]);
-
-  let sortedData = [...data];
-  if (sortKey) {
-    sortedData.sort((a, b) => {
-      // Allow virtual keys (useful for numeric keys or derived values)
-      const aVal = (a as any)[sortKey as any];
-      const bVal = (b as any)[sortKey as any];
-
-      if (aVal < bVal) return sortOrder === 'asc' ? -1 : 1;
-      if (aVal > bVal) return sortOrder === 'asc' ? 1 : -1;
-      return 0;
-    });
-  }
-
-  // Pagination
-  const hasPagination = !!pagination;
-  const isServerSide = typeof pagination?.totalItems === 'number';
-  
-  const defaultPageSize = pagination?.defaultPageSize ?? (pagination?.pageSizeOptions && pagination?.pageSizeOptions.length ? pagination.pageSizeOptions[0] : 10);
-  const [pageSize, setPageSize] = useState<number>(defaultPageSize || 10);
-  const [currentPage, setCurrentPage] = useState<number>(1);
-
-  // If page size changes, reset to page 1
-  useEffect(() => {
-    setCurrentPage(1);
-  }, [pageSize]);
-
-  const totalRows = isServerSide ? (pagination?.totalItems || 0) : sortedData.length;
-  
-  const visibleStart = hasPagination ? (currentPage - 1) * pageSize + 1 : 1;
-  const visibleEnd = hasPagination ? Math.min(visibleStart + pageSize - 1, totalRows) : totalRows;
-  const totalPages = hasPagination ? Math.max(1, Math.ceil(totalRows / pageSize)) : 1;
-  
-  // Slice data only if client-side pagination
-  if (hasPagination && !isServerSide) {
-    const start = (currentPage - 1) * pageSize;
-    sortedData = sortedData.slice(start, start + pageSize);
-  }
 
   useEffect(() => {
     if (!hasPagination) return;
@@ -179,7 +196,27 @@ function TableComponent<T extends Record<string, any>>({
   }
 
   return (
-    <div className={cn('w-full overflow-x-auto rounded-lg border border-border', className)} role="table" aria-label={ariaLabel || className || 'Data table'}>
+    <div className={cn('relative w-full group/table', className)}>
+      {/* Scroll Shadows */}
+      <div 
+        className={cn(
+          "absolute left-0 top-0 bottom-0 w-8 pointer-events-none z-20 transition-opacity duration-300 bg-gradient-to-r from-background/80 to-transparent",
+          scrollState.left ? "opacity-100" : "opacity-0"
+        )}
+      />
+      <div 
+        className={cn(
+          "absolute right-0 top-0 bottom-0 w-8 pointer-events-none z-20 transition-opacity duration-300 bg-gradient-to-l from-background/80 to-transparent",
+          scrollState.right ? "opacity-100" : "opacity-0"
+        )}
+      />
+
+      <div 
+        ref={containerRef}
+        className="w-full overflow-x-auto rounded-lg border border-border scrollbar-hide" 
+        role="table" 
+        aria-label={ariaLabel || className || 'Data table'}
+      >
       <div className="min-w-full inline-block align-middle">
         <table className="w-full">
           <thead>
@@ -203,7 +240,7 @@ function TableComponent<T extends Record<string, any>>({
                 >
                   {sortable ? (
                     <button
-                      className={cn('flex items-center gap-2 w-full text-left', getResponsiveClass(column))}
+                      className={cn('flex items-center gap-2 w-full text-left py-2 px-1 min-h-[44px]', getResponsiveClass(column))}
                       onClick={() => sortable && handleSort(column.key)}
                       aria-label={`Sort by ${column.label}`}
                       aria-pressed={sortKey === column.key}
@@ -276,6 +313,7 @@ function TableComponent<T extends Record<string, any>>({
         {/* Announce sorting changes and page changes for screen readers */}
         <div className="sr-only" role="status" aria-live="polite">{sortMessage}</div>
         <div className="sr-only" role="status" aria-live="polite">{pageMessage}</div>
+        </div>
       </div>
       <div className="px-4 py-3 border-t border-border bg-surface/50 text-xs text-text-muted flex justify-between items-center gap-4">
         <div className="flex items-center gap-4">
@@ -286,8 +324,17 @@ function TableComponent<T extends Record<string, any>>({
           )}
         </div>
         <div className="flex items-center gap-4">
-          <span className="hidden sm:inline">Scroll horizontally for more columns →</span>
-          <span className="sm:hidden">Swipe → for more</span>
+          <div className={cn(
+            "flex items-center gap-1.5 transition-opacity duration-300",
+            (scrollState.left || scrollState.right) ? "opacity-100" : "opacity-0"
+          )}>
+            <div className="flex gap-0.5">
+              <div className={cn("w-1.5 h-1.5 rounded-full transition-colors", scrollState.left ? "bg-primary" : "bg-border")} />
+              <div className={cn("w-1.5 h-1.5 rounded-full transition-colors", scrollState.right ? "bg-primary" : "bg-border")} />
+            </div>
+            <span className="hidden sm:inline">Scroll for columns</span>
+            <span className="sm:hidden">Swipe for more</span>
+          </div>
         </div>
       </div>
 
@@ -299,9 +346,9 @@ function TableComponent<T extends Record<string, any>>({
               onClick={handlePrevPage}
               disabled={currentPage === 1}
               aria-label="Previous page"
-              className={cn('p-2 rounded-md', currentPage === 1 ? 'opacity-50 cursor-not-allowed' : 'hover:bg-surface/60')}
+              className={cn('p-3 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-lg transition-colors', currentPage === 1 ? 'opacity-30 cursor-not-allowed' : 'hover:bg-surface/60 active:bg-primary/20')}
             >
-              <ChevronLeft size={16} />
+              <ChevronLeft size={20} />
             </button>
             <div className="text-xs">
               Page {currentPage} of {totalPages}
@@ -310,9 +357,9 @@ function TableComponent<T extends Record<string, any>>({
               onClick={handleNextPage}
               disabled={currentPage === totalPages}
               aria-label="Next page"
-              className={cn('p-2 rounded-md', currentPage === totalPages ? 'opacity-50 cursor-not-allowed' : 'hover:bg-surface/60')}
+              className={cn('p-3 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-lg transition-colors', currentPage === totalPages ? 'opacity-30 cursor-not-allowed' : 'hover:bg-surface/60 active:bg-primary/20')}
             >
-              <ChevronRight size={16} />
+              <ChevronRight size={20} />
             </button>
           </div>
 

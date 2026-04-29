@@ -14,11 +14,12 @@ import { LivePrice } from '../components/LivePrice';
 
 import { useAppContext } from '../context/AppContext';
 import { PageRoute } from '../types';
+import { MobilePageCategories } from '../components/MobilePageCategories';
 
 
 // ─── TYPES ────────────────────────────────────────────────────────────────────
 
-type MacroTab = 'weekly' | 'geopolitical' | 'cross-market' | 'institutional' | 'archive';
+type MacroTab = 'all' | 'weekly' | 'geopolitical' | 'cross-market' | 'institutional' | 'archive';
 
 interface ReportSection {
   icon: React.ReactNode;
@@ -43,6 +44,7 @@ interface MacroReport {
 // ─── TABS ─────────────────────────────────────────────────────────────────────
 
 const TABS: { id: MacroTab; label: string; icon: React.ReactNode; isPro?: boolean }[] = [
+  { id: 'all', label: 'All Intel', icon: <Layers size={16} /> },
   { id: 'weekly', label: 'Weekly Briefing', icon: <Zap size={16} /> },
   { id: 'geopolitical', label: 'Geopolitical Decoder', icon: <Globe size={16} /> },
   { id: 'cross-market', label: 'Cross-Market', icon: <BarChart3 size={16} /> },
@@ -1662,11 +1664,11 @@ export interface MacroIntelProps {
 
 export const MacroIntel: React.FC<MacroIntelProps> = ({ onNavigate }) => {
   const [activeReportId, setActiveReportId] = useState<string | null>(null);
-  const [activeTab, setActiveTab] = useState<MacroTab>('weekly');
+  const [activeTab, setActiveTab] = useState<MacroTab>('all');
 
   const { setActiveSubMenu, setPageCategories, activeSubMenu } = useAppContext();
   const activeReport = REPORTS.find(r => r.id === activeReportId);
-  const filteredReports = REPORTS ? REPORTS.filter(r => r.tab === activeTab) : [];
+  const filteredReports = REPORTS ? REPORTS.filter(r => activeTab === 'all' ? true : r.tab === activeTab) : [];
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -1716,6 +1718,15 @@ export const MacroIntel: React.FC<MacroIntelProps> = ({ onNavigate }) => {
       />
 
 
+
+        {/* Back Button for Mobile */}
+        <button 
+          onClick={() => setActiveReportId(null)}
+          className="flex items-center gap-2 text-primary font-bold text-sm mb-8 group lg:hidden"
+        >
+          <Zap size={16} className="rotate-180" />
+          <span>Back to Intel List</span>
+        </button>
 
         {/* Report Header */}
         <div className="mb-10">
@@ -1805,8 +1816,8 @@ export const MacroIntel: React.FC<MacroIntelProps> = ({ onNavigate }) => {
 
 
 
-      {/* On-Page Navigation handled by global component */}
-      <div className="h-4" /> {/* Spacer */}
+      {/* On-Page Navigation for Mobile */}
+      <MobilePageCategories />
 
       {/* Reports Grid */}
       {filteredReports.length > 0 ? (

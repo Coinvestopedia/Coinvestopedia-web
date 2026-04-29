@@ -68,7 +68,7 @@ export const CryptoNewsFeed: React.FC = () => {
                 href={article.link}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group block py-2.5 border-b border-border/30 last:border-b-0 hover:bg-primary/5 -mx-1 px-1 rounded transition-colors"
+                className="group block py-4 border-b border-border/30 last:border-b-0 hover:bg-primary/5 -mx-2 px-2 rounded-xl transition-colors"
               >
                 {/* Source icon + Time row — matches TradingView's layout */}
                 <div className="flex items-center gap-1.5 mb-1.5">
@@ -98,7 +98,7 @@ export const CryptoNewsFeed: React.FC = () => {
         <div className="border-t border-border/30 flex-shrink-0">
           <button
             onClick={() => setExpanded(!expanded)}
-            className="w-full py-2.5 flex items-center justify-center gap-2 text-xs font-bold text-primary hover:bg-surface/50 transition-colors"
+            className="w-full py-4 flex items-center justify-center gap-2 text-xs font-bold text-primary hover:bg-surface/50 transition-colors uppercase tracking-widest"
           >
             {expanded ? (
               <><ChevronUp size={14} /> Show Less</>

@@ -9,6 +9,7 @@ import { TargetIcon } from '../components/AnimatedIcons';
 import { PageRoute } from '../types';
 
 import { useAppContext } from '../context/AppContext';
+import { MobilePageCategories } from '../components/MobilePageCategories';
 
 
 // --- Types & Data ---
@@ -164,6 +165,8 @@ export const Learn: React.FC<LearnProps> = ({ onNavigate }) => {
           <p className="text-text-muted text-lg max-w-3xl">{category.desc}</p>
         </div>
 
+        <MobilePageCategories />
+
         <div className="space-y-4">
           <h2 className="text-xl font-bold mb-4">Course Material ({category.resources.length})</h2>
           {category.resources.map(resource => (
@@ -233,6 +236,8 @@ export const Learn: React.FC<LearnProps> = ({ onNavigate }) => {
           </p>
         </div>
       </section>
+
+      <MobilePageCategories />
 
 
       {/* Research & Reports CTA */}

@@ -59,6 +59,15 @@
     background: rgba(var(--c-text-muted), 0.5); 
   }
 
+  /* Utility to hide scrollbar but keep scrollability */
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .hide-scrollbar {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+
   /* Mesh Gradient Animation for Hero */
   .hero-mesh::before {
     content: '';

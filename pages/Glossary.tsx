@@ -649,7 +649,7 @@ export const Glossary: React.FC<GlossaryProps> = ({ onNavigate }) => {
     setActiveLetter(letter);
     const ref = sectionRefs.current[letter];
     if (ref) {
-      const headerOffset = 200;
+      const headerOffset = 120; // Adjusted for 64px header + 56px navigator
       const top = ref.getBoundingClientRect().top + window.scrollY - headerOffset;
       window.scrollTo({ top, behavior: 'smooth' });
     }
@@ -671,7 +671,7 @@ export const Glossary: React.FC<GlossaryProps> = ({ onNavigate }) => {
       setTimeout(() => {
         const ref = termRefs.current[term];
         if (ref) {
-          const headerOffset = 200;
+          const headerOffset = 120; // Adjusted for 64px header + 56px navigator
           const top = ref.getBoundingClientRect().top + window.scrollY - headerOffset;
           window.scrollTo({ top, behavior: 'smooth' });
 
@@ -752,23 +752,29 @@ export const Glossary: React.FC<GlossaryProps> = ({ onNavigate }) => {
         </p>
       </div>
 
-      {/* ── Smart Search Bar ── */}
-      <SmartSearch
-        searchQuery={searchQuery}
-        onSearchChange={setSearchQuery}
-        onSelectTerm={handleSelectTerm}
-      />
+      {/* ── Sticky Search & Navigation ── */}
+      <div className="sticky top-16 lg:top-[100px] z-30 bg-background/95 backdrop-blur-xl border-b border-border/50 pt-4 pb-2 -mx-4 px-4 sm:-mx-6 sm:px-6 mb-6 shadow-sm flex flex-col gap-4">
+        
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+          {/* ── Smart Search Bar ── */}
+          <div className="flex-1 w-full max-w-xl">
+            <SmartSearch
+              searchQuery={searchQuery}
+              onSearchChange={setSearchQuery}
+              onSelectTerm={handleSelectTerm}
+            />
+          </div>
+          
+          {/* ── Search Results Count ── */}
+          {searchQuery && (
+            <p className="text-sm text-text-muted flex-shrink-0">
+              Showing <span className="text-primary font-bold">{filteredCount}</span> of {TOTAL_ENTRIES} terms
+            </p>
+          )}
+        </div>
 
-      {/* ── Search Results Count ── */}
-      {searchQuery && (
-        <p className="text-sm text-text-muted">
-          Showing <span className="text-primary font-bold">{filteredCount}</span> of {TOTAL_ENTRIES} terms
-        </p>
-      )}
-
-      {/* ── Alphabet Navigator ── */}
-      <div className="sticky top-[80px] lg:top-[100px] z-30 py-3 bg-background/80 backdrop-blur-md border-b border-border/50 -mx-1">
-        <div className="flex flex-wrap gap-1 justify-center px-1">
+        {/* ── Alphabet Navigator ── */}
+        <div className="flex flex-nowrap overflow-x-auto pb-2 scrollbar-hide -mx-2 px-2 gap-1.5 lg:flex-wrap lg:justify-center lg:overflow-visible lg:pb-0">
           {ALL_LETTERS.map(letter => {
             const hasResults = filteredSections.some(s => s.letter === letter);
             return (
@@ -777,7 +783,7 @@ export const Glossary: React.FC<GlossaryProps> = ({ onNavigate }) => {
                 onClick={() => hasResults && scrollToLetter(letter)}
                 disabled={!hasResults}
                 className={`
-                  w-9 h-9 rounded-lg text-sm font-bold transition-colors transition-transform transform-gpu duration-200 flex items-center justify-center
+                  flex-shrink-0 w-8 h-8 lg:w-9 lg:h-9 rounded-lg text-xs lg:text-sm font-bold transition-colors transition-transform transform-gpu duration-200 flex items-center justify-center
                   ${activeLetter === letter
                     ? 'bg-primary text-background shadow-lg shadow-primary/30 scale-110'
                     : hasResults

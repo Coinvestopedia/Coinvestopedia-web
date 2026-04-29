@@ -13,6 +13,7 @@ import { AllocationPanel } from '../components/compare/AllocationPanel';
 import { CorrelationHeatmap } from '../components/compare/CorrelationHeatmap';
 import { AnalystPanel } from '../components/compare/AnalystPanel';
 import { CompareChart } from '../components/compare/CompareChart';
+import { MobilePageCategories } from '../components/MobilePageCategories';
 
 
 // Icons
@@ -81,7 +82,9 @@ export const Compare: React.FC<CompareProps> = ({ onNavigate }) => {
       
       {/* ─── HERO SECTION (Standardized Design) ─────────────── */}
       <div className="relative z-30 rounded-2xl lg:rounded-3xl border border-border bg-gradient-to-br from-background to-surface p-8 lg:p-16">
-        <div className="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full -translate-y-48 translate-x-48 blur-3xl pointer-events-none"></div>
+        <div className="absolute inset-0 overflow-hidden rounded-2xl lg:rounded-3xl pointer-events-none">
+          <div className="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full -translate-y-48 translate-x-48 blur-3xl"></div>
+        </div>
         
         <div className="relative z-10">
           {/* Title area */}
@@ -117,27 +120,8 @@ export const Compare: React.FC<CompareProps> = ({ onNavigate }) => {
 
 
 
-      {/* ─── TABS & NAVIGATION ─────────────────────────────────────────────── */}
-      <div className="flex lg:hidden overflow-x-auto scrollbar-hide gap-2 md:gap-3 pb-2 scroll-smooth">
-        {tabs.map(tab => {
-          const isActive = activeTab === tab.id;
-          const Icon = tab.icon;
-          return (
-            <button
-              key={tab.id}
-              onClick={() => setActiveTab(tab.id)}
-              className={`flex items-center justify-center gap-2 px-6 py-3.5 text-sm font-bold rounded-xl border transition-colors transition-shadow transform-gpu duration-300 whitespace-nowrap shrink-0
-                ${isActive 
-                  ? 'border-primary/50 text-primary bg-primary/10 shadow-[0_0_15px_rgba(255,215,0,0.1)]' 
-                  : 'border-border text-text-muted hover:text-text hover:bg-surface hover:border-primary/30'
-                }`}
-            >
-              <Icon size={16} className={isActive ? 'text-primary' : 'text-text-muted'} />
-              <span>{tab.label}</span>
-            </button>
-          );
-        })}
-      </div>
+      {/* ─── TABS & NAVIGATION (Mobile) ─────────────────────────────────────────────── */}
+      <MobilePageCategories />
 
       {/* ─── TAB CONTENT PANELS ────────────────────────────────────────────── */}
       <div className="min-h-[500px]">

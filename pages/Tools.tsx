@@ -7,6 +7,7 @@ import {
   LineChart, Sparkles, Globe, Target, Calendar
 } from 'lucide-react';
 import { useAppContext } from '../context/AppContext';
+import { MobilePageCategories } from '../components/MobilePageCategories';
 
 
 // Existing Tools
@@ -149,6 +150,16 @@ export const Tools: React.FC<ToolsProps> = ({ onNavigate }) => {
 
 
         <div className="mb-8 border-b border-border pb-6">
+          <button 
+            onClick={handleBackToDashboard}
+            className="flex items-center gap-2 text-text-muted hover:text-primary transition-colors text-sm font-bold uppercase tracking-wider mb-6 group"
+          >
+            <div className="w-6 h-6 rounded-full border border-border flex items-center justify-center group-hover:border-primary/50 group-hover:bg-primary/10 transition-colors">
+              <span className="text-[10px]">←</span>
+            </div>
+            Back to Tools Dashboard
+          </button>
+
           <div className="flex items-center gap-3 text-xs font-bold uppercase tracking-wider text-text-muted mb-3">
              <span className="text-primary">{activeTool.category}</span>
              <span>•</span>
@@ -161,6 +172,8 @@ export const Tools: React.FC<ToolsProps> = ({ onNavigate }) => {
           </h1>
           <p className="text-text-muted text-lg">{activeTool.description}</p>
         </div>
+
+        <MobilePageCategories />
 
         {ActiveComponent ? <ActiveComponent /> : <PlaceholderTool tool={activeTool} />}
       </div>
@@ -200,6 +213,8 @@ export const Tools: React.FC<ToolsProps> = ({ onNavigate }) => {
           </p>
         </div>
       </section>
+
+      <MobilePageCategories />
 
 
 

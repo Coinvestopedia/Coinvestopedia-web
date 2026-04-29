@@ -91,10 +91,10 @@ export const SmartMoneyConfidenceWidget: React.FC = () => {
                e.stopPropagation();
                setShowTooltip(!showTooltip);
              }}
-             className={`w-8 h-8 rounded-full flex items-center justify-center transition-colors ${showTooltip ? 'bg-primary text-background' : 'bg-surface border border-border text-text-muted hover:text-text'}`}
+             className={`w-11 h-11 rounded-full flex items-center justify-center transition-colors ${showTooltip ? 'bg-primary text-background' : 'bg-surface border border-border text-text-muted hover:text-text'}`}
              aria-label="More information"
            >
-             <Info size={16} />
+             <Info size={18} />
            </button>
            
            <AnimatePresence>
@@ -118,7 +118,7 @@ export const SmartMoneyConfidenceWidget: React.FC = () => {
                   </ul>
                   <button 
                     onClick={() => setShowTooltip(false)}
-                    className="mt-3 w-full py-1.5 bg-primary/10 hover:bg-primary/20 text-primary font-bold rounded-lg transition-colors"
+                    className="mt-4 w-full py-3 bg-primary/10 hover:bg-primary/20 text-primary font-bold rounded-lg transition-colors text-xs uppercase tracking-wider"
                   >
                     Close
                   </button>

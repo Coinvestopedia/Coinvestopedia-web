@@ -142,14 +142,16 @@ const MarketInsights: React.FC<{ onNavigate?: (route: PageRoute) => void }> = ({
             </span>
             
             {/* Progress dots */}
-            <div className="flex items-center gap-1.5" onClick={(e) => e.stopPropagation()}>
+            <div className="flex items-center gap-2" onClick={(e) => e.stopPropagation()}>
               {ARTICLES.map((_, idx) => (
                 <button 
                   key={idx}
                   onClick={() => setCurrentIndex(idx)}
-                  className={`h-1 rounded-full transition-colors transition-[width] duration-300 ${idx === currentIndex ? 'w-4 bg-primary' : 'w-1 bg-border hover:bg-white/30'}`}
+                  className="group relative h-6 w-4 flex items-center justify-center focus:outline-none"
                   aria-label={`Go to insight ${idx + 1}`}
-                />
+                >
+                  <span className={`h-1.5 rounded-full transition-all duration-300 ${idx === currentIndex ? 'w-4 bg-primary' : 'w-1.5 bg-border group-hover:bg-white/30'}`} />
+                </button>
               ))}
             </div>
           </div>
@@ -195,26 +197,26 @@ const SectorPerformanceCard: React.FC = () => {
       </div>
       
       {sectors.length === 0 ? (
-        <div className="grid grid-cols-2 gap-3 animate-pulse flex-1">
+        <div className="flex md:grid overflow-x-auto md:overflow-x-visible md:grid-cols-2 gap-3 animate-pulse flex-1 snap-x snap-mandatory pb-2 md:pb-0">
           {[1,2,3,4,5,6,7,8].map(i => (
-            <div key={i} className="h-20 bg-surface/50 rounded-xl"></div>
+            <div key={i} className="min-w-[140px] md:min-w-0 snap-center h-20 bg-surface/50 rounded-xl"></div>
           ))}
         </div>
       ) : (
-        <div className="grid grid-cols-2 gap-3 flex-1 overflow-y-auto pr-1 custom-scrollbar">
+        <div className="flex overflow-x-auto md:grid md:grid-cols-2 gap-3 flex-1 overflow-y-auto pr-1 pb-2 md:pb-0 custom-scrollbar snap-x snap-mandatory hide-scrollbar">
           {sectors.map(s => {
             const change = s.market_cap_change_24h || 0;
             const isUp = change >= 0;
             return (
               <div 
                 key={s.id} 
-                className={`p-4 rounded-xl flex flex-col items-center justify-center text-center transition-colors border
+                className={`min-w-[140px] md:min-w-0 snap-center p-4 rounded-xl flex flex-col items-center justify-center text-center transition-colors border
                   ${isUp 
                     ? 'bg-emerald-500/5 border-emerald-500/10 hover:bg-emerald-500/10' 
                     : 'bg-red-500/5 border-red-500/10 hover:bg-red-500/10'}
                 `}
               >
-                <span className="text-[10px] font-bold text-text-muted uppercase tracking-wider mb-2 opacity-80">
+                <span className="text-[10px] font-bold text-text-muted uppercase tracking-wider mb-2 opacity-80 whitespace-nowrap overflow-hidden text-ellipsis w-full">
                   {s.name.replace(' Ecosystem', '').replace(' Platform', '')}
                 </span>
                 <span className={`text-lg font-bold font-mono ${isUp ? 'text-emerald-400' : 'text-red-400'}`}>
@@ -232,6 +234,8 @@ const SectorPerformanceCard: React.FC = () => {
 // ─── MAIN EXPORT ──────────────────────────────────────────────────────────────
 
 export const MarketPulseDashboard: React.FC<{ onNavigate?: (route: PageRoute) => void }> = ({ onNavigate }) => {
+  const [activeTimeline, setActiveTimeline] = useState<'global' | 'crypto'>('global');
+
   return (
     <div className="space-y-6">
       {/* Section Header */}
@@ -256,34 +260,52 @@ export const MarketPulseDashboard: React.FC<{ onNavigate?: (route: PageRoute) =>
       {/* Row 2: Intelligence Cards Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
         {/* Top: Smart Money Confidence (Full Width) */}
-        <div className="md:col-span-2">
+        <div className="md:col-span-2 order-1">
           <SmartMoneyConfidenceWidget />
         </div>
 
-        {/* Left: Sector Performance (Tall) */}
-        <div className="flex flex-col">
-          <SectorPerformanceCard />
-        </div>
-
-        {/* Right: Fear & Greed + Market Performance (Stacked) */}
-        <div className="flex flex-col gap-5">
+        {/* Fear & Greed + Market Performance (Stacked) - Priority 2 on Mobile */}
+        <div className="flex flex-col gap-5 order-2">
           <FearGreedGauge />
           <MarketInsights onNavigate={onNavigate} />
+        </div>
+
+        {/* Sector Performance (Detailed) - Priority 3 on Mobile */}
+        <div className="flex flex-col order-3">
+          <SectorPerformanceCard />
         </div>
       </div>
 
       {/* Row 4: Dual Market Timelines */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
-        <div className="h-[500px] flex flex-col">
-          <h3 className="text-lg font-bold mb-3 flex items-center gap-2"><Globe size={18} className="text-primary"/> Global Market Timeline</h3>
-          <div className="flex-1">
-            <TradingViewTimelineNews />
-          </div>
+      <div className="flex flex-col gap-5">
+        {/* Mobile Tab Switcher */}
+        <div className="flex lg:hidden bg-surface border border-border p-1 rounded-xl">
+          <button 
+            onClick={() => setActiveTimeline('global')}
+            className={`flex-1 flex items-center justify-center gap-2 py-3 rounded-lg text-xs font-bold transition-all ${activeTimeline === 'global' ? 'bg-primary text-background' : 'text-text-muted hover:text-text'}`}
+          >
+            <Globe size={14} /> Global Timeline
+          </button>
+          <button 
+            onClick={() => setActiveTimeline('crypto')}
+            className={`flex-1 flex items-center justify-center gap-2 py-3 rounded-lg text-xs font-bold transition-all ${activeTimeline === 'crypto' ? 'bg-primary text-background' : 'text-text-muted hover:text-text'}`}
+          >
+            <Newspaper size={14} /> Crypto Timeline
+          </button>
         </div>
-        <div className="h-[500px] flex flex-col">
-          <h3 className="text-lg font-bold mb-3 flex items-center gap-2"><Newspaper size={18} className="text-primary"/> Crypto Market Timeline</h3>
-          <div className="flex-1 min-h-0">
-            <CryptoNewsFeed />
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
+          <div className={`h-[500px] flex flex-col ${activeTimeline !== 'global' ? 'hidden lg:flex' : 'flex'}`}>
+            <h3 className="text-lg font-bold mb-3 hidden lg:flex items-center gap-2"><Globe size={18} className="text-primary"/> Global Market Timeline</h3>
+            <div className="flex-1">
+              <TradingViewTimelineNews />
+            </div>
+          </div>
+          <div className={`h-[500px] flex flex-col ${activeTimeline !== 'crypto' ? 'hidden lg:flex' : 'flex'}`}>
+            <h3 className="text-lg font-bold mb-3 hidden lg:flex items-center gap-2"><Newspaper size={18} className="text-primary"/> Crypto Market Timeline</h3>
+            <div className="flex-1 min-h-0">
+              <CryptoNewsFeed />
+            </div>
           </div>
         </div>
       </div>

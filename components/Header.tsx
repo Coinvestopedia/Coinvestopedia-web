@@ -43,12 +43,13 @@ export const Header: React.FC<HeaderProps> = ({
 
 
   return (
-    <header className={`fixed top-0 left-0 right-0 z-50 transition-colors duration-200 h-[80px] lg:h-[100px] ${isMobileMenuOpen ? 'bg-background' : 'glass-nav'}`}>
-      <div className="max-w-container mx-auto px-6 h-full flex items-center justify-between xl:justify-start xl:gap-16">
+    <>
+      <header className={`fixed top-0 left-0 right-0 z-50 transition-colors duration-200 h-16 lg:h-[100px] ${isMobileMenuOpen ? 'bg-background' : 'glass-nav'}`}>
+      <div className="max-w-container mx-auto px-6 h-full flex items-center relative md:justify-between xl:justify-start xl:gap-16">
         
-        {/* Logo */}
+        {/* Logo - Centered on Mobile, Left-aligned on Desktop */}
         <div
-          className="flex items-center cursor-pointer group flex-shrink-0 py-1"
+          className="absolute left-1/2 -translate-x-1/2 md:relative md:left-auto md:translate-x-0 flex items-center cursor-pointer group flex-shrink-0 py-1 z-10"
           onClick={() => handleNavClick(PageRoute.HOME)}
         >
           {/* ── Desktop Logo ── */}
@@ -64,10 +65,10 @@ export const Header: React.FC<HeaderProps> = ({
           <img
             src="/logo-transparent-mobile.png"
             alt="Coinvestopedia"
-            width={64}
-            height={64}
+            width={48}
+            height={48}
             decoding="async"
-            className="h-16 w-auto object-contain transition-transform duration-200 group-hover:scale-105 block md:hidden"
+            className="h-12 w-auto object-contain transition-transform duration-200 group-hover:scale-105 block md:hidden"
           />
         </div>
 
@@ -108,79 +109,124 @@ export const Header: React.FC<HeaderProps> = ({
         </nav>
 
         {/* Actions */}
-        <div className="flex items-center gap-3 ml-auto">
-
-          
-          {/* Area kept empty for future social icons */}
-
-
+        <div className="flex items-center gap-3 ml-auto relative z-10">
           {/* Hamburger: Hidden on mobile (< md) because bottom nav exists. Visible on tablet (md-xl). Hidden on desktop (> xl). */}
           <button className="hidden md:block xl:hidden text-text p-2.5 min-w-[44px] min-h-[44px] flex items-center justify-center" onClick={() => onToggleMobileMenu(!isMobileMenuOpen)}>
             {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
       </div>
+    </header>
 
-      {/* Mobile Menu Overlay */}
+    {/* Mobile Side Drawer - Moved outside header tag to prevent clipping/flicker */}
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div 
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.2 }}
-            className="xl:hidden fixed inset-0 top-[80px] lg:top-[100px] bg-background/95 backdrop-blur-md z-40 overflow-y-auto pb-32 border-t border-border"
+            key="mobile-menu-backdrop"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => onToggleMobileMenu(false)}
+            className="xl:hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-[60]"
+          />
+        )}
+        
+        {isMobileMenuOpen && (
+          <motion.div 
+            key="mobile-menu-drawer"
+            initial={{ y: '100%' }}
+            animate={{ y: 0 }}
+            exit={{ y: '100%' }}
+            transition={{ type: 'spring', damping: 28, stiffness: 200 }}
+            className="xl:hidden fixed bottom-[68px] left-0 w-full bg-background border-t border-border/50 z-[70] flex flex-col shadow-[0_-8px_32px_rgba(0,0,0,0.6)] rounded-t-[32px] max-h-[85vh] overflow-hidden"
           >
-            <div className="p-6 flex flex-col gap-6">
-
-
-              <div className="flex flex-col gap-3">
-                 <h3 className="text-[10px] font-bold text-text-muted uppercase tracking-[0.2em] mb-2 px-1">Institutional Navigation</h3>
-                 
-                 {/* Featured Whale Radar in mobile */}
-                 {featuredLinks.map((link) => (
-                   <div 
-                     key={link.label}
-                     className={`group relative py-4 px-5 rounded-xl border transition-all duration-200 flex items-center justify-between overflow-hidden ${currentRoute === link.route ? 'border-primary bg-primary/10 shadow-[0_0_20px_rgba(16,185,129,0.1)]' : 'border-border/40 bg-surface/30 active:bg-surface/50'}`}
-                     onClick={() => handleNavClick(link.route)}
-                   >
-                     <div className="flex items-center gap-4 relative z-10">
-                        <span className={`text-lg font-bold tracking-tight ${currentRoute === link.route ? 'text-primary' : 'text-text'}`}>{link.label}</span>
-                     </div>
-
-                     <div className="relative z-10">
-                        <span className="text-[10px] bg-primary/10 text-primary px-2 py-0.5 rounded-full font-bold uppercase tracking-wider border border-primary/20">Featured</span>
-                     </div>
-                     
-                     {/* Decorative background element */}
-                     <div className="absolute top-0 right-0 w-32 h-full bg-gradient-to-l from-primary/5 to-transparent pointer-events-none" />
-                   </div>
-                 ))}
-                 
-                 <div className="grid grid-cols-1 gap-2 mt-2">
-                    {navLinks.map((link) => {
-                      const isActive = currentRoute === link.route;
-                      return (
-                        <div 
-                          key={link.label}
-                          className={`group py-4 px-5 rounded-xl border transition-all duration-200 flex items-center justify-between cursor-pointer ${isActive ? 'border-primary/40 bg-primary/5' : 'border-border/30 bg-surface/10 active:bg-surface/30'}`}
-                          onClick={() => handleNavClick(link.route)}
-                        >
-                          <span className={`text-base font-semibold tracking-tight transition-colors ${isActive ? 'text-primary' : 'text-text group-hover:text-primary'}`}>
-                            {link.label}
-                          </span>
-                          {isActive && (
-                            <div className="w-1.5 h-1.5 rounded-full bg-primary shadow-[0_0_8px_rgba(16,185,129,0.5)]" />
-                          )}
-                        </div>
-                      );
-                    })}
-                 </div>
+            <div className="w-full flex justify-center pt-4 pb-2">
+               <div className="w-12 h-1.5 bg-border rounded-full" />
+            </div>
+            <div className="flex items-center justify-between px-6 pb-4 border-b border-border/50">
+              <div className="flex items-center gap-2">
+                <img
+                  src="/logo-transparent-mobile.png"
+                  alt="Coinvestopedia"
+                  width={32}
+                  height={32}
+                  className="h-8 w-auto object-contain"
+                />
+                <span className="font-bold text-sm tracking-tight">Intelligence Portal</span>
               </div>
+              <button 
+                onClick={() => onToggleMobileMenu(false)}
+                className="p-1.5 text-text-muted hover:text-text bg-surface/80 rounded-full"
+              >
+                <X size={20} />
+              </button>
+            </div>
+
+            <div className="flex-1 overflow-y-auto p-6">
+              <div className="flex flex-col gap-8">
+                <div>
+                  <h3 className="text-[11px] font-black text-text-muted uppercase tracking-[0.2em] mb-4 px-1">Institutional Data</h3>
+                  
+                  {/* Featured Whale Radar */}
+                  {featuredLinks.map((link) => (
+                    <div 
+                      key={link.label}
+                      className={`group relative py-4 px-5 rounded-2xl border transition-all duration-300 flex items-center justify-between overflow-hidden mb-3 ${currentRoute === link.route ? 'border-primary bg-primary/10' : 'border-border/40 bg-surface/30 active:bg-surface/50'}`}
+                      onClick={() => handleNavClick(link.route)}
+                    >
+                      <div className="flex items-center gap-3 relative z-10">
+                         <span className="text-xl">{link.icon}</span>
+                         <span className={`text-lg font-bold tracking-tight ${currentRoute === link.route ? 'text-primary' : 'text-text'}`}>{link.label}</span>
+                      </div>
+
+                      <div className="relative z-10">
+                         <span className="text-[10px] bg-primary/10 text-primary px-2 py-0.5 rounded-full font-bold uppercase tracking-wider border border-primary/20">Active</span>
+                      </div>
+                      
+                      <div className="absolute top-0 right-0 w-32 h-full bg-gradient-to-l from-primary/5 to-transparent pointer-events-none" />
+                    </div>
+                  ))}
+                </div>
+                
+                <div>
+                  <h3 className="text-[11px] font-black text-text-muted uppercase tracking-[0.2em] mb-4 px-1">Global Research</h3>
+                  <div className="grid grid-cols-1 gap-2">
+                     {navLinks.map((link) => {
+                       const isActive = currentRoute === link.route;
+                       return (
+                         <div 
+                           key={link.label}
+                           className={`group py-3.5 px-5 rounded-xl border transition-all duration-300 flex items-center justify-between cursor-pointer ${isActive ? 'border-primary/40 bg-primary/5' : 'border-border/30 bg-surface/10 active:bg-surface/30'}`}
+                           onClick={() => handleNavClick(link.route)}
+                         >
+                           <span className={`text-base font-semibold tracking-tight transition-colors ${isActive ? 'text-primary' : 'text-text group-hover:text-primary'}`}>
+                             {link.label}
+                           </span>
+                           {isActive && (
+                             <div className="w-1.5 h-1.5 rounded-full bg-primary shadow-[0_0_8px_rgba(16,185,129,0.8)]" />
+                           )}
+                         </div>
+                       );
+                     })}
+                  </div>
+                </div>
+
+                <div className="mt-4 p-5 rounded-2xl bg-surface/20 border border-border/40">
+                  <p className="text-[11px] text-text-muted leading-relaxed font-medium">
+                    Coinvestopedia delivers high-fidelity institutional insights. Professional grade, zero noise.
+                  </p>
+                </div>
+              </div>
+            </div>
+            
+            <div className="p-6 border-t border-border/50 bg-surface/10">
+              <p className="text-[10px] text-text-muted text-center font-bold uppercase tracking-widest">
+                © 2026 Coinvestopedia Intelligence
+              </p>
             </div>
           </motion.div>
         )}
       </AnimatePresence>
-    </header>
+    </>
   );
 };

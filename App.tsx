@@ -2,6 +2,7 @@ import React, { useState, useCallback, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 import { Header } from './components/Header';
+import { MobileTabBar } from './components/MobileTabBar';
 import { DynamicSidebar } from './components/DynamicSidebar';
 import { SidebarRight } from './components/SidebarRight';
 import { Background } from './components/Background';
@@ -162,14 +163,6 @@ const AppContent: React.FC = () => {
     );
   };
 
-  const mobileNavItems = [
-    { label: 'Overview', route: PageRoute.HOME },
-    { label: 'Whale Tracker', route: PageRoute.WHALE },
-    { label: 'Calculators', route: PageRoute.TOOLS },
-  ];
-
-
-
   return (
     <div className="min-h-screen bg-background text-text font-body selection:bg-primary/30 relative">
       {/* Skip to main content — accessibility */}
@@ -193,7 +186,7 @@ const AppContent: React.FC = () => {
           Grid Layout Optimized (Restored 5-column): 
           160px Sidebar | 32px gap | 720px Content | 32px gap | 300px Sidebar 
         */}
-        <main id="main-content" tabIndex={-1} className="max-w-container mx-auto pt-[80px] lg:pt-[100px] px-6 pb-32 md:pb-24 outline-none">
+        <main id="main-content" tabIndex={-1} className="max-w-container mx-auto pt-16 lg:pt-[100px] px-6 pb-32 md:pb-24 outline-none">
           <div className="lg:grid lg:grid-cols-[160px_32px_1fr_32px_300px] lg:gap-0">
             
             {/* Col 1: Left Dynamic Sidebar */}
@@ -290,31 +283,13 @@ const AppContent: React.FC = () => {
           </div>
         </footer>
 
-        {/* Mobile Bottom Navigation: Locked to Bottom */}
-        <div className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-xl border-t border-white/5 pb-[env(safe-area-inset-bottom)]">
-          <div className="flex items-center justify-center h-[68px] px-2">
-            
-            {/* Menu Toggle Item */}
-            <button
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className={`flex flex-col items-center justify-center px-12 h-full gap-1 transition-all
-                ${isMobileMenuOpen ? 'text-primary' : 'text-text-muted active:text-text'}
-              `}
-            >
-              <div className={`flex flex-col items-center transition-transform duration-200 ${isMobileMenuOpen ? 'scale-110' : 'scale-100'}`}>
-                <div className={`grid grid-cols-2 gap-1 mb-1 ${isMobileMenuOpen ? 'text-primary' : 'text-text-muted'}`}>
-                  <div className="w-1.2 h-1.2 rounded-[1px] border-current border-[1.5px]" />
-                  <div className="w-1.2 h-1.2 rounded-[1px] border-current border-[1.5px]" />
-                  <div className="w-1.2 h-1.2 rounded-[1px] border-current border-[1.5px]" />
-                  <div className="w-1.2 h-1.2 rounded-[1px] border-current border-[1.5px]" />
-                </div>
-                <span className={`text-[9px] font-black uppercase tracking-[0.12em] ${isMobileMenuOpen ? 'opacity-100' : 'opacity-60'}`}>
-                  Menu
-                </span>
-              </div>
-            </button>
-          </div>
-        </div>
+        {/* Mobile Bottom Navigation */}
+        <MobileTabBar 
+          currentRoute={currentRoute}
+          onNavigate={handleNavigate}
+          isMenuOpen={isMobileMenuOpen}
+          onToggleMenu={setIsMobileMenuOpen}
+        />
 
         {/* Global Action Button: Invisible until scroll > 300px */}
         <ScrollToTop />

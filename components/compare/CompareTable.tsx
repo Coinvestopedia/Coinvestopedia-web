@@ -1,5 +1,5 @@
 import { AssetData } from '../../data/assetRegistry';
-import { AlertCircle } from 'lucide-react';
+import { AlertCircle, ArrowLeftRight } from 'lucide-react';
 import { ProGate } from '../ProGate';
 
 interface CompareTableProps {
@@ -39,8 +39,15 @@ export const CompareTable: React.FC<CompareTableProps> = ({ assets }) => {
 
 
   return (
-    <div className="animate-fade-in overflow-x-auto leather-card rounded-xl">
-      <table className="w-full text-sm text-left">
+    <div className="animate-fade-in leather-card rounded-xl overflow-hidden flex flex-col">
+      {assets.length > 1 && (
+        <div className="md:hidden flex items-center justify-center gap-1.5 py-2.5 bg-surface/50 border-b border-border text-xs text-text-muted font-medium w-full">
+          <ArrowLeftRight size={14} className="opacity-70" />
+          <span>Swipe horizontally to compare</span>
+        </div>
+      )}
+      <div className="overflow-x-auto custom-scrollbar">
+        <table className="w-full text-sm text-left">
         <thead className="bg-surface/50 border-b border-border">
           <tr>
             <th className="p-4 text-left font-bold text-text uppercase tracking-wider sticky left-0 bg-surface z-10 w-48">Asset</th>
@@ -209,6 +216,7 @@ export const CompareTable: React.FC<CompareTableProps> = ({ assets }) => {
            </tr>
          </tbody>
       </table>
+      </div>
     </div>
   );
 };
