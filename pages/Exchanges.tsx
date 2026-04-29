@@ -7,7 +7,7 @@ import { Button } from '../components/Button';
 import { useAppContext } from '../context/AppContext';
 import {
   Shield, ChevronDown, ChevronUp, Check, X as XIcon,
-  DollarSign, Globe, Server, Clock, Info, ArrowRight, Layers, Scale,
+  DollarSign, Globe, Server, Clock, Info, ArrowRight, ArrowLeftRight, Layers, Scale,
   Trophy, Building, Droplets, TrendingDown, Repeat, Lock, Coins,
   Briefcase, Users, Landmark, Wallet, Zap, Percent,
   CircleDollarSign, Copy, Smartphone, Activity, ShieldCheck
