@@ -601,12 +601,33 @@ const parseRSSXml = (xmlText: string, sourceName: string): RSSNewsItem[] => {
 };
 
 export const fetchCryptoRSSFeeds = async (): Promise<RSSNewsItem[]> => {
+  const CACHE_KEY = 'coinvestopedia_rss_feeds';
+  const TTL = 21600 * 1000; // 6 hours in ms
+
+  // Check cache first
+  let staleData: RSSNewsItem[] | null = null;
+  try {
+    const cached = localStorage.getItem(CACHE_KEY);
+    if (cached) {
+      const { timestamp, data } = JSON.parse(cached);
+      staleData = data;
+      if (Date.now() - timestamp < TTL) return data;
+    }
+  } catch (e) {
+    console.warn("RSS cache parse error:", e);
+  }
+
   try {
     const feedPromises = RSS_SOURCES.map(async (src) => {
       try {
         const response = await fetch(src.url);
         if (!response.ok) return [];
         const text = await response.text();
+        // Guard: if the response is HTML (SPA fallback), skip it
+        if (text.trimStart().startsWith('<!DOCTYPE') || text.trimStart().startsWith('<html')) {
+          console.warn(`RSS ${src.name} returned HTML instead of XML, skipping.`);
+          return [];
+        }
         return parseRSSXml(text, src.name);
       } catch {
         console.warn(`Failed to fetch RSS from ${src.name}`);
@@ -624,10 +645,19 @@ export const fetchCryptoRSSFeeds = async (): Promise<RSSNewsItem[]> => {
       return dateB - dateA;
     });
 
-    return merged.slice(0, 30); // Top 30 headlines
+    const result = merged.slice(0, 30); // Top 30 headlines
+
+    // Only cache if we got results
+    if (result.length > 0) {
+      localStorage.setItem(CACHE_KEY, JSON.stringify({ timestamp: Date.now(), data: result }));
+      return result;
+    }
+
+    // No fresh data — return stale if available
+    return staleData || [];
   } catch (error) {
     console.error('Error fetching RSS feeds:', error);
-    return [];
+    return staleData || [];
   }
 };
 

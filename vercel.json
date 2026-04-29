@@ -73,7 +73,7 @@
       "destination": "https://api.studio.thegraph.com/:path*"
     },
     {
-      "source": "/((?!api/.*).*)",
+      "source": "/((?!api/|rss/).*)",
       "destination": "/index.html"
     }
   ]
