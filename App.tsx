@@ -29,6 +29,7 @@ const Terms = React.lazy(() => import('./pages/Terms').then(module => ({ default
 const Cookies = React.lazy(() => import('./pages/Cookies').then(module => ({ default: module.Cookies })));
 const Disclaimer = React.lazy(() => import('./pages/Disclaimer'));
 const AffiliateDisclosure = React.lazy(() => import('./pages/AffiliateDisclosure'));
+const ConfirmSubscription = React.lazy(() => import('./pages/ConfirmSubscription').then(module => ({ default: module.ConfirmSubscription })));
 const NotFound = React.lazy(() => import('./pages/NotFound').then(module => ({ default: module.NotFound })));
 
 import { PageRoute } from './types';
@@ -145,6 +146,9 @@ const AppContent: React.FC = () => {
         break;
       case PageRoute.AFFILIATE:
         page = <AffiliateDisclosure />;
+        break;
+      case PageRoute.CONFIRM_SUBSCRIPTION:
+        page = <ConfirmSubscription onNavigate={handleNavigate} />;
         break;
       default:
         page = <Home onNavigate={handleNavigate} />;

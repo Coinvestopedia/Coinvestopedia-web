@@ -51,5 +51,6 @@ export enum PageRoute {
   EXCHANGES = '/exchanges',
   COOKIES = '/cookies',
   DISCLAIMER = '/disclaimer',
-  AFFILIATE = '/affiliate-disclosure'
+  AFFILIATE = '/affiliate-disclosure',
+  CONFIRM_SUBSCRIPTION = '/confirm-subscription'
 }

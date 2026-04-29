@@ -36,6 +36,25 @@ export async function subscribeToBriefing(params: SubscribeParams): Promise<Subs
   return data;
 }
 
+export async function confirmSubscription(token: string): Promise<SubscribeResponse> {
+  const response = await fetch(`${SUPABASE_URL}/functions/v1/confirm-subscription`, {
+    method: 'POST',
+    headers: { 
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
+    },
+    body: JSON.stringify({ token }),
+  });
+
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(data.error || 'Confirmation failed');
+  }
+
+  return data;
+}
+
 export function getUtmParams(): Record<string, string> {
   const params = new URLSearchParams(window.location.search);
   const utm: Record<string, string> = {};

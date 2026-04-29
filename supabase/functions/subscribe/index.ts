@@ -36,8 +36,8 @@ async function checkRateLimit(supabase: any, identifier: string, action: string)
   return true;
 }
 
-async function sendConfirmationEmail(resendApiKey: string, email: string, token: string, supabaseUrl: string) {
-  const confirmUrl = `${supabaseUrl}/functions/v1/confirm-subscription?token=${token}`;
+async function sendConfirmationEmail(resendApiKey: string, email: string, token: string, siteUrl: string) {
+  const confirmUrl = `${siteUrl}/confirm-subscription?token=${token}`;
   const res = await fetch("https://api.resend.com/emails", {
     method: "POST",
     headers: { Authorization: `Bearer ${resendApiKey}`, "Content-Type": "application/json" },
@@ -45,7 +45,7 @@ async function sendConfirmationEmail(resendApiKey: string, email: string, token:
       from: "The Briefing <newsletter@coinvestopedia.com>",
       to: email,
       subject: "Confirm your subscription to The Briefing",
-      html: \`
+      html: `
         <!DOCTYPE html>
         <html>
         <head>
@@ -87,7 +87,7 @@ async function sendConfirmationEmail(resendApiKey: string, email: string, token:
               
               <!-- CTA - Colors hardcoded to ensure it never renders blue -->
               <div style="text-align: center;">
-                <a href="\${confirmUrl}" style="background-color: #10B981; color: #022C22; padding: 16px 36px; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 15px; display: inline-block;">Confirm Subscription</a>
+                <a href="${confirmUrl}" style="background-color: #10B981; color: #022C22; padding: 16px 36px; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 15px; display: inline-block;">Confirm Subscription</a>
               </div>
               
               <!-- Divider -->
@@ -103,7 +103,7 @@ async function sendConfirmationEmail(resendApiKey: string, email: string, token:
           </div>
         </body>
         </html>
-      \`,
+      `,
     }),
   });
   if (!res.ok) throw new Error(await res.text());
@@ -131,7 +131,7 @@ Deno.serve(async (req) => {
       token_expires_at: new Date(Date.now() + 86400000).toISOString()
     }, { onConflict: "email" });
     if (insertError) throw insertError;
-    await sendConfirmationEmail(Deno.env.get("RESEND_API_KEY")!, email, token, Deno.env.get("SUPABASE_URL")!);
+    await sendConfirmationEmail(Deno.env.get("RESEND_API_KEY")!, email, token, Deno.env.get("SITE_URL") || "https://coinvestopedia.com");
     return jsonResponse({ message: "Check your email to confirm your subscription." });
   } catch (error) {
     return jsonResponse({ error: error.message }, 500);
