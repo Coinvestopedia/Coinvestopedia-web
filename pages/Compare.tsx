@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { DEFAULT_ASSETS, AssetData } from '../data/assetRegistry';
 import { useLiveAssetRegistry } from '../hooks/useLiveAssetRegistry';
 import { useAppContext } from '../context/AppContext';
+import { trackEvent } from '../utils/analytics';
 
 // Components
 import { AssetSelector } from '../components/compare/AssetSelector';
@@ -35,6 +36,33 @@ export const Compare: React.FC<CompareProps> = ({ onNavigate }) => {
 
   const { registry } = useLiveAssetRegistry();
   const { setPageCategories, setActiveSubMenu, activeSubMenu } = useAppContext();
+
+  useEffect(() => {
+    const handleLocationChange = () => {
+      const pathParts = window.location.pathname.split('/');
+      if (pathParts.length > 2 && pathParts[1] === 'compare') {
+        const assetsFromUrl = pathParts[2].split(',').filter(id => registry[id]);
+        if (assetsFromUrl.length > 0) {
+          setSelectedAssetIds(prev => {
+            if (prev.join(',') !== assetsFromUrl.join(',')) {
+              return assetsFromUrl;
+            }
+            return prev;
+          });
+        }
+      }
+    };
+    handleLocationChange();
+    window.addEventListener('popstate', handleLocationChange);
+    return () => window.removeEventListener('popstate', handleLocationChange);
+  }, [registry]);
+
+  const handleAssetsChange = (newAssets: string[]) => {
+    setSelectedAssetIds(newAssets);
+    const path = newAssets.length > 0 ? `/compare/${newAssets.join(',')}` : '/compare';
+    window.history.pushState({}, '', path);
+    trackEvent('asset_comparison', { assets_compared: newAssets.join(',') });
+  };
 
   const selectedAssets = selectedAssetIds
     .map(id => registry[id])
@@ -105,7 +133,7 @@ export const Compare: React.FC<CompareProps> = ({ onNavigate }) => {
               <div className="w-full min-w-0">
                 <AssetSelector 
                   selectedIds={selectedAssetIds} 
-                  onChange={setSelectedAssetIds} 
+                  onChange={handleAssetsChange} 
                   registry={registry}
                 />
               </div>
