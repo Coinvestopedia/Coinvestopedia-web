@@ -46,6 +46,10 @@ import { CookieBanner } from './components/CookieBanner';
  * Handles both exact matches and the root fallback.
  */
 function pathnameToRoute(pathname: string): PageRoute {
+  // Handle parameterized routes
+  if (pathname.startsWith('/insights')) return PageRoute.INSIGHTS;
+  if (pathname.startsWith('/macro-intel')) return PageRoute.MACRO_INTEL;
+
   // Build reverse lookup: '/compare' → PageRoute.COMPARE, etc.
   const routeValues = Object.values(PageRoute) as string[];
   const match = routeValues.find(r => r === pathname);

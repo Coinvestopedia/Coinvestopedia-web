@@ -10,9 +10,7 @@ import { NewsletterSignup } from '../components/NewsletterSignup';
 import { ArrowLeft, Clock, Share2, BookmarkPlus, Globe, Shield, Building2, Scale } from 'lucide-react';
 import { TargetIcon } from '../components/AnimatedIcons';
 import { useAppContext } from '../context/AppContext';
-
-
-
+import { trackEvent } from '../utils/analytics';
 
 export interface Article {
   id: string;
@@ -39,6 +37,7 @@ import { aiScamsSecurityArticle } from '../content/articles/ai-scams-ransomware-
 import { cme247Article } from '../content/articles/cme-24-7-structural-shift';
 import { morganStanleyArticle } from '../content/articles/morgan-stanley-bitcoin-trust';
 import { geoFrameworkArticle } from '../content/articles/geo-framework-bitcoin-analysis';
+import { africaCryptoInfrastructureArticle } from '../content/articles/africa-crypto-infrastructure';
 
 export const ARTICLES: Article[] = [
   geoFrameworkArticle,
@@ -427,286 +426,7 @@ export const ARTICLES: Article[] = [
   },
   asiaPacificMiddleEastArticle,
   crossBorderPortabilityArticle,
-  {
-    id: 'africa-crypto-infrastructure',
-    title: "Africa's Crypto Infrastructure: From Grassroots Utility to Regulated Markets",
-    category: 'Geopolitics',
-    tags: ['Africa'],
-    readTime: '14 min read',
-    date: 'April 10, 2026',
-    image: '/africa-crypto-featured.png',
-    desc: 'Sub-Saharan Africa is the third fastest-growing crypto region globally, driven by infrastructure needs, financial inclusion, and FX stability.',
-    icon: <Globe className="text-emerald-400" size={24} />,
-    keyInsights: [
-      "Rapid Growth: Sub-Saharan Africa saw a 52% YoY increase in on-chain value ($205B) by June 2025.",
-      "Regulatory Hubs: Mauritius and South Africa lead with mature frameworks like the VAITOS Act and CASP licensing.",
-      "Stability Premium: In Nigeria, the Naira's 200% devaluation in 2023-24 turned stablecoins into an essential store of value.",
-      "AfCFTA Synergy: Digital rails are supplementing the PAPSS system to bypass correspondent banking bottlenecks for 1.4B people."
-    ],
-    faq: [
-      { question: "Why is Nigeria leading crypto adoption in Africa?", answer: "The Naira's 200% devaluation in 2023-24 made stablecoins an essential infrastructure for capital preservation and commerce." },
-      { question: "What is the role of Mauritius and South Africa in African crypto?", answer: "They serve as the continent's primary regulatory hubs, with Mauritius using the VAITOS Act and South Africa approving over 138 CASP licenses." }
-    ],
-    content: (
-      <>
-        <p className="text-xl text-text-muted mb-8 italic">
-          Infrastructure-Driven Adoption: How African markets are building financial utility from the bottom up.
-        </p>
-        
-        <h2 className="text-2xl font-bold mt-10 mb-4 text-text">Scale and Context</h2>
-        <p className="mb-6">
-          Sub-Saharan Africa received $205B in on-chain value in the 12 months to June 2025 — a 52% YoY increase, making it the third fastest-growing crypto region globally behind APAC and Latin America. Unlike developed markets where crypto is primarily an institutional portfolio play, African adoption is infrastructure-driven: it solves real problems that legacy finance cannot.
-        </p>
-
-        <div className="my-10 rounded-2xl overflow-hidden border border-border shadow-2xl">
-           <img src="/africa-crypto-featured.png" alt="Africa Crypto Infrastructure" loading="lazy" decoding="async" className="w-full h-auto object-cover" />
-           <div className="p-4 bg-background/50 text-xs text-center border-t border-border italic text-text-muted">
-              Digital Finance Evolution: Stylized visualization of Africa's emerging crypto infrastructure and cross-border nodes.
-           </div>
-        </div>
-
-        <div className="leather-card p-6 rounded-xl mb-10 overflow-hidden">
-           <div className="overflow-x-auto">
-              <table className="w-full text-sm text-left border-collapse min-w-[600px]">
-                 <thead>
-                    <tr className="border-b border-border text-text-muted">
-                       <th className="py-3 pr-4 font-medium uppercase text-xs">Region</th>
-                       <th className="py-3 px-4 font-medium uppercase text-xs">YoY Growth</th>
-                       <th className="py-3 px-4 font-medium uppercase text-xs">On-Chain Value</th>
-                       <th className="py-3 pl-4 font-medium uppercase text-xs">Primary Driver</th>
-                    </tr>
-                 </thead>
-                 <tbody>
-                    <tr className="border-b border-border/50 hover:bg-primary/5 transition-colors">
-                       <td className="py-3 pr-4 font-medium">APAC</td>
-                       <td className="py-3 px-4">69%</td>
-                       <td className="py-3 px-4">$2.36T</td>
-                       <td className="py-3 pl-4 text-text-muted">Retail + Inst. Innovation</td>
-                    </tr>
-                    <tr className="border-b border-border/50 hover:bg-primary/5 transition-colors">
-                       <td className="py-3 pr-4 font-medium">Latin America</td>
-                       <td className="py-3 px-4">63%</td>
-                       <td className="py-3 px-4">—</td>
-                       <td className="py-3 pl-4 text-text-muted">Remittances, Inflation Hedge</td>
-                    </tr>
-                    <tr className="border-b border-border/50 bg-primary/5">
-                       <td className="py-3 pr-4 font-bold text-primary">Sub-Saharan Africa</td>
-                       <td className="py-3 px-4 font-bold">52%</td>
-                       <td className="py-3 px-4 font-bold">$205B</td>
-                       <td className="py-3 pl-4 font-bold">Financial Inclusion, FX Stability</td>
-                    </tr>
-                    <tr className="border-b border-border/50 hover:bg-primary/5 transition-colors">
-                       <td className="py-3 pr-4 font-medium">MENA</td>
-                       <td className="py-3 px-4">33%</td>
-                       <td className="py-3 px-4">$500B+</td>
-                       <td className="py-3 pl-4 text-text-muted">Institutions + Wealth Mgmt.</td>
-                    </tr>
-                 </tbody>
-              </table>
-           </div>
-        </div>
-
-        <h2 className="text-2xl font-bold mt-10 mb-4 text-text">Macro Catalyst: Currency Devaluation</h2>
-        <p className="mb-4">
-          Nigeria serves as the primary case study. Between May 2023 and February 2024, the Naira lost over 200% of its value against the USD, driving immediate adoption of stablecoins as a store of value — not for speculation, but for capital preservation.
-        </p>
-
-        <div className="my-8 p-6 bg-surface border border-border rounded-xl">
-           <h3 className="text-lg font-bold mb-3 flex items-center gap-2"><TargetIcon className="w-5 h-5 text-primary" /> Devaluation Engine</h3>
-           <p className="text-sm">When a domestic currency devalues, three distinct phases occur:</p>
-           <ul className="list-disc pl-5 mt-4 space-y-2 text-sm text-text-muted">
-              <li><strong>Hedged Entry:</strong> New users enter to preserve existing savings.</li>
-              <li><strong>Accumulation:</strong> Existing users accelerate stablecoin holdings.</li>
-              <li><strong>Volume Spike:</strong> Exchange volumes decouple from global market trends.</li>
-           </ul>
-        </div>
-
-        <div className="my-10 rounded-2xl overflow-hidden border border-border shadow-2xl">
-           <img src="/africa-market-growth.png" alt="Africa Market Growth" className="w-full h-auto object-cover" />
-           <div className="p-4 bg-background/50 text-xs text-center border-t border-border italic text-text-muted">
-              Market Dynamics: Visualizing the shift from traditional banking to stablecoin-based commerce in Nigeria and Kenya.
-           </div>
-        </div>
-
-
-
-        <h2 className="text-2xl font-bold mt-10 mb-4 text-text">Regulatory Landscape: A Divergent Map</h2>
-        <p className="mb-6">Regulatory frameworks across Africa's 54 countries are diverging, creating distinct regional hubs for institutional and retail activity.</p>
-        
-        <h3 className="text-xl font-bold mt-6 mb-2 text-primary">Mature Frameworks: Mauritius & South Africa</h3>
-        <p className="mb-6">South Africa declared crypto a financial product in 2022, approving over 138 CASP licenses by mid-2024. Mauritius offers the most structured licensing under the VAITOS Act (2021) with five distinct classes:</p>
-
-        <div className="overflow-x-auto mb-10">
-           <table className="w-full text-sm text-left border-collapse bg-surface border border-border rounded-xl overflow-hidden">
-              <thead>
-                 <tr className="bg-white/5 border-b border-border text-xs uppercase tracking-wider">
-                    <th className="p-4">License Type</th>
-                    <th className="p-4">Service Scope</th>
-                    <th className="p-4 text-right">Min. Capital (MUR)</th>
-                 </tr>
-              </thead>
-              <tbody>
-                 <tr className="border-b border-border/50">
-                    <td className="p-4 font-medium">Class M</td>
-                    <td className="p-4 text-text-muted">Broker-Dealer</td>
-                    <td className="p-4 text-right">2,000,000</td>
-                 </tr>
-                 <tr className="border-b border-border/50">
-                    <td className="p-4 font-medium">Class O</td>
-                    <td className="p-4 text-text-muted">Wallet Services</td>
-                    <td className="p-4 text-right">2,000,000</td>
-                 </tr>
-                 <tr className="border-b border-border/50">
-                    <td className="p-4 font-medium">Class R</td>
-                    <td className="p-4 text-text-muted">Custodial Services</td>
-                    <td className="p-4 text-right">5,000,000</td>
-                 </tr>
-                 <tr className="border-b border-border/50">
-                    <td className="p-4 font-medium">Class S</td>
-                    <td className="p-4 text-text-muted">Exchange Operations</td>
-                    <td className="p-4 text-right">6,500,000</td>
-                 </tr>
-              </tbody>
-           </table>
-        </div>
-
-        <h2 className="text-2xl font-bold mt-10 mb-4 text-text">Volume Distribution: The Power Centers</h2>
-        <p className="mb-6">Nigeria dominates the regional share, with value received exceeding that of the next four countries combined.</p>
-        
-        <div className="leather-card p-6 rounded-xl mb-10 overflow-hidden">
-           <div className="overflow-x-auto">
-              <table className="w-full text-sm text-left border-collapse min-w-[600px]">
-                 <thead>
-                    <tr className="border-b border-border text-text-muted">
-                       <th className="py-3 pr-4 font-medium uppercase text-xs">Country</th>
-                       <th className="py-3 px-4 font-medium uppercase text-xs">Value Received</th>
-                       <th className="py-3 px-4 font-medium uppercase text-xs">Regional Share</th>
-                       <th className="py-3 pl-4 font-medium uppercase text-xs">Dominant Asset</th>
-                    </tr>
-                 </thead>
-                 <tbody>
-                    <tr className="border-b border-border/50 hover:bg-primary/5 transition-colors">
-                       <td className="py-3 pr-4 font-bold">Nigeria</td>
-                       <td className="py-3 px-4 font-bold text-primary">$92.1B</td>
-                       <td className="py-3 px-4">45%</td>
-                       <td className="py-3 pl-4 text-text-muted">Bitcoin (89% of fiat buys)</td>
-                    </tr>
-                    <tr className="border-b border-border/50 hover:bg-primary/5 transition-colors">
-                       <td className="py-3 pr-4 font-medium">South Africa</td>
-                       <td className="py-3 px-4">$35.0B</td>
-                       <td className="py-3 px-4">17%</td>
-                       <td className="py-3 pl-4 text-text-muted">Bitcoin (74% of fiat buys)</td>
-                    </tr>
-                    <tr className="border-b border-border/50 hover:bg-primary/5 transition-colors">
-                       <td className="py-3 pr-4 font-medium">Ethiopia</td>
-                       <td className="py-3 px-4">~$15B</td>
-                       <td className="py-3 px-4">7%</td>
-                       <td className="py-3 pl-4 text-text-muted">Bitcoin (Mining-driven)</td>
-                    </tr>
-                    <tr className="border-b border-border/50 hover:bg-primary/5 transition-colors">
-                       <td className="py-3 pr-4 font-medium">Kenya</td>
-                       <td className="py-3 px-4">~$12B</td>
-                       <td className="py-3 px-4">6%</td>
-                       <td className="py-3 pl-4 text-text-muted">Stablecoins</td>
-                    </tr>
-                    <tr className="border-b border-border/50 hover:bg-primary/5 transition-colors">
-                       <td className="py-3 pr-4 font-medium">Ghana</td>
-                       <td className="py-3 px-4">~$8B</td>
-                       <td className="py-3 px-4">4%</td>
-                       <td className="py-3 pl-4 text-text-muted">Stablecoins</td>
-                    </tr>
-                 </tbody>
-              </table>
-           </div>
-        </div>
-
-        <h2 className="text-2xl font-bold mt-10 mb-4 text-text">Exchange Ecosystem: Global vs. Local</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
-           <div className="p-6 bg-background border border-border rounded-xl">
-              <h4 className="font-bold text-primary mb-3">Global Dominance</h4>
-              <p className="text-sm text-text-muted leading-relaxed">Binance holds the majority market share, with its P2P marketplace acting as a critical differentiator in markets where legacy banking restrictions still limit direct fiat-to-exchange flows.</p>
-           </div>
-           <div className="p-6 bg-background border border-border rounded-xl">
-              <h4 className="font-bold text-emerald-400 mb-2">Local Champions</h4>
-              <p className="text-sm text-text-muted leading-relaxed">Local exchanges like VALR and Yellow Card compete on regulatory trust, local currency integration, and 24/7 fiat settlement, particularly within the AfCFTA context.</p>
-           </div>
-        </div>
-
-        <h2 className="text-2xl font-bold mt-10 mb-4 text-text">Stablecoins as the Physical Rail</h2>
-        <p className="mb-6">
-          While Bitcoin drives retail purchase behavior as a store of value, stablecoins underpin actual commerce. Stablecoin payment volume for real economic activity reached $390B in 2025 across the continent.
-        </p>
-
-        <div className="my-10 p-8 bg-blue-500/10 border border-blue-500/30 rounded-2xl">
-           <div className="flex items-start gap-4">
-              <Shield className="text-blue-400 shrink-0 mt-1" size={24} />
-              <div>
-                 <h4 className="font-bold text-blue-400 mb-2">Remittance and B2B Impact</h4>
-                 <p className="text-sm text-text-muted leading-relaxed italic">
-                    For SMEs trading with suppliers in Asia, USDC/USDT settlement bypasses SWIFT delays entirely. For migrant workers, costs drop from 8.3% to under 1% via Polygon or Solana rails.
-                 </p>
-              </div>
-           </div>
-        </div>
-
-        <h2 className="text-2xl font-bold mt-10 mb-4 text-text">Fraud and Risk Trajectory</h2>
-        <p className="mb-6">Fraud rates declined to 2.6% in 2025, driven by faster KYC and FATF Travel Rule compliance, but the threat vector has shifted toward AI-enabled social engineering.</p>
-        <div className="leather-card p-6 rounded-xl mb-10 overflow-hidden">
-           <table className="w-full text-sm text-left">
-              <thead>
-                 <tr className="border-b border-border text-text-muted text-xs uppercase font-bold">
-                    <th className="py-2">Country</th>
-                    <th className="py-2">2025 Fraud Rate</th>
-                    <th className="py-2 text-right">YoY Change</th>
-                 </tr>
-              </thead>
-              <tbody>
-                 <tr className="border-b border-border/30">
-                    <td className="py-3">Kenya</td>
-                    <td className="py-2">2.5%</td>
-                    <td className="py-3 text-green-400 text-right font-medium">-30%</td>
-                 </tr>
-                 <tr className="border-b border-border/30">
-                    <td className="py-3">Nigeria</td>
-                    <td className="py-2">2.6%</td>
-                    <td className="py-3 text-green-400 text-right font-medium">-28%</td>
-                 </tr>
-                 <tr className="border-b border-border/30">
-                    <td className="py-3">South Africa</td>
-                    <td className="py-2">3.1%</td>
-                    <td className="py-3 text-green-400 text-right font-medium">-14%</td>
-                 </tr>
-              </tbody>
-           </table>
-        </div>
-
-        <h2 className="text-2xl font-bold mt-10 mb-4 text-text">Structural Tailwind: AfCFTA</h2>
-        <p className="mb-6">
-          The African Continental Free Trade Area (AfCFTA) — covering 1.4B people — depends on borderless payment infrastructure. Both the official PAPSS system and private crypto rails are running in parallel to solve the correspondent banking bottleneck.
-        </p>
-
-        <h2 className="text-2xl font-bold mt-10 mb-4 text-text">Key Takeaways for Institutional Allocators</h2>
-        <ul className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-10">
-           <li className="flex gap-4 p-4 bg-surface/50 border border-border rounded-lg">
-              <span className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center text-primary text-xs font-bold shrink-0">01</span>
-              <p className="text-sm"><strong>Nigeria is the Market:</strong> 25% adult penetration, $92B volume, and persistent demand driven by FX weakness.</p>
-           </li>
-           <li className="flex gap-4 p-4 bg-surface/50 border border-border rounded-lg">
-              <span className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center text-primary text-xs font-bold shrink-0">02</span>
-              <p className="text-sm"><strong>South Africa is the Hub:</strong> The continent's most mature regulatory regime with institutional-grade custody options.</p>
-           </li>
-           <li className="flex gap-4 p-4 bg-surface/50 border border-border rounded-lg">
-              <span className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center text-primary text-xs font-bold shrink-0">03</span>
-              <p className="text-sm"><strong>Stablecoins drive volume:</strong> Infrastructure-layer adoption is denominated in USD-stablecoins for actual commerce.</p>
-           </li>
-           <li className="flex gap-4 p-4 bg-surface/50 border border-border rounded-lg">
-              <span className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center text-primary text-xs font-bold shrink-0">04</span>
-              <p className="text-sm"><strong>Regulatory risk is bifurcated:</strong> Tier 1 markets offer clear frameworks; Tier 2 still carries informal P2P risk.</p>
-           </li>
-        </ul>
-      </>
-    )
-  },
+  africaCryptoInfrastructureArticle,
   {
     id: 'europe-crypto-infrastructure',
     title: "Europe's Regulated Crypto Market: MiCA, Market Structure, and the End of the Wild West",
@@ -1538,24 +1258,43 @@ export const Insights: React.FC<InsightsProps> = ({ onNavigate }) => {
     // falls back to the standard Knowledge submenu.
   }, []);
 
-  // Handle URL Hash for deep linking
+  // Handle URL Path for deep linking
   useEffect(() => {
-    const handleHashChange = () => {
+    const handleLocationChange = () => {
+      // Support both hash (legacy) and path-based routing
       if (window.location.hash) {
         const hashId = window.location.hash.replace('#', '');
         const validArticle = ARTICLES.find(a => a.id === hashId);
         if (validArticle) {
           setActiveArticleId(hashId);
+          return;
         }
+      }
+
+      const pathParts = window.location.pathname.split('/');
+      if (pathParts.length > 2 && pathParts[1] === 'insights') {
+        const articleId = pathParts[2];
+        const validArticle = ARTICLES.find(a => a.id === articleId);
+        if (validArticle) {
+          setActiveArticleId(articleId);
+        } else {
+          setActiveArticleId(null);
+        }
+      } else {
+        setActiveArticleId(null);
       }
     };
     
     // Initial check
-    handleHashChange();
+    handleLocationChange();
     
     // Listen for changes
-    window.addEventListener('hashchange', handleHashChange);
-    return () => window.removeEventListener('hashchange', handleHashChange);
+    window.addEventListener('popstate', handleLocationChange);
+    window.addEventListener('hashchange', handleLocationChange);
+    return () => {
+      window.removeEventListener('popstate', handleLocationChange);
+      window.removeEventListener('hashchange', handleLocationChange);
+    };
   }, []);
 
   const activeArticle = ARTICLES.find(a => a.id === activeArticleId);
@@ -1565,9 +1304,15 @@ export const Insights: React.FC<InsightsProps> = ({ onNavigate }) => {
     window.scrollTo(0, 0);
   }, [activeArticleId]);
 
+  const handleArticleClick = (id: string) => {
+    setActiveArticleId(id);
+    window.history.pushState({}, '', `/insights/${id}`);
+    trackEvent('article_read', { article_id: id, article_category: 'Insights' });
+  };
+
   const handleBackToList = () => {
     setActiveArticleId(null);
-    history.pushState("", document.title, window.location.pathname + window.location.search);
+    window.history.pushState({}, '', '/insights');
   };
 
   if (activeArticle) {
@@ -1590,6 +1335,14 @@ export const Insights: React.FC<InsightsProps> = ({ onNavigate }) => {
         />
         
 
+
+        <button 
+          onClick={handleBackToList}
+          className="flex items-center gap-2 text-primary font-bold text-sm mb-8 group"
+        >
+          <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
+          <span>Back to Insights</span>
+        </button>
 
         <div className="mb-8">
           <div className="flex items-center gap-3 text-xs font-bold text-text-muted tracking-wider uppercase mb-4">
@@ -1676,7 +1429,7 @@ export const Insights: React.FC<InsightsProps> = ({ onNavigate }) => {
       {/* Category Pills */}
       <section className="mb-12 border-b border-border/50 pb-4">
         <div className="flex items-center gap-2 overflow-x-auto hide-scrollbar pb-2">
-          {['All', 'Sovereignty', 'Institutions', 'Regulation', 'Technology'].map(cat => (
+          {['All', 'Sovereignty', 'Institutions', 'Regulation', 'Technology', 'Geopolitics'].map(cat => (
              <button
                 key={cat}
                 onClick={() => setActiveCategory(cat)}
@@ -1700,7 +1453,7 @@ export const Insights: React.FC<InsightsProps> = ({ onNavigate }) => {
          </h2>
          <Card 
             className="p-0 overflow-hidden group cursor-pointer border border-border hover:border-primary/50 transition-colors duration-300"
-            onClick={() => setActiveArticleId(featuredArticle.id)}
+            onClick={() => handleArticleClick(featuredArticle.id)}
          >
             <div className="flex flex-col">
                <div className="w-full relative h-[300px] lg:h-[400px] overflow-hidden">
@@ -1745,7 +1498,7 @@ export const Insights: React.FC<InsightsProps> = ({ onNavigate }) => {
                <React.Fragment key={article.id}>
                  <Card 
                     className="flex flex-col group hover:border-primary/40 cursor-pointer h-full transition-all duration-300 transform-gpu hover:-translate-y-1 hover:shadow-xl hover:shadow-primary/5"
-                    onClick={() => setActiveArticleId(article.id)}
+                    onClick={() => handleArticleClick(article.id)}
                  >
                     <div className="flex justify-between items-start mb-6">
                        <div className="w-12 h-12 rounded-xl bg-surface border border-border flex items-center justify-center group-hover:scale-110 transition-transform transform-gpu">

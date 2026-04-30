@@ -15,6 +15,7 @@ import { LivePrice } from '../components/LivePrice';
 import { useAppContext } from '../context/AppContext';
 import { PageRoute } from '../types';
 import { MobilePageCategories } from '../components/MobilePageCategories';
+import { trackEvent } from '../utils/analytics';
 
 
 // ─── TYPES ────────────────────────────────────────────────────────────────────
@@ -55,6 +56,32 @@ const TABS: { id: MacroTab; label: string; icon: React.ReactNode; isPro?: boolea
 // ─── SEED REPORTS ─────────────────────────────────────────────────────────────
 
 const REPORTS: MacroReport[] = [
+  {
+    id: 'q4-2025-institutional-flows',
+    title: 'Q4 2025 Institutional Flow Analysis',
+    subtitle: 'A retrospective look at institutional capital allocation trends at the end of 2025.',
+    tab: 'archive',
+    date: 'January 15, 2026',
+    readTime: '18 min read',
+    confidenceLevel: 'High',
+    keyMetrics: [
+      { label: 'Total Inflows', value: '$12.4B', direction: 'up' },
+      { label: 'BTC ETF Dominance', value: '78%', direction: 'neutral' },
+    ],
+    keyInsights: [
+      "Institutional allocation shifted from speculative to strategic holding.",
+      "Regulatory clarity in Q4 drove a 45% increase in registered fund inflows."
+    ],
+    sections: [
+      {
+        icon: <Layers size={18} />,
+        title: 'Q4 Review',
+        content: (
+          <p className="mb-4">This archived report details the capital flows during Q4 2025, highlighting the transition of digital assets into mainstream treasury portfolios.</p>
+        ),
+      }
+    ]
+  },
   {
     id: 'fed-holds-strong-dollar',
     title: 'Fed Holds + Strong Dollar Regime: BTC in a Risk-Off World',
@@ -1670,6 +1697,42 @@ export const MacroIntel: React.FC<MacroIntelProps> = ({ onNavigate }) => {
   const activeReport = REPORTS.find(r => r.id === activeReportId);
   const filteredReports = REPORTS ? REPORTS.filter(r => activeTab === 'all' ? true : r.tab === activeTab) : [];
 
+  // Handle URL Path for deep linking
+  useEffect(() => {
+    const handleLocationChange = () => {
+      const pathParts = window.location.pathname.split('/');
+      if (pathParts.length > 2 && pathParts[1] === 'macro-intel') {
+        const articleId = pathParts[2];
+        const validReport = REPORTS.find(r => r.id === articleId);
+        if (validReport) {
+          setActiveReportId(articleId);
+        } else {
+          setActiveReportId(null);
+        }
+      } else {
+        setActiveReportId(null);
+      }
+    };
+    
+    // Initial check
+    handleLocationChange();
+    
+    // Listen for changes
+    window.addEventListener('popstate', handleLocationChange);
+    return () => window.removeEventListener('popstate', handleLocationChange);
+  }, []);
+
+  const handleReportClick = (id: string) => {
+    setActiveReportId(id);
+    window.history.pushState({}, '', `/macro-intel/${id}`);
+    trackEvent('article_read', { article_id: id, article_category: 'Macro Intel' });
+  };
+
+  const handleBackToList = () => {
+    setActiveReportId(null);
+    window.history.pushState({}, '', '/macro-intel');
+  };
+
   useEffect(() => {
     window.scrollTo(0, 0);
     // Register categories with universal menu
@@ -1721,7 +1784,7 @@ export const MacroIntel: React.FC<MacroIntelProps> = ({ onNavigate }) => {
 
         {/* Back Button for Mobile */}
         <button 
-          onClick={() => setActiveReportId(null)}
+          onClick={handleBackToList}
           className="flex items-center gap-2 text-primary font-bold text-sm mb-8 group lg:hidden"
         >
           <Zap size={16} className="rotate-180" />
@@ -1826,7 +1889,7 @@ export const MacroIntel: React.FC<MacroIntelProps> = ({ onNavigate }) => {
             <ReportCard
               key={report.id}
               report={report}
-              onClick={() => setActiveReportId(report.id)}
+              onClick={() => handleReportClick(report.id)}
             />
           ))}
         </div>
