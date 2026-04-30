@@ -89,6 +89,7 @@ const PlaceholderTool: React.FC<{ tool: ToolDefinition }> = ({ tool }) => (
 );
 
 
+import { trackEvent } from '../utils/analytics';
 import { PageRoute } from '../types';
 
 export interface ToolsProps {
@@ -98,6 +99,42 @@ export interface ToolsProps {
 export const Tools: React.FC<ToolsProps> = ({ onNavigate }) => {
   const { setActiveSubMenu, activeSubMenu, setPageCategories } = useAppContext();
   const [activeToolId, setActiveToolId] = useState<string | null>(null);
+
+  const handleToolClick = React.useCallback((id: string, name: string, category: string) => {
+    setActiveToolId(id);
+    window.history.pushState({}, '', `/tools/${id}`);
+    trackEvent('tool_opened', { tool_id: id, tool_name: name, tool_category: category });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, []);
+
+  const handleBackToDashboard = React.useCallback(() => {
+    setActiveToolId(null);
+    window.history.pushState({}, '', '/tools');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, []);
+
+  // Handle URL Path for deep linking
+  useEffect(() => {
+    const handleLocationChange = () => {
+      const pathParts = window.location.pathname.split('/');
+      if (pathParts.length > 2 && pathParts[1] === 'tools') {
+        const toolId = pathParts[2];
+        const validTool = TOOLS_REGISTRY.find(t => t.id === toolId);
+        if (validTool) {
+          setActiveToolId(toolId);
+        } else {
+          setActiveToolId(null);
+        }
+      } else {
+        setActiveToolId(null);
+      }
+    };
+    
+    handleLocationChange();
+    
+    window.addEventListener('popstate', handleLocationChange);
+    return () => window.removeEventListener('popstate', handleLocationChange);
+  }, []);
 
   // Scroll top on navigate
   useEffect(() => {
@@ -111,10 +148,7 @@ export const Tools: React.FC<ToolsProps> = ({ onNavigate }) => {
       label: tool.name,
       icon: tool.icon,
       active: activeToolId === tool.id,
-      onClick: () => {
-         setActiveToolId(tool.id);
-         window.scrollTo({ top: 0, behavior: 'smooth' });
-      }
+      onClick: () => handleToolClick(tool.id, tool.name, tool.category)
     }));
 
     setPageCategories([
@@ -122,24 +156,16 @@ export const Tools: React.FC<ToolsProps> = ({ onNavigate }) => {
          label: 'Tools Dashboard',
          icon: <Calculator size={18} />,
          active: activeToolId === null,
-         onClick: () => {
-           setActiveToolId(null);
-           window.scrollTo({ top: 0, behavior: 'smooth' });
-         }
+         onClick: handleBackToDashboard
       },
       ...categories
     ]);
 
     return () => setPageCategories([]);
-  }, [setActiveSubMenu, activeSubMenu, activeToolId, setPageCategories]);
+  }, [setActiveSubMenu, activeSubMenu, activeToolId, setPageCategories, handleToolClick, handleBackToDashboard]);
 
   const activeTool = TOOLS_REGISTRY.find(t => t.id === activeToolId);
   const ActiveComponent = activeTool?.component || null;
-
-  const handleBackToDashboard = () => {
-    setActiveToolId(null);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
 
   // View: Single Tool
   if (activeTool) {
@@ -239,7 +265,7 @@ export const Tools: React.FC<ToolsProps> = ({ onNavigate }) => {
                 {catTools.map(tool => (
                   <button
                     key={tool.id}
-                    onClick={() => setActiveToolId(tool.id)}
+                    onClick={() => handleToolClick(tool.id, tool.name, tool.category)}
                     className="flex flex-col text-left p-6 rounded-2xl border border-border bg-surface dark:bg-[#111114] hover:border-primary/50 hover:bg-primary/5 dark:hover:bg-[#16161a] transition-colors transition-transform duration-300 group h-full relative overflow-hidden shadow-lg hover:shadow-primary/5 active:scale-[0.98] transform-gpu"
                   >
                     {/* Top row: Icon + Tier/Status */}

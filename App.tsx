@@ -49,6 +49,7 @@ function pathnameToRoute(pathname: string): PageRoute {
   // Handle parameterized routes
   if (pathname.startsWith('/insights')) return PageRoute.INSIGHTS;
   if (pathname.startsWith('/macro-intel')) return PageRoute.MACRO_INTEL;
+  if (pathname.startsWith('/tools')) return PageRoute.TOOLS;
 
   // Build reverse lookup: '/compare' → PageRoute.COMPARE, etc.
   const routeValues = Object.values(PageRoute) as string[];
