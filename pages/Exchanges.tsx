@@ -1,7 +1,7 @@
 import { PageMeta } from '../components/PageMeta';
 
 import { PageRoute } from '../types';
-import React, { useState, useMemo, useEffect } from 'react';
+import React, { useState, useMemo, useEffect, useRef } from 'react';
 import { Card } from '../components/Card';
 import { Button } from '../components/Button';
 import { useAppContext } from '../context/AppContext';
@@ -20,8 +20,7 @@ import { ExchangeCard } from '../components/exchanges/ExchangeCard';
 
 import { AreaChart, Area, RadarChart, PolarGrid, PolarAngleAxis, Radar, ResponsiveContainer, Tooltip as RechartsTooltip, XAxis } from 'recharts';
 import { PulseIcon } from '../components/AnimatedIcons';
-
-
+import { trackEvent } from '../utils/analytics';
 
 // Custom dimension colors for charts matching default Coinvestopedia palette
 // ─── Utility helpers ──────────────────────────────────────────────
@@ -1050,10 +1049,24 @@ export interface ExchangesProps {
 export const Exchanges: React.FC<ExchangesProps> = ({ onNavigate }) => {
   const { setPageCategories, setActiveSubMenu, activeSubMenu } = useAppContext();
   const [activeSection, setActiveSection] = useState('methodology');
+  const manualScrollRef = useRef(false);
 
-  const scrollToSection = (id: string) => {
+  useEffect(() => {
+    // Initial mount from URL
+    const pathParts = window.location.pathname.split('/');
+    if (pathParts.length > 2 && pathParts[1] === 'exchanges') {
+       const section = pathParts[2];
+       const validSections = ['methodology', 'best-for', 'exchange-profiles', 'compare-tool', 'fee-calculator', 'regulatory-matrix', 'faq'];
+       if (validSections.includes(section)) {
+          setTimeout(() => scrollToSection(section, false), 100);
+       }
+    }
+  }, []);
+
+  const scrollToSection = (id: string, pushHistory: boolean = true) => {
     const element = document.getElementById(id);
     if (element) {
+      manualScrollRef.current = true;
       const offset = 120; // Accounts for sticky header
       const bodyRect = document.body.getBoundingClientRect().top;
       const elementRect = element.getBoundingClientRect().top;
@@ -1064,6 +1077,13 @@ export const Exchanges: React.FC<ExchangesProps> = ({ onNavigate }) => {
         top: offsetPosition,
         behavior: 'smooth'
       });
+      
+      setActiveSection(id);
+      if (pushHistory) {
+         window.history.pushState({}, '', `/exchanges/${id}`);
+         trackEvent('exchange_tab_clicked', { tab_name: id });
+      }
+      setTimeout(() => { manualScrollRef.current = false; }, 1000);
     }
   };
 
@@ -1081,7 +1101,7 @@ export const Exchanges: React.FC<ExchangesProps> = ({ onNavigate }) => {
     setPageCategories(categories.map(cat => ({
       ...cat,
       active: activeSection === cat.id,
-      onClick: () => scrollToSection(cat.id)
+      onClick: () => scrollToSection(cat.id, true)
     })));
 
     if (activeSubMenu !== 'Knowledge') {
@@ -1090,6 +1110,7 @@ export const Exchanges: React.FC<ExchangesProps> = ({ onNavigate }) => {
 
     // Scroll Spy Logic
     const handleScroll = () => {
+      if (manualScrollRef.current) return;
       const scrollPosition = window.scrollY + 200;
       
       for (const cat of categories) {
@@ -1098,7 +1119,11 @@ export const Exchanges: React.FC<ExchangesProps> = ({ onNavigate }) => {
           const top = section.offsetTop;
           const height = section.offsetHeight;
           if (scrollPosition >= top && scrollPosition < top + height) {
-            setActiveSection(cat.id);
+            if (activeSection !== cat.id) {
+               setActiveSection(cat.id);
+               window.history.replaceState({}, '', `/exchanges/${cat.id}`);
+               trackEvent('exchange_section_viewed', { section_name: cat.id });
+            }
             break;
           }
         }
