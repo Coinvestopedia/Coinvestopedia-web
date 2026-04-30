@@ -1695,7 +1695,7 @@ export const MacroIntel: React.FC<MacroIntelProps> = ({ onNavigate }) => {
 
   const { setActiveSubMenu, setPageCategories, activeSubMenu } = useAppContext();
   const activeReport = REPORTS.find(r => r.id === activeReportId);
-  const filteredReports = REPORTS ? REPORTS.filter(r => activeTab === 'all' ? true : r.tab === activeTab) : [];
+  const filteredReports = REPORTS ? REPORTS.filter(r => activeTab === 'all' ? true : r.tab === activeTab).sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()) : [];
 
   // Handle URL Path for deep linking
   useEffect(() => {
