@@ -41,14 +41,26 @@ export const Compare: React.FC<CompareProps> = ({ onNavigate }) => {
     const handleLocationChange = () => {
       const pathParts = window.location.pathname.split('/');
       if (pathParts.length > 2 && pathParts[1] === 'compare') {
-        const assetsFromUrl = pathParts[2].split(',').filter(id => registry[id]);
-        if (assetsFromUrl.length > 0) {
-          setSelectedAssetIds(prev => {
-            if (prev.join(',') !== assetsFromUrl.join(',')) {
-              return assetsFromUrl;
-            }
-            return prev;
-          });
+        const validTabs: TabId[] = ['overview', 'performance', 'risk', 'allocation', 'correlation', 'analyst'];
+        
+        // Check if pathParts[2] is a tab (e.g. /compare/risk)
+        if (validTabs.includes(pathParts[2] as TabId)) {
+          setActiveTab(pathParts[2] as TabId);
+        } else {
+          // pathParts[2] must be assets
+          const assetsFromUrl = pathParts[2].split(',').filter(id => registry[id]);
+          if (assetsFromUrl.length > 0) {
+            setSelectedAssetIds(prev => {
+              if (prev.join(',') !== assetsFromUrl.join(',')) {
+                return assetsFromUrl;
+              }
+              return prev;
+            });
+          }
+          // pathParts[3] is the tab
+          if (pathParts.length > 3 && validTabs.includes(pathParts[3] as TabId)) {
+             setActiveTab(pathParts[3] as TabId);
+          }
         }
       }
     };
@@ -60,9 +72,16 @@ export const Compare: React.FC<CompareProps> = ({ onNavigate }) => {
   const handleAssetsChange = (newAssets: string[]) => {
     setSelectedAssetIds(newAssets);
     const path = newAssets.length > 0 ? `/compare/${newAssets.join(',')}` : '/compare';
-    window.history.pushState({}, '', path);
+    window.history.pushState({}, '', `${path}/${activeTab}`);
     trackEvent('asset_comparison', { assets_compared: newAssets.join(',') });
   };
+
+  const handleTabChange = React.useCallback((tabId: TabId) => {
+    setActiveTab(tabId);
+    const basePath = selectedAssetIds.length > 0 ? `/compare/${selectedAssetIds.join(',')}` : '/compare';
+    window.history.pushState({}, '', `${basePath}/${tabId}`);
+    trackEvent('comparison_tab_viewed', { tab_name: tabId, assets_compared: selectedAssetIds.join(',') });
+  }, [selectedAssetIds]);
 
   const selectedAssets = selectedAssetIds
     .map(id => registry[id])
@@ -85,7 +104,7 @@ export const Compare: React.FC<CompareProps> = ({ onNavigate }) => {
         label: tab.label,
         icon: <Icon size={18} />,
         active: activeTab === tab.id,
-        onClick: () => setActiveTab(tab.id)
+        onClick: () => handleTabChange(tab.id)
       };
     });
     setPageCategories(categories);
@@ -97,7 +116,7 @@ export const Compare: React.FC<CompareProps> = ({ onNavigate }) => {
     return () => {
       setPageCategories([]);
     };
-  }, [activeTab, setPageCategories, setActiveSubMenu, activeSubMenu]);
+  }, [activeTab, setPageCategories, setActiveSubMenu, activeSubMenu, handleTabChange]);
 
   return (
     <div className="animate-fade-in relative">
