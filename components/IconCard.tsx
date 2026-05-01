@@ -26,7 +26,7 @@ const IconCardComponent: React.FC<IconCardProps> = ({
 }) => {
   const handleClick = useCallback(() => {
     if (onClick) onClick();
-    if (href) window.location.href = href;
+    else if (href) window.location.href = href; // External links or fallback
   }, [onClick, href]);
   
   return (

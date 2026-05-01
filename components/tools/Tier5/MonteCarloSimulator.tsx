@@ -113,7 +113,7 @@ export const MonteCarloSimulator: React.FC = () => {
             <Card className="flex-1 min-h-[400px] flex flex-col">
               <h4 className="font-bold text-sm text-text-muted uppercase tracking-widest mb-6 text-center">GBM Stochastic Volatility Pathways</h4>
               <div className="flex-1 w-full bg-background/50 rounded-lg p-2 border border-border/50">
-                <ResponsiveContainer width="100%" height="100%">
+                <ResponsiveContainer width="100%" height="100%" minWidth={0} minHeight={0}>
                   <LineChart data={simulations.chartData} margin={{ top: 10, right: 30, left: 10, bottom: 20 }}>
                     <CartesianGrid strokeDasharray="3 3" stroke="#27272a" vertical={false} />
                     <XAxis dataKey="year" tick={{ fontSize: 10, fill: '#a1a1aa' }} stroke="#3f3f46" label={{ value: 'Years', position: 'bottom', fill: '#666', fontSize: 10 }} />

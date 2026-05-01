@@ -123,7 +123,7 @@ export const FixedIncomeCalculator: React.FC = () => {
            </div>
            
            <div className="flex-1 w-full bg-background/50 rounded-lg p-2 border border-border/50">
-             <ResponsiveContainer width="100%" height="100%">
+             <ResponsiveContainer width="100%" height="100%" minWidth={0} minHeight={0}>
                <LineChart data={result.curveData} margin={{ top: 10, right: 10, bottom: 20, left: 10 }}>
                  <CartesianGrid strokeDasharray="3 3" stroke="#27272a" />
                  <XAxis 

@@ -26,7 +26,7 @@ export const MarketPulseMetric: React.FC<MarketPulseMetricProps> = ({ label, val
        
        <div className="absolute inset-x-2 bottom-0 h-12 opacity-80">
          <div className="h-full w-full relative">
-           <ResponsiveContainer width="100%" height="100%" debounce={50}>
+           <ResponsiveContainer width="100%" height="100%" minWidth={0} minHeight={0} debounce={50}>
            <LineChart data={chartData}>
              <Line 
                type="monotone" 

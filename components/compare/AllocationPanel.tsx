@@ -29,7 +29,7 @@ export const AllocationPanel: React.FC = () => {
         </div>
         
         <div className="h-[300px] lg:h-[400px]">
-          <ResponsiveContainer width="100%" height="100%">
+          <ResponsiveContainer width="100%" height="100%" minWidth={0} minHeight={0}>
             <PieChart>
               <Pie
                 data={GLOBAL_MARKET_CAP_DATA}

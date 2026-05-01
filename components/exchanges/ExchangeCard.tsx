@@ -59,8 +59,8 @@ export const ExchangeCard: React.FC<ExchangeCardProps> = ({ exchange, rank }) =>
             {rank}
           </div>
           <div className="min-w-0">
-            <span className="font-bold text-sm block group-hover:text-primary transition-colors">{exchange.name}</span>
-            <span className="text-[11px] text-text-muted block truncate">{exchange.bestFor}</span>
+            <span className="font-bold text-sm block group-hover:text-primary transition-colors">{exchange.bestFor}</span>
+            <span className="text-[11px] text-text-muted block truncate">{exchange.name}</span>
             <div className="mt-1 inline-block">
                <CoinvestoAIScoreBadge score={exchange.coinvestoAIScore} grade={exchange.grade} size="sm" />
             </div>

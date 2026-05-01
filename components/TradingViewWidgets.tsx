@@ -30,7 +30,7 @@ export const TradingViewTimelineNews = memo(() => {
         src={iframeSrc}
         title="TradingView Global Timeline"
         className="w-full h-full border-0"
-        allowTransparency
+        allowtransparency="true"
         allow="encrypted-media"
         loading="lazy"
       />

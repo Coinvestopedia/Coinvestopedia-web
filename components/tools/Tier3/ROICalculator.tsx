@@ -71,7 +71,7 @@ export const ROICalculator: React.FC = () => {
           <ResultMetric label="Break-Even Price" value={fmtUSD(result.breakEven)} neutral />
         </div>
         <div className="flex-1 min-h-[180px]">
-          <ResponsiveContainer width="100%" height="100%">
+          <ResponsiveContainer width="100%" height="100%" minWidth={0} minHeight={0}>
             <BarChart data={result.chartData} margin={{ top: 5, right: 5, left: 10, bottom: 5 }}>
               <CartesianGrid strokeDasharray="3 3" stroke="#27272a" vertical={false} />
               <XAxis dataKey="name" tick={{ fontSize: 10, fill: '#a1a1aa' }} stroke="#3f3f46" />

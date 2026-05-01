@@ -1338,7 +1338,7 @@ export const Insights: React.FC<InsightsProps> = ({ onNavigate }) => {
 
         <button 
           onClick={handleBackToList}
-          className="flex items-center gap-2 text-primary font-bold text-sm mb-8 group"
+          className="flex items-center gap-2 text-primary font-bold text-sm mb-8 group min-h-[44px]"
         >
           <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
           <span>Back to Insights</span>
@@ -1368,8 +1368,8 @@ export const Insights: React.FC<InsightsProps> = ({ onNavigate }) => {
                </div>
             </div>
             <div className="flex items-center gap-3">
-               <button className="p-2 border border-border rounded-lg text-text-muted hover:text-primary transition-colors"><BookmarkPlus size={18} /></button>
-               <button className="p-2 border border-border rounded-lg text-text-muted hover:text-primary transition-colors"><Share2 size={18} /></button>
+               <button className="p-2.5 min-w-[44px] min-h-[44px] flex items-center justify-center border border-border rounded-lg text-text-muted hover:text-primary transition-colors" aria-label="Bookmark article"><BookmarkPlus size={18} /></button>
+               <button className="p-2.5 min-w-[44px] min-h-[44px] flex items-center justify-center border border-border rounded-lg text-text-muted hover:text-primary transition-colors" aria-label="Share article"><Share2 size={18} /></button>
             </div>
           </div>
         </div>
@@ -1433,7 +1433,7 @@ export const Insights: React.FC<InsightsProps> = ({ onNavigate }) => {
              <button
                 key={cat}
                 onClick={() => setActiveCategory(cat)}
-                className={`px-4 py-2 rounded-full text-sm font-bold whitespace-nowrap transition-all duration-200 ${
+                className={`px-4 py-2 min-h-[44px] rounded-full text-sm font-bold whitespace-nowrap transition-all duration-200 ${
                   activeCategory === cat 
                     ? 'bg-primary text-background' 
                     : 'bg-surface border border-border text-text-muted hover:text-text hover:border-primary/50'

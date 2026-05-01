@@ -119,7 +119,7 @@ const PageHeader: React.FC = () => {
         </div>
 
         {/* CTA buttons */}
-        <div className="flex flex-wrap gap-3">
+        <div className="flex flex-wrap justify-center gap-3">
           <Button onClick={() => scrollTo('compare-tool')}>
             Compare Exchanges
           </Button>
@@ -213,7 +213,7 @@ const MethodologySection: React.FC = () => {
                </div>
                <div className="h-[300px] lg:h-full min-h-[300px] w-full relative pl-2 pt-4 flex-1">
                   <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-primary/5 via-background to-background pointer-events-none"></div>
-                  <ResponsiveContainer width="100%" height="100%" debounce={50}>
+                  <ResponsiveContainer width="100%" height="100%" minWidth={0} minHeight={0} debounce={50}>
                      <RadarChart cx="50%" cy="50%" outerRadius="70%" data={methodologyRadarData}>
                         <PolarGrid stroke="#3A3F4B" strokeDasharray="3 3"/>
                         <PolarAngleAxis dataKey="subject" tick={{ fill: '#94A3B8', fontSize: 10, fontWeight: 'bold' }} />
@@ -305,12 +305,12 @@ const BestForGrid: React.FC = () => {
                     ? 'text-primary bg-primary/5 border-primary/20 group-hover:bg-primary/10' 
                     : 'text-yellow-500 bg-yellow-500/5 border-yellow-500/20 group-hover:bg-yellow-500/10'
                   }`}>
-                    {exchange.name}
+                    {card.label}
                   </span>
                   <Activity size={14} className="text-text-muted opacity-30 group-hover:opacity-100 group-hover:text-primary transition-all" />
                 </div>
                 <h3 className="font-bold text-xl leading-snug group-hover:text-primary transition-colors min-h-[3.5rem] flex items-center">
-                  {card.label}
+                  {exchange.name}
                 </h3>
               </div>
 
@@ -489,107 +489,185 @@ const ComparisonTool: React.FC = () => {
 
   return (
     <section id="compare-tool" className="scroll-mt-24">
-      <h2 className="text-xl font-bold mb-6 flex items-center gap-2">
-        <span className="w-1.5 h-6 bg-primary rounded-sm inline-block"></span>
-        Side-by-Side Comparison Tool
-      </h2>
-
-      {/* Exchange selector */}
-      <div className="mb-6 relative">
-        <button
-          onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-          className={`w-full leather-card rounded-xl p-4 flex items-center justify-between transition duration-300 transform-gpu ${isDropdownOpen ? 'border-primary/40 bg-primary/5 shadow-md shadow-primary/5' : 'hover:border-primary/30 hover:bg-primary/5 hover:shadow-md'}`}
-        >
-          <div className="flex items-center gap-2 flex-wrap">
-            <span className="text-sm text-text-muted mr-2">Comparing:</span>
-            {selectedExchanges.map(e => (
-              <span key={e.id} className="px-3 py-1 bg-surface border border-border text-text font-medium text-xs rounded-lg shadow-sm">
-                {e.name}
-              </span>
-            ))}
-          </div>
-          <div className="flex items-center gap-3">
-            <span className="text-xs text-text-muted font-bold">{selected.length}/4</span>
-            <ChevronDown size={18} className={`text-text-muted transition-transform transform-gpu duration-300 ${isDropdownOpen ? 'rotate-180 text-primary' : ''}`} />
-          </div>
-        </button>
-
-        {isDropdownOpen && (
-          <div className="absolute top-full left-0 right-0 mt-2 bg-surface border border-border rounded-xl shadow-2xl shadow-black/20 z-30 p-2 max-h-64 overflow-y-auto">
-            {EXCHANGES.map(e => (
-              <button
-                key={e.id}
-                onClick={() => toggleExchange(e.id)}
-                className={`w-full flex items-center justify-between p-4 rounded-lg text-sm hover:bg-background transition-colors ${
-                  selected.includes(e.id) ? 'text-primary bg-primary/5' : 'text-text-muted'
-                }`}
-                disabled={!selected.includes(e.id) && selected.length >= 4}
-              >
-                <span className="font-bold">{e.name}</span>
-                <div className="flex items-center gap-3">
-                  <span className={`text-xs font-bold font-mono ${scoreColor(e.coinvestoAIScore)}`}>{e.coinvestoAIScore}</span>
-                  {selected.includes(e.id) && <Check size={18} className="text-primary" />}
-                </div>
-              </button>
-            ))}
-          </div>
-        )}
-      </div>
-
-      {/* Comparison table */}
-      <Card className="p-0 overflow-hidden leather-card group relative border-t-2 border-t-primary transition-all duration-500 hover:shadow-2xl hover:shadow-primary/5">
+      <div className="leather-card rounded-2xl p-6 lg:p-8 relative overflow-hidden group border-t-2 border-t-primary transition-all duration-500 hover:shadow-2xl hover:shadow-primary/5">
         {/* Pulse Background */}
         <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"></div>
         <div className="absolute -right-20 -bottom-20 w-80 h-80 bg-primary/5 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-1000 pointer-events-none"></div>
 
-        {selectedExchanges.length > 1 && (
-          <div className="md:hidden flex items-center justify-center gap-1.5 py-3 bg-surface/50 border-b border-border text-xs text-text-muted font-medium w-full relative z-10">
-            <ArrowLeftRight size={14} className="opacity-70" />
-            <span>Swipe horizontally to compare</span>
+        <div className="relative z-10">
+          {/* Header */}
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
+            <div>
+              <h2 className="text-2xl font-bold mb-1 flex items-center gap-2">
+                <span className="w-1.5 h-7 bg-primary rounded-sm inline-block"></span>
+                Side-by-Side Comparison Tool
+              </h2>
+              <p className="text-sm text-text-muted">Select up to 4 exchanges to compare across 14 institutional dimensions</p>
+            </div>
+            <div className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-text-muted">
+              <span className="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+              {selected.length} of 4 Selected
+            </div>
           </div>
-        )}
 
-        <div className="overflow-x-auto relative z-10 custom-scrollbar">
-          <table className="w-full min-w-[600px]">
-            <thead>
-              <tr className="border-b border-border bg-background/30">
-                <th className="p-5 text-left text-xs font-bold uppercase tracking-wider text-text-muted w-44">Dimension</th>
+          {/* Exchange selector */}
+          <div className="mb-8 relative">
+            <button
+              onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+              className={`w-full rounded-xl p-4 min-h-[44px] flex items-center justify-between transition duration-300 transform-gpu border ${isDropdownOpen ? 'border-primary/40 bg-primary/5 shadow-md shadow-primary/5' : 'border-border bg-surface/50 hover:border-primary/30 hover:bg-primary/5 hover:shadow-md'}`}
+            >
+              <div className="flex items-center gap-2 flex-wrap">
+                <span className="text-sm text-text-muted mr-2 font-medium">Comparing:</span>
                 {selectedExchanges.map(e => (
-                  <th key={e.id} className="p-5 text-center">
-                    <div className="inline-flex px-2 py-0.5 rounded-md bg-surface border border-border text-[10px] font-black text-primary mb-1">
-                      {e.grade === 'INSTITUTIONAL' ? 'INSTITUTIONAL' : 'RETAIL+'}
-                    </div>
-                    <div className="text-base font-bold group-hover:text-primary transition-colors">{e.name}</div>
-                    <div className={`text-[11px] font-black mt-1 ${scoreColor(e.coinvestoAIScore)}`}>{e.coinvestoAIScore}/100</div>
-                  </th>
+                  <span key={e.id} className="px-3 py-1.5 bg-background border border-border text-text font-bold text-xs rounded-lg shadow-sm flex items-center gap-1.5">
+                    <span className={`w-1.5 h-1.5 rounded-full ${scoreColor(e.coinvestoAIScore).includes('emerald') ? 'bg-emerald-400' : scoreColor(e.coinvestoAIScore).includes('amber') ? 'bg-amber-400' : 'bg-primary'}`}></span>
+                    {e.name}
+                  </span>
                 ))}
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-border/30">
-              {comparisonRows.map((row, i) => {
-                const bestId = getBestId(row.key);
-                return (
-                  <tr key={i} className="hover:bg-primary/5 transition-colors">
-                    <td className="p-5 text-xs font-bold text-text-muted border-r border-border/20">{row.label}</td>
-                    {selectedExchanges.map(e => (
-                      <td key={e.id} className={`p-5 text-center transition-colors duration-300 ${bestId === e.id ? 'bg-primary/5' : ''}`}>
-                        <div className="flex flex-col items-center justify-center gap-1">
-                          <div className="font-medium text-sm">{row.render(e)}</div>
-                          {bestId === e.id && (
-                            <span className="flex items-center gap-1 text-[9px] font-black text-primary bg-primary/10 px-2 py-0.5 rounded uppercase tracking-tighter mt-1">
-                              <ShieldCheck size={8} /> Best-in-Class
-                            </span>
-                          )}
+              </div>
+              <div className="flex items-center gap-3">
+                <span className="text-xs text-text-muted font-bold">{selected.length}/4</span>
+                <ChevronDown size={18} className={`text-text-muted transition-transform transform-gpu duration-300 ${isDropdownOpen ? 'rotate-180 text-primary' : ''}`} />
+              </div>
+            </button>
+
+            {isDropdownOpen && (
+              <div className="absolute top-full left-0 right-0 mt-2 bg-surface border border-border rounded-xl shadow-2xl shadow-black/30 z-30 p-2 max-h-72 overflow-y-auto custom-scrollbar">
+                {EXCHANGES.map(e => {
+                  const isSelected = selected.includes(e.id);
+                  const isDisabled = !isSelected && selected.length >= 4;
+                  return (
+                    <button
+                      key={e.id}
+                      onClick={() => toggleExchange(e.id)}
+                      className={`w-full flex items-center justify-between p-4 min-h-[44px] rounded-lg text-sm transition-colors ${
+                        isSelected ? 'text-primary bg-primary/5 border border-primary/20' : isDisabled ? 'text-text-muted/40 cursor-not-allowed' : 'text-text-muted hover:bg-background hover:text-text'
+                      } ${!isDisabled && !isSelected ? 'border border-transparent' : ''}`}
+                      disabled={isDisabled}
+                    >
+                      <div className="flex items-center gap-3">
+                        <div className={`w-5 h-5 rounded-md border-2 flex items-center justify-center transition-colors ${isSelected ? 'border-primary bg-primary' : 'border-border'}`}>
+                          {isSelected && <Check size={12} className="text-background" />}
                         </div>
-                      </td>
+                        <span className="font-bold">{e.name}</span>
+                      </div>
+                      <div className="flex items-center gap-3">
+                        <span className={`text-xs font-black font-mono ${scoreColor(e.coinvestoAIScore)}`}>{e.coinvestoAIScore}</span>
+                        <span className={`text-[9px] font-bold px-1.5 py-0.5 rounded ${gradeColor(e.grade)}`}>{gradeLabel(e.grade)}</span>
+                      </div>
+                    </button>
+                  );
+                })}
+              </div>
+            )}
+          </div>
+
+          {/* Mobile: Card-based comparison */}
+          <div className="block md:hidden">
+            <div className="flex overflow-x-auto snap-x snap-mandatory gap-4 pb-6 custom-scrollbar hide-scrollbar" style={{ scrollPaddingLeft: '1rem' }}>
+              {selectedExchanges.map(e => (
+                <div key={e.id} className="min-w-[280px] w-[280px] sm:min-w-[320px] sm:w-[320px] snap-center shrink-0 rounded-2xl border border-border/50 bg-surface/30 backdrop-blur-md overflow-hidden relative group shadow-lg">
+                  {/* Header */}
+                  <div className="p-5 border-b border-border/30 bg-background/60 relative">
+                    <div className="flex flex-col gap-2">
+                      <div className={`inline-flex px-2 py-0.5 rounded text-[9px] font-black uppercase tracking-wider self-start ${e.grade === 'INSTITUTIONAL' ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20' : 'bg-amber-500/10 text-amber-400 border border-amber-500/20'}`}>
+                        {e.grade === 'INSTITUTIONAL' ? 'Institutional' : 'Retail+'}
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <span className="text-xl font-black text-text">{e.name}</span>
+                        <div className="flex items-center gap-1.5">
+                          <div className={`w-2 h-2 rounded-full ${e.coinvestoAIScore >= 80 ? 'bg-emerald-400' : e.coinvestoAIScore >= 60 ? 'bg-amber-400' : 'bg-red-400'}`}></div>
+                          <span className={`text-sm font-black font-mono ${scoreColor(e.coinvestoAIScore)}`}>{e.coinvestoAIScore}/100</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  {/* Specs */}
+                  <div className="divide-y divide-border/20">
+                    {comparisonRows.map((row) => {
+                      const bestId = getBestId(row.key);
+                      const isBest = bestId === e.id;
+                      return (
+                        <div key={row.key} className={`flex flex-col px-5 py-3 transition-colors ${isBest ? 'bg-primary/5' : ''}`}>
+                          <span className="text-[10px] font-bold uppercase tracking-wider text-text-muted mb-1">{row.label}</span>
+                          <div className="flex items-center justify-between">
+                            <span className="text-sm font-medium text-text">{row.render(e)}</span>
+                            {isBest && (
+                              <span className="flex items-center gap-1 text-[8px] font-black text-primary bg-primary/10 px-1.5 py-0.5 rounded-md uppercase tracking-widest border border-primary/10">
+                                <ShieldCheck size={8} /> Best
+                              </span>
+                            )}
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div className="flex items-center justify-center gap-1.5 mt-2 text-xs text-text-muted font-medium">
+              <ArrowLeftRight size={14} className="opacity-70" />
+              <span>Swipe to compare</span>
+            </div>
+          </div>
+
+          {/* Desktop: Sticky-column table */}
+          <div className="hidden md:block rounded-2xl border border-border/50 bg-surface/30 backdrop-blur-md overflow-hidden shadow-2xl shadow-black/5">
+            <div className="overflow-x-auto custom-scrollbar relative">
+              <table className="w-full text-left border-collapse" style={{ minWidth: `${180 + selectedExchanges.length * 200}px` }}>
+                <thead>
+                  <tr>
+                    <th className="sticky left-0 z-20 bg-surface p-5 text-[11px] font-black uppercase tracking-widest text-text-muted w-[180px] min-w-[180px] border-b border-border/50 border-r border-border/50 shadow-[4px_0_12px_rgba(0,0,0,0.03)] after:absolute after:inset-y-0 after:right-0 after:w-px after:bg-border/50">
+                      <div className="flex items-center gap-2">
+                        <ArrowLeftRight size={14} className="text-primary" />
+                        Dimension
+                      </div>
+                    </th>
+                    {selectedExchanges.map(e => (
+                      <th key={e.id} className="p-6 text-center min-w-[200px] border-b border-border/50 bg-background/60">
+                        <div className="flex flex-col items-center gap-2">
+                          <div className={`inline-flex px-2.5 py-1 rounded-lg text-[9px] font-black uppercase tracking-wider ${e.grade === 'INSTITUTIONAL' ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20' : 'bg-amber-500/10 text-amber-400 border border-amber-500/20'}`}>
+                            {e.grade === 'INSTITUTIONAL' ? 'Institutional' : 'Retail+'}
+                          </div>
+                          <span className="text-lg font-black text-text">{e.name}</span>
+                          <div className="flex items-center gap-1.5">
+                            <div className={`w-2 h-2 rounded-full ${e.coinvestoAIScore >= 80 ? 'bg-emerald-400' : e.coinvestoAIScore >= 60 ? 'bg-amber-400' : 'bg-red-400'}`}></div>
+                            <span className={`text-xs font-black font-mono ${scoreColor(e.coinvestoAIScore)}`}>{e.coinvestoAIScore}/100</span>
+                          </div>
+                        </div>
+                      </th>
                     ))}
                   </tr>
-                );
-              })}
-            </tbody>
-          </table>
+                </thead>
+                <tbody className="divide-y divide-border/20">
+                  {comparisonRows.map((row, i) => {
+                    const bestId = getBestId(row.key);
+                    return (
+                      <tr key={i} className="group/row">
+                        <td className={`sticky left-0 z-10 p-5 text-xs font-bold text-text-muted whitespace-nowrap border-r border-border/50 transition-colors shadow-[4px_0_12px_rgba(0,0,0,0.03)] after:absolute after:inset-y-0 after:right-0 after:w-px after:bg-border/50 ${i % 2 === 0 ? 'bg-surface' : 'bg-background'} group-hover/row:bg-primary/5`}>
+                          {row.label}
+                        </td>
+                        {selectedExchanges.map(e => (
+                          <td key={e.id} className={`p-5 text-center transition-colors duration-300 ${i % 2 === 0 ? 'bg-surface/30' : 'bg-transparent'} ${bestId === e.id ? 'bg-primary/[0.04]' : ''} group-hover/row:bg-primary/[0.03]`}>
+                            <div className="flex flex-col items-center justify-center gap-1.5">
+                              <div className="font-medium text-sm text-text">{row.render(e)}</div>
+                              {bestId === e.id && (
+                                <span className="flex items-center gap-1 text-[9px] font-black text-primary bg-primary/10 px-2 py-0.5 rounded-md uppercase tracking-widest border border-primary/10 mt-1">
+                                  <ShieldCheck size={10} /> Best-in-Class
+                                </span>
+                              )}
+                            </div>
+                          </td>
+                        ))}
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
+          </div>
         </div>
-      </Card>
+      </div>
     </section>
   );
 };
@@ -648,9 +726,9 @@ const FeeCalculator: React.FC = () => {
         <div className="absolute -right-20 -bottom-20 w-96 h-96 bg-yellow-500/5 rounded-full blur-[100px] opacity-0 group-hover:opacity-100 transition-opacity duration-1000 pointer-events-none"></div>
 
         <div className="relative z-10">
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-12">
+          <div className="flex flex-col md:flex-row items-center md:items-center justify-between gap-6 mb-12 text-center md:text-left">
             <div>
-              <h2 className="text-2xl font-bold mb-2 flex items-center gap-2">
+              <h2 className="text-2xl font-bold mb-2 flex items-center justify-center md:justify-start gap-2">
                 <span className="w-1.5 h-6 bg-yellow-500 rounded-sm inline-block"></span>
                 Cost of Capital Calculator
               </h2>
@@ -661,7 +739,7 @@ const FeeCalculator: React.FC = () => {
                 <button
                   key={t}
                   onClick={() => setTradeType(t)}
-                  className={`px-5 py-2 rounded-lg text-xs font-bold transition-all duration-300 ${tradeType === t ? 'bg-primary text-background shadow-lg shadow-primary/20' : 'text-text-muted hover:text-text'}`}
+                  className={`flex items-center justify-center px-5 py-2 min-h-[44px] rounded-lg text-xs font-bold transition-all duration-300 ${tradeType === t ? 'bg-primary text-background shadow-lg shadow-primary/20' : 'text-text-muted hover:text-text'}`}
                 >
                   {t.toUpperCase()}
                 </button>
@@ -699,7 +777,7 @@ const FeeCalculator: React.FC = () => {
                     key={e.id}
                     onClick={() => toggleCalcExchange(e.id)}
                     disabled={!selectedIds.includes(e.id) && selectedIds.length >= 5}
-                    className={`px-4 py-2 rounded-xl text-xs font-bold transition-all duration-300 ${
+                    className={`px-4 py-2 min-h-[44px] rounded-xl text-xs font-bold transition-all duration-300 ${
                       selectedIds.includes(e.id) ? 'bg-primary text-background shadow-lg shadow-primary/10' : 'bg-surface/50 border border-border text-text-muted hover:border-primary/30 hover:bg-surface'
                     } disabled:opacity-20 disabled:cursor-not-allowed`}
                   >
@@ -762,7 +840,7 @@ const FeeCalculator: React.FC = () => {
                     </div>
                   </div>
                   <div className="flex-1 min-h-[250px] relative">
-                    <ResponsiveContainer width="100%" height="100%" debounce={50}>
+                    <ResponsiveContainer width="100%" height="100%" minWidth={0} minHeight={0} debounce={50}>
                       <AreaChart data={chartData} margin={{ top: 0, right: 0, left: 0, bottom: 0 }}>
                         <defs>
                            {selectedIds.map((id) => {
@@ -841,28 +919,23 @@ const RegulatoryMatrix: React.FC = () => {
         <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"></div>
         
         <div className="relative z-10">
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-12">
+          <div className="flex flex-col md:flex-row items-center md:items-center justify-between gap-6 mb-12 text-center md:text-left">
             <div>
-              <div className="flex items-center gap-2 mb-2">
+              <div className="flex items-center justify-center md:justify-start gap-2 mb-2">
                  <ShieldCheck size={18} className="text-emerald-400" />
                  <span className="text-[10px] font-black bg-emerald-500/10 text-emerald-400 px-2 py-0.5 rounded uppercase tracking-widest border border-emerald-500/20">Global Trust Verified</span>
               </div>
-              <h2 className="text-2xl font-bold flex items-center gap-2">
+              <h2 className="text-2xl font-bold flex items-center justify-center md:justify-start gap-2">
                 <span className="w-1.5 h-6 bg-emerald-500 rounded-sm inline-block"></span>
                 Regulatory Status Matrix
               </h2>
               <p className="text-text-muted">Live tracking of exchange operational licenses and regional restrictions.</p>
             </div>
             
-            <div className="flex gap-4 p-4 bg-background/50 rounded-xl border border-border backdrop-blur-md">
+            <div className="flex items-center justify-center gap-4 p-4 bg-background/50 rounded-xl border border-border backdrop-blur-md min-w-[120px]">
                <div className="text-center">
                  <div className="text-lg font-black text-emerald-400 tabular-nums">100%</div>
                  <div className="text-[8px] text-text-muted font-bold uppercase tracking-widest">Compliance Latency</div>
-               </div>
-               <div className="w-px h-10 bg-border"></div>
-               <div className="text-center">
-                 <div className="text-lg font-black text-text tabular-nums">48h</div>
-                 <div className="text-[8px] text-text-muted font-bold uppercase tracking-widest">Data Freshness</div>
                </div>
             </div>
           </div>
@@ -958,7 +1031,7 @@ const FAQAccordion: React.FC = () => {
             >
               <button
                 onClick={() => setOpenIndex(isOpen ? null : i)}
-                className="w-full p-6 flex items-center justify-between text-left group/btn"
+                className="w-full p-6 min-h-[44px] flex items-center justify-between text-left group/btn"
               >
                 <div className="flex items-center gap-4">
                    <div className={`w-6 h-6 rounded-lg flex items-center justify-center text-[10px] font-black transition-colors ${

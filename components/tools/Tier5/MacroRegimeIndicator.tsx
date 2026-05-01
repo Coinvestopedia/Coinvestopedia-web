@@ -87,7 +87,7 @@ export const MacroRegimeIndicator: React.FC = () => {
                       
                       {/* Chart Area */}
                       <div className="flex-1 w-full bg-background border border-border/50 rounded-2xl overflow-hidden p-4 relative">
-                         <ResponsiveContainer width="100%" height="100%">
+                         <ResponsiveContainer width="100%" height="100%" minWidth={0} minHeight={0}>
                             <ScatterChart margin={{ top: 20, right: 20, bottom: 20, left: 20 }}>
                                <CartesianGrid strokeDasharray="3 3" stroke="#27272a" strokeOpacity={0.5} />
                                <XAxis type="number" dataKey="x" domain={[-2, 6]} hide />

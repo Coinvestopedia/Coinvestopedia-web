@@ -82,7 +82,7 @@ export const InflationAdjusted: React.FC = () => {
           <Card className="flex-1 flex flex-col min-h-[400px]">
             <h4 className="font-bold text-sm text-text-muted uppercase tracking-widest mb-6 text-center">Nominal vs Purchasing Power Over Time</h4>
             <div className="flex-1 relative">
-              <ResponsiveContainer width="100%" height="100%">
+              <ResponsiveContainer width="100%" height="100%" minWidth={0} minHeight={0}>
                 <AreaChart data={result.chartData} margin={{ top: 10, right: 30, left: 20, bottom: 20 }}>
                   <CartesianGrid strokeDasharray="3 3" stroke="#27272a" vertical={false} />
                   <XAxis dataKey="year" tick={{ fontSize: 10, fill: '#a1a1aa' }} stroke="#3f3f46" />

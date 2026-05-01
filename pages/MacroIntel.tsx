@@ -1785,7 +1785,8 @@ export const MacroIntel: React.FC<MacroIntelProps> = ({ onNavigate }) => {
         {/* Back Button for Mobile */}
         <button 
           onClick={handleBackToList}
-          className="flex items-center gap-2 text-primary font-bold text-sm mb-8 group lg:hidden"
+          className="flex items-center gap-2 text-primary font-bold text-sm mb-8 group lg:hidden min-h-[44px] min-w-[44px]"
+          aria-label="Back to Intel List"
         >
           <Zap size={16} className="rotate-180" />
           <span>Back to Intel List</span>

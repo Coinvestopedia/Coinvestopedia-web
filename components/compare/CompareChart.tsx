@@ -100,7 +100,7 @@ export const CompareChart: React.FC<CompareChartProps> = ({ assets, timeframe, o
       {/* Chart Canvas */}
       <div className="flex-grow w-full relative">
          <div className="w-full h-[400px]">
-           <ResponsiveContainer width="100%" height="100%">
+           <ResponsiveContainer width="100%" height="100%" minWidth={0} minHeight={0}>
               <LineChart data={chartData} margin={{ top: 20, right: 30, left: 0, bottom: 0 }}>
                  <CartesianGrid strokeDasharray="3 3" stroke="#27272A" vertical={false} />
                  <XAxis 

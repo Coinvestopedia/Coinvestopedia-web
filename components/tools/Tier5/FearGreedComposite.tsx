@@ -154,7 +154,7 @@ export const FearGreedComposite: React.FC = () => {
                </div>
                
                <div className="h-[250px] w-full pt-4 border-t border-border/50">
-                  <ResponsiveContainer width="100%" height="100%">
+                  <ResponsiveContainer width="100%" height="100%" minWidth={0} minHeight={0}>
                     <BarChart data={stats.chartData} margin={{ left: 0, right: 30, top: 10, bottom: 0 }}>
                       <CartesianGrid strokeDasharray="3 3" stroke="#27272a" vertical={false} />
                       <XAxis dataKey="name" tick={{ fontSize: 9, fill: '#a1a1aa' }} stroke="#3f3f46" />

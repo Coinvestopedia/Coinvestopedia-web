@@ -382,7 +382,7 @@ const SmartSearch: React.FC<SmartSearchProps> = ({ searchQuery, onSearchChange, 
         {searchQuery && (
           <button
             onClick={() => { onSearchChange(''); inputRef.current?.focus(); }}
-            className="pr-4 flex items-center text-text-muted hover:text-primary transition-colors"
+            className="pr-4 flex items-center justify-center min-w-[44px] min-h-[44px] text-text-muted hover:text-primary transition-colors"
             aria-label="Clear search"
           >
             <X size={18} />
@@ -578,7 +578,7 @@ const GlossaryEntryCard: React.FC<GlossaryEntryCardProps> = ({ entry, isExpanded
 
         {canExpand && (
           <button
-            className={`flex-shrink-0 w-8 h-8 rounded-lg flex items-center justify-center transition-colors transition-shadow duration-200 mt-0.5 ${
+            className={`flex-shrink-0 w-11 h-11 rounded-lg flex items-center justify-center transition-colors transition-shadow duration-200 mt-0.5 ${
               isExpanded
                 ? 'bg-primary/10 text-primary'
                 : 'bg-surface text-text-muted hover:text-primary shadow-sm border border-border/50'
@@ -783,7 +783,7 @@ export const Glossary: React.FC<GlossaryProps> = ({ onNavigate }) => {
                 onClick={() => hasResults && scrollToLetter(letter)}
                 disabled={!hasResults}
                 className={`
-                  flex-shrink-0 w-8 h-8 lg:w-9 lg:h-9 rounded-lg text-xs lg:text-sm font-bold transition-colors transition-transform transform-gpu duration-200 flex items-center justify-center
+                  flex-shrink-0 w-10 h-10 lg:w-9 lg:h-9 rounded-lg text-xs lg:text-sm font-bold transition-colors transition-transform transform-gpu duration-200 flex items-center justify-center
                   ${activeLetter === letter
                     ? 'bg-primary text-background shadow-lg shadow-primary/30 scale-110'
                     : hasResults

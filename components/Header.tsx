@@ -156,7 +156,7 @@ export const Header: React.FC<HeaderProps> = ({
               </div>
               <button 
                 onClick={() => onToggleMobileMenu(false)}
-                className="p-1.5 text-text-muted hover:text-text bg-surface/80 rounded-full"
+                className="p-2 min-w-[44px] min-h-[44px] flex items-center justify-center text-text-muted hover:text-text bg-surface/80 rounded-full"
               >
                 <X size={20} />
               </button>

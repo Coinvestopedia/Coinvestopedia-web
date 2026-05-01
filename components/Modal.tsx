@@ -103,7 +103,7 @@ export const Modal = ({
             {showCloseButton && (
               <button
                 onClick={onClose}
-                className="p-1 hover:bg-background rounded-lg transition-colors text-text-muted hover:text-text"
+                className="p-2 min-w-[44px] min-h-[44px] flex items-center justify-center hover:bg-background rounded-lg transition-colors text-text-muted hover:text-text -mr-2"
                 aria-label="Close modal"
               >
                 <X size={20} />
@@ -162,7 +162,7 @@ export const Dialog = ({
           <button
             onClick={onClose}
             disabled={isLoading}
-            className="px-4 py-2 rounded-lg border border-border text-text hover:bg-background transition-colors disabled:opacity-50"
+            className="px-4 py-2 min-h-[44px] rounded-lg border border-border text-text hover:bg-background transition-colors disabled:opacity-50"
           >
             {cancelText}
           </button>
@@ -170,7 +170,7 @@ export const Dialog = ({
             onClick={onConfirm}
             disabled={isLoading}
             className={cn(
-              'px-4 py-2 rounded-lg font-semibold transition-colors disabled:opacity-50',
+              'px-4 py-2 min-h-[44px] rounded-lg font-semibold transition-colors disabled:opacity-50',
               isDangerous
                 ? 'bg-red-500 text-white hover:bg-red-600'
                 : 'bg-primary text-white hover:bg-primary-dark'

@@ -96,7 +96,7 @@ const ReturnComparisonChart: React.FC<{ assets: AssetData[] }> = ({ assets }) =>
       <h3 className="font-bold text-lg mb-1">YTD vs 1-Year Returns</h3>
       <p className="text-sm text-text-muted mb-6">Side-by-side comparison of short-term and medium-term performance.</p>
       <div className="h-[350px]">
-        <ResponsiveContainer width="100%" height="100%">
+        <ResponsiveContainer width="100%" height="100%" minWidth={0} minHeight={0}>
           <BarChart data={chartData} margin={{ top: 20, right: 30, left: 0, bottom: 5 }}>
             <CartesianGrid strokeDasharray="3 3" stroke="#27272A" vertical={false} />
             <XAxis dataKey="symbol" stroke="#52525B" tick={{ fill: '#A1A1AA', fontSize: 11, fontWeight: 700 }} />

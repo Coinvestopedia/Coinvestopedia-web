@@ -24,7 +24,7 @@ const YtdBarChart: React.FC<{ assets: AssetData[] }> = ({ assets }) => {
       <h3 className="font-bold text-lg mb-1">YTD Performance Ranking</h3>
       <p className="text-sm text-text-muted mb-6">Year-to-date returns across selected assets, ranked best to worst.</p>
       <div style={{ height: Math.max(300, assets.length * 42) }}>
-        <ResponsiveContainer width="100%" height="100%">
+        <ResponsiveContainer width="100%" height="100%" minWidth={0} minHeight={0}>
           <BarChart data={chartData} layout="vertical" margin={{ top: 5, right: 30, left: 60, bottom: 5 }}>
             <CartesianGrid strokeDasharray="3 3" stroke="#27272A" horizontal={false} />
             <XAxis type="number" stroke="#52525B" tick={{ fill: '#71717A', fontSize: 11 }} tickFormatter={(v) => `${v}%`} />

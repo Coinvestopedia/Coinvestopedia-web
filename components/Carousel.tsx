@@ -126,14 +126,14 @@ export function Carousel<T>({
         <>
           <button
             onClick={handlePrev}
-            className="absolute left-4 top-1/2 -translate-y-1/2 z-10 p-2 bg-black/50 hover:bg-black/70 rounded-lg transition-colors"
+            className="absolute left-2 top-1/2 -translate-y-1/2 z-10 p-2.5 min-w-[44px] min-h-[44px] flex items-center justify-center bg-black/50 hover:bg-black/70 rounded-lg transition-colors"
             aria-label="Previous slide"
           >
             <ChevronLeft size={24} />
           </button>
           <button
             onClick={handleNext}
-            className="absolute right-4 top-1/2 -translate-y-1/2 z-10 p-2 bg-black/50 hover:bg-black/70 rounded-lg transition-colors"
+            className="absolute right-2 top-1/2 -translate-y-1/2 z-10 p-2.5 min-w-[44px] min-h-[44px] flex items-center justify-center bg-black/50 hover:bg-black/70 rounded-lg transition-colors"
             aria-label="Next slide"
           >
             <ChevronRight size={24} />
@@ -148,14 +148,16 @@ export function Carousel<T>({
             <button
               key={index}
               onClick={() => handleDotClick(index)}
-              className={cn(
-                'rounded-full transition-[width,background-color] duration-300',
+              className="flex items-center justify-center min-w-[44px] min-h-[44px]"
+              aria-label={`Go to slide ${index + 1}`}
+            >
+              <span className={cn(
+                'rounded-full transition-[width,background-color] duration-300 block',
                 index === currentIndex
                   ? 'bg-primary w-8 h-2'
                   : 'bg-zinc-700 w-2 h-2 hover:bg-zinc-600'
-              )}
-              aria-label={`Go to slide ${index + 1}`}
-            />
+              )} />
+            </button>
           ))}
         </div>
       )}

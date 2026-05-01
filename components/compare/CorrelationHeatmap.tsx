@@ -62,7 +62,7 @@ const CorrelationRadar: React.FC<{ assets: AssetData[] }> = ({ assets }) => {
       <p className="text-sm text-text-muted mb-6">Cross-correlation normalized strength to BTC, Gold, and S&P 500.</p>
       
       <div className="h-[400px]">
-        <ResponsiveContainer width="100%" height="100%">
+        <ResponsiveContainer width="100%" height="100%" minWidth={0} minHeight={0}>
           <RadarChart cx="50%" cy="50%" outerRadius="70%" data={data}>
             <PolarGrid stroke="#3F3F46" />
             <PolarAngleAxis dataKey="subject" tick={{ fill: '#A1A1AA', fontSize: 11, fontWeight: 'bold' }} />

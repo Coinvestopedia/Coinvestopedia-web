@@ -78,7 +78,7 @@ export const RiskAdjustedReturns: React.FC = () => {
             <Card className="flex-1 flex flex-col min-h-[450px]">
                <h4 className="font-bold text-sm text-text-muted uppercase tracking-widest mb-8 text-center">Efficiency Benchmark Comparison</h4>
                <div className="flex-1 w-full bg-background/50 p-6 rounded-2xl border border-border/50 min-h-[300px]">
-                 <ResponsiveContainer width="100%" height="100%">
+                 <ResponsiveContainer width="100%" height="100%" minWidth={0} minHeight={0}>
                    <BarChart data={stats.chartData} layout="vertical" margin={{ left: 20, right: 40 }}>
                      <CartesianGrid strokeDasharray="3 3" stroke="#27272a" horizontal={false} />
                      <XAxis type="number" domain={[0, 4]} tick={{ fontSize: 10, fill: '#a1a1aa' }} stroke="#3f3f46" />

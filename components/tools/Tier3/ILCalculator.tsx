@@ -94,7 +94,7 @@ export const ILCalculator: React.FC = () => {
 
         <div className="flex-1 min-h-[160px]">
           <p className="text-xs text-text-muted mb-2 font-medium">IL% vs Price Ratio (of Token A)</p>
-          <ResponsiveContainer width="100%" height="100%">
+          <ResponsiveContainer width="100%" height="100%" minWidth={0} minHeight={0}>
             <LineChart data={result.curvePts} margin={{ top: 5, right: 5, left: 0, bottom: 5 }}>
               <CartesianGrid strokeDasharray="3 3" stroke="#27272a" vertical={false} />
               <XAxis dataKey="ratio" tick={{ fontSize: 9, fill: '#a1a1aa' }} stroke="#3f3f46" />

@@ -118,7 +118,7 @@ export const OnChainValuation: React.FC = () => {
 
             {/* Chart */}
             <div className="w-full h-[400px] mt-8">
-               <ResponsiveContainer width="100%" height="100%">
+               <ResponsiveContainer width="100%" height="100%" minWidth={0} minHeight={0}>
                  <LineChart data={modelData} margin={{ top: 5, right: 5, left: 10, bottom: 5 }}>
                    <CartesianGrid strokeDasharray="3 3" stroke="#27272a" vertical={false} />
                    <XAxis dataKey="date" tick={{ fontSize: 10, fill: '#a1a1aa' }} stroke="#3f3f46" minTickGap={30} />

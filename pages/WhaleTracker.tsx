@@ -98,7 +98,8 @@ const AddressCell: React.FC<{ address: string; labels?: Record<string, string> }
         <span className={`text-xs ${label ? 'text-text-muted' : 'font-mono text-text-muted'}`}>{short}</span>
         {isRaw && (
           <button onClick={handleCopy}
-            className="opacity-0 group-hover/addr:opacity-100 text-text-muted hover:text-primary transition duration-200 p-0.5 transform-gpu">
+            className="opacity-0 group-hover/addr:opacity-100 text-text-muted hover:text-primary transition duration-200 p-3 -m-2.5 transform-gpu"
+            aria-label="Copy address">
             <Copy size={10} />
           </button>
         )}
@@ -513,13 +514,13 @@ export const WhaleTracker: React.FC<WhaleTrackerProps> = ({ onNavigate }) => {
         <div className="flex bg-surface border border-border rounded-xl p-1 w-fit">
           <button
             onClick={() => setActiveView('table')}
-            className={`px-6 py-2 rounded-lg text-sm font-bold transition duration-200 transform-gpu ${activeView === 'table' ? 'bg-primary text-background' : 'text-text-muted hover:text-text'}`}
+            className={`px-6 py-2 min-h-[44px] rounded-lg text-sm font-bold transition duration-200 transform-gpu flex items-center gap-1.5 ${activeView === 'table' ? 'bg-primary text-background' : 'text-text-muted hover:text-text'}`}
           >
             <BarChart2 size={16} /> Transactions
           </button>
           <button
             onClick={() => setActiveView('alerts')}
-            className={`px-6 py-2 rounded-lg text-sm font-bold transition duration-200 transform-gpu ${activeView === 'alerts' ? 'bg-primary text-background' : 'text-text-muted hover:text-text'}`}
+            className={`px-6 py-2 min-h-[44px] rounded-lg text-sm font-bold transition duration-200 transform-gpu flex items-center gap-1.5 ${activeView === 'alerts' ? 'bg-primary text-background' : 'text-text-muted hover:text-text'}`}
           >
             <Activity size={16} /> Activity Feed
           </button>
@@ -552,7 +553,7 @@ export const WhaleTracker: React.FC<WhaleTrackerProps> = ({ onNavigate }) => {
                 <div className="flex bg-surface border border-border rounded-lg p-0.5">
                   {(['all', 'inflow', 'outflow', 'transfer'] as const).map(f => (
                     <button key={f} onClick={() => { setTypeFilter(f); setPagination(p => ({ ...p, page: 1 })); }}
-                      className={`px-3 py-1.5 rounded-md text-[10px] font-bold uppercase transition duration-200 transform-gpu ${typeFilter === f ? 'bg-primary text-background' : 'text-text-muted hover:text-text'}`}>
+                      className={`px-3 py-1.5 min-h-[44px] rounded-md text-[10px] font-bold uppercase transition duration-200 transform-gpu ${typeFilter === f ? 'bg-primary text-background' : 'text-text-muted hover:text-text'}`}>
                       {f}
                     </button>
                   ))}

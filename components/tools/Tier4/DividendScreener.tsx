@@ -129,7 +129,7 @@ export const DividendScreener: React.FC = () => {
           <Card className="flex flex-col flex-[2] min-h-[400px]">
             <h4 className="font-bold text-sm text-text-muted uppercase tracking-widest mb-6 text-center">Yield Comparison</h4>
             <div className="flex-1 w-full">
-              <ResponsiveContainer width="100%" height="100%">
+              <ResponsiveContainer width="100%" height="100%" minWidth={0} minHeight={0}>
                 <BarChart data={filteredAssets.slice(0, 6)} layout="vertical" margin={{ left: 0, right: 30 }}>
                   <CartesianGrid strokeDasharray="3 3" stroke="#27272a" horizontal={false} />
                   <XAxis type="number" hide />

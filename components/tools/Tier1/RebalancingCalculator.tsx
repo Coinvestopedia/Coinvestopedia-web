@@ -214,7 +214,7 @@ export const RebalancingCalculator: React.FC = () => {
           <Card>
             <h4 className="font-bold text-center text-sm mb-6 text-text-muted uppercase tracking-wider">Current Allocation</h4>
             <div className="h-[250px]">
-              <ResponsiveContainer width="100%" height="100%">
+              <ResponsiveContainer width="100%" height="100%" minWidth={0} minHeight={0}>
                 <PieChart>
                   <Pie data={result.pieDataCurrent} cx="50%" cy="50%" innerRadius={60} outerRadius={90} dataKey="value" stroke="none">
                     {result.pieDataCurrent.map((_, i) => <Cell key={i} fill={COLORS[i % COLORS.length]} />)}
@@ -233,7 +233,7 @@ export const RebalancingCalculator: React.FC = () => {
           <Card>
             <h4 className="font-bold text-center text-sm mb-6 text-text-muted uppercase tracking-wider">Target Allocation</h4>
             <div className="h-[250px]">
-              <ResponsiveContainer width="100%" height="100%">
+              <ResponsiveContainer width="100%" height="100%" minWidth={0} minHeight={0}>
                 <PieChart>
                   <Pie data={result.pieDataTarget} cx="50%" cy="50%" innerRadius={60} outerRadius={90} dataKey="value" stroke="none">
                     {result.pieDataTarget.map((_, i) => <Cell key={i} fill={COLORS[i % COLORS.length]} />)}

@@ -108,7 +108,7 @@ export const ConfirmSubscription: React.FC<ConfirmSubscriptionProps> = ({ onNavi
                 
                 <button 
                   onClick={() => onNavigate?.(PageRoute.HOME)}
-                  className="w-full text-text-muted hover:text-text text-xs font-bold transition-colors uppercase tracking-widest"
+                  className="w-full min-h-[44px] text-text-muted hover:text-text text-xs font-bold transition-colors uppercase tracking-widest"
                 >
                   Back to Dashboard
                 </button>

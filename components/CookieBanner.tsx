@@ -54,7 +54,7 @@ export const CookieBanner: React.FC = () => {
           </div>
           <button 
             onClick={() => setIsVisible(false)}
-            className="text-text-muted hover:text-text transition-colors"
+            className="p-2 min-w-[44px] min-h-[44px] flex items-center justify-center text-text-muted hover:text-text transition-colors"
             aria-label="Close"
           >
             <X size={20} />
@@ -69,7 +69,7 @@ export const CookieBanner: React.FC = () => {
             </div>
             <a 
               href="/cookies" 
-              className="hover:text-primary underline flex items-center gap-1 transition-colors"
+              className="hover:text-primary underline flex items-center gap-1 transition-colors min-h-[44px] px-2 -mx-2"
             >
               Full Policy <ExternalLink size={12} />
             </a>
@@ -78,13 +78,13 @@ export const CookieBanner: React.FC = () => {
           <div className="grid grid-cols-2 gap-3">
             <button
               onClick={handleDeclineAll}
-              className="px-4 py-2.5 rounded-xl border border-border bg-surface hover:bg-background text-text text-sm font-medium transition-all"
+              className="px-4 py-2.5 min-h-[44px] rounded-xl border border-border bg-surface hover:bg-background text-text text-sm font-medium transition-all"
             >
               Essential Only
             </button>
             <button
               onClick={handleAcceptAll}
-              className="px-4 py-2.5 rounded-xl bg-primary hover:bg-primary-dark text-white text-sm font-medium transition-all shadow-lg shadow-primary/20 active:scale-95"
+              className="px-4 py-2.5 min-h-[44px] rounded-xl bg-primary hover:bg-primary-dark text-white text-sm font-medium transition-all shadow-lg shadow-primary/20 active:scale-95"
             >
               Accept All
             </button>

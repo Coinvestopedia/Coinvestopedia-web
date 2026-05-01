@@ -166,7 +166,7 @@ export const AssetSimulator: React.FC = () => {
            <p className="text-xs text-text-muted mb-6">Simulated geometric growth including synthesized bear market stress periods.</p>
            
            <div className="flex-1 w-full relative">
-             <ResponsiveContainer width="100%" height="100%">
+             <ResponsiveContainer width="100%" height="100%" minWidth={0} minHeight={0}>
                <LineChart data={result.simulationData} margin={{ top: 5, right: 5, left: 15, bottom: 5 }}>
                  <CartesianGrid strokeDasharray="3 3" stroke="#27272a" vertical={false} />
                  <XAxis dataKey="year" tick={{ fontSize: 10, fill: '#a1a1aa' }} stroke="#3f3f46" />
@@ -185,7 +185,7 @@ export const AssetSimulator: React.FC = () => {
         <Card className="h-[200px] flex flex-col">
            <h3 className="font-bold text-sm mb-4 text-text-muted">Underwater Equity Curve (Drawdowns)</h3>
            <div className="flex-1 w-full">
-             <ResponsiveContainer width="100%" height="100%">
+             <ResponsiveContainer width="100%" height="100%" minWidth={0} minHeight={0}>
                <AreaChart data={result.underwaterData} margin={{ top: 5, right: 5, left: 5, bottom: 0 }}>
                  <CartesianGrid strokeDasharray="3 3" stroke="#27272a" vertical={false} />
                  <XAxis dataKey="year" hide />

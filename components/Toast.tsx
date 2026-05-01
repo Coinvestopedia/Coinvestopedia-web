@@ -45,7 +45,7 @@ const ToastItem = ({ id, message, type, onClose }: ToastItemProps) => {
       </div>
       <button
         onClick={() => onClose(id)}
-        className="flex-shrink-0 mt-0.5 hover:opacity-70 transition-opacity"
+        className="flex-shrink-0 -m-2 p-2 min-w-[44px] min-h-[44px] flex items-center justify-center hover:opacity-70 transition-opacity"
         aria-label="Close notification"
       >
         <X size={16} />

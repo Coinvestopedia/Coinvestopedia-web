@@ -199,7 +199,7 @@ export const Newsletter: React.FC<NewsletterProps> = ({ onNavigate }) => {
             </p>
             <button 
               onClick={() => document.getElementById('final-cta')?.scrollIntoView({ behavior: 'smooth' })}
-              className="flex items-center gap-1.5 text-primary text-sm font-semibold cursor-pointer hover:opacity-80 transition-opacity"
+              className="flex items-center gap-1.5 text-primary text-sm font-semibold cursor-pointer hover:opacity-80 transition-opacity min-h-[44px]"
             >
               <span>Subscribe to read full issues</span>
               <ArrowRight size={14} />

@@ -90,7 +90,7 @@ export const DCACalculator: React.FC = () => {
         </div>
         <p className="text-xs text-text-muted mb-4 opacity-75">{result.n} total purchases over {years} years</p>
         <div className="flex-1 min-h-[220px]">
-          <ResponsiveContainer width="100%" height="100%">
+          <ResponsiveContainer width="100%" height="100%" minWidth={0} minHeight={0}>
             <LineChart data={result.chartData} margin={{ top: 5, right: 5, left: 10, bottom: 5 }}>
               <CartesianGrid strokeDasharray="3 3" stroke="#27272a" />
               <XAxis dataKey="period" tick={{ fontSize: 10, fill: '#a1a1aa' }} stroke="#3f3f46" />

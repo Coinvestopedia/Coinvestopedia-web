@@ -71,13 +71,13 @@ export const AIMarketOverview: React.FC<AIMarketOverviewProps> = ({ className = 
           <div className="pt-2 border-t border-white/5 mt-4">
             <p className="text-xs font-bold text-center text-text-muted mb-3">How do you feel about the market?</p>
             <div className="flex justify-center items-center gap-4">
-              <button className="w-9 h-9 rounded-full bg-green-500/10 border border-green-500/20 flex items-center justify-center text-green-500 hover:bg-green-500/20 hover:scale-110 transition-all duration-200">
+              <button className="w-11 h-11 rounded-full bg-green-500/10 border border-green-500/20 flex items-center justify-center text-green-500 hover:bg-green-500/20 hover:scale-110 transition-all duration-200" aria-label="Bullish">
                 <ThumbsUp size={16} />
               </button>
-              <button className="w-9 h-9 rounded-full bg-yellow-500/10 border border-yellow-500/20 flex items-center justify-center text-yellow-500 hover:bg-yellow-500/20 hover:scale-110 transition-all duration-200" title="Neutral">
+              <button className="w-11 h-11 rounded-full bg-yellow-500/10 border border-yellow-500/20 flex items-center justify-center text-yellow-500 hover:bg-yellow-500/20 hover:scale-110 transition-all duration-200" aria-label="Neutral">
                 <Hand size={16} />
               </button>
-              <button className="w-9 h-9 rounded-full bg-red-500/10 border border-red-500/20 flex items-center justify-center text-red-500 hover:bg-red-500/20 hover:scale-110 transition-all duration-200">
+              <button className="w-11 h-11 rounded-full bg-red-500/10 border border-red-500/20 flex items-center justify-center text-red-500 hover:bg-red-500/20 hover:scale-110 transition-all duration-200" aria-label="Bearish">
                 <ThumbsDown size={16} />
               </button>
             </div>

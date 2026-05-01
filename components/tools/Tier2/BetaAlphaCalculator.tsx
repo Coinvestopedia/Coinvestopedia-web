@@ -110,7 +110,7 @@ export const BetaAlphaCalculator: React.FC = () => {
            <p className="text-xs text-text-muted mb-4 uppercase tracking-wider font-bold">Y = {result.beta.toFixed(2)}X + {(result.annualizedAlpha/52).toFixed(3)}%</p>
            
            <div className="flex-1 w-full bg-background/50 rounded-lg border border-border/50 p-2">
-             <ResponsiveContainer width="100%" height="100%">
+             <ResponsiveContainer width="100%" height="100%" minWidth={0} minHeight={0}>
                <ScatterChart margin={{ top: 20, right: 20, bottom: 20, left: 20 }}>
                  <CartesianGrid strokeDasharray="3 3" stroke="#27272a" />
                  

@@ -135,7 +135,7 @@ export const DrawdownAnalyzer: React.FC = () => {
         <Card className="flex-1 min-h-[250px] flex flex-col">
            <h3 className="font-bold text-sm mb-4 text-text-muted">Portfolio Value over Simulated Cycle</h3>
            <div className="flex-1 w-full">
-             <ResponsiveContainer width="100%" height="100%">
+             <ResponsiveContainer width="100%" height="100%" minWidth={0} minHeight={0}>
                <AreaChart data={result.data} margin={{ top: 5, right: 5, left: 10, bottom: 5 }}>
                  <CartesianGrid strokeDasharray="3 3" stroke="#27272a" vertical={false} />
                  <XAxis dataKey="year" tick={{ fontSize: 10, fill: '#a1a1aa' }} stroke="#3f3f46" />
@@ -153,7 +153,7 @@ export const DrawdownAnalyzer: React.FC = () => {
         <Card className="flex-1 min-h-[200px] flex flex-col">
            <h3 className="font-bold text-sm mb-4 text-text-muted text-red-400">Underwater Curve (Drawdown Depth)</h3>
            <div className="flex-1 w-full">
-             <ResponsiveContainer width="100%" height="100%">
+             <ResponsiveContainer width="100%" height="100%" minWidth={0} minHeight={0}>
                <AreaChart data={result.data} margin={{ top: 5, right: 5, left: 10, bottom: 5 }}>
                  <CartesianGrid strokeDasharray="3 3" stroke="#27272a" vertical={false} />
                  <XAxis dataKey="year" hide />

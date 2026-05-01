@@ -29,13 +29,13 @@ export const NotFound: React.FC<NotFoundProps> = ({ onNavigate }) => {
       <div className="flex flex-wrap items-center justify-center gap-3">
         <button
           onClick={() => onNavigate?.(PageRoute.HOME)}
-          className="px-6 py-3 bg-primary text-white font-bold text-sm rounded-xl hover:bg-primary/90 transition-colors shadow-lg shadow-primary/20"
+          className="px-6 py-3 min-h-[44px] bg-primary text-white font-bold text-sm rounded-xl hover:bg-primary/90 transition-colors shadow-lg shadow-primary/20"
         >
           Return to Dashboard
         </button>
         <button
           onClick={() => onNavigate?.(PageRoute.LEARN)}
-          className="px-6 py-3 bg-surface border border-border text-text-muted font-bold text-sm rounded-xl hover:text-primary hover:border-primary/50 transition-colors"
+          className="px-6 py-3 min-h-[44px] bg-surface border border-border text-text-muted font-bold text-sm rounded-xl hover:text-primary hover:border-primary/50 transition-colors"
         >
           Browse Knowledge
         </button>
