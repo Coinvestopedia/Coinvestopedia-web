@@ -392,7 +392,10 @@ const BestForGrid: React.FC = () => {
 // ─── Exchange Profiles Section ────────────────────────────────────
 
 const ExchangeProfilesSection: React.FC = () => {
+  const [showAllExchanges, setShowAllExchanges] = useState(false);
   const sortedExchanges = useMemo(() => [...EXCHANGES].sort((a, b) => b.coinvestoAIScore - a.coinvestoAIScore), []);
+
+  const displayedExchanges = showAllExchanges ? sortedExchanges : sortedExchanges.slice(0, 10);
 
   return (
     <section id="exchange-profiles" className="scroll-mt-24">
@@ -416,12 +419,29 @@ const ExchangeProfilesSection: React.FC = () => {
           </div>
 
           <div className="space-y-4">
-            {sortedExchanges.map((exchange, index) => (
+            {displayedExchanges.map((exchange, index) => (
               <React.Fragment key={exchange.id}>
                 <ExchangeCard exchange={exchange} rank={index + 1} />
               </React.Fragment>
             ))}
           </div>
+
+          {sortedExchanges.length > 10 && (
+            <div className="mt-8 flex justify-center">
+              <Button
+                variant="secondary"
+                size="lg"
+                onClick={() => setShowAllExchanges(!showAllExchanges)}
+                className="w-full sm:w-auto min-w-[200px] group gap-3 py-7 rounded-2xl border-primary/30 bg-primary/5 hover:bg-primary/10 hover:border-primary/60 transition-all duration-500 shadow-lg shadow-primary/5 hover:shadow-primary/20"
+                icon={showAllExchanges ? <ChevronUp size={20} className="group-hover:-translate-y-1 transition-all duration-300 text-primary" /> : <ChevronDown size={20} className="group-hover:translate-y-1 transition-all duration-300 text-primary" />}
+                iconPosition="right"
+              >
+                <span className="text-sm font-bold tracking-tight uppercase">
+                  {showAllExchanges ? 'Show Less' : 'Show All Venues'}
+                </span>
+              </Button>
+            </div>
+          )}
         </div>
       </div>
     </section>
@@ -678,6 +698,7 @@ const FeeCalculator: React.FC = () => {
   const [volume, setVolume] = useState(1000000);
   const [tradeType, setTradeType] = useState<'spot' | 'perpetuals'>('spot');
   const [selectedIds, setSelectedIds] = useState<string[]>(['coinbase', 'kraken', 'binance', 'okx', 'hyperliquid']);
+  const [isMobileExpanded, setIsMobileExpanded] = useState(false);
 
   const volumeSteps = [10000, 50000, 100000, 500000, 1000000, 5000000, 10000000, 50000000, 100000000];
 
@@ -726,7 +747,7 @@ const FeeCalculator: React.FC = () => {
         <div className="absolute -right-20 -bottom-20 w-96 h-96 bg-yellow-500/5 rounded-full blur-[100px] opacity-0 group-hover:opacity-100 transition-opacity duration-1000 pointer-events-none"></div>
 
         <div className="relative z-10">
-          <div className="flex flex-col md:flex-row items-center md:items-center justify-between gap-6 mb-12 text-center md:text-left">
+          <div className={`flex flex-col md:flex-row items-center md:items-center justify-between gap-6 text-center md:text-left ${!isMobileExpanded ? 'mb-6 md:mb-12' : 'mb-12'}`}>
             <div>
               <h2 className="text-2xl font-bold mb-2 flex items-center justify-center md:justify-start gap-2">
                 <span className="w-1.5 h-6 bg-yellow-500 rounded-sm inline-block"></span>
@@ -734,7 +755,7 @@ const FeeCalculator: React.FC = () => {
               </h2>
               <p className="text-text-muted">Simulate annual trading slippage and fee overhead across multiple venues.</p>
             </div>
-            <div className="flex bg-background/50 p-1.5 rounded-xl border border-border backdrop-blur-md">
+            <div className={`flex bg-background/50 p-1.5 rounded-xl border border-border backdrop-blur-md ${!isMobileExpanded ? 'hidden md:flex' : ''}`}>
               {(['spot', 'perpetuals'] as const).map(t => (
                 <button
                   key={t}
@@ -747,7 +768,23 @@ const FeeCalculator: React.FC = () => {
             </div>
           </div>
 
-          <div className="space-y-10">
+          {/* Mobile Expand Toggle */}
+          <div className="md:hidden flex justify-center mb-6">
+            <Button
+              variant="secondary"
+              size="sm"
+              onClick={() => setIsMobileExpanded(!isMobileExpanded)}
+              className="w-full group gap-2 py-3 rounded-xl border-border/50 bg-surface/30 hover:bg-surface hover:border-primary/20 transition-all duration-500 text-text-muted hover:text-primary"
+              icon={isMobileExpanded ? <ChevronUp size={16} className="group-hover:-translate-y-1 transition-all duration-300" /> : <ChevronDown size={16} className="group-hover:translate-y-1 transition-all duration-300" />}
+              iconPosition="right"
+            >
+              <span className="text-xs font-bold tracking-tight uppercase">
+                {isMobileExpanded ? 'Hide Calculator' : 'Expand Calculator'}
+              </span>
+            </Button>
+          </div>
+
+          <div className={`space-y-10 ${!isMobileExpanded ? 'hidden md:block' : ''}`}>
             {/* Volume slider */}
             <div className="bg-background/40 p-6 rounded-2xl border border-border/50">
               <div className="flex justify-between items-end mb-4">
@@ -941,27 +978,27 @@ const RegulatoryMatrix: React.FC = () => {
           </div>
 
           <div className="bg-background/40 rounded-2xl border border-border/50 overflow-hidden backdrop-blur-sm">
-            <div className="overflow-x-auto">
-              <table className="w-full min-w-[800px]">
-                <thead>
-                  <tr className="border-b border-border/50 bg-surface/30">
-                    <th className="p-5 text-left text-[10px] font-black uppercase tracking-widest text-text-muted">Venue Infrastructure</th>
+            <div className="overflow-auto custom-scrollbar relative max-h-[600px]">
+              <table className="w-full min-w-[800px] border-collapse relative">
+                <thead className="sticky top-0 z-20 shadow-sm">
+                  <tr className="bg-surface">
+                    <th className="sticky left-0 z-30 bg-surface p-5 text-left text-[10px] font-black uppercase tracking-widest text-text-muted border-b border-r border-border/50 shadow-[4px_0_12px_rgba(0,0,0,0.03)] after:absolute after:inset-y-0 after:right-0 after:w-px after:bg-border/50">Venue Infrastructure</th>
                     {REGIONS.map(r => (
-                      <th key={r} className="p-5 text-center text-[10px] font-black uppercase tracking-widest text-text-muted">{r}</th>
+                      <th key={r} className="p-5 text-center text-[10px] font-black uppercase tracking-widest text-text-muted border-b border-border/50 bg-surface">{r}</th>
                     ))}
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-border/30">
-                  {EXCHANGES.map(e => (
-                    <tr key={e.id} className="hover:bg-emerald-500/5 transition-colors group/row">
-                      <td className="p-5">
+                  {EXCHANGES.map((e, i) => (
+                    <tr key={e.id} className="group/row">
+                      <td className={`sticky left-0 z-10 p-5 border-r border-border/50 shadow-[4px_0_12px_rgba(0,0,0,0.03)] after:absolute after:inset-y-0 after:right-0 after:w-px after:bg-border/50 transition-colors duration-300 ${i % 2 === 0 ? 'bg-surface' : 'bg-background'}`}>
                         <div className="flex items-center gap-3">
                            <div className="w-1 h-4 bg-transparent group-hover/row:bg-emerald-500 transition-colors rounded-full"></div>
                            <span className="font-bold text-sm text-text transition-colors group-hover/row:text-emerald-400">{e.name}</span>
                         </div>
                       </td>
                       {REGIONS.map(r => (
-                        <td key={r} className="p-5 text-center">
+                        <td key={r} className={`p-5 text-center transition-colors duration-300 ${i % 2 === 0 ? 'bg-surface/30' : 'bg-transparent'} group-hover/row:bg-emerald-500/5`}>
                           <div className="flex justify-center scale-110 transition-transform hover:scale-125">
                             {regStatusIcon(e.regulatoryMap[r])}
                           </div>
