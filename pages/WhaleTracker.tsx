@@ -250,10 +250,7 @@ export const WhaleTracker: React.FC<WhaleTrackerProps> = ({ onNavigate }) => {
   // Load data & Initialize Orchestrator
   useEffect(() => {
     const orchestrator = new WhaleOrchestrator(
-      {
-        whaleAlertKey: import.meta.env.VITE_WHALE_ALERT_API_KEY || '',
-        etherscanKey: import.meta.env.VITE_ETHERSCAN_API || '',
-      },
+      {},
       (data) => {
         setFullDataset(data.txs);
         setMacroStats(data.macroStats);

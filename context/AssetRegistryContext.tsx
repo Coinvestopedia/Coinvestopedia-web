@@ -37,7 +37,11 @@ export const AssetRegistryProvider: React.FC<{ children: ReactNode }> = ({ child
             throw new Error('Edge fetch failed');
           }
         } catch (e) {
-            console.warn("Backend /api/market-data unavailable locally, falling back to direct client fetching...");
+            if (import.meta.env.DEV) {
+              console.debug("[AssetRegistryContext] /api/market-data unavailable locally, falling back to direct fetching.");
+            } else {
+              console.warn("Backend /api/market-data unavailable, falling back to direct client fetching...");
+            }
         }
 
         if (cryptoResultValue === null || macroResultValue === null) {

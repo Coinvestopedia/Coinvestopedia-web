@@ -199,7 +199,7 @@ const SectorPerformanceCard: React.FC = () => {
       {sectors.length === 0 ? (
         <div className="flex md:grid overflow-x-auto md:overflow-x-visible md:grid-cols-2 gap-3 animate-pulse flex-1 snap-x snap-mandatory pb-2 md:pb-0">
           {[1,2,3,4,5,6,7,8].map(i => (
-            <div key={i} className="min-w-[140px] md:min-w-0 snap-center h-20 bg-surface/50 rounded-xl"></div>
+            <div key={i} className="min-w-[140px] md:min-w-0 snap-center h-20 bg-white/5 border border-white/5 rounded-xl"></div>
           ))}
         </div>
       ) : (

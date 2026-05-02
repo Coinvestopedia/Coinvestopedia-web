@@ -18,11 +18,11 @@ export const TradingViewTimelineNews = memo(() => {
       displayMode: "regular",
       width: "100%",
       height: "100%",
-      colorTheme: isDarkMode ? "dark" : "light",
+      colorTheme: "dark",
       locale: "en"
     };
     return `https://www.tradingview.com/embed-widget/timeline/?locale=en#${encodeURIComponent(JSON.stringify(config))}`;
-  }, [isDarkMode]);
+  }, []);
 
   return (
     <div className="tradingview-widget-container h-full w-full rounded-xl overflow-hidden border border-border bg-surface">

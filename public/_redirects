@@ -1,0 +1,7 @@
+# SPA Fallback
+/* /index.html 200
+
+# Legacy RSS compatibility
+/rss/coindesk https://www.coindesk.com/arc/outboundfeeds/rss/ 301
+/rss/cointelegraph https://cointelegraph.com/rss 301
+/rss/decrypt https://decrypt.co/feed 301

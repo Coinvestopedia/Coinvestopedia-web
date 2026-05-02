@@ -6,10 +6,21 @@ export const onRequestGet: PagesFunction = async (context) => {
   const path = pathSegments.join('/');
   const url = new URL(context.request.url);
 
-  const targetUrl = `https://cryptopanic.com/${path}${url.search}`;
+  const env = context.env as { CRYPTOPANIC_API?: string; VITE_CRYPTOPANIC_API?: string };
+  const apiKey = env.CRYPTOPANIC_API || env.VITE_CRYPTOPANIC_API;
+
+  const targetUrl = new URL(`https://cryptopanic.com/${path}`);
+  // Copy all search params except auth_token (which we inject)
+  url.searchParams.forEach((value, key) => {
+    if (key !== 'auth_token') targetUrl.searchParams.set(key, value);
+  });
+  
+  if (apiKey) {
+    targetUrl.searchParams.set('auth_token', apiKey);
+  }
 
   try {
-    const response = await fetch(targetUrl, {
+    const response = await fetch(targetUrl.toString(), {
       headers: {
         'User-Agent':
           'Mozilla/5.0 (compatible; Coinvestopedia/1.0; +https://coinvestopedia.com)',

@@ -110,7 +110,8 @@ function TableComponent<T extends Record<string, any>>({
       el.removeEventListener('scroll', checkScroll);
       window.removeEventListener('resize', checkScroll);
     };
-  }, [checkScroll, sortedData]);
+    // Use data.length as a stable primitive instead of sortedData (new ref every render)
+  }, [checkScroll, data.length]);
 
   const handleSort = (key: keyof T | string) => {
     if (sortKey === key) {

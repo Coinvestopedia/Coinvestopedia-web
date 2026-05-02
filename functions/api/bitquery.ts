@@ -8,9 +8,11 @@ export const onRequestAll: PagesFunction = async (context) => {
       'Content-Type': 'application/json',
     };
 
-    const authHeader = context.request.headers.get('Authorization');
-    if (authHeader) {
-      headers['Authorization'] = authHeader;
+    const env = context.env as { BITQUERY_API_KEY?: string; VITE_BITQUERY_API_KEY?: string };
+    const apiKey = env.BITQUERY_API_KEY || env.VITE_BITQUERY_API_KEY;
+
+    if (apiKey) {
+      headers['Authorization'] = apiKey.startsWith('Bearer ') ? apiKey : `Bearer ${apiKey}`;
     }
 
     const body = context.request.method === 'POST'

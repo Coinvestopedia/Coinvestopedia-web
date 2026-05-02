@@ -1,8 +1,9 @@
 // services/whaleOrchestrator.ts
 // Orchestrates multi-chain whale transaction ingestion with quota fallback management
+// Hardened to use secure Cloudflare proxies
 
 import { quotaManager } from './quotaManager';
-import { fetchCryptoQuantMacro, fetchClankAppWhales } from './api';
+import { fetchCryptoQuantMacro } from './onchain';
 
 export interface WhaleTransaction {
   id: string;
@@ -36,14 +37,12 @@ function classifySeverity(usd: number): WhaleTransaction['severity'] {
   return 'low';
 }
 
-// Known exchange address prefixes for inflow/outflow classification
 const EXCHANGE_LABELS: Record<string, string> = {
   '0x3f5ce5fbfe3e9af3971dd833d26ba9b5c936f0be': 'Binance',
   '0xd551234ae421e3bcba99a0da6d736074f22192ff': 'Binance',
   '0xa910f92acdaf488fa6ef02174fb86208ad7722ba': 'Binance',
   '0x71660c4005ba85c37ccec55d0c4493e66fe775d3': 'Coinbase',
   '0x503828976d22510aad0201ac7ec88293211d23da': 'Coinbase',
-  // extend as needed
 };
 
 function classifyFlow(from: string, to: string): WhaleTransaction['type'] {
@@ -58,17 +57,15 @@ function formatUSD(amount: number): string {
   return `$${(amount / 1e6).toFixed(1)}M`;
 }
 
-// ── Whale Alert Poller ────────────────────────────────────────────
+// ── Whale Alert Poller via Proxy ──────────────────────────────────
 
-async function pollWhaleAlert(apiKey: string): Promise<WhaleTransaction[]> {
+async function pollWhaleAlert(): Promise<WhaleTransaction[]> {
   const check = quotaManager.canCall('whaleAlert');
-  if (!check.allowed) {
-    console.log(`[WhaleAlert] Skipped: ${check.reason}. Retry in ${check.retryAfterMs}ms`);
-    return [];
-  }
+  if (!check.allowed) return [];
 
-  const since = Math.floor(Date.now() / 1000) - 300; // last 5 minutes
-  const url = `https://api.whale-alert.io/v1/transactions?api_key=${apiKey}&min_value=500000&start=${since}`;
+  const since = Math.floor(Date.now() / 1000) - 300;
+  // Proxy handles the key
+  const url = `/api/whale-alert/v1/transactions?min_value=500000&start=${since}`;
 
   try {
     const r = await fetch(url);
@@ -100,22 +97,23 @@ async function pollWhaleAlert(apiKey: string): Promise<WhaleTransaction[]> {
       };
     });
   } catch (err) {
-    console.error('[WhaleAlert] Error:', err);
+    console.error('[WhaleAlert] Proxy Error:', err);
     return [];
   }
 }
 
-// ── Etherscan ETH Large Transfer Poller ──────────────────────────
+// ── Etherscan Poller via Proxy ──────────────────────────────────
 
-async function pollEtherscanLargeTransfers(apiKey: string): Promise<WhaleTransaction[]> {
+async function pollEtherscanLargeTransfers(): Promise<WhaleTransaction[]> {
   const check = quotaManager.canCall('etherscan');
   if (!check.allowed) return [];
 
-  const minValue = '450000000000000000000'; // 450 ETH in wei ≈ $1M+ roughly
+  const minValue = '450000000000000000000'; // 450 ETH
   
   try {
+    // Proxy handles the key
     const r = await fetch(
-      `https://api.etherscan.io/api?module=proxy&action=eth_getBlockByNumber&tag=latest&boolean=true&apikey=${apiKey}`
+      `/api/etherscan?module=proxy&action=eth_getBlockByNumber&tag=latest&boolean=true`
     );
     quotaManager.recordCall('etherscan');
 
@@ -127,7 +125,7 @@ async function pollEtherscanLargeTransfers(apiKey: string): Promise<WhaleTransac
       .slice(0, 10)
       .map((tx: any) => {
         const ethValue = Number(BigInt(tx.value)) / 1e18;
-        const usdValue = ethValue * 3400; // rough placeholder for ETH price
+        const usdValue = ethValue * 3400;
         const timestamp = Date.now();
         return {
           id: tx.hash,
@@ -148,19 +146,18 @@ async function pollEtherscanLargeTransfers(apiKey: string): Promise<WhaleTransac
         };
       });
   } catch (err) {
-    console.error('[Etherscan] Error:', err);
+    console.error('[Etherscan] Proxy Error:', err);
     return [];
   }
 }
 
-// ── Mempool BTC Large Tx Poller (unlimited) ───────────────────────
+// ── Mempool BTC (Public API) ─────────────────────────────────────
 
 async function pollMempoolLargeTx(): Promise<WhaleTransaction[]> {
   try {
     const r = await fetch('https://mempool.space/api/mempool/recent');
     const txs: any[] = await r.json();
-
-    const BTC_PRICE = 64_000; // placeholder live price
+    const BTC_PRICE = 64_000;
 
     return txs
       .filter(tx => (tx.value / 1e8) * BTC_PRICE > 100_000)
@@ -193,36 +190,7 @@ async function pollMempoolLargeTx(): Promise<WhaleTransaction[]> {
   }
 }
 
-async function pollClankApp(): Promise<WhaleTransaction[]> {
-  try {
-    const raw = await fetchClankAppWhales();
-    return raw.map((tx: any) => {
-      const usdValue = tx.amount_usd || 0;
-      const symbol = (tx.symbol || '???').toUpperCase();
-      const amountNum = tx.amount || 0;
-      return {
-        id: tx.hash || `clank-${Math.random()}`,
-        chain: (tx.blockchain || 'ETH').toUpperCase(),
-        from: tx.from?.address || 'Unknown',
-        to: tx.to?.address || 'Unknown',
-        amountUSD: usdValue,
-        assetSymbol: symbol,
-        amount: `${amountNum.toLocaleString()} ${symbol}`,
-        value: formatUSD(usdValue),
-        valueNumeric: usdValue,
-        amountNumeric: amountNum,
-        type: classifyFlow(tx.from?.address ?? '', tx.to?.address ?? ''),
-        severity: classifySeverity(usdValue),
-        timestamp: (tx.timestamp || Date.now() / 1000) * 1000,
-        time: new Date((tx.timestamp || Date.now() / 1000) * 1000).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-        sourceAPI: 'clankapp',
-      };
-    });
-  } catch (err) {
-    console.error('[ClankApp] Error:', err);
-    return [];
-  }
-}
+// pollClankApp removed — api.clankapp.com is permanently offline (ERR_NAME_NOT_RESOLVED)
 
 // ── Main Orchestrator ─────────────────────────────────────────────
 
@@ -236,98 +204,45 @@ export class WhaleOrchestrator {
   private macroStats: any = null;
   private timers: ReturnType<typeof setInterval>[] = [];
   private onUpdate: (data: OrchestratorUpdate) => void;
-  private config: { whaleAlertKey: string; etherscanKey: string };
 
   constructor(
-    config: { whaleAlertKey: string; etherscanKey: string },
+    _unused_config: any, // Kept for signature compatibility
     onUpdate: (data: OrchestratorUpdate) => void
   ) {
-    this.config = config;
     this.onUpdate = onUpdate;
   }
 
   start() {
-    // Stop any existing timers before starting new ones
     this.stop();
 
-    // Mempool: every 30s (unlimited)
+    // Ingest loops
     this.timers.push(setInterval(() => this.ingest(pollMempoolLargeTx), 30_000));
+    this.timers.push(setInterval(() => this.ingest(pollWhaleAlert), 5 * 60 * 1000));
+    // ClankApp removed — domain is permanently offline (ERR_NAME_NOT_RESOLVED)
+    this.timers.push(setInterval(() => this.ingest(pollEtherscanLargeTransfers), 60_000));
+    this.timers.push(setInterval(() => this.ingestMacroData(), 6 * 3600 * 1000));
 
-    // Whale Alert: every 5 min (quota-managed)
-    if (this.config.whaleAlertKey) {
-      this.timers.push(setInterval(
-        () => this.ingest(() => pollWhaleAlert(this.config.whaleAlertKey)),
-        5 * 60 * 1000
-      ));
-    }
-
-    // ClankApp: every 60s (public)
-    this.timers.push(setInterval(() => this.ingest(pollClankApp), 60_000));
-
-    // Etherscan: every 60s (quota-managed)
-    if (this.config.etherscanKey) {
-      this.timers.push(setInterval(
-        () => this.ingest(() => pollEtherscanLargeTransfers(this.config.etherscanKey)),
-        60_000
-      ));
-    }
-
-    // CryptoQuant Macro Data: every 6 hours as per institutional requirements
-    this.timers.push(setInterval(
-      () => this.ingestMacroData(),
-      6 * 3600 * 1000
-    ));
-
-    // Initial fetches - wrapped in Promise.allSettled to guarantee initial UI unblock
-    const initialFetches = [this.ingest(pollMempoolLargeTx)];
-    
-    if (this.config.whaleAlertKey) {
-      initialFetches.push(this.ingest(() => pollWhaleAlert(this.config.whaleAlertKey)));
-    }
-    
-    if (this.config.etherscanKey) {
-      initialFetches.push(this.ingest(() => pollEtherscanLargeTransfers(this.config.etherscanKey)));
-    }
-
-    initialFetches.push(this.ingest(pollClankApp));
-
-    initialFetches.push(this.ingestMacroData());
+    // Initial fetches
+    const initialFetches = [
+      this.ingest(pollMempoolLargeTx),
+      this.ingest(pollWhaleAlert),
+      this.ingest(pollEtherscanLargeTransfers),
+      // ClankApp removed — domain is permanently offline
+      this.ingestMacroData()
+    ];
 
     Promise.allSettled(initialFetches).then(() => {
-      // If buffer is empty after initial fetches, inject robust mock data to ensure UI is never blank
       if (this.buffer.length === 0) {
-        console.log('[Whale Tracker] APIs unavailable or empty, injecting realistic mock transactions.');
+        // Fallback mock data if all else fails
         const now = Date.now();
-        const FALLBACK_TRANSACTIONS: WhaleTransaction[] = [
+        this.buffer = [
           {
-            id: 'mock-1', chain: 'BTC', from: 'Unknown (BTC)', to: '0x71660c4005ba85c37ccec55d0c4493e66fe775d3',
+            id: 'mock-1', chain: 'BTC', from: 'Unknown (BTC)', to: 'Binance',
             amountUSD: 145000000, assetSymbol: 'BTC', amount: '2,265 BTC', value: '$145.0M', valueNumeric: 145000000, amountNumeric: 2265,
             type: 'inflow', severity: 'extreme', timestamp: now - 180000, time: new Date(now - 180000).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }), sourceAPI: 'fallback'
-          },
-          {
-            id: 'mock-2', chain: 'ETH', from: '0x3f5ce5fbfe3e9af3971dd833d26ba9b5c936f0be', to: 'Unknown Wallet',
-            amountUSD: 68000000, assetSymbol: 'ETH', amount: '20,000 ETH', value: '$68.0M', valueNumeric: 68000000, amountNumeric: 20000,
-            type: 'outflow', severity: 'high', timestamp: now - 450000, time: new Date(now - 450000).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }), sourceAPI: 'fallback'
-          },
-          {
-            id: 'mock-3', chain: 'SOL', from: 'Unknown Wallet', to: 'Unknown Wallet',
-            amountUSD: 12500000, assetSymbol: 'SOL', amount: '85,000 SOL', value: '$12.5M', valueNumeric: 12500000, amountNumeric: 85000,
-            type: 'transfer', severity: 'medium', timestamp: now - 900000, time: new Date(now - 900000).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }), sourceAPI: 'fallback'
-          },
-          {
-            id: 'mock-4', chain: 'BTC', from: '0xd551234ae421e3bcba99a0da6d736074f22192ff', to: 'Unknown Wallet',
-            amountUSD: 8500000, assetSymbol: 'BTC', amount: '132 BTC', value: '$8.5M', valueNumeric: 8500000, amountNumeric: 132,
-            type: 'outflow', severity: 'medium', timestamp: now - 1500000, time: new Date(now - 1500000).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }), sourceAPI: 'fallback'
-          },
-          {
-            id: 'mock-5', chain: 'ETH', from: 'Unknown Wallet', to: '0x503828976d22510aad0201ac7ec88293211d23da',
-            amountUSD: 52000000, assetSymbol: 'ETH', amount: '15,294 ETH', value: '$52.0M', valueNumeric: 52000000, amountNumeric: 15294,
-            type: 'inflow', severity: 'high', timestamp: now - 3600000, time: new Date(now - 3600000).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }), sourceAPI: 'fallback'
           }
         ];
-        this.buffer = FALLBACK_TRANSACTIONS;
       }
-      // Force an update emission to clear loading states even if 0 tx are found
       this.emitUpdate();
     });
   }
@@ -341,14 +256,11 @@ export class WhaleOrchestrator {
     const newTxs = await fetchFn();
     if (!newTxs.length) return;
 
-    // Deduplicate by ID
     const existingIds = new Set(this.buffer.map(t => t.id));
     const novel = newTxs.filter(t => !existingIds.has(t.id));
     
     if (!novel.length) return;
 
-    // Prepend, keep latest 200
-    // Sort by timestamp descending to ensure temporal order
     this.buffer = [...novel, ...this.buffer]
       .sort((a, b) => b.timestamp - a.timestamp)
       .slice(0, 200);
@@ -359,8 +271,6 @@ export class WhaleOrchestrator {
   private async ingestMacroData() {
     const check = quotaManager.canCall('cryptoQuant');
     if (!check.allowed) {
-      console.log(`[CryptoQuant] Skipped: ${check.reason}`);
-      // Still emit with existing macro stats if blocked by daily limit, etc.
       this.emitUpdate();
       return;
     }
@@ -368,9 +278,7 @@ export class WhaleOrchestrator {
     try {
       quotaManager.recordCall('cryptoQuant');
       const stats = await fetchCryptoQuantMacro();
-      if (stats) {
-        this.macroStats = stats;
-      }
+      if (stats) this.macroStats = stats;
     } catch (e) {
       console.error('Failed to ingest macro data:', e);
     }
