@@ -141,6 +141,16 @@ export const fetchCryptoQuantReserves = async () => {
   try {
     // Fetch miner outflow as a proxy for reserve pressure
     const response = await fetch(`/api/cryptoquant/v1/btc/miner-flows/outflow?window=hour&limit=24`);
+    
+    // Validate that we actually got JSON back to prevent parsing errors
+    const contentType = response.headers.get('content-type');
+    if (!contentType || !contentType.includes('application/json')) {
+      if (import.meta.env.DEV) {
+        console.warn('CryptoQuant API returned non-JSON response. Likely WAF block or missing API key.');
+      }
+      return { minerOutflow: 50 }; // Fallback to neutral
+    }
+
     const body = await response.json();
     
     // Calculate a simple average or latest value for minerOutflow

@@ -12,10 +12,13 @@ export const onRequestAll: PagesFunction = async (context) => {
       'User-Agent': 'Mozilla/5.0 (compatible; Coinvestopedia/1.0)',
     };
 
-    // Forward Authorization header if present
+    // Forward Authorization header if present from client
     const authHeader = context.request.headers.get('Authorization');
     if (authHeader) {
       headers['Authorization'] = authHeader;
+    } else if (context.env?.CRYPTOQUANT_API_KEY) {
+      // Or use server-side API key if configured
+      headers['Authorization'] = `Bearer ${context.env.CRYPTOQUANT_API_KEY}`;
     }
 
     const response = await fetch(targetUrl, {
@@ -25,11 +28,12 @@ export const onRequestAll: PagesFunction = async (context) => {
     });
 
     const body = await response.text();
+    const contentType = response.headers.get('Content-Type') || 'application/json; charset=utf-8';
 
     return new Response(body, {
       status: response.status,
       headers: {
-        'Content-Type': 'application/json; charset=utf-8',
+        'Content-Type': contentType,
         'Cache-Control': 'public, s-maxage=21600, stale-while-revalidate=60',
         'Access-Control-Allow-Origin': '*',
       },
