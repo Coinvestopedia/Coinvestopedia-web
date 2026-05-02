@@ -1,0 +1,18 @@
+# Coinvestopedia
+> Institutional-grade crypto exchange research and comparison platform.
+
+## Key Pages
+- /exchanges — Compare 50+ exchanges with Coinvesto AI Score™
+- /whale-tracker — Real-time institutional capital flow and whale alerts
+- /tools — Crypto fee calculators, yield comparators, and rebalancing tools
+- /macro-intel — Institutional-grade macro research and market intelligence
+- /research — Deep-dive institutional reports
+
+## About
+Coinvestopedia provides AI-synthesized research scores for cryptocurrency exchanges covering security, fees, liquidity, and compliance. Our platform is designed for finance professionals and institutional investors seeking high-signal data in the crypto markets.
+
+## Brand Values
+- Institutional Precision
+- Data-Driven Intelligence
+- Educational Excellence
+- Absolute Transparency

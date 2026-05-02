@@ -60,18 +60,32 @@
     
     <!-- JSON-LD Structured Data -->
     <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "EducationalOrganization",
-      "name": "Coinvestopedia",
-      "url": "https://coinvestopedia.com",
-      "logo": "https://coinvestopedia.com/logo-dark-full.png",
-      "description": "World-class institutional-grade crypto research, educational simulators, and market intelligence.",
-      "sameAs": [
-        "https://twitter.com/coinvestopedia",
-        "https://www.linkedin.com/company/coinvestopedia"
-      ]
-    }
+    [
+      {
+        "@context": "https://schema.org",
+        "@type": "EducationalOrganization",
+        "name": "Coinvestopedia",
+        "url": "https://coinvestopedia.com",
+        "logo": "https://coinvestopedia.com/logo-dark-full.png",
+        "description": "World-class institutional-grade crypto research, educational simulators, and market intelligence.",
+        "sameAs": [
+          "https://twitter.com/coinvestopedia",
+          "https://www.linkedin.com/company/coinvestopedia"
+        ]
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Coinvestopedia",
+        "url": "https://coinvestopedia.com",
+        "description": "Institutional crypto exchange research & AI scoring platform",
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "https://coinvestopedia.com/exchanges?q={search_term_string}",
+          "query-input": "required name=search_term_string"
+        }
+      }
+    ]
     </script>
 
 
