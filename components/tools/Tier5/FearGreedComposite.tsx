@@ -139,6 +139,8 @@ export const FearGreedComposite: React.FC = () => {
                           </span>
                        </div>
                        <input 
+                         id={`driver-${driver.id}`}
+                         name={`driver-${driver.id}`}
                          type="range" 
                          min="0" max="100" 
                          value={driverValues[driver.id]} 

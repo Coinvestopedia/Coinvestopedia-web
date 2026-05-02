@@ -117,6 +117,8 @@ export const RebalancingCalculator: React.FC = () => {
                     <tr key={h.id} className="group">
                       <td className="py-4 pr-2">
                         <input
+                          id={`symbol-${h.id}`}
+                          name={`symbol-${h.id}`}
                           type="text"
                           value={h.symbol}
                           onChange={e => updateHolding(h.id, 'symbol', e.target.value)}
@@ -128,6 +130,8 @@ export const RebalancingCalculator: React.FC = () => {
                          <div className="relative group/input flex-1 min-w-[120px] max-w-[200px]">
                            <span className="absolute left-3 top-1/2 -translate-y-1/2 text-text-muted text-xs font-bold">$</span>
                             <input
+                              id={`value-${h.id}`}
+                              name={`value-${h.id}`}
                               type="number"
                               value={h.value}
                               onChange={e => updateHolding(h.id, 'value', e.target.value)}
@@ -139,6 +143,8 @@ export const RebalancingCalculator: React.FC = () => {
                       <td className="py-4 pr-4 text-right flex justify-end">
                          <div className="relative inline-block w-full max-w-[140px]">
                             <input
+                              id={`targetWeight-${h.id}`}
+                              name={`targetWeight-${h.id}`}
                               type="number"
                               value={h.targetWeight}
                               onChange={e => updateHolding(h.id, 'targetWeight', e.target.value)}

@@ -116,6 +116,8 @@ export const NewsletterSignup: React.FC<NewsletterSignupProps> = ({
           <form onSubmit={handleSubmit} className="flex flex-row items-stretch gap-3 w-full relative z-10">
             <div className="flex-1">
                 <input
+                  id="newsletter-email-compact"
+                  name="email"
                   type="email"
                   placeholder="Your email address"
                   value={email}
@@ -187,6 +189,8 @@ export const NewsletterSignup: React.FC<NewsletterSignupProps> = ({
                 <div className="flex-1">
                   <div className="relative">
                     <input
+                      id="newsletter-email-default"
+                      name="email"
                       type="email"
                       placeholder="Your email address"
                       value={email}

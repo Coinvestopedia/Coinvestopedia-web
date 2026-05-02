@@ -27,6 +27,8 @@ export const SearchBar: React.FC<SearchBarProps> = ({
           <Search size={18} className={`transition-colors ${isFocused ? 'text-primary' : 'text-text-muted'}`} />
         </div>
         <input 
+          id="global-search-input"
+          name="q"
           type="text" 
           placeholder={placeholder}
           value={query}
