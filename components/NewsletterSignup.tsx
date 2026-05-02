@@ -4,7 +4,7 @@ import { Mail, Sparkles, Check, AlertCircle } from 'lucide-react';
 import { Button } from './Button';
 import { useAppContext } from '../context/AppContext';
 import { subscribeToBriefing, getUtmParams } from '../services/briefing';
-import { trackEvent } from '../utils/analytics';
+import { trackEvent, identifyUser } from '../utils/analytics';
 
 interface NewsletterSignupProps {
   className?: string;
@@ -80,6 +80,9 @@ export const NewsletterSignup: React.FC<NewsletterSignupProps> = ({
         source: 'briefing_signup',
         location: variant === 'compact' ? 'footer/sidebar' : 'hero_section'
       });
+
+      // Identify user in Clarity
+      identifyUser(email, email);
 
       addToast('Check your email to confirm your subscription.', 'success', 4000);
       setEmail('');
