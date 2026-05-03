@@ -235,8 +235,22 @@ const MethodologySection: React.FC = () => {
                         <PolarGrid stroke="#3A3F4B" strokeDasharray="3 3"/>
                         <PolarAngleAxis dataKey="subject" tick={{ fill: '#94A3B8', fontSize: 10, fontWeight: 'bold' }} />
                         <RechartsTooltip 
-                           contentStyle={{ backgroundColor: '#1A1D24', borderColor: '#333842', borderRadius: '8px' }}
-                           itemStyle={{ color: '#10b981', fontWeight: 'bold' }}
+                           content={({ active, payload }) => {
+                             if (active && payload && payload.length) {
+                               const data = payload[0].payload;
+                               const weight = payload[0].value as number;
+                               const color = getScoreColorHex(weight * 4);
+                               return (
+                                 <div className="bg-[#1A1D24] border border-[#333842] rounded-lg p-3 shadow-xl backdrop-blur-md">
+                                   <p className="text-white font-bold mb-1">{data.subject}</p>
+                                   <p className="font-bold" style={{ color }}>
+                                     Weight (%) : {weight}
+                                   </p>
+                                 </div>
+                               );
+                             }
+                             return null;
+                           }}
                         />
                         <Radar name="Weight (%)" dataKey="weight" stroke="url(#radarStroke)" fill="url(#radarFill)" fillOpacity={1} strokeWidth={2} />
                      </RadarChart>
