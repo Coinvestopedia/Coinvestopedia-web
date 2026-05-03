@@ -26,10 +26,11 @@ import { trackEvent } from '../utils/analytics';
 // ─── Utility helpers ──────────────────────────────────────────────
 
 const getScoreColorHex = (score: number) => {
-  if (score >= 85) return '#10b981'; // emerald-500
-  if (score >= 70) return '#94a3b8'; // slate-400
-  if (score >= 50) return '#f87171'; // red-400
-  return '#ef4444'; // red-500
+  if (score >= 100) return '#10b981'; // 25% (Teal)
+  if (score >= 80) return '#22c55e';  // 20% (Green)
+  if (score >= 60) return '#a6ce39';  // 15% (Lime Green)
+  if (score >= 40) return '#f4c95d';  // 10% (Yellow/Gold)
+  return '#facc15';                   // 5%  (Bright Yellow)
 };
 
 const getRankColorHex = (index: number, total: number) => {
@@ -215,13 +216,29 @@ const MethodologySection: React.FC = () => {
                   <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-primary/5 via-background to-background pointer-events-none"></div>
                   <ResponsiveContainer width="100%" height="100%" minWidth={0} minHeight={0} debounce={50}>
                      <RadarChart cx="50%" cy="50%" outerRadius="70%" data={methodologyRadarData}>
+                        <defs>
+                          <radialGradient id="radarFill" cx="50%" cy="50%" r="50%">
+                            <stop offset="0%" stopColor="#facc15" stopOpacity={0.8}/>
+                            <stop offset="25%" stopColor="#f4c95d" stopOpacity={0.6}/>
+                            <stop offset="50%" stopColor="#a6ce39" stopOpacity={0.5}/>
+                            <stop offset="75%" stopColor="#22c55e" stopOpacity={0.4}/>
+                            <stop offset="100%" stopColor="#10b981" stopOpacity={0.3}/>
+                          </radialGradient>
+                          <radialGradient id="radarStroke" cx="50%" cy="50%" r="50%">
+                            <stop offset="0%" stopColor="#facc15" stopOpacity={1}/>
+                            <stop offset="25%" stopColor="#f4c95d" stopOpacity={1}/>
+                            <stop offset="50%" stopColor="#a6ce39" stopOpacity={1}/>
+                            <stop offset="75%" stopColor="#22c55e" stopOpacity={1}/>
+                            <stop offset="100%" stopColor="#10b981" stopOpacity={1}/>
+                          </radialGradient>
+                        </defs>
                         <PolarGrid stroke="#3A3F4B" strokeDasharray="3 3"/>
                         <PolarAngleAxis dataKey="subject" tick={{ fill: '#94A3B8', fontSize: 10, fontWeight: 'bold' }} />
                         <RechartsTooltip 
                            contentStyle={{ backgroundColor: '#1A1D24', borderColor: '#333842', borderRadius: '8px' }}
                            itemStyle={{ color: '#10b981', fontWeight: 'bold' }}
                         />
-                        <Radar name="Weight (%)" dataKey="weight" stroke="#10b981" fill="#10b981" fillOpacity={0.2} strokeWidth={2} />
+                        <Radar name="Weight (%)" dataKey="weight" stroke="url(#radarStroke)" fill="url(#radarFill)" fillOpacity={1} strokeWidth={2} />
                      </RadarChart>
                   </ResponsiveContainer>
                </div>
