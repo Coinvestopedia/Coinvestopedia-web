@@ -245,6 +245,10 @@ const AppContent: React.FC = () => {
               <img 
                 src="/logo-transparent-dark-desktop.png" 
                 alt="Coinvestopedia" 
+                width="192"
+                height="96"
+                loading="lazy"
+                decoding="async"
                 className="h-16 md:h-24 w-auto opacity-80 hover:opacity-100 transition-opacity"
               />
               <p className="text-text-muted text-sm px-4">

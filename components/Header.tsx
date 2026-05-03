@@ -59,6 +59,7 @@ export const Header: React.FC<HeaderProps> = ({
             width={88}
             height={88}
             decoding="async"
+            fetchPriority="high"
             className="h-16 lg:h-[88px] w-auto object-contain transition-transform duration-200 group-hover:scale-105 hidden md:block"
           />
           {/* ── Mobile Logo ── */}
@@ -68,6 +69,7 @@ export const Header: React.FC<HeaderProps> = ({
             width={48}
             height={48}
             decoding="async"
+            fetchPriority="high"
             className="h-12 w-auto object-contain transition-transform duration-200 group-hover:scale-105 block md:hidden"
           />
         </div>

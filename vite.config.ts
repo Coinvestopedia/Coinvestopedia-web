@@ -112,6 +112,25 @@ export default defineConfig(({ mode }) => {
       },
       build: {
         chunkSizeWarningLimit: 800,
+        sourcemap: true,
+        rollupOptions: {
+          output: {
+            manualChunks: (id) => {
+              // Animations — large, lazy-importable, isolated
+              if (id.includes('node_modules/framer-motion')) {
+                return 'vendor-animations';
+              }
+              // Icons — large, stable, isolated
+              if (id.includes('node_modules/lucide-react')) {
+                return 'vendor-icons';
+              }
+              // All other node_modules together
+              if (id.includes('node_modules')) {
+                return 'vendor';
+              }
+            },
+          },
+        },
       }
     };
 });

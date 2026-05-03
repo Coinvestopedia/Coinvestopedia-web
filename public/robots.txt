@@ -1,6 +1,15 @@
 User-agent: *
 Allow: /
 Disallow: /api/
-Disallow: /_next/
+
+# AI Crawlers — explicitly allowed for GEO/AI citations
+User-agent: GPTBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
 
 Sitemap: https://coinvestopedia.com/sitemap.xml
