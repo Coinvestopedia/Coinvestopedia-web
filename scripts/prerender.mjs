@@ -373,6 +373,19 @@ function run() {
       `<meta property="og:url" content="${canonicalUrl}"`
     )
 
+    // Add hydration guard to prevent FOUC
+    const hydrationGuard = `
+    <style>#root { visibility: hidden; opacity: 0; transition: opacity 0.15s ease; }</style>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        var r = document.getElementById('root');
+        r.style.visibility = 'visible';
+        requestAnimationFrame(function() { r.style.opacity = '1'; });
+      });
+    </script>
+    `;
+    html = html.replace('</head>', hydrationGuard + '</head>')
+
     // Write to the correct path
     if (route === '/') {
       fs.writeFileSync(templatePath, html, 'utf-8')
