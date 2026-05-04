@@ -93,7 +93,7 @@ export const CookieBanner: React.FC = () => {
 
         {/* Legal footprint */}
         <div className="mt-4 pt-4 border-t border-border/50 text-[10px] text-text-muted/60 uppercase tracking-widest text-center">
-          Institutional Access &bull; Coinvestopedia 2025
+          Institutional Intel &bull; Coinvestopedia 2026
         </div>
       </div>
     </div>

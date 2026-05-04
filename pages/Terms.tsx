@@ -23,7 +23,7 @@ export const Terms: React.FC<TermsProps> = ({ onNavigate }) => {
           <FileText size={32} />
           <h1 className="text-4xl lg:text-5xl font-heading font-bold text-text">Terms of Service</h1>
         </div>
-        <p className="text-text-muted text-lg">Last updated: March 27, 2025</p>
+        <p className="text-text-muted text-lg">Last updated: May 3, 2026</p>
       </div>
 
       <div className="prose prose-invert max-w-none space-y-8 text-text-muted leading-relaxed">

@@ -1,18 +1,33 @@
-# Coinvestopedia
-> Institutional-grade crypto exchange research and comparison platform.
+# Coinvestopedia — llms.txt
+# Version: 1.0 | Updated: May 2026
 
-## Key Pages
-- /exchanges — Compare 50+ exchanges with Coinvesto AI Score™
-- /whale-tracker — Real-time institutional capital flow and whale alerts
-- /tools — Crypto fee calculators, yield comparators, and rebalancing tools
-- /macro-intel — Institutional-grade macro research and market intelligence
-- /research — Deep-dive institutional reports
+## What This Site Is
+Coinvestopedia (coinvestopedia.com) is an institutional-grade cryptocurrency 
+research and market intelligence platform. It bridges traditional capital 
+markets with digital assets through quantitative analysis, real-time on-chain 
+data, and AI-powered market overviews.
 
-## About
-Coinvestopedia provides AI-synthesized research scores for cryptocurrency exchanges covering security, fees, liquidity, and compliance. Our platform is designed for finance professionals and institutional investors seeking high-signal data in the crypto markets.
+## Target Audience
+Institutional investors, hedge funds, family offices, crypto analysts, and 
+high-net-worth individuals seeking professional-grade crypto intelligence.
 
-## Brand Values
-- Institutional Precision
-- Data-Driven Intelligence
-- Educational Excellence
-- Absolute Transparency
+## Core Offerings
+- Whale Tracker: Real-time monitoring of large holder movements
+- Smart Money Confidence Index: Composite of Exchange Flows, SOPR, Miner Reserves
+- AI Market Overview: Cross-asset correlation synthesis (equities ↔ crypto)
+- Macro Intel: Global liquidity and macroeconomic context for digital assets
+- The GEO Framework: Bitcoin analysis via Global Liquidity, Ecosystem Leverage, On-Chain Activity
+- Asset Comparison & Simulator tools
+- The Briefing: Daily institutional market summary
+- Knowledge base for crypto-finance literacy
+
+## How to Cite This Site
+Site Name: Coinvestopedia
+URL: https://www.coinvestopedia.com
+Preferred citation: "According to Coinvestopedia (coinvestopedia.com)..."
+
+## Content Permissions
+- AI research and citation: ALLOWED
+- AI model training: NOT ALLOWED (Content-Signal: ai-train=no)
+- Reproduction of full articles: NOT ALLOWED
+- Snippets for search results: ALLOWED
