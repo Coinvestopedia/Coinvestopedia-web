@@ -1,15 +1,27 @@
 # coinvestopedia.com robots.txt
-# Content Rights: ai-train=no (EU Directive 2019/790)
+# Last updated: May 2026
+# EU Directive 2019/790 — ai-train=no is an express reservation of rights
+#
+# ─── IMPORTANT DEPLOYMENT NOTE ───────────────────────────────────────────────
+# Cloudflare injects a managed robots.txt block ABOVE this file by default.
+# That managed block blocks GPTBot and Google-Extended — conflicting with the
+# custom allow rules below.
+#
+# Fix: Cloudflare Dashboard → Security → Bots → Managed robots.txt → set to OFF
+# Or: Cloudflare Dashboard → Crawlers → set "Use custom robots.txt only"
+# Once disabled, this file is the sole source of truth.
+# ─────────────────────────────────────────────────────────────────────────────
 
+# ─── GLOBAL DEFAULTS ──────────────────────────────────────
 User-agent: *
+Content-Signal: search=yes, ai-train=no
 Allow: /
 Disallow: /api/
 
-# ─── AI Training Crawlers — BLOCKED ───────────────────────
-User-agent: ClaudeBot
-Disallow: /
+# ─── AI TRAINING CRAWLERS — BLOCKED ──────────────────────
+# These bots collect content for model training. Blocked under EU Directive 2019/790.
 
-User-agent: Google-Extended
+User-agent: ClaudeBot
 Disallow: /
 
 User-agent: CCBot
@@ -33,7 +45,16 @@ Disallow: /
 User-agent: PetalBot
 Disallow: /
 
-# ─── AI Research Crawlers — ALLOWED for GEO/Citations ─────
+User-agent: Scrapy
+Disallow: /
+
+User-agent: ia_archiver
+Disallow: /
+
+# ─── AI RESEARCH CRAWLERS — ALLOWED (GEO / Citation) ─────
+# These bots retrieve content for real-time AI research and citations.
+# NOT for training. Allowed under Content-Signal: ai-input=yes.
+
 User-agent: GPTBot
 Allow: /
 
@@ -52,4 +73,19 @@ Allow: /
 User-agent: YouBot
 Allow: /
 
+# ─── SEARCH ENGINE CRAWLERS — ALLOWED ────────────────────
+
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Slurp
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+# ─── SITEMAP ──────────────────────────────────────────────
 Sitemap: https://www.coinvestopedia.com/sitemap.xml

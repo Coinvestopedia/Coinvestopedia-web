@@ -1,4 +1,6 @@
 import React, { useEffect } from 'react';
+
+
 import { PageMeta } from '../components/PageMeta';
 import { NewsletterSignup } from '../components/NewsletterSignup';
 import { Card } from '../components/Card';
@@ -16,6 +18,8 @@ export interface NewsletterProps {
 }
 
 export const Newsletter: React.FC<NewsletterProps> = ({ onNavigate }) => {
+
+
   const { setActiveSubMenu, activeSubMenu, setPageCategories } = useAppContext();
 
   useEffect(() => {

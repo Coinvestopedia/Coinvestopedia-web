@@ -1,6 +1,7 @@
 import { PageMeta, homePageSchema, organizationSchema } from '../components/PageMeta';
 
 import React, { useEffect } from 'react';
+
 import { Hero } from '../components/Hero';
 import { Card } from '../components/Card';
 import { useAppContext } from '../context/AppContext';

@@ -1,4 +1,6 @@
 import { PageMeta, articleSchema, faqSchema } from '../components/PageMeta';
+
+
 import { KeyInsights } from '../components/KeyInsights';
 import React, { useState, useEffect } from 'react';
 import { Card } from '../components/Card';
@@ -1690,6 +1692,7 @@ export interface MacroIntelProps {
 }
 
 export const MacroIntel: React.FC<MacroIntelProps> = ({ onNavigate }) => {
+
   const [activeReportId, setActiveReportId] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState<MacroTab>('all');
 

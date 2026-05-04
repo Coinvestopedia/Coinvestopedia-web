@@ -1,4 +1,6 @@
 import { PageMeta } from '../components/PageMeta';
+
+
 import React, { useState, useEffect } from 'react';
 import { DEFAULT_ASSETS, AssetData } from '../data/assetRegistry';
 import { useLiveAssetRegistry } from '../hooks/useLiveAssetRegistry';
@@ -29,6 +31,8 @@ export interface CompareProps {
 }
 
 export const Compare: React.FC<CompareProps> = ({ onNavigate }) => {
+
+
   const isProUser = true; // Set to true for institutional dashboard view
   const [selectedAssetIds, setSelectedAssetIds] = useState<string[]>(DEFAULT_ASSETS);
   const [activeTab, setActiveTab] = useState<TabId>('overview');

@@ -1,4 +1,6 @@
 import { PageMeta, toolsPageSchema } from '../components/PageMeta';
+
+
 import React, { useState, useEffect } from 'react';
 
 import {
@@ -97,6 +99,8 @@ export interface ToolsProps {
 }
 
 export const Tools: React.FC<ToolsProps> = ({ onNavigate }) => {
+
+
   const { setActiveSubMenu, activeSubMenu, setPageCategories } = useAppContext();
   const [activeToolId, setActiveToolId] = useState<string | null>(null);
 

@@ -1,6 +1,8 @@
 import { PageMeta } from '../components/PageMeta';
 
 
+
+
 import React, { useState } from 'react';
 import { Card } from '../components/Card';
 import { Button } from '../components/Button';
@@ -97,6 +99,8 @@ export interface LearnProps {
 }
 
 export const Learn: React.FC<LearnProps> = ({ onNavigate }) => {
+
+
   const { addToast, setPageCategories, setActiveSubMenu, activeSubMenu } = useAppContext();
   const [activeCategoryId, setActiveCategoryId] = useState<string | null>(null);
 

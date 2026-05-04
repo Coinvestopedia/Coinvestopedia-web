@@ -1,4 +1,6 @@
 import { PageMeta } from '../components/PageMeta';
+
+
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { AreaChart, Area, Tooltip, ResponsiveContainer, BarChart, Bar, XAxis, YAxis, CartesianGrid } from 'recharts';
 import { Button } from '../components/Button';
@@ -212,6 +214,8 @@ export interface WhaleTrackerProps {
 }
 
 export const WhaleTracker: React.FC<WhaleTrackerProps> = ({ onNavigate }) => {
+
+
   const { addToast, setActiveSubMenu, activeSubMenu, setPageCategories } = useAppContext();
   const [tableData, setTableData] = useState<WhaleTransaction[]>([]);
   const [fullDataset, setFullDataset] = useState<WhaleTransaction[]>([]);
