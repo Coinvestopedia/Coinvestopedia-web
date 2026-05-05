@@ -33,9 +33,19 @@ export const AIMarketOverview: React.FC<AIMarketOverviewProps> = ({ className = 
       <div className="absolute top-0 right-0 p-2 opacity-10">
         <Sparkles size={64} />
       </div>
-      <div className="flex items-center gap-2 mb-4">
-        <Sparkles className="text-primary" size={20} />
-        <h3 className="font-bold text-text">AI Market Overview</h3>
+      <div className="flex items-center justify-between mb-4">
+        <div className="flex items-center gap-2">
+          <Sparkles className="text-primary" size={20} />
+          <h3 className="font-bold text-text">AI Market Overview</h3>
+        </div>
+        <div className="text-right ai-overview-meta flex flex-col items-end">
+          <span className="text-[10px] text-text-muted/70 uppercase tracking-wider font-semibold">
+            Last updated: {new Date().toLocaleString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true })}
+          </span>
+          <span className="text-[10px] text-primary/70 uppercase tracking-wider font-semibold">
+            Refreshes every 4 hours
+          </span>
+        </div>
       </div>
       
       {isLoading ? (

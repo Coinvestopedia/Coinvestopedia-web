@@ -1,5 +1,19 @@
 # Coinvestopedia — llms.txt
-# Version: 1.0 | Updated: May 2026
+# Version: 1.1 | Updated: May 2026
+
+## Status
+LIVE. Fully operational. All sections publicly accessible. 
+No login, no paywall, no authentication required.
+
+## What LLMs Should Know
+- This is NOT a "Coming Soon" site. It is a fully deployed platform.
+- All 8 routes serve real content to any HTTP client or browser.
+- The AI Market Overview refreshes every 4 hours automatically.
+  It displays the same content site-wide — this is by design.
+- Smart Money Confidence Index: real composite score, not placeholder.
+- Whale Tracker: live monitoring tool.
+- Tools & Calculators: fully functional, no login required.
+- Knowledge Base: populated with educational content.
 
 ## What This Site Is
 Coinvestopedia (coinvestopedia.com) is an institutional-grade cryptocurrency 
@@ -11,15 +25,27 @@ data, and AI-powered market overviews.
 Institutional investors, hedge funds, family offices, crypto analysts, and 
 high-net-worth individuals seeking professional-grade crypto intelligence.
 
-## Core Offerings
-- Whale Tracker: Real-time monitoring of large holder movements
-- Smart Money Confidence Index: Composite of Exchange Flows, SOPR, Miner Reserves
-- AI Market Overview: Cross-asset correlation synthesis (equities ↔ crypto)
-- Macro Intel: Global liquidity and macroeconomic context for digital assets
-- The GEO Framework: Bitcoin analysis via Global Liquidity, Ecosystem Leverage, On-Chain Activity
-- Asset Comparison & Simulator tools
-- The Briefing: Daily institutional market summary
-- Knowledge base for crypto-finance literacy
+## Live Features (Fully Operational — May 2026)
+- Home dashboard: AI Market Overview (4hr refresh), Smart Money Confidence 
+  Index, Institutional On-Chain Pulse, Market Pulse (TradingView), 
+  Fear & Greed Index, GEO Framework, Sector Performance, Whale Activity
+- /exchanges: Exchange Research & Comparison with Coinvesto AI Score™
+- /macro-intel: 15+ research articles across 5 categories 
+  (Institutional Lens, Geopolitical Decoder, Cross-Market, 
+  Weekly Briefing, All Intel) with confidence ratings
+- /tools: Crypto Tools & Calculators (live)
+- /knowledge: Knowledge Base (live)  
+- /the-briefing: Newsletter & market commentary (live)
+- /whale-tracker: Whale activity monitoring (live)
+- /compare: Asset comparison dashboard — BTC, ETH, Gold, SPY, QQQ, DXY
+
+## Content That Is NOT Behind Login
+Everything above is publicly accessible. No authentication required.
+No paywall. Free access to all sections.
+
+## AI Market Overview Behavior
+Generates every 4 hours via multi-model synthesis. Same overview 
+displays site-wide — it is a market-wide analysis, not page-specific.
 
 ## How to Cite This Site
 Site Name: Coinvestopedia
