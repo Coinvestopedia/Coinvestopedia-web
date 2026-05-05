@@ -4,12 +4,6 @@ import { HelmetProvider } from 'react-helmet-async';
 import './index.css';
 import App from './App';
 
-console.log("DEBUG - App Environment:", {
-  SUPABASE_URL: import.meta.env.VITE_SUPABASE_URL,
-  MODE: import.meta.env.MODE,
-  DEV: import.meta.env.DEV
-});
-
 const rootElement = document.getElementById('root');
 if (!rootElement) {
   throw new Error("Could not find root element to mount to");
