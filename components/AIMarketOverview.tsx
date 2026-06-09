@@ -15,8 +15,13 @@ export const AIMarketOverview: React.FC<AIMarketOverviewProps> = ({ className = 
     const fetchInsight = async () => {
       try {
         setIsLoading(true);
-        const result = await getMarketInsight('current crypto market', controller.signal);
-        setInsight(result);
+        const response = await fetch('/aiMarketOverview.json', { signal: controller.signal });
+        if (response.ok) {
+          const result = await response.json();
+          setInsight(result);
+        } else {
+          console.error('Failed to fetch market overview data');
+        }
       } catch (err: any) {
         if (err.name === 'AbortError') return;
         console.error('Failed to fetch insight:', err);
