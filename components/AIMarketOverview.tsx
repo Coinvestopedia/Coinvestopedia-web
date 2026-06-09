@@ -40,7 +40,7 @@ export const AIMarketOverview: React.FC<AIMarketOverviewProps> = ({ className = 
       </div>
       <div className="flex flex-wrap items-center gap-2 mb-3 ai-overview-meta">
         <span className="text-[10px] text-text-muted/70 uppercase tracking-wider font-semibold">
-          Last updated: {new Date().toLocaleString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true })}
+          Last updated: {insight?.timestamp ? new Date(insight.timestamp).toLocaleString('en-US', { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit', hour12: true }) : '...'}
         </span>
         <span className="text-[10px] text-text-muted/30">•</span>
         <span className="text-[10px] text-primary/70 uppercase tracking-wider font-semibold">
@@ -57,12 +57,18 @@ export const AIMarketOverview: React.FC<AIMarketOverviewProps> = ({ className = 
           <div className="h-4 bg-white/10 rounded w-full"></div>
           <div className="h-4 bg-white/10 rounded w-5/6"></div>
           <div className="h-4 bg-white/10 rounded w-4/6"></div>
+          <div className="h-4 bg-white/10 rounded w-full"></div>
+          <div className="h-4 bg-white/10 rounded w-3/6"></div>
         </div>
       ) : (
         <>
-          <p className="text-sm text-text-muted leading-relaxed mb-4">
-            {insight?.text}
-          </p>
+          <div className="space-y-3 mb-4">
+            {insight?.text?.split('\n\n').map((paragraph, idx) => (
+              <p key={idx} className="text-sm text-text-muted leading-relaxed">
+                {paragraph}
+              </p>
+            ))}
+          </div>
           {insight?.sources && insight.sources.length > 0 && (
             <div className="mb-4 pt-3 border-t border-white/5">
               <p className="text-[10px] text-text-muted uppercase tracking-widest font-bold mb-2">Sources</p>

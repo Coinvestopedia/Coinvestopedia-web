@@ -1,4 +1,3 @@
-import { GoogleGenAI } from '@google/genai';
 import fs from 'fs';
 import path from 'path';
 import { execSync } from 'child_process';
@@ -6,7 +5,6 @@ import dotenv from 'dotenv';
 
 dotenv.config({ path: '.env.local' });
 
-const geminiApiKey = process.env.VITE_GEMINI_API_KEY;
 const telegramBotToken = process.env.TELEGRAM_BOT_TOKEN;
 const telegramChatId = process.env.TELEGRAM_CHAT_ID;
 const githubToken = process.env.GITHUB_TOKEN;
@@ -38,24 +36,22 @@ async function run() {
   try {
     console.log("Starting Market Overview Generation...");
 
-    let text = process.argv[2];
+    // Read from temp-overview.json (written by the agent before running this script)
+    const tempOverviewPath = path.join(process.cwd(), 'scripts', 'temp-overview.json');
 
-    if (!text) {
-      if (!geminiApiKey) throw new Error("VITE_GEMINI_API_KEY not found and no text provided.");
-      const ai = new GoogleGenAI({ apiKey: geminiApiKey });
-      const prompt = `You are an expert crypto and macro analyst. Generate a 4-sentence market overview analyzing the current state of the global markets, crypto, and geopolitical news. Provide only the text, no markdown.`;
-      
-      console.log("Fetching insight from Gemini...");
-      const response = await ai.models.generateContent({
-          model: 'gemini-2.5-flash',
-          contents: prompt,
-          config: {
-              temperature: 0.7,
-          }
-      });
-      text = response.text || "Market data unavailable.";
+    let text: string;
+
+    if (fs.existsSync(tempOverviewPath)) {
+      console.log("Reading overview from temp-overview.json...");
+      const raw = JSON.parse(fs.readFileSync(tempOverviewPath, 'utf8'));
+      text = raw.text;
+      fs.unlinkSync(tempOverviewPath); // Clean up
     } else {
-      console.log("Using provided text argument.");
+      throw new Error("temp-overview.json not found. Please create it before running this script.");
+    }
+
+    if (!text || text.trim().length < 50) {
+      throw new Error("Overview text is too short or empty.");
     }
 
     const data = {
@@ -76,9 +72,6 @@ async function run() {
         execSync('git config user.email "automator@coinvestopedia.com"');
         execSync('git add public/aiMarketOverview.json');
         execSync('git commit -m "Auto-update: AI Market Overview"');
-        // Push using the provided token URL. Assumes remote 'origin' is set.
-        // We will just do a standard push if the token is already in the remote URL,
-        // or we can set it.
         const remoteUrl = `https://${githubToken}@github.com/Coinvestopedia/Coinvestopedia-web.git`;
         execSync(`git push ${remoteUrl} main`);
         console.log("Pushed successfully.");
@@ -87,7 +80,9 @@ async function run() {
       }
     }
 
-    await sendTelegramMessage(`✅ <b>Market Overview Updated</b>\n\n${text}`);
+    // Send truncated preview to Telegram (first 300 chars)
+    const preview = text.length > 300 ? text.substring(0, 300) + '...' : text;
+    await sendTelegramMessage(`✅ <b>Market Overview Updated</b>\n\n${preview}`);
     console.log("Done!");
   } catch (error: any) {
     console.error("Error generating market overview:", error);
