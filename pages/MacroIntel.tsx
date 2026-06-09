@@ -59,33 +59,6 @@ const TABS: { id: MacroTab; label: string; icon: React.ReactNode; isPro?: boolea
 
 const REPORTS: MacroReport[] = [
   {
-    id: 'macro-intel-update-2026',
-    title: `Macro Resilience: Global Liquidity vs Geopolitical Friction`,
-    subtitle: `How resilient traditional markets are buffering crypto volatility amidst rising geopolitical tensions.`,
-    tab: 'weekly',
-    date: 'June 9, 2026',
-    readTime: '12 min read',
-    confidenceLevel: 'High',
-    keyMetrics: [{"label":"DXY","value":"104.2","direction":"down"},{"label":"BTC ETF Inflows","value":"$1.2B","direction":"up"},{"label":"10Y Yield","value":"4.15%","direction":"down"}],
-    keyInsights: ["DXY weakness is creating a tailwind for risk-on assets, despite geopolitical uncertainty.","Institutional flows into ETFs remain robust, absorbing speculative sell-offs.","Federal Reserve liquidity tools continue to provide a floor for asset prices."],
-    sections: [
-      {
-        icon: <Globe size={18} />,
-        title: `Macro Context`,
-        content: (<><p className="mb-4">Global markets are currently experiencing a tug-of-war between strong underlying economic data and rising geopolitical frictions. The US Dollar Index (DXY) has retreated from its recent highs, settling around 104.2. This weakness in the dollar has historically provided a constructive environment for digital assets, acting as a broad tailwind for risk-on capital.
-
-Simultaneously, the 10-year Treasury yield has moderated to 4.15%, signaling that bond markets are pricing in a 'higher for longer' but stable rate regime. This stability allows institutional allocators to better forecast their cost of capital, reducing the volatility premium previously demanded for holding non-yielding assets like Bitcoin.</p></>),
-      },
-      {
-        icon: <Globe size={18} />,
-        title: `Transmission Analysis`,
-        content: (<><p className="mb-4">The transmission mechanism from traditional finance (TradFi) to crypto remains dominated by the ETF channel. Over the past week, we observed $1.2B in net inflows across major spot BTC and ETH products. Crucially, these inflows are occurring during periods of intraday price weakness, suggesting that institutional buyers are treating dips as strategic accumulation opportunities rather than signs of systemic failure.
-
-Furthermore, stablecoin market capitalization continues to expand, indicating fresh fiat entering the ecosystem. This liquidity acts as a buffer against speculative leverage washouts, maintaining market structure integrity even amidst geopolitical headlines.</p></>),
-      },
-    ]
-  },
-  {
     id: 'q4-2025-institutional-flows',
     title: 'Q4 2025 Institutional Flow Analysis',
     subtitle: 'A retrospective look at institutional capital allocation trends at the end of 2025.',

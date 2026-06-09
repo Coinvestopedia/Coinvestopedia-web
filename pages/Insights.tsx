@@ -40,23 +40,6 @@ import { geoFrameworkArticle } from '../content/articles/geo-framework-bitcoin-a
 import { africaCryptoInfrastructureArticle } from '../content/articles/africa-crypto-infrastructure';
 
 export const ARTICLES: Article[] = [
-  {
-    id: 'institutional-insight-june-2026',
-    title: `The Institutional Pivot: From Exploration to Core Allocation`,
-    category: 'Institutional',
-    tags: ["Institution","Macro","Adoption","Treasury"],
-    readTime: '15 min read',
-    date: 'June 9, 2026',
-    image: '/europe-crypto-featured.png',
-    desc: `How legacy financial institutions are transitioning digital assets from experimental technology to core portfolio components.`,
-    icon: <Building2 className="text-blue-400" size={24} />,
-    keyInsights: ["Corporate treasury adoption of Bitcoin has increased by 45% year-over-year.","Major wealth managers are now advising a standard 1-3% allocation to digital assets for aggressive growth portfolios.","Custodial infrastructure has matured, removing the final barrier for highly regulated entities."],
-    content: (<><p className="mb-6">The narrative surrounding institutional adoption of digital assets has fundamentally shifted in 2026. We are no longer witnessing a phase of tentative exploration or 'dipping toes' into the asset class. Instead, legacy financial institutions are executing a deliberate pivot toward core allocation strategies.
-
-Recent data indicates that corporate treasury adoption of Bitcoin has surged by 45% compared to the previous year. This is primarily driven by inflation hedging concerns and the desire for non-correlated assets. The approval and subsequent immense liquidity of spot ETFs have provided the necessary regulatory cover and market depth for these moves.
-
-Furthermore, major wealth management platforms—previously hesitant to offer crypto exposure—are now systematically integrating it into their model portfolios. The 'standard' advice for aggressive growth portfolios now frequently includes a 1-3% allocation to a basket of major digital assets. This shift from 'forbidden' to 'recommended' represents a structural change in capital flows that will likely define the market dynamics for the next decade.</p></>)
-  },
   geoFrameworkArticle,
   morganStanleyArticle,
   cme247Article,
