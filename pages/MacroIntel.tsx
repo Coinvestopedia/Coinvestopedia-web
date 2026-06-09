@@ -59,6 +59,47 @@ const TABS: { id: MacroTab; label: string; icon: React.ReactNode; isPro?: boolea
 
 const REPORTS: MacroReport[] = [
   {
+    id: 'macro-intel-june-9-2026',
+    title: `Macro Realignment: High Rates, De-escalation, and the Flight from Risk`,
+    subtitle: `An analysis of the converging pressures from a resilient U.S. labor market, delayed monetary easing, and recalibrating institutional crypto portfolios.`,
+    tab: 'weekly',
+    date: 'June 9, 2026',
+    readTime: '15 min read',
+    confidenceLevel: 'High',
+    keyMetrics: [{"label":"US NFP (May)","value":"172K","direction":"up"},{"label":"Spot BTC ETF Flow (13d)","value":"-$3.4B","direction":"down"},{"label":"RWA Sector Growth","value":"589%","direction":"up"}],
+    keyInsights: ["U.S. labor market resilience has forced major institutions to abandon 2026 rate cut forecasts, heavily dampening near-term liquidity expectations.","Middle East geopolitical tensions show signs of de-escalation, temporarily stabilizing energy markets but failing to ignite broad risk-on sentiment.","Institutional 'buy-the-dip' strategies in crypto are being tested by a record 13-day outflow streak in spot ETFs, signaling a structural recalibration.","While broad crypto markets face 'Extreme Fear', targeted capital is violently rotating into Real-World Asset (RWA) tokenization, specifically yield-bearing products."],
+    sections: [
+      {
+        icon: <Globe size={18} />,
+        title: `Macro Context: The 'Higher for Longer' Reality`,
+        content: (<><p className="mb-4">The global macroeconomic landscape in June 2026 is defined by a forced acceptance of prolonged restrictive monetary policy. The catalyst for this recalibration was the May Nonfarm Payrolls (NFP) report, which demonstrated a surprisingly robust addition of 172,000 jobs—shattering the forecasted 85,000 and prompting upward revisions to April's data. This underlying economic heat fundamentally contradicts the narrative of an imminent, engineered slowdown.
+
+In response to this sticky domestic strength, leading financial institutions have capitulated on their dovish outlooks. Goldman Sachs has notably abandoned its forecast for a December 2026 Federal Reserve rate cut, aligning with a new consensus that rates will remain unchanged until at least 2027. Consequently, Treasury yields have surged, making risk-free cash highly attractive and starving speculative assets of the cheap liquidity they have historically relied upon to fuel sustained rallies.</p></>),
+      },
+      {
+        icon: <Globe size={18} />,
+        title: `Geopolitics: A Tenuous De-escalation`,
+        content: (<><p className="mb-4">While monetary headwinds intensify, the geopolitical risk premium has marginally softened. Recent weeks were characterized by deep uncertainty regarding a broader conflict in the Middle East following direct military exchanges between Israel and Iran. However, as of early June, back-channel diplomacy appears to have orchestrated a pause in direct strikes.
+
+This de-escalation is immediately visible in commodity markets, with oil prices retreating below the critical $90 threshold. The Volatility Index (VIX) has simultaneously cooled from its recent spikes. Yet, this geopolitical stabilization has not translated into a 'risk-on' rally for equities or digital assets. Instead, the market is interpreting the lack of a systemic shock not as a green light to buy, but simply as an excuse to refocus on the punishing reality of elevated interest rates.</p></>),
+      },
+      {
+        icon: <Globe size={18} />,
+        title: `Crypto Transmission: Institutional Recalibration`,
+        content: (<><p className="mb-4">The transmission of these macro factors into the digital asset ecosystem has been swift and severe, pushing the market Fear & Greed Index to a baseline of 10 ('Extreme Fear'). Bitcoin has been rejected from higher bounds, consolidating tenuously in the $62,000–$63,000 range. 
+
+The most glaring metric of this rotation is institutional sentiment. U.S. spot Bitcoin ETFs have logged a record-breaking 13 consecutive days of net outflows, shedding over $3.4 billion. This is not retail capitulation; it is a calculated, algorithmic de-risking by institutional allocators responding to the revised Treasury yield curve. When risk-free rates offer competitive yields, the opportunity cost of holding non-yielding digital assets rises substantially, forcing money managers to trim exposure.</p></>),
+      },
+      {
+        icon: <Globe size={18} />,
+        title: `Sector Divergence: The Rise of Tokenized Yield`,
+        content: (<><p className="mb-4">Despite the brutal top-line metrics, beneath the surface, the crypto market is undergoing a structural evolution. Capital is not merely fleeing the ecosystem; it is rotating into efficiency. Specifically, the Real-World Asset (RWA) tokenization sector has experienced a staggering 589% active growth since early 2025.
+
+Institutional capital seeking shelter from volatility is migrating toward on-chain products that offer predictable, real-world yields. The launch of advanced tokenized trading platforms, such as Ondo Finance's new perpetual contracts for tokenized stocks and ETFs, exemplifies this trend. The market is aggressively discounting speculative tokens while rewarding infrastructure that bridges the gap between decentralized finance and the resilient, high-yield traditional economy.</p></>),
+      },
+    ]
+  },
+  {
     id: 'q4-2025-institutional-flows',
     title: 'Q4 2025 Institutional Flow Analysis',
     subtitle: 'A retrospective look at institutional capital allocation trends at the end of 2025.',
