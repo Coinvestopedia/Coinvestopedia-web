@@ -98,7 +98,7 @@ Return ONLY a valid JSON object matching this schema exactly:
 
     const macroFilePath = path.join(process.cwd(), 'pages', 'MacroIntel.tsx');
     let macroFileContent = fs.readFileSync(macroFilePath, 'utf8');
-    macroFileContent = macroFileContent.replace('const REPORTS: MacroReport[] = [\n', `const REPORTS: MacroReport[] = [\n${macroTsx}`);
+    macroFileContent = macroFileContent.replace(/const REPORTS: MacroReport\[\] = \[\r?\n/, `const REPORTS: MacroReport[] = [\n${macroTsx}`);
     fs.writeFileSync(macroFilePath, macroFileContent);
     console.log("Updated MacroIntel.tsx");
 
@@ -154,7 +154,7 @@ Return ONLY a valid JSON object matching this schema exactly:
 
     const insightFilePath = path.join(process.cwd(), 'pages', 'Insights.tsx');
     let insightFileContent = fs.readFileSync(insightFilePath, 'utf8');
-    insightFileContent = insightFileContent.replace('export const ARTICLES: Article[] = [\n', `export const ARTICLES: Article[] = [\n${insightTsx}`);
+    insightFileContent = insightFileContent.replace(/export const ARTICLES: Article\[\] = \[\r?\n/, `export const ARTICLES: Article[] = [\n${insightTsx}`);
     fs.writeFileSync(insightFilePath, insightFileContent);
     console.log("Updated Insights.tsx");
 
