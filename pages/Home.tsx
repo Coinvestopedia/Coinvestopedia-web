@@ -56,42 +56,77 @@ export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
   useEffect(() => {
     const fetchMetrics = async () => {
       try {
-        const { fetchDefiLlamaTVL } = await import('../services/api');
-        const tvl = await fetchDefiLlamaTVL();
-        
-        const newMetrics = [
+        const response = await fetch('/onChainPulse.json');
+        if (response.ok) {
+          const data = await response.json();
+          const newMetrics = [
+            { 
+              label: 'Total Value Locked (DeFi)', 
+              description: 'Total capital deposited across all decentralized finance protocols globally.',
+              value: data.defiTvl?.value || '$130.4B', 
+              change: data.defiTvl?.change || '+1.8%',
+              icon: <Globe size={24} /> 
+            },
+            { 
+              label: 'Stablecoin Mkt Cap', 
+              description: 'Total circulating supply of fiat-pegged digital assets.',
+              value: data.stablecoinMktCap?.value || '$186.8B', 
+              change: data.stablecoinMktCap?.change || '+0.2%', 
+              icon: <Coins size={24} /> 
+            },
+            { 
+              label: 'ETH Staking Ratio', 
+              description: 'Percentage of total Ethereum supply locked in staking contracts.',
+              value: data.ethStakingRatio?.value || '32.6%', 
+              change: data.ethStakingRatio?.change || '+0.5%', 
+              icon: <Zap size={24} /> 
+            },
+            { 
+              label: 'DEX Volume (24h)', 
+              description: 'Total trading volume across all decentralized exchanges in the last 24 hours.',
+              value: data.dexVolume24h?.value || '$6.6B', 
+              change: data.dexVolume24h?.change || '+8.4%', 
+              icon: <Activity size={24} /> 
+            }
+          ];
+          setMetrics(newMetrics);
+        } else {
+          throw new Error('Failed to load onChainPulse.json');
+        }
+      } catch (err) {
+        console.error("Failed to fetch on-chain pulse:", err);
+        // Fallback to static values if JSON fetch fails
+        const fallbackMetrics = [
           { 
             label: 'Total Value Locked (DeFi)', 
             description: 'Total capital deposited across all decentralized finance protocols globally.',
-            value: tvl ? `$${(tvl / 1e9).toFixed(2)}B` : '$54.2B', 
-            change: '+2.4%',
+            value: '$130.4B', 
+            change: '+1.8%',
             icon: <Globe size={24} /> 
           },
           { 
             label: 'Stablecoin Mkt Cap', 
             description: 'Total circulating supply of fiat-pegged digital assets.',
-            value: '$162.8B', 
-            change: '+0.4%', 
+            value: '$186.8B', 
+            change: '+0.2%', 
             icon: <Coins size={24} /> 
           },
           { 
             label: 'ETH Staking Ratio', 
             description: 'Percentage of total Ethereum supply locked in staking contracts.',
-            value: '28.4%', 
-            change: '+1.2%', 
+            value: '32.6%', 
+            change: '+0.5%', 
             icon: <Zap size={24} /> 
           },
           { 
             label: 'DEX Volume (24h)', 
             description: 'Total trading volume across all decentralized exchanges in the last 24 hours.',
-            value: '$4.1B', 
-            change: '-2.1%', 
+            value: '$6.6B', 
+            change: '+8.4%', 
             icon: <Activity size={24} /> 
           }
         ];
-        setMetrics(newMetrics);
-      } catch (err) {
-        console.error("Failed to fetch on-chain pulse:", err);
+        setMetrics(fallbackMetrics);
       } finally {
         setLoadingMetrics(false);
       }
