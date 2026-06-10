@@ -59,6 +59,34 @@ const TABS: { id: MacroTab; label: string; icon: React.ReactNode; isPro?: boolea
 
 const REPORTS: MacroReport[] = [
   {
+    id: 'inflation-geopolitics-liquidity-shock-june-10-2026',
+    title: `The 4.2% Inflation Wall: Geopolitical Containment Failures and the Liquidity Retreat`,
+    subtitle: `How escalating strikes on U.S. bases in the Middle East and a three-year high in U.S. consumer prices are sparking a global risk asset contraction.`,
+    tab: 'weekly',
+    date: 'June 10, 2026',
+    readTime: '15 min read',
+    confidenceLevel: 'High',
+    keyMetrics: [{"label":"US May Annual Inflation","value":"4.2%","direction":"up"},{"label":"Global Asset Value Wiped","value":"$1.88 Trillion","direction":"down"},{"label":"Bitcoin Intraday Low","value":"$60,892","direction":"down"}],
+    keyInsights: ["Energy-driven supply disruptions in the Strait of Hormuz have pushed U.S. inflation to a three-year high of 4.2% in May, representing more than 60% of the month's overall CPI increase.","Geopolitical escalation involving direct Iranian missile strikes on U.S. bases in Bahrain, Kuwait, and Jordan has triggered a severe 'risk-off' contraction across traditional equities and crypto.","The Federal Reserve's rate path is increasingly expected to remain 'higher for longer' at the upcoming June 16–17 FOMC meeting, ending hopes for a rate cut in 2026.","Crypto markets have shown extreme sensitivity to legacy macro shocks, with the Fear & Greed Index hitting 'Extreme Fear' at 9/100, invalidating the 'uncorrelated hedge' narrative."],
+    sections: [
+      {
+        icon: <Globe size={18} />,
+        title: `Macro Context: The Geopolitical Inflation Shock`,
+        content: (<><p className="mb-4">Global macroeconomic structures are facing severe stress following a dual-force shock of accelerating inflation and direct military conflict. On June 10, 2026, U.S. consumer price data revealed that annual inflation rose to 4.2% in May, marking a three-year high and completely altering the market's monetary policy outlook. The key driver behind this surge was energy costs, which accounted for over 60% of the CPI increase. This was a direct consequence of shipping and supply line disruptions in the Strait of Hormuz following escalating exchanges of military strikes between U.S. forces and Iranian targets.</p><p className="mb-4">With Iran launching retaliatory missile strikes toward American military installations in Bahrain, Jordan, and Kuwait, energy markets are pricing in a prolonged geopolitical risk premium. OECD crude inventories are testing historic 20-year lows, ensuring that oil costs will remain elevated. Consequently, Wall Street has priced out any probability of interest rate cuts by the Federal Reserve at the June 16–17 FOMC meeting, with expectations shifting toward rates staying unchanged or potentially rising in the back half of the year to prevent a structural wage-price spiral.</p></>),
+      },
+      {
+        icon: <Globe size={18} />,
+        title: `Asset Transmission: The $1.88 Trillion Liquidity Drain`,
+        content: (<><p className="mb-4">The sudden pricing-in of a persistent interest rate environment has triggered a swift capital contraction across risk-on asset classes. Between June 9 and June 10, approximately $1.88 trillion in paper wealth was wiped out globally. Technology stocks led the decline on Wall Street as higher discount rates compressed multiple valuations. This capital retreat was mirrored in digital asset markets. Bitcoin fell to an intraday low of $60,892, breaking key support levels and triggering massive liquidations.</p><p className="mb-4">Unlike previous instances where digital assets acted as a hedge against geopolitical instability, this sell-off demonstrates that crypto remains deeply coupled with the broader legacy liquidity cycle. The Crypto Fear & Greed Index plunged to 'Extreme Fear' at 9/100, reflecting panic among retail and institutional participants. U.S. spot Bitcoin ETFs registered massive outflows as funds rotated out of volatile instruments and into short-term cash and sovereign bonds.</p></>),
+      },
+      {
+        icon: <Globe size={18} />,
+        title: `Regulated Frontiers: Infrastructure and Systemic Bridges`,
+        content: (<><p className="mb-4">Despite the severe price correction, institutional infrastructure continues to expand, providing a foundation for future cycles. The recent launch of the Nasdaq CME Crypto Index futures (NCI/MCI contracts) on June 8, 2026, represents a critical bridge, allowing institutions to hedge index-wide beta exposure during market drawdowns. Concurrently, Figure Technology Solutions announced a $717 million acquisition of Kiavi, aiming to migrate residential mortgage assets onto blockchain-native rails, demonstrating that real-world asset (RWA) tokenization is moving forward independently of price volatility.</p><p className="mb-4">These integrations highlight a structural shift: crypto is becoming an institutionalized extension of the traditional financial system. Under incoming European EMT rules and expanding U.S. index futures, the digital asset market is getting integrated into legacy capital structures. While this increases short-term correlation and vulnerability to macro shocks like the Middle East base strikes, it also guarantees that digital assets will be major beneficiaries when the Federal Reserve eventually resumes liquidity expansion.</p></>),
+      },
+    ]
+  },
+  {
     id: 'macro-intel-june-10-2026',
     title: `The Warsh Regime Begins: Assessing the Hawkish Pivot and Sovereign Bond Divergence`,
     subtitle: `How stubborn inflation and a leadership transition at the Federal Reserve are reshaping traditional and digital asset capital flows.`,
