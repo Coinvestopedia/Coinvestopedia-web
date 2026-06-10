@@ -59,6 +59,34 @@ const TABS: { id: MacroTab; label: string; icon: React.ReactNode; isPro?: boolea
 
 const REPORTS: MacroReport[] = [
   {
+    id: 'macro-intel-june-10-2026',
+    title: `The Warsh Regime Begins: Assessing the Hawkish Pivot and Sovereign Bond Divergence`,
+    subtitle: `How stubborn inflation and a leadership transition at the Federal Reserve are reshaping traditional and digital asset capital flows.`,
+    tab: 'weekly',
+    date: 'June 10, 2026',
+    readTime: '14 min read',
+    confidenceLevel: 'High',
+    keyMetrics: [{"label":"US May Payrolls","value":"+172,000","direction":"up"},{"label":"10-Year US Treasury Yield","value":"4.92%","direction":"up"},{"label":"U.S. Spot ETF 11-Day Outflow","value":"$3.15 Billion","direction":"down"}],
+    keyInsights: ["The transition to Fed Chair Kevin Warsh marks the official removal of the central bank's easing bias, preparing markets for a prolonged period of elevated interest rates.","Persistent energy market volatility, sustained by geopolitical concerns in the Strait of Hormuz, continues to inject a stagflationary impulse into global economic forecasts.","Sovereign debt markets are experiencing severe capital reallocation, with the 10-year US Treasury yield testing multi-decade highs and compressing the yield spread against risk assets.","The launch of Nasdaq CME Crypto Index futures represents a critical structural bridge, allowing institutional investors to hedge beta exposure during macro-driven selloffs."],
+    sections: [
+      {
+        icon: <Globe size={18} />,
+        title: `Macroeconomic Context: The Warsh Fed Era`,
+        content: (<><p className="mb-4">The global financial architecture is adapting to a significant leadership transition following the swearing-in of Kevin Warsh as Chair of the Federal Reserve. The incoming Chair's first FOMC meeting, scheduled for June 16–17, 2026, has already catalyzed a dramatic recalibration of yield curves and market expectations. Wall Street has aggressively repriced the path of interest rates, shifting from earlier expectations of rate cuts to preparing for a potential interest rate hike later this year. Stubborn core inflation, driven by persistent supply chain realignments and rising commodity costs, continues to run significantly above the Fed's 2% target.</p><p className="mb-4">Adding to the hawkish pressures, the U.S. labor market remains highly resilient. The May non-farm payrolls data reported an addition of 172,000 jobs, demonstrating that despite high borrowing costs, businesses are maintaining their headcount. This labor market strength provides the Fed with the economic runway to maintain the target range of 3.50% to 3.75% for an extended period, or even increase it. Consequently, the 10-year U.S. Treasury yield has climbed toward 4.92%, raising the cost of capital globally and exerting substantial pressure on valuation multiples for high-growth sectors, including technology and digital assets.</p></>),
+      },
+      {
+        icon: <Globe size={18} />,
+        title: `Transmission Dynamics: Risk-Off Pressure on Digital Assets`,
+        content: (<><p className="mb-4">The macroeconomic transition is transmitting directly into the cryptocurrency ecosystem, triggering a risk-off correction. Bitcoin's decline from $72,000 to $64,000 in early June is a direct reflection of this liquidity drain. Institutional investors, facing elevated yields in risk-free sovereign debt, have reduced their exposure to spot digital assets. This is evidenced by the massive outflow of $3.15 billion from U.S. spot Bitcoin ETFs over the last eleven days, ending a long streak of net positive inflows. This trend indicates that hot capital is temporarily rotating back into fixed-income instruments or cash equivalents to ride out the regulatory and rate uncertainty.</p><p className="mb-4">Despite the immediate sell-off, structural indicators suggest that institutional integration is maturing rather than retreating. The launch of the Nasdaq CME Crypto Index futures (NCI/MCI) on June 8, 2026, provides a regulated hedging mechanism that was previously missing. By enabling institutional desks to trade a diversified index of eight major crypto assets (including BTC, ETH, SOL, and XRP), the market is gaining the tools necessary to manage systemic risk. Additionally, MicroStrategy's recent purchase of 1,550 BTC for $101 million—despite its minor $2.5 million dividend-funding sale—proves that corporate treasury buyers are viewing the $64,000 level as an attractive long-term entry point.</p></>),
+      },
+      {
+        icon: <Globe size={18} />,
+        title: `Geopolitical Realignment and Sovereign Hedging`,
+        content: (<><p className="mb-4">Underlying the financial volatility is a highly fragmented geopolitical landscape. While tentative de-escalation discussions between Israel and Iran have temporarily capped crude oil volatility, the threat of maritime disruptions in the Strait of Hormuz remains a constant tail risk for global energy markets. In Europe, the ongoing conflict in Ukraine continues to drive defense and military rearmament spending to historic levels, further straining national budgets and complicating fiscal policy. The resulting inflation is structural, meaning central banks will struggle to lower rates even if economic growth begins to slow down.</p><p className="mb-4">Faced with persistent sanctions and the weaponization of the SWIFT network, several non-aligned nations are actively accelerating the development of alternative payment systems. These networks, often leveraging blockchain technology or central bank digital currencies (CBDCs), are designed to settle international trade outside the U.S. dollar system. This trend is driving a long-term sovereign interest in digital assets as neutral reserve instruments, which may eventually decouple the valuation of leading cryptocurrencies from short-term Federal Reserve interest rate decisions.</p></>),
+      },
+    ]
+  },
+  {
     id: 'macro-intel-june-9-2026',
     title: `Macro Realignment: High Rates, De-escalation, and the Flight from Risk`,
     subtitle: `An analysis of the converging pressures from a resilient U.S. labor market, delayed monetary easing, and recalibrating institutional crypto portfolios.`,
