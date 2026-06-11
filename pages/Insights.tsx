@@ -57,22 +57,6 @@ export const ARTICLES: Article[] = [
     </>)
   },
   {
-    id: 'institutional-bifurcation-june-2026',
-    title: `The Institutional Bifurcation: Evaluating On-Chain Capital Through Spot ETF Outflows, RWA Maturation, and Yield Migration`,
-    category: 'Institutional',
-    tags: undefined,
-    readTime: '6 min read',
-    date: 'June 11, 2026',
-    image: '/geo-framework-hero.png',
-    desc: `undefined`,
-    icon: <Building2 className="text-blue-400" size={24} />,
-    keyInsights: undefined,
-    content: (<>
-      <p className="text-xl text-text-muted mb-8 italic"></p>
-      
-    </>)
-  },
-  {
     id: 'ria-framework-btc-etf-institutional-june-2026',
     title: `The RIA Framework: Evaluating Bitcoin's Institutional Maturity Through Regulatory Integration, Infrastructure Depth, and Allocator Behavior`,
     category: 'Institutional',
