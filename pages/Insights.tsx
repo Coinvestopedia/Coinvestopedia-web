@@ -7,7 +7,7 @@ import React, { useState, useEffect } from 'react';
 import { Card } from '../components/Card';
 import { Button } from '../components/Button';
 import { NewsletterSignup } from '../components/NewsletterSignup';
-import { ArrowLeft, Clock, Share2, BookmarkPlus, Globe, Shield, Building2, Scale } from 'lucide-react';
+import { ArrowLeft, Clock, Share2, BookmarkPlus, Globe, Shield, Building2, Scale, Activity } from 'lucide-react';
 import { TargetIcon } from '../components/AnimatedIcons';
 import { useAppContext } from '../context/AppContext';
 import { trackEvent } from '../utils/analytics';

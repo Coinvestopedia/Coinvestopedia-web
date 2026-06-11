@@ -278,7 +278,7 @@ async function run() {
     insightTsx += `    date: '${insightData.date}',\n`;
     insightTsx += `    image: '/geo-framework-hero.png',\n`;
     insightTsx += `    desc: \`${insightData.desc}\`,\n`;
-    insightTsx += `    icon: <Activity className="text-primary" size={24} />,\n`;
+    insightTsx += `    icon: <Building2 className="text-blue-400" size={24} />,\n`;
     insightTsx += `    keyInsights: ${JSON.stringify(insightData.keyInsights)},\n`;
     insightTsx += `    content: (<>\n`;
     insightTsx += `      <p className="text-xl text-text-muted mb-8 italic">${(insightBlocks[0] || '').replace(/^_|_$/g, '').trim()}</p>\n`;
