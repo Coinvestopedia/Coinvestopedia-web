@@ -16,6 +16,7 @@ export interface AnalysisResponse {
 // Keep the same interface as the old file for compatibility
 export interface InsightResult {
   text: string;
+  timestamp?: string;
   sources?: { title: string; uri: string }[];
 }
 

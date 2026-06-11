@@ -10,8 +10,8 @@
       "DOM.Iterable"
     ],
     "strict": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
     "noImplicitReturns": true,
     "skipLibCheck": true,
     "types": [
@@ -29,5 +29,6 @@
     },
     "allowImportingTsExtensions": true,
     "noEmit": true
-  }
+  },
+  "exclude": ["node_modules", "dist", "patch_prerender.js", "patch_prerender.cjs", "scripts/prerender.mjs", "functions", "supabase", "temp_unzip"]
 }

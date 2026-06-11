@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Sparkles, ExternalLink, ThumbsUp, ThumbsDown, Hand } from 'lucide-react';
-import { getMarketInsight, InsightResult } from '../services/geminiService';
+import { InsightResult } from '../services/geminiService';
 
 interface AIMarketOverviewProps {
   className?: string;
@@ -41,10 +41,6 @@ export const AIMarketOverview: React.FC<AIMarketOverviewProps> = ({ className = 
       <div className="flex flex-wrap items-center gap-2 mb-3 ai-overview-meta">
         <span className="text-[10px] text-text-muted/70 uppercase tracking-wider font-semibold">
           Last updated: {insight?.timestamp ? new Date(insight.timestamp).toLocaleString('en-US', { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit', hour12: true }) : '...'}
-        </span>
-        <span className="text-[10px] text-text-muted/30">•</span>
-        <span className="text-[10px] text-primary/70 uppercase tracking-wider font-semibold">
-          Refreshes every 4 hours
         </span>
       </div>
       <div className="flex items-center gap-2 mb-4">

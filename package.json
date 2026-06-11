@@ -15,7 +15,8 @@
     "test:watch": "vitest",
     "typecheck": "tsc --noEmit",
     "automator:market-overview": "tsx scripts/generate-market-overview.ts",
-    "automator:daily-intel": "tsx scripts/generate-daily-intel.ts"
+    "automator:daily-intel": "tsx scripts/generate-daily-intel.ts",
+    "automator:onchain-pulse": "tsx scripts/generate-onchain-pulse.ts"
   },
   "dependencies": {
     "@google/genai": "^1.31.0",
