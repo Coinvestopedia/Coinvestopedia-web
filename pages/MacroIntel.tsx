@@ -59,6 +59,39 @@ const TABS: { id: MacroTab; label: string; icon: React.ReactNode; isPro?: boolea
 
 const REPORTS: MacroReport[] = [
   {
+    id: 'ecb-hawkish-pivot-june-2026',
+    title: `ECB's Hawkish Pivot: Strait of Hormuz Crisis Forces First Rate Hike Since 2023`,
+    subtitle: `As Eurozone growth drops to 0.8%, ECB's 25bps hike tightens global liquidity, placing downward pressure on BTC support at $61,500.`,
+    tab: 'weekly',
+    date: 'June 11, 2026',
+    readTime: '4 min read',
+    confidenceLevel: '85',
+    keyMetrics: [{"label":"Deposit Facility Rate","value":"2.25%","direction":"up"},{"label":"Eurozone GDP Forecast","value":"0.8%","direction":"down"},{"label":"May US CPI","value":"4.2%","direction":"up"}],
+    keyInsights: ["ECB raises all three key rates by 25bps to address Middle East energy shocks feeding into persistent headline inflation, projected to average 3.0% in 2026.","Eurozone GDP growth lowered to 0.8% due to trade disruption, amplifying stagflation risks that restrict speculative retail risk appetite.","Diminished expectations for Fed rate cuts following 4.2% US inflation strengthen the USD index (DXY), reinforcing a capital drag on digital assets.","Bitcoin tests critical support at $61,500 as global liquidity contractions limit institutional capital allocation."],
+    sections: [
+      {
+        icon: <Globe size={18} />,
+        title: `Macro Context`,
+        content: (<><p className="mb-4">On June 11, 2026, the European Central Bank (ECB) executed its first interest rate hike since September 2023, raising the deposit rate by 25 basis points to 2.25%. This policy adjustment comes in direct response to severe energy market shocks sparked by the geopolitical crisis in the Middle East and the closure of the Strait of Hormuz. With energy supply disruptions driving Eurozone inflation expectations up to 3.0% for 2026, the ECB was forced to prioritize inflation anchoring over economic growth, revising its Eurozone GDP growth forecast downward to 0.8%. At the same time, the U.S. Federal Reserve faces persistent price pressures as U.S. May CPI accelerated to 4.2% year-over-year. This global central bank tightening cycle has effectively ended any short-term rate cut narrative, bolstering the US Dollar Index (DXY) and restricting capital flows into high-beta risk assets like Bitcoin.</p></>),
+      },
+      {
+        icon: <TrendingUp size={18} />,
+        title: `Transmission Analysis`,
+        content: (<><p className="mb-4">The monetary tightening transmits to digital assets through three distinct channels. First, the sovereign debt yield channel: higher risk-free yields in both the US and Europe make yield-barren assets like Bitcoin less attractive to macro allocators. Second, the USD strength channel: a hawkish Fed and ECB support a 'higher-for-longer' interest rate regime, causing the DXY to strengthen. Historically, a rising DXY exerts immediate negative pressure on BTC valuations. Third, the credit contraction channel: higher cost of capital limits leverage across major crypto desks, dampening synthetic demand in derivatives markets.</p></>),
+      },
+      {
+        icon: <Eye size={18} />,
+        title: `What Professional Investors Are Watching`,
+        content: (<><p className="mb-4">Professional investors should monitor three critical developments. First, the June 16-17 FOMC meeting, where any hawkish Fed guidance could solidify rate hike expectations for late 2026. Second, geopolitical developments in the Middle East, as further energy escalations could push inflation expectations higher. Third, stablecoin velocity and market cap stability. While spot Bitcoin ETFs have seen outflows, tokenized RWA growth suggests capital is staying on-chain, waiting for macroeconomic stabilization.</p></>),
+      },
+      {
+        icon: <BarChart3 size={18} />,
+        title: `Scenario Analysis`,
+        content: (<><p className="mb-4">In our Base Case (55% probability), the Fed holds rates steady while the ECB pauses further hikes, keeping BTC trading in a $58,000 to $63,000 range. Under the Bear Case (35% probability), persistent inflation forces the Fed to hike rates to 4.0% in Q3, causing a liquidation event that breaks BTC below $54,000. In the Bull Case (10% probability), geopolitical resolutions rapidly ease energy prices, allowing central banks to adopt a dovish stance and launching BTC back toward $68,000.</p></>),
+      },
+    ]
+  },
+  {
     id: 'warsh-fed-hawkish-pivot-btc-june-2026',
     title: `Warsh's Hawkish Pivot: BTC Under Pressure as Higher-For-Longer Returns`,
     subtitle: `How a revived contractionary bias at the FOMC under Chair Kevin Warsh reshapes BTC's risk-return profile ahead of the June 16–17 meeting.`,
