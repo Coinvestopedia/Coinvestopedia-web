@@ -215,7 +215,7 @@ const AppContent: React.FC = () => {
                   duration: 0.4,
                   ease: [0.23, 1, 0.32, 1] 
                 }}
-                className="w-full min-w-0 transform-gpu"
+                className="w-full min-w-0 transform-gpu relative z-10"
               >
                 <ErrorBoundary>
                   {renderPage()}
