@@ -11,6 +11,7 @@ import { NewsletterSignup } from '../components/NewsletterSignup';
 import { Activity, Zap, BookOpen, Coins, BarChart3, Target, DollarSign, PieChart, Globe } from 'lucide-react';
 import { PageRoute } from '../types';
 import { AIMarketOverview } from '../components/AIMarketOverview';
+import { TrendChartModal } from '../components/TrendChartModal';
 
 interface HomeProps {
   onNavigate?: (route: PageRoute) => void;
@@ -50,8 +51,10 @@ export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
     return () => setPageCategories([]);
   }, [setActiveSubMenu, activeSubMenu, setPageCategories, onNavigate]);
   
-  const [metrics, setMetrics] = React.useState<{ label: string, description: string, value: string, change?: string, icon: any }[]>([]);
+  const [metrics, setMetrics] = React.useState<{ label: string, description: string, value: string, change?: string, icon: any, metricKey: 'defiTvl' | 'stablecoinMktCap' | 'ethStakingRatio' | 'dexVolume24h' }[]>([]);
   const [loadingMetrics, setLoadingMetrics] = React.useState(true);
+  const [trendModalOpen, setTrendModalOpen] = React.useState(false);
+  const [selectedMetric, setSelectedMetric] = React.useState<{ key: 'defiTvl' | 'stablecoinMktCap' | 'ethStakingRatio' | 'dexVolume24h'; value: string; change?: string } | null>(null);
 
   useEffect(() => {
     const fetchMetrics = async () => {
@@ -65,28 +68,32 @@ export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
               description: 'Total capital deposited across all decentralized finance protocols globally.',
               value: data.defiTvl?.value || '$130.4B', 
               change: data.defiTvl?.change || '+1.8%',
-              icon: <Globe size={24} /> 
+              icon: <Globe size={24} />,
+              metricKey: 'defiTvl' as const
             },
             { 
               label: 'Stablecoin Mkt Cap', 
               description: 'Total circulating supply of fiat-pegged digital assets.',
               value: data.stablecoinMktCap?.value || '$186.8B', 
               change: data.stablecoinMktCap?.change || '+0.2%', 
-              icon: <Coins size={24} /> 
+              icon: <Coins size={24} />,
+              metricKey: 'stablecoinMktCap' as const
             },
             { 
               label: 'ETH Staking Ratio', 
               description: 'Percentage of total Ethereum supply locked in staking contracts.',
               value: data.ethStakingRatio?.value || '32.6%', 
               change: data.ethStakingRatio?.change || '+0.5%', 
-              icon: <Zap size={24} /> 
+              icon: <Zap size={24} />,
+              metricKey: 'ethStakingRatio' as const
             },
             { 
               label: 'DEX Volume (24h)', 
               description: 'Total trading volume across all decentralized exchanges in the last 24 hours.',
               value: data.dexVolume24h?.value || '$6.6B', 
               change: data.dexVolume24h?.change || '+8.4%', 
-              icon: <Activity size={24} /> 
+              icon: <Activity size={24} />,
+              metricKey: 'dexVolume24h' as const
             }
           ];
           setMetrics(newMetrics);
@@ -102,28 +109,32 @@ export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
             description: 'Total capital deposited across all decentralized finance protocols globally.',
             value: '$130.4B', 
             change: '+1.8%',
-            icon: <Globe size={24} /> 
+            icon: <Globe size={24} />,
+            metricKey: 'defiTvl' as const
           },
           { 
             label: 'Stablecoin Mkt Cap', 
             description: 'Total circulating supply of fiat-pegged digital assets.',
             value: '$186.8B', 
             change: '+0.2%', 
-            icon: <Coins size={24} /> 
+            icon: <Coins size={24} />,
+            metricKey: 'stablecoinMktCap' as const
           },
           { 
             label: 'ETH Staking Ratio', 
             description: 'Percentage of total Ethereum supply locked in staking contracts.',
             value: '32.6%', 
             change: '+0.5%', 
-            icon: <Zap size={24} /> 
+            icon: <Zap size={24} />,
+            metricKey: 'ethStakingRatio' as const
           },
           { 
             label: 'DEX Volume (24h)', 
             description: 'Total trading volume across all decentralized exchanges in the last 24 hours.',
             value: '$6.6B', 
             change: '+8.4%', 
-            icon: <Activity size={24} /> 
+            icon: <Activity size={24} />,
+            metricKey: 'dexVolume24h' as const
           }
         ];
         setMetrics(fallbackMetrics);
@@ -169,7 +180,6 @@ export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
                 key={i} 
                 variant="interactive" 
                 className="h-full flex flex-col items-center text-center w-full"
-                onClick={() => handleCardClick(PageRoute.MACRO_INTEL)}
               >
                 <div className="flex flex-col items-center gap-3 mb-4">
                   <div className="p-3 bg-primary/10 rounded-lg text-primary flex-shrink-0">
@@ -191,13 +201,28 @@ export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
                    )}
                 </div>
 
-                <div className="flex items-center justify-center w-full px-4 py-2.5 mt-auto bg-primary/10 hover:bg-primary/20 text-primary text-sm font-bold rounded-lg transition-colors border border-primary/20">
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setSelectedMetric({ key: m.metricKey, value: m.value, change: m.change });
+                    setTrendModalOpen(true);
+                  }}
+                  className="flex items-center justify-center w-full px-4 py-2.5 mt-auto bg-primary/10 hover:bg-primary/20 text-primary text-sm font-bold rounded-lg transition-colors border border-primary/20"
+                >
                   Analyze Trend
-                </div>
+                </button>
               </Card>
             ))}
           </div>
         )}
+
+        <TrendChartModal
+          isOpen={trendModalOpen}
+          onClose={() => { setTrendModalOpen(false); setSelectedMetric(null); }}
+          metricKey={selectedMetric?.key ?? null}
+          currentValue={selectedMetric?.value}
+          currentChange={selectedMetric?.change}
+        />
       </section>
       
       {/* AI Market Overview - Mobile Only */}
