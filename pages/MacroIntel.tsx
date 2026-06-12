@@ -59,6 +59,39 @@ const TABS: { id: MacroTab; label: string; icon: React.ReactNode; isPro?: boolea
 
 const REPORTS: MacroReport[] = [
   {
+    id: 'macro-inflation-june-2026',
+    title: `Inflation Shock: US May CPI at 4.2% Hardens Fed's Higher-for-Longer Path`,
+    subtitle: `As energy costs surge 23.5%, persistent pricing pressures neutralize rate cut scenarios ahead of the June 16-17 FOMC meeting.`,
+    tab: 'weekly',
+    date: 'June 12, 2026',
+    readTime: '5 min read',
+    confidenceLevel: 'High',
+    keyMetrics: [{"label":"US May CPI","value":"4.2%","direction":"up"},{"label":"Energy Price Surge","value":"23.5%","direction":"up"},{"label":"Fed Funds Target","value":"3.50%–3.75%","direction":"neutral"},{"label":"BTC Spot Rate","value":"$61,800","direction":"down"}],
+    keyInsights: ["US headline CPI accelerates to 4.2% in May, fueled by a 23.5% surge in energy prices, locking in a hawkish policy floor.","The upcoming June 16-17 FOMC meeting, chaired by Kevin Warsh, is expected to pivot away from easing biases toward rate hike scenarios.","Sustained high sovereign yields increase the opportunity cost of holding BTC, triggering capital migration into short-term cash instruments.","Spot Bitcoin ETFs experience their longest net outflow streak in history, reflecting institutional de-risking amidst macro contraction."],
+    sections: [
+      {
+        icon: <Globe size={18} />,
+        title: `Macro Context`,
+        content: (<><p className="mb-4">The macroeconomic landscape has taken a decidedly hawkish turn in June 2026. According to the latest data, U.S. Consumer Price Index (CPI) inflation accelerated to 4.2% annually in May, marking its highest rate since late 2023. The primary driver of this print was a sharp 23.5% surge in energy costs, exacerbated by ongoing supply line tensions in the Middle East and the closure of the Strait of Hormuz. The resurgent price pressures have effectively eliminated any remaining market expectations for interest rate cuts in 2026. Instead, market participants are now preparing for the upcoming June 16–17 Federal Open Market Committee (FOMC) meeting, which marks the debut of Kevin Warsh as Federal Reserve Chairman. Consensus is forming around a contractionary policy stance, with yields on 10-year Treasury notes rising in response.</p></>),
+      },
+      {
+        icon: <TrendingUp size={18} />,
+        title: `Transmission Analysis`,
+        content: (<><p className="mb-4">This persistent higher-for-longer rate regime transmits direct downward pressure on digital assets. First, the yield opportunity cost channel: as risk-free yields on short-term U.S. debt instruments hover near 3.75%, the hurdle rate for holding non-yielding assets like Bitcoin increases. Institutional portfolios are rotating out of speculative vehicles and into cash equivalents. Second, the liquidity channel: contraction in central bank balance sheets reduces global M2 growth, directly dry-docking the excess liquidity that historically fuels crypto bull markets. Third, the risk-prevention channel: elevated geopolitical risks encourage investors to seek safe-haven sovereign bonds, draining liquidity from high-beta crypto assets.</p></>),
+      },
+      {
+        icon: <Eye size={18} />,
+        title: `What Professional Investors Are Watching`,
+        content: (<><p className="mb-4">Professional allocators are monitoring three main indicators. First, the June 17 dot plot and Chair Kevin Warsh's post-meeting press conference, looking for explicit signals regarding a return to rate hikes. Second, the stability of stablecoin reserves; a decline in total stablecoin market cap would confirm active capital flight out of the digital asset ecosystem. Third, on-chain capitulation signals, particularly the percentage of short-term holder supply held in loss, which is currently testing cyclical support levels.</p></>),
+      },
+      {
+        icon: <BarChart3 size={18} />,
+        title: `Scenario Analysis`,
+        content: (<><p className="mb-4">In our Base Case (60% probability), the Fed holds rates steady while signaling a hawkish bias, keeping Bitcoin range-bound between $58,000 and $63,000. Under the Bear Case (30% probability), resurgent inflation forces the Fed to hike rates by 25bps in Q3, triggering a liquidation cascade that breaks Bitcoin below the critical $54,000 support level. In the Bull Case (10% probability), a rapid resolution of Middle East energy blockades drops oil prices, allowing the Fed to return to a neutral stance and pushing Bitcoin back above $66,000.</p></>),
+      },
+    ]
+  },
+  {
     id: 'ecb-hawkish-pivot-june-2026',
     title: `ECB's Hawkish Pivot: Strait of Hormuz Crisis Forces First Rate Hike Since 2023`,
     subtitle: `As Eurozone growth drops to 0.8%, ECB's 25bps hike tightens global liquidity, placing downward pressure on BTC support at $61,500.`,
