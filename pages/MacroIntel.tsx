@@ -59,6 +59,39 @@ const TABS: { id: MacroTab; label: string; icon: React.ReactNode; isPro?: boolea
 
 const REPORTS: MacroReport[] = [
   {
+    id: 'macro-warsh-era-june-2026',
+    title: `The Warsh Era Begins: FOMC Braces for Easing Bias Cancellation`,
+    subtitle: `With futures pricing in a 96.4% pause, market focus turns to updated dot plot projections under new Fed leadership.`,
+    tab: 'weekly',
+    date: 'June 15, 2026',
+    readTime: '5 min read',
+    confidenceLevel: 'High',
+    keyMetrics: [{"label":"Pause Probability","value":"96.4%","direction":"neutral"},{"label":"U.S. Base Rate Range","value":"3.50%–3.75%","direction":"neutral"},{"label":"BTC Spot Rate","value":"$65,550","direction":"up"},{"label":"Mining Difficulty Adjustment","value":"-10.0%","direction":"down"}],
+    keyInsights: ["Markets price in a 96.4% probability of a rate pause, but expect hawkish forward guidance to dismantle previous rate cut scenarios.","The upcoming June 16-17 FOMC meeting is Kevin Warsh's debut as Fed Chairman, driving speculation of long-term rate hikes.","Bitcoin exhibits signs of structural consolidation near $65,500, supported by a 10% downward difficulty correction that stabilized miners.","Persistent inflation data forces a higher-for-longer regime, shifting expectations for policy easing into late 2027."],
+    sections: [
+      {
+        icon: <Globe size={18} />,
+        title: `Macro Context`,
+        content: (<><p className="mb-4">Global markets are entering a highly critical window ahead of the June 16–17, 2026 Federal Open Market Committee (FOMC) meeting, which marks the policy debut of new Federal Reserve Chairman Kevin Warsh. The consensus among economists and treasury markets points to a near-universal expectation that the benchmark rate will remain paused in the 3.50%–3.75% target range. However, the true macro signal lies in the upcoming policy projections and forward guidance. With core inflation persisting above 4% annually, the FOMC is widely anticipated to officially cancel its historical 'easing bias' and signal a more aggressive stance, potentially raising the prospect of further interest rate hikes in late 2026 to firmly anchor long-term price targets.</p></>),
+      },
+      {
+        icon: <TrendingUp size={18} />,
+        title: `Transmission Analysis`,
+        content: (<><p className="mb-4">The transmission of this hawkish policy outlook affects digital asset markets through three distinct channels. First, the yield spread channel: as short-term risk-free rates remain elevated near 3.75%, institutional allocators face a high opportunity cost for holding non-yielding assets, suppressing speculative flows. Second, the USD liquidity channel: expectations of contractionary monetary policy keep the DXY index elevated, historical headwinds for Bitcoin valuation. Third, the asset rotation channel: as high yields persist, institutional credit is directed into cash equivalents and high-profile tech stocks (such as recent AI listings and mega-IPOs), rather than digital assets.</p></>),
+      },
+      {
+        icon: <Eye size={18} />,
+        title: `What Professional Investors Are Watching`,
+        content: (<><p className="mb-4">Professional allocators are focusing on three primary data points. First, the June 17 dot plot, looking for changes in the consensus policy rate projection for late 2026 and 2027. Second, the tone of Chairman Warsh's inaugural press conference, checking for specific hawkish policy cues. Third, net flows in spot Bitcoin ETFs; after weeks of record outflows, a stabilization in daily flow metrics is needed to establish a sustainable price floor.</p></>),
+      },
+      {
+        icon: <BarChart3 size={18} />,
+        title: `Scenario Analysis`,
+        content: (<><p className="mb-4">In our Base Case (55% probability), the Fed pauses but delivers hawkish forward guidance, keeping BTC range-bound between $62,000 and $66,000. Under the Bear Case (35% probability), resurgent inflation fears prompt the Fed to actively warn of a Q3 rate hike, triggering a risk-off liquidation that breaks BTC below $58,000. In the Bull Case (10% probability), geopolitical resolutions rapidly ease energy prices, allowing the Fed to present a more neutral outlook and launching BTC toward $70,000.</p></>),
+      },
+    ]
+  },
+  {
     id: 'macro-inflation-june-2026',
     title: `Inflation Shock: US May CPI at 4.2% Hardens Fed's Higher-for-Longer Path`,
     subtitle: `As energy costs surge 23.5%, persistent pricing pressures neutralize rate cut scenarios ahead of the June 16-17 FOMC meeting.`,
