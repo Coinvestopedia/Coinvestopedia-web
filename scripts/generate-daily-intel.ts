@@ -251,7 +251,7 @@ async function run() {
     const insightRaw: string = insightData.content || '';
     const insightBlocks = insightRaw.split(/\\n\\n|\n\n/).filter((b: string) => b.trim());
 
-    const insightJsx = insightBlocks.map((block: string) => {
+    const insightJsx = insightBlocks.slice(1).map((block: string) => {
       const trimmed = block.trim();
       if (trimmed.startsWith('## ')) {
         const heading = trimmed.replace(/^## /, '');
