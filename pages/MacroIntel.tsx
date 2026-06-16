@@ -59,6 +59,39 @@ const TABS: { id: MacroTab; label: string; icon: React.ReactNode; isPro?: boolea
 
 const REPORTS: MacroReport[] = [
   {
+    id: 'april-cpi-btc-implication-2024-05-16',
+    title: `US April CPI Report: Reshaping Fed Expectations and Bolstering Bitcoin's Rebound`,
+    subtitle: `Softer-than-expected inflation data for April 2024 has recalibrated market expectations for Federal Reserve rate cuts, driving a risk-on pivot that directly benefits uncorrelated digital assets like Bitcoin through enhanced liquidity and reduced opportunity cost.`,
+    tab: 'weekly',
+    date: 'May 16, 2024',
+    readTime: '14 min read',
+    confidenceLevel: 'High',
+    keyMetrics: [{"label":"DXY Index","value":"104.55","direction":"down","symbol":"DXY","format":"number"},{"label":"Bitcoin (BTC)","value":"66,250","direction":"up","symbol":"BTC","format":"number"},{"label":"US 10Y Yield","value":"4.37%","direction":"down","symbol":"^TNX","format":"percent"},{"label":"S&P 500","value":"5,308","direction":"up","symbol":"^SPX","format":"number"}],
+    keyInsights: ["US headline CPI for April 2024 registered 0.3% MoM, falling below the consensus estimate of 0.4% and the prior month's 0.4%.","Core CPI, excluding volatile food and energy, also came in at 0.3% MoM, aligning with expectations but indicating a deceleration from recent sticky prints.","The probability of a September Federal Reserve rate cut surged to approximately 75% following the CPI release, up from roughly 60% just 24 hours prior.","Bitcoin (BTC) price advanced over 7% from its pre-CPI low of $61,500 to touch $66,000+ within 12 hours, demonstrating a strong risk-on response."],
+    sections: [
+      {
+        icon: <Globe size={18} />,
+        title: `Macro Context`,
+        content: (<><p className="mb-4">The release of the US April Consumer Price Index (CPI) on May 15, 2024, marked a pivotal moment for financial markets, offering a reprieve from several months of stubbornly high inflation readings. Both the headline CPI and core CPI, which strips out volatile food and energy components, registered a <span className="text-emerald-400 font-bold">0.3%</span> month-over-month increase. This headline print was notably below the <span className="text-emerald-400 font-bold">0.4%</span> consensus forecast from economists polled by Bloomberg, while core CPI met expectations, collectively signaling a potential re-acceleration of disinflationary forces.</p><p className="mb-4">Prior to this report, Federal Reserve officials, including Chairman Jerome Powell, had maintained a cautious 'higher for longer' stance, emphasizing the need for greater confidence in sustained disinflation before considering rate cuts. Regional Fed presidents like Neel Kashkari (Minneapolis) and Loretta Mester (Cleveland) had even floated the possibility of holding rates steady for the entirety of 2024, or even hiking, if inflation proved persistent. However, the latest CPI data has immediately shifted market sentiment, with futures markets now pricing in a significantly higher probability (around <span className="text-emerald-400 font-bold">75%</span>) of a Fed rate cut as early as September, compared to approximately <span className="text-emerald-400 font-bold">60%</span> before the report. This recalibration suggests that the Fed’s path of monetary policy normalization may resume sooner than previously anticipated, easing financial conditions across the board despite lingering geopolitical tensions in the Middle East and Eastern Europe.</p></>),
+      },
+      {
+        icon: <TrendingUp size={18} />,
+        title: `Transmission Analysis`,
+        content: (<><p className="mb-4">The softer April CPI data translates into immediate and tangible impacts on digital assets like Bitcoin through three primary channels: risk appetite, liquidity, and opportunity cost. These mechanisms collectively drive capital flows and influence price discovery in the volatile crypto market.</p><p className="mb-4">**Channel 1: Risk Appetite** — A disinflationary signal from the CPI report fosters a significant improvement in broad market risk appetite. Lower inflation reduces the perceived need for aggressive monetary tightening, which typically dampens economic growth and corporate earnings. As such, traditional risk assets such as technology stocks (represented by the Nasdaq 100) and growth-oriented equities experienced a strong rally post-CPI. Bitcoin, often acting as a high-beta risk asset, demonstrates a robust positive correlation with major equity indices, with its 30-day correlation coefficient to the Nasdaq 100 frequently oscillating between +0.65 and +0.72. Following the May 15 CPI release, this correlation strengthened as BTC mirrored the equity market's upward trajectory, surging over <span className="text-emerald-400 font-bold">7%</span> from its intra-day low of $61,500.</p><p className="mb-4">**Channel 2: Liquidity** — Easing inflation pressures and the prospect of earlier Fed rate cuts typically lead to a weakening US Dollar. A declining Dollar Index (DXY) signals increased global liquidity and reduced demand for dollar-denominated safe-haven assets. The DXY notably dropped from 105.3 pre-CPI to a low of 104.2 within hours of the announcement, a decline of over <span className="text-emerald-400 font-bold">1%</span>. Historically, Bitcoin exhibits a strong inverse correlation with the DXY, with a 30-day coefficient often ranging from -0.50 to -0.65. This inverse relationship intensified post-CPI, as a weaker dollar made riskier, non-yielding assets like BTC more attractive to international investors and facilitated broader capital flows into the crypto ecosystem.</p><p className="mb-4">**Channel 3: Opportunity Cost** — The most direct impact of shifting rate expectations is on the opportunity cost of holding non-yielding assets. The US 10-Year Treasury yield, a benchmark for global borrowing costs, plummeted by over 12 basis points from <span className="text-emerald-400 font-bold">4.49%</span> to <span className="text-emerald-400 font-bold">4.37%</span> within hours of the CPI release. This sharp decline makes holding cash or fixed-income instruments less appealing relative to growth-oriented or speculative assets. Bitcoin, as a non-yielding asset, benefits significantly from this dynamic; the reduced return on 'safe' investments decreases the opportunity cost of allocating capital to crypto. Lag analysis suggests that Bitcoin often reacts to significant shifts in benchmark Treasury yields with a lag of 4 to 8 hours, reflecting the time required for institutional capital to reallocate and for market sentiment to fully coalesce around new monetary policy expectations.</p><p className="mb-4">Collectively, the improved risk sentiment, enhanced global liquidity from a weaker dollar, and reduced opportunity cost from falling yields create a potent tailwind for Bitcoin and the broader crypto market. The CPI print served as a catalyst, reinforcing the narrative that macro factors remain a dominant driver of digital asset performance.</p></>),
+      },
+      {
+        icon: <Eye size={18} />,
+        title: `What Professional Investors Are Watching`,
+        content: (<><p className="mb-4">Professional investors are closely monitoring several key macro and crypto-specific levels to gauge the sustainability of the post-CPI rally and potential regime shifts:</p><ul className="space-y-4 mb-4"><li className="flex items-start gap-3"><span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" /><div><strong className="text-text">**DXY 104.0:</strong><span className="text-text-muted">** A sustained break below this critical support level would signal a more aggressive weakening of the US Dollar, likely strengthening the inverse correlation between DXY and BTC to -0.75 or greater, suggesting a significant liquidity injection into risk assets.</span></div></li><li className="flex items-start gap-3"><span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" /><span className="text-text-muted">**US 10-Year Treasury Yield <span className="text-emerald-400 font-bold">4.25%</span>:** A decisive move and close below this threshold would indicate a strong conviction in continued disinflation and increased probability of a second Fed rate cut in 2024, further reducing the opportunity cost for non-yielding assets.</span></li><li className="flex items-start gap-3"><span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" /><span className="text-text-muted">**Bitcoin Dominance (BTC.D) <span className="text-emerald-400 font-bold">55.0%</span>:** A sustained push above this level would suggest capital rotation from altcoins back into Bitcoin, often seen during periods of initial market strength or when investors seek the relative safety of the largest crypto asset amidst broader macro uncertainty.</span></li><li className="flex items-start gap-3"><span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" /><div><strong className="text-text">**S&P 500 (SPX) 5,350:</strong><span className="text-text-muted">** A clear breakout and consolidation above this new all-time high would confirm robust institutional risk appetite across traditional markets, providing a strong correlated tailwind for Bitcoin's price appreciation.</span></div></li></ul></>),
+      },
+      {
+        icon: <BarChart3 size={18} />,
+        title: `Scenario Analysis`,
+        content: (<><p className="mb-4">The post-CPI environment introduces a range of potential outcomes for Bitcoin and broader markets, each contingent on forthcoming economic data and central bank commentary.</p><p className="mb-4">**Base Case (<span className="text-emerald-400 font-bold">55%</span> probability):** Disinflationary trends continue at a moderate pace, but core services inflation remains somewhat sticky, leading the Federal Reserve to implement a single rate cut in Q3 2024 (e.g., September). Under this scenario, Bitcoin consolidates its gains above the $65,000 level, absorbing profit-taking while gradually building momentum towards a target range of $70,000-$72,000 by the end of Q2, supported by persistent institutional ETF inflows and improved macro sentiment.</p><p className="mb-4">**Bull Case (<span className="text-emerald-400 font-bold">25%</span> probability):** Subsequent inflation reports, including the Personal Consumption Expenditures (PCE) price index, surprise to the downside (e.g., core PCE below <span className="text-emerald-400 font-bold">0.2%</span> MoM), indicating a faster path to the Fed's <span className="text-emerald-400 font-bold">2%</span> target. This prompts the Fed to signal the likelihood of two rate cuts in 2024. In this more accommodative environment, Bitcoin experiences a significant breakout above its previous all-time highs, targeting the $78,000-$80,000 range, potentially testing the psychological $80,000 barrier as a result of aggressive liquidity expansion and heightened risk-on speculation.</p><p className="mb-4">**Bear Case (<span className="text-emerald-400 font-bold">20%</span> probability):** Upcoming economic data, particularly the next CPI or PCE report, shows a re-acceleration of inflationary pressures, or labor market tightness persists unexpectedly. This forces the Federal Reserve to revert to a more hawkish stance, potentially delaying rate cuts until 2025 or even hinting at further tightening if inflation proves recalcitrant. Under this adverse scenario, Bitcoin would likely retest critical support levels, initially falling back to $60,000, and potentially sliding further to the $58,000-$55,000 range as risk assets are repriced lower amid tightening financial conditions.</p></>),
+      },
+    ]
+  },
+  {
     id: 'macro-warsh-era-june-2026',
     title: `The Warsh Era Begins: FOMC Braces for Easing Bias Cancellation`,
     subtitle: `With futures pricing in a 96.4% pause, market focus turns to updated dot plot projections under new Fed leadership.`,
@@ -77,12 +110,57 @@ const REPORTS: MacroReport[] = [
       {
         icon: <TrendingUp size={18} />,
         title: `Transmission Analysis`,
-        content: (<><p className="mb-4">The transmission of this hawkish policy outlook affects digital asset markets through three distinct channels. First, the yield spread channel: as short-term risk-free rates remain elevated near 3.75%, institutional allocators face a high opportunity cost for holding non-yielding assets, suppressing speculative flows. Second, the USD liquidity channel: expectations of contractionary monetary policy keep the DXY index elevated, historical headwinds for Bitcoin valuation. Third, the asset rotation channel: as high yields persist, institutional credit is directed into cash equivalents and high-profile tech stocks (such as recent AI listings and mega-IPOs), rather than digital assets.</p></>),
+        content: (
+          <>
+            <p className="mb-4">The transmission of this hawkish policy outlook affects digital asset markets through three distinct channels.</p>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+              <div className="p-4 bg-surface border border-border rounded-xl">
+                <h4 className="text-sm font-bold text-primary mb-2">Channel 1: Yield Spread</h4>
+                <p className="text-xs text-text-muted">As short-term risk-free rates remain elevated near <span className="text-red-400 font-bold">3.75%</span>, institutional allocators face a high opportunity cost for holding non-yielding assets, suppressing speculative flows.</p>
+              </div>
+              <div className="p-4 bg-surface border border-border rounded-xl">
+                <h4 className="text-sm font-bold text-primary mb-2">Channel 2: USD Liquidity</h4>
+                <p className="text-xs text-text-muted">Expectations of contractionary monetary policy keep the DXY index elevated, creating historical headwinds for Bitcoin valuation.</p>
+              </div>
+              <div className="p-4 bg-surface border border-border rounded-xl">
+                <h4 className="text-sm font-bold text-primary mb-2">Channel 3: Asset Rotation</h4>
+                <p className="text-xs text-text-muted">As high yields persist, institutional credit is directed into cash equivalents and high-profile tech stocks, rather than digital assets.</p>
+              </div>
+            </div>
+          </>
+        ),
       },
       {
         icon: <Eye size={18} />,
         title: `What Professional Investors Are Watching`,
-        content: (<><p className="mb-4">Professional allocators are focusing on three primary data points. First, the June 17 dot plot, looking for changes in the consensus policy rate projection for late 2026 and 2027. Second, the tone of Chairman Warsh's inaugural press conference, checking for specific hawkish policy cues. Third, net flows in spot Bitcoin ETFs; after weeks of record outflows, a stabilization in daily flow metrics is needed to establish a sustainable price floor.</p></>),
+        content: (
+          <>
+            <p className="mb-4">Professional allocators are focusing on three primary data points.</p>
+            <ul className="space-y-4 mb-4">
+              <li className="flex items-start gap-3">
+                <span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" />
+                <div>
+                  <strong className="text-text">June 17 Dot Plot:</strong>
+                  <span className="text-text-muted"> Looking for changes in the consensus policy rate projection for late 2026 and 2027.</span>
+                </div>
+              </li>
+              <li className="flex items-start gap-3">
+                <span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" />
+                <div>
+                  <strong className="text-text">Warsh's Inaugural Press Conference:</strong>
+                  <span className="text-text-muted"> Checking the tone for specific hawkish policy cues.</span>
+                </div>
+              </li>
+              <li className="flex items-start gap-3">
+                <span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" />
+                <div>
+                  <strong className="text-text">Spot Bitcoin ETF Net Flows:</strong>
+                  <span className="text-text-muted"> After weeks of record outflows, a stabilization in daily flow metrics is needed to establish a sustainable price floor.</span>
+                </div>
+              </li>
+            </ul>
+          </>
+        ),
       },
       {
         icon: <BarChart3 size={18} />,
@@ -110,12 +188,57 @@ const REPORTS: MacroReport[] = [
       {
         icon: <TrendingUp size={18} />,
         title: `Transmission Analysis`,
-        content: (<><p className="mb-4">This persistent higher-for-longer rate regime transmits direct downward pressure on digital assets. First, the yield opportunity cost channel: as risk-free yields on short-term U.S. debt instruments hover near 3.75%, the hurdle rate for holding non-yielding assets like Bitcoin increases. Institutional portfolios are rotating out of speculative vehicles and into cash equivalents. Second, the liquidity channel: contraction in central bank balance sheets reduces global M2 growth, directly dry-docking the excess liquidity that historically fuels crypto bull markets. Third, the risk-prevention channel: elevated geopolitical risks encourage investors to seek safe-haven sovereign bonds, draining liquidity from high-beta crypto assets.</p></>),
+        content: (
+          <>
+            <p className="mb-4">This persistent higher-for-longer rate regime transmits direct downward pressure on digital assets through three distinct channels.</p>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+              <div className="p-4 bg-surface border border-border rounded-xl">
+                <h4 className="text-sm font-bold text-primary mb-2">Channel 1: Yield Opportunity Cost</h4>
+                <p className="text-xs text-text-muted">As risk-free yields on short-term U.S. debt instruments hover near <span className="text-emerald-400 font-bold">3.75%</span>, the hurdle rate for holding non-yielding assets like Bitcoin increases. Institutional portfolios are rotating out of speculative vehicles.</p>
+              </div>
+              <div className="p-4 bg-surface border border-border rounded-xl">
+                <h4 className="text-sm font-bold text-primary mb-2">Channel 2: Liquidity Contraction</h4>
+                <p className="text-xs text-text-muted">Contraction in central bank balance sheets reduces global M2 growth, directly dry-docking the excess liquidity that historically fuels crypto bull markets.</p>
+              </div>
+              <div className="p-4 bg-surface border border-border rounded-xl">
+                <h4 className="text-sm font-bold text-primary mb-2">Channel 3: Risk Prevention</h4>
+                <p className="text-xs text-text-muted">Elevated geopolitical risks encourage investors to seek safe-haven sovereign bonds, draining liquidity from high-beta crypto assets.</p>
+              </div>
+            </div>
+          </>
+        ),
       },
       {
         icon: <Eye size={18} />,
         title: `What Professional Investors Are Watching`,
-        content: (<><p className="mb-4">Professional allocators are monitoring three main indicators. First, the June 17 dot plot and Chair Kevin Warsh's post-meeting press conference, looking for explicit signals regarding a return to rate hikes. Second, the stability of stablecoin reserves; a decline in total stablecoin market cap would confirm active capital flight out of the digital asset ecosystem. Third, on-chain capitulation signals, particularly the percentage of short-term holder supply held in loss, which is currently testing cyclical support levels.</p></>),
+        content: (
+          <>
+            <p className="mb-4">Professional allocators are monitoring three main indicators.</p>
+            <ul className="space-y-4 mb-4">
+              <li className="flex items-start gap-3">
+                <span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" />
+                <div>
+                  <strong className="text-text">June 17 Dot Plot & Warsh's Guidance:</strong>
+                  <span className="text-text-muted"> Looking for explicit signals regarding a return to rate hikes.</span>
+                </div>
+              </li>
+              <li className="flex items-start gap-3">
+                <span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" />
+                <div>
+                  <strong className="text-text">Stablecoin Reserves:</strong>
+                  <span className="text-text-muted"> A decline in total stablecoin market cap would confirm active capital flight out of the digital asset ecosystem.</span>
+                </div>
+              </li>
+              <li className="flex items-start gap-3">
+                <span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" />
+                <div>
+                  <strong className="text-text">On-Chain Capitulation:</strong>
+                  <span className="text-text-muted"> Particularly the percentage of short-term holder supply held in loss, currently testing cyclical support levels.</span>
+                </div>
+              </li>
+            </ul>
+          </>
+        ),
       },
       {
         icon: <BarChart3 size={18} />,
@@ -143,12 +266,57 @@ const REPORTS: MacroReport[] = [
       {
         icon: <TrendingUp size={18} />,
         title: `Transmission Analysis`,
-        content: (<><p className="mb-4">The monetary tightening transmits to digital assets through three distinct channels. First, the sovereign debt yield channel: higher risk-free yields in both the US and Europe make yield-barren assets like Bitcoin less attractive to macro allocators. Second, the USD strength channel: a hawkish Fed and ECB support a 'higher-for-longer' interest rate regime, causing the DXY to strengthen. Historically, a rising DXY exerts immediate negative pressure on BTC valuations. Third, the credit contraction channel: higher cost of capital limits leverage across major crypto desks, dampening synthetic demand in derivatives markets.</p></>),
+        content: (
+          <>
+            <p className="mb-4">The monetary tightening transmits to digital assets through three distinct channels.</p>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+              <div className="p-4 bg-surface border border-border rounded-xl">
+                <h4 className="text-sm font-bold text-primary mb-2">Channel 1: Sovereign Yields</h4>
+                <p className="text-xs text-text-muted">Higher risk-free yields in both the US and Europe make yield-barren assets like Bitcoin less attractive to macro allocators.</p>
+              </div>
+              <div className="p-4 bg-surface border border-border rounded-xl">
+                <h4 className="text-sm font-bold text-primary mb-2">Channel 2: USD Strength</h4>
+                <p className="text-xs text-text-muted">A hawkish Fed and ECB support a 'higher-for-longer' interest rate regime, causing the DXY to strengthen, exerting immediate negative pressure on BTC valuations.</p>
+              </div>
+              <div className="p-4 bg-surface border border-border rounded-xl">
+                <h4 className="text-sm font-bold text-primary mb-2">Channel 3: Credit Contraction</h4>
+                <p className="text-xs text-text-muted">Higher cost of capital limits leverage across major crypto desks, dampening synthetic demand in derivatives markets.</p>
+              </div>
+            </div>
+          </>
+        ),
       },
       {
         icon: <Eye size={18} />,
         title: `What Professional Investors Are Watching`,
-        content: (<><p className="mb-4">Professional investors should monitor three critical developments. First, the June 16-17 FOMC meeting, where any hawkish Fed guidance could solidify rate hike expectations for late 2026. Second, geopolitical developments in the Middle East, as further energy escalations could push inflation expectations higher. Third, stablecoin velocity and market cap stability. While spot Bitcoin ETFs have seen outflows, tokenized RWA growth suggests capital is staying on-chain, waiting for macroeconomic stabilization.</p></>),
+        content: (
+          <>
+            <p className="mb-4">Professional investors should monitor three critical developments.</p>
+            <ul className="space-y-4 mb-4">
+              <li className="flex items-start gap-3">
+                <span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" />
+                <div>
+                  <strong className="text-text">June 16-17 FOMC Meeting:</strong>
+                  <span className="text-text-muted"> Any hawkish Fed guidance could solidify rate hike expectations for late 2026.</span>
+                </div>
+              </li>
+              <li className="flex items-start gap-3">
+                <span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" />
+                <div>
+                  <strong className="text-text">Middle East Geopolitics:</strong>
+                  <span className="text-text-muted"> Further energy escalations could push inflation expectations higher.</span>
+                </div>
+              </li>
+              <li className="flex items-start gap-3">
+                <span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" />
+                <div>
+                  <strong className="text-text">Stablecoin Velocity:</strong>
+                  <span className="text-text-muted"> While spot Bitcoin ETFs have seen outflows, tokenized RWA growth suggests capital is staying on-chain, waiting for macroeconomic stabilization.</span>
+                </div>
+              </li>
+            </ul>
+          </>
+        ),
       },
       {
         icon: <BarChart3 size={18} />,
@@ -176,12 +344,64 @@ const REPORTS: MacroReport[] = [
       {
         icon: <TrendingUp size={18} />,
         title: `Transmission Analysis`,
-        content: (<><p className="mb-4">Historically, strong dollar regimes and hawkish Fed pivots transmit into crypto through three channels, each currently active.</p><p className="mb-4"><strong>Channel 1:</strong> Risk Appetite — BTC's 90-day rolling correlation with the DXY stands at approximately -0.68, meaning each sustained dollar rally above 99 creates statistically predictable downside pressure on BTC. With the DXY testing resistance at 100, the transmission lag of 7–14 trading days means the full effect of the current dollar move may not be priced into BTC until late June.</p><p className="mb-4"><strong>Channel 2:</strong> Liquidity — A hawkish Fed compresses global dollar liquidity. Emerging-market investors — an increasingly critical BTC cohort — face rising FX headwinds converting local currency into USD-denominated digital assets. Tether (USDT) market cap growth has flattened near $112B for over four consecutive weeks, a reliable leading indicator of reduced stablecoin-to-crypto conversion flows.</p><p className="mb-4"><strong>Channel 3:</strong> Opportunity Cost — With the 10-year Treasury yield hovering near 4.5%, the risk-free rate continues to compete aggressively with non-yielding assets. Spot BTC ETFs — which crossed $2T cumulative volume in 2026 — recorded net outflows across multiple May sessions, suggesting institutional allocators are rotating into short-duration Treasuries. The structural bid that defined 2025 is materially thinner in mid-2026.</p></>),
+        content: (
+          <>
+            <p className="mb-4">Historically, strong dollar regimes and hawkish Fed pivots transmit into crypto through three channels, each currently active.</p>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+              <div className="p-4 bg-surface border border-border rounded-xl">
+                <h4 className="text-sm font-bold text-primary mb-2">Channel 1: Risk Appetite</h4>
+                <p className="text-xs text-text-muted">BTC's 90-day rolling correlation with the DXY stands at approximately <span className="text-red-400 font-bold">-0.68</span>, meaning each sustained dollar rally above 99 creates statistically predictable downside pressure on BTC.</p>
+              </div>
+              <div className="p-4 bg-surface border border-border rounded-xl">
+                <h4 className="text-sm font-bold text-primary mb-2">Channel 2: Liquidity</h4>
+                <p className="text-xs text-text-muted">A hawkish Fed compresses global dollar liquidity. Emerging-market investors face rising FX headwinds. Tether (USDT) market cap growth has flattened near $112B for over four consecutive weeks.</p>
+              </div>
+              <div className="p-4 bg-surface border border-border rounded-xl">
+                <h4 className="text-sm font-bold text-primary mb-2">Channel 3: Opportunity Cost</h4>
+                <p className="text-xs text-text-muted">With the 10-year Treasury yield hovering near <span className="text-emerald-400 font-bold">4.5%</span>, the risk-free rate continues to compete aggressively with non-yielding assets. Spot BTC ETFs recorded net outflows across multiple sessions.</p>
+              </div>
+            </div>
+          </>
+        ),
       },
       {
         icon: <Eye size={18} />,
         title: `What Professional Investors Are Watching`,
-        content: (<><p className="mb-4">Four key level-based triggers are dominating institutional watch lists ahead of the June 16–17 FOMC decision.</p><ul className="space-y-4 mb-4"><li className="flex items-start gap-3"><span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" /><div><strong className="text-text">DXY 101.5 Level:</strong><span className="text-text-muted"> Above this threshold, historical data shows the BTC-DXY inverse correlation strengthens to -0.80+, entering a regime where EM crypto capital flight accelerates. This is the "pain level" for dollar-denominated BTC demand from Asia and Latin America.</span></div></li></ul><ul className="space-y-4 mb-4"><li className="flex items-start gap-3"><span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" /><div><strong className="text-text">CME FedWatch:</strong><span className="text-text-muted"> June Cut Probability: Currently sub-5%. Any upside surprise in the June FOMC statement toward a neutral bias — rather than the expected hawkish lean — would catalyze a rapid re-pricing of BTC. Traders are watching for the dot plot's 2026 median projection as the primary catalyst signal.</span></div></li></ul><ul className="space-y-4 mb-4"><li className="flex items-start gap-3"><span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" /><div><strong className="text-text">BTC ETF Weekly Flow:</strong><span className="text-text-muted"> Net outflows have dominated for 3+ consecutive weeks. A return to $150M+ weekly net inflows would signal institutional re-engagement and act as the structural bid needed to arrest the current supply-in-loss dynamic near $60,000.</span></div></li></ul><ul className="space-y-4 mb-4"><li className="flex items-start gap-3"><span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" /><div><strong className="text-text">$60,000 BTC Support (Aggregate Realized Price):</strong><span className="text-text-muted"> On-chain data shows the aggregate realized price — the average cost basis of all circulating BTC — sits near $58,000–$60,000. A sustained breach of this level has historically preceded 15–25% capitulation moves in prior cycles before recovery.</span></div></li></ul></>),
+        content: (
+          <>
+            <p className="mb-4">Four key level-based triggers are dominating institutional watch lists ahead of the June 16–17 FOMC decision.</p>
+            <ul className="space-y-4 mb-4">
+              <li className="flex items-start gap-3">
+                <span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" />
+                <div>
+                  <strong className="text-text">DXY 101.5 Level:</strong>
+                  <span className="text-text-muted"> Above this threshold, historical data shows the BTC-DXY inverse correlation strengthens to -0.80+, entering a regime where EM crypto capital flight accelerates.</span>
+                </div>
+              </li>
+              <li className="flex items-start gap-3">
+                <span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" />
+                <div>
+                  <strong className="text-text">CME FedWatch:</strong>
+                  <span className="text-text-muted"> June Cut Probability: Currently sub-5%. Any upside surprise in the June FOMC statement toward a neutral bias would catalyze a rapid re-pricing of BTC.</span>
+                </div>
+              </li>
+              <li className="flex items-start gap-3">
+                <span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" />
+                <div>
+                  <strong className="text-text">BTC ETF Weekly Flow:</strong>
+                  <span className="text-text-muted"> Net outflows have dominated for 3+ consecutive weeks. A return to $150M+ weekly net inflows would signal institutional re-engagement.</span>
+                </div>
+              </li>
+              <li className="flex items-start gap-3">
+                <span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" />
+                <div>
+                  <strong className="text-text">$60,000 BTC Support:</strong>
+                  <span className="text-text-muted"> On-chain data shows the aggregate realized price sits near $58,000–$60,000. A sustained breach has historically preceded 15–25% capitulation moves.</span>
+                </div>
+              </li>
+            </ul>
+          </>
+        ),
       },
       {
         icon: <BarChart3 size={18} />,
