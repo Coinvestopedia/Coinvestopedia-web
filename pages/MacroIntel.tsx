@@ -59,6 +59,39 @@ const TABS: { id: MacroTab; label: string; icon: React.ReactNode; isPro?: boolea
 
 const REPORTS: MacroReport[] = [
   {
+    id: 'warsh-fomc-btc-risk-off-regime',
+    title: `Warsh's First Hold: Bitcoin Enters Rate-Regime Crossfire as New Fed Chair Signals Higher-for-Longer`,
+    subtitle: `How Kevin Warsh's inaugural FOMC stance, sticky inflation, and MiCA's Binance deadline combine to create Bitcoin's most complex macro backdrop since April 2024`,
+    tab: 'weekly',
+    date: 'June 17, 2026',
+    readTime: '12 min read',
+    confidenceLevel: 'High',
+    keyMetrics: [{"label":"BTC Price","value":"$65,456","direction":"down"},{"label":"Fed Rate","value":"3.50–3.75%","direction":"neutral"},{"label":"RWA Market","value":"$43B","direction":"up"},{"label":"BTC ETF Holdings","value":"678K BTC","direction":"up"}],
+    keyInsights: ["Kevin Warsh's first FOMC as Chair held rates at 3.50%–3.75%, with the dot plot shifting to signal zero 2026 cuts — a hawkish surprise pushing BTC down 1.2% to $65,456.","MiCA enforcement risk: Binance faces a June 30 EU licensing deadline in Greece, threatening regulated institutional access for European capital flows into crypto.","RWA tokenization surpassed $43 billion globally (+37% in 180 days), with Ethereum hosting 57.8% of tokenized assets — signaling structural demand beyond pure Bitcoin speculation.","U.S. spot Bitcoin ETFs hold 678,000 BTC ($54B cumulative inflows), but mid-June saw mixed daily flows as institutional capital rotated toward Ethereum and Solana products."],
+    sections: [
+      {
+        icon: <Globe size={18} />,
+        title: `Macro Context`,
+        content: (<><p className="mb-4">The Federal Reserve's June 17 FOMC meeting — the first chaired by Kevin Warsh following Powell's exit last month — delivered an expected rate hold at <span className="text-emerald-400 font-bold">3.50%</span>–<span className="text-emerald-400 font-bold">3.75%</span>, but the hawkish surprise came in the dot plot. The updated Summary of Economic Projections now signals zero rate cuts for the remainder of 2026, a sharp deviation from the one-to-two cuts markets had priced in. Warsh cited persistent inflation, partly driven by energy price shocks and robust job growth, as the rationale for extending the higher-for-longer posture. Bitcoin, which had rebounded from a June dip to $61,000 following May CPI data, stalled at $65,800 pre-announcement and slid <span className="text-emerald-400 font-bold">1.2%</span> to $65,456 as traders digested the hawkish dot plot. The DXY held firm above 104, reinforcing the inverse correlation with BTC that has defined 2026's risk-off macro environment.</p></>),
+      },
+      {
+        icon: <TrendingUp size={18} />,
+        title: `Transmission Analysis`,
+        content: (<><div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6"><div className="p-4 bg-surface border border-border rounded-xl"><h4 className="text-sm font-bold text-primary mb-2">Channel 1 — Rate Expectations</h4><p className="text-xs text-text-muted">Zero cuts priced for 2026 compresses Bitcoin's theoretical fair value by removing the anticipated liquidity injection that historically supports risk assets. The CME FedWatch tool showed odds of any 2026 cut collapse from <span className="text-emerald-400 font-bold">62%</span> to <span className="text-emerald-400 font-bold">31%</span> post-announcement.</p></div><div className="p-4 bg-surface border border-border rounded-xl"><h4 className="text-sm font-bold text-primary mb-2">Channel 2 — Regulatory Risk (MiCA)</h4><p className="text-xs text-text-muted">Binance's failure to secure a MiCA-compliant license in Greece by the June 30 deadline risks a full EU market suspension — a $4.2 billion annualized revenue exposure. This creates a second-order risk: European institutional flows dependent on Binance's infrastructure face disruption, reducing addressable liquidity.</p></div><div className="p-4 bg-surface border border-border rounded-xl"><h4 className="text-sm font-bold text-primary mb-2">Channel 3 — Institutional Rotation</h4><p className="text-xs text-text-muted">Mid-June ETF data showed Bitcoin spot products experiencing net outflows while Ethereum, Solana, and XRP funds attracted capital — a tactical shift driven partly by AI-adjacent blockchain narratives and a post-SpaceX IPO risk appetite rotation.</p></div></div></>),
+      },
+      {
+        icon: <Eye size={18} />,
+        title: `What Professional Investors Are Watching`,
+        content: (<><ul className="space-y-4 mb-4"><li className="flex items-start gap-3"><span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" /><div><strong className="text-text">Warsh's July press conference language:</strong><span className="text-text-muted"> Any dovish softening toward 2027 cuts would be a primary catalyst for a BTC breakout above $68,000–$70,000.</span></div></li><li className="flex items-start gap-3"><span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" /><div><strong className="text-text">Binance MiCA outcome (June 30 deadline):</strong><span className="text-text-muted"> A license denial triggers European crypto market structure disruption, potentially widening BTC/ETH spreads across EU venues by 15–25 bps.</span></div></li><li className="flex items-start gap-3"><span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" /><div><strong className="text-text">RWA tokenization milestone:</strong><span className="text-text-muted"> If the market crosses $50 billion by Q3 2026, it signals structural blockchain utility demand that decouples from speculative Bitcoin cycles.</span></div></li><li className="flex items-start gap-3"><span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" /><div><strong className="text-text">US inflation data (July print):</strong><span className="text-text-muted"> Core PCE above <span className="text-emerald-400 font-bold">2.8%</span> would further anchor the hawkish dot plot and suppress BTC below $63,000 support.</span></div></li></ul></>),
+      },
+      {
+        icon: <BarChart3 size={18} />,
+        title: `Scenario Analysis`,
+        content: (<><p className="mb-4"><strong>Bull Case (25% probability):</strong> Warsh strikes a constructive tone in July, CPI softens toward <span className="text-emerald-400 font-bold">2.4%</span>, and Binance secures EU licensing. ETF inflows resume daily at $200M+, driving BTC toward $72,000–$75,000 by August.</p><p className="mb-4"><strong>Base Case (55% probability):</strong> Fed holds through Q3, BTC consolidates $62,000–$68,000, ETF flows remain mixed, and RWA tokenization continues steady growth toward $50B. Bitcoin trades as a macro-correlated asset with limited independent upside catalysts.</p><p className="mb-4"><strong>Bear Case (20% probability):</strong> Warsh tightens language further, Binance loses EU access, and a second-quarter inflation surprise above <span className="text-emerald-400 font-bold">3.0%</span> triggers institutional deleveraging. BTC tests $58,000–$60,000 support range, with ETF daily outflows exceeding $150M.</p></>),
+      },
+    ]
+  },
+  {
     id: 'us-april-cpi-report-btc-q2-trajectory-2024-05-17',
     title: `US April CPI Report: Implications for BTC's Q2 Trajectory`,
     subtitle: `Softer inflation data has re-calibrated Fed rate cut expectations, directly influencing risk asset appeal and dollar strength, impacting Bitcoin's near-term outlook.`,
