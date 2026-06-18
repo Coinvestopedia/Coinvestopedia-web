@@ -9,11 +9,13 @@ const telegramBotToken = process.env.TELEGRAM_BOT_TOKEN;
 const telegramChatId = process.env.TELEGRAM_CHAT_ID;
 const githubToken = process.env.GITHUB_TOKEN;
 
-async function sendTelegramMessage(message: string) {
+async function sendTelegramMessage(message: string, attempt = 1): Promise<void> {
   if (!telegramBotToken || !telegramChatId) {
     console.warn("Telegram credentials missing, skipping notification.");
     return;
   }
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 8000);
   try {
     const response = await fetch(`https://api.telegram.org/bot${telegramBotToken}/sendMessage`, {
       method: 'POST',
@@ -22,13 +24,23 @@ async function sendTelegramMessage(message: string) {
         chat_id: telegramChatId,
         text: message,
         parse_mode: 'HTML'
-      })
+      }),
+      signal: controller.signal
     });
+    clearTimeout(timeout);
     if (!response.ok) {
       console.error("Telegram error:", await response.text());
+    } else {
+      console.log("Telegram notification sent.");
     }
-  } catch (error) {
-    console.error("Failed to send telegram message:", error);
+  } catch (error: any) {
+    clearTimeout(timeout);
+    if (attempt < 3) {
+      console.warn(`Telegram attempt ${attempt} failed, retrying in 3s...`);
+      await new Promise(r => setTimeout(r, 3000));
+      return sendTelegramMessage(message, attempt + 1);
+    }
+    console.error("Failed to send telegram message after 3 attempts:", error?.message ?? error);
   }
 }
 

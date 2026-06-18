@@ -11,23 +11,38 @@ const telegramBotToken = process.env.TELEGRAM_BOT_TOKEN;
 const telegramChatId = process.env.TELEGRAM_CHAT_ID;
 const githubToken = process.env.GITHUB_TOKEN;
 
-async function sendTelegramMessage(message: string) {
+async function sendTelegramMessage(message: string, attempt = 1): Promise<void> {
   if (!telegramBotToken || !telegramChatId) {
     console.warn("Telegram credentials missing, skipping notification.");
     return;
   }
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 8000);
   try {
-    await fetch(`https://api.telegram.org/bot${telegramBotToken}/sendMessage`, {
+    const response = await fetch(`https://api.telegram.org/bot${telegramBotToken}/sendMessage`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         chat_id: telegramChatId,
         text: message,
         parse_mode: 'HTML'
-      })
+      }),
+      signal: controller.signal
     });
-  } catch (error) {
-    console.error("Failed to send telegram message:", error);
+    clearTimeout(timeout);
+    if (!response.ok) {
+      console.error("Telegram error:", await response.text());
+    } else {
+      console.log("Telegram notification sent.");
+    }
+  } catch (error: any) {
+    clearTimeout(timeout);
+    if (attempt < 3) {
+      console.warn(`Telegram attempt ${attempt} failed, retrying in 3s...`);
+      await new Promise(r => setTimeout(r, 3000));
+      return sendTelegramMessage(message, attempt + 1);
+    }
+    console.error("Failed to send telegram message after 3 attempts:", error?.message ?? error);
   }
 }
 
@@ -100,45 +115,43 @@ Return ONLY a valid JSON object matching this schema:
 
 const INSIGHT_STYLE_PROMPT = `You are a top-tier institutional crypto research analyst for Coinvestopedia.
 
-STYLE REFERENCE: Follow the exact structure of this published article:
-"The GEO Framework: Evaluating Bitcoin Through Global Liquidity, Ecosystem Leverage, and On-Chain Analysis"
+STYLE REFERENCE: Follow the exact structure of this published benchmark article:
+"Mexico's Tax 'Kill Switch' & Brazil's DeCripto: The New Era of Regional Surveillance"
 
 STRUCTURE TO FOLLOW:
-- Title: A named framework, thesis, or analytical lens (e.g. "The X Framework: Evaluating Y Through Z")
+- Title: A compelling institutional title (e.g. "Specific Event: The New Era of X")
 - desc: 2-sentence analytical abstract (the thesis + the finding)
 - 5 keyInsights: each a single data-dense sentence with named framework component and metric
-- content sections (use \\n\\n between paragraphs):
-  1. Opening italic thesis statement (what the framework reveals as of today)
-  2. Section 1 with named icon concept: Deep dive — Macro/Global lens (liquidity, M2, DXY correlations with named r² values)
-  3. Section 2 with named icon concept: Leverage/Derivatives lens (open interest, funding rates, basis compression with $ figures)
-  4. Section 3 with named icon concept: On-Chain lens (realized price tiers, cohort analysis, HODL wave insights)
-  5. Section 4: Cycle or structural analysis (halving cycles, institutional shift data, ETF flow data)
-  6. Synthesis/Conclusion blockquote: A 2-sentence research verdict with a registry-style tag at the bottom
+- content string (use \\n\\n between blocks):
+  1. Opening italic thesis statement.
+  2. Hero Image Banner: Use standard markdown image syntax with a high-quality relevant Unsplash image URL, immediately followed by an italicized caption line starting with "Banner:".
+  3. Sections with ## headers. Include paragraphs with named data points.
+  4. 2-Column Grid Cards: To break down concepts, use "GRID: IconName | Card Title | Card description" (Use valid lucide-react icon names like Shield, Zap, Database, Globe, Activity). Output two GRID lines sequentially.
+  5. Data Tables: Provide a comparative markdown table (e.g., | Feature | Model A | Model B |).
+  6. Synthesis/Conclusion blockquote: A 2-sentence research verdict starting with "> " and a registry tag at the bottom starting with "_Research Registry".
 
 CONTENT REQUIREMENTS:
-- Choose a CURRENT, highly specific institutional topic from today (ETF developments, RWA tokenization, derivatives infrastructure, custody, regulation, central bank digital assets, on-chain analytics milestones).
-- All data must be specific and named: institutions, $ amounts, %, dates, correlation coefficients.
+- Choose a CURRENT, highly specific institutional topic from today.
+- All data must be specific and named: institutions, $ amounts, %, dates.
 - Avoid generic content — every paragraph must contain at least one specific named data point.
-- Use a 3-dimensional analytical framework (like GEO) to structure the thesis.
-- Content paragraphs separated by \\n\\n.
 
 Return ONLY a valid JSON object matching this schema:
 {
   "id": "unique-hyphenated-slug",
-  "title": "Framework Title: Evaluating X Through Y, Z, and W",
+  "title": "Institutional Title: The Implication",
   "category": "Institutional",
-  "tags": ["Framework", "On-Chain", "Institutional", "Macro"],
-  "readTime": "18 min read",
+  "tags": ["LatAm", "Regulation", "Institutional", "Macro"],
+  "readTime": "12 min read",
   "date": "Month DD, YYYY",
-  "desc": "Sentence 1 describing the framework. Sentence 2 describing the key finding.",
+  "desc": "Sentence 1 describing the thesis. Sentence 2 describing the key finding.",
   "keyInsights": [
-    "Named lens 1: specific metric finding.",
-    "Named lens 2: specific metric finding.",
-    "Named lens 3: specific metric finding.",
-    "Structural/cycle finding with data.",
+    "Specific metric finding 1.",
+    "Specific metric finding 2.",
+    "Specific metric finding 3.",
+    "Specific metric finding 4.",
     "Synthesis conclusion with data point."
   ],
-  "content": "Opening italic thesis statement.\\n\\n## Global/Macro Lens\\n\\nParagraph 1 with named data.\\n\\nParagraph 2 with named correlation.\\n\\n## Leverage/Derivatives Lens\\n\\nParagraph 1 with OI and funding rate data.\\n\\nParagraph 2 with basis analysis.\\n\\n## On-Chain Lens\\n\\nParagraph 1 with realized price data.\\n\\nParagraph 2 with cohort analysis.\\n\\n## Structural Analysis\\n\\nParagraph 1 with ETF or cycle data.\\n\\nParagraph 2 with institutional shift data.\\n\\n## Synthesis: [Date] State\\n\\nResearch verdict sentence 1. Research verdict sentence 2.\\n\\n_Research Registry — #[FRAMEWORK-TAG]_"
+  "content": "Opening italic thesis statement.\\n\\n![RegTech Infrastructure](https://images.unsplash.com/photo-1554224155-6726b3ff858f?q=80&w=2622&auto=format&fit=crop)\\n\\n_Banner: Institutional Oversight: The convergence of tax law and digital platforms._\\n\\n## Enforcement Mechanisms\\n\\nParagraph 1 with named data.\\n\\nGRID: Zap | Enforcement Mechanism | Non-compliance can lead to...\\nGRID: Database | Continuous Query Access | The policy shifts the burden...\\n\\n## Regional Alignment\\n\\nParagraph 2 with data.\\n\\n| Feature | Mexico | Brazil |\\n|---|---|---|\\n| Target | Digital Services | Exchanges |\\n\\n## Synthesis: [Date] State\\n\\n> Research verdict sentence 1. Research verdict sentence 2.\\n\\n_Research Registry — #[TAG]_"
 }`;
 
 async function run() {
@@ -188,13 +201,41 @@ async function run() {
       macroTsx += `        title: \`${sec.title}\`,\n`;
 
       // Build rich JSX content: split on \\n\\n, detect bullet lines (•)
+      let jsxParts = '';
       const rawContent: string = sec.content || '';
       const blocks = rawContent.split(/\\n\\n|\n\n/).filter((b: string) => b.trim());
-      const jsxParts = blocks.map((block: string) => {
+
+      let channelBlocks: string[] = [];
+      let listItems: string[] = [];
+      
+      const flushChannels = () => {
+        if (channelBlocks.length > 0) {
+          jsxParts += `<div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">${channelBlocks.join('')}</div>`;
+          channelBlocks = [];
+        }
+      };
+
+      const flushLists = () => {
+        if (listItems.length > 0) {
+          jsxParts += `<ul className="space-y-4 mb-4">${listItems.join('')}</ul>`;
+          listItems = [];
+        }
+      };
+
+      const highlightPercentages = (text: string) => {
+        return text.replace(/(-?\d+(\.\d+)?%)/g, (match) => {
+          return `<span className="${match.startsWith('-') ? 'text-red-400' : 'text-emerald-400'} font-bold">${match}</span>`;
+        });
+      };
+
+      blocks.forEach((block: string) => {
         const trimmed = block.trim();
+        
         if (trimmed.startsWith('•') || trimmed.startsWith('-')) {
-          const items = trimmed.split(/\n/).filter((l: string) => l.trim()).map((l: string) => {
-            const clean = l.replace(/^[•\-]\s*/, '');
+          flushChannels();
+          const items = trimmed.split(/\\n|\n/).filter((l: string) => l.trim()).map((l: string) => {
+            let clean = l.replace(/^[•-]\s*/, '');
+            clean = highlightPercentages(clean);
             const colonIdx = clean.indexOf(':');
             if (colonIdx > 0 && colonIdx < 60) {
               const label = clean.substring(0, colonIdx);
@@ -202,19 +243,41 @@ async function run() {
               return `<li className="flex items-start gap-3"><span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" /><div><strong className="text-text">${label}:</strong><span className="text-text-muted">${rest}</span></div></li>`;
             }
             return `<li className="flex items-start gap-3"><span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" /><span className="text-text-muted">${clean}</span></li>`;
-          }).join('');
-          return `<ul className="space-y-4 mb-4">${items}</ul>`;
-        }
-        if (trimmed.startsWith('Channel') || trimmed.startsWith('Base Case') || trimmed.startsWith('Bull Case') || trimmed.startsWith('Bear Case')) {
+          });
+          listItems.push(...items);
+        } else if (trimmed.startsWith('Channel')) {
+          flushLists();
+          const colonIdx = trimmed.indexOf(':');
+          let label = trimmed.substring(0, colonIdx > 0 ? colonIdx : 9);
+          let rest = trimmed.substring(colonIdx > 0 ? colonIdx + 1 : 10).trim();
+          
+          const emdashIdx = rest.indexOf('—');
+          if (emdashIdx > -1 && emdashIdx < 30) {
+            label = label + ": " + rest.substring(0, emdashIdx).trim();
+            rest = rest.substring(emdashIdx + 1).trim();
+          }
+
+          rest = highlightPercentages(rest);
+          channelBlocks.push(`<div className="p-4 bg-surface border border-border rounded-xl"><h4 className="text-sm font-bold text-primary mb-2">${label}</h4><p className="text-xs text-text-muted">${rest}</p></div>`);
+        } else if (trimmed.startsWith('Base Case') || trimmed.startsWith('Bull Case') || trimmed.startsWith('Bear Case')) {
+          flushChannels();
+          flushLists();
           const colonIdx = trimmed.indexOf(':');
           if (colonIdx > 0) {
             const label = trimmed.substring(0, colonIdx);
-            const rest = trimmed.substring(colonIdx + 1);
-            return `<p className="mb-4"><strong>${label}:</strong>${rest}</p>`;
+            const rest = highlightPercentages(trimmed.substring(colonIdx + 1));
+            jsxParts += `<p className="mb-4"><strong>${label}:</strong>${rest}</p>`;
+          } else {
+            jsxParts += `<p className="mb-4">${highlightPercentages(trimmed)}</p>`;
           }
+        } else {
+          flushChannels();
+          flushLists();
+          jsxParts += `<p className="mb-4">${highlightPercentages(trimmed)}</p>`;
         }
-        return `<p className="mb-4">${trimmed}</p>`;
-      }).join('');
+      });
+      flushChannels();
+      flushLists();
 
       macroTsx += `        content: (<>${jsxParts}</>),\n`;
       macroTsx += `      },\n`;
@@ -247,27 +310,135 @@ async function run() {
     }
 
     // ── Build Insight TSX ────────────────────────────────────────────────────
-    // Parse structured content with ## headers
-    const insightRaw: string = insightData.content || '';
-    const insightBlocks = insightRaw.split(/\\n\\n|\n\n/).filter((b: string) => b.trim());
+    const highlightPercentages = (text: string) => {
+      return text.replace(/(-?\d+(\.\d+)?%)/g, (match) => {
+        return `<span className="${match.startsWith('-') ? 'text-red-400' : 'text-emerald-400'} font-bold">${match}</span>`;
+      });
+    };
 
-    const insightJsx = insightBlocks.slice(1).map((block: string) => {
+    const rawInsightContent: string = insightData.content || '';
+    const insightBlocks = rawInsightContent.split(/\\n\\n|\n\n/).filter((b: string) => b.trim());
+
+    let insightJsx = '';
+    let currentGrid: string[] = [];
+    let currentTable: string[] = [];
+    
+    const flushGrid = () => {
+      if (currentGrid.length > 0) {
+        insightJsx += `<div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">\n${currentGrid.join('')}\n</div>\n`;
+        currentGrid = [];
+      }
+    };
+
+    const flushTable = () => {
+      if (currentTable.length > 0) {
+        const rows = currentTable.map(r => r.split('|').map(c => c.trim()).slice(1, -1));
+        if (rows.length >= 2) {
+          const headers = rows[0];
+          const trHeaders = headers.map(h => `<th className="p-4 bg-surface/50 font-bold border-b border-border text-text">${h}</th>`).join('');
+          
+          let trBody = '';
+          for (let i = 2; i < rows.length; i++) {
+            const cells = rows[i].map((c, idx) => `<td className="p-4 border-b border-border border-dashed text-text-muted ${idx===0 ? 'font-medium text-text' : ''}">${highlightPercentages(c)}</td>`).join('');
+            trBody += `<tr>${cells}</tr>`;
+          }
+          
+          insightJsx += `
+<div className="leather-card p-6 rounded-xl mb-10 overflow-hidden">
+  <div className="overflow-x-auto">
+    <table className="w-full text-sm text-left border-collapse min-w-[600px]">
+      <thead><tr>${trHeaders}</tr></thead>
+      <tbody>${trBody}</tbody>
+    </table>
+  </div>
+</div>\n`;
+        }
+        currentTable = [];
+      }
+    };
+
+    for (let i = 1; i < insightBlocks.length; i++) {
+      const block = insightBlocks[i];
       const trimmed = block.trim();
+      
+      if (trimmed.startsWith('GRID:')) {
+        flushTable();
+        const lines = trimmed.split(/\n/);
+        for (const line of lines) {
+          if (line.startsWith('GRID:')) {
+            const parts = line.replace('GRID:', '').split('|').map(p => p.trim());
+            const iconName = parts[0] || 'Zap';
+            const title = parts[1] || '';
+            const desc = highlightPercentages(parts[2] || '');
+            currentGrid.push(`
+<div className="p-6 bg-surface border border-border rounded-xl">
+  <h3 className="font-bold text-lg mb-4 flex items-center gap-2 text-red-400"><${iconName} className="w-5 h-5" /> ${title}</h3>
+  <p className="text-sm text-text-muted leading-relaxed">${desc}</p>
+</div>`);
+          }
+        }
+        continue;
+      }
+      
+      if (trimmed.startsWith('|') && trimmed.endsWith('|')) {
+        flushGrid();
+        const lines = trimmed.split(/\n/);
+        for (const line of lines) {
+           if(line.startsWith('|')) currentTable.push(line);
+        }
+        continue;
+      }
+      
+      flushGrid();
+      flushTable();
+      
+      const processed = highlightPercentages(trimmed);
+      
+      if (trimmed.startsWith('![') && trimmed.includes('](')) {
+        const altMatch = trimmed.match(/!\[([^\]]+)\]/);
+        const urlMatch = trimmed.match(/\(([^)]+)\)/);
+        if (urlMatch) {
+           insightJsx += `<div className="my-10 rounded-2xl overflow-hidden border border-border shadow-2xl">\n  <img src="${urlMatch[1]}" alt="${altMatch ? altMatch[1] : 'Image'}" className="w-full h-auto object-cover max-h-[500px]" />\n`;
+        }
+        continue;
+      }
+      
+      if (trimmed.startsWith('_Banner:') && trimmed.endsWith('_')) {
+        const caption = processed.replace(/^_Banner:/, '').replace(/_$/, '').trim();
+        insightJsx += `  <div className="p-4 bg-background/50 text-xs text-center border-t border-border italic text-text-muted">${caption}</div>\n</div>\n`;
+        continue;
+      }
+
       if (trimmed.startsWith('## ')) {
-        const heading = trimmed.replace(/^## /, '');
-        return `<h2 className="text-2xl font-bold mt-10 mb-4 text-text">${heading}</h2>`;
+        const heading = processed.replace(/^## /, '');
+        insightJsx += `<h2 className="text-2xl font-bold mt-10 mb-4 text-text">${heading}</h2>\n`;
+        continue;
       }
       if (trimmed.startsWith('_') && trimmed.endsWith('_')) {
-        return `<p className="text-xs text-text-muted italic border-t border-border pt-4 text-right mt-10">${trimmed.replace(/_/g, '')}</p>`;
+        insightJsx += `<p className="text-xs text-text-muted italic border-t border-border pt-4 text-right mt-10">${processed.replace(/_/g, '')}</p>\n`;
+        continue;
       }
       if (trimmed.startsWith('> ') || (trimmed.length < 300 && !trimmed.includes('.'))) {
-        const inner = trimmed.replace(/^> /, '');
-        return `<blockquote className="border-l-4 border-primary pl-6 py-2 my-6 italic text-text-muted">${inner}</blockquote>`;
+        const inner = processed.replace(/^> /, '');
+        insightJsx += `<blockquote className="border-l-4 border-primary pl-6 py-2 my-6 italic text-text-muted">${inner}</blockquote>\n`;
+        continue;
       }
-      // Bold **text** handling
-      const withBold = trimmed.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
-      return `<p className="mb-6">${withBold}</p>`;
-    }).join('');
+      
+      if (trimmed.startsWith('•') || trimmed.startsWith('-')) {
+        const items = trimmed.split(/\\n|\n/).filter(l => l.trim()).map(l => {
+          let clean = l.replace(/^[•-]\s*/, '');
+          clean = highlightPercentages(clean);
+          return `<li className="flex items-start gap-3"><span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" /><span className="text-text-muted">${clean}</span></li>`;
+        });
+        insightJsx += `<ul className="space-y-4 mb-6">${items.join('')}</ul>\n`;
+        continue;
+      }
+
+      const withBold = processed.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+      insightJsx += `<p className="mb-6">${withBold}</p>\n`;
+    }
+    flushGrid();
+    flushTable();
 
     let insightTsx = `  {\n`;
     insightTsx += `    id: '${insightData.id}',\n`;
