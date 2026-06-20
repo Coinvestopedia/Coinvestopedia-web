@@ -41,6 +41,37 @@ import { africaCryptoInfrastructureArticle } from '../content/articles/africa-cr
 
 export const ARTICLES: Article[] = [
   {
+    id: 'infrastructure-framework-rwa-stablecoins-june-2026',
+    title: `The Infrastructure Framework: Evaluating Institutional On-Chain Adoption Through RWA Networks, Stablecoin Velocity, and Custodial Standards`,
+    category: 'Institutional',
+    tags: ["Framework","On-Chain","Institutional","Macro"],
+    readTime: '18 min read',
+    date: 'June 20, 2026',
+    image: '/geo-framework-hero.png',
+    desc: `A comprehensive evaluation of institutional capital migration into digital assets, analyzing the $43B RWA sector, stablecoin payment volumes, and the shifting competitive landscape between Ethereum and Solana.`,
+    icon: <Building2 className="text-blue-400" size={24} />,
+    keyInsights: ["RWA Market Capitalization has officially crossed the $43 billion threshold, transitioning from experimental pilots to core institutional infrastructure.","Solana has overtaken Ethereum in RWA holder metrics, reaching approximately 286,000 wallets, signaling a preference for high-throughput execution environments.","Stablecoin settlement volumes continue to rival traditional payment networks like Visa and ACH, functioning as the primary bridge for institutional capital.","U.S. spot Bitcoin ETFs are experiencing sustained net outflows (e.g., $90.66M on June 18), reflecting a tactical rotation toward yield-bearing traditional assets.","Synthesis: Institutional focus has decisively pivoted from speculative asset accumulation (Bitcoin ETFs) to structural yield generation (Tokenized Treasuries and Stablecoins)."],
+    content: (<>
+      <p className="text-xl text-text-muted mb-8 italic">*The institutional digital asset landscape is undergoing a profound structural rotation. As macroeconomic headwinds suppress speculative appetite, capital is migrating toward the foundational infrastructure of on-chain finance: yield-bearing stablecoins, tokenized real-world assets (RWAs), and high-throughput settlement networks.*</p>
+      <h2 className="text-2xl font-bold mt-10 mb-4 text-text">Global/Macro Lens</h2>
+<p className="mb-6">The macroeconomic environment of mid-2026 is defined by a 'higher-for-longer' interest rate regime. The U.S. Federal Reserve's hawkish hold at <span className="text-emerald-400 font-bold">3.50%</span>–<span className="text-emerald-400 font-bold">3.75%</span>, combined with resilient 10-year Treasury yields near <span className="text-emerald-400 font-bold">4.46%</span>, has fundamentally altered the opportunity cost of holding non-yielding digital assets. This dynamic explains the sustained, historic outflow streak from U.S. spot Bitcoin ETFs, which recently culminated in a $90.66 million single-day net outflow.</p>
+<p className="mb-6">However, this capital is not entirely exiting the digital asset ecosystem; rather, it is rotating. Institutions are increasingly allocating toward tokenized U.S. Treasuries and yield-bearing stablecoin equivalents that offer the compliance and yield of traditional fixed income, coupled with the 24/7 settlement velocity of blockchain networks. The macro environment has inadvertently catalyzed the maturation of the RWA sector.</p>
+<h2 className="text-2xl font-bold mt-10 mb-4 text-text">Leverage/Derivatives Lens</h2>
+<p className="mb-6">The derivatives market reflects a bifurcated sentiment. While Bitcoin perpetuals and futures experience high volatility and cascading liquidations within the $61,000–$64,000 'decision zone,' the demand for hedging instruments surrounding stablecoins and RWAs is surging.</p>
+<p className="mb-6">Institutional desks are increasingly utilizing decentralized money markets to execute delta-neutral yield strategies, leveraging tokenized T-bills as premium collateral. The impending enforcement of the EU's MiCA framework and the U.S. GENIUS Act is driving demand for compliant, pre-execution risk control infrastructure, ensuring that leveraged positions are collateralized by assets with audited, verifiable off-chain reserves.</p>
+<h2 className="text-2xl font-bold mt-10 mb-4 text-text">On-Chain Lens</h2>
+<p className="mb-6">On-chain metrics reveal a significant shifting of the tectonic plates between Layer 1 protocols. While Ethereum maintains dominance in total Assets Under Management (AUM) and serves as the primary settlement layer for institutional-grade treasury funds, Solana is rapidly capturing the velocity and retail-to-institutional adoption vector.</p>
+<p className="mb-6">Solana has recently surpassed Ethereum in RWA holder counts, reaching approximately 286,000 wallets, driven by daily transactions exceeding 100 million. This metric indicates that while deep institutional liquidity remains on Ethereum, the transactional utility and high-frequency settlement of tokenized assets are migrating to environments with lower latency and reduced fee friction. Stablecoin velocity on these high-throughput networks now rivals traditional ACH systems.</p>
+<h2 className="text-2xl font-bold mt-10 mb-4 text-text">Structural Analysis</h2>
+<p className="mb-6">The structural maturation of the industry is evidenced by the convergence of traditional finance (TradFi) and decentralized finance (DeFi) standards. Major financial institutions, including Fidelity, are launching specialized money market funds specifically designed to serve as reserve assets for stablecoin issuers under new regulatory frameworks.</p>
+<p className="mb-6">Simultaneously, the political landscape is solidifying. Bipartisan efforts in the U.S. to ban retail CBDCs until 2030 are effectively cementing private, fiat-collateralized stablecoins as the de facto digital dollar infrastructure for the remainder of the decade. This regulatory moat is accelerating venture capital investment into compliance layers, custody solutions, and risk-management protocols that bridge the TradFi-DeFi divide.</p>
+<h2 className="text-2xl font-bold mt-10 mb-4 text-text">Synthesis: June 20, 2026 State</h2>
+<p className="mb-6">The current market cycle is no longer defined by the binary adoption of Bitcoin. It is defined by the financialization of the blockchain infrastructure itself. The crossing of the $43 billion threshold in RWA market capitalization, coupled with the rise of high-throughput settlement networks, confirms that the 'Institutional Era' of digital assets is fundamentally about integrating blockchain rails into the core plumbing of global capital markets.</p>
+<p className="text-xs text-text-muted italic border-t border-border pt-4 text-right mt-10">Research Registry — #FRAMEWORK</p>
+
+    </>)
+  },
+  {
     id: 'genius-act-stablecoin-framework-june-2026',
     title: `The GENIUS Framework: Evaluating Stablecoin Institutionalization Through Regulatory Architecture, Liquidity Infrastructure, and On-Chain Capital Velocity`,
     category: 'Institutional',
