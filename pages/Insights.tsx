@@ -41,6 +41,33 @@ import { africaCryptoInfrastructureArticle } from '../content/articles/africa-cr
 
 export const ARTICLES: Article[] = [
   {
+    id: 'basel-mica-framework-custody',
+    title: `The Basel-MiCA Framework: Evaluating Institutional Custody Through Regulation, Capital Requirements, and Joint Ventures`,
+    category: 'Institutional',
+    tags: ["Framework","Institutional","Macro"],
+    readTime: '16 min read',
+    date: 'June 22, 2026',
+    image: '/geo-framework-hero.png',
+    desc: `An analysis of the rapid formalization of crypto market structure. Exploring how impending regulatory deadlines and Tier-1 banking standards are driving legacy financial integration.`,
+    icon: <Building2 className="text-blue-400" size={24} />,
+    keyInsights: ["The July 1 MiCA deadline is forcing European entities to finalize authorizations or face severe administrative penalties.","The integration of Basel standards for bank crypto exposures is providing the regulatory certainty required for traditional banks to offer custody.","Joint ventures like the ICE-OKX partnership indicate a shift from 'shadow banking' to fully regulated, U.S.-compliant broker-dealers."],
+    content: (<>
+      <p className="text-xl text-text-muted mb-8 italic">*The era of regulatory ambiguity is officially closing. As mid-2026 approaches, the digital asset ecosystem is undergoing a forced structural reset, transitioning from a paradigm of 'regulation by enforcement' to one of formalized, bank-grade infrastructure. The Basel-MiCA Framework provides a lens to evaluate how capital requirements and compliance deadlines are fundamentally reshaping institutional participation.*</p>
+      <h2 className="text-2xl font-bold mt-10 mb-4 text-text">Global/Macro Lens</h2>
+<p className="mb-6">The overarching theme of 2026 is the convergence of traditional finance (TradFi) and digital assets. This convergence is not occurring organically; it is being mandated by global standard-setters. The implementation of the Basel Committee's final standards for banks' exposures to cryptoassets (effective since January 1, 2026) has provided the missing rulebook. Banks now have explicit capital and liquidity requirements for holding digital assets and stablecoin reserves. This clarity has catalyzed legacy institutions to aggressively enter the space, shifting the narrative from 'career risk' to 'fiduciary duty'.</p>
+<h2 className="text-2xl font-bold mt-10 mb-4 text-text">Leverage/Derivatives Lens</h2>
+<p className="mb-6">The formalization of market structure is drastically altering the derivatives landscape. Historically dominated by offshore, unregulated entities, the derivatives market is moving onshore. The Commodity Futures Trading Commission (CFTC) has expanded its oversight, recently approving KalshiEX to list bitcoin perpetual futures. Even more disruptive is the announcement of the joint venture between Intercontinental Exchange (ICE)—the parent company of the NYSE—and OKX to launch a U.S.-regulated broker-dealer and futures commission merchant (FCM). By bringing Wall Street's clearing and settlement standards to crypto derivatives, institutions can finally hedge spot exposures without incurring unacceptable counterparty risk.</p>
+<h2 className="text-2xl font-bold mt-10 mb-4 text-text">On-Chain Lens</h2>
+<p className="mb-6">The regulatory pressure is trickling down to the protocol layer, specifically concerning stablecoins. U.S. federal agencies have proposed classifying Permitted Payment Stablecoin Issuers (PPSIs) as financial institutions under the Bank Secrecy Act. This means stablecoin transactions will increasingly require bank-grade Customer Identification Programs (CIP) and AML/CFT compliance. On-chain, we are witnessing the deployment of permissioned pools and KYC-gated tokens to ensure that institutional capital does not interact with sanctioned or illicit addresses. The blockchain is becoming a transparent ledger for compliant financial institutions rather than an anonymous network.</p>
+<h2 className="text-2xl font-bold mt-10 mb-4 text-text">Structural Analysis</h2>
+<p className="mb-6">The most immediate structural catalyst is the European Union's Markets in Crypto-Assets (MiCA) regulation. With the grandfathering period ending on July 1, 2026, Crypto-Asset Service Providers (CASPs) face an existential compliance cliff. Firms operating without authorization risk severe penalties. This deadline has sparked a wave of consolidations, acquisitions (such as Franklin Templeton acquiring 250 Digital), and rapid capability upgrades. Custody is no longer just about securing private keys; it is about providing a legally recognized, bankruptcy-remote structure that satisfies MiCA's stringent consumer protection and capital segregation requirements.</p>
+<h2 className="text-2xl font-bold mt-10 mb-4 text-text">Synthesis: June 2026 State</h2>
+<p className="mb-6">Institutional participation is no longer speculative; it is infrastructural. As Basel standards take root and MiCA enforcement begins, the digital asset market is being systematically integrated into the global financial plumbing. Those who comply will inherit the liquidity of traditional capital markets.</p>
+<p className="text-xs text-text-muted italic border-t border-border pt-4 text-right mt-10">Research Registry — #Institutional</p>
+
+    </>)
+  },
+  {
     id: 'yield-asset-framework-rwa-evaluation',
     title: `The Yield-Asset Framework: Evaluating RWA Integration Through Treasury Demand, Regulatory Compliance, and On-Chain Liquidity`,
     category: 'Institutional',

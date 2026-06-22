@@ -59,6 +59,39 @@ const TABS: { id: MacroTab; label: string; icon: React.ReactNode; isPro?: boolea
 
 const REPORTS: MacroReport[] = [
   {
+    id: 'pce-pause-institutional-indecision',
+    title: `The PCE Pause: Institutional Indecision Ahead of Critical Inflation Print`,
+    subtitle: `How the impending June 25 core PCE data and a hawkish Fed are paralyzing digital asset momentum.`,
+    tab: 'weekly',
+    date: 'June 22, 2026',
+    readTime: '6 min read',
+    confidenceLevel: 'High',
+    keyMetrics: [{"label":"2-Year Treasury Yield","value":"4.23%","direction":"up"},{"label":"DXY Index","value":"101.0","direction":"up"},{"label":"BTC 24h Volatility","value":"Low","direction":"down"}],
+    keyInsights: ["Market participants have entered a holding pattern ahead of Thursday's May PCE inflation release, keeping Bitcoin pinned near $64,000.","The 2-year Treasury yield hit a 16-month high of 4.23%, reflecting entrenched expectations for a 'higher-for-longer' Fed policy under Chair Kevin Warsh.","While spot Bitcoin ETF outflows are decelerating, institutions remain hesitant to allocate fresh capital until the inflation trajectory is confirmed.","The U.S. dollar's strength (DXY > 101.0) continues to act as a mechanical headwind for dollar-denominated risk assets."],
+    sections: [
+      {
+        icon: <Globe size={18} />,
+        title: `Macro Context`,
+        content: (<><p className="mb-4">The global financial system has entered a state of suspended animation as of late June 22. Following the Federal Reserve's overtly hawkish pivot—where policymakers raised their 2026 terminal rate projection to <span className="text-emerald-400 font-bold">3.8%</span>—markets are desperate for data validation. All eyes are now fixed on the upcoming May Personal Consumption Expenditures (PCE) price index, the Fed's preferred inflation gauge, scheduled for June 25. This anticipation has pushed the 2-year Treasury yield to a 16-month high of <span className="text-emerald-400 font-bold">4.23%</span> and kept the US Dollar Index (DXY) firmly above 101.0. Consequently, Bitcoin is trapped in a tight $64,000–$64,500 band, lacking the macro catalyst necessary to break resistance or the institutional panic required to breach support.</p></>),
+      },
+      {
+        icon: <TrendingUp size={18} />,
+        title: `Transmission Analysis`,
+        content: (<><p className="mb-4">**1. The Yield Curve Anchor:** The sharp rise in the 2-year yield to <span className="text-emerald-400 font-bold">4.23%</span> directly competes with digital asset allocations. Short-duration, risk-free paper is currently offering a compelling premium, draining momentum liquidity from the crypto ecosystem.</p><p className="mb-4">**2. The Dollar Dominance Channel:** A DXY trading near 101.0 creates a persistent, mechanical headwind. As the dollar strengthens on hawkish rate expectations, non-yielding assets priced in dollars automatically face downward pressure.</p><p className="mb-4">**3. The Institutional Pause:** Institutional allocators are notoriously data-dependent. While the severe $6.35B outflow from spot Bitcoin ETFs has decelerated, asset managers are refusing to deploy new capital 'blind' into a potentially hot inflation print, resulting in an anemic, low-volume consolidation phase.</p></>),
+      },
+      {
+        icon: <Eye size={18} />,
+        title: `What Professional Investors Are Watching`,
+        content: (<><ul className="space-y-4 mb-4"><li className="flex items-start gap-3"><span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" /><div><strong className="text-text">**May Core PCE (June 25):</strong><span className="text-text-muted">** The definitive signal for the week. A print above expectations will cement the Fed's hawkish trajectory and likely trigger a crypto sell-off.</span></div></li><li className="flex items-start gap-3"><span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" /><div><strong className="text-text">**ICE and OKX Joint Venture:</strong><span className="text-text-muted">** The newly announced partnership to build a U.S.-regulated broker-dealer signals long-term institutional commitment despite short-term macro headwinds.</span></div></li><li className="flex items-start gap-3"><span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" /><div><strong className="text-text">**U.S.-Iran Negotiations:</strong><span className="text-text-muted">** Progress in Switzerland has eased oil prices; any breakdown could cause an energy shock, complicating the Fed's inflation fight.</span></div></li><li className="flex items-start gap-3"><span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" /><div><strong className="text-text">**Stablecoin AML Regulations:</strong><span className="text-text-muted">** Proposed rules classifying Permitted Payment Stablecoin Issuers as financial institutions under the Bank Secrecy Act.</span></div></li></ul></>),
+      },
+      {
+        icon: <BarChart3 size={18} />,
+        title: `Scenario Analysis`,
+        content: (<><p className="mb-4">**Base Case (<span className="text-emerald-400 font-bold">65%</span> Probability):** The PCE prints in line with expectations. Bitcoin remains range-bound between $62,000 and $66,000. Institutions slowly resume systematic accumulation, but explosive upside remains capped by the <span className="text-emerald-400 font-bold">4.50%</span> 10-year Treasury yield.</p><p className="mb-4">**Bear Case (<span className="text-emerald-400 font-bold">25%</span> Probability):** Core PCE comes in significantly hot. The market prices in near-zero probability of rate cuts in 2026. The 2-year yield spikes toward <span className="text-emerald-400 font-bold">4.40%</span>, triggering a brutal risk-off rotation that breaks Bitcoin's $60,000 psychological support.</p><p className="mb-4">**Bull Case (<span className="text-emerald-400 font-bold">10%</span> Probability):** The PCE print shows a dramatic, unexpected disinflationary drop. The yield curve shifts downward, the DXY breaks below 100, and institutional capital violently rotates back into spot Bitcoin ETFs, driving a swift rally toward $68,000.</p></>),
+      },
+    ]
+  },
+  {
     id: 'warsh-pivot-terminal-rate-crypto',
     title: `The Warsh Pivot: 3.8% Terminal Rate Projections Suppress Crypto Multiples`,
     subtitle: `How the FOMC's abrupt hawkish shift and elevated 2026 inflation targets are rewiring institutional risk appetite and sapping liquidity from digital assets.`,
