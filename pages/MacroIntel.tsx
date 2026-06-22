@@ -59,6 +59,39 @@ const TABS: { id: MacroTab; label: string; icon: React.ReactNode; isPro?: boolea
 
 const REPORTS: MacroReport[] = [
   {
+    id: 'warsh-pivot-terminal-rate-crypto',
+    title: `The Warsh Pivot: 3.8% Terminal Rate Projections Suppress Crypto Multiples`,
+    subtitle: `How the FOMC's abrupt hawkish shift and elevated 2026 inflation targets are rewiring institutional risk appetite and sapping liquidity from digital assets.`,
+    tab: 'weekly',
+    date: 'June 22, 2026',
+    readTime: '6 min read',
+    confidenceLevel: 'High',
+    keyMetrics: [{"label":"Projected 2026 Terminal Rate","value":"3.80%","direction":"up"},{"label":"10-Year Treasury Yield","value":"4.49%","direction":"up"},{"label":"Spot BTC ETF 30-Day Outflow","value":"$6.35B","direction":"down"}],
+    keyInsights: ["Fed Chair Kevin Warsh’s debut FOMC meeting eliminated forward guidance and raised the median 2026 Fed Funds projection to 3.8%.","Core PCE inflation forecasts were aggressively adjusted upward to 3.3%, signaling a prolonged battle against structural inflation.","The 2-year Treasury yield surged 13 basis points to multi-year highs, sharply steepening the opportunity cost for holding zero-yield assets like Bitcoin.","Institutional capital has responded defensively, driving a historic $6.35 billion 30-day net outflow from U.S. spot Bitcoin ETFs."],
+    sections: [
+      {
+        icon: <Globe size={18} />,
+        title: `Macro Context`,
+        content: (<><p className="mb-4">The June 2026 FOMC meeting fundamentally altered the macroeconomic baseline. Under the new leadership of Chair Kevin Warsh, the Federal Reserve not only held the federal funds rate at <span className="text-emerald-400 font-bold">3.50%</span>–<span className="text-emerald-400 font-bold">3.75%</span> but executed a hawkish pivot that surprised dovish consensus. Policymakers aggressively revised their Summary of Economic Projections (SEP), elevating the 2026 core PCE inflation target to <span className="text-emerald-400 font-bold">3.3%</span> due to resilient energy shocks and labor market tightness. Consequently, the median projection for the terminal rate jumped to <span className="text-emerald-400 font-bold">3.8%</span>. This 'higher-for-longer' reality pushed the US Dollar Index (DXY) to a one-year high and anchored the 10-year Treasury yield near <span className="text-emerald-400 font-bold">4.49%</span>, creating a fiercely competitive environment for risk assets.</p></>),
+      },
+      {
+        icon: <TrendingUp size={18} />,
+        title: `Transmission Analysis`,
+        content: (<><p className="mb-4">**1. The Liquidity Vacuum:** The immediate repricing of the short-end of the yield curve (with 2-year yields spiking 13 basis points) acts as a direct liquidity drain. Capital that previously sought momentum in Bitcoin is now finding <span className="text-emerald-400 font-bold">4%</span>+ risk-free yields highly attractive.</p><p className="mb-4">**2. The Currency Channel:** The resurgent DXY mechanically suppresses dollar-denominated assets. The 30-day rolling correlation between BTC and the DXY has deepened to -0.68, meaning dollar strength is actively suppressing Bitcoin's technical rebounds near the $64,000 level.</p><p className="mb-4">**3. The Institutional Exodus:** Institutional allocators operate on risk-adjusted return metrics. The rising risk-free rate has compressed the equity risk premium proxy for crypto, triggering a record six consecutive weeks of withdrawals from U.S. spot Bitcoin ETFs, totaling $6.35 billion.</p></>),
+      },
+      {
+        icon: <Eye size={18} />,
+        title: `What Professional Investors Are Watching`,
+        content: (<><ul className="space-y-4 mb-4"><li className="flex items-start gap-3"><span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" /><div><strong className="text-text">**May PCE Print (June 25):</strong><span className="text-text-muted">** The market is bracing for the Bureau of Economic Analysis release. A print above the <span className="text-emerald-400 font-bold">3.3%</span> Fed forecast could trigger a catastrophic repricing of risk assets.</span></div></li><li className="flex items-start gap-3"><span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" /><div><strong className="text-text">**$63,000 Technical Support:</strong><span className="text-text-muted">** Analysts are monitoring the $63,000–$64,000 consolidation zone. A high-volume breakdown below this could force systemic liquidations.</span></div></li><li className="flex items-start gap-3"><span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" /><div><strong className="text-text">**U.S.-Iran Diplomatic Progress:</strong><span className="text-text-muted">** Vice President JD Vance's negotiations in Switzerland. A breakdown in talks could spark an oil price shock, further entrenching the Fed's hawkish bias.</span></div></li><li className="flex items-start gap-3"><span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" /><div><strong className="text-text">**MiCA Compliance Cliff (July 1):</strong><span className="text-text-muted">** The impending deadline for European service providers threatens to temporarily fragment liquidity across EU trading venues.</span></div></li></ul></>),
+      },
+      {
+        icon: <BarChart3 size={18} />,
+        title: `Scenario Analysis`,
+        content: (<><p className="mb-4">**Base Case (<span className="text-emerald-400 font-bold">60%</span> Probability):** The Fed maintains its <span className="text-emerald-400 font-bold">3.75%</span> hold through Q3 as inflation remains sticky. Bitcoin continues to consolidate in a tight, low-volatility $60,000–$66,000 range as ETF outflows gradually taper but fail to reverse into net inflows until macroeconomic clarity emerges.</p><p className="mb-4">**Bear Case (<span className="text-emerald-400 font-bold">25%</span> Probability):** The May PCE print severely misses expectations to the upside, forcing the Fed to actively hike rates to <span className="text-emerald-400 font-bold">4.00%</span>. The 10-year yield breaks <span className="text-emerald-400 font-bold">4.70%</span>, triggering a massive risk-off liquidation event that breaks Bitcoin's $59,000 miner-surrender support.</p><p className="mb-4">**Bull Case (<span className="text-emerald-400 font-bold">15%</span> Probability):** Disinflation resumes faster than the Fed's pessimistic projections, and geopolitical tensions ease, lowering oil prices. The DXY retreats, providing breathing room for Bitcoin to reclaim the $68,000 psychological threshold.</p></>),
+      },
+    ]
+  },
+  {
     id: 'strait-of-hormuz-energy-deflation-meets-hawkish-fed-june-2026',
     title: `Strait of Hormuz Reopens: Energy Deflation Meets a Hawkish Fed Framework`,
     subtitle: `As 17 million barrels of oil resume transit through the Strait of Hormuz, energy-driven inflation cools—but the Fed's hawkish posturing keeps risk assets grounded.`,
