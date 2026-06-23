@@ -59,6 +59,39 @@ const TABS: { id: MacroTab; label: string; icon: React.ReactNode; isPro?: boolea
 
 const REPORTS: MacroReport[] = [
   {
+    id: 'ppi-shock-risk-off',
+    title: `Producer Price Shock: Systemic Implications for BTC/Markets`,
+    subtitle: `How May's 6.5% PPI surge and the KOSPI collapse are enforcing a 'higher-for-longer' regime.`,
+    tab: 'weekly',
+    date: 'June 23, 2026',
+    readTime: '12 min read',
+    confidenceLevel: 'High',
+    keyMetrics: [{"label":"May PPI (YoY)","value":"6.5%","direction":"up"},{"label":"10Y Treasury","value":"4.49%","direction":"up"},{"label":"30-Day ETF Outflows","value":"$8.0B","direction":"down"}],
+    keyInsights: ["U.S. Producer Price Index spiked 6.5% YoY in May, cementing a restrictive Fed.","Global equities violently corrected, with the Nasdaq dropping 2% and South Korea's KOSPI plunging 10%.","Institutional digital asset outflows hit $8 billion over the past 30 days as capital rotates to yield.","BlackRock's BITA launch signals a shift toward yield-generation to combat high risk-free rates."],
+    sections: [
+      {
+        icon: <Globe size={18} />,
+        title: `Macro Context`,
+        content: (<><p className="mb-4">The macroeconomic landscape shifted violently on June 23 as the May Producer Price Index (PPI) registered a shocking <span className="text-emerald-400 font-bold">6.5%</span> year-over-year increase, the largest since late 2022. This inflationary resurgence entirely dismantled remaining hopes for near-term Federal Reserve rate cuts, enforcing a 'higher-for-longer' reality. The immediate shockwave triggered a global equity liquidation: the Nasdaq shed <span className="text-emerald-400 font-bold">2%</span>, while South Korea's KOSPI index plummeted an unprecedented <span className="text-emerald-400 font-bold">10%</span>, forcing trading halts. Bitcoin, acting as a high-beta liquidity proxy, broke down to $62,000, finalizing $575 million in long liquidations.</p></>),
+      },
+      {
+        icon: <TrendingUp size={18} />,
+        title: `Transmission Analysis`,
+        content: (<><p className="mb-4">**1. The Yield Vector:** With the 10-year Treasury note anchored at <span className="text-emerald-400 font-bold">4.49%</span> and the 2-year surging to <span className="text-emerald-400 font-bold">4.19%</span>, the risk-free rate provides a formidable alternative to zero-yield digital assets.</p><p className="mb-4">**2. The Liquidity Vacuum:** An $8 billion exodus from spot Bitcoin ETFs over the last 30 days highlights institutional de-risking. Capital is retreating from structural crypto exposure.</p><p className="mb-4">**3. The Yield-Generation Pivot:** In response to high rates, BlackRock launched the iShares Bitcoin Premium Income ETF (BITA), utilizing covered calls to generate 15<span className="text-red-400 font-bold">-25%</span> yields, attempting to make BTC palatable in a <span className="text-emerald-400 font-bold">5%</span> risk-free world.</p></>),
+      },
+      {
+        icon: <Eye size={18} />,
+        title: `What Professional Investors Are Watching`,
+        content: (<><ul className="space-y-4 mb-4"><li className="flex items-start gap-3"><span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" /><div><strong className="text-text">**The $60K Support Level:</strong><span className="text-text-muted">** If BTC loses the $60,000 structural support, forced selling from momentum quant funds will likely trigger.</span></div></li><li className="flex items-start gap-3"><span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" /><div><strong className="text-text">**ETF Flow Reversals:</strong><span className="text-text-muted">** Monitoring if BlackRock's BITA can stanch the bleeding of the $8 billion 30-day outflow trend.</span></div></li><li className="flex items-start gap-3"><span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" /><div><strong className="text-text">**PCE Print:</strong><span className="text-text-muted">** The upcoming Personal Consumption Expenditures data will serve as the final confirmation of the Fed's next dot-plot trajectory.</span></div></li><li className="flex items-start gap-3"><span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" /><div><strong className="text-text">**Tech Equity Correlation:</strong><span className="text-text-muted">** Assessing if the AI/semiconductor sell-off (Nvidia, Alphabet, SK Hynix) finds a floor, stabilizing the broader risk-on beta.</span></div></li></ul></>),
+      },
+      {
+        icon: <BarChart3 size={18} />,
+        title: `Scenario Analysis`,
+        content: (<><p className="mb-4">**Base Case (<span className="text-emerald-400 font-bold">60%</span>):** 'Higher for Longer' persists. BTC ranges tightly between $58,000 and $64,000 as institutional capital remains sidelined in Treasuries and yield-generating products like BITA.</p><p className="mb-4">**Bull Case (<span className="text-emerald-400 font-bold">15%</span>):** The KOSPI collapse and tech sell-off force central banks to preemptively inject liquidity, causing a sudden bid for scarce assets. BTC reclaims $68,000.</p><p className="mb-4">**Bear Case (<span className="text-emerald-400 font-bold">25%</span>):** Inflation data continues to run hot, pushing the 10-year yield toward <span className="text-emerald-400 font-bold">5.0%</span>. The tech bubble deflates further, dragging BTC down to the $52,000 macro support zone.</p></>),
+      },
+    ]
+  },
+  {
     id: 'pce-pause-institutional-indecision',
     title: `The PCE Pause: Institutional Indecision Ahead of Critical Inflation Print`,
     subtitle: `How the impending June 25 core PCE data and a hawkish Fed are paralyzing digital asset momentum.`,

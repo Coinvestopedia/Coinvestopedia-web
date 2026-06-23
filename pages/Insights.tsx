@@ -41,6 +41,31 @@ import { africaCryptoInfrastructureArticle } from '../content/articles/africa-cr
 
 export const ARTICLES: Article[] = [
   {
+    id: 'capital-flow-framework-june2026',
+    title: `The Capital Flow Framework: Evaluating Bitcoin Through Yield Generation, Outflows, and Regulatory Milestones`,
+    category: 'Institutional',
+    tags: ["Framework","Institutional","Macro","Regulation"],
+    readTime: '15 min read',
+    date: 'June 23, 2026',
+    image: '/geo-framework-hero.png',
+    desc: `A structural analysis of the $8 billion institutional ETF exodus and the pivot toward yield-generating crypto assets. Evaluating the impact of BlackRock's BITA launch against a backdrop of European MiCA compliance.`,
+    icon: <Building2 className="text-blue-400" size={24} />,
+    keyInsights: ["A historic $8 billion net outflow across ETFs and corporate treasuries signals a regime shift from accumulation to yield-seeking.","BlackRock's launch of the iShares Bitcoin Premium Income ETF (BITA) represents a structural adaptation to the 5% risk-free rate environment.","The July 1 MiCA deadline is fracturing the global market, consolidating capital into highly regulated entities like Bitcoin Suisse and Ripple."],
+    content: (<>
+      <p className="text-xl text-text-muted mb-8 italic">*The digital asset ecosystem is undergoing a violent transition from a pure capital appreciation model to a yield-competitive structure, forced by persistent macroeconomic headwinds and an $8 billion institutional capital strike.*</p>
+      <h2 className="text-2xl font-bold mt-10 mb-4 text-text">Global/Macro Lens</h2>
+<p className="mb-6">The macroeconomic environment has turned intensely hostile to zero-yield assets. With the U.S. Producer Price Index accelerating to <span className="text-emerald-400 font-bold">6.5%</span> YoY in May 2026, the Federal Reserve's 'higher-for-longer' posture has entrenched the 10-year Treasury yield near <span className="text-emerald-400 font-bold">4.50%</span>. This restrictive monetary reality has catalyzed a historic capital flight from digital assets. Over the trailing 30 days, institutional allocators have pulled a staggering $8 billion in net outflows from spot Bitcoin ETFs, stablecoins, and corporate treasuries. This is not merely profit-taking; it is a systemic capital rotation out of high-beta risk and into risk-free yields and AI-driven equities.</p>
+<h2 className="text-2xl font-bold mt-10 mb-4 text-text">Yield/Derivatives Lens</h2>
+<p className="mb-6">In direct response to this liquidity vacuum, Wall Street is fundamentally altering the Bitcoin investment vehicle. The launch of BlackRock's iShares Bitcoin Premium Income ETF (BITA) on June 16 marks a watershed moment. By utilizing an active covered-call strategy, BITA attempts to convert Bitcoin's inherent implied volatility into a targeted 15–<span className="text-emerald-400 font-bold">25%</span> annual cash yield. This structural evolution is critical: to compete in a world where short-dated Treasuries guarantee <span className="text-emerald-400 font-bold">5%</span>, Bitcoin must offer synthetic yield to retain institutional portfolio weighting.</p>
+<h2 className="text-2xl font-bold mt-10 mb-4 text-text">Regulatory Lens</h2>
+<p className="mb-6">While capital flows dictate immediate price action, regulatory frameworks are dictating long-term market structure. The impending July 1, 2026, deadline for the European Union's Markets in Crypto-Assets (MiCA) regulation is forcing a massive consolidation. Legacy entities are moving aggressively to secure market share; Bitcoin Suisse recently obtained its CASP license in Liechtenstein, and Ripple secured early clearance in Luxembourg. Concurrently, the U.S. continues its push for the Digital Asset Market Clarity Act and Genuis Act stablecoin rules, further bifurcating the market between regulated institutional custodians and unregulated offshore liquidity.</p>
+<h2 className="text-2xl font-bold mt-10 mb-4 text-text">Synthesis: June 2026 State</h2>
+<p className="mb-6">Bitcoin's failure to hold the $63,000 support level is symptomatic of a broader institutional repositioning. Until global liquidity decisively pivots, the asset class will rely heavily on yield-generating derivatives like BITA and strict regulatory compliance to attract sticky capital.</p>
+<p className="text-xs text-text-muted italic border-t border-border pt-4 text-right mt-10">Research Registry — #CapitalFlowFramework</p>
+
+    </>)
+  },
+  {
     id: 'basel-mica-framework-custody',
     title: `The Basel-MiCA Framework: Evaluating Institutional Custody Through Regulation, Capital Requirements, and Joint Ventures`,
     category: 'Institutional',
