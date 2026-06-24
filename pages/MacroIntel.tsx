@@ -59,6 +59,39 @@ const TABS: { id: MacroTab; label: string; icon: React.ReactNode; isPro?: boolea
 
 const REPORTS: MacroReport[] = [
   {
+    id: 'macro-60k-breakdown-pce-wait-2026',
+    title: `The $60K Breakdown: Capital Rotation Amid Sticky Yields and Pending PCE Data`,
+    subtitle: `Bitcoin breaks critical support as $8B in ETF outflows collide with a broader tech-fueled equity pullback.`,
+    tab: 'weekly',
+    date: 'June 24, 2026',
+    readTime: '6 min read',
+    confidenceLevel: 'High',
+    keyMetrics: [{"label":"BTC Support Breached","value":"$59,200","direction":"down"},{"label":"10Y Treasury Yield","value":"4.40%","direction":"down"},{"label":"30-Day ETF Outflows","value":"$8.0B","direction":"up"},{"label":"WTI Crude Oil","value":"$70.00","direction":"down"}],
+    keyInsights: ["Bitcoin's break below the $60,000 'put wall' has catalyzed liquidations, driven by a 30-day $8 billion institutional ETF exodus.","Macro stabilization is evident as the 10-year Treasury yield eased to 4.40% and WTI crude fell to $70, largely driven by US-Iran peace negotiations.","Capital is rotating aggressively; while Bitcoin ETFs bleed, U.S. spot XRP ETFs have accumulated over $1.4 billion in net inflows.","Institutional allocators are firmly risk-off, hoarding cash ahead of the highly anticipated June 25 PCE inflation print to front-run the Fed's next move."],
+    sections: [
+      {
+        icon: <Globe size={18} />,
+        title: `Macro Context`,
+        content: (<><p className="mb-4">The global financial landscape is experiencing a sharp divergence between easing commodity pressures and an aggressive risk-off posture in technology and digital assets. Despite WTI crude falling to $70 a barrel on the back of U.S.-Iran technical talks—which materially reduces headline inflation fears—the broader market remains constrained by the Federal Reserve's 'higher for longer' mandate. The S&P Global U.S. Manufacturing PMI hit a multi-year high of 55.7, suggesting resilient economic output that complicates the case for near-term rate cuts. Consequently, Bitcoin has lost its footing, plummeting through the critical $60,000 support level as $8 billion in 30-day ETF outflows finally overwhelmed spot buyers.</p></>),
+      },
+      {
+        icon: <TrendingUp size={18} />,
+        title: `Transmission Analysis`,
+        content: (<><p className="mb-4">**1. The Rates Channel:** The 10-year Treasury yield's retreat to <span className="text-emerald-400 font-bold">4.40%</span> would traditionally act as a tailwind for long-duration risk assets like Bitcoin. However, the transmission mechanism is currently broken; the focus has shifted entirely to tomorrow's PCE inflation print. Institutions are unwilling to deploy capital at <span className="text-emerald-400 font-bold">4.40%</span> when a hot PCE print could immediately reverse the yield curve higher.</p><p className="mb-4">**2. The Equity/Proxy Channel:** The correlation between Bitcoin and highly levered tech proxies is accelerating. MicroStrategy (MSTR) dropped below the critical $100 threshold for the first time since early 2024, amplifying the negative feedback loop as algorithmic traders short proxy assets alongside spot BTC.</p><p className="mb-4">**3. The Capital Rotation Channel:** The outflow from Bitcoin is not a complete exit from crypto. U.S. spot XRP ETFs have quietly amassed $1.4 billion in net inflows. This signals a tactical rotation by institutional allocators hunting for divergent regulatory catalysts (such as MiCA and the GENIUS Act) rather than blanket capitulation.</p></>),
+      },
+      {
+        icon: <Eye size={18} />,
+        title: `What Professional Investors Are Watching`,
+        content: (<><ul className="space-y-4 mb-4"><li className="flex items-start gap-3"><span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" /><div><strong className="text-text">**PCE Inflation Print (June 25):</strong><span className="text-text-muted">** The market requires a Core PCE print below <span className="text-emerald-400 font-bold">0.3%</span> MoM to re-establish confidence in late-2026 rate cuts.</span></div></li><li className="flex items-start gap-3"><span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" /><div><strong className="text-text">**The $58,500 Liquidation Node:</strong><span className="text-text-muted">** If Bitcoin fails to reclaim $60,000, options market makers will be forced into negative gamma hedging, potentially accelerating the drop to $58,500.</span></div></li><li className="flex items-start gap-3"><span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" /><div><strong className="text-text">**U.S. Current Account Deficit:</strong><span className="text-text-muted">** The deficit widened to $226.8 billion in Q1; a structurally weaker dollar is the long-term bullish thesis for BTC, but short-term liquidity hoarding is dominating.</span></div></li><li className="flex items-start gap-3"><span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" /><div><strong className="text-text">**Tech Sector Earnings (Micron):</strong><span className="text-text-muted">** AI-adjacent hardware earnings are dictating the Nasdaq's direction; a miss here could trigger a secondary liquidity shock across all risk assets.</span></div></li></ul></>),
+      },
+      {
+        icon: <BarChart3 size={18} />,
+        title: `Scenario Analysis`,
+        content: (<><p className="mb-4">**Base Case (<span className="text-emerald-400 font-bold">60%</span> Probability):** The PCE print comes in line with expectations. Bitcoin establishes a new, lower consolidation range between $58,000 and $61,000 as summer doldrums set in and institutional ETF outflows begin to taper off but do not immediately reverse.</p><p className="mb-4">**Bull Case (<span className="text-emerald-400 font-bold">25%</span> Probability):** Core PCE prints significantly cooler than expected. The 10-year yield breaks below <span className="text-emerald-400 font-bold">4.30%</span>, triggering a massive short squeeze in both the Nasdaq and Bitcoin, aggressively reclaiming the $62,000 level and reigniting ETF inflows.</p><p className="mb-4">**Bear Case (<span className="text-emerald-400 font-bold">15%</span> Probability):** PCE data comes in hot, shattering hopes for 2026 rate cuts. The 10-year yield spikes back above <span className="text-emerald-400 font-bold">4.55%</span>, forcing a cascade of liquidations that drives Bitcoin down to test the $53,000–$55,000 structural support zone.</p></>),
+      },
+    ]
+  },
+  {
     id: 'ppi-shock-risk-off',
     title: `Producer Price Shock: Systemic Implications for BTC/Markets`,
     subtitle: `How May's 6.5% PPI surge and the KOSPI collapse are enforcing a 'higher-for-longer' regime.`,

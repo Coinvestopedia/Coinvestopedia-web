@@ -41,6 +41,33 @@ import { africaCryptoInfrastructureArticle } from '../content/articles/africa-cr
 
 export const ARTICLES: Article[] = [
   {
+    id: 'rotation-framework-xrp-etfs-genius-act-2026',
+    title: `The Rotation Framework: Evaluating Capital Flight Through Stablecoin Legislation, XRP Inflows, and ETF Drawdowns`,
+    category: 'Institutional',
+    tags: ["Framework","On-Chain","Institutional","Macro","Regulation"],
+    readTime: '17 min read',
+    date: 'June 24, 2026',
+    image: '/geo-framework-hero.png',
+    desc: `A structural analysis of the $8 billion Bitcoin ETF exodus and the surprising rotation into alternative crypto assets. Evaluating how the impending GENIUS Act and MiCA deadlines are fundamentally reshaping institutional portfolio weighting.`,
+    icon: <Building2 className="text-blue-400" size={24} />,
+    keyInsights: ["The 30-day streak of $8 billion in net outflows from Bitcoin ETFs represents a tactical rebalancing, not an ecosystem exit.","U.S. spot XRP ETFs have contrarily accumulated over $1.4 billion in net inflows, signaling institutional appetite for assets with distinct regulatory catalysts.","The impending GENIUS Act is driving capital into yield-bearing, compliant stablecoin infrastructure as a 'risk-free' crypto alternative.","With Bitcoin breaking below $60,000, market structure relies heavily on institutional rotation into regulated DeFi and alternative L1s rather than pure beta exposure."],
+    content: (<>
+      <p className="text-xl text-text-muted mb-8 italic">*The institutional narrative surrounding digital assets has violently fractured in the summer of 2026. The monolithic "Bitcoin as crypto" thesis is dissolving, replaced by a sophisticated, multi-asset rotation strategy. As $8 billion hemorrhages from spot Bitcoin ETFs, the capital is not disappearing into fiat—it is migrating into regulated stablecoin infrastructure and alternative spot ETFs, fundamentally redefining institutional market structure.*</p>
+      <h2 className="text-2xl font-bold mt-10 mb-4 text-text">Global/Macro Lens</h2>
+<p className="mb-6">The macroeconomic environment of late June 2026 has catalyzed a profound reassessment of risk. With the U.S. Federal Reserve entrenched in a restrictive posture and the 10-year Treasury yield hovering near <span className="text-emerald-400 font-bold"><span className="text-emerald-400 font-bold">4.40%</span></span>, the opportunity cost of holding non-yielding digital gold has become acute. This macro reality triggered the breach of Bitcoin's critical $60,000 support level and fueled an $8 billion, 30-day institutional exodus from spot BTC ETFs. However, this flight from pure beta exposure is occurring alongside a surge in demand for yield-generating traditional assets integrated via blockchain. Institutional treasurers are weaponizing the high-rate environment, actively seeking tokenized T-bills and GENIUS Act-compliant stablecoins that offer <span className="text-emerald-400 font-bold">4%</span>+ yields with the 24/7 settlement velocity of the crypto ecosystem.</p>
+<h2 className="text-2xl font-bold mt-10 mb-4 text-text">Leverage/Derivatives Lens</h2>
+<p className="mb-6">The derivatives market illuminates the mechanics of this capital rotation. As Bitcoin dipped into the $59,000 range, long liquidations cascaded across centralized exchanges, severely depressing funding rates. Yet, while the speculative leverage on Bitcoin collapses, hedging activity around stablecoins and alternative assets is spiking. Open interest on XRP and stablecoin-collateralized perpetuals has expanded by <span className="text-emerald-400 font-bold"><span className="text-emerald-400 font-bold">18%</span></span> over the past quarter. Institutional market makers are utilizing these instruments to execute delta-neutral strategies, utilizing the deep liquidity of the newly approved spot XRP ETFs—which have astonishingly amassed $1.4 billion in inflows—to offset the volatility of their primary Bitcoin holdings.</p>
+<h2 className="text-2xl font-bold mt-10 mb-4 text-text">On-Chain Lens</h2>
+<p className="mb-6">On-chain analytics reveal a stark divergence between store-of-value networks and transactional infrastructure. While Bitcoin's on-chain velocity has slowed amidst the ETF drawdowns, the deployment of capital into stablecoin smart contracts has accelerated. The impending passage of the U.S. GENIUS Act is forcing a consolidation of on-chain liquidity into fully reserved, audited stablecoins like USDC. Large-value, institutional-sized transactions involving these compliant stablecoins have increased by <span className="text-emerald-400 font-bold"><span className="text-emerald-400 font-bold">25%</span></span> month-over-month. Capital is migrating from volatile Layer-1 tokens into the programmable, fiat-pegged infrastructure that will serve as the plumbing for the next wave of Real-World Asset (RWA) tokenization.</p>
+<h2 className="text-2xl font-bold mt-10 mb-4 text-text">Structural Analysis</h2>
+<p className="mb-6">The ultimate driver of this rotation is regulatory asymmetry. The European Union's Markets in Crypto-Assets (MiCA) regulation reaches its full compliance deadline on July 1, 2026, while the U.S. Finalizes the GENIUS Act. This has created a massive regulatory premium for assets and entities that can prove compliance. Firms like OpenPayd and NAGA Group securing MiCA authorizations today highlight the scramble for legitimacy. Institutions are rotating out of structurally ambiguous assets and aggressively positioning into ecosystems (like stablecoins and specifically targeted alternative ETFs) that possess clear, legislated frameworks.</p>
+<h2 className="text-2xl font-bold mt-10 mb-4 text-text">Synthesis: June 24, 2026 State</h2>
+<p className="mb-6">The breakdown of Bitcoin below $60,000 is not the end of the institutional adoption cycle; it is the beginning of its diversification phase. Capital is actively rotating from speculative beta into compliant, yield-bearing infrastructure and alternative regulatory plays, permanently altering the digital asset landscape.</p>
+<p className="text-xs text-text-muted italic border-t border-border pt-4 text-right mt-10">Research Registry — #Institutional</p>
+
+    </>)
+  },
+  {
     id: 'capital-flow-framework-june2026',
     title: `The Capital Flow Framework: Evaluating Bitcoin Through Yield Generation, Outflows, and Regulatory Milestones`,
     category: 'Institutional',
