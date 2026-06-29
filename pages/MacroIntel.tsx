@@ -59,6 +59,39 @@ const TABS: { id: MacroTab; label: string; icon: React.ReactNode; isPro?: boolea
 
 const REPORTS: MacroReport[] = [
   {
+    id: 'macro-4b-exodus-nfp-june-2026',
+    title: `The $4 Billion Exodus: Capital Rotation Ahead of the U.S. Semiquincentennial and NFP`,
+    subtitle: `Bitcoin languishes below $60,000 as historic ETF outflows collide with a holiday-shortened macro week.`,
+    tab: 'weekly',
+    date: 'June 29, 2026',
+    readTime: '6 min read',
+    confidenceLevel: 'High',
+    keyMetrics: [{"label":"BTC Price Level","value":"$59,700","direction":"down"},{"label":"10Y Treasury Yield","value":"4.38%","direction":"down"},{"label":"June BTC ETF Outflows","value":"$4.06B","direction":"up"},{"label":"S&P 500 Index","value":"7,385","direction":"up"}],
+    keyInsights: ["U.S. spot Bitcoin ETFs recorded a historic $4.06 billion in net outflows for June 2026, marking the most severe institutional retreat since their launch.","BlackRock's IBIT, previously the anchor of institutional accumulation, accounted for 73% of the final week's redemptions.","Traditional markets are entering a holiday-shortened week for the U.S. 250th anniversary, driving a rotation into the 5-year Treasury curve.","Volatility is expected to spike on Thursday as the market digests the crucial non-farm payrolls (NFP) report amid thin holiday liquidity."],
+    sections: [
+      {
+        icon: <Globe size={18} />,
+        title: `Macro Context`,
+        content: (<><p className="mb-4">As the United States approaches its semiquincentennial (250th) Independence Day on Friday, July 3, global financial markets are settling into a cautious, liquidity-thin holding pattern. Traditional equities experienced a volatile end to the previous week, marked by a sharp rotation out of high-flying semiconductor and AI stocks, though the S&P 500 has managed to stabilize near 7,385. In contrast, the digital asset ecosystem is enduring a severe stress test. Bitcoin has been unable to definitively reclaim the $60,000 psychological support level, battered by a staggering $4.06 billion in U.S. spot ETF outflows throughout June. This represents the worst month on record for the products, signaling a structural shift in how institutions are managing risk heading into the second half of the year.</p></>),
+      },
+      {
+        icon: <TrendingUp size={18} />,
+        title: `Transmission Analysis`,
+        content: (<><p className="mb-4">**1. The Liquidity Vacuum Channel:** The holiday-shortened trading week is exacerbating the impact of ETF redemptions. With traditional exchanges closing on Friday, institutional market makers are preemptively pulling liquidity from order books, leading to choppier price action in spot crypto markets and amplifying the downside pressure of the $4 billion exodus.</p><p className="mb-4">**2. The Yield Curve Channel:** The 10-year U.S. Treasury yield has drifted lower to <span className="text-emerald-400 font-bold">4.38%</span>. Rather than seeking risk (Beta) in assets like Bitcoin, allocators are tactically moving into the 'belly' of the curve—specifically the 5-year Treasury yielding ~<span className="text-emerald-400 font-bold">4.15%</span>—locking in safe, risk-adjusted returns while avoiding the duration risk associated with the long end and the volatility of digital assets.</p><p className="mb-4">**3. The Regulatory Deadline Channel:** The impending July 1 deadline for the European Union's MiCA regulation is forcing an immediate restructuring of global liquidity. Major platforms are actively restricting services for non-compliant assets, triggering localized sell-offs that are bleeding into the broader market sentiment.</p></>),
+      },
+      {
+        icon: <Eye size={18} />,
+        title: `What Professional Investors Are Watching`,
+        content: (<><ul className="space-y-4 mb-4"><li className="flex items-start gap-3"><span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" /><div><strong className="text-text">**Thursday's Non-Farm Payrolls (NFP):</strong><span className="text-text-muted">** Releasing a day early due to the holiday, this data point will dictate the Federal Reserve's rate trajectory for Q3. A print below 150k could quickly reverse the risk-off sentiment.</span></div></li><li className="flex items-start gap-3"><span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" /><div><strong className="text-text">**BlackRock IBIT Flows:</strong><span className="text-text-muted">** Investors are closely monitoring IBIT to see if the fund can arrest its recent streak of outflows, which accounted for <span className="text-emerald-400 font-bold">73%</span> of last week's redemptions.</span></div></li><li className="flex items-start gap-3"><span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" /><div><strong className="text-text">**The $58,500 Liquidation Node:</strong><span className="text-text-muted">** If BTC fails to hold the high $59k range, thin holiday liquidity could result in a rapid flush down to $58,500 as leveraged longs are forced to unwind.</span></div></li><li className="flex items-start gap-3"><span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" /><div><strong className="text-text">**Russell Reconstitution Aftermath:</strong><span className="text-text-muted">** The impact of the annual Russell US Indexes reconstitution will ripple through mid- and small-cap equities, potentially triggering secondary volatility across highly correlated tech proxies.</span></div></li></ul></>),
+      },
+      {
+        icon: <BarChart3 size={18} />,
+        title: `Scenario Analysis`,
+        content: (<><p className="mb-4">**Base Case (<span className="text-emerald-400 font-bold">55%</span> Probability):** Bitcoin chops in a tight $58,500–$61,000 range through the holiday weekend. Thursday's NFP data comes in line with expectations, validating the Fed's cautious stance and keeping institutional capital safely parked in mid-duration Treasuries.</p><p className="mb-4">**Bull Case (<span className="text-emerald-400 font-bold">25%</span> Probability):** Thursday's NFP prints significantly cooler than expected (<120k jobs), signaling a rapidly cooling labor market. The 10-year yield drops toward <span className="text-emerald-400 font-bold">4.25%</span>, sparking a 'bad news is good news' relief rally that pushes Bitcoin aggressively back above $62,500.</p><p className="mb-4">**Bear Case (<span className="text-emerald-400 font-bold">20%</span> Probability):** A hot NFP print coincides with the July 1 MiCA implementation disruptions. The resulting panic in a thin-liquidity holiday market triggers cascading liquidations, breaking Bitcoin's structural support and sending it toward $54,000.</p></>),
+      },
+    ]
+  },
+  {
     id: 'macro-60k-breakdown-pce-wait-2026',
     title: `The $60K Breakdown: Capital Rotation Amid Sticky Yields and Pending PCE Data`,
     subtitle: `Bitcoin breaks critical support as $8B in ETF outflows collide with a broader tech-fueled equity pullback.`,

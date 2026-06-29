@@ -41,6 +41,33 @@ import { africaCryptoInfrastructureArticle } from '../content/articles/africa-cr
 
 export const ARTICLES: Article[] = [
   {
+    id: 'compliance-framework-mica-etf-outflows-2026',
+    title: `The Compliance Framework: Evaluating Market Structure Through MiCA, ETF Redemptions, and the July 1 Deadline`,
+    category: 'Institutional',
+    tags: ["Framework","Regulation","Institutional","Macro"],
+    readTime: '16 min read',
+    date: 'June 29, 2026',
+    image: '/geo-framework-hero.png',
+    desc: `A structural analysis of the historic $4.06 billion June ETF exodus and the impending July 1 EU MiCA deadline. Evaluating how regulatory compliance is fundamentally reshaping institutional liquidity.`,
+    icon: <Building2 className="text-blue-400" size={24} />,
+    keyInsights: ["June 2026 recorded an unprecedented $4.06 billion in U.S. spot Bitcoin ETF outflows, driven by a structural shift in institutional risk appetite.","The July 1 implementation of the EU's MiCA regulation is actively draining liquidity from non-compliant assets and platforms.","Institutional allocators are bypassing ETF wrappers in favor of direct custody solutions, evidenced by sustained corporate treasury accumulation.","The 5-year U.S. Treasury curve is absorbing capital previously allocated to digital assets, acting as a safe haven amid regulatory uncertainty."],
+    content: (<>
+      <p className="text-xl text-text-muted mb-8 italic">*The digital asset market is currently caught in a vice grip between historic institutional capitulation in public markets and the most significant regulatory deadline of the decade. As $4.06 billion hemorrhages from U.S. spot Bitcoin ETFs, the European Union is simultaneously dropping the hammer on compliance. The resulting liquidity landscape is punishing ambiguous assets while rewarding fully regulated, yield-bearing infrastructure.*</p>
+      <h2 className="text-2xl font-bold mt-10 mb-4 text-text">Global/Macro Lens</h2>
+<p className="mb-6">The macro environment heading into the second half of 2026 has violently shifted the opportunity cost of capital. With the 10-year U.S. Treasury yield hovering at <span className="text-emerald-400 font-bold"><span className="text-emerald-400 font-bold">4.38%</span></span> and the 5-year curve offering an attractive ~<span className="text-emerald-400 font-bold">4.15%</span>, institutional allocators are retreating to traditional safe havens. This rotation is the primary catalyst behind the devastating $4.06 billion net outflow from U.S. spot Bitcoin ETFs in June—the worst monthly performance on record. BlackRock's IBIT, previously a fortress of accumulation, accounted for a staggering <span className="text-emerald-400 font-bold">73%</span> of the most recent weekly redemptions. In a high-rate regime overseen by a cautious Federal Reserve, the appetite for zero-yield digital beta has evaporated, replaced by a demand for quantifiable, risk-adjusted returns.</p>
+<h2 className="text-2xl font-bold mt-10 mb-4 text-text">Leverage/Derivatives Lens</h2>
+<p className="mb-6">The derivatives market reflects a profound lack of conviction. As Bitcoin struggles to maintain the $60,000 threshold, open interest has significantly contracted. However, the nature of the leverage has shifted; speculative retail long positions are being flushed out, while institutional market makers are heavily utilizing options to delta-hedge their remaining spot exposure through the impending U.S. holiday weekend. Interestingly, amidst the Bitcoin ETF bleed, XRP spot ETFs have quietly maintained a streak of net inflows. This indicates that while aggregate leverage is down, sophisticated capital is executing highly targeted, event-driven trades based on specific regulatory milestones rather than broad market beta.</p>
+<h2 className="text-2xl font-bold mt-10 mb-4 text-text">On-Chain Lens</h2>
+<p className="mb-6">On-chain analytics reveal a fascinating divergence between public ETF flows and private accumulation. While public ETF wrappers are bleeding assets, on-chain entity tracking indicates that several major corporate treasuries and high-net-worth individuals have continued to aggressively accumulate Bitcoin via direct custody arrangements. Large-value UTXOs (Unspent Transaction Outputs) belonging to known corporate entities have grown by <span className="text-emerald-400 font-bold"><span className="text-emerald-400 font-bold">4.2%</span></span> in June. This suggests that the ETF outflows may partially represent a *rotation of the custody vehicle*—institutions moving from fee-bearing public funds to self-managed, bespoke custody solutions as they prepare for a longer-term holding period.</p>
+<h2 className="text-2xl font-bold mt-10 mb-4 text-text">Structural Analysis</h2>
+<p className="mb-6">The most pressing structural force in the market is the July 1, 2026, deadline for the European Union’s Markets in Crypto-Assets (MiCA) regulation. This is not a theoretical framework; it is an active market constraint. As the grandfathering period expires, any entity providing services to EEA clients without authorization faces immediate enforcement. We are observing a real-time fracturing of global liquidity. Major platforms, including Binance, are forcibly restricting services for unauthorized stablecoins and tokens, causing localized liquidity vacuums. Capital is being aggressively funneled out of structurally ambiguous offshore entities and into fully licensed, compliant onshore custodians. The MiCA deadline is the forcing function that is finally separating institutional-grade infrastructure from speculative retail platforms.</p>
+<h2 className="text-2xl font-bold mt-10 mb-4 text-text">Synthesis: June 29, 2026 State</h2>
+<p className="mb-6">The historic ETF outflows of June are symptoms of a market undergoing massive regulatory and macroeconomic rationalization. As the MiCA deadline arrives, the era of frictionless, global liquidity for non-compliant digital assets is officially over, ushering in a fractured landscape dominated by regulated onshore capital.</p>
+<p className="text-xs text-text-muted italic border-t border-border pt-4 text-right mt-10">Research Registry — #Regulation</p>
+
+    </>)
+  },
+  {
     id: 'rotation-framework-xrp-etfs-genius-act-2026',
     title: `The Rotation Framework: Evaluating Capital Flight Through Stablecoin Legislation, XRP Inflows, and ETF Drawdowns`,
     category: 'Institutional',
