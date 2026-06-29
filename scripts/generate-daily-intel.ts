@@ -228,6 +228,17 @@ async function run() {
         });
       };
 
+      const escapeHtml = (text: string) => {
+        return text.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+      };
+
+      const processText = (text: string) => {
+        let processed = escapeHtml(text);
+        processed = highlightPercentages(processed);
+        processed = processed.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+        return processed;
+      };
+
       blocks.forEach((block: string) => {
         const trimmed = block.trim();
         
@@ -235,7 +246,7 @@ async function run() {
           flushChannels();
           const items = trimmed.split(/\\n|\n/).filter((l: string) => l.trim()).map((l: string) => {
             let clean = l.replace(/^[•-]\s*/, '');
-            clean = highlightPercentages(clean);
+            clean = processText(clean);
             const colonIdx = clean.indexOf(':');
             if (colonIdx > 0 && colonIdx < 60) {
               const label = clean.substring(0, colonIdx);
@@ -257,7 +268,7 @@ async function run() {
             rest = rest.substring(emdashIdx + 1).trim();
           }
 
-          rest = highlightPercentages(rest);
+          rest = processText(rest);
           channelBlocks.push(`<div className="p-4 bg-surface border border-border rounded-xl"><h4 className="text-sm font-bold text-primary mb-2">${label}</h4><p className="text-xs text-text-muted">${rest}</p></div>`);
         } else if (trimmed.startsWith('Base Case') || trimmed.startsWith('Bull Case') || trimmed.startsWith('Bear Case')) {
           flushChannels();
@@ -265,21 +276,21 @@ async function run() {
           const colonIdx = trimmed.indexOf(':');
           if (colonIdx > 0) {
             const label = trimmed.substring(0, colonIdx);
-            const rest = highlightPercentages(trimmed.substring(colonIdx + 1));
+            const rest = processText(trimmed.substring(colonIdx + 1));
             jsxParts += `<p className="mb-4"><strong>${label}:</strong>${rest}</p>`;
           } else {
-            jsxParts += `<p className="mb-4">${highlightPercentages(trimmed)}</p>`;
+            jsxParts += `<p className="mb-4">${processText(trimmed)}</p>`;
           }
         } else {
           flushChannels();
           flushLists();
-          jsxParts += `<p className="mb-4">${highlightPercentages(trimmed)}</p>`;
+          jsxParts += `<p className="mb-4">${processText(trimmed)}</p>`;
         }
       });
       flushChannels();
       flushLists();
 
-      macroTsx += `        content: (<>${jsxParts}</>),\n`;
+      macroTsx += `        content: (<>${jsxParts}</>), \n`;
       macroTsx += `      },\n`;
     }
     macroTsx += `    ]\n  },\n`;
@@ -310,10 +321,18 @@ async function run() {
     }
 
     // ── Build Insight TSX ────────────────────────────────────────────────────
+    const escapeHtml = (text: string) => {
+      return text.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    };
+
     const highlightPercentages = (text: string) => {
       return text.replace(/(-?\d+(\.\d+)?%)/g, (match) => {
         return `<span className="${match.startsWith('-') ? 'text-red-400' : 'text-emerald-400'} font-bold">${match}</span>`;
       });
+    };
+
+    const processInsightText = (text: string) => {
+      return highlightPercentages(escapeHtml(text));
     };
 
     const rawInsightContent: string = insightData.content || '';
@@ -339,7 +358,7 @@ async function run() {
           
           let trBody = '';
           for (let i = 2; i < rows.length; i++) {
-            const cells = rows[i].map((c, idx) => `<td className="p-4 border-b border-border border-dashed text-text-muted ${idx===0 ? 'font-medium text-text' : ''}">${highlightPercentages(c)}</td>`).join('');
+            const cells = rows[i].map((c, idx) => `<td className="p-4 border-b border-border border-dashed text-text-muted ${idx===0 ? 'font-medium text-text' : ''}">${processInsightText(c)}</td>`).join('');
             trBody += `<tr>${cells}</tr>`;
           }
           
@@ -369,7 +388,7 @@ async function run() {
             const parts = line.replace('GRID:', '').split('|').map(p => p.trim());
             const iconName = parts[0] || 'Zap';
             const title = parts[1] || '';
-            const desc = highlightPercentages(parts[2] || '');
+            const desc = processInsightText(parts[2] || '');
             currentGrid.push(`
 <div className="p-6 bg-surface border border-border rounded-xl">
   <h3 className="font-bold text-lg mb-4 flex items-center gap-2 text-red-400"><${iconName} className="w-5 h-5" /> ${title}</h3>
@@ -392,7 +411,7 @@ async function run() {
       flushGrid();
       flushTable();
       
-      const processed = highlightPercentages(trimmed);
+      const processed = processInsightText(trimmed);
       
       if (trimmed.startsWith('![') && trimmed.includes('](')) {
         const altMatch = trimmed.match(/!\[([^\]]+)\]/);
@@ -427,7 +446,7 @@ async function run() {
       if (trimmed.startsWith('•') || trimmed.startsWith('-')) {
         const items = trimmed.split(/\\n|\n/).filter(l => l.trim()).map(l => {
           let clean = l.replace(/^[•-]\s*/, '');
-          clean = highlightPercentages(clean);
+          clean = processInsightText(clean);
           return `<li className="flex items-start gap-3"><span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" /><span className="text-text-muted">${clean}</span></li>`;
         });
         insightJsx += `<ul className="space-y-4 mb-6">${items.join('')}</ul>\n`;
