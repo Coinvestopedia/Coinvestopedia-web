@@ -21,8 +21,22 @@ export class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoun
   }
 
   componentDidCatch(error: Error, info: ErrorInfo) {
-    // TODO: send to logging backend like Sentry
     console.error('Uncaught error:', error, info);
+
+    const isChunkError = 
+      error.message?.includes('Failed to fetch dynamically imported module') ||
+      error.message?.includes('ChunkLoadError') ||
+      error.message?.includes('Failed to fetch module script') ||
+      error.name === 'ChunkLoadError';
+
+    if (isChunkError) {
+      console.warn("Chunk/Dynamic Import load error detected. Automatically reloading page to fetch latest version...");
+      const hasReloaded = window.sessionStorage.getItem('chunk-reload-occurred');
+      if (!hasReloaded) {
+        window.sessionStorage.setItem('chunk-reload-occurred', 'true');
+        window.location.reload();
+      }
+    }
   }
 
   reset = () => {

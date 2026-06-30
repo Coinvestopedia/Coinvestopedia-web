@@ -70,8 +70,11 @@ const AppContent: React.FC = () => {
   // Accessibility: move focus to main content on route change
   useFocusOnRouteChange(currentRoute);
 
-  // Sync route state with browser back/forward buttons
+  // Sync route state with browser back/forward buttons & clear chunk reload state
   useEffect(() => {
+    // Clear dynamic import reload flag on successful load
+    window.sessionStorage.removeItem('chunk-reload-occurred');
+
     const handlePopState = () => {
       setCurrentRoute(pathnameToRoute(window.location.pathname));
     };
