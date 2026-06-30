@@ -41,6 +41,33 @@ import { africaCryptoInfrastructureArticle } from '../content/articles/africa-cr
 
 export const ARTICLES: Article[] = [
   {
+    id: 'compliance-framework-distribution-overhang-2026',
+    title: `The Distribution Framework: Evaluating Mt. Gox Liquidation Overhang, ETF Absorption, and the July 1 Threshold`,
+    category: 'Institutional',
+    tags: ["Framework","Regulation","On-Chain","Macro"],
+    readTime: '16 min read',
+    date: 'June 30, 2026',
+    image: '/geo-framework-hero.png',
+    desc: `An evaluation of the $9 billion Mt. Gox distribution overhang and the July 1 EU MiCA implementation. Assessing how spot ETF inflows are acting as the primary buffer against structural sell pressure.`,
+    icon: <Building2 className="text-blue-400" size={24} />,
+    keyInsights: ["The Mt. Gox distribution represents a potential $9 billion structural supply overhang, though historical analysis suggests high retention rates among creditors.","A net inflow of $73 million on June 30 broke a multi-week streak of ETF redemptions, showing early signs of institutional buy-side support.","The July 1 EU MiCA deadline is causing exchanges to restrict non-compliant stablecoins, leading to temporary liquidity fragmentation.","On-chain metrics indicate that long-term holder distribution has stabilized, reducing sell-side velocity outside of distressed entities."],
+    content: (<>
+      <p className="text-xl text-text-muted mb-8 italic">*The digital asset market enters the third quarter of 2026 positioned at a critical nexus. The long-awaited distribution of $9 billion in Mt. Gox bankruptcy assets is beginning, while the European Union’s MiCA framework officially takes effect on July 1. This convergence will test the structural absorption capacity of the spot ETF market, which has just turned positive after a historic month of net outflows.*</p>
+      <h2 className="text-2xl font-bold mt-10 mb-4 text-text">Global/Macro Lens</h2>
+<p className="mb-6">Macro markets are showing a defensive posture as institutional managers prepare for the second half of the year. The S&P 500 edged higher to 7,410, while the U.S. 10-year Treasury yield consolidated around &lt;span className="text-emerald-400 font-bold"&gt;<span className="text-emerald-400 font-bold">4.39%</span>&lt;/span&gt;. In this environment, the cost of capital continues to favor cash and short-duration yield over speculative risk. However, the digital asset market found a vital buffer as U.S. spot ETFs registered a net inflow of $73 million on June 30, breaking the aggressive redemptions of the prior weeks. This suggests that while broader market risk appetite remains muted, institutional buyers are actively stepping in to defend the lower boundaries of the current range.</p>
+<h2 className="text-2xl font-bold mt-10 mb-4 text-text">Leverage/Derivatives Lens</h2>
+<p className="mb-6">Derivatives data indicates a significant deleveraging trend ahead of the regulatory implementation. Futures open interest has declined, and funding rates have flatlined, indicating that speculative long exposure has been thoroughly cleaned out. Option skew shows an premium for puts over the next 14 days, reflecting protective hedging against the Mt. Gox distributions. This positioning suggests that the market is already braced for a volatility event, which could limit the downside impact of actual spot liquidations as institutional market makers are already delta-hedged.</p>
+<h2 className="text-2xl font-bold mt-10 mb-4 text-text">On-Chain Lens</h2>
+<p className="mb-6">On-chain metrics offer structural reassurance regarding the Mt. Gox supply overhang. Analysis of creditor addresses indicates that a substantial portion of the distributions will go to long-term holders and funds who have already committed to retaining their assets rather than liquidating them on the open market. Additionally, long-term holder supply outside of the bankruptcy estates has ceased its distribution phase, with net wallet inflows increasing by &lt;span className="text-emerald-400 font-bold"&gt;<span className="text-emerald-400 font-bold">1.8%</span>&lt;/span&gt; over the past week. This indicates that organic sell pressure is drying up, leaving the Mt. Gox trustee as the sole remaining structural seller.</p>
+<h2 className="text-2xl font-bold mt-10 mb-4 text-text">Structural Analysis</h2>
+<p className="mb-6">The immediate structural focus is the July 1 MiCA implementation. Exchanges are actively implementing restrictions on stablecoins that do not meet the strict e-money token compliance rules under the new European framework. This has led to a major migration of capital toward compliant stablecoins like USDC, which has seen its market share in European trading pairs rise by &lt;span className="text-emerald-400 font-bold"&gt;<span className="text-emerald-400 font-bold">12.5%</span>&lt;/span&gt;. While this transition causes short-term liquidity fragmentation, it establishes a standardized regulatory foundation that will facilitate deeper institutional integration in the EU throughout the remainder of 2026.</p>
+<h2 className="text-2xl font-bold mt-10 mb-4 text-text">Synthesis: June 30, 2026 State</h2>
+<p className="mb-6">As Mt. Gox distributions begin alongside the MiCA regulatory implementation, the digital asset market's structural support is being tested. However, the return of spot ETF inflows and delta-hedging in derivatives are forming a robust defensive barrier against the supply overhang.</p>
+<p className="text-xs text-text-muted italic border-t border-border pt-4 text-right mt-10">Research Registry — #SupplyOverhang</p>
+
+    </>)
+  },
+  {
     id: 'compliance-framework-mica-etf-outflows-2026',
     title: `The Compliance Framework: Evaluating Market Structure Through MiCA, ETF Redemptions, and the July 1 Deadline`,
     category: 'Institutional',

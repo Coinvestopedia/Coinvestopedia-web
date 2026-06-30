@@ -59,6 +59,39 @@ const TABS: { id: MacroTab; label: string; icon: React.ReactNode; isPro?: boolea
 
 const REPORTS: MacroReport[] = [
   {
+    id: 'macro-etf-reversal-mica-eve-2026',
+    title: `ETF Flow Reversals and MiCA Eve: Bitcoin Consolidates Above $61K`,
+    subtitle: `Spot inflows return to positive territory as the market prepares for structural regulatory changes and supply overhangs.`,
+    tab: 'weekly',
+    date: 'June 30, 2026',
+    readTime: '6 min read',
+    confidenceLevel: 'High',
+    keyMetrics: [{"label":"BTC Price Level","value":"$61,200","direction":"up"},{"label":"10Y Treasury Yield","value":"4.39%","direction":"neutral"},{"label":"Net ETF Inflows","value":"+$73M","direction":"up"},{"label":"S&P 500 Index","value":"7,410","direction":"up"}],
+    keyInsights: ["U.S. spot Bitcoin ETFs broke their outflow streak on June 30 with +$73 million in net inflows, signaling a potential floor.","Market participants are highly cautious ahead of the July 1 MiCA implementation, which is altering stablecoin liquidity routes in Europe.","The impending distribution of $9 billion in BTC by the Mt. Gox rehabilitation trustee continues to act as a significant technical supply overhang.","A rotation into traditional defensive equities suggests a broad de-risking trend ahead of Q3, despite a steady 10-year yield."],
+    sections: [
+      {
+        icon: <Globe size={18} />,
+        title: `Macro Context`,
+        content: (<><p className="mb-4">On the eve of the European Union's landmark Markets in Crypto-Assets (MiCA) regulation, digital asset markets are demonstrating initial signs of stabilization. Bitcoin recovered above the $61,200 level, buoyed by the first positive net inflow day for U.S. spot ETFs after weeks of aggressive capital flight. Fidelity's FBTC led the reversal with +$73 million in new assets. However, the macro backdrop remains highly defensive. Federal Reserve officials continue to signal a data-dependent, restrictive stance, anchoring the 10-year U.S. Treasury yield at <span className="text-emerald-400 font-bold">4.39%</span>. In traditional markets, index funds are rebalancing portfolios for the second half of the year, rotating into consumer staples and low-volatility sectors, reflecting a broader institutional caution that is keeping digital assets locked in a tight consolidation range.</p></>), 
+      },
+      {
+        icon: <TrendingUp size={18} />,
+        title: `Transmission Analysis`,
+        content: (<><div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6"><div className="p-4 bg-surface border border-border rounded-xl"><h4 className="text-sm font-bold text-primary mb-2">Channel 1: Risk Appetite</h4><p className="text-xs text-text-muted">The minor positive flip in ETF flows has injected short-term confidence, dampening the panic selling seen last week. However, institutional demand is cautious; the correlation with high-beta tech stocks has temporarily decoupled as crypto traders focus on native supply factors.</p></div><div className="p-4 bg-surface border border-border rounded-xl"><h4 className="text-sm font-bold text-primary mb-2">Channel 2: Liquidity</h4><p className="text-xs text-text-muted">The July 1 MiCA deadline is forcing exchanges to restructure stablecoin markets in the European Economic Area. This regulatory threshold is creating temporary liquidity pockets and wider bid-ask spreads for non-compliant stablecoins, forcing capital into USDC and regulated euro-pegged tokens.</p></div><div className="p-4 bg-surface border border-border rounded-xl"><h4 className="text-sm font-bold text-primary mb-2">Channel 3: Opportunity Cost</h4><p className="text-xs text-text-muted">With real yields holding elevated, the cost of capital remains a massive drag on speculative assets. Capital that would typically float to altcoins is staying parked in cash equivalents or sovereign bonds, keeping Bitcoin dominant at <span className="text-emerald-400 font-bold">55.4%</span> of the total crypto market cap.</p></div></div></>), 
+      },
+      {
+        icon: <Eye size={18} />,
+        title: `What Professional Investors Are Watching`,
+        content: (<><ul className="space-y-4 mb-4"><li className="flex items-start gap-3"><span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" /><div><strong className="text-text">Mt. Gox Payout Schedule:</strong><span className="text-text-muted"> The rehabilitation trustee is set to distribute $9 billion in assets. Traders are watching on-chain movement to gauge creditor liquidation velocity.</span></div></li><li className="flex items-start gap-3"><span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" /><div><strong className="text-text">MiCA Stablecoin Volumes:</strong><span className="text-text-muted"> Monitoring if the regulatory enforcement results in a permanent volume shift away from USDT in favor of compliant stablecoins within Europe.</span></div></li><li className="flex items-start gap-3"><span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" /><div><strong className="text-text">Thursday's Unemployment Claims:</strong><span className="text-text-muted"> A surprise rise in weekly claims would support the case for autumn Fed rate cuts, lowering the opportunity cost of digital assets.</span></div></li><li className="flex items-start gap-3"><span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" /><div><strong className="text-text">The $60,500 Support Block:</strong><span className="text-text-muted"> If spot inflows fail to sustain, a drop below this support would expose liquidations down to the $58,000 range.</span></div></li></ul></>), 
+      },
+      {
+        icon: <BarChart3 size={18} />,
+        title: `Scenario Analysis`,
+        content: (<><p className="mb-4"><strong>Base Case (60% Probability):</strong> Bitcoin remains range-bound between $60,000 and $63,000 as Mt. Gox payouts begin. Institutional spot inflows remain modestly positive, neutralizing the localized sell pressure from creditors.</p><p className="mb-4"><strong>Bull Case (20% Probability):</strong> Creditors retain a high percentage of their distributed assets, and U.S. macro data shows signs of weakness, sparking a yield collapse. Bitcoin surges toward $65,000 as supply overhang fears vanish.</p><p className="mb-4"><strong>Bear Case (20% Probability):</strong> High creditor selling pressure coincides with liquidity disruptions from the MiCA transition. Bitcoin breaks support, dropping to test $57,500 in a thin-liquidity sell-off.</p></>), 
+      },
+    ]
+  },
+  {
     id: 'macro-4b-exodus-nfp-june-2026',
     title: `The $4 Billion Exodus: Capital Rotation Ahead of the U.S. Semiquincentennial and NFP`,
     subtitle: `Bitcoin languishes below $60,000 as historic ETF outflows collide with a holiday-shortened macro week.`,
