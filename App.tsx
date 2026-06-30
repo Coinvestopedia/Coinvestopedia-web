@@ -72,8 +72,9 @@ const AppContent: React.FC = () => {
 
   // Sync route state with browser back/forward buttons & clear chunk reload state
   useEffect(() => {
-    // Clear dynamic import reload flag on successful load
+    // Clear dynamic import reload flags on successful load
     window.sessionStorage.removeItem('chunk-reload-occurred');
+    window.sessionStorage.removeItem('entry-reload');
 
     const handlePopState = () => {
       setCurrentRoute(pathnameToRoute(window.location.pathname));
