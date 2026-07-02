@@ -59,6 +59,39 @@ const TABS: { id: MacroTab; label: string; icon: React.ReactNode; isPro?: boolea
 
 const REPORTS: MacroReport[] = [
   {
+    id: 'macro-nfp-june-2026-recovery',
+    title: `June NFP Prints 114K: Easing Yields Spark Bitcoin Recovery Past $60K`,
+    subtitle: `A cooling labor market and supportive comments from Fed Chair Kevin Warsh trigger short-covering, offset by continued ETF redemptions.`,
+    tab: 'weekly',
+    date: 'July 2, 2026',
+    readTime: '6 min read',
+    confidenceLevel: 'High',
+    keyMetrics: [{"label":"BTC Price Level","value":"$60,150","direction":"up"},{"label":"10Y Treasury Yield","value":"4.47%","direction":"down"},{"label":"Net ETF Outflows","value":"-$296M","direction":"down"},{"label":"June NFP Added","value":"114K","direction":"down"}],
+    keyInsights: ["The June U.S. jobs report added 114,000 payrolls, down from May's 172,000, cooling Fed rate-hike anxieties.","Comments from Fed Chair Kevin Warsh regarding easing inflation risks triggered significant short-covering in the BTC futures market.","U.S. spot Bitcoin ETFs continued to record outflows, registering -$296 million on July 1, led by $219 million from BlackRock's IBIT.","Treasury yields pulled back slightly with the 10-year yield declining to 4.47%, relaxing the opportunity cost ceiling on digital assets."],
+    sections: [
+      {
+        icon: <Globe size={18} />,
+        title: `Macro Context`,
+        content: (<><p className="mb-4">A highly anticipated macro catalyst arrived on July 2 as the U.S. Bureau of Labor Statistics released the June Nonfarm Payrolls (NFP) report. Advanced by one day due to the Independence Day holiday, the print showed the U.S. economy added 114,000 jobs, a notable deceleration from May's 172,000 and directly in line with market forecasts of 110,000–115,000. The unemployment rate held steady at <span className="text-emerald-400 font-bold">4.3%</span>. This moderate cooling, coupled with earlier comments from Federal Reserve Chairman Kevin Warsh hinting that structural inflation risks are finally beginning to ease, brought significant relief to risk markets. The 10-year Treasury yield reacted by sliding back to <span className="text-emerald-400 font-bold">4.47%</span> from its <span className="text-emerald-400 font-bold">4.50%</span> high. In response, Bitcoin staged a sharp <span className="text-emerald-400 font-bold">3.2%</span> recovery, re-establishing its position above the critical $60,000 support level.</p></>), 
+      },
+      {
+        icon: <TrendingUp size={18} />,
+        title: `Transmission Analysis`,
+        content: (<><div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6"><div className="p-4 bg-surface border border-border rounded-xl"><h4 className="text-sm font-bold text-primary mb-2">Channel 1: Interest Rate Expectations</h4><p className="text-xs text-text-muted">The NFP print of 114K indicates that while the labor market is resilient, it is not hot enough to force immediate rate hikes. This cooled the hawkish expectations priced in during June, capping the U.S. Dollar Index (DXY) at 101.35 and providing support for risk assets.</p></div><div className="p-4 bg-surface border border-border rounded-xl"><h4 className="text-sm font-bold text-primary mb-2">Channel 2: Opportunity Cost</h4><p className="text-xs text-text-muted">The slide in the 10-year Treasury yield to <span className="text-emerald-400 font-bold">4.47%</span> has slightly reduced the yield ceiling that has constrained digital assets. A lower real yield environment immediately increases the marginal appeal of holding non-yielding digital assets like Bitcoin.</p></div><div className="p-4 bg-surface border border-border rounded-xl"><h4 className="text-sm font-bold text-primary mb-2">Channel 3: Derivatives Dynamics</h4><p className="text-xs text-text-muted">The recovery was heavily fueled by short-covering. Perpetual futures funding rates, which had turned negative on June 30 due to extreme fear, rebounded rapidly as short positions were forced to cover upon the neutral-to-cool jobs print, generating strong buy-side momentum.</p></div></div></>), 
+      },
+      {
+        icon: <Eye size={18} />,
+        title: `What Professional Investors Are Watching`,
+        content: (<><ul className="space-y-4 mb-4"><li className="flex items-start gap-3"><span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" /><div><strong className="text-text">Weekly Close Above $60,500:</strong><span className="text-text-muted"> A confirmed weekly close above $60,500 would validate today's move as a structural bottom formation rather than a temporary short-squeeze.</span></div></li><li className="flex items-start gap-3"><span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" /><div><strong className="text-text">July 8 FOMC Minutes:</strong><span className="text-text-muted"> Investors are looking for any details on Chair Warsh's internal consensus regarding the threshold for future rate adjustments.</span></div></li><li className="flex items-start gap-3"><span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" /><div><strong className="text-text">ETF Outflow Exhaustion:</strong><span className="text-text-muted"> While spot ETFs saw $296M in net redemptions on July 1, analysts are watching to see if inflows return following this labor data.</span></div></li><li className="flex items-start gap-3"><span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" /><div><strong className="text-text">July 14 CPI Print:</strong><span className="text-text-muted"> The upcoming Consumer Price Index release is the final crucial milestone needed to confirm a structural inflation downtrend.</span></div></li></ul></>), 
+      },
+      {
+        icon: <BarChart3 size={18} />,
+        title: `Scenario Analysis`,
+        content: (<><p className="mb-4"><strong>Base Case (60% Probability):</strong> Bitcoin consolidates in the $59,000–$62,000 range as the market digests the NFP report. ETF outflows slow down, and macro traders wait for the CPI print on July 14 before committing to new trends.</p><p className="mb-4"><strong>Bull Case (20% Probability):</strong> Spot ETF flows flip positive over the coming sessions as institutional allocators react to the cooling job data. Bitcoin breaks resistance at $62,000 and surges toward $64,500.</p><p className="mb-4"><strong>Bear Case (20% Probability):</strong> The relief rally is short-lived. Continued regulatory pressure from the MiCA transition or renewed geopolitical tensions in the Middle East drive Bitcoin back to retest the $58,000 support level.</p></>), 
+      },
+    ]
+  },
+  {
     id: 'warsh-fed-nfp-btc-july-2026',
     title: `Warsh's Data-Dependent Fed and the June NFP Pivot: Bitcoin's Make-or-Break Macro Week`,
     subtitle: `With May CPI at a 3-year high of 4.2% and September hike probability at 60%, Thursday's jobs report is the single most important near-term catalyst for Bitcoin's $58,000 support.`,

@@ -41,6 +41,33 @@ import { africaCryptoInfrastructureArticle } from '../content/articles/africa-cr
 
 export const ARTICLES: Article[] = [
   {
+    id: 'reaction-framework-labor-softening-etf-flows-2026',
+    title: `The Reaction Framework: Evaluating Bitcoin Through Labor Softening, Yield Retraction, and ETF Outflow Exhaustion`,
+    category: 'Institutional',
+    tags: ["Framework","On-Chain","Institutional","Macro"],
+    readTime: '16 min read',
+    date: 'July 2, 2026',
+    image: '/geo-framework-hero.png',
+    desc: `An institutional evaluation of the June U.S. jobs report (114K) and its impact on interest rate expectations, yield curves, and Bitcoin's recovery back above the $60,000 threshold.`,
+    icon: <Building2 className="text-blue-400" size={24} />,
+    keyInsights: ["June Nonfarm Payrolls added 114,000 jobs, matching expectations and verifying a cooling labor market trend from May's 172,000.","Treasury yields pulled back as the 10-year note slid to 4.47%, relaxing the opportunity cost ceiling on non-yielding digital assets.","Bitcoin spot ETFs saw $296 million in net outflows on July 1, but the price recovery suggests a temporary exhaustion of mechanical selling pressure.","On-chain whale wallets continue to hold reserves at 7-year lows on exchanges, implying strong underlying long-term accumulation."],
+    content: (<>
+      <p className="text-xl text-text-muted mb-8 italic">*The release of the June Nonfarm Payrolls report on July 2 has brought a crucial macro catalyst to risk markets. The print of 114,000 jobs represents a steady cooling of the U.S. labor market, easing the aggressive rate-hike expectations that had mounted over the past month. In response, Bitcoin has reclaimed the $60,000 level, showing structural resilience on the back of short-covering and yield retraction.*</p>
+      <h2 className="text-2xl font-bold mt-10 mb-4 text-text">Global/Macro Lens</h2>
+<p className="mb-6">The macro backdrop entering the second half of the year has experienced a moderate reprieve. The U.S. economy added 114,000 jobs in June, aligning precisely with the consensus range of 110,000–115,000. The unemployment rate stood steady at <span className="text-emerald-400 font-bold">4.3%</span>. This cooling labor demand, combined with comments from Fed Chairman Kevin Warsh highlighting that structural inflation forces are starting to relax, has pushed the 10-year Treasury yield down from <span className="text-emerald-400 font-bold">4.50%</span> to &lt;span className="text-emerald-400 font-bold"&gt;<span className="text-emerald-400 font-bold">4.47%</span>&lt;/span&gt;. While the U.S. dollar (DXY) remains relatively strong, this moderate pullback in yields has relieved the immediate opportunity cost pressure on digital assets.</p>
+<h2 className="text-2xl font-bold mt-10 mb-4 text-text">Leverage/Derivatives Lens</h2>
+<p className="mb-6">Derivatives markets experienced a strong short-covering event following the jobs release. Open interest had built up significantly as traders shorted the $58,000 support level in expectation of a hot NFP print. When the data printed in-line, funding rates instantly flipped back into positive territory as short positions covered, injecting strong technical momentum that drove the spot price above the &lt;span className="text-emerald-400 font-bold"&gt;$60,000&lt;/span&gt; mark. Option skew has flattened, showing reduced demand for immediate downside protection.</p>
+<h2 className="text-2xl font-bold mt-10 mb-4 text-text">On-Chain Lens</h2>
+<p className="mb-6">On-chain dynamics continue to show a significant divergence between regulated ETF products and organic wallet holdings. While U.S. spot Bitcoin ETFs registered a net outflow of $296 million on July 1 (led by BlackRock's IBIT at $219 million), on-chain exchange reserves have reached fresh multi-year lows. This indicates that the supply being sold by ETF issuers to meet redemptions is being systematically absorbed by long-term whale wallets, who are moving the coins off exchanges, reducing overall spot market velocity.</p>
+<h2 className="text-2xl font-bold mt-10 mb-4 text-text">Structural Analysis</h2>
+<p className="mb-6">The structural challenge remains the stabilization of institutional flows. Citigroup’s recent revision of target inflows highlights a cautious posture among large allocators. However, the combination of a cooling labor market and lower yields is expected to slow the pace of ETF redemptions. If the upcoming Consumer Price Index (CPI) print on July 14 confirms a continuing cooling trend, the structural flow dynamics are highly likely to flip back to positive territory in the third quarter of 2026.</p>
+<h2 className="text-2xl font-bold mt-10 mb-4 text-text">Synthesis: July 2, 2026 State</h2>
+<p className="mb-6">Bitcoin's recovery above $60,000 indicates that the structural bottom is holding, supported by a cooling labor market and easing yields. While ETF outflows remain a drag, short-covering and strong whale accumulation are acting as a solid floor for the market.</p>
+<p className="text-xs text-text-muted italic border-t border-border pt-4 text-right mt-10">Research Registry — #LaborSoftening</p>
+
+    </>)
+  },
+  {
     id: 'supply-transfer-framework-whale-etf-cold-storage-july-2026',
     title: `The Supply Transfer Framework: Evaluating Bitcoin's Bottom Formation Through Whale Accumulation, ETF Distribution, and Exchange Reserve Depletion`,
     category: 'Institutional',
