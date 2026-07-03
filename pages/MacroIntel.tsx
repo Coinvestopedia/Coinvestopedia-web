@@ -59,6 +59,39 @@ const TABS: { id: MacroTab; label: string; icon: React.ReactNode; isPro?: boolea
 
 const REPORTS: MacroReport[] = [
   {
+    id: 'macro-nfp-miss-june-2026-rebound',
+    title: `June NFP Misses at 57K: Short Squeeze Propels Bitcoin Past $62K`,
+    subtitle: `A massive labor market cooling triggers $450M in short liquidations and flips spot ETF flows to +$220M.`,
+    tab: 'weekly',
+    date: 'July 3, 2026',
+    readTime: '6 min read',
+    confidenceLevel: 'High',
+    keyMetrics: [{"label":"BTC Price Level","value":"$62,100","direction":"up"},{"label":"U.S. Dollar Index","value":"100.83","direction":"down"},{"label":"Daily ETF Net Inflow","value":"+$220M","direction":"up"},{"label":"June NFP Added","value":"57K","direction":"down"}],
+    keyInsights: ["The June U.S. jobs report added only 57,000 payrolls, well below the 110,000 consensus, fueling rate-cut expectations.","A massive short squeeze occurred, triggering approximately $450 million in crypto short liquidations as bears were caught off-guard.","Spot Bitcoin ETFs broke their 10-day consecutive outflow streak, recording over $220 million in positive net inflows.","Fidelity's FBTC and Ark & 21Shares' ARKB led the positive flows, securing $165M and $91.84M respectively."],
+    sections: [
+      {
+        icon: <Globe size={18} />,
+        title: `Macro Context`,
+        content: (<><p className="mb-4">A major macro pivot occurred on July 3 as the U.S. Bureau of Labor Statistics released the June jobs report. The print showed the U.S. economy added only 57,000 jobs, significantly missing the consensus forecast of 110,000. This stark deceleration from May's 172,000 addition has fueled expectations that the Federal Reserve, under Chair Kevin Warsh, will have to shift away from its 'higher-for-longer' bias toward near-term monetary easing. In response, the U.S. Dollar Index (DXY) slid to 100.83, and Treasury yields fell. This macro environment spurred a sharp recovery in risk assets, allowing Bitcoin to break back above the $62,000 mark.</p></>), 
+      },
+      {
+        icon: <TrendingUp size={18} />,
+        title: `Transmission Analysis`,
+        content: (<><div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6"><div className="p-4 bg-surface border border-border rounded-xl"><h4 className="text-sm font-bold text-primary mb-2">Channel 1: Interest Rate Expectations</h4><p className="text-xs text-text-muted">The significant miss in NFP payrolls (57K vs 110K expected) has lowered the probability of a September rate hike and increased rate cut expectations. This has immediately weakened the dollar, supporting BTC's valuation.</p></div><div className="p-4 bg-surface border border-border rounded-xl"><h4 className="text-sm font-bold text-primary mb-2">Channel 2: Institutional Inflows</h4><p className="text-xs text-text-muted">The positive macro signal broke a painful 10-day outflow streak for U.S. spot Bitcoin ETFs, driving a net inflow of $220 million. This inflow provides direct spot market buy pressure, reversing the mechanical drag from June's redemptions.</p></div><div className="p-4 bg-surface border border-border rounded-xl"><h4 className="text-sm font-bold text-primary mb-2">Channel 3: Short Squeeze Mechanics</h4><p className="text-xs text-text-muted">The recovery was accelerated by a severe short squeeze. As spot prices broke past resistance levels, Leveraged shorts were forced into liquidations, leading to $450 million in total crypto liquidations and driving rapid price appreciation.</p></div></div></>), 
+      },
+      {
+        icon: <Eye size={18} />,
+        title: `What Professional Investors Are Watching`,
+        content: (<><ul className="space-y-4 mb-4"><li className="flex items-start gap-3"><span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" /><div><strong className="text-text">Sustainability of ETF Inflows:</strong><span className="text-text-muted"> Monitoring whether the positive flip on July 3 represents the start of a sustained institutional accumulation cycle or a one-off reaction.</span></div></li><li className="flex items-start gap-3"><span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" /><div><strong className="text-text">July 14 CPI Release:</strong><span className="text-text-muted"> The upcoming Consumer Price Index print is the next major macro test for the Fed's pivot thesis.</span></div></li><li className="flex items-start gap-3"><span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" /><div><strong className="text-text">The $63,800 Resistance Level:</strong><span className="text-text-muted"> A clean break above this resistance would confirm the end of the June downtrend and open the path to $65,000.</span></div></li><li className="flex items-start gap-3"><span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" /><div><strong className="text-text">Fed Chair Warsh's Reactions:</strong><span className="text-text-muted"> Parsed comments from Federal Reserve members over the coming week will be key to confirming the easing bias.</span></div></li></ul></>), 
+      },
+      {
+        icon: <BarChart3 size={18} />,
+        title: `Scenario Analysis`,
+        content: (<><p className="mb-4"><strong>Base Case (60% Probability):</strong> Bitcoin consolidates the $61,000–$63,000 range through early July. ETF inflows remain moderately positive as institutional investors position ahead of the July 14 CPI release.</p><p className="mb-4"><strong>Bull Case (25% Probability):</strong> A softer-than-expected CPI print on July 14 combines with sustained ETF inflows. Bitcoin breaks resistance at $63,800 and targets the $66,000 zone.</p><p className="mb-4"><strong>Bear Case (15% Probability):</strong> Hawkish comments from Fed members or renewed geopolitical tensions in the Middle East reverse the risk-on sentiment, sending Bitcoin back to test $59,000.</p></>), 
+      },
+    ]
+  },
+  {
     id: 'macro-nfp-june-2026-recovery',
     title: `June NFP Prints 114K: Easing Yields Spark Bitcoin Recovery Past $60K`,
     subtitle: `A cooling labor market and supportive comments from Fed Chair Kevin Warsh trigger short-covering, offset by continued ETF redemptions.`,
