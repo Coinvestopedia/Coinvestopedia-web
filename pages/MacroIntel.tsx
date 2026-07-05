@@ -59,6 +59,39 @@ const TABS: { id: MacroTab; label: string; icon: React.ReactNode; isPro?: boolea
 
 const REPORTS: MacroReport[] = [
   {
+    id: 'macro-consolidation-july-5-2026',
+    title: `Macro Consolidation at $62.8K: Bitcoin Prepares for FOMC Minutes Test`,
+    subtitle: `Extreme fear readings ease to 15/100 as the market digests NFP relief and waits for the next macro spark.`,
+    tab: 'weekly',
+    date: 'July 5, 2026',
+    readTime: '6 min read',
+    confidenceLevel: 'High',
+    keyMetrics: [{"label":"BTC Price Level","value":"$62,850","direction":"up"},{"label":"DXY Dollar Index","value":"100.86","direction":"down"},{"label":"10Y Treasury Yield","value":"4.49%","direction":"down"},{"label":"Weekly ETF Flow","value":"-$527M","direction":"down"},{"label":"Crypto Fear & Greed","value":"15 (Extreme Fear)","direction":"up"}],
+    keyInsights: ["Bitcoin is stabilizing in the $62,800 range, recovering over 8% from its 21-month lows near $57,750.","The Crypto Fear & Greed Index remains depressed at 15/100, which has historically marked structural accumulation bottoms.","While the final session generated a $221.7M net inflow, the entire week recorded $527M in net outflows, representing the eighth negative week in a row.","BlackRock's IBIT fund is under scrutiny after logging 11 consecutive sessions of net outflows prior to the weekend holiday."],
+    sections: [
+      {
+        icon: <Globe size={18} />,
+        title: `Macro Context`,
+        content: (<><p className="mb-4">Bitcoin enters the final day of the holiday weekend consolidating in a steady range between $62,500 and $63,100. The panic that dominated the final week of June has subsided, replaced by a cautious stabilization. Traditional markets remain closed, leaving the U.S. Dollar Index (DXY) at 100.86 and the 10-year Treasury yield at <span className="text-emerald-400 font-bold">4.49%</span>. The primary macro narrative remains the fallout from the weak June payrolls report (57K added), which has shifted the rate expectations curve in favor of risk assets. Investors are now looking forward to the July 8 FOMC minutes to evaluate Fed Chair Kevin Warsh's internal committee alignment.</p></>), 
+      },
+      {
+        icon: <TrendingUp size={18} />,
+        title: `Transmission Analysis`,
+        content: (<><div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6"><div className="p-4 bg-surface border border-border rounded-xl"><h4 className="text-sm font-bold text-primary mb-2">Channel 1: Yield and Dollar Stability</h4><p className="text-xs text-text-muted">With traditional trading desks closed, the volatility of macro assets is suppressed. This has allowed Bitcoin to digest its recent short-squeeze gains without the mechanical pressure of a rising dollar or climbing yields.</p></div><div className="p-4 bg-surface border border-border rounded-xl"><h4 className="text-sm font-bold text-primary mb-2">Channel 2: ETF Outflow Fatigue</h4><p className="text-xs text-text-muted">The $221.7 million net inflow recorded in the final session of the week indicates that the intense redemptions that plagued June may have reached a point of exhaustion. Even though the weekly total was -$527 million, the final day's flip suggests institutional allocators are beginning to react to the cooler macro data.</p></div><div className="p-4 bg-surface border border-border rounded-xl"><h4 className="text-sm font-bold text-primary mb-2">Channel 3: Sentiment Divergence</h4><p className="text-xs text-text-muted">The Fear & Greed Index at 15/100 represents a high degree of skepticism. However, this extreme fear has historically functioned as a contrarian indicator, coinciding with whale wallets absorbing supply from distressed sellers while exchange reserves hover at 7-year lows.</p></div></div></>), 
+      },
+      {
+        icon: <Eye size={18} />,
+        title: `What Professional Investors Are Watching`,
+        content: (<><ul className="space-y-4 mb-4"><li className="flex items-start gap-3"><span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" /><div><strong className="text-text">The $63,800 Resistance Level:</strong><span className="text-text-muted"> Breaking this level on volume is the first step toward confirming a structural bottom and starting a move toward the $65,000 resistance zone.</span></div></li><li className="flex items-start gap-3"><span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" /><div><strong className="text-text">Weekly Close Above $62,500:</strong><span className="text-text-muted"> Securing a weekly close above $62,500 would confirm that the $58,000 test was successfully defended as a cycle floor.</span></div></li><li className="flex items-start gap-3"><span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" /><div><strong className="text-text">July 8 FOMC Minutes:</strong><span className="text-text-muted"> Parsed comments on the committee's willingness to tolerate a cooling labor market will dictate direction in the middle of the week.</span></div></li><li className="flex items-start gap-3"><span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" /><div><strong className="text-text">ETF Flows on Monday Open:</strong><span className="text-text-muted"> Watching if the Fidelity-led inflow momentum from Friday carries over to the new trading week as institutions return from the holiday.</span></div></li></ul></>), 
+      },
+      {
+        icon: <BarChart3 size={18} />,
+        title: `Scenario Analysis`,
+        content: (<><p className="mb-4"><strong>Base Case (65% Probability):</strong> Bitcoin continues to consolidate between $62,000 and $63,500 through the early part of the week. ETF flows show neutral to minor positive readings as institutional investors await the FOMC minutes on Wednesday.</p><p className="mb-4"><strong>Bull Case (20% Probability):</strong> Monday open brings positive spot ETF inflows above $150M. Bitcoin breaks past $63,800, invalidating the June downtrend and targeting $65,000.</p><p className="mb-4"><strong>Bear Case (15% Probability):</strong> The Monday session brings renewed outflows from BlackRock's IBIT. Bitcoin breaks down from its consolidating range, re-testing the $60,500 support zone.</p></>), 
+      },
+    ]
+  },
+  {
     id: 'etf-inflow-reversal-independence-day-july-2026',
     title: `ETF Inflow Reversal on Independence Day: $221.7M Signals Institutional Return to Bitcoin`,
     subtitle: `After a 10-day, $2.7B outflow streak, Fidelity-led inflows and a historic NFP miss converge to form the first sustained institutional re-entry signal since April.`,

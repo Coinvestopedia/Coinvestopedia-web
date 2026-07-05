@@ -41,6 +41,33 @@ import { africaCryptoInfrastructureArticle } from '../content/articles/africa-cr
 
 export const ARTICLES: Article[] = [
   {
+    id: 'reaccumulation-framework-liquidity-halts-etf-stabilization-2026',
+    title: `The Re-Accumulation Framework: Evaluating Bitcoin Through Liquidity Halts, ETF Flow Stabilization, and Sentiment Divergence`,
+    category: 'Institutional',
+    tags: ["Framework","On-Chain","Institutional","Macro"],
+    readTime: '16 min read',
+    date: 'July 5, 2026',
+    image: '/geo-framework-hero.png',
+    desc: `An evaluation of Bitcoin's consolidation in the $62,800 range during the holiday weekend, analyzing the structural exhaustion of the 8-week ETF outflow streak and the contrarian opportunities presented by extreme fear sentiment.`,
+    icon: <Building2 className="text-blue-400" size={24} />,
+    keyInsights: ["Bitcoin is consolidating between $62,500 and $63,100, stabilizing after its sharp recovery from the July 2 low of $57,750.","The Crypto Fear & Greed Index remains at 15/100, displaying a strong contrarian buy signal that has historically aligned with whale accumulation phases.","U.S. spot Bitcoin ETFs closed the week with a net outflow of $527 million, marking their eighth consecutive negative week despite a $221.7M positive turn on the final session.","Fidelity's FBTC led the final day's recovery, while BlackRock's IBIT continues to face pressure after an 11-day negative streak."],
+    content: (<>
+      <p className="text-xl text-text-muted mb-8 italic">*Bitcoin enters the final day of the holiday weekend consolidating in a steady range between $62,500 and $63,100. With traditional markets closed, the digital asset is digesting its recent short-squeeze gains. The structural focus of the Re-Accumulation Framework is evaluating whether the final day's ETF flow reversal and persistent extreme fear indicate the formation of a durable cycle bottom.*</p>
+      <h2 className="text-2xl font-bold mt-10 mb-4 text-text">Global/Macro Lens</h2>
+<p className="mb-6">The macro transmission channel remains in a temporary state of suspension due to the Independence Day market closures. The DXY is holding at &lt;span className="text-emerald-400 font-bold"&gt;100.86&lt;/span&gt;, while the 10-year Treasury yield remains at <span className="text-emerald-400 font-bold">4.49%</span>. The fundamental driver continues to be the weaker jobs report (57K payrolls), which has significantly weakened the case for Fed rate hikes under Chair Kevin Warsh. Investors are parsing this data as a net-positive signal for risk-on assets, expecting that the Fed's restrictive stance will have to soften in the second half of 2026. This expectations shift has lowered the real yield opportunity cost for digital assets.</p>
+<h2 className="text-2xl font-bold mt-10 mb-4 text-text">Leverage/Derivatives Lens</h2>
+<p className="mb-6">Derivatives markets are experiencing a decline in active volume as holiday closures restrict institutional trading desks. Perpetual funding rates remain steady and positive, reflecting a healthier balance of leverage after the $450 million short-squeeze liquidation on July 3. Option market positioning shows that implied volatility has compressed, suggesting that traders are expecting a period of consolidation before the next major macro catalyst, which will be the release of the FOMC minutes on July 8.</p>
+<h2 className="text-2xl font-bold mt-10 mb-4 text-text">On-Chain Lens</h2>
+<p className="mb-6">On-chain dynamics continue to present a strong contrarian case. The Crypto Fear & Greed Index sits at &lt;span className="text-emerald-400 font-bold"&gt;15/100&lt;/span&gt;, indicating persistent extreme fear. Historically, whenever this index has sustained levels below 20 while exchange reserves sit at multi-year lows, it has corresponded to a high-probability re-accumulation zone for whale wallets. Whales are continuing to absorb spot supply sold by exiting retail and non-compliant entities, transferring assets to cold storage and thinning the available floating supply on exchanges.</p>
+<h2 className="text-2xl font-bold mt-10 mb-4 text-text">Structural Analysis</h2>
+<p className="mb-6">The structural recovery will face a major test at the Monday market open. While the $221.7 million positive flow on the final day of the week broke the 10-day outflow streak, the overall week was still negative at -$527 million. BlackRock's IBIT fund is under particular observation after its 11-day outflow streak. If IBIT flows return to positive territory or flatten on Monday, it will confirm that the mechanical selling pressure from ETF redemptions has structurally concluded, leaving the spot market free to respond to the softer macro data.</p>
+<h2 className="text-2xl font-bold mt-10 mb-4 text-text">Synthesis: July 5, 2026 State</h2>
+<p className="mb-6">Bitcoin's stability at $62,850 suggests that the structural floor is solidifying. The convergence of a cooling labor market, the first signs of ETF outflow exhaustion, and persistent whale accumulation support the re-accumulation thesis. The key near-term milestones are the Monday ETF flow results and the FOMC minutes on Wednesday.</p>
+<p className="text-xs text-text-muted italic border-t border-border pt-4 text-right mt-10">Research Registry — #ReAccumulation</p>
+
+    </>)
+  },
+  {
     id: 'convergence-framework-etf-reversal-dollar-retreat-mica-july-2026',
     title: `The Convergence Framework: Evaluating Bitcoin's Recovery Through ETF Flow Reversal, Dollar Retreat, and MiCA Regulatory Consolidation`,
     category: 'Institutional',
