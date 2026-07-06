@@ -41,6 +41,33 @@ import { africaCryptoInfrastructureArticle } from '../content/articles/africa-cr
 
 export const ARTICLES: Article[] = [
   {
+    id: 'money-supply-framework-m2-models-yield-compression-2026',
+    title: `The Money Supply Framework: Evaluating Bitcoin Through M2 Expansion Models, Yield Compression, and Institutional Re-Entry`,
+    category: 'Institutional',
+    tags: ["Framework","On-Chain","Institutional","Macro"],
+    readTime: '16 min read',
+    date: 'July 6, 2026',
+    image: '/geo-framework-hero.png',
+    desc: `An analysis of the newly introduced Salomon Brothers M2 valuation model, examining the structural impact of declining 10-year yields (4.46%) and Monday's market reopen on institutional digital asset allocation.`,
+    icon: <Building2 className="text-blue-400" size={24} />,
+    keyInsights: ["A new Salomon Brothers report introduces a valuation model linking Bitcoin's long-term price action to USD M2 money supply growth.","U.S. Treasury yields continue to slide, with the 10-year note easing to 4.46% as the market adjusts to the soft jobs data.","The U.S. Dollar Index (DXY) consolidated near 101.00, supported by safe-haven demand amid rising geopolitical tensions in the Strait of Hormuz.","Institutional digital asset allocation is showing signs of positive rotation, supported by the final trading session's +$221.7M ETF inflow."],
+    content: (<>
+      <p className="text-xl text-text-muted mb-8 italic">*Bitcoin's recovery past the $63,000 mark on July 6 highlights the market's response to easing yields and new institutional valuation frameworks. The debut of a Salomon Brothers research paper linking Bitcoin's price appreciation to M2 money supply expansion provides a long-term fundamental basis for allocators, coinciding with a drop in the 10-year yield to 4.46% as markets digest the post-holiday reopen.*</p>
+      <h2 className="text-2xl font-bold mt-10 mb-4 text-text">Global/Macro Lens</h2>
+<p className="mb-6">The macro transmission channel has entered a constructive phase for risk assets. With U.S. markets reopening after the Independence Day holiday, the impact of the weak June payrolls print (57K) has driven the 10-year Treasury yield down to &lt;span className="text-emerald-400 font-bold"&gt;<span className="text-emerald-400 font-bold">4.46%</span>&lt;/span&gt;. The U.S. dollar, however, remains resilient at 101.00, supported by safe-haven demand as geopolitical tensions escalate in the Strait of Hormuz. Despite the strong dollar, the lower real yield curve lowers the opportunity cost hurdle for holding digital store-of-value assets.</p>
+<h2 className="text-2xl font-bold mt-10 mb-4 text-text">Leverage/Derivatives Lens</h2>
+<p className="mb-6">Derivatives markets indicate a clean leverage structure entering the week. After the $450 million short squeeze on July 3, perpetual funding rates have stabilized at a neutral-to-positive level. Open interest remains consolidated, suggesting that the recent price rise is supported by spot buying rather than excessive leverage. Option markets show a reduction in immediate protective put demand, with open interest shifting toward call options at the $65,000 strike for late-July expiry.</p>
+<h2 className="text-2xl font-bold mt-10 mb-4 text-text">On-Chain Lens</h2>
+<p className="mb-6">On-chain metrics have been bolstered by the introduction of the Daniels-Hileman money supply (M2) valuation model. This model, highlighted by Salomon Brothers, demonstrates that Bitcoin's structural price path is highly correlated with M2 expansion. As global central banks navigate cooling economic growth, expectation of future M2 liquidity injections is prompting long-term whale wallets to continue accumulating. On-chain exchange reserves remain at 7-year lows, confirming that supply continues to be moved into self-custody.</p>
+<h2 className="text-2xl font-bold mt-10 mb-4 text-text">Structural Analysis</h2>
+<p className="mb-6">The key structural variable for the week is the continuation of positive ETF flows. While the $221.7 million net inflow on the final day of the week broke the negative streak, the overall weekly flow of -$527 million highlights that institutional allocation is still fragile. If BlackRock's IBIT fund and other U.S. spot ETFs confirm positive inflows on Monday, it will establish a solid buying foundation heading into the release of the FOMC minutes on Wednesday.</p>
+<h2 className="text-2xl font-bold mt-10 mb-4 text-text">Synthesis: July 6, 2026 State</h2>
+<p className="mb-6">Bitcoin's stabilization above $63,000 suggests that the structural recovery is gaining strength. Easing yields, clean derivatives leverage, and new institutional valuation frameworks based on money supply expansion are supporting the re-accumulation thesis. The primary focal points for the week are the Monday ETF flow outcomes and the FOMC minutes on Wednesday.</p>
+<p className="text-xs text-text-muted italic border-t border-border pt-4 text-right mt-10">Research Registry — #MoneySupply</p>
+
+    </>)
+  },
+  {
     id: 'reaccumulation-framework-liquidity-halts-etf-stabilization-2026',
     title: `The Re-Accumulation Framework: Evaluating Bitcoin Through Liquidity Halts, ETF Flow Stabilization, and Sentiment Divergence`,
     category: 'Institutional',

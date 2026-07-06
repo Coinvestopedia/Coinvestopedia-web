@@ -59,6 +59,39 @@ const TABS: { id: MacroTab; label: string; icon: React.ReactNode; isPro?: boolea
 
 const REPORTS: MacroReport[] = [
   {
+    id: 'macro-salomon-m2-model-recovery-july-2026',
+    title: `Salomon M2 Model Debuts as Easing Yields Support Bitcoin past $63.5K`,
+    subtitle: `Traditional markets reopen with tech gains, pushing the 10-year yield down to 4.46% as DXY consolidates near 101.00.`,
+    tab: 'weekly',
+    date: 'July 6, 2026',
+    readTime: '6 min read',
+    confidenceLevel: 'High',
+    keyMetrics: [{"label":"BTC Price Level","value":"$63,500","direction":"up"},{"label":"10Y Treasury Yield","value":"4.46%","direction":"down"},{"label":"U.S. Dollar Index","value":"101.00","direction":"up"},{"label":"Crypto Market Cap","value":"$2.17T","direction":"up"}],
+    keyInsights: ["Bitcoin rallied past $63.5K as traditional markets reopened, extending gains from the post-NFP macro shift.","The 10-year Treasury yield eased further to 4.46%, reducing the yield hurdle for digital store-of-value assets.","A Salomon Brothers research report introduced a new valuation model linking BTC price appreciation to USD M2 money supply growth.","Geopolitical safe-haven demand from Strait of Hormuz tensions supported DXY strength at 101.00, keeping dollar-denominated assets resilient."],
+    sections: [
+      {
+        icon: <Globe size={18} />,
+        title: `Macro Context`,
+        content: (<><p className="mb-4">Traditional financial markets reopened on July 6 following the Independence Day long weekend, immediately integrating the weaker-than-expected 57,000 payrolls print. Tech futures pointed to a strong open to kick off the Q2 earnings season, while U.S. yields continued their downward slide with the 10-year note hitting <span className="text-emerald-400 font-bold">4.46%</span>. However, safe-haven demand driven by rising geopolitical tensions in the Strait of Hormuz kept the U.S. Dollar Index (DXY) well-supported at 101.00. Within this mixed macro environment, Bitcoin gained strength, breaking past the $63,000 mark and testing local resistance near $63,882.</p></>), 
+      },
+      {
+        icon: <TrendingUp size={18} />,
+        title: `Transmission Analysis`,
+        content: (<><div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6"><div className="p-4 bg-surface border border-border rounded-xl"><h4 className="text-sm font-bold text-primary mb-2">Channel 1: Monetary Policy Path</h4><p className="text-xs text-text-muted">The lower 10-year yield at <span className="text-emerald-400 font-bold">4.46%</span> confirms that bond markets are pricing in a softer Fed bias. This yield compression lowers the opportunity cost of holding non-yielding digital assets, encouraging capital reallocation.</p></div><div className="p-4 bg-surface border border-border rounded-xl"><h4 className="text-sm font-bold text-primary mb-2">Channel 2</h4><p className="text-xs text-text-muted">Monetary Liquidity (M2) Correlation — The debut of the Salomon Brothers M2 valuation model highlighted the tightening connection between global money supply expansion and Bitcoin's structural appreciation. As M2 growth resumes, institutional investors are referencing M2 models to justify long-term long positions.</p></div><div className="p-4 bg-surface border border-border rounded-xl"><h4 className="text-sm font-bold text-primary mb-2">Channel 3: Risk-On Sentiment</h4><p className="text-xs text-text-muted">The reopening of equities with a technology focus has improved global risk appetite. Digital assets are benefiting from this positive shift, capturing capital from investors looking to play the easing-yield narrative.</p></div></div></>), 
+      },
+      {
+        icon: <Eye size={18} />,
+        title: `What Professional Investors Are Watching`,
+        content: (<><ul className="space-y-4 mb-4"><li className="flex items-start gap-3"><span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" /><div><strong className="text-text">June ISM Services Data:</strong><span className="text-text-muted"> Crucial service-sector health indicators will determine if the economic slowdown is broad-based or confined to the labor market.</span></div></li><li className="flex items-start gap-3"><span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" /><div><strong className="text-text">July 8 FOMC Minutes:</strong><span className="text-text-muted"> Parsed comments on committee discussions regarding the threshold for a data-dependent policy easing under Chair Kevin Warsh.</span></div></li><li className="flex items-start gap-3"><span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" /><div><strong className="text-text">ETF Flow Confirmation:</strong><span className="text-text-muted"> Watching if Monday's ETF flow data confirms a continuation of the $221.7M positive inflow trend from late last week.</span></div></li><li className="flex items-start gap-3"><span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" /><div><strong className="text-text">Clout of the M2 Valuation Model:</strong><span className="text-text-muted"> Tracking if other institutional research desks adopt the Daniels-Hileman M2 framework for digital asset pricing.</span></div></li></ul></>), 
+      },
+      {
+        icon: <BarChart3 size={18} />,
+        title: `Scenario Analysis`,
+        content: (<><p className="mb-4"><strong>Base Case (60% Probability):</strong> Bitcoin consolidates in the $62,500–$64,000 range. Institutional flows remain net-neutral as the market awaits the FOMC minutes on Wednesday.</p><p className="mb-4"><strong>Bull Case (25% Probability):</strong> Strong tech earnings and soft services data push yields lower. ETF inflows accelerate. Bitcoin cleanly breaks past $63,800 resistance and surges toward $65,500.</p><p className="mb-4"><strong>Bear Case (15% Probability):</strong> Hawkish Fed comments or a sudden spike in geopolitical tensions drive safe-haven flow exclusively to the U.S. dollar, pushing Bitcoin back to test support at $61,500.</p></>), 
+      },
+    ]
+  },
+  {
     id: 'macro-consolidation-july-5-2026',
     title: `Macro Consolidation at $62.8K: Bitcoin Prepares for FOMC Minutes Test`,
     subtitle: `Extreme fear readings ease to 15/100 as the market digests NFP relief and waits for the next macro spark.`,
