@@ -41,6 +41,33 @@ import { africaCryptoInfrastructureArticle } from '../content/articles/africa-cr
 
 export const ARTICLES: Article[] = [
   {
+    id: 'regulatory-convergence-framework-mica-clarity-act-etf-2026',
+    title: `The Regulatory Convergence Framework: Evaluating Bitcoin Through EU MiCA Licensing, Senate Clarity Act Timelines, and ETF Flow Bifurcation`,
+    category: 'Institutional',
+    tags: ["Framework","On-Chain","Institutional","Macro"],
+    readTime: '16 min read',
+    date: 'July 7, 2026',
+    image: '/geo-framework-hero.png',
+    desc: `An evaluation of Bitcoin's recovery to $64,000, analyzing the structural impact of Ripple's EU MiCA licensing, the U.S. Senate's Clarity Act timeline, and the bifurcation in spot ETF flows.`,
+    icon: <Building2 className="text-blue-400" size={24} />,
+    keyInsights: ["Bitcoin broke past the $64,000 mark, supported by a second consecutive massive ETF inflow session of $266 million on July 6.","Ripple obtained a full MiCA license in the EU, and Bitcoin Suisse received approval in Abu Dhabi, driving global regulatory convergence.","The U.S. Senate is targeting August 7 for the final draft of the Clarity Act, which analysts view as a 50/50 chance for 2026 passage.","Fidelity's FBTC led the positive flows, offsetting BlackRock's IBIT fund which remains in an 11-day outflow streak."],
+    content: (<>
+      <p className="text-xl text-text-muted mb-8 italic">*Bitcoin's break past $64,000 on July 7 represents a key milestone in its post-NFP recovery. The move is supported by a strong continuation of positive ETF inflows and accelerating global regulatory progress. The Regulatory Convergence Framework evaluates how Ripple's EU MiCA license, the Senate's Clarity Act timeline, and the split in ETF flows are shaping institutional positioning entering the third quarter.*</p>
+      <h2 className="text-2xl font-bold mt-10 mb-4 text-text">Global/Macro Lens</h2>
+<p className="mb-6">The macro transmission channel remains supportive despite a slight rise in yields. The 10-year Treasury yield rose to &lt;span className="text-emerald-400 font-bold"&gt;<span className="text-emerald-400 font-bold">4.51%</span>&lt;/span&gt; as bond markets position ahead of Wednesday's FOMC minutes. The U.S. Dollar Index (DXY) consolidated near 100.90, showing slight weakness as market participants expect a data-dependent easing path under Fed Chair Kevin Warsh. The slight yield rise has been easily absorbed, as the positive reaction to the weak jobs report continues to support risk appetite across equity and digital asset markets.</p>
+<h2 className="text-2xl font-bold mt-10 mb-4 text-text">Leverage/Derivatives Lens</h2>
+<p className="mb-6">Derivatives indicators show that leverage remains healthy. Perpetual funding rates are slightly positive, reflecting growing confidence among long positions. Open interest has risen moderately, showing that the recovery is attracting new capital rather than just triggering short-covering. Option skew remains neutral, with demand for call options at the $66,000 and $68,000 strikes increasing for late-July expiry, indicating that institutional hedgers are positioning for further upside.</p>
+<h2 className="text-2xl font-bold mt-10 mb-4 text-text">On-Chain Lens</h2>
+<p className="mb-6">On-chain dynamics are increasingly influenced by institutional flow bifurcation. U.S. spot Bitcoin ETFs registered a massive $266 million net inflow on Monday, July 6, following last week's $221.7 million positive turn. However, this demand is not uniform: Fidelity's FBTC led with strong buying, while BlackRock's IBIT fund extended its outflow streak to 11 days. This bifurcation implies that institutional capital is rebalancing between major issuers. Meanwhile, exchange reserves continue to hover at 7-year lows, confirming that whale accumulation is successfully maintaining a tight spot supply floor.</p>
+<h2 className="text-2xl font-bold mt-10 mb-4 text-text">Structural Analysis</h2>
+<p className="mb-6">The structural highlight of the day is the acceleration of global regulatory clarity. Ripple securing a full MiCA license in the EU and Bitcoin Suisse gaining operating permissions in Abu Dhabi represent significant milestones. Furthermore, the U.S. Senate's target of August 7 for the final draft of the Clarity Act provides a clear timeline for domestic regulation. While analysts place the chances of the bill passing in 2026 at a 50/50 coin toss, the progress itself reduces compliance risks, making digital assets structurally more investable for conservative institutional allocators.</p>
+<h2 className="text-2xl font-bold mt-10 mb-4 text-text">Synthesis: July 7, 2026 State</h2>
+<p className="mb-6">Bitcoin's recovery to $64,072 indicates that the market is transitioning from re-accumulation to active recovery. Easing macro headwinds, back-to-back positive ETF inflows, and accelerating global regulatory progress are creating a highly constructive environment. The key milestones for the week remain the FOMC minutes on Wednesday and the continuation of ETF flow stabilization.</p>
+<p className="text-xs text-text-muted italic border-t border-border pt-4 text-right mt-10">Research Registry — #RegulatoryConvergence</p>
+
+    </>)
+  },
+  {
     id: 'money-supply-framework-m2-models-yield-compression-2026',
     title: `The Money Supply Framework: Evaluating Bitcoin Through M2 Expansion Models, Yield Compression, and Institutional Re-Entry`,
     category: 'Institutional',

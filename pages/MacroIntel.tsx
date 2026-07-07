@@ -59,6 +59,39 @@ const TABS: { id: MacroTab; label: string; icon: React.ReactNode; isPro?: boolea
 
 const REPORTS: MacroReport[] = [
   {
+    id: 'macro-etf-inflows-ripple-mica-july-2026',
+    title: `ETF Inflows Accelerate to $266M: Ripple Secures EU MiCA License as Bitcoin Touches $64K`,
+    subtitle: `A second consecutive massive inflow session offsets BlackRock's 11-day negative streak, while the 10-year yield sits at 4.51%.`,
+    tab: 'weekly',
+    date: 'July 7, 2026',
+    readTime: '6 min read',
+    confidenceLevel: 'High',
+    keyMetrics: [{"label":"BTC Price Level","value":"$64,072","direction":"up"},{"label":"10Y Treasury Yield","value":"4.51%","direction":"up"},{"label":"Daily ETF Net Inflow","value":"+$266M","direction":"up"},{"label":"U.S. Dollar Index","value":"100.90","direction":"down"}],
+    keyInsights: ["Bitcoin broke above the $64,000 threshold, marking a solid recovery from the 21-month low of $57,750.","U.S. spot Bitcoin ETFs logged $266 million in net inflows on Monday, July 6, confirming a back-to-back positive reversal.","Ripple secured a full MiCA license in the EU, and Bitcoin Suisse received approval in Abu Dhabi, accelerating global regulatory clarity.","Fidelity's FBTC continues to drive the positive flows, offsetting BlackRock's IBIT which remains in an 11-day outflow streak."],
+    sections: [
+      {
+        icon: <Globe size={18} />,
+        title: `Macro Context`,
+        content: (<><p className="mb-4">Bitcoin's recovery momentum accelerated on July 7, with the price breaking past the critical $64,000 resistance level to trade around $64,072. The broader market sentiment is stabilizing as institutional demand returns. U.S. Treasury yields rose slightly with the 10-year yield hitting <span className="text-emerald-400 font-bold">4.51%</span>, reflecting typical volatility ahead of Wednesday's FOMC minutes. However, the U.S. Dollar Index (DXY) remained soft near 100.90. The key highlight of the day was a second consecutive massive spot ETF inflow session of $266 million on Monday, July 6, confirming that the late-week positive reversal was a durable trend shift rather than a temporary short squeeze.</p></>), 
+      },
+      {
+        icon: <TrendingUp size={18} />,
+        title: `Transmission Analysis`,
+        content: (<><div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6"><div className="p-4 bg-surface border border-border rounded-xl"><h4 className="text-sm font-bold text-primary mb-2">Channel 1: Rate Expectations and Yields</h4><p className="text-xs text-text-muted">While the 10-year Treasury yield rose slightly to <span className="text-emerald-400 font-bold">4.51%</span>, it remains well below its pre-NFP highs. This yield consolidation has allowed risk assets to absorb the temporary yield uptick without triggering capital flight.</p></div><div className="p-4 bg-surface border border-border rounded-xl"><h4 className="text-sm font-bold text-primary mb-2">Channel 2: ETF Flow Bifurcation</h4><p className="text-xs text-text-muted">A significant divergence is visible among issuers. Fidelity's FBTC continues to lead inflows, while BlackRock's IBIT extended its outflow streak to 11 days. This indicates that while net institutional demand is positive, there is a rotation and rebalancing occurring between major asset managers.</p></div><div className="p-4 bg-surface border border-border rounded-xl"><h4 className="text-sm font-bold text-primary mb-2">Channel 3: Global Regulatory Floor</h4><p className="text-xs text-text-muted">Ripple obtaining a full MiCA license in the EU and Bitcoin Suisse securing operating permissions in Abu Dhabi represent massive structural steps forward. These developments reduce compliance risk, establishing a regulatory floor that encourages long-term institutional allocation.</p></div></div></>), 
+      },
+      {
+        icon: <Eye size={18} />,
+        title: `What Professional Investors Are Watching`,
+        content: (<><ul className="space-y-4 mb-4"><li className="flex items-start gap-3"><span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" /><div><strong className="text-text">July 8 FOMC Minutes:</strong><span className="text-text-muted"> Parsed comments on Kevin Warsh's data-dependent approach and the committee's tolerance for labor market cooling will be the main volatility catalyst.</span></div></li><li className="flex items-start gap-3"><span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" /><div><strong className="text-text">Clarity Act Draft (August 7):</strong><span className="text-text-muted"> Monitoring the progress of U.S. Senate negotiations, which are currently viewed as a 50/50 coin toss for passing in 2026.</span></div></li><li className="flex items-start gap-3"><span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" /><div><strong className="text-text">Stabilization above $63,800:</strong><span className="text-text-muted"> Confirming a daily close above this level is key to verifying the invalidation of the June downtrend.</span></div></li><li className="flex items-start gap-3"><span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" /><div><strong className="text-text">IBIT Outflow Exhaustion:</strong><span className="text-text-muted"> Watching for the session when BlackRock's negative streak concludes, which would remove the remaining structural sell pressure.</span></div></li></ul></>), 
+      },
+      {
+        icon: <BarChart3 size={18} />,
+        title: `Scenario Analysis`,
+        content: (<><p className="mb-4"><strong>Base Case (65% Probability):</strong> Bitcoin consolidates in the $63,000–$64,500 range. ETF flows remain net positive, and the market awaits the FOMC minutes on Wednesday for the next major directional trigger.</p><p className="mb-4"><strong>Bull Case (20% Probability):</strong> The FOMC minutes confirm a more neutral policy bias, driving yields lower. IBIT flows flip positive. Bitcoin breaks past $64,500 and targets the $66,000 resistance zone.</p><p className="mb-4"><strong>Bear Case (15% Probability):</strong> Hawkish Fed minutes revive rate-hike concerns, driving yields past <span className="text-emerald-400 font-bold">4.55%</span> and forcing Bitcoin back to test support at $61,500.</p></>), 
+      },
+    ]
+  },
+  {
     id: 'macro-salomon-m2-model-recovery-july-2026',
     title: `Salomon M2 Model Debuts as Easing Yields Support Bitcoin past $63.5K`,
     subtitle: `Traditional markets reopen with tech gains, pushing the 10-year yield down to 4.46% as DXY consolidates near 101.00.`,
