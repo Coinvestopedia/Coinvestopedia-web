@@ -222,20 +222,25 @@ async function run() {
         }
       };
 
+      const escapeHtml = (text: string) => {
+        // Strip any pre-existing span tags from source before escaping
+        const cleaned = text
+          .replace(/<span[^>]*>/gi, '')
+          .replace(/<\/span>/gi, '');
+        return cleaned.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+      };
+
       const highlightPercentages = (text: string) => {
+        // Inject spans AFTER escaping so they are never double-escaped
         return text.replace(/(-?\d+(\.\d+)?%)/g, (match) => {
           return `<span className="${match.startsWith('-') ? 'text-red-400' : 'text-emerald-400'} font-bold">${match}</span>`;
         });
       };
 
-      const escapeHtml = (text: string) => {
-        return text.replace(/</g, '&lt;').replace(/>/g, '&gt;');
-      };
-
       const processText = (text: string) => {
-        let processed = escapeHtml(text);
-        processed = highlightPercentages(processed);
-        processed = processed.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+        let processed = escapeHtml(text);       // 1. escape & strip spans
+        processed = highlightPercentages(processed); // 2. inject highlight spans
+        processed = processed.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>'); // 3. bold
         return processed;
       };
 
@@ -322,16 +327,22 @@ async function run() {
 
     // ── Build Insight TSX ────────────────────────────────────────────────────
     const escapeHtml = (text: string) => {
-      return text.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+      // Strip any pre-existing span tags before escaping
+      const cleaned = text
+        .replace(/<span[^>]*>/gi, '')
+        .replace(/<\/span>/gi, '');
+      return cleaned.replace(/</g, '&lt;').replace(/>/g, '&gt;');
     };
 
     const highlightPercentages = (text: string) => {
+      // Inject spans AFTER escaping so they are never double-escaped
       return text.replace(/(-?\d+(\.\d+)?%)/g, (match) => {
         return `<span className="${match.startsWith('-') ? 'text-red-400' : 'text-emerald-400'} font-bold">${match}</span>`;
       });
     };
 
     const processInsightText = (text: string) => {
+      // 1. escape & strip → 2. inject highlight spans
       return highlightPercentages(escapeHtml(text));
     };
 
