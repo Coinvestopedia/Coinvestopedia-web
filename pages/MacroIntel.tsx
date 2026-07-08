@@ -59,6 +59,39 @@ const TABS: { id: MacroTab; label: string; icon: React.ReactNode; isPro?: boolea
 
 const REPORTS: MacroReport[] = [
   {
+    id: 'us-iran-tensions-oil-fomc-minutes-btc-july-8-2026',
+    title: `US-Iran Escalation Lifts Oil Above $76: Bitcoin Tests $62.6K Support Ahead of FOMC Minutes`,
+    subtitle: `Geopolitical risk premium returns as Brent crude surges, 10-year yields climb, and DXY holds above 101 on safe-haven demand.`,
+    tab: 'weekly',
+    date: 'July 8, 2026',
+    readTime: '6 min read',
+    confidenceLevel: 'High',
+    keyMetrics: [{"label":"BTC Price Level","value":"$62,750","direction":"down"},{"label":"Brent Crude Oil","value":"$76.20/bbl","direction":"up"},{"label":"U.S. Dollar Index","value":"101.20","direction":"up"},{"label":"Daily ETF Net Inflow","value":"+$21.4M","direction":"up"},{"label":"1Y Inflation Expectations","value":"3.7%","direction":"up"}],
+    keyInsights: ["US airstrikes on Iranian targets following attacks on commercial vessels near the Strait of Hormuz sent Brent crude above $76/bbl, reigniting inflation fears.","Bitcoin pulled back to $62,600–$62,900 despite recording its third consecutive day of spot ETF net inflows ($21.4 million).","The FOMC minutes from the June 16–17 meeting release today — the key catalyst for near-term rate expectations and crypto positioning.","The SEC unveiled its 2026 regulatory agenda on July 7, specifically prioritizing three crypto-related rule changes for exchanges and broker-dealers."],
+    sections: [
+      {
+        icon: <Globe size={18} />,
+        title: `Macro Context`,
+        content: (<><p className="mb-4">Markets on July 8, 2026 are operating under a dual shock: geopolitical escalation and a high-stakes macro event. US airstrikes on Iranian targets in response to attacks on commercial vessels near the Strait of Hormuz caused Brent crude to break above $76/bbl, triggering a significant re-pricing of inflation risk. Short-term inflation expectations have now risen to <span className="text-emerald-400 font-bold">3.7%</span> (1-year) and <span className="text-emerald-400 font-bold">3.3%</span> (3-year), significantly above prior levels. At the same time, global equities are selling off with the Nasdaq under pressure as investors question the sustainability of the AI-led growth narrative. Bitcoin, highly correlated to risk-off events, pulled back from its $64,000 recovery peak to trade in the $62,600–$62,900 range.</p></>), 
+      },
+      {
+        icon: <TrendingUp size={18} />,
+        title: `Transmission Analysis`,
+        content: (<><div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6"><div className="p-4 bg-surface border border-border rounded-xl"><h4 className="text-sm font-bold text-primary mb-2">Channel 1: Oil-Inflation-Yields</h4><p className="text-xs text-text-muted">Brent crude above $76/bbl has a direct transmission into Treasury yields via the inflation expectations channel. A higher yield environment raises the opportunity cost of holding non-yielding assets like Bitcoin. Investors now face a scenario where the FOMC's data-dependent path may be forced to remain hawkish longer than expected.</p></div><div className="p-4 bg-surface border border-border rounded-xl"><h4 className="text-sm font-bold text-primary mb-2">Channel 2</h4><p className="text-xs text-text-muted">Geopolitical Safe-Haven Demand — The DXY breaking above 101 on safe-haven flows creates direct dollar headwinds for crypto. As dollar strength increases, Bitcoin's USD-denominated price faces mechanical downward pressure from FX-driven capital reallocation.</p></div><div className="p-4 bg-surface border border-border rounded-xl"><h4 className="text-sm font-bold text-primary mb-2">Channel 3: ETF Flow Resilience</h4><p className="text-xs text-text-muted">Despite the macro headwinds, spot Bitcoin ETFs registered $21.4 million in net inflows for the third consecutive session. This signals that the institutional buyer base is dip-buying rather than fleeing, which provides a meaningful structural floor for the current price consolidation.</p></div></div></>), 
+      },
+      {
+        icon: <Eye size={18} />,
+        title: `What Professional Investors Are Watching`,
+        content: (<><ul className="space-y-4 mb-4"><li className="flex items-start gap-3"><span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" /><div><strong className="text-text">FOMC Minutes (July 8, 2026):</strong><span className="text-text-muted"> The June 16–17 minutes will reveal how hawkish the committee was before the soft jobs report. Any signals of a higher-for-longer consensus will push yields higher and compress crypto valuations further.</span></div></li><li className="flex items-start gap-3"><span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" /><div><strong className="text-text">Brent Crude Trajectory:</strong><span className="text-text-muted"> If crude sustains above $76/bbl, stagflation risks re-emerge. A sustained energy price shock reduces the likelihood of near-term Fed easing.</span></div></li><li className="flex items-start gap-3"><span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" /><div><strong className="text-text">Bitcoin $61,500 Support Zone:</strong><span className="text-text-muted"> This is the next major technical level below the current consolidation. A break here would invalidate the post-NFP recovery thesis.</span></div></li><li className="flex items-start gap-3"><span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" /><div><strong className="text-text">SEC 2026 Regulatory Agenda:</strong><span className="text-text-muted"> Monitoring the proposed rule changes for exchanges and broker-dealers, which could materially affect how institutional desks handle digital asset custody and trading.</span></div></li></ul></>), 
+      },
+      {
+        icon: <BarChart3 size={18} />,
+        title: `Scenario Analysis`,
+        content: (<><p className="mb-4"><strong>Base Case (60% Probability):</strong> FOMC minutes reveal a neutral-to-slightly-hawkish tone that markets have already priced in. Bitcoin holds above $62,000 support. ETF flows remain modestly positive. Recovery pauses temporarily.</p><p className="mb-4"><strong>Bull Case (20% Probability):</strong> FOMC minutes confirm a strongly data-dependent stance, signaling potential easing. Oil reverses after geopolitical de-escalation signals. Bitcoin rebounds above $64,000 and targets $65,500.</p><p className="mb-4"><strong>Bear Case (20% Probability):</strong> FOMC minutes signal a September rate hike consensus. Brent crude sustains above $77/bbl. Bitcoin breaks below $61,500 support, testing the $59,000 zone.</p></>), 
+      },
+    ]
+  },
+  {
     id: 'macro-etf-inflows-ripple-mica-july-2026',
     title: `ETF Inflows Accelerate to $266M: Ripple Secures EU MiCA License as Bitcoin Touches $64K`,
     subtitle: `A second consecutive massive inflow session offsets BlackRock's 11-day negative streak, while the 10-year yield sits at 4.51%.`,

@@ -41,6 +41,33 @@ import { africaCryptoInfrastructureArticle } from '../content/articles/africa-cr
 
 export const ARTICLES: Article[] = [
   {
+    id: 'geopolitical-risk-framework-oil-fomc-crypto-2026',
+    title: `The Geopolitical Risk Framework: Evaluating Bitcoin Through Oil Price Transmission, FOMC Policy Signals, and ETF Flow Resilience`,
+    category: 'Institutional',
+    tags: ["Framework","On-Chain","Institutional","Macro"],
+    readTime: '16 min read',
+    date: 'July 8, 2026',
+    image: '/geo-framework-hero.png',
+    desc: `An evaluation of Bitcoin's retracement to $62,750 amid US-Iran escalation, analyzing how Brent crude above $76/bbl transmits into digital asset valuations through yields, the dollar, and inflation expectations. Despite the macro headwinds, a third consecutive day of positive ETF inflows signals structural institutional resilience.`,
+    icon: <Building2 className="text-blue-400" size={24} />,
+    keyInsights: ["US-Iran military escalation drove Brent crude above $76/bbl, raising 1-year inflation expectations to 3.7% and strengthening the DXY above 101.","Bitcoin pulled back to $62,750 from its $64,000 recovery peak, but spot ETFs recorded $21.4M in net inflows — their third consecutive positive day.","The FOMC minutes from the June 16–17 meeting release today, representing the primary macro catalyst for near-term digital asset direction.","The SEC published its 2026 regulatory agenda on July 7, targeting three specific crypto-related rule changes for exchanges and broker-dealers."],
+    content: (<>
+      <p className="text-xl text-text-muted mb-8 italic">*Bitcoin's retracement to $62,750 on July 8 highlights the dual-shock environment of geopolitical escalation and macro policy uncertainty. The Geopolitical Risk Framework evaluates how the US-Iran military tensions, surging oil prices, and the release of the FOMC minutes are transmitting into digital asset valuations — while examining the structural resilience signal embedded in the third consecutive day of positive Bitcoin ETF inflows.*</p>
+      <h2 className="text-2xl font-bold mt-10 mb-4 text-text">Global/Macro Lens</h2>
+<p className="mb-6">The macro landscape on July 8 is dominated by two forces: a geopolitical shock and a policy event. US airstrikes on Iranian targets sent Brent crude above &lt;span className="text-emerald-400 font-bold"&gt;$76/bbl&lt;/span&gt;, a level that historically begins to feed into broader CPI readings through energy and transportation costs. Short-term inflation expectations (1-year) have now risen to <span className="text-emerald-400 font-bold">3.7%</span>, while the 3-year outlook sits at <span className="text-emerald-400 font-bold">3.3%</span>. This re-acceleration of inflation expectations is arriving at a particularly sensitive time — just as the FOMC minutes from the June 16–17 meeting are being released. The DXY has held above 101 on safe-haven demand, providing dollar strength that mechanically pressures Bitcoin's USD-denominated price.</p>
+<h2 className="text-2xl font-bold mt-10 mb-4 text-text">Leverage/Derivatives Lens</h2>
+<p className="mb-6">Derivatives markets reflect the caution visible in spot prices. Perpetual funding rates have softened slightly from yesterday's neutral-positive readings, suggesting that some leveraged longs are being deleveraged during the pullback. Open interest has declined modestly, confirming that the current move is a spot-driven correction rather than a leverage-driven flush. Option markets show a shift toward protective put demand at the $61,000–$62,000 strike range for short-dated expiries, indicating that professional traders are hedging against a scenario where the FOMC minutes reveal a more hawkish committee stance than previously expected.</p>
+<h2 className="text-2xl font-bold mt-10 mb-4 text-text">On-Chain Lens</h2>
+<p className="mb-6">Despite the macro headwinds, on-chain dynamics remain constructive. Spot Bitcoin ETFs registered &lt;span className="text-emerald-400 font-bold"&gt;$21.4 million&lt;/span&gt; in net inflows on July 8, marking the third consecutive positive session — a meaningful signal given the challenging macro backdrop. Whale wallets continue to accumulate on dips, with blockchain data showing a net increase in long-term holder addresses over the past 72 hours. Exchange reserves remain at 7-year lows, suggesting that the structural supply squeeze from the recent accumulation cycle has not unwound despite the price pullback.</p>
+<h2 className="text-2xl font-bold mt-10 mb-4 text-text">Structural Analysis</h2>
+<p className="mb-6">The SEC's publication of its 2026 regulatory agenda on July 7 is a critical structural development. The agenda prioritizes three specific crypto-related rule changes targeting exchanges and broker-dealers, establishing a formal framework for how institutional players can custody and trade digital assets. This coincides with the EU's full MiCA authorization requirement (effective July 1) and the UK FCA's crypto regulation roadmap targeting October 2027. The convergence of US, EU, and UK regulatory frameworks is establishing a global institutional infrastructure layer for crypto that did not exist 18 months ago.</p>
+<h2 className="text-2xl font-bold mt-10 mb-4 text-text">Synthesis: July 8, 2026 State</h2>
+<p className="mb-6">Bitcoin's pullback to $62,750 is a macro-driven response to geopolitical and inflationary pressures, not a structural breakdown. The third consecutive day of positive ETF inflows and continued on-chain accumulation confirm that the institutional floor established after the June lows remains intact. Today's FOMC minutes are the decisive short-term catalyst.</p>
+<p className="text-xs text-text-muted italic border-t border-border pt-4 text-right mt-10">Research Registry — #GeopoliticalRisk</p>
+
+    </>)
+  },
+  {
     id: 'regulatory-convergence-framework-mica-clarity-act-etf-2026',
     title: `The Regulatory Convergence Framework: Evaluating Bitcoin Through EU MiCA Licensing, Senate Clarity Act Timelines, and ETF Flow Bifurcation`,
     category: 'Institutional',
