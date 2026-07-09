@@ -59,6 +59,39 @@ const TABS: { id: MacroTab; label: string; icon: React.ReactNode; isPro?: boolea
 
 const REPORTS: MacroReport[] = [
   {
+    id: 'fomc-minutes-clarity-act-july9-2026',
+    title: `The Hawkish Divide: Evaluating BTC Risk Amid FOMC Minutes and Senate Clarity Act Milestones`,
+    subtitle: `Federal Reserve rate policy projections and upcoming Senate digital asset draft deadlines are setting a rigid macro coordinate system for Bitcoin.`,
+    tab: 'weekly',
+    date: 'July 9, 2026',
+    readTime: '14 min read',
+    confidenceLevel: 'High',
+    keyMetrics: [{"label":"Bitcoin Price","value":"$62,400","direction":"down"},{"label":"10-Year US Treasury Yield","value":"4.539%","direction":"down"},{"label":"September Hike Probability","value":"68%","direction":"up"},{"label":"Fear & Greed Index","value":"22","direction":"neutral"}],
+    keyInsights: ["FOMC minutes revealed 9 of 18 Fed officials projecting at least one more rate hike in 2026, anchoring yields higher.","US Senate prepares draft timeline for the Clarity Act next week, attempting to map SEC and CFTC jurisdiction bounds.","The 10-year Treasury yield snapped its seven-day rising streak to close at 4.539%, offering a short-term yield reprieve.","Hyperscale Data (NYSE: GPUS) announced corporate treasury holdings surpassed 1,000 BTC, signaling ongoing AI-miner corporate pivot."],
+    sections: [
+      {
+        icon: <Globe size={18} />,
+        title: `Macro Context`,
+        content: (<><p className="mb-4">The macroeconomic landscape on late July 9, 2026 consolidated as bond markets digested the hawkish undercurrents of the recent FOMC minutes. Projections indicating that 9 of 18 Fed officials see another rate hike in 2026 have dampened expectation of a near-term policy pivot. The 10-year Treasury yield snapped its aggressive seven-day run, closing lower at <span className="text-emerald-400 font-bold">4.539%</span>, while the US Dollar Index (DXY) stabilised near 100.95.</p><p className="mb-4">Simultaneously, U.S. inflation concerns remain highly sensitive to oil price movements, with Brent crude hovering around $78–$79 per barrel following recent military actions in the Middle East. While equity markets staged a mild recovery with the S&P 500 rising <span className="text-emerald-400 font-bold">0.16%</span> to 7,494, digital assets faced a continuation of selective risk-off trading, keeping the Fear & Greed index in 'Extreme Fear' territory at 22.</p></>), 
+      },
+      {
+        icon: <TrendingUp size={18} />,
+        title: `Transmission Analysis`,
+        content: (<><div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6"><div className="p-4 bg-surface border border-border rounded-xl"><h4 className="text-sm font-bold text-primary mb-2">Channel 1: Yield-Curve Pressure</h4><p className="text-xs text-text-muted">Despite the pullback to <span className="text-emerald-400 font-bold">4.539%</span> on the 10-year note, the persistent expectation of a <span className="text-emerald-400 font-bold">68%</span> probability of a September rate increase maintains high capital hurdle rates. Zero-yield assets like Bitcoin face ongoing capital flight into short-term cash alternatives yielding above <span className="text-emerald-400 font-bold">4%</span>.</p></div><div className="p-4 bg-surface border border-border rounded-xl"><h4 className="text-sm font-bold text-primary mb-2">Channel 2: Legislative Premium</h4><p className="text-xs text-text-muted">Structural expectations surrounding the draft Clarity Act next week are acting as a counterweight to macro risk. A clear legislative compromise defining CFTC vs SEC regulatory scopes would reduce the legal risk discount applied to spot markets, potentially supporting a floor near $60,000.</p></div><div className="p-4 bg-surface border border-border rounded-xl"><h4 className="text-sm font-bold text-primary mb-2">Channel 3</h4><p className="text-xs text-text-muted">Corporate Accumulation Arbitrage — Hyperscale Data (GPUS) surpassing 1,000 BTC in treasury reserves highlights a growing trend of corporate integration. As AI data centers and digital asset mining converge, institutional treasury demand acts as a structural supply sink, offsetting spot liquidations.</p></div></div></>), 
+      },
+      {
+        icon: <Eye size={18} />,
+        title: `What Professional Investors Are Watching`,
+        content: (<><ul className="space-y-4 mb-4"><li className="flex items-start gap-3"><span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" /><div><strong className="text-text">Treasury Yield Consolidation:</strong><span className="text-text-muted"> Monitoring whether the 10-year note holds below the <span className="text-emerald-400 font-bold">4.50%</span> pivot level or resumes its march toward <span className="text-emerald-400 font-bold">4.75%</span> following incoming CPI updates.</span></div></li><li className="flex items-start gap-3"><span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" /><div><strong className="text-text">Clarity Act Draft Release:</strong><span className="text-text-muted"> Key legislative markers next week that define stablecoin treatment and exchange registration rules will set the structural framework for H2 2026.</span></div></li><li className="flex items-start gap-3"><span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" /><div><strong className="text-text">Strategic Corporate Treasury Changes:</strong><span className="text-text-muted"> Tracking whether other miner-adjacent entities replicate GPUS's treasury accumulation strategy to offset variable operational margins.</span></div></li><li className="flex items-start gap-3"><span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" /><div><strong className="text-text">ETF Inflow Persistence:</strong><span className="text-text-muted"> Checking if spot flows can sustain positive metrics after the $510 million three-day inflows as retail volume contracts.</span></div></li><li className="flex items-start gap-3"><span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" /><div><strong className="text-text">September Hike Odds:</strong><span className="text-text-muted"> Any shift in interest rate futures pricing above <span className="text-emerald-400 font-bold">75%</span> will likely trigger systematic deleveraging across perpetual contracts.</span></div></li></ul></>), 
+      },
+      {
+        icon: <BarChart3 size={18} />,
+        title: `Scenario Analysis`,
+        content: (<><p className="mb-4"><strong>Base Case (60% probability):</strong> Bitcoin continues its range-bound consolidation between $61,000 and $64,000. Yields hold steady near <span className="text-emerald-400 font-bold">4.50%</span> while the legislative draft is published with standard compromise terms. ETF flows remain net flat or slightly positive.</p><p className="mb-4"><strong>Bull Case (25% probability):</strong> Clarity Act draft exceeds expectations on regulatory simplicity, driving a wave of institutional accumulation. Bitcoin rallies above $65,000 as Treasury yields soften below <span className="text-emerald-400 font-bold">4.40%</span>.</p><p className="mb-4"><strong>Bear Case (15% probability):</strong> Middle East geopolitical escalations fuel a surge in Brent crude above $85/bbl, prompting a hawkish Fed repricing. Bitcoin breaches the critical $60,000 support level, targeting the $56,000 demand block.</p></>), 
+      },
+    ]
+  },
+  {
     id: 'fomc-minutes-iran-shock-btc-july8-2026',
     title: `FOMC Minutes & Iran Shock: Dual Macro Headwinds Compress Bitcoin's Recovery`,
     subtitle: `A divided Federal Reserve and a geopolitical oil spike are compressing Bitcoin's USD-denominated price through three reinforcing transmission channels.`,

@@ -41,6 +41,54 @@ import { africaCryptoInfrastructureArticle } from '../content/articles/africa-cr
 
 export const ARTICLES: Article[] = [
   {
+    id: 'institutional-convergence-clarity-act-sec-2026',
+    title: `The Legislative Convergence Framework: Evaluating Crypto Structure Through the Clarity Act Draft, SEC 2026 Agenda, and Corporate Treasury Pivots`,
+    category: 'Institutional',
+    tags: ["Framework","Regulation","Institutional","Infrastructure"],
+    readTime: '16 min read',
+    date: 'July 9, 2026',
+    image: '/geo-framework-hero.png',
+    desc: `An evaluation of the upcoming U.S. Senate Clarity Act draft and the SEC's 2026 Unified Agenda. Analyzing the structural impact of corporate treasury accumulations and post-MiCA European liquidity adjustments.`,
+    icon: <Building2 className="text-blue-400" size={24} />,
+    keyInsights: ["The U.S. Senate is preparing the final draft of the digital asset 'Clarity Act' for next week, aiming to define jurisdictional boundaries between the SEC and CFTC.","The SEC's 2026 Unified Agenda targets July for three key digital asset proposals covering offering exemptions, custody rules, and broker-dealer financial responsibility.","Hyperscale Data (NYSE: GPUS) announced its corporate treasury holdings surpassed 1,000 BTC, indicating a growing corporate treasury pivot among AI-infrastructure providers.","European markets continue to consolidate post-MiCA, as exchange partners and custodians adjust service access under the strict EEA compliance regime.","Exchange reserves fell to multi-year lows, showing structural holding patterns despite geopolitical risks in the Middle East."],
+    content: (<>
+      <p className="text-xl text-text-muted mb-8 italic">The structural convergence of regulatory agendas and legislative drafts in July 2026 is creating a defined, closed-loop coordinate system for digital asset trading. As the Senate prepares the Clarity Act draft and the SEC structures its 2026 rulemakings, institutional managers are transitioning from regulatory avoidance to active infrastructure positioning, supported by corporate treasury pivots into digital reserve assets.</p>
+      <h2 className="text-2xl font-bold mt-10 mb-4 text-text">Global/Macro Lens</h2>
+<p className="mb-6">The macro-regulatory landscape is preparing for a significant transition as the U.S. Senate approaches its draft deadline for the digital asset Clarity Act next week. The bill seeks to resolve the persistent jurisdictional tension between the SEC and the CFTC by establishing clear statutory definitions for what constitutes a digital commodity versus a digital security. This legislative milestone is occurring alongside the SEC's formalized 2026 Unified Agenda, which outlines three imminent rulemakings targetting digital asset offerings, adviser custody frameworks, and broker-dealer compliance rules. Together, these frameworks reduce the legal premium associated with institutional custody and trading.</p>
+<p className="mb-6">In Europe, the post-MiCA landscape is entering a consolidation phase. Following the June 30 transitional deadline, liquidity is pooling within a smaller number of fully authorized custodians. This has led to a structured re-assessment of asset availability across EEA jurisdictions, accelerating capital flows into compliant, yield-bearing stablecoins and regulated institutional wrappers. The long-term result of this enforcement period is a highly standardized onshore market that reduces counterparty risk for conservative allocators.</p>
+<h2 className="text-2xl font-bold mt-10 mb-4 text-text">Corporate Treasury Lens</h2>
+<p className="mb-6">A critical structural development on July 9 is the growing trend of corporate treasury pivots, exemplified by Hyperscale Data (NYSE: GPUS) announcing that its treasury reserves have surpassed 1,000 BTC. This move represents a strategic adaptation where AI-infrastructure providers and high-performance computing operators use digital assets as an alternative treasury reserve to offset cyclical cash flows.</p>
+<p className="mb-6">The integration of digital assets onto corporate balance sheets provides operational flexibility, particularly as mining operations and AI data centers continue to merge. As access to computing power becomes a primary institutional driver, tokenized computing contracts and direct reserve holdings are establishing a structural floor under digital asset spot prices, independent of traditional retail trading volumes.</p>
+<div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
+
+<div className="p-6 bg-surface border border-border rounded-xl">
+  <h3 className="font-bold text-lg mb-4 flex items-center gap-2 text-red-400"><Shield className="w-5 h-5" /> Clarity Act Timeline</h3>
+  <p className="text-sm text-text-muted leading-relaxed">Senate draft expected next week targeting jurisdictional divisions between CFTC and SEC, reducing legal risk for institutional platforms.</p>
+</div>
+<div className="p-6 bg-surface border border-border rounded-xl">
+  <h3 className="font-bold text-lg mb-4 flex items-center gap-2 text-red-400"><Activity className="w-5 h-5" /> Corporate Accumulation</h3>
+  <p className="text-sm text-text-muted leading-relaxed">Hyperscale Data (GPUS) surpasses 1,000 BTC treasury reserves, highlighting the corporate shift toward digital asset integration.</p>
+</div>
+</div>
+<h2 className="text-2xl font-bold mt-10 mb-4 text-text">Regulatory Comparison Lens</h2>
+<p className="mb-6">As global regulatory bodies implement frameworks, the operational requirements for custodians and broker-dealers are becoming standardized, reducing divergence across major jurisdictions.</p>
+
+<div className="leather-card p-6 rounded-xl mb-10 overflow-hidden">
+  <div className="overflow-x-auto">
+    <table className="w-full text-sm text-left border-collapse min-w-[600px]">
+      <thead><tr><th className="p-4 bg-surface/50 font-bold border-b border-border text-text">Region</th><th className="p-4 bg-surface/50 font-bold border-b border-border text-text">Primary Framework</th><th className="p-4 bg-surface/50 font-bold border-b border-border text-text">Key Focus Area</th><th className="p-4 bg-surface/50 font-bold border-b border-border text-text">Status</th></tr></thead>
+      <tbody><tr><td className="p-4 border-b border-border border-dashed text-text-muted font-medium text-text">United States</td><td className="p-4 border-b border-border border-dashed text-text-muted ">Clarity Act (Draft)</td><td className="p-4 border-b border-border border-dashed text-text-muted ">CFTC/SEC Jurisdiction</td><td className="p-4 border-b border-border border-dashed text-text-muted ">Draft next week</td></tr><tr><td className="p-4 border-b border-border border-dashed text-text-muted font-medium text-text">European Union</td><td className="p-4 border-b border-border border-dashed text-text-muted ">MiCA</td><td className="p-4 border-b border-border border-dashed text-text-muted ">Custody & Stablecoins</td><td className="p-4 border-b border-border border-dashed text-text-muted ">Fully active</td></tr><tr><td className="p-4 border-b border-border border-dashed text-text-muted font-medium text-text">United Kingdom</td><td className="p-4 border-b border-border border-dashed text-text-muted ">FCA Roadmap</td><td className="p-4 border-b border-border border-dashed text-text-muted ">Stablecoin Supervision</td><td className="p-4 border-b border-border border-dashed text-text-muted ">Sandbox phase</td></tr><tr><td className="p-4 border-b border-border border-dashed text-text-muted font-medium text-text">UAE (ADGM)</td><td className="p-4 border-b border-border border-dashed text-text-muted ">FSRA</td><td className="p-4 border-b border-border border-dashed text-text-muted ">Institutional Access</td><td className="p-4 border-b border-border border-dashed text-text-muted ">Active</td></tr></tbody>
+    </table>
+  </div>
+</div>
+<h2 className="text-2xl font-bold mt-10 mb-4 text-text">Structural Analysis</h2>
+<p className="mb-6">The long-term impact of these convergent rules is the migration of digital assets from speculative instruments to standardized financial infrastructure. The reduction in exchange reserves to multi-year lows suggests that institutional players are storing assets in long-term custody solutions rather than maintaining active trading balances. As tokenized assets merge with traditional settlement rails, the underlying blockchain networks are increasingly acting as global clearing ledgers for institutional finance.</p>
+<blockquote className="border-l-4 border-primary pl-6 py-2 my-6 italic text-text-muted">&gt; The transition from enforcement to formalized rulemaking in the US, combined with corporate balance sheet pivots, represents a structural maturity phase that will define institutional asset allocation for the remainder of 2026.</blockquote>
+<p className="text-xs text-text-muted italic border-t border-border pt-4 text-right mt-10">Research Registry — #LegislativeConvergence</p>
+
+    </>)
+  },
+  {
     id: 'regulatory-convergence-framework-sec-mica-edx-july2026',
     title: `The Convergence Framework: Evaluating Institutional Infrastructure Through SEC Rulemaking, MiCA Enforcement, and Dark Pool Expansion`,
     category: 'Institutional',
