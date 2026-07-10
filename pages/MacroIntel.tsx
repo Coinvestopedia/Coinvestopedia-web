@@ -59,6 +59,39 @@ const TABS: { id: MacroTab; label: string; icon: React.ReactNode; isPro?: boolea
 
 const REPORTS: MacroReport[] = [
   {
+    id: 'short-liquidation-etf-rebound-july10-2026',
+    title: `The Liquidation Catalyst: Evaluating BTC's Rebound Past $63,000 Amid Options Expiry and Fed Reform Timelines`,
+    subtitle: `A $79.5 million short squeeze and the reversal of an eight-week ETF outflow streak are establishing a temporary technical base for digital assets.`,
+    tab: 'weekly',
+    date: 'July 10, 2026',
+    readTime: '14 min read',
+    confidenceLevel: 'High',
+    keyMetrics: [{"label":"Bitcoin Price","value":"$63,800","direction":"up"},{"label":"24h Short Liquidations","value":"$79.5M","direction":"up"},{"label":"3-Day ETF Inflows","value":"$510M","direction":"up"},{"label":"10-Year Treasury Yield","value":"4.54%","direction":"neutral"}],
+    keyInsights: ["Bitcoin broke past $63,000, triggering $79.5 million in leveraged short liquidations within a 24-hour window.","U.S. spot Bitcoin ETFs reversed an eight-week outflow streak with $510 million in net inflows over three consecutive sessions.","U.S. 10-year Treasury yields stabilized at 4.54% as bond markets pause ahead of next week's Humphrey-Hawkins testimony.","Federal Reserve Chair Kevin Warsh announced new institutional working groups targeting inflation and balance sheet policy."],
+    sections: [
+      {
+        icon: <Globe size={18} />,
+        title: `Macro Context`,
+        content: (<><p className="mb-4">Bitcoin's breakout above the $63,000 mark on July 10, 2026, represents a critical shift in near-term market structure. The rally, which pushed the asset to intraday highs near $63,800, was fueled by a combination of localized market dynamics and easing macroeconomic pressure. International crude prices moderated as Middle East geopolitical tensions cooled slightly, reducing the immediate commodity-inflation premium.</p><p className="mb-4">In fixed income, U.S. 10-year Treasury yields stabilized near <span className="text-emerald-400 font-bold">4.54%</span>, snapping their recent upward trend. This consolidation reflects a broader wait-and-see posture among institutional investors ahead of the Humphrey-Hawkins testimony by Fed Chair Kevin Warsh next week and the critical June CPI report scheduled for Tuesday, July 14.</p></>), 
+      },
+      {
+        icon: <TrendingUp size={18} />,
+        title: `Transmission Analysis`,
+        content: (<><div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6"><div className="p-4 bg-surface border border-border rounded-xl"><h4 className="text-sm font-bold text-primary mb-2">Channel 1: Leverage Squeeze</h4><p className="text-xs text-text-muted">The primary catalyst for the breakout was the rapid liquidation of $79.5 million in leveraged short positions. This short squeeze forced systematic buy-backs across perpetual and futures markets, driving spot prices past key resistance levels near $63,000.</p></div><div className="p-4 bg-surface border border-border rounded-xl"><h4 className="text-sm font-bold text-primary mb-2">Channel 2: ETF Reversal</h4><p className="text-xs text-text-muted">The technical breakout coincided with a major reversal in institutional flows. Spot Bitcoin ETFs registered a total of $510 million in net inflows over a three-day period, ending an eight-week streak of net redemptions. This indicates a returned willingness among allocators to purchase digital beta at range-low valuations.</p></div><div className="p-4 bg-surface border border-border rounded-xl"><h4 className="text-sm font-bold text-primary mb-2">Channel 3: Fed Reform Expectations</h4><p className="text-xs text-text-muted">Chair Kevin Warsh's announcement of new Fed working groups to re-evaluate inflation and balance sheet policy has introduced a degree of optimism. Market participants are anticipating that these groups may lay the groundwork for a more flexible policy framework, lowering real yield hurdle rates in H2 2026.</p></div></div></>), 
+      },
+      {
+        icon: <Eye size={18} />,
+        title: `What Professional Investors Are Watching`,
+        content: (<><ul className="space-y-4 mb-4"><li className="flex items-start gap-3"><span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" /><div><strong className="text-text">June CPI Print:</strong><span className="text-text-muted"> Next Tuesday's inflation reading is the primary macro marker; any print below expectations will accelerate rate cut bets.</span></div></li><li className="flex items-start gap-3"><span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" /><div><strong className="text-text">Option Expiry Concentration:</strong><span className="text-text-muted"> Re-evaluating spot volatility following today's $1.4 billion options expiry and the roll-over of short-dated contracts.</span></div></li><li className="flex items-start gap-3"><span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" /><div><strong className="text-text">September Fed Pricing:</strong><span className="text-text-muted"> Tracking whether the implied rate path shifts back toward a hold or cut as macro indicators soften.</span></div></li><li className="flex items-start gap-3"><span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" /><div><strong className="text-text">Retail Volume Confirmation:</strong><span className="text-text-muted"> Monitoring whether the spot breakout is accompanied by a return of retail trading volume, which has remained flat during the recovery.</span></div></li><li className="flex items-start gap-3"><span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" /><div><strong className="text-text">Yield Curve Support:</strong><span className="text-text-muted"> Ensuring the 10-year Treasury yield remains below <span className="text-emerald-400 font-bold">4.60%</span> to prevent another mechanical sell-off in risk assets.</span></div></li></ul></>), 
+      },
+      {
+        icon: <BarChart3 size={18} />,
+        title: `Scenario Analysis`,
+        content: (<><p className="mb-4"><strong>Base Case (50% probability):</strong> Bitcoin consolidates the breakout, holding within the $62,500–$64,500 range ahead of next week's inflation print. Yields remain stable near <span className="text-emerald-400 font-bold">4.50%</span> and ETF flows are moderately positive.</p><p className="mb-4"><strong>Bull Case (30% probability):</strong> CPI print next week comes in cooler than expected, accelerating rate cut bets and driving Bitcoin toward the $66,000–$68,000 zone.</p><p className="mb-4"><strong>Bear Case (20% probability):</strong> A hot CPI print next week reignites inflation fears, sending yields back toward <span className="text-emerald-400 font-bold">4.70%</span> and pushing Bitcoin back to the $60,000 support level.</p></>), 
+      },
+    ]
+  },
+  {
     id: 'fomc-minutes-clarity-act-july9-2026',
     title: `The Hawkish Divide: Evaluating BTC Risk Amid FOMC Minutes and Senate Clarity Act Milestones`,
     subtitle: `Federal Reserve rate policy projections and upcoming Senate digital asset draft deadlines are setting a rigid macro coordinate system for Bitcoin.`,
