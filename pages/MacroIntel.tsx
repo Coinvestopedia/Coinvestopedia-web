@@ -59,6 +59,39 @@ const TABS: { id: MacroTab; label: string; icon: React.ReactNode; isPro?: boolea
 
 const REPORTS: MacroReport[] = [
   {
+    id: 'macro-intel-july-11-2026',
+    title: `Geopolitical Shock and Persistent Inflation Restrict Central Bank Easing`,
+    subtitle: `Re-escalating Middle East tensions trigger an energy supply shock, stalling the global disinflationary trend.`,
+    tab: 'weekly',
+    date: 'July 11, 2026',
+    readTime: '12 min read',
+    confidenceLevel: 'High',
+    keyMetrics: [{"label":"IMF 2026 Global Growth Forecast","value":"3.0%","direction":"down"},{"label":"IMF 2026 Global Inflation Forecast","value":"4.7%","direction":"up"},{"label":"BTC ETF Net Inflows","value":"$90M","direction":"up"},{"label":"Total RWA Tokenization","value":"$34B","direction":"up"}],
+    keyInsights: ["U.S. strikes on Iranian targets have re-escalated Middle East tensions, causing Brent crude prices to surge and energy markets to experience significant volatility.","The IMF has revised global headline inflation to 4.7% for 2026, indicating the disinflationary trend has stalled due to energy supply bottlenecks.","Central banks, including the Federal Reserve, are maintaining a hawkish stance to prevent persistent inflation from becoming entrenched.","Despite macro headwinds, institutional crypto adoption continues to grow, with RWA tokenization reaching $34 billion and U.S. spot Bitcoin ETFs returning to net inflows."],
+    sections: [
+      {
+        icon: <Globe size={18} />,
+        title: `Macro Context`,
+        content: (<><p className="mb-4">The global macroeconomic and geopolitical landscape is currently defined by a significant re-escalation in the Middle East. U.S. strikes on Iranian targets have disrupted commercial shipping and caused energy markets to spike, with Brent crude surging. In its July 2026 update, the IMF projected global growth at <span className="text-emerald-400 font-bold">3.0%</span>, a slight downward revision due to the lingering effects of this energy shock. More concerning for markets is the upward revision of global headline inflation to <span className="text-emerald-400 font-bold">4.7%</span> for 2026. This indicates that the disinflationary trend observed over the past two years has stalled, caught between the negative supply shock from the conflict and the positive momentum driven by the global technology and AI cycle.</p></>), 
+      },
+      {
+        icon: <TrendingUp size={18} />,
+        title: `Transmission Analysis`,
+        content: (<><div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6"><div className="p-4 bg-surface border border-border rounded-xl"><h4 className="text-sm font-bold text-primary mb-2">Channel 1: Energy Costs and Inflation</h4><p className="text-xs text-text-muted">The surge in Brent crude directly translates to higher transportation and production costs, mechanically lifting short-term inflation expectations and forcing central banks to reconsider any planned rate cuts.</p></div><div className="p-4 bg-surface border border-border rounded-xl"><h4 className="text-sm font-bold text-primary mb-2">Channel 2: Safe-Haven Dollar Strength</h4><p className="text-xs text-text-muted">Heightened geopolitical risk has increased safe-haven demand for the U.S. Dollar. A stronger DXY traditionally pressures dollar-denominated risk assets, including Bitcoin, creating a headwind despite positive institutional fundamentals.</p></div><div className="p-4 bg-surface border border-border rounded-xl"><h4 className="text-sm font-bold text-primary mb-2">Channel 3: Institutional Capital Flows</h4><p className="text-xs text-text-muted">Despite the hawkish macro backdrop, capital is flowing back into digital assets. Following a prolonged period of net outflows in June 2026, U.S. spot Bitcoin ETFs recorded net inflows of approximately $90 million on July 10, signaling a stabilization in institutional sentiment.</p></div></div></>), 
+      },
+      {
+        icon: <Eye size={18} />,
+        title: `What Professional Investors Are Watching`,
+        content: (<><ul className="space-y-4 mb-4"><li className="flex items-start gap-3"><span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" /><div><strong className="text-text">Level:</strong><span className="text-text-muted"> Federal Reserve guidance shift away from explicit forward guidance toward data-dependent flexibility.</span></div></li><li className="flex items-start gap-3"><span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" /><div><strong className="text-text">Level:</strong><span className="text-text-muted"> Energy market volatility and its passthrough effect on the upcoming CPI print.</span></div></li><li className="flex items-start gap-3"><span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" /><div><strong className="text-text">Level:</strong><span className="text-text-muted"> Circle's OCC approval for a National Trust, indicating deeper regulatory integration for stablecoin infrastructure.</span></div></li><li className="flex items-start gap-3"><span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" /><div><strong className="text-text">Level:</strong><span className="text-text-muted"> RWA tokenization volume, particularly in tokenized U.S. Treasuries which remain the dominant asset class.</span></div></li></ul></>), 
+      },
+      {
+        icon: <BarChart3 size={18} />,
+        title: `Scenario Analysis`,
+        content: (<><p className="mb-4"><strong>Base Case (60% probability):</strong> Energy prices stabilize at elevated levels, keeping inflation sticky. Central banks delay rate cuts, leading to range-bound trading for risk assets, while institutional crypto adoption (ETFs, RWAs) provides a slow, steady bid for Bitcoin.</p><p className="mb-4"><strong>Bull Case (25% probability):</strong> Diplomatic efforts in Islamabad succeed in de-escalating the Middle East conflict. Energy prices retrace, allowing inflation to resume its downward trend. Central banks signal rate cuts, sparking a broad rally in tech and digital assets.</p><p className="mb-4"><strong>Bear Case (15% probability):</strong> The conflict broadens, severely disrupting the Strait of Hormuz. A massive energy supply shock drives inflation above <span className="text-emerald-400 font-bold">5%</span>, forcing central banks to hike rates further. Risk assets face a severe liquidation event.</p></>), 
+      },
+    ]
+  },
+  {
     id: 'short-liquidation-etf-rebound-july10-2026',
     title: `The Liquidation Catalyst: Evaluating BTC's Rebound Past $63,000 Amid Options Expiry and Fed Reform Timelines`,
     subtitle: `A $79.5 million short squeeze and the reversal of an eight-week ETF outflow streak are establishing a temporary technical base for digital assets.`,

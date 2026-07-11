@@ -41,6 +41,51 @@ import { africaCryptoInfrastructureArticle } from '../content/articles/africa-cr
 
 export const ARTICLES: Article[] = [
   {
+    id: 'institutional-insight-july-11-2026',
+    title: `The Next Trillion: RWA Tokenization and the Institutional Shift to On-Chain Capital Markets`,
+    category: 'Institutional',
+    tags: ["Framework","On-Chain","Institutional","Macro"],
+    readTime: '16 min read',
+    date: 'July 11, 2026',
+    image: '/geo-framework-hero.png',
+    desc: `Real-World Asset tokenization has surpassed $34 billion in on-chain value. This article analyzes the infrastructure overhaul driving institutional adoption beyond simple tokenization.`,
+    icon: <Building2 className="text-blue-400" size={24} />,
+    keyInsights: ["The Real-World Asset (RWA) tokenization sector has reached approximately $33–$34 billion in on-chain value as of July 2026.","Tokenized U.S. Treasuries remain the dominant asset class, accounting for roughly $13–$16 billion of the total RWA market.","Institutional RWA adoption is moving beyond simple asset issuance toward a broader capital market infrastructure overhaul focusing on atomic settlement.","Tokenized perpetuals topped $100 billion in monthly volume in June 2026, making RWA-related derivatives a core institutional tool.","Circle's recent OCC approval to establish a National Trust bank marks a critical milestone for regulated stablecoin infrastructure in traditional finance."],
+    content: (<>
+      <p className="text-xl text-text-muted mb-8 italic">The narrative around Real-World Assets (RWA) is no longer a theoretical projection. As of July 2026, it is a $34 billion operational reality reshaping institutional capital markets.</p>
+      <h2 className="text-2xl font-bold mt-10 mb-4 text-text">The Expansion of On-Chain Value</h2>
+<p className="mb-6">The Real-World Asset tokenization sector has experienced a surge, reaching approximately $33 to $34 billion in on-chain value. This growth trajectory is supported by increasing participation from traditional financial institutions moving beyond pilot programs into live, scaled deployments. Tokenized U.S. Treasuries remain the dominant asset class, accounting for roughly half of the total value, followed by private credit, tokenized gold, real estate, and equities.</p>
+<div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
+
+<div className="p-6 bg-surface border border-border rounded-xl">
+  <h3 className="font-bold text-lg mb-4 flex items-center gap-2 text-red-400"><Database className="w-5 h-5" /> Asset Dominance</h3>
+  <p className="text-sm text-text-muted leading-relaxed">Tokenized Treasuries dominate the RWA landscape, providing a risk-free yield benchmark on-chain.</p>
+</div>
+<div className="p-6 bg-surface border border-border rounded-xl">
+  <h3 className="font-bold text-lg mb-4 flex items-center gap-2 text-red-400"><Activity className="w-5 h-5" /> Derivatives Surge</h3>
+  <p className="text-sm text-text-muted leading-relaxed">Tokenized perpetuals topped $100 billion in monthly volume, indicating deep institutional liquidity.</p>
+</div>
+</div>
+<h2 className="text-2xl font-bold mt-10 mb-4 text-text">The Infrastructure Overhaul</h2>
+<p className="mb-6">Recent institutional activity highlights a shift from simple tokenization toward a broader capital market infrastructure overhaul. Financial institutions are focusing on private, permissioned structures and atomic settlement to meet stringent balance sheet and privacy requirements. This evolution is essential for integrating on-chain mechanics with traditional regulatory frameworks.</p>
+
+<div className="leather-card p-6 rounded-xl mb-10 overflow-hidden">
+  <div className="overflow-x-auto">
+    <table className="w-full text-sm text-left border-collapse min-w-[600px]">
+      <thead><tr><th className="p-4 bg-surface/50 font-bold border-b border-border text-text">Asset Class</th><th className="p-4 bg-surface/50 font-bold border-b border-border text-text">Estimated Value</th><th className="p-4 bg-surface/50 font-bold border-b border-border text-text">Institutional Adoption Phase</th></tr></thead>
+      <tbody><tr><td className="p-4 border-b border-border border-dashed text-text-muted font-medium text-text">U.S. Treasuries</td><td className="p-4 border-b border-border border-dashed text-text-muted ">$13B - $16B</td><td className="p-4 border-b border-border border-dashed text-text-muted ">Scaled Production</td></tr><tr><td className="p-4 border-b border-border border-dashed text-text-muted font-medium text-text">Private Credit</td><td className="p-4 border-b border-border border-dashed text-text-muted ">$8B - $10B</td><td className="p-4 border-b border-border border-dashed text-text-muted ">Growth & Structuring</td></tr><tr><td className="p-4 border-b border-border border-dashed text-text-muted font-medium text-text">Commodities (Gold)</td><td className="p-4 border-b border-border border-dashed text-text-muted ">$4B - $5B</td><td className="p-4 border-b border-border border-dashed text-text-muted ">Mature / Liquid</td></tr></tbody>
+    </table>
+  </div>
+</div>
+<h2 className="text-2xl font-bold mt-10 mb-4 text-text">Regulatory Milestones</h2>
+<p className="mb-6">In a significant development for the underlying infrastructure, Circle received approval from the U.S. Office of the Comptroller of the Currency (OCC) to establish the Circle National Trust. This allows Circle to offer fiduciary digital asset custody services, bringing USDC infrastructure under federal regulatory oversight. Simultaneously, institutional custodians like Clearstream are expanding their MiCA-compliant offerings to include assets like Solana, Avalanche, and XRP.</p>
+<ul className="space-y-4 mb-6"><li className="flex items-start gap-3"><span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" /><span className="text-text-muted">The SEC's 2026 agenda includes proposed rule amendments to modernise custody requirements.</span></li><li className="flex items-start gap-3"><span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" /><span className="text-text-muted">Clearstream expanded its service offering to include six additional cryptocurrencies.</span></li><li className="flex items-start gap-3"><span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" /><span className="text-text-muted">U.S. spot Bitcoin and Ethereum ETFs have seen a return to net inflows following a period of redemptions.</span></li></ul>
+<blockquote className="border-l-4 border-primary pl-6 py-2 my-6 italic text-text-muted">&gt; The RWA sector's growth to $34 billion signals that tokenization has moved from an experimental phase to a core component of modern financial infrastructure. The focus has shifted from proving the technology works to building the regulatory and custody frameworks necessary for trillions in legacy assets to migrate on-chain.</blockquote>
+<p className="text-xs text-text-muted italic border-t border-border pt-4 text-right mt-10">Research Registry — #RWA-INSTITUTIONAL-2026</p>
+
+    </>)
+  },
+  {
     id: 'institutional-breakout-framework-etf-short-liquidations-2026',
     title: `The Liquidation Breakout Framework: Evaluating Digital Asset Structure Through Short Squeezes, ETF Flow Reversals, and Fed Policy Adaptations`,
     category: 'Institutional',
