@@ -66,7 +66,7 @@ STYLE REFERENCE: Follow the exact structure of this published article:
 - 3-4 sections, each named:
   1. "Macro Context" — Central bank policy, rates, geopolitics, what's driving the current regime. Named institutions, named officials, named figures.
   2. "Transmission Analysis" — How the macro event transmits into crypto through 3 channels (risk appetite, liquidity, opportunity cost). Include correlation coefficients, lag analysis, specific % data.
-  3. "What Professional Investors Are Watching" — 4 specific level/threshold bullet points professionals are monitoring as regime-change signals (e.g. "DXY 107.8: above this, BTC-DXY inverse correlation strengthens to -0.85+").
+  3. "What Professional Investors Are Watching" — 4 specific topic bullet points professionals are monitoring as regime-change signals (e.g. "DXY 107.8: above this, BTC-DXY inverse correlation strengthens to -0.85+").
   4. "Scenario Analysis / Risk Matrix" — 2-3 numbered scenarios (bull/base/bear) with probability estimates and BTC price targets.
 
 CONTENT REQUIREMENTS:
@@ -100,7 +100,7 @@ Return ONLY a valid JSON object matching this schema:
   "sections": [
     {"title": "Macro Context", "content": "Paragraph 1.\\n\\nParagraph 2."},
     {"title": "Transmission Analysis", "content": "Paragraph 1 setting up 3 channels.\\n\\nChannel 1: Risk Appetite — [data].\\n\\nChannel 2: Liquidity — [data].\\n\\nChannel 3: Opportunity Cost — [data].\\n\\nSynthesis paragraph."},
-    {"title": "What Professional Investors Are Watching", "content": "Intro sentence.\\n\\n• Level/Threshold 1: [specific threshold and meaning].\\n\\n• Level/Threshold 2: [specific threshold and meaning].\\n\\n• Level/Threshold 3: [specific threshold and meaning].\\n\\n• Level/Threshold 4: [specific threshold and meaning]."},
+    {"title": "What Professional Investors Are Watching", "content": "Intro sentence.\\n\\n• Topic Name 1: [specific threshold and meaning].\\n\\n• Topic Name 2: [specific threshold and meaning].\\n\\n• Topic Name 3: [specific threshold and meaning].\\n\\n• Topic Name 4: [specific threshold and meaning]."},
     {"title": "Scenario Analysis", "content": "Base Case (55% probability): [BTC/market outlook with target].\\n\\nBull Case (25% probability): [catalyst and target].\\n\\nBear Case (20% probability): [risk and target]."}
   ]
 }`;
