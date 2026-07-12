@@ -59,6 +59,39 @@ const TABS: { id: MacroTab; label: string; icon: React.ReactNode; isPro?: boolea
 
 const REPORTS: MacroReport[] = [
   {
+    id: 'macro-intel-july-13-2026',
+    title: `Liquidity Contraction and Regulatory Formalization Dominate Mid-July`,
+    subtitle: `Bitcoin consolidates as Asian trading volumes collapse and the SEC races against legislative efforts to finalize market structure rules.`,
+    tab: 'weekly',
+    date: 'July 13, 2026',
+    readTime: '14 min read',
+    confidenceLevel: 'High',
+    keyMetrics: [{"label":"Crypto Fear & Greed","value":"25","direction":"neutral"},{"label":"Fed Funds Target","value":"3.50%-3.75%","direction":"neutral"},{"label":"BTC Price Support","value":"$58,000","direction":"down"},{"label":"BTC Resistance","value":"$64,000","direction":"up"}],
+    keyInsights: ["Bitcoin is holding steady near $64,000, despite extreme market fear and South Korean trading volumes plunging to two-year lows.","The SEC has proposed three formal rules targeting broker-dealer custody and market structure in a race against the stalled CLARITY Act.","The Federal Reserve, under Chair Kevin Warsh, has officially shifted to a 'data-dependent' approach, injecting uncertainty ahead of the July 28 FOMC meeting.","The EU's MiCA transitional period has formally expired, subjecting all operating entities to strict harmonized authorization standards."],
+    sections: [
+      {
+        icon: <Globe size={18} />,
+        title: `Macro Context`,
+        content: (<><p className="mb-4">The global liquidity environment remains tightly constrained as we progress through July 2026. The Federal Reserve continues to maintain its target federal funds rate between <span className="text-emerald-400 font-bold">3.50%</span> and <span className="text-emerald-400 font-bold">3.75%</span>, balancing persistent, albeit moderating, inflation against a lacklustre labor market. Under the leadership of Chair Kevin Warsh, the central bank has deliberately abandoned explicit forward guidance in favor of a data-dependent strategy. This shift has elevated the importance of incoming macroeconomic data, leaving markets highly reactive and directionless ahead of the pivotal July 28-29 FOMC meeting.</p></>), 
+      },
+      {
+        icon: <TrendingUp size={18} />,
+        title: `Transmission Analysis`,
+        content: (<><div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6"><div className="p-4 bg-surface border border-border rounded-xl"><h4 className="text-sm font-bold text-primary mb-2">Channel 1: Asian Liquidity Drain</h4><p className="text-xs text-text-muted">Trading volumes in critical Asian markets, particularly South Korea, have hit two-year lows. This volume contraction, triggered by broader equity market volatility, removes a historical pillar of retail support for Bitcoin, contributing to the asset's tight consolidation range.</p></div><div className="p-4 bg-surface border border-border rounded-xl"><h4 className="text-sm font-bold text-primary mb-2">Channel 2: Regulatory Friction</h4><p className="text-xs text-text-muted">The SEC's introduction of three new rule proposals targeting digital asset offerings and broker-dealer custody creates near-term compliance friction. However, this formal rulemaking establishes the necessary structural clarity for long-term institutional capital deployment.</p></div><div className="p-4 bg-surface border border-border rounded-xl"><h4 className="text-sm font-bold text-primary mb-2">Channel 3: Yield Constraints</h4><p className="text-xs text-text-muted">With the Fed pausing rate cuts, the opportunity cost of capital remains high. The persistence of elevated Treasury yields continues to mechanically suppress demand for non-yielding digital assets, placing a ceiling on Bitcoin's short-term upside near $64,000.</p></div></div></>), 
+      },
+      {
+        icon: <Eye size={18} />,
+        title: `What Professional Investors Are Watching`,
+        content: (<><ul className="space-y-4 mb-4"><li className="flex items-start gap-3"><span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" /><div><strong className="text-text">Asian Volume Metrics:</strong><span className="text-text-muted"> Monitoring whether the collapse in South Korean trading volume is a temporary lull or a structural exit of retail liquidity.</span></div></li><li className="flex items-start gap-3"><span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" /><div><strong className="text-text">FOMC Signaling:</strong><span className="text-text-muted"> Tracking any subtle deviations in Fed Chair Warsh's data-dependent rhetoric that might indicate a bias toward easing in late 2026.</span></div></li><li className="flex items-start gap-3"><span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" /><div><strong className="text-text">SEC Rule Finalization:</strong><span className="text-text-muted"> Watching the timeline for the SEC's three new proposals and their potential conflict with the Senate's stalled CLARITY Act.</span></div></li><li className="flex items-start gap-3"><span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" /><div><strong className="text-text">$58K Technical Floor:</strong><span className="text-text-muted"> Observing Bitcoin's ability to maintain the vital $58,000 support level, a breach of which could trigger systemic derivatives deleveraging.</span></div></li></ul></>), 
+      },
+      {
+        icon: <BarChart3 size={18} />,
+        title: `Scenario Analysis`,
+        content: (<><p className="mb-4"><strong>Base Case (55% probability):</strong> The Fed holds rates steady in July. Bitcoin continues to chop in the $60,000–$64,000 range as institutional inflows are perfectly offset by retail apathy and macro uncertainty.</p><p className="mb-4"><strong>Bull Case (25% probability):</strong> Softer-than-expected labor data forces the Fed to signal a dovish pivot at the July meeting. Yields drop, and Bitcoin breaks through the $64,000 resistance, targeting $68,000.</p><p className="mb-4"><strong>Bear Case (20% probability):</strong> Retail exhaustion in Asia triggers a cascade of spot selling, breaking the $58,000 technical floor and sending Bitcoin toward the low $50,000s before institutional buyers step in.</p></>), 
+      },
+    ]
+  },
+  {
     id: 'macro-intel-july-12-2026',
     title: `Sticky Inflation and Structural Convergence Define Mid-July Capital Flows`,
     subtitle: `Accelerating U.S. inflation tightens Fed policy expectations, while the expiration of MiCA's transitional window reshapes institutional liquidity.`,

@@ -41,6 +41,51 @@ import { africaCryptoInfrastructureArticle } from '../content/articles/africa-cr
 
 export const ARTICLES: Article[] = [
   {
+    id: 'institutional-sec-rulemaking-july-13-2026',
+    title: `The Rulemaking Race: SEC Strategy vs. Legislative Momentum in H2 2026`,
+    category: 'Institutional',
+    tags: ["Regulation","SEC","Institutional","Policy"],
+    readTime: '14 min read',
+    date: 'July 13, 2026',
+    image: '/geo-framework-hero.png',
+    desc: `An analysis of the SEC's aggressive July regulatory agenda. Evaluating the structural implications of three new proposals targeting broker-dealer custody and market venue registration.`,
+    icon: <Building2 className="text-blue-400" size={24} />,
+    keyInsights: ["The SEC has introduced three formal rule proposals targeting digital asset offerings, custody, and market structure.","This aggressive rulemaking is widely viewed as a pre-emptive strike against the Senate's stalled CLARITY Act.","The expiration of the EU's MiCA transitional window has placed pressure on U.S. regulators to establish a competitive domestic framework.","Institutional allocators are prioritizing clear broker-dealer custody guidelines before executing massive RWA tokenization strategies.","The shift from 'regulation by enforcement' to prescriptive rulemaking signifies the maturation of the U.S. digital asset market."],
+    content: (<>
+      <p className="text-xl text-text-muted mb-8 italic">The era of regulation by enforcement is definitively transitioning into a period of aggressive, prescriptive rulemaking. As legislative efforts like the CLARITY Act stall in the Senate, the SEC is rapidly formalizing its jurisdiction over digital asset market structure.</p>
+      <h2 className="text-2xl font-bold mt-10 mb-4 text-text">The SEC's July Offensive</h2>
+<p className="mb-6">In early July 2026, the Securities and Exchange Commission signaled a major shift in tactics by introducing three distinct rule proposals. These target the fundamental architecture of the crypto ecosystem: the mechanics of digital asset offerings, the compliance requirements for broker-dealer custody, and the registration of market trading venues. This is not a routine update; it is a calculated effort to define the perimeter of U.S. crypto regulation before Congress can enact a bespoke legislative framework.</p>
+<div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
+
+<div className="p-6 bg-surface border border-border rounded-xl">
+  <h3 className="font-bold text-lg mb-4 flex items-center gap-2 text-red-400"><Shield className="w-5 h-5" /> Custody Framework</h3>
+  <p className="text-sm text-text-muted leading-relaxed">New requirements for broker-dealers seeking to hold digital assets on behalf of clients.</p>
+</div>
+<div className="p-6 bg-surface border border-border rounded-xl">
+  <h3 className="font-bold text-lg mb-4 flex items-center gap-2 text-red-400"><Globe className="w-5 h-5" /> Venue Registration</h3>
+  <p className="text-sm text-text-muted leading-relaxed">Strict market structure mandates targeting decentralized and centralized trading platforms.</p>
+</div>
+</div>
+<h2 className="text-2xl font-bold mt-10 mb-4 text-text">The MiCA Catalyst</h2>
+<p className="mb-6">The timing of these proposals is not coincidental. Across the Atlantic, the transitional period for the European Union's Markets in Crypto-Assets (MiCA) regulation has officially expired. European operations are now fully harmonized under a clear authorization framework. This has created a massive regulatory arbitrage opportunity, forcing U.S. regulators to accelerate their own structural guidelines to prevent a mass exodus of institutional capital and intellectual property to the EU.</p>
+
+<div className="leather-card p-6 rounded-xl mb-10 overflow-hidden">
+  <div className="overflow-x-auto">
+    <table className="w-full text-sm text-left border-collapse min-w-[600px]">
+      <thead><tr><th className="p-4 bg-surface/50 font-bold border-b border-border text-text">Regulatory Pillar</th><th className="p-4 bg-surface/50 font-bold border-b border-border text-text">SEC Proposal Approach</th><th className="p-4 bg-surface/50 font-bold border-b border-border text-text">EU MiCA Approach</th></tr></thead>
+      <tbody><tr><td className="p-4 border-b border-border border-dashed text-text-muted font-medium text-text">Custody</td><td className="p-4 border-b border-border border-dashed text-text-muted ">Enhanced Broker-Dealer Rules</td><td className="p-4 border-b border-border border-dashed text-text-muted ">Harmonized CASP Authorization</td></tr><tr><td className="p-4 border-b border-border border-dashed text-text-muted font-medium text-text">Token Issuance</td><td className="p-4 border-b border-border border-dashed text-text-muted ">Traditional Securities Framing</td><td className="p-4 border-b border-border border-dashed text-text-muted ">Bespoke Utility/Asset-Referenced Rules</td></tr></tbody>
+    </table>
+  </div>
+</div>
+<h2 className="text-2xl font-bold mt-10 mb-4 text-text">Institutional Implications</h2>
+<p className="mb-6">For sovereign wealth funds, pension managers, and corporate treasuries, this formalization is a net positive. While the specific rules may be stringent, they provide the exact legal certainty required to deploy capital. The primary roadblock to institutional adoption has never been the technology; it has been the absence of clear operational boundaries.</p>
+<ul className="space-y-4 mb-6"><li className="flex items-start gap-3"><span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" /><span className="text-text-muted">The focus on broker-dealer custody directly supports the continued growth of institutional RWA tokenization.</span></li><li className="flex items-start gap-3"><span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" /><span className="text-text-muted">Clearer offering rules may finally open the door for regulated, onshore utility token issuance.</span></li><li className="flex items-start gap-3"><span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" /><span className="text-text-muted">The formalization of market structure will likely force further consolidation among U.S.-based exchanges.</span></li></ul>
+<blockquote className="border-l-4 border-primary pl-6 py-2 my-6 italic text-text-muted">&gt; The SEC's pivot to formal rulemaking establishes the definitive operational boundaries for H2 2026. While compliance costs will rise significantly, the resulting legal certainty will unlock the next wave of institutional capital deployment.</blockquote>
+<p className="text-xs text-text-muted italic border-t border-border pt-4 text-right mt-10">Research Registry — #SEC-AGENDA-2026</p>
+
+    </>)
+  },
+  {
     id: 'institutional-compliance-framework-july-12-2026',
     title: `The Compliance Framework: Evaluating Digital Asset Integration Through OCC Approvals and Post-MiCA Liquidity`,
     category: 'Institutional',
