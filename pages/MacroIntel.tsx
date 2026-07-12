@@ -59,6 +59,39 @@ const TABS: { id: MacroTab; label: string; icon: React.ReactNode; isPro?: boolea
 
 const REPORTS: MacroReport[] = [
   {
+    id: 'macro-intel-july-12-2026',
+    title: `Sticky Inflation and Structural Convergence Define Mid-July Capital Flows`,
+    subtitle: `Accelerating U.S. inflation tightens Fed policy expectations, while the expiration of MiCA's transitional window reshapes institutional liquidity.`,
+    tab: 'weekly',
+    date: 'July 12, 2026',
+    readTime: '14 min read',
+    confidenceLevel: 'High',
+    keyMetrics: [{"label":"US Annual Inflation Rate","value":"4.2%","direction":"up"},{"label":"Crypto Fear & Greed Index","value":"25","direction":"down"},{"label":"Fed July Hike Probability","value":"25%","direction":"up"},{"label":"BTC Price Consolidation","value":"$64,000","direction":"neutral"}],
+    keyInsights: ["U.S. annual inflation has reached 4.2%, prompting the Federal Reserve to revise its 2026 PCE forecast to 3.6% and increasing the probability of a July rate hike.","Bitcoin is consolidating near the $64,000 level despite extreme fear in the broader crypto market and escalating geopolitical tensions in the Middle East.","The expiration of the EU's MiCA transitional window on July 1 is forcing a rapid consolidation of crypto service providers into fully authorized entities.","The OCC's approval of Circle National Trust establishes a federally regulated custody milestone, bridging stablecoins with traditional banking infrastructure."],
+    sections: [
+      {
+        icon: <Globe size={18} />,
+        title: `Macro Context`,
+        content: (<><p className="mb-4">The macroeconomic environment entering mid-July 2026 is defined by a significant re-acceleration in price pressures. U.S. annual inflation reached <span className="text-emerald-400 font-bold">4.2%</span> in May, its highest level since April 2023, driven by energy market volatility and AI-related infrastructure investments. In response, the Federal Reserve has maintained the federal funds rate between <span className="text-emerald-400 font-bold">3.50%</span> and <span className="text-emerald-400 font-bold">3.75%</span>, revising its 2026 PCE inflation forecast upward to <span className="text-emerald-400 font-bold">3.6%</span>. This sticky inflation dynamic has shifted the policy outlook from expected easing to a potential tightening cycle, with futures markets currently assigning a <span className="text-emerald-400 font-bold">25%</span> probability to a 25-basis-point rate hike at the upcoming July 28-29 FOMC meeting.</p></>), 
+      },
+      {
+        icon: <TrendingUp size={18} />,
+        title: `Transmission Analysis`,
+        content: (<><div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6"><div className="p-4 bg-surface border border-border rounded-xl"><h4 className="text-sm font-bold text-primary mb-2">Channel 1: Yield and Opportunity Cost</h4><p className="text-xs text-text-muted">The hawkish repricing of Federal Reserve expectations has stabilized U.S. Treasury yields at elevated levels. This increases the structural opportunity cost of holding non-yielding digital assets, placing a mechanical cap on Bitcoin's short-term price appreciation.</p></div><div className="p-4 bg-surface border border-border rounded-xl"><h4 className="text-sm font-bold text-primary mb-2">Channel 2: Geopolitical Risk Premium</h4><p className="text-xs text-text-muted">Escalating tensions in the Middle East have driven Brent crude prices higher, sustaining the energy-driven inflation narrative. While Bitcoin traditionally acts as a hedge against fiat debasement, the immediate liquidity constraints caused by geopolitical shocks often result in temporary correlations with risk-off equity movements.</p></div><div className="p-4 bg-surface border border-border rounded-xl"><h4 className="text-sm font-bold text-primary mb-2">Channel 3</h4><p className="text-xs text-text-muted">Institutional Infrastructure Integration — Despite macro headwinds, regulatory milestones are accelerating capital formation. The OCC's approval of Circle National Trust and the expiration of the EU's MiCA grandfathering window are forcing institutional liquidity into highly regulated, compliant channels, establishing a robust floor for long-term digital asset allocation.</p></div></div></>), 
+      },
+      {
+        icon: <Eye size={18} />,
+        title: `What Professional Investors Are Watching`,
+        content: (<><ul className="space-y-4 mb-4"><li className="flex items-start gap-3"><span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" /><div><strong className="text-text">Level:</strong><span className="text-text-muted"> Federal Reserve Chair Kevin Warsh's upcoming congressional testimony for signals on balance sheet policy and inflation tolerance.</span></div></li><li className="flex items-start gap-3"><span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" /><div><strong className="text-text">Level:</strong><span className="text-text-muted"> Energy market volatility, specifically supply disruptions in the Strait of Hormuz impacting global crude pricing.</span></div></li><li className="flex items-start gap-3"><span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" /><div><strong className="text-text">Level:</strong><span className="text-text-muted"> The rapid consolidation of European liquidity as non-MiCA compliant exchanges suspend operations following the July 1 deadline.</span></div></li><li className="flex items-start gap-3"><span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" /><div><strong className="text-text">Level:</strong><span className="text-text-muted"> The continuation of positive inflows into U.S. spot Bitcoin ETFs, which have shown resilience despite broader market fear.</span></div></li></ul></>), 
+      },
+      {
+        icon: <BarChart3 size={18} />,
+        title: `Scenario Analysis`,
+        content: (<><p className="mb-4"><strong>Base Case (60% probability):</strong> Inflation remains sticky around <span className="text-emerald-400 font-bold">4.0%</span>, forcing the Fed to maintain current rates through Q3. Bitcoin consolidates in the $60,000–$65,000 range as institutional ETF accumulation offsets retail deleveraging and macro uncertainty.</p><p className="mb-4"><strong>Bull Case (25% probability):</strong> Upcoming CPI data prints below expectations, alleviating pressure on the Fed to hike in July. The dollar weakens, and the formalization of U.S. and EU crypto frameworks triggers a massive wave of corporate treasury adoption, pushing Bitcoin past $70,000.</p><p className="mb-4"><strong>Bear Case (15% probability):</strong> A severe energy shock drives inflation toward <span className="text-emerald-400 font-bold">5%</span>, forcing the Fed to execute a surprise 25bps rate hike in July. The resulting liquidity drain causes a severe risk-off event, driving Bitcoin below its structural support at $58,000.</p></>), 
+      },
+    ]
+  },
+  {
     id: 'macro-intel-july-11-2026',
     title: `Geopolitical Shock and Persistent Inflation Restrict Central Bank Easing`,
     subtitle: `Re-escalating Middle East tensions trigger an energy supply shock, stalling the global disinflationary trend.`,
