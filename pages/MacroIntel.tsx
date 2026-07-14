@@ -59,6 +59,39 @@ const TABS: { id: MacroTab; label: string; icon: React.ReactNode; isPro?: boolea
 
 const REPORTS: MacroReport[] = [
   {
+    id: 'macro-intel-july-14-2026',
+    title: `Geopolitical Shock Meets a Hawkish Federal Reserve`,
+    subtitle: `Bitcoin retreats below $64,000 as Middle East tensions spark a risk-off flight and the Fed signals a prolonged pause on rate cuts.`,
+    tab: 'weekly',
+    date: 'July 14, 2026',
+    readTime: '15 min read',
+    confidenceLevel: 'High',
+    keyMetrics: [{"label":"Crypto Fear & Greed","value":"24","direction":"down"},{"label":"Core Inflation (May)","value":"3.4%","direction":"up"},{"label":"BTC Price Target","value":"$60,000","direction":"neutral"},{"label":"Fed Funds Target","value":"3.50%-3.75%","direction":"neutral"}],
+    keyInsights: ["Bitcoin has slipped into the $62,000–$64,000 range following U.S. strikes in the Strait of Hormuz, which triggered a broad risk-off market contraction.","The Federal Reserve is taking a hawkish pivot following a rebound in core inflation to 3.4%, diminishing hopes for late-2026 rate cuts.","The U.S. House is preparing for crucial July 17 hearings on the CLARITY Act to establish a digital commodities framework.","The UK’s FCA and the EU’s ESMA are aggressively pushing forward with comprehensive crypto-asset supervisory frameworks."],
+    sections: [
+      {
+        icon: <Globe size={18} />,
+        title: `Macro Context`,
+        content: (<><p className="mb-4">The global macro landscape is currently caught in a vice between geopolitical instability and restrictive monetary policy. Recent U.S. military strikes in the Strait of Hormuz have injected severe volatility into energy markets, prompting an immediate flight to safety across all risk assets. Simultaneously, the Federal Reserve is grappling with surprisingly sticky core inflation, which rebounded to <span className="text-emerald-400 font-bold">3.4%</span> in May. This resilience has forced central bank officials into a more hawkish posture, with consensus rapidly shifting toward maintaining the <span className="text-emerald-400 font-bold">3.50%</span>–<span className="text-emerald-400 font-bold">3.75%</span> federal funds rate for the entirety of 2026.</p></>), 
+      },
+      {
+        icon: <TrendingUp size={18} />,
+        title: `Transmission Analysis`,
+        content: (<><div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6"><div className="p-4 bg-surface border border-border rounded-xl"><h4 className="text-sm font-bold text-primary mb-2">Channel 1: Geopolitical De-risking</h4><p className="text-xs text-text-muted">The escalation in the Middle East has disrupted the recent positive momentum driven by spot ETF inflows. As oil prices surge and global equities wobble, institutional allocators are aggressively de-risking, dragging highly correlated assets like Bitcoin down into the $62,000 range.</p></div><div className="p-4 bg-surface border border-border rounded-xl"><h4 className="text-sm font-bold text-primary mb-2">Channel 2: Yield Suppression</h4><p className="text-xs text-text-muted">The Fed's explicit 'higher-for-longer' stance continues to elevate U.S. Treasury yields. This high opportunity cost of capital mechanically suppresses demand for non-yielding digital assets, placing a firm ceiling on Bitcoin's ability to break the critical $65,000 resistance level.</p></div><div className="p-4 bg-surface border border-border rounded-xl"><h4 className="text-sm font-bold text-primary mb-2">Channel 3: Regulatory Formalization</h4><p className="text-xs text-text-muted">While macro headwinds dominate price action, the regulatory foundation continues to solidify. The upcoming July 17 House hearings on the CLARITY Act, combined with the FCA's new authorization gateway in the UK, provide the structural certainty necessary for the next wave of institutional adoption once macro conditions ease.</p></div></div></>), 
+      },
+      {
+        icon: <Eye size={18} />,
+        title: `What Professional Investors Are Watching`,
+        content: (<><ul className="space-y-4 mb-4"><li className="flex items-start gap-3"><span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" /><div><strong className="text-text">Strait of Hormuz Developments:</strong><span className="text-text-muted"> Monitoring energy prices and supply chain disruptions for secondary impacts on global inflation data.</span></div></li><li className="flex items-start gap-3"><span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" /><div><strong className="text-text">CLARITY Act Hearings:</strong><span className="text-text-muted"> Watching the July 17 House Financial Services Subcommittee hearings for indications of bipartisan support for a stablecoin and digital commodities framework.</span></div></li><li className="flex items-start gap-3"><span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" /><div><strong className="text-text">Core PCE Prints:</strong><span className="text-text-muted"> Tracking incoming inflation data to see if the recent spike to <span className="text-emerald-400 font-bold">3.4%</span> is a transient anomaly or a structural re-acceleration.</span></div></li><li className="flex items-start gap-3"><span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" /><div><strong className="text-text">MicroStrategy Activity:</strong><span className="text-text-muted"> Observing institutional whales and their balance sheet adjustments amid this period of extreme market fear.</span></div></li></ul></>), 
+      },
+      {
+        icon: <BarChart3 size={18} />,
+        title: `Scenario Analysis`,
+        content: (<><p className="mb-4"><strong>Base Case (60% probability):</strong> The Fed holds rates steady through Q3 2026. Bitcoin consolidates heavily in the $60,000–$64,000 range, unable to break resistance without a clear catalyst or a softening in the U.S. dollar.</p><p className="mb-4"><strong>Bull Case (20% probability):</strong> A sudden de-escalation in the Middle East combined with an unexpected drop in June CPI forces the Fed to reconsider a late-year rate cut, propelling Bitcoin past $65,000.</p><p className="mb-4"><strong>Bear Case (20% probability):</strong> Energy shocks trigger a secondary inflation wave, forcing the Fed to discuss rate hikes. Risk assets plummet, and Bitcoin breaks the $60,000 support, entering a deep correction.</p></>), 
+      },
+    ]
+  },
+  {
     id: 'macro-intel-july-13-2026',
     title: `Liquidity Contraction and Regulatory Formalization Dominate Mid-July`,
     subtitle: `Bitcoin consolidates as Asian trading volumes collapse and the SEC races against legislative efforts to finalize market structure rules.`,
