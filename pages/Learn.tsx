@@ -108,38 +108,36 @@ export const Learn: React.FC<LearnProps> = ({ onNavigate }) => {
 
 
 
+  const categories = React.useMemo(() => [
+    { id: 'research', label: 'Research & Reports', icon: <FileText size={18} />, active: false, onClick: () => onNavigate?.(PageRoute.RESEARCH) },
+    { id: 'insights', label: 'Institutional Insights', icon: <TargetIcon className="w-[18px] h-[18px]" />, active: false, onClick: () => onNavigate?.(PageRoute.INSIGHTS) },
+    { id: 'exchanges', label: 'Exchange Intelligence', icon: <BarChart2 size={18} />, active: false, onClick: () => onNavigate?.(PageRoute.EXCHANGES) },
+    { id: 'glossary', label: 'Crypto Glossary', icon: <BookOpen size={18} />, active: false, onClick: () => onNavigate?.(PageRoute.GLOSSARY) },
+    ...KNOWLEDGE_CATEGORIES.map(cat => ({
+      id: cat.id,
+      label: cat.name,
+      icon: cat.icon,
+      active: activeCategoryId === cat.id,
+      comingSoon: cat.comingSoon,
+      onClick: () => {
+        if (cat.comingSoon) {
+          addToast(`${cat.name} is coming soon to the Coinvestopedia Academy!`, 'info');
+          return;
+        }
+        setActiveCategoryId(cat.id);
+      }
+    }))
+  ], [activeCategoryId, onNavigate, addToast]);
+
   // --- Sidebar Registration ---
   React.useEffect(() => {
-    if (activeSubMenu !== 'Knowledge') {
-      setActiveSubMenu('Knowledge');
-    }
-
-    const categories = [
-      { id: 'research', label: 'Research & Reports', icon: <FileText size={18} />, active: false, onClick: () => onNavigate?.(PageRoute.RESEARCH) },
-      { id: 'insights', label: 'Institutional Insights', icon: <TargetIcon className="w-[18px] h-[18px]" />, active: false, onClick: () => onNavigate?.(PageRoute.INSIGHTS) },
-      { id: 'exchanges', label: 'Exchange Intelligence', icon: <BarChart2 size={18} />, active: false, onClick: () => onNavigate?.(PageRoute.EXCHANGES) },
-      { id: 'glossary', label: 'Crypto Glossary', icon: <BookOpen size={18} />, active: false, onClick: () => onNavigate?.(PageRoute.GLOSSARY) },
-      ...KNOWLEDGE_CATEGORIES.map(cat => ({
-        id: cat.id,
-        label: cat.name,
-        icon: cat.icon,
-        active: activeCategoryId === cat.id,
-        comingSoon: cat.comingSoon,
-        onClick: () => {
-          if (cat.comingSoon) {
-            addToast(`${cat.name} is coming soon to the Coinvestopedia Academy!`, 'info');
-            return;
-          }
-          setActiveCategoryId(cat.id);
-        }
-      }))
-    ];
+    setActiveSubMenu('Knowledge');
     setPageCategories(categories);
 
     return () => {
       setPageCategories([]);
     };
-  }, [activeCategoryId, setActiveSubMenu, setPageCategories, activeSubMenu]);
+  }, [categories, setActiveSubMenu, setPageCategories]);
 
   // --- Scroll to Top on View Change ---
   React.useEffect(() => {

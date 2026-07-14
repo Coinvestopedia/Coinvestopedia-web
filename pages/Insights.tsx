@@ -2294,10 +2294,8 @@ export const Insights: React.FC<InsightsProps> = ({ onNavigate }) => {
       setFeaturedIndex(randomIdx);
 
       // Automatically show the relevant menu if not already open
-      if (activeSubMenu !== 'Knowledge') {
-         setActiveSubMenu('Knowledge');
-      }
-   }, [setActiveSubMenu, activeSubMenu]);
+      setActiveSubMenu('Knowledge');
+   }, [setActiveSubMenu]);
 
    useEffect(() => {
       // Removed pageCategories override so that the sidebar

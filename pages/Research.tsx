@@ -96,9 +96,7 @@ export const Research: React.FC<ResearchProps> = ({ onNavigate }) => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    if (activeSubMenu !== 'Knowledge') {
-      setActiveSubMenu('Knowledge');
-    }
+    setActiveSubMenu('Knowledge');
     
     // Removed pageCategories override so that the sidebar
     // falls back to the standard Knowledge submenu.
@@ -106,7 +104,7 @@ export const Research: React.FC<ResearchProps> = ({ onNavigate }) => {
     return () => {
       setPageCategories([]);
     };
-  }, [setActiveSubMenu, activeSubMenu, setPageCategories]);
+  }, [setActiveSubMenu, setPageCategories]);
 
   return (
     <div className="animate-fade-in pb-16">

@@ -1247,9 +1247,7 @@ export const Exchanges: React.FC<ExchangesProps> = ({ onNavigate }) => {
       onClick: () => scrollToSection(cat.id, true)
     })));
 
-    if (activeSubMenu !== 'Knowledge') {
-      setActiveSubMenu('Knowledge');
-    }
+    setActiveSubMenu('Knowledge');
 
     // Scroll Spy Logic
     const handleScroll = () => {
@@ -1278,7 +1276,7 @@ export const Exchanges: React.FC<ExchangesProps> = ({ onNavigate }) => {
       window.removeEventListener('scroll', handleScroll);
       setPageCategories([]);
     };
-  }, [activeSection, setPageCategories, setActiveSubMenu, activeSubMenu]);
+  }, [activeSection, setPageCategories, setActiveSubMenu]);
 
   return (
     <div className="animate-fade-in space-y-10 lg:space-y-14 pb-12">

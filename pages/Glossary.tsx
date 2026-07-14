@@ -615,13 +615,11 @@ export const Glossary: React.FC<GlossaryProps> = ({ onNavigate }) => {
   
   useEffect(() => {
     window.scrollTo(0, 0);
-    if (activeSubMenu !== 'Knowledge') {
-      setActiveSubMenu('Knowledge');
-    }
+    setActiveSubMenu('Knowledge');
 
     // Removed pageCategories override so that the sidebar
     // falls back to the standard Knowledge submenu.
-  }, [setActiveSubMenu, activeSubMenu, setPageCategories]);
+  }, [setActiveSubMenu, setPageCategories]);
   const sectionRefs = useRef<Record<string, HTMLDivElement | null>>({});
   const termRefs = useRef<Record<string, HTMLDivElement | null>>({});
 

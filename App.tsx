@@ -72,16 +72,23 @@ const AppContent: React.FC = () => {
 
   // Sync route state with browser back/forward buttons & clear chunk reload state
   useEffect(() => {
-    // Clear dynamic import reload flags on successful load
-    window.sessionStorage.removeItem('chunk-reload-occurred');
-    window.sessionStorage.removeItem('entry-reload');
+    // Clear dynamic import reload flags AFTER a delay to ensure chunks loaded successfully.
+    // Clearing immediately on mount defeats ErrorBoundary's one-reload guard and causes
+    // infinite reload loops when a chunk is genuinely missing (stale deploy).
+    const clearTimer = setTimeout(() => {
+      window.sessionStorage.removeItem('chunk-reload-occurred');
+      window.sessionStorage.removeItem('entry-reload');
+    }, 5000);
 
     const handlePopState = () => {
       setCurrentRoute(pathnameToRoute(window.location.pathname));
     };
 
     window.addEventListener('popstate', handlePopState);
-    return () => window.removeEventListener('popstate', handlePopState);
+    return () => {
+      clearTimeout(clearTimer);
+      window.removeEventListener('popstate', handlePopState);
+    };
   }, []);
 
   // Initialize Google Consent Mode v2
