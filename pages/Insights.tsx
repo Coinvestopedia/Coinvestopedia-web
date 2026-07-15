@@ -41,6 +41,53 @@ import { africaCryptoInfrastructureArticle } from '../content/articles/africa-cr
 
 export const ARTICLES: Article[] = [
   {
+    id: 'the-liquidity-transmission-framework',
+    title: `The Liquidity Framework: Evaluating Crypto Through Rates, Dollar Strength, and Oil`,
+    category: 'Institutional',
+    tags: ["Framework","Macro","Institutional","Liquidity"],
+    readTime: '15 min read',
+    date: 'July 14, 2026',
+    image: '/geo-framework-hero.png',
+    desc: `A structural approach to modeling Bitcoin's price elasticity against macroeconomic headwinds. Establishing the correlation between sticky core inflation and digital asset performance.`,
+    icon: <Building2 className="text-blue-400" size={24} />,
+    keyInsights: ["Digital assets are currently trading as high-beta proxies for global dollar liquidity.","The transmission of Fed policy to crypto markets occurs primarily through the DXY.","Energy price volatility heavily influences institutional risk-appetite for Bitcoin.","A 50% probability of a July rate hike actively caps near-term spot volume growth.","Long-term fundamentals remain intact, but short-term price action is macro-dominated."],
+    content: (<>
+      <p className="text-xl text-text-muted mb-8 italic">Bitcoin's transition from an uncorrelated hedge to a hyper-sensitive macro asset requires a fundamental reassessment of institutional allocation models.</p>
+      <h2 className="text-2xl font-bold mt-10 mb-4 text-text">The Shifting Paradigm</h2>
+<p className="mb-6">Over the past 24 hours, the digital asset market has absorbed a complex Consumer Price Index print. While headline inflation contracted, the structural stickiness of core services inflation has fundamentally altered the near-term liquidity outlook. Institutional investors must now evaluate crypto allocations through a strict macroeconomic framework rather than pure technological adoption metrics.</p>
+<h2 className="text-2xl font-bold mt-10 mb-4 text-text">Three Pillars of Liquidity Evaluation</h2>
+<blockquote className="border-l-4 border-primary pl-6 py-2 my-6 italic text-text-muted">Our framework identifies three primary variables that dictate Bitcoin's current market structure:</blockquote>
+<blockquote className="border-l-4 border-primary pl-6 py-2 my-6 italic text-text-muted">• The Dollar Index (DXY) as the ultimate liquidity gauge
+• Federal Reserve rate expectations and the resulting cost of capital
+• Geopolitical energy shocks and their secondary inflationary impacts</blockquote>
+<div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
+
+<div className="p-6 bg-surface border border-border rounded-xl">
+  <h3 className="font-bold text-lg mb-4 flex items-center gap-2 text-red-400"><Activity className="w-5 h-5" /> The DXY Inverse</h3>
+  <p className="text-sm text-text-muted leading-relaxed">A rising dollar structurally drains the global liquidity necessary for crypto market expansion.</p>
+</div>
+<div className="p-6 bg-surface border border-border rounded-xl">
+  <h3 className="font-bold text-lg mb-4 flex items-center gap-2 text-red-400"><Building2 className="w-5 h-5" /> The Cost of Capital</h3>
+  <p className="text-sm text-text-muted leading-relaxed">Elevated "higher for longer" rate expectations severely increase the opportunity cost of holding non-yielding assets.</p>
+</div>
+</div>
+<h2 className="text-2xl font-bold mt-10 mb-4 text-text">Quantitative Impacts on Market Microstructure</h2>
+<p className="mb-6">As money markets aggressively price a <span className="text-emerald-400 font-bold">50%</span> probability of a July rate hike, the immediate impact is visible in market microstructure. Spot volumes have compressed, and volatility expectations remain muted.</p>
+
+<div className="leather-card p-6 rounded-xl mb-10 overflow-hidden">
+  <div className="overflow-x-auto">
+    <table className="w-full text-sm text-left border-collapse min-w-[600px]">
+      <thead><tr><th className="p-4 bg-surface/50 font-bold border-b border-border text-text">Metric</th><th className="p-4 bg-surface/50 font-bold border-b border-border text-text">Prior Expectation</th><th className="p-4 bg-surface/50 font-bold border-b border-border text-text">Current Reality</th></tr></thead>
+      <tbody><tr><td className="p-4 border-b border-border border-dashed text-text-muted font-medium text-text">July Hike Odds</td><td className="p-4 border-b border-border border-dashed text-text-muted "><span className="text-emerald-400 font-bold">15%</span></td><td className="p-4 border-b border-border border-dashed text-text-muted "><span className="text-emerald-400 font-bold">50%</span></td></tr><tr><td className="p-4 border-b border-border border-dashed text-text-muted font-medium text-text">Core CPI (YoY)</td><td className="p-4 border-b border-border border-dashed text-text-muted "><span className="text-emerald-400 font-bold">2.4%</span></td><td className="p-4 border-b border-border border-dashed text-text-muted "><span className="text-emerald-400 font-bold">2.6%</span></td></tr><tr><td className="p-4 border-b border-border border-dashed text-text-muted font-medium text-text">BTC 30D Volatility</td><td className="p-4 border-b border-border border-dashed text-text-muted ">Elevated</td><td className="p-4 border-b border-border border-dashed text-text-muted ">Compressed</td></tr></tbody>
+    </table>
+  </div>
+</div>
+<blockquote className="border-l-4 border-primary pl-6 py-2 my-6 italic text-text-muted">&gt; The current consolidation phase near $62,500 is not a lack of interest, but a calculated institutional waiting game. Capital is defensively positioned, awaiting definitive monetary clarity before deploying.</blockquote>
+<p className="text-xs text-text-muted italic border-t border-border pt-4 text-right mt-10">Research Registry — #MACROLIQUIDITY</p>
+
+    </>)
+  },
+  {
     id: 'institutional-global-regulatory-divergence-july-14-2026',
     title: `Global Regulatory Divergence: The CLARITY Act vs. European Consolidation`,
     category: 'Institutional',

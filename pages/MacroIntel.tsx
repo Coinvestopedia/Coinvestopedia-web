@@ -59,6 +59,39 @@ const TABS: { id: MacroTab; label: string; icon: React.ReactNode; isPro?: boolea
 
 const REPORTS: MacroReport[] = [
   {
+    id: 'cpi-disinflation-fed-july-2026',
+    title: `June CPI Disinflation: Core Stickiness Challenges July Fed Policy`,
+    subtitle: `While headline inflation decelerated sharply, persistent core services inflation maintains the probability of a July Fed hike.`,
+    tab: 'weekly',
+    date: 'July 14, 2026',
+    readTime: '12 min read',
+    confidenceLevel: 'High',
+    keyMetrics: [{"label":"June CPI (Annual)","value":"3.5%","direction":"down"},{"label":"Core CPI (Annual)","value":"2.6%","direction":"down"},{"label":"July Hike Probability","value":"50%","direction":"up"},{"label":"WTI Crude","value":"$80/bbl","direction":"up"}],
+    keyInsights: ["Headline inflation dropped to 3.5% annually, driven primarily by falling energy prices following a temporary US-Iran ceasefire.","Core inflation remains sticky at 2.6%, causing money markets to price in a 50% probability of a July rate hike.","Bitcoin is consolidating around $62,500 as risk assets brace for potentially sustained restrictive monetary policy.","Federal Reserve Governor Waller's recent hawkish signals highlight the central bank's focus on service-sector costs over headline improvements."],
+    sections: [
+      {
+        icon: <Globe size={18} />,
+        title: `Macro Context`,
+        content: (<><p className="mb-4">The June 2026 Consumer Price Index (CPI) report delivered a complex macroeconomic signal. Headline inflation cooled significantly to <span className="text-emerald-400 font-bold">3.5%</span> on an annualized basis, bolstered by a <span className="text-emerald-400 font-bold">0.4%</span> monthly contraction. This decline was heavily concentrated in the energy sector, as a temporary U.S.-Iran ceasefire alleviated pressure on global crude supplies.</p><p className="mb-4">However, beneath the headline deceleration, core inflation—which excludes volatile food and energy components—eased only marginally to <span className="text-emerald-400 font-bold">2.6%</span>. This stickiness in service-sector costs has reinvigorated hawkish sentiment within the Federal Reserve, with Governor Waller indicating that further policy firming may be necessary. Consequently, money markets have elevated the probability of a July rate hike to approximately <span className="text-emerald-400 font-bold">50%</span>, forcing risk assets into a defensive posture.</p></>), 
+      },
+      {
+        icon: <TrendingUp size={18} />,
+        title: `Transmission Analysis`,
+        content: (<><div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6"><div className="p-4 bg-surface border border-border rounded-xl"><h4 className="text-sm font-bold text-primary mb-2">Channel 1: Dollar Liquidity Constraints</h4><p className="text-xs text-text-muted">Elevated rate hike probabilities strengthen the DXY, structurally draining the dollar liquidity necessary to sustain crypto market rallies.</p></div><div className="p-4 bg-surface border border-border rounded-xl"><h4 className="text-sm font-bold text-primary mb-2">Channel 2: Institutional De-Risking</h4><p className="text-xs text-text-muted">As traditional equities adjust to the prospect of "higher for longer" rates, institutional capital flows reflect a broader de-risking, directly compressing Bitcoin spot volumes.</p></div><div className="p-4 bg-surface border border-border rounded-xl"><h4 className="text-sm font-bold text-primary mb-2">Channel 3: Energy Cost Rebound</h4><p className="text-xs text-text-muted">With WTI crude pushing back toward $80 per barrel, future headline inflation prints face upside risks, potentially forcing the Fed's hand in late Q3.</p></div></div></>), 
+      },
+      {
+        icon: <Eye size={18} />,
+        title: `What Professional Investors Are Watching`,
+        content: (<><ul className="space-y-4 mb-4"><li className="flex items-start gap-3"><span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" /><div><strong className="text-text">Fed Funds Rate:</strong><span className="text-text-muted"> Monitoring whether the July FOMC meeting results in a 25 bps hike or a hawkish pause.</span></div></li><li className="flex items-start gap-3"><span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" /><div><strong className="text-text">Core Services Inflation:</strong><span className="text-text-muted"> Evaluating upcoming PCE data to confirm or refute the stickiness seen in the CPI report.</span></div></li><li className="flex items-start gap-3"><span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" /><div><strong className="text-text">Energy Markets:</strong><span className="text-text-muted"> Tracking WTI crude resilience near $80, as geopolitical truces remain fragile.</span></div></li><li className="flex items-start gap-3"><span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" /><div><strong className="text-text">ETF Flows:</strong><span className="text-text-muted"> Assessing whether recent spot Bitcoin ETF inflows can offset broader macroeconomic headwinds.</span></div></li></ul></>), 
+      },
+      {
+        icon: <BarChart3 size={18} />,
+        title: `Scenario Analysis`,
+        content: (<><p className="mb-4"><strong>Base Case (55% probability):</strong> The Fed executes a hawkish pause in July, demanding further core inflation deterioration before cutting rates. Bitcoin remains range-bound between $60,000 and $65,000.</p><p className="mb-4"><strong>Bull Case (25% probability):</strong> Upcoming economic data reveals rapid service-sector cooling, prompting the Fed to signal a Q4 rate cut. Bitcoin breaks $68,000 on renewed liquidity expectations.</p><p className="mb-4"><strong>Bear Case (20% probability):</strong> The Fed hikes rates in July, triggering a dollar spike and broader risk asset sell-off. Bitcoin tests critical support at $58,000.</p></>), 
+      },
+    ]
+  },
+  {
     id: 'macro-intel-july-14-2026',
     title: `Geopolitical Shock Meets a Hawkish Federal Reserve`,
     subtitle: `Bitcoin retreats below $64,000 as Middle East tensions spark a risk-off flight and the Fed signals a prolonged pause on rate cuts.`,
