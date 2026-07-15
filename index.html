@@ -106,10 +106,19 @@
       window.addEventListener('error', function(e) {
         if (e.target && e.target.tagName === 'SCRIPT') {
           var src = e.target.src || '';
-          if (src.indexOf('/assets/') !== -1 && !sessionStorage.getItem('entry-reload')) {
-            console.warn('Main chunk failed to load (likely stale cache). Reloading...');
-            sessionStorage.setItem('entry-reload', 'true');
-            window.location.reload();
+          if (src.indexOf('/assets/') !== -1) {
+            var lastReload = sessionStorage.getItem('entry-reload-time');
+            var now = Date.now();
+            // Only reload if we haven't reloaded in the last 10 seconds
+            if (!lastReload || (now - parseInt(lastReload)) > 10000) {
+              console.warn('Main chunk failed to load (likely stale cache). Force reloading...');
+              sessionStorage.setItem('entry-reload-time', now.toString());
+              
+              // Cache-bust the HTML
+              var url = new URL(window.location.href);
+              url.searchParams.set('t', now.toString());
+              window.location.href = url.toString();
+            }
           }
         }
       }, true);
@@ -123,10 +132,15 @@
             msg.includes('ChunkLoadError') ||
             msg.includes('dynamically imported module')
         )) {
-          if (!sessionStorage.getItem('chunk-reload-occurred')) {
-            console.warn('Dynamic import failed (likely stale deployment). Reloading...');
-            sessionStorage.setItem('chunk-reload-occurred', 'true');
-            window.location.reload();
+          var lastReload = sessionStorage.getItem('chunk-reload-time');
+          var now = Date.now();
+          if (!lastReload || (now - parseInt(lastReload)) > 10000) {
+            console.warn('Dynamic import failed (likely stale deployment). Force reloading...');
+            sessionStorage.setItem('chunk-reload-time', now.toString());
+            
+            var url = new URL(window.location.href);
+            url.searchParams.set('t', now.toString());
+            window.location.href = url.toString();
           }
         }
       });

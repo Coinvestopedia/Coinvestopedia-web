@@ -31,10 +31,14 @@ export class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoun
 
     if (isChunkError) {
       console.warn("Chunk/Dynamic Import load error detected. Automatically reloading page to fetch latest version...");
-      const hasReloaded = window.sessionStorage.getItem('chunk-reload-occurred');
-      if (!hasReloaded) {
-        window.sessionStorage.setItem('chunk-reload-occurred', 'true');
-        window.location.reload();
+      const lastReload = window.sessionStorage.getItem('chunk-reload-time');
+      const now = Date.now();
+      if (!lastReload || (now - parseInt(lastReload)) > 10000) {
+        window.sessionStorage.setItem('chunk-reload-time', now.toString());
+        
+        const url = new URL(window.location.href);
+        url.searchParams.set('t', now.toString());
+        window.location.href = url.toString();
       }
     }
   }
