@@ -113,6 +113,23 @@
           }
         }
       }, true);
+
+      // Catch dynamic import failures that bypass React's ErrorBoundary
+      window.addEventListener('unhandledrejection', function(e) {
+        var msg = e.reason && (e.reason.message || e.reason.toString());
+        if (msg && (
+            msg.includes('Failed to fetch dynamically imported module') ||
+            msg.includes('Importing a module script failed') ||
+            msg.includes('ChunkLoadError') ||
+            msg.includes('dynamically imported module')
+        )) {
+          if (!sessionStorage.getItem('chunk-reload-occurred')) {
+            console.warn('Dynamic import failed (likely stale deployment). Reloading...');
+            sessionStorage.setItem('chunk-reload-occurred', 'true');
+            window.location.reload();
+          }
+        }
+      });
     </script>
     <link rel="stylesheet" href="/index.css">
   </head>
