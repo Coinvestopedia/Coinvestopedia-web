@@ -59,6 +59,39 @@ const TABS: { id: MacroTab; label: string; icon: React.ReactNode; isPro?: boolea
 
 const REPORTS: MacroReport[] = [
   {
+    id: 'japan-etf-ppi-cooling-july-2026',
+    title: `Japan Reclassifies Crypto Amidst Cooling U.S. Producer Prices`,
+    subtitle: `Deflationary PPI data bolsters the case for Fed rate cuts as Japan paves the regulatory path for Asian spot crypto ETFs.`,
+    tab: 'weekly',
+    date: 'July 16, 2026',
+    readTime: '13 min read',
+    confidenceLevel: 'High',
+    keyMetrics: [{"label":"US PPI (Monthly)","value":"-0.3%","direction":"down"},{"label":"Bitcoin","value":"$64,500","direction":"neutral"},{"label":"Ethereum","value":"$1,915","direction":"up"},{"label":"Fear & Greed Index","value":"25","direction":"neutral"}],
+    keyInsights: ["Japan's parliamentary committee approved legislation reclassifying digital assets as financial instruments, setting the stage for domestic spot ETFs.","The U.S. Producer Price Index (PPI) contracted by 0.3%, indicating a cooling wholesale inflation environment that supports dovish Fed sentiment.","Bitcoin is establishing strong structural support at $64,000, despite broader market sentiment remaining stuck in 'Extreme Fear'.","AMINA Bank's integration of the Mesh network highlights the continuous deployment of institutional-grade crypto settlement infrastructure."],
+    sections: [
+      {
+        icon: <Globe size={18} />,
+        title: `Macro Context`,
+        content: (<><p className="mb-4">Global macroeconomic conditions presented a dovish signal this week as the U.S. Producer Price Index (PPI) registered an unexpected <span className="text-emerald-400 font-bold">0.3%</span> monthly contraction. This wholesale deflationary print significantly eases upstream cost pressures, providing the Federal Reserve with additional data supporting a potential monetary pivot later this year. Consequently, bond yields experienced localized softening, creating a marginally friendlier environment for risk assets.</p><p className="mb-4">Simultaneously, the regulatory landscape in Asia achieved a major milestone. A Japanese parliamentary committee formally approved a bill to reclassify digital assets as standard financial instruments. This reclassification is widely anticipated to unlock favorable tax treatments and catalyze the launch of Japanese spot cryptocurrency ETFs, potentially injecting substantial Asian institutional liquidity into the market.</p></>), 
+      },
+      {
+        icon: <TrendingUp size={18} />,
+        title: `Transmission Analysis`,
+        content: (<><div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6"><div className="p-4 bg-surface border border-border rounded-xl"><h4 className="text-sm font-bold text-primary mb-2">Channel 1: Asian Institutional Inflows</h4><p className="text-xs text-text-muted">The Japanese regulatory shift creates a direct compliance pathway for domestic asset managers, structurally expanding the total addressable market for Bitcoin and Ethereum ETFs in Asia.</p></div><div className="p-4 bg-surface border border-border rounded-xl"><h4 className="text-sm font-bold text-primary mb-2">Channel 2: Yield Curve Softening</h4><p className="text-xs text-text-muted">The contraction in U.S. PPI exerts downward pressure on the short end of the yield curve, reducing the opportunity cost of holding non-yielding digital assets and theoretically supporting higher valuations.</p></div><div className="p-4 bg-surface border border-border rounded-xl"><h4 className="text-sm font-bold text-primary mb-2">Channel 3: Infrastructure Maturation</h4><p className="text-xs text-text-muted">The integration of networks like Mesh by regulated entities such as AMINA Bank physically rails the plumbing necessary for large-scale corporate and institutional capital deployment.</p></div></div></>), 
+      },
+      {
+        icon: <Eye size={18} />,
+        title: `What Professional Investors Are Watching`,
+        content: (<><ul className="space-y-4 mb-4"><li className="flex items-start gap-3"><span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" /><div><strong className="text-text">Japanese Regulatory Timeline:</strong><span className="text-text-muted"> Monitoring the final legislative approval and subsequent applications for Asian-domiciled spot ETFs.</span></div></li><li className="flex items-start gap-3"><span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" /><div><strong className="text-text">Core PCE Print:</strong><span className="text-text-muted"> Evaluating whether the deflationary trend seen in PPI effectively translates into the Fed's preferred consumer inflation gauge.</span></div></li><li className="flex items-start gap-3"><span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" /><div><strong className="text-text">Geopolitical Friction:</strong><span className="text-text-muted"> Assessing the risk premium embedded in energy markets due to escalating U.S.-Iran tensions.</span></div></li><li className="flex items-start gap-3"><span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" /><div><strong className="text-text">Ethereum Relative Strength:</strong><span className="text-text-muted"> Tracking the ETH/BTC ratio as Ethereum shows relative outperformance around the $1,915 level.</span></div></li></ul></>), 
+      },
+      {
+        icon: <BarChart3 size={18} />,
+        title: `Scenario Analysis`,
+        content: (<><p className="mb-4"><strong>Base Case (60% probability):</strong> Markets consolidate as investors await confirmation from consumer inflation metrics; Bitcoin respects the $64,000 support level while institutional infrastructure continues to build quietly.</p><p className="mb-4"><strong>Bull Case (25% probability):</strong> The Japanese ETF narrative triggers front-running by global macro funds, pushing Bitcoin rapidly through the $69,000 resistance zone on high volume.</p><p className="mb-4"><strong>Bear Case (15% probability):</strong> Geopolitical shocks unexpectedly reverse the disinflationary trend, forcing a hawkish Fed repricing and dragging Bitcoin back below $60,000.</p></>), 
+      },
+    ]
+  },
+  {
     id: 'cpi-disinflation-fed-july-2026',
     title: `June CPI Disinflation: Core Stickiness Challenges July Fed Policy`,
     subtitle: `While headline inflation decelerated sharply, persistent core services inflation maintains the probability of a July Fed hike.`,
