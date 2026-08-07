@@ -41,6 +41,53 @@ import { africaCryptoInfrastructureArticle } from '../content/articles/africa-cr
 
 export const ARTICLES: Article[] = [
   {
+    id: 'the-stagflation-hedge-framework',
+    title: `The Stagflation Paradigm: Evaluating Crypto Assets in a Low-Growth Environment`,
+    category: 'Institutional',
+    tags: ["Framework","Macro","Institutional","Policy"],
+    readTime: '15 min read',
+    date: 'August 07, 2026',
+    image: '/geo-framework-hero.png',
+    desc: `A structural approach to modeling Bitcoin's performance during periods of macroeconomic stagflation. Analyzing the interplay between restrictive monetary policy and stalling economic indicators.`,
+    icon: <Building2 className="text-blue-400" size={24} />,
+    keyInsights: ["Digital assets face a unique structural headwind in a stagflationary environment compared to pure inflationary or deflationary cycles.","The delay of the CLARITY Act removes a significant idiosyncratic catalyst that could have decoupled crypto from macro trends.","Current ETF outflows are heavily influenced by the unwinding of cash-and-carry basis trades rather than spot distribution.","A potential December Fed rate hike fundamentally alters the opportunity cost of holding non-yielding digital assets.","Hardware wallet exploits highlight the ongoing operational risks inherent in institutional self-custody models."],
+    content: (<>
+      <p className="text-xl text-text-muted mb-8 italic">As macroeconomic indicators increasingly signal a convergence of stagnant growth and sticky inflation, institutional capital is forced to completely reassess the role of digital assets within a diversified portfolio.</p>
+      <h2 className="text-2xl font-bold mt-10 mb-4 text-text">The Stagflation Dilemma</h2>
+<p className="mb-6">For the past three years, the institutional thesis for Bitcoin has largely oscillated between an inflation hedge and a high-beta liquidity sponge. However, the recent weakness in U.S. manufacturing paired with the Federal Reserve's reluctance to cut rates from the <span className="text-emerald-400 font-bold">3.50%</span>–<span className="text-emerald-400 font-bold">3.75%</span> band introduces a third, far more complex variable: stagflation. This macroeconomic paradigm severely complicates asset allocation, as the traditional inverse correlation between equities and bonds breaks down.</p>
+<h2 className="text-2xl font-bold mt-10 mb-4 text-text">Three Pillars of the Current Market Structure</h2>
+<blockquote className="border-l-4 border-primary pl-6 py-2 my-6 italic text-text-muted">Our current framework identifies three primary variables dictating Bitcoin's sluggish August performance:</blockquote>
+<blockquote className="border-l-4 border-primary pl-6 py-2 my-6 italic text-text-muted">• The impending Non-Farm Payrolls data dictating the Fed's December trajectory
+• The legislative void left by the delayed Crypto CLARITY Act
+• The shift from directional ETF inflows to basis-trade unwinding</blockquote>
+<div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
+
+<div className="p-6 bg-surface border border-border rounded-xl">
+  <h3 className="font-bold text-lg mb-4 flex items-center gap-2 text-red-400"><AlertTriangle className="w-5 h-5" /> The Policy Squeeze</h3>
+  <p className="text-sm text-text-muted leading-relaxed">A potential December rate hike severely increases the opportunity cost of deploying capital into crypto.</p>
+</div>
+<div className="p-6 bg-surface border border-border rounded-xl">
+  <h3 className="font-bold text-lg mb-4 flex items-center gap-2 text-red-400"><Lock className="w-5 h-5" /> Legislative Stagnation</h3>
+  <p className="text-sm text-text-muted leading-relaxed">Without the CLARITY Act, regulatory ambiguity continues to artificially cap institutional market depth.</p>
+</div>
+</div>
+<h2 className="text-2xl font-bold mt-10 mb-4 text-text">Quantitative Impacts on Capital Flows</h2>
+<p className="mb-6">The immediate impact of this ambiguity is visible in the recent reversal of ETF flows. After a robust three-week accumulation phase, institutions have halted deployment.</p>
+
+<div className="leather-card p-6 rounded-xl mb-10 overflow-hidden">
+  <div className="overflow-x-auto">
+    <table className="w-full text-sm text-left border-collapse min-w-[600px]">
+      <thead><tr><th className="p-4 bg-surface/50 font-bold border-b border-border text-text">Macro Indicator</th><th className="p-4 bg-surface/50 font-bold border-b border-border text-text">Prior Expectation</th><th className="p-4 bg-surface/50 font-bold border-b border-border text-text">Current Reality</th></tr></thead>
+      <tbody><tr><td className="p-4 border-b border-border border-dashed text-text-muted font-medium text-text">Fed Policy</td><td className="p-4 border-b border-border border-dashed text-text-muted ">Q3 Rate Cuts</td><td className="p-4 border-b border-border border-dashed text-text-muted ">Potential Dec Hike</td></tr><tr><td className="p-4 border-b border-border border-dashed text-text-muted font-medium text-text">Legislation</td><td className="p-4 border-b border-border border-dashed text-text-muted ">Summer Vote</td><td className="p-4 border-b border-border border-dashed text-text-muted ">Delayed to Autumn</td></tr><tr><td className="p-4 border-b border-border border-dashed text-text-muted font-medium text-text">ETF Momentum</td><td className="p-4 border-b border-border border-dashed text-text-muted ">Net Inflows</td><td className="p-4 border-b border-border border-dashed text-text-muted ">Net Outflows</td></tr></tbody>
+    </table>
+  </div>
+</div>
+<blockquote className="border-l-4 border-primary pl-6 py-2 my-6 italic text-text-muted">&gt; The current consolidation phase near $64,300 is emblematic of a market starved for definitive catalysts. Until the macroeconomic fog clears or regulatory clarity is achieved, institutional capital will remain defensively positioned.</blockquote>
+<p className="text-xs text-text-muted italic border-t border-border pt-4 text-right mt-10">Research Registry — #MACROSTAGFLATION</p>
+
+    </>)
+  },
+  {
     id: 'the-asian-etf-catalyst-framework',
     title: `The Asian ETF Catalyst: Regulatory Arbitrage and Institutional Capital Flows`,
     category: 'Institutional',

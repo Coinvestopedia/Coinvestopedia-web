@@ -59,6 +59,39 @@ const TABS: { id: MacroTab; label: string; icon: React.ReactNode; isPro?: boolea
 
 const REPORTS: MacroReport[] = [
   {
+    id: 'nfp-stagflation-clarity-act-aug-2026',
+    title: `Stagflation Fears Resurface as Crypto CLARITY Act Stalls`,
+    subtitle: `Macroeconomic ambiguity ahead of the Non-Farm Payrolls report stalls digital asset momentum amidst regulatory delays.`,
+    tab: 'weekly',
+    date: 'August 07, 2026',
+    readTime: '12 min read',
+    confidenceLevel: 'High',
+    keyMetrics: [{"label":"Fed Funds Rate","value":"3.50-3.75%","direction":"neutral"},{"label":"Bitcoin","value":"$64,300","direction":"neutral"},{"label":"Spot ETF Flows","value":"Net Outflows","direction":"down"},{"label":"Hardware Wallet Losses","value":"$90M","direction":"up"}],
+    keyInsights: ["A highly anticipated Senate vote on the Crypto CLARITY Act has been delayed until after the summer recess, stripping the market of a major near-term catalyst.","U.S. manufacturing and services data have revived 'stagflation' concerns, forcing institutional investors to adopt defensive posturing ahead of today's Non-Farm Payrolls report.","Spot Bitcoin ETFs snapped a three-week buying streak, recording net outflows largely driven by arbitrage strategies rather than directional selling.","A $90 million firmware exploit affecting select Coldcard hardware wallets has introduced friction and security concerns within the self-custody ecosystem."],
+    sections: [
+      {
+        icon: <Globe size={18} />,
+        title: `Macro Context`,
+        content: (<><p className="mb-4">The global macroeconomic narrative has shifted back to ambiguity as early August trading commences. Despite the Federal Reserve holding interest rates steady at <span className="text-emerald-400 font-bold">3.50%</span>–<span className="text-emerald-400 font-bold">3.75%</span> during their late July meeting, recent weakness in U.S. manufacturing and services data has inadvertently revived fears of stagflation—a scenario characterized by stagnant economic growth coupled with persistent inflation.</p><p className="mb-4">This challenging environment has placed immense weight on today's upcoming Non-Farm Payrolls (NFP) report. Institutional desks, including analysts at J.P. Morgan, are recalibrating their models, with some explicitly warning of a potential Fed rate hike in December if wage pressures fail to subside. Consequently, risk assets, including Bitcoin, have entered a period of low-volume consolidation as capital sits on the sidelines awaiting definitive economic direction.</p></>), 
+      },
+      {
+        icon: <TrendingUp size={18} />,
+        title: `Transmission Analysis`,
+        content: (<><div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6"><div className="p-4 bg-surface border border-border rounded-xl"><h4 className="text-sm font-bold text-primary mb-2">Channel 1: Regulatory Stagnation</h4><p className="text-xs text-text-muted">The postponement of the Senate vote on the Crypto CLARITY Act until after the summer recess delays essential regulatory clarity, neutralizing a key catalyst that had been heavily priced in by institutional allocators.</p></div><div className="p-4 bg-surface border border-border rounded-xl"><h4 className="text-sm font-bold text-primary mb-2">Channel 2: Capital Flight from Risk</h4><p className="text-xs text-text-muted">Resurgent stagflation fears historically trigger capital flight from high-beta assets. This is currently manifesting as net outflows in U.S. spot Bitcoin ETFs, breaking a previous three-week accumulation streak.</p></div><div className="p-4 bg-surface border border-border rounded-xl"><h4 className="text-sm font-bold text-primary mb-2">Channel 3: Self-Custody Friction</h4><p className="text-xs text-text-muted">The reported $90 million exploit affecting select hardware wallet firmware temporarily dampens the narrative of secure decentralization, potentially slowing retail accumulation at the margin.</p></div></div></>), 
+      },
+      {
+        icon: <Eye size={18} />,
+        title: `What Professional Investors Are Watching`,
+        content: (<><ul className="space-y-4 mb-4"><li className="flex items-start gap-3"><span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" /><div><strong className="text-text">Non-Farm Payrolls:</strong><span className="text-text-muted"> Scrutinizing today's employment data to gauge the probability of a dovish Fed pivot versus a hawkish December hike.</span></div></li><li className="flex items-start gap-3"><span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" /><div><strong className="text-text">ETF Arbitrage Flows:</strong><span className="text-text-muted"> Monitoring whether the recent ETF outflows represent true directional selling or merely the unwinding of basis trades.</span></div></li><li className="flex items-start gap-3"><span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" /><div><strong className="text-text">Treasury Yield Curve:</strong><span className="text-text-muted"> Tracking the 10-year Treasury yield for signs of a stagflation-induced breakout.</span></div></li><li className="flex items-start gap-3"><span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" /><div><strong className="text-text">Network Security Patches:</strong><span className="text-text-muted"> Awaiting definitive firmware updates and post-mortems regarding the recent hardware wallet exploits.</span></div></li></ul></>), 
+      },
+      {
+        icon: <BarChart3 size={18} />,
+        title: `Scenario Analysis`,
+        content: (<><p className="mb-4"><strong>Base Case (55% probability):</strong> The NFP report meets expectations, leaving Fed policy ambiguous. Bitcoin continues its low-volume chop between $62,000 and $66,000 throughout the summer doldrums.</p><p className="mb-4"><strong>Bull Case (25% probability):</strong> Employment data comes in significantly softer than expected, extinguishing December hike fears and triggering a relief rally in BTC toward $68,000.</p><p className="mb-4"><strong>Bear Case (20% probability):</strong> NFP data prints red-hot, confirming sticky wage inflation and cementing a hawkish Fed trajectory. Bitcoin breaks psychological support at $60,000.</p></>), 
+      },
+    ]
+  },
+  {
     id: 'japan-etf-ppi-cooling-july-2026',
     title: `Japan Reclassifies Crypto Amidst Cooling U.S. Producer Prices`,
     subtitle: `Deflationary PPI data bolsters the case for Fed rate cuts as Japan paves the regulatory path for Asian spot crypto ETFs.`,
