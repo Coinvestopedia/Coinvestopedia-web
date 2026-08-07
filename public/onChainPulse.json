@@ -1,19 +1,19 @@
 {
   "defiTvl": {
-    "value": "$140.9B",
-    "change": "+0.8%"
+    "value": "$141.6B",
+    "change": "-0.4%"
   },
   "stablecoinMktCap": {
-    "value": "$309.0B",
-    "change": "+0.1%"
+    "value": "$307.7B",
+    "change": "+0.3%"
   },
   "ethStakingRatio": {
-    "value": "27.0%",
-    "change": "+1.9%"
+    "value": "27.4%",
+    "change": "-0.5%"
   },
   "dexVolume24h": {
-    "value": "$7.5B",
-    "change": "-4.6%"
+    "value": "$7.2B",
+    "change": "-2.2%"
   },
-  "timestamp": "2026-07-16T07:38:06.356Z"
+  "timestamp": "2026-08-07T06:20:38.829Z"
 }
