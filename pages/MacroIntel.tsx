@@ -59,6 +59,39 @@ const TABS: { id: MacroTab; label: string; icon: React.ReactNode; isPro?: boolea
 
 const REPORTS: MacroReport[] = [
   {
+    id: 'cpi-sec-meeting-aug-12-2026',
+    title: `Markets Hibernate Ahead of CPI Print and SEC Crypto Deliberations`,
+    subtitle: `Record-low trading volumes underscore institutional caution as allocators await critical inflation data and regulatory frameworks.`,
+    tab: 'weekly',
+    date: 'August 12, 2026',
+    readTime: '12 min read',
+    confidenceLevel: 'High',
+    keyMetrics: [{"label":"Fed Funds Rate","value":"3.50-3.75%","direction":"neutral"},{"label":"Bitcoin","value":"$63,800","direction":"neutral"},{"label":"BTC Institutional Ownership","value":"17.9%","direction":"up"},{"label":"Trading Volume","value":"3-Year Low","direction":"down"}],
+    keyInsights: ["Bitcoin trading volumes have plummeted to three-year lows as the market enters a structural 'hibernation' phase between $62,000 and $66,000.","Institutional entities now control approximately 17.9% of the circulating Bitcoin supply, irrevocably tethering digital asset performance to traditional macroeconomic data.","Today's U.S. Consumer Price Index (CPI) release serves as the primary catalyst determining whether the Federal Reserve will maintain its restrictive monetary posture.","The SEC's scheduled open meeting today regarding bespoke frameworks for crypto asset investment contracts introduces a layer of near-term regulatory volatility."],
+    sections: [
+      {
+        icon: <Globe size={18} />,
+        title: `Macro Context`,
+        content: (<><p className="mb-4">The global digital asset market has ground to a virtual halt as capital allocators brace for today's pivotal U.S. Consumer Price Index (CPI) report. Following a string of mixed economic signals, including an unexpectedly weak July jobs report, the Federal Reserve's commitment to the restrictive <span className="text-emerald-400 font-bold">3.50%</span>–<span className="text-emerald-400 font-bold">3.75%</span> rate band hinges entirely on the trajectory of consumer inflation.</p><p className="mb-4">This macroeconomic bottleneck has triggered a severe volatility compression across crypto markets, driving trading volumes to their lowest levels in three years. Institutional investors, who now command a record <span className="text-emerald-400 font-bold">17.9%</span> of the Bitcoin supply via ETFs and corporate treasuries, have aggressively de-risked their portfolios, preferring the safety of high-yielding cash equivalents until a definitive monetary trend emerges.</p></>), 
+      },
+      {
+        icon: <TrendingUp size={18} />,
+        title: `Transmission Analysis`,
+        content: (<><div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6"><div className="p-4 bg-surface border border-border rounded-xl"><h4 className="text-sm font-bold text-primary mb-2">Channel 1: Monetary Squeeze</h4><p className="text-xs text-text-muted">A 'hot' CPI print would immediately re-price the probability of future rate hikes, exerting severe downward pressure on high-beta assets as the opportunity cost of holding non-yielding digital assets rises.</p></div><div className="p-4 bg-surface border border-border rounded-xl"><h4 className="text-sm font-bold text-primary mb-2">Channel 2: Institutional Immobilization</h4><p className="text-xs text-text-muted">With <span className="text-emerald-400 font-bold">17.9%</span> of the supply in institutional hands, Bitcoin's historically idiosyncratic volatility has been replaced by hypersensitivity to standard macro liquidity models, suppressing retail-driven breakouts.</p></div><div className="p-4 bg-surface border border-border rounded-xl"><h4 className="text-sm font-bold text-primary mb-2">Channel 3: Regulatory Friction</h4><p className="text-xs text-text-muted">Today's SEC open meeting on crypto asset investment contracts injects idiosyncratic risk; potential bespoke compliance frameworks could temporarily freeze corporate accumulation strategies until legal clarity is achieved.</p></div></div></>), 
+      },
+      {
+        icon: <Eye size={18} />,
+        title: `What Professional Investors Are Watching`,
+        content: (<><ul className="space-y-4 mb-4"><li className="flex items-start gap-3"><span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" /><div><strong className="text-text">Core CPI Print:</strong><span className="text-text-muted"> Analyzing the month-over-month inflation data for stickiness in shelter and services, which dictate the Fed's ultimate policy path.</span></div></li><li className="flex items-start gap-3"><span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" /><div><strong className="text-text">SEC Meeting Minutes:</strong><span className="text-text-muted"> Monitoring the tone and substance of the SEC's proposed frameworks for digital asset investment contracts.</span></div></li><li className="flex items-start gap-3"><span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" /><div><strong className="text-text">Real Yield Breakouts:</strong><span className="text-text-muted"> Watching the U.S. 10-year Treasury real yield for sudden spikes that traditionally precede capital flight from the crypto sector.</span></div></li><li className="flex items-start gap-3"><span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" /><div><strong className="text-text">Volume Divergence:</strong><span className="text-text-muted"> Looking for a meaningful surge in spot trading volume as the first technical signal of a regime change and breakout from the current range.</span></div></li></ul></>), 
+      },
+      {
+        icon: <BarChart3 size={18} />,
+        title: `Scenario Analysis`,
+        content: (<><p className="mb-4"><strong>Base Case (50% probability):</strong> CPI prints in line with expectations, validating the 'higher-for-longer' narrative. Bitcoin remains trapped in a low-volume chop between $62,000 and $66,000.</p><p className="mb-4"><strong>Bull Case (30% probability):</strong> Inflation data surprises heavily to the downside, catalyzing a dovish repricing of Fed policy and sparking an immediate, volume-backed relief rally toward $68,000.</p><p className="mb-4"><strong>Bear Case (20% probability):</strong> CPI accelerates, accompanied by hawkish SEC rhetoric on investment contracts. Institutional derisking accelerates, breaking the $62,000 floor and threatening the $58,000 support zone.</p></>), 
+      },
+    ]
+  },
+  {
     id: 'nfp-stagflation-clarity-act-aug-2026',
     title: `Stagflation Fears Resurface as Crypto CLARITY Act Stalls`,
     subtitle: `Macroeconomic ambiguity ahead of the Non-Farm Payrolls report stalls digital asset momentum amidst regulatory delays.`,
