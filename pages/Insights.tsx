@@ -41,6 +41,50 @@ import { africaCryptoInfrastructureArticle } from '../content/articles/africa-cr
 
 export const ARTICLES: Article[] = [
   {
+    id: 'the-beta-rotation-framework',
+    title: `The Beta Rotation: Institutional Capital Flight from Large-Cap Dominance`,
+    category: 'Institutional',
+    tags: ["Framework","Institutional","Altcoins","Macro"],
+    readTime: '16 min read',
+    date: 'August 13, 2026',
+    image: '/geo-framework-hero.png',
+    desc: `Analyzing the structural shift in institutional asset allocation models following dovish inflation data. Evaluating the transition from Bitcoin dominance to high-beta ecosystem tokens.`,
+    icon: <Building2 className="text-blue-400" size={24} />,
+    keyInsights: ["Benign CPI data has ironically failed to lift Bitcoin, exposing a structural rotation of institutional capital away from the apex asset.","GSR's 'Core3' model update (SOL 43.6%, BTC 16.9%) is a definitive signal that professional allocators are prioritizing beta over perceived safety.","The $90 million hardware wallet exploit has temporarily severely damaged the retail self-custody accumulation thesis.","A decoupling is occurring where traditional macro tailwinds (cooling inflation) are failing to overcome crypto-native structural overhangs.","The upcoming PPI data will serve as a critical test of whether the broader disinflationary trend can salvage the stalled crypto market."],
+    content: (<>
+      <p className="text-xl text-text-muted mb-8 italic">As macroeconomic inflation metrics finally begin to align with a dovish monetary pivot, institutional capital is bypassing Bitcoin in search of higher-beta yield and ecosystem expansion.</p>
+      <h2 className="text-2xl font-bold mt-10 mb-4 text-text">The Decoupling Anomaly</h2>
+<p className="mb-6">Historically, a benign U.S. Consumer Price Index (CPI) print—such as yesterday's cooling of the annual rate to <span className="text-emerald-400 font-bold">3.4%</span> and core rate to <span className="text-emerald-400 font-bold">2.5%</span>—would act as a powerful catalyst for a broad-based digital asset rally. Yet, Bitcoin remains conspicuously anchored near $63,300. This anomaly is not the result of a delayed reaction, but rather a calculated, structural rotation by institutional allocators away from large-cap dominance.</p>
+<h2 className="text-2xl font-bold mt-10 mb-4 text-text">The GSR Bellwether</h2>
+<p className="mb-6">The most glaring evidence of this shift is the recent recalibration of market maker GSR's 'Core3' model portfolio. By actively slashing their Bitcoin allocation to <span className="text-emerald-400 font-bold">16.9%</span> and heavily overweighting Solana (SOL) to a dominant <span className="text-emerald-400 font-bold">43.6%</span>, GSR has essentially published a masterclass in modern crypto portfolio theory: in a stabilizing macro environment, institutions will aggressively hunt for beta.</p>
+<div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
+
+<div className="p-6 bg-surface border border-border rounded-xl">
+  <h3 className="font-bold text-lg mb-4 flex items-center gap-2 text-red-400"><Activity className="w-5 h-5" /> The Beta Hunt</h3>
+  <p className="text-sm text-text-muted leading-relaxed">With the probability of a September Fed rate hike dropping to ~<span className="text-emerald-400 font-bold">40%</span>, institutions are comfortable taking on smart contract execution risk.</p>
+</div>
+<div className="p-6 bg-surface border border-border rounded-xl">
+  <h3 className="font-bold text-lg mb-4 flex items-center gap-2 text-red-400"><Shield className="w-5 h-5" /> Custody Friction</h3>
+  <p className="text-sm text-text-muted leading-relaxed">A concurrent $90M hardware wallet exploit has chilled retail accumulation, leaving institutional rotation as the dominant market force.</p>
+</div>
+</div>
+<h2 className="text-2xl font-bold mt-10 mb-4 text-text">Quantitative Portfolio Shifts</h2>
+<p className="mb-6">This rotation creates a bifurcated market where capital flows into high-performance ecosystems while the base layer stagnates under localized sell pressure.</p>
+
+<div className="leather-card p-6 rounded-xl mb-10 overflow-hidden">
+  <div className="overflow-x-auto">
+    <table className="w-full text-sm text-left border-collapse min-w-[600px]">
+      <thead><tr><th className="p-4 bg-surface/50 font-bold border-b border-border text-text">Asset Class</th><th className="p-4 bg-surface/50 font-bold border-b border-border text-text">Macro Sensitivity</th><th className="p-4 bg-surface/50 font-bold border-b border-border text-text">Current Institutional Flow</th></tr></thead>
+      <tbody><tr><td className="p-4 border-b border-border border-dashed text-text-muted font-medium text-text">Bitcoin (BTC)</td><td className="p-4 border-b border-border border-dashed text-text-muted ">High</td><td className="p-4 border-b border-border border-dashed text-text-muted ">Net Neutral / Outflow</td></tr><tr><td className="p-4 border-b border-border border-dashed text-text-muted font-medium text-text">Smart Contracts (SOL)</td><td className="p-4 border-b border-border border-dashed text-text-muted ">Moderate</td><td className="p-4 border-b border-border border-dashed text-text-muted ">Aggressive Inflow</td></tr><tr><td className="p-4 border-b border-border border-dashed text-text-muted font-medium text-text">Cash Equivalents</td><td className="p-4 border-b border-border border-dashed text-text-muted ">Absolute</td><td className="p-4 border-b border-border border-dashed text-text-muted ">Baseline (<span className="text-emerald-400 font-bold">3.50%</span> Yield)</td></tr></tbody>
+    </table>
+  </div>
+</div>
+<blockquote className="border-l-4 border-primary pl-6 py-2 my-6 italic text-text-muted">&gt; The failure of Bitcoin to capture the dovish CPI narrative marks a definitive maturation point for the asset class. Institutional capital is no longer monolithic; it is actively rotating down the risk curve toward specific execution ecosystems, fundamentally altering the structural floor for legacy digital assets.</blockquote>
+<p className="text-xs text-text-muted italic border-t border-border pt-4 text-right mt-10">Research Registry — #INSTITUTIONALROTATION</p>
+
+    </>)
+  },
+  {
     id: 'the-institutional-tether-framework',
     title: `The Institutional Tether: Macro Dependency and Volume Compression`,
     category: 'Institutional',
