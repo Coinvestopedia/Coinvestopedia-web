@@ -41,6 +41,50 @@ import { africaCryptoInfrastructureArticle } from '../content/articles/africa-cr
 
 export const ARTICLES: Article[] = [
   {
+    id: 'the-decoupling-dilemma-framework',
+    title: `The Decoupling Dilemma: Regulatory Friction in a Risk-On Macro Regime`,
+    category: 'Institutional',
+    tags: ["Framework","Regulation","Institutional","Macro"],
+    readTime: '15 min read',
+    date: 'August 14, 2026',
+    image: '/geo-framework-hero.png',
+    desc: `Analyzing the structural decoupling between digital assets and traditional equities. Evaluating the impact of SEC delays and operational friction on institutional capital deployment.`,
+    icon: <Building2 className="text-blue-400" size={24} />,
+    keyInsights: ["Dovish inflation data (4.7% PPI) has successfully catalyzed traditional equities but failed to break crypto's volume suppression.","The cancellation of the SEC's crypto framework meeting indefinitely extends the compliance risk premium for institutional allocators.","Bitwise's 14% headcount reduction indicates that major infrastructure providers are modeling for protracted regulatory stagnation.","Bitcoin's correlation with the S&P 500 is breaking down exactly when legacy risk assets are hitting all-time highs.","Without a bespoke regulatory framework, corporate treasuries are actively choosing to bypass crypto in favor of traditional high-beta tech."],
+    content: (<>
+      <p className="text-xl text-text-muted mb-8 italic">As macroeconomic tailwinds propel traditional equities to unprecedented valuations, the digital asset sector is learning a harsh lesson: favorable monetary policy cannot overcome structural regulatory opacity.</p>
+      <h2 className="text-2xl font-bold mt-10 mb-4 text-text">The Broken Correlation Matrix</h2>
+<p className="mb-6">For the past year, the prevailing institutional thesis posited that a dovish pivot by the Federal Reserve would act as a universal rising tide for all risk assets. This week's U.S. Producer Price Index (PPI) print—cooling to a lower-than-expected <span className="text-emerald-400 font-bold">4.7%</span>—should have been the definitive trigger. Yet, while the S&P 500 surged to new all-time highs, Bitcoin remained conspicuously flat near $63,500. This is not a delay; it is a structural decoupling driven by an intolerable regulatory risk premium.</p>
+<h2 className="text-2xl font-bold mt-10 mb-4 text-text">The Cost of Compliance Ambiguity</h2>
+<p className="mb-6">The immediate catalyst for this underperformance was the U.S. Securities and Exchange Commission's (SEC) abrupt cancellation of today's highly anticipated open meeting regarding crypto asset investment contracts. For corporate treasurers and pension fund managers, this is a red line.</p>
+<div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
+
+<div className="p-6 bg-surface border border-border rounded-xl">
+  <h3 className="font-bold text-lg mb-4 flex items-center gap-2 text-red-400"><Lock className="w-5 h-5" /> Regulatory Bottleneck</h3>
+  <p className="text-sm text-text-muted leading-relaxed">Institutional compliance departments cannot greenlight massive capital deployments without the bespoke frameworks the SEC just delayed.</p>
+</div>
+<div className="p-6 bg-surface border border-border rounded-xl">
+  <h3 className="font-bold text-lg mb-4 flex items-center gap-2 text-red-400"><Activity className="w-5 h-5" /> Operational Contraction</h3>
+  <p className="text-sm text-text-muted leading-relaxed">The <span className="text-emerald-400 font-bold">14%</span> headcount reduction at Bitwise illustrates the tangible financial toll this legal ambiguity takes on native infrastructure providers.</p>
+</div>
+</div>
+<h2 className="text-2xl font-bold mt-10 mb-4 text-text">Quantitative Portfolio Allocation</h2>
+<p className="mb-6">When faced with a choice between two high-beta assets—one with clear legal standing (tech equities) and one steeped in jurisdictional risk (crypto)—institutions are defaulting to safety, regardless of the Fed's interest rate path.</p>
+
+<div className="leather-card p-6 rounded-xl mb-10 overflow-hidden">
+  <div className="overflow-x-auto">
+    <table className="w-full text-sm text-left border-collapse min-w-[600px]">
+      <thead><tr><th className="p-4 bg-surface/50 font-bold border-b border-border text-text">Asset Class</th><th className="p-4 bg-surface/50 font-bold border-b border-border text-text">Macro Tailwind</th><th className="p-4 bg-surface/50 font-bold border-b border-border text-text">Regulatory Clarity</th><th className="p-4 bg-surface/50 font-bold border-b border-border text-text">Institutional Flow</th></tr></thead>
+      <tbody><tr><td className="p-4 border-b border-border border-dashed text-text-muted font-medium text-text">S&P 500</td><td className="p-4 border-b border-border border-dashed text-text-muted ">Dovish PPI (Strong)</td><td className="p-4 border-b border-border border-dashed text-text-muted ">High</td><td className="p-4 border-b border-border border-dashed text-text-muted ">Aggressive Inflow</td></tr><tr><td className="p-4 border-b border-border border-dashed text-text-muted font-medium text-text">Bitcoin (BTC)</td><td className="p-4 border-b border-border border-dashed text-text-muted ">Dovish PPI (Strong)</td><td className="p-4 border-b border-border border-dashed text-text-muted ">Low / Deteriorating</td><td className="p-4 border-b border-border border-dashed text-text-muted ">Stagnant / Outflow</td></tr></tbody>
+    </table>
+  </div>
+</div>
+<blockquote className="border-l-4 border-primary pl-6 py-2 my-6 italic text-text-muted">&gt; The prevailing narrative that macro liquidity alone dictates crypto valuations has been decisively invalidated. Until the SEC establishes a functioning compliance framework, digital assets will continue to suffer a severe opportunity cost against traditional, legally secure equities.</blockquote>
+<p className="text-xs text-text-muted italic border-t border-border pt-4 text-right mt-10">Research Registry — #REGULATORYFRICTION</p>
+
+    </>)
+  },
+  {
     id: 'the-beta-rotation-framework',
     title: `The Beta Rotation: Institutional Capital Flight from Large-Cap Dominance`,
     category: 'Institutional',

@@ -59,6 +59,39 @@ const TABS: { id: MacroTab; label: string; icon: React.ReactNode; isPro?: boolea
 
 const REPORTS: MacroReport[] = [
   {
+    id: 'ppi-cooling-sec-delay-aug-14-2026',
+    title: `Crypto Decouples from Equities Amid SEC Delays and Industry Cuts`,
+    subtitle: `Record-breaking equity markets ignore digital assets as a canceled SEC meeting extends compliance ambiguity for institutional funds.`,
+    tab: 'weekly',
+    date: 'August 14, 2026',
+    readTime: '12 min read',
+    confidenceLevel: 'High',
+    keyMetrics: [{"label":"US PPI (Annual)","value":"4.7%","direction":"down"},{"label":"Bitcoin","value":"$63,500","direction":"neutral"},{"label":"S&P 500","value":"ATH","direction":"up"},{"label":"Fed Sept Pause Prob.","value":"85%","direction":"up"}],
+    keyInsights: ["The U.S. Producer Price Index (PPI) cooled to 4.7% year-over-year, beating expectations and driving traditional equities to new all-time highs.","Bitcoin has explicitly decoupled from the broader risk-on rally, remaining anchored near $63,500 as crypto-native friction absorbs macroeconomic tailwinds.","The SEC abruptly canceled today's highly anticipated meeting on bespoke crypto investment contracts, stripping the market of a major near-term regulatory catalyst.","Bitwise Asset Management's 14% headcount reduction highlights the ongoing operational friction faced by native crypto infrastructure providers despite broader economic strength."],
+    sections: [
+      {
+        icon: <Globe size={18} />,
+        title: `Macro Context`,
+        content: (<><p className="mb-4">The divergence between traditional finance and digital assets reached a critical juncture yesterday following the release of the U.S. Producer Price Index (PPI). Wholesale inflation cooled to <span className="text-emerald-400 font-bold">4.7%</span> year-over-year—the lowest level since March—significantly beating the <span className="text-emerald-400 font-bold">4.9%</span> market expectation. This disinflationary print essentially cemented a Federal Reserve rate pause for September, triggering a massive risk-on rotation that propelled the S&P 500 to new all-time highs.</p><p className="mb-4">However, the crypto market's reaction was aggressively muted. Bitcoin failed to break the $64,000 resistance ceiling, demonstrating a stark decoupling from legacy risk assets. This underperformance is directly attributable to idiosyncratic, sector-specific friction that is neutralizing external macroeconomic tailwinds. Institutional capital allocators remain sidelined, demanding explicit legal clarity before aggressively deploying capital into an ecosystem still hampered by severe regulatory bottlenecks.</p></>), 
+      },
+      {
+        icon: <TrendingUp size={18} />,
+        title: `Transmission Analysis`,
+        content: (<><div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6"><div className="p-4 bg-surface border border-border rounded-xl"><h4 className="text-sm font-bold text-primary mb-2">Channel 1: Regulatory Opacity</h4><p className="text-xs text-text-muted">The sudden cancellation of today's SEC open meeting regarding crypto asset investment contracts acts as a structural roadblock, delaying the bespoke compliance frameworks necessary for large-scale corporate accumulation.</p></div><div className="p-4 bg-surface border border-border rounded-xl"><h4 className="text-sm font-bold text-primary mb-2">Channel 2: Asset Class Decoupling</h4><p className="text-xs text-text-muted">The failure of Bitcoin to track the S&P 500 to new highs indicates a shift in its correlation matrix; institutional models are currently pricing in higher jurisdictional risk for crypto compared to traditional tech equities.</p></div><div className="p-4 bg-surface border border-border rounded-xl"><h4 className="text-sm font-bold text-primary mb-2">Channel 3: Operational Contraction</h4><p className="text-xs text-text-muted">Cost-cutting measures from leading infrastructure providers like Bitwise (a <span className="text-emerald-400 font-bold">14%</span> headcount reduction) signal that native crypto businesses are preparing for a protracted period of low volume and regulatory stagnation, regardless of Fed policy.</p></div></div></>), 
+      },
+      {
+        icon: <Eye size={18} />,
+        title: `What Professional Investors Are Watching`,
+        content: (<><ul className="space-y-4 mb-4"><li className="flex items-start gap-3"><span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" /><div><strong className="text-text">SEC Rescheduling:</strong><span className="text-text-muted"> Monitoring official channels for a new date regarding the postponed meeting on crypto investment contracts.</span></div></li><li className="flex items-start gap-3"><span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" /><div><strong className="text-text">S&P 500 Correlation:</strong><span className="text-text-muted"> Tracking the 30-day rolling correlation between Bitcoin and the S&P 500 to determine if this decoupling is a permanent structural shift or a temporary anomaly.</span></div></li><li className="flex items-start gap-3"><span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" /><div><strong className="text-text">Institutional Earnings:</strong><span className="text-text-muted"> Analyzing Q2 2026 financial results from publicly traded crypto entities (e.g., Solana Company, DeFi Technologies) for signs of underlying operational health.</span></div></li><li className="flex items-start gap-3"><span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" /><div><strong className="text-text">Fed Jackson Hole Symposium:</strong><span className="text-text-muted"> Preparing for Jerome Powell's upcoming late-August speech, which will officially confirm the market's September rate pause thesis.</span></div></li></ul></>), 
+      },
+      {
+        icon: <BarChart3 size={18} />,
+        title: `Scenario Analysis`,
+        content: (<><p className="mb-4"><strong>Base Case (60% probability):</strong> The SEC remains silent on a rescheduled date. Bitcoin continues to chop sideways between $62,000 and $65,000, missing out on the broader equity summer rally.</p><p className="mb-4"><strong>Bull Case (25% probability):</strong> The SEC promptly reschedules the meeting with dovish preliminary remarks. Regulatory relief triggers a violent capital catch-up rotation from equities into crypto, pushing BTC past $68,000.</p><p className="mb-4"><strong>Bear Case (15% probability):</strong> Broad equities experience a sudden pullback from all-time highs. Given its current weakness, Bitcoin suffers an exaggerated beta breakdown, violating structural support at $60,000.</p></>), 
+      },
+    ]
+  },
+  {
     id: 'cpi-dovish-ppi-test-aug-13-2026',
     title: `Crypto Ignored Dovish CPI, Waiting For PPI Confirmation`,
     subtitle: `While traditional markets scale back Fed rate hike probabilities, Bitcoin stalls amidst institutional capital rotation toward high-beta altcoins.`,
