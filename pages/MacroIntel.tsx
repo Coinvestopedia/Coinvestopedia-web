@@ -59,6 +59,39 @@ const TABS: { id: MacroTab; label: string; icon: React.ReactNode; isPro?: boolea
 
 const REPORTS: MacroReport[] = [
   {
+    id: 'fomc-minutes-etf-outflows-aug-17-2026',
+    title: `Institutional De-Risking Ahead of July FOMC Minutes: Yield Curve Flattening Caps Crypto Beta`,
+    subtitle: `Spot ETF outflows and institutional positioning reflect pre-FOMC caution while Goldman's $2.25B NEOS acquisition signals expanding derivative appetite.`,
+    tab: 'weekly',
+    date: 'August 17, 2026',
+    readTime: '13 min read',
+    confidenceLevel: 'High',
+    keyMetrics: [{"label":"Bitcoin Spot Price","value":"$63,200","direction":"down"},{"label":"BTC ETF Net Flow (2D)","value":"-$192.2M","direction":"down"},{"label":"Ethereum Spot Price","value":"$1,890","direction":"neutral"},{"label":"Goldman NEOS Deal","value":"$2.25B","direction":"up"}],
+    keyInsights: ["Spot Bitcoin ETFs recorded $192.2 million in cumulative net outflows across mid-August, reflecting tactical de-risking ahead of the July FOMC meeting minutes release.","Bitcoin trades constrained below its 50-day EMA near $63,200, with institutional order books heavily clustered around key downside support at $62,300 to $62,500.","Goldman Sachs finalized an acquisition of NEOS Investments for up to $2.25 billion, absorbing $1 billion in crypto ETF-linked covered-call and option-income strategies.","Allocators are positioning for monetary policy clarity from both the upcoming August 19 FOMC minutes and the Jackson Hole Symposium scheduled for August 27–29."],
+    sections: [
+      {
+        icon: <Globe size={18} />,
+        title: `Macro Context`,
+        content: (<><p className="mb-4">Digital asset markets opened the third week of August in a pronounced volatility compression regime, with Bitcoin oscillating narrowly around $63,200 and Ethereum holding steady near $1,890. Market participants have largely paused active directional positioning following a 48-hour window of net redemptions in U.S. spot Bitcoin ETFs totaling $192.2 million. This institutional hesitation directly coincides with the approach of Wednesday’s release of the July 28–29 FOMC meeting minutes.</p><p className="mb-4">While traditional equity indices hover near record levels supported by cooling Producer Price Index prints from late last week, crypto-specific liquidity remains subdued. Fixed income markets are pricing in heightened sensitivity to any hawkish dissent within the Federal Open Market Committee, creating a cautious backdrop for risk-weighted digital assets.</p></>), 
+      },
+      {
+        icon: <TrendingUp size={18} />,
+        title: `Transmission Analysis`,
+        content: (<><div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6"><div className="p-4 bg-surface border border-border rounded-xl"><h4 className="text-sm font-bold text-primary mb-2">Channel 1: Monetary Policy Uncertainty</h4><p className="text-xs text-text-muted">Unresolved debates within the FOMC regarding the exact timing of policy easing keep the 10-year Treasury yield sticky, preventing aggressive capital rotation into non-yielding crypto spot assets.</p></div><div className="p-4 bg-surface border border-border rounded-xl"><h4 className="text-sm font-bold text-primary mb-2">Channel 2: ETF Liquidity Dynamic</h4><p className="text-xs text-text-muted">Two consecutive sessions of net outflows totaling $192.2 million in spot Bitcoin ETFs have temporarily drained marginal buy-side support, forcing spot prices below the 50-day moving average.</p></div><div className="p-4 bg-surface border border-border rounded-xl"><h4 className="text-sm font-bold text-primary mb-2">Channel 3: Structured Product Expansion</h4><p className="text-xs text-text-muted">Goldman Sachs' $2.25 billion acquisition of NEOS Investments channels institutional capital toward yield-generating option overlay funds rather than naked directional spot exposure, dampening spot velocity while expanding institutional derivatives infrastructure.</p></div></div></>), 
+      },
+      {
+        icon: <Eye size={18} />,
+        title: `What Professional Investors Are Watching`,
+        content: (<><ul className="space-y-4 mb-4"><li className="flex items-start gap-3"><span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" /><div><strong className="text-text">July FOMC Minutes:</strong><span className="text-text-muted"> Parsing the language on Wednesday at 2:00 PM ET for voting splits regarding rate paths and balance sheet reduction plans.</span></div></li><li className="flex items-start gap-3"><span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" /><div><strong className="text-text">Spot ETF Flow Reversal:</strong><span className="text-text-muted"> Monitoring institutional custodial inflows to see if the $192.2 million outflow streak stabilizes above key $62,300 support.</span></div></li><li className="flex items-start gap-3"><span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" /><div><strong className="text-text">Jackson Hole Guidance:</strong><span className="text-text-muted"> Evaluating policy signaling ahead of the Federal Reserve's annual symposium featuring newly appointed leadership.</span></div></li><li className="flex items-start gap-3"><span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" /><div><strong className="text-text">Wyoming Blockchain Symposium:</strong><span className="text-text-muted"> Tracking regulatory commentary and legislative dialogue regarding the Digital Asset Market Clarity Act.</span></div></li></ul></>), 
+      },
+      {
+        icon: <BarChart3 size={18} />,
+        title: `Scenario Analysis`,
+        content: (<><p className="mb-4"><strong>Base Case (55% probability):</strong> FOMC minutes reaffirm a data-dependent, gradual easing posture. Bitcoin remains range-bound between $62,500 and $64,800 as institutional volume remains muted through mid-week.</p><p className="mb-4"><strong>Bull Case (25% probability):</strong> The FOMC minutes reveal broad committee support for a September rate cut, triggering immediate dollar weakness and driving Bitcoin back above $66,000.</p><p className="mb-4"><strong>Bear Case (20% probability):</strong> FOMC commentary highlights persistent service inflation concerns, lifting real yields and pushing Bitcoin to test critical liquidity pockets below $61,800.</p></>), 
+      },
+    ]
+  },
+  {
     id: 'ppi-cooling-sec-delay-aug-14-2026',
     title: `Crypto Decouples from Equities Amid SEC Delays and Industry Cuts`,
     subtitle: `Record-breaking equity markets ignore digital assets as a canceled SEC meeting extends compliance ambiguity for institutional funds.`,
