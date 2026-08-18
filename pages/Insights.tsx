@@ -41,6 +41,50 @@ import { africaCryptoInfrastructureArticle } from '../content/articles/africa-cr
 
 export const ARTICLES: Article[] = [
   {
+    id: 'the-genius-act-settlement-framework',
+    title: `The GENIUS Act Settlement Framework: Evaluating Digital Dollars Through Treasury Licensing, Federal Reserve Oversight, and Global Capital Velocity`,
+    category: 'Institutional',
+    tags: ["Framework","Regulation","Stablecoins","Institutional","Macro"],
+    readTime: '18 min read',
+    date: 'August 18, 2026',
+    image: '/geo-framework-hero.png',
+    desc: `An institutional analysis of the U.S. Treasury Department's Notice of Proposed Rulemaking under Section 3 of the GENIUS Act. Assessing the transformation of private stablecoin issuance into regulated federal settlement architecture.`,
+    icon: <Building2 className="text-blue-400" size={24} />,
+    keyInsights: ["The Treasury Department's NPRM codifies formal federal licensing standards for payment stablecoin issuers, establishing an enforceable compliance deadline of January 18, 2027.","By defining jurisdictional boundaries for 'offers and sales' to U.S. persons, the framework creates a strict gating mechanism that mandates offshore stablecoin compliance by July 2028.","Regulated stablecoin market capitalization ($178.4B) is projected to accelerate as tier-one commercial banks leverage the federal charter to issue proprietary settlement tokens.","The institutional shift from fragmented state-level money transmission regimes to a unified federal prudential framework eliminates structural counterparty risk for prime broker settlement.","Treasury-backed reserves will integrate digital dollars directly into domestic debt management, anchoring sovereign Treasury demand in short-dated T-bills."],
+    content: (<>
+      <p className="text-xl text-text-muted mb-8 italic">The formalization of the GENIUS Act by the U.S. Department of the Treasury represents the definitive institutional transition of stablecoins from crypto-native collateral into federally sanctioned sovereign payment infrastructure.</p>
+      <h2 className="text-2xl font-bold mt-10 mb-4 text-text">The Codification of Federal Payment Stablecoins</h2>
+<p className="mb-6">On August 17, the U.S. Treasury Department initiated a 60-day rulemaking process under Section 3 of the GENIUS Act, laying the cornerstone for federal oversight of digital dollar issuance. For global institutional allocators, this regulatory milestone fundamentally eliminates the existential legal ambiguity that previously capped balance-sheet deployment. By establishing clear reserve composition standards, mandatory monthly attestation audits, and unified licensing paths, Washington has signaled that digital dollars are a permanent pillar of global dollar hegemony.</p>
+<h2 className="text-2xl font-bold mt-10 mb-4 text-text">The Dual-Pronged Prudential Architecture</h2>
+<p className="mb-6">The proposed framework establishes a strict two-stage enforcement timeline: initial federal licensing becomes mandatory on January 18, 2027, followed by a complete prohibition on non-compliant foreign stablecoin offerings to U.S. persons by July 18, 2028.</p>
+<div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
+
+<div className="p-6 bg-surface border border-border rounded-xl">
+  <h3 className="font-bold text-lg mb-4 flex items-center gap-2 text-red-400"><Shield className="w-5 h-5" /> Federal Licensing Perimeter</h3>
+  <p className="text-sm text-text-muted leading-relaxed">Stablecoin issuers must hold registered state or federal charters backed 1:1 by high-quality liquid assets, primarily short-dated U.S. Treasury bills and central bank deposits.</p>
+</div>
+<div className="p-6 bg-surface border border-border rounded-xl">
+  <h3 className="font-bold text-lg mb-4 flex items-center gap-2 text-red-400"><Globe className="w-5 h-5" /> Cross-Border Compliance Gating</h3>
+  <p className="text-sm text-text-muted leading-relaxed">Foreign issuers face explicit regulatory equivalency standards to access U.S. digital asset service providers, mitigating regulatory arbitrage.</p>
+</div>
+</div>
+<h2 className="text-2xl font-bold mt-10 mb-4 text-text">Institutional Impact Across Capital Channels</h2>
+<p className="mb-6">The migration toward federally compliant stablecoin rails impacts custody, clearing, and corporate treasury management across multiple dimensions.</p>
+
+<div className="leather-card p-6 rounded-xl mb-10 overflow-hidden">
+  <div className="overflow-x-auto">
+    <table className="w-full text-sm text-left border-collapse min-w-[600px]">
+      <thead><tr><th className="p-4 bg-surface/50 font-bold border-b border-border text-text">Operational Dimension</th><th className="p-4 bg-surface/50 font-bold border-b border-border text-text">Pre-GENIUS Act Regime</th><th className="p-4 bg-surface/50 font-bold border-b border-border text-text">Post-2027 Federal Framework</th><th className="p-4 bg-surface/50 font-bold border-b border-border text-text">Institutional Impact</th></tr></thead>
+      <tbody><tr><td className="p-4 border-b border-border border-dashed text-text-muted font-medium text-text">Regulatory Jurisdiction</td><td className="p-4 border-b border-border border-dashed text-text-muted ">Fragmented 50-State MTL</td><td className="p-4 border-b border-border border-dashed text-text-muted ">Unified Federal / State Charter</td><td className="p-4 border-b border-border border-dashed text-text-muted ">Elimination of Multi-State Licensing Friction</td></tr><tr><td className="p-4 border-b border-border border-dashed text-text-muted font-medium text-text">Reserve Requirements</td><td className="p-4 border-b border-border border-dashed text-text-muted ">Discretionary / Varies</td><td className="p-4 border-b border-border border-dashed text-text-muted "><span className="text-emerald-400 font-bold">100%</span> Cash & Short-Term Treasuries</td><td className="p-4 border-b border-border border-dashed text-text-muted ">Direct Integration with Sovereign Debt Demand</td></tr><tr><td className="p-4 border-b border-border border-dashed text-text-muted font-medium text-text">Foreign Issuer Access</td><td className="p-4 border-b border-border border-dashed text-text-muted ">Unrestricted Global Liquidity</td><td className="p-4 border-b border-border border-dashed text-text-muted ">Strict Equivalency & Licensing Gate</td><td className="p-4 border-b border-border border-dashed text-text-muted ">Repatriation of Global On-Chain Dollar Volume</td></tr><tr><td className="p-4 border-b border-border border-dashed text-text-muted font-medium text-text">Prime Broker Collateral</td><td className="p-4 border-b border-border border-dashed text-text-muted ">High Haircut / Unrated</td><td className="p-4 border-b border-border border-dashed text-text-muted ">Recognized Cash-Equivalent Settlement</td><td className="p-4 border-b border-border border-dashed text-text-muted ">24/7 Multi-Asset Instant Margin Settlement</td></tr></tbody>
+    </table>
+  </div>
+</div>
+<blockquote className="border-l-4 border-primary pl-6 py-2 my-6 italic text-text-muted">&gt; The Treasury's rulemaking is not merely an administrative exercise; it is the structural integration of tokenized dollar liquidity into the federal financial plumbing, locking in institutional capital rails for the next decade of digital asset market expansion.</blockquote>
+<p className="text-xs text-text-muted italic border-t border-border pt-4 text-right mt-10">Research Registry — #STABLECOINGOVERNANCE</p>
+
+    </>)
+  },
+  {
     id: 'the-derivative-transition-framework',
     title: `The Derivative Transition Framework: Evaluating Institutional Crypto Inflows Through Option Overlays, ETF Redemptions, and Collateral Demand`,
     category: 'Institutional',

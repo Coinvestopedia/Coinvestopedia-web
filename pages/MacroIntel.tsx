@@ -59,6 +59,39 @@ const TABS: { id: MacroTab; label: string; icon: React.ReactNode; isPro?: boolea
 
 const REPORTS: MacroReport[] = [
   {
+    id: 'treasury-genius-act-fomc-aug-18-2026',
+    title: `Treasury Unveils GENIUS Act Stablecoin Rules as FOMC Minutes Loom`,
+    subtitle: `Federal licensing standards for dollar-pegged tokens establish structural institutional rails while markets await central bank rate trajectory signals.`,
+    tab: 'weekly',
+    date: 'August 18, 2026',
+    readTime: '14 min read',
+    confidenceLevel: 'High',
+    keyMetrics: [{"label":"Bitcoin Spot Price","value":"$64,150","direction":"up"},{"label":"Weekly BTC ETF Flow","value":"-$390M","direction":"down"},{"label":"GENIUS Act Window","value":"60 Days","direction":"neutral"},{"label":"Stablecoin Market Cap","value":"$178.4B","direction":"up"}],
+    keyInsights: ["The U.S. Department of the Treasury issued a landmark Notice of Proposed Rulemaking under Section 3 of the GENIUS Act, initiating a 60-day public comment period for federal stablecoin licensing.","Bitcoin reclaimed the $64,000 threshold to trade near $64,150, attempting to stabilize following nearly $390 million in net weekly redemptions across spot Bitcoin ETFs.","The SEC formally canceled its scheduled open meeting on 'Regulation Crypto' under mounting pressure from SIFMA and pending executive-branch policy negotiations.","Wednesday's joint catalyst—the release of the July FOMC meeting minutes and the White House digital asset innovation summit—will dictate institutional liquidity through late August."],
+    sections: [
+      {
+        icon: <Globe size={18} />,
+        title: `Macro Context`,
+        content: (<><p className="mb-4">The U.S. macroeconomic and regulatory landscape experienced a decisive structural development on August 17 as the Department of the Treasury released its comprehensive Notice of Proposed Rulemaking (NPRM) implementing Section 3 of the GENIUS Act. By establishing clear definitions for domestic issuance and multi-tier licensing requirements taking effect January 18, 2027, the framework formally integrates payment stablecoins into the federal banking perimeter. This transition establishes long-sought jurisdictional clarity for commercial banks and fintech issuers handling dollar-denominated settlement tokens.</p><p className="mb-4">Concurrently, crypto asset prices exhibited measured resilience, with Bitcoin recovering above $64,150 after absorbing nearly $390 million in weekly spot ETF outflows. With broad equity markets consolidating near all-time highs and Treasury yields flatlining, market attention is concentrated on tomorrow's release of the July FOMC meeting minutes, which will reveal the committee's internal consensus regarding late-year policy easing.</p></>), 
+      },
+      {
+        icon: <TrendingUp size={18} />,
+        title: `Transmission Analysis`,
+        content: (<><div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6"><div className="p-4 bg-surface border border-border rounded-xl"><h4 className="text-sm font-bold text-primary mb-2">Channel 1: Regulatory De-Risking</h4><p className="text-xs text-text-muted">The Treasury’s NPRM removes tail-risk ambiguity surrounding dollar-backed stablecoins, allowing prime brokers and corporate treasuries to model reserve allocations and on-chain liquidity management with concrete regulatory parameters.</p></div><div className="p-4 bg-surface border border-border rounded-xl"><h4 className="text-sm font-bold text-primary mb-2">Channel 2: ETF Flow Stabilization</h4><p className="text-xs text-text-muted">Following five consecutive days of spot ETF redemptions totaling $390 million, institutional selling pressure appears exhausted at the $63,000 support level, establishing a base for accumulation ahead of Jackson Hole.</p></div><div className="p-4 bg-surface border border-border rounded-xl"><h4 className="text-sm font-bold text-primary mb-2">Channel 3</h4><p className="text-xs text-text-muted">Inter-Agency Policy Realignment — The SEC’s cancellation of its controversial 'Regulation Crypto' open meeting, combined with Wednesday’s White House innovation summit, signals a shift toward a coordinated federal approach that favors legislative compromise over unilateral enforcement.</p></div></div></>), 
+      },
+      {
+        icon: <Eye size={18} />,
+        title: `What Professional Investors Are Watching`,
+        content: (<><ul className="space-y-4 mb-4"><li className="flex items-start gap-3"><span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" /><div><strong className="text-text">Treasury Stablecoin NPRM Comments:</strong><span className="text-text-muted"> Evaluating corporate feedback during the 60-day comment window on reserve auditing and foreign issuer compliance requirements.</span></div></li><li className="flex items-start gap-3"><span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" /><div><strong className="text-text">July FOMC Minutes:</strong><span className="text-text-muted"> Parsing voting nuance on Wednesday at 2:00 PM ET for insight into the three-way policymaker dissent regarding interest rate paths.</span></div></li><li className="flex items-start gap-3"><span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" /><div><strong className="text-text">White House Crypto Summit:</strong><span className="text-text-muted"> Monitoring outcomes from Wednesday's closed-door meeting between digital asset executives and senior executive branch officials.</span></div></li><li className="flex items-start gap-3"><span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" /><div><strong className="text-text">Jackson Hole Keynote Preparations:</strong><span className="text-text-muted"> Assessing macroeconomic expectations for central bank forward guidance on payments innovation scheduled for August 27–29.</span></div></li></ul></>), 
+      },
+      {
+        icon: <BarChart3 size={18} />,
+        title: `Scenario Analysis`,
+        content: (<><p className="mb-4"><strong>Base Case (60% probability):</strong> FOMC minutes reinforce a balanced, data-dependent trajectory. Bitcoin consolidates between $63,500 and $65,500 as markets digest the Treasury's stablecoin rules ahead of Jackson Hole.</p><p className="mb-4"><strong>Bull Case (25% probability):</strong> The White House summit yields constructive legislative commitments alongside dovish FOMC minutes, propelling Bitcoin past $67,000 on renewed institutional inflows.</p><p className="mb-4"><strong>Bear Case (15% probability):</strong> FOMC minutes emphasize stubborn service-sector inflation risks, lifting the 10-year Treasury yield above <span className="text-emerald-400 font-bold">4.35%</span> and forcing Bitcoin back toward $61,500 liquidity pools.</p></>), 
+      },
+    ]
+  },
+  {
     id: 'fomc-minutes-etf-outflows-aug-17-2026',
     title: `Institutional De-Risking Ahead of July FOMC Minutes: Yield Curve Flattening Caps Crypto Beta`,
     subtitle: `Spot ETF outflows and institutional positioning reflect pre-FOMC caution while Goldman's $2.25B NEOS acquisition signals expanding derivative appetite.`,
