@@ -2,49 +2,49 @@
   {
     "id": "smart-contract-platform",
     "name": "Smart Contract",
-    "market_cap": 2021823789860.1384,
-    "market_cap_change_24h": 8.99586827981168
+    "market_cap": 2127635915815.7148,
+    "market_cap_change_24h": 8.10207981935791
   },
   {
     "id": "layer-1",
     "name": "Layer 1 (L1)",
-    "market_cap": 1993991080521.1196,
-    "market_cap_change_24h": 9.033087105418831
+    "market_cap": 2097923695728.3,
+    "market_cap_change_24h": 8.073999461509239
   },
   {
     "id": "proof-of-work-pow",
     "name": "Proof of Work (PoW)",
-    "market_cap": 1433937314501.7305,
-    "market_cap_change_24h": 7.905284602038747
+    "market_cap": 1503472780709.705,
+    "market_cap_change_24h": 6.7307151607759685
   },
   {
     "id": "world-liberty-financial-portfolio",
     "name": "World Liberty Financial Portfolio",
-    "market_cap": 578895268967.2782,
-    "market_cap_change_24h": 7.894582588465305
+    "market_cap": 592293861698.4962,
+    "market_cap_change_24h": 6.017227646543647
   },
   {
     "id": "proof-of-stake-pos",
     "name": "Proof of Stake (PoS)",
-    "market_cap": 478719257252.97095,
-    "market_cap_change_24h": 12.317882293890527
-  },
-  {
-    "id": "stablecoins",
-    "name": "Stablecoins",
-    "market_cap": 288138350326.2128,
-    "market_cap_change_24h": 0.43370721691831743
-  },
-  {
-    "id": "usd-stablecoin",
-    "name": "USD Stablecoin",
-    "market_cap": 285445754380.2535,
-    "market_cap_change_24h": 0.41942742982796993
+    "market_cap": 498716180307.4755,
+    "market_cap_change_24h": 9.814945893136475
   },
   {
     "id": "made-in-usa",
     "name": "Made in USA",
-    "market_cap": 283260895778.4675,
-    "market_cap_change_24h": 6.580151768035944
+    "market_cap": 302853080672.4033,
+    "market_cap_change_24h": 9.94270992599061
+  },
+  {
+    "id": "stablecoins",
+    "name": "Stablecoins",
+    "market_cap": 288249611121.2975,
+    "market_cap_change_24h": 0.2592071713409106
+  },
+  {
+    "id": "usd-stablecoin",
+    "name": "USD Stablecoin",
+    "market_cap": 285544815597.01404,
+    "market_cap_change_24h": 0.24599516529303064
   }
 ]
