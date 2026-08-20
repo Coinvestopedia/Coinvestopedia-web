@@ -41,6 +41,50 @@ import { africaCryptoInfrastructureArticle } from '../content/articles/africa-cr
 
 export const ARTICLES: Article[] = [
   {
+    id: 'the-clarity-act-institutional-unlock-framework',
+    title: `The CLARITY Act Institutional Framework: Evaluating Statutory Jurisdiction, Reserve Banking, and Capital Allocations`,
+    category: 'Institutional',
+    tags: ["Framework","Regulation","Institutional","Macro","Legislation"],
+    readTime: '18 min read',
+    date: 'August 20, 2026',
+    image: '/geo-framework-hero.png',
+    desc: `A structural analysis of the White House digital asset summit and the legislative architecture of the CLARITY Act. Modeling the institutional balance-sheet unlock resulting from clear jurisdictional boundaries between the SEC and CFTC.`,
+    icon: <Building2 className="text-blue-400" size={24} />,
+    keyInsights: ["The White House digital asset summit solidified executive backing for the CLARITY Act, targeting a decisive Senate cloture vote on September 15, 2026.","Establishing statutory distinctions between digital commodities and investment contracts removes the primary compliance barrier preventing $1.2T in institutional retirement capital deployment.","The 9–3 FOMC rate decision underscores that regulatory certainty is currently a more powerful asset-pricing catalyst than marginal interest rate expectations.","Corporate debt repayments on decentralized lending markets (e.g., Morpho) illustrate the rapid convergence of institutional balance sheets with trustless DeFi rails.","The transition toward statutory federal oversight replaces enforcement-by-litigation with transparent registration pathways for digital asset custodians."],
+    content: (<>
+      <p className="text-xl text-text-muted mb-8 italic">The White House Roosevelt Room summit marks the decisive transition of cryptocurrency regulation from adversarial enforcement into structured federal legislation, permanently resetting institutional risk parameters.</p>
+      <h2 className="text-2xl font-bold mt-10 mb-4 text-text">The Strategic Impact of the White House Summit</h2>
+<p className="mb-6">On August 19, the executive branch convened chief executives from Coinbase, Ripple, Kraken, Gemini, and Robinhood alongside top regulatory appointees to coordinate the passage of the Digital Asset Market Clarity Act. For institutional allocators, this summit fundamentally changes the risk-reward calculus. By aligning executive leadership with statutory legislative momentum ahead of the September 15 Senate vote, Washington is replacing years of regulatory ambiguity with an explicit federal charter for digital asset market structure.</p>
+<h2 className="text-2xl font-bold mt-10 mb-4 text-text">Structural Mechanics of the CLARITY Framework</h2>
+<p className="mb-6">The CLARITY Act establishes concrete statutory tests defining when a digital asset transitions from an investment contract into a mature decentralized digital commodity under CFTC jurisdiction, while codifying joint SEC-CFTC custody standards.</p>
+<div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
+
+<div className="p-6 bg-surface border border-border rounded-xl">
+  <h3 className="font-bold text-lg mb-4 flex items-center gap-2 text-red-400"><Shield className="w-5 h-5" /> Statutory Jurisdictional Certainty</h3>
+  <p className="text-sm text-text-muted leading-relaxed">Explicit criteria separate digital commodities from securities, allowing institutional asset managers to custody and trade major liquid tokens without registration ambiguity.</p>
+</div>
+<div className="p-6 bg-surface border border-border rounded-xl">
+  <h3 className="font-bold text-lg mb-4 flex items-center gap-2 text-red-400"><Building2 className="w-5 h-5" /> Bank Custody & Reserve Integration</h3>
+  <p className="text-sm text-text-muted leading-relaxed">Regulated banking institutions receive explicit authority to provide digital asset custody and clearing services without punitive balance-sheet capital penalties.</p>
+</div>
+</div>
+<h2 className="text-2xl font-bold mt-10 mb-4 text-text">Institutional Allocation Matrix Under Statutory Clarity</h2>
+<p className="mb-6">The transition from regulatory friction to statutory clarity fundamentally reconfigures allocation behavior across all major institutional tiers.</p>
+
+<div className="leather-card p-6 rounded-xl mb-10 overflow-hidden">
+  <div className="overflow-x-auto">
+    <table className="w-full text-sm text-left border-collapse min-w-[600px]">
+      <thead><tr><th className="p-4 bg-surface/50 font-bold border-b border-border text-text">Institutional Tier</th><th className="p-4 bg-surface/50 font-bold border-b border-border text-text">Pre-Summit Allocation Mandate</th><th className="p-4 bg-surface/50 font-bold border-b border-border text-text">Post-CLARITY Framework Outlook</th><th className="p-4 bg-surface/50 font-bold border-b border-border text-text">Projected Balance Sheet Shift</th></tr></thead>
+      <tbody><tr><td className="p-4 border-b border-border border-dashed text-text-muted font-medium text-text">Pension & Endowment Funds</td><td className="p-4 border-b border-border border-dashed text-text-muted ">Restricted / Delta-Neutral Only</td><td className="p-4 border-b border-border border-dashed text-text-muted ">Direct Spot & Regulated ETF Allocations</td><td className="p-4 border-b border-border border-dashed text-text-muted ">+<span className="text-emerald-400 font-bold">1.5%</span> to +<span className="text-emerald-400 font-bold">3.0%</span> Portfolio Target</td></tr><tr><td className="p-4 border-b border-border border-dashed text-text-muted font-medium text-text">Corporate Treasuries</td><td className="p-4 border-b border-border border-dashed text-text-muted ">Cash & Commercial Paper</td><td className="p-4 border-b border-border border-dashed text-text-muted ">Compliant Stablecoins & Digital Commodities</td><td className="p-4 border-b border-border border-dashed text-text-muted ">24/7 Yield & Instant Settlement</td></tr><tr><td className="p-4 border-b border-border border-dashed text-text-muted font-medium text-text">Prime Brokerages</td><td className="p-4 border-b border-border border-dashed text-text-muted ">High-Margin Synthetic Exposure</td><td className="p-4 border-b border-border border-dashed text-text-muted ">Direct Custodial Clearing & 1:1 Financing</td><td className="p-4 border-b border-border border-dashed text-text-muted ">Expansion of Collateral Utility</td></tr><tr><td className="p-4 border-b border-border border-dashed text-text-muted font-medium text-text">Decentralized Lending Desks</td><td className="p-4 border-b border-border border-dashed text-text-muted ">Uncollateralized / High Risk</td><td className="p-4 border-b border-border border-dashed text-text-muted ">Regulated Institutional Underwriting (Morpho)</td><td className="p-4 border-b border-border border-dashed text-text-muted ">Deepening On-Chain Liquidity</td></tr></tbody>
+    </table>
+  </div>
+</div>
+<blockquote className="border-l-4 border-primary pl-6 py-2 my-6 italic text-text-muted">&gt; The CLARITY Act represents the definitive institutional unlock for the digital asset ecosystem. By replacing jurisdictional uncertainty with statutory federal law, the United States is establishing the foundation for the next multi-trillion-dollar wave of global institutional capital integration.</blockquote>
+<p className="text-xs text-text-muted italic border-t border-border pt-4 text-right mt-10">Research Registry — #STATUTORYCLARITY</p>
+
+    </>)
+  },
+  {
     id: 'the-genius-act-settlement-framework',
     title: `The GENIUS Act Settlement Framework: Evaluating Digital Dollars Through Treasury Licensing, Federal Reserve Oversight, and Global Capital Velocity`,
     category: 'Institutional',

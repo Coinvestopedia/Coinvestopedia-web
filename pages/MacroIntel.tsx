@@ -59,6 +59,39 @@ const TABS: { id: MacroTab; label: string; icon: React.ReactNode; isPro?: boolea
 
 const REPORTS: MacroReport[] = [
   {
+    id: 'white-house-summit-fomc-minutes-aug-20-2026',
+    title: `White House Crypto Summit Catalyzes $69K Breakout as FOMC Minutes Reveal Hawkish Split`,
+    subtitle: `Executive backing for the CLARITY Act unlocks institutional liquidity as markets parse a 9-3 FOMC voting division ahead of Jackson Hole.`,
+    tab: 'weekly',
+    date: 'August 20, 2026',
+    readTime: '14 min read',
+    confidenceLevel: 'High',
+    keyMetrics: [{"label":"Bitcoin Spot Price","value":"$69,250","direction":"up"},{"label":"FOMC Vote Split","value":"9–3 Hold","direction":"neutral"},{"label":"CLARITY Senate Date","value":"Sept 15","direction":"up"},{"label":"Fed Funds Target","value":"3.50-3.75%","direction":"neutral"}],
+    keyInsights: ["President Donald Trump hosted top digital asset chief executives in the White House Roosevelt Room to coordinate a unified executive strategy for passing the CLARITY Act.","Bitcoin broke out of its summer consolidation range, surging to $69,250 as spot ETF net inflows accelerated on revived legislative optimism.","The July FOMC minutes documented a rare three-way dissent, with regional Fed Presidents Logan, Hammack, and Kashkari voting for a 25 bps rate increase.","Institutional trading desks are re-leveraging into crypto beta ahead of Federal Reserve Chair Kevin Warsh's scheduled keynote at the Jackson Hole Symposium."],
+    sections: [
+      {
+        icon: <Globe size={18} />,
+        title: `Macro Context`,
+        content: (<><p className="mb-4">The digital asset market recorded one of its most aggressive bullish regime shifts of Q3 on August 20, with Bitcoin surging past $69,250. This surge followed an extraordinary executive branch summit hosted by President Donald Trump at the White House. Gathering leadership from Coinbase, Ripple, Kraken, Gemini, and Robinhood alongside top regulatory appointees, the administration committed to aggressive executive and legislative coordination to pass the landmark Digital Asset Market Clarity Act ahead of the September 15 Senate vote.</p><p className="mb-4">Concurrently, macroeconomic clarity emerged with the publication of the July 28–29 FOMC meeting minutes. While the committee voted 9–3 to maintain benchmark rates at <span className="text-emerald-400 font-bold">3.50%</span>–<span className="text-emerald-400 font-bold">3.75%</span>, the minutes detailed active debate among policymakers, with three regional presidents advocating for an immediate hike to combat residual service inflation. Despite this hawkish undercurrent, risk markets prioritized the tangible regulatory de-risking signaled from Washington over marginal interest rate frictions.</p></>), 
+      },
+      {
+        icon: <TrendingUp size={18} />,
+        title: `Transmission Analysis`,
+        content: (<><div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6"><div className="p-4 bg-surface border border-border rounded-xl"><h4 className="text-sm font-bold text-primary mb-2">Channel 1</h4><p className="text-xs text-text-muted">Legislative Risk Premium Collapse — Direct executive sponsorship of the CLARITY Act eliminates long-standing jurisdictional friction between the SEC and CFTC, clearing compliance bottlenecks for tier-one corporate treasury deployments.</p></div><div className="p-4 bg-surface border border-border rounded-xl"><h4 className="text-sm font-bold text-primary mb-2">Channel 2</h4><p className="text-xs text-text-muted">Re-Hypothecation Liquidity Influx — Spot ETF inflows accelerated across major institutional venues as market makers unwound basis hedges, driving spot market volume above $32 billion within 24 hours.</p></div><div className="p-4 bg-surface border border-border rounded-xl"><h4 className="text-sm font-bold text-primary mb-2">Channel 3</h4><p className="text-xs text-text-muted">Policy Divergence and Forward Guidance — The 9–3 FOMC voting split concentrates market attention on Chair Kevin Warsh’s upcoming Jackson Hole keynote, where the central bank is expected to address financial innovation and digital payment infrastructure.</p></div></div></>), 
+      },
+      {
+        icon: <Eye size={18} />,
+        title: `What Professional Investors Are Watching`,
+        content: (<><ul className="space-y-4 mb-4"><li className="flex items-start gap-3"><span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" /><div><strong className="text-text">CLARITY Act Cloture Count:</strong><span className="text-text-muted"> Tracking Senate whip counts ahead of the formal September 15 procedural vote on comprehensive market structure.</span></div></li><li className="flex items-start gap-3"><span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" /><div><strong className="text-text">Spot ETF Cumulative Delta:</strong><span className="text-text-muted"> Monitoring whether post-summit institutional inflows can sustain daily net accumulation above $250 million.</span></div></li><li className="flex items-start gap-3"><span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" /><div><strong className="text-text">Jackson Hole Keynote Address:</strong><span className="text-text-muted"> Parsing Fed Chair Kevin Warsh's speech on August 28 for forward guidance on payment stablecoins and interest rate policy.</span></div></li><li className="flex items-start gap-3"><span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" /><div><strong className="text-text">Morpho & DeFi Collateral Deleveraging:</strong><span className="text-text-muted"> Tracking institutional loan repayments following Hyperscale Data's $47 million debt clearance on decentralized lending rails.</span></div></li></ul></>), 
+      },
+      {
+        icon: <BarChart3 size={18} />,
+        title: `Scenario Analysis`,
+        content: (<><p className="mb-4"><strong>Base Case (60% probability):</strong> Bitcoin consolidates in the $68,000 to $71,500 band as institutional desks accumulate ahead of Jackson Hole commentary and formal legislative debates.</p><p className="mb-4"><strong>Bull Case (25% probability):</strong> Broad Senate bipartisan support confirms passage of the CLARITY Act, igniting an aggressive liquidity expansion that pushes Bitcoin to new all-time highs above $75,000.</p><p className="mb-4"><strong>Bear Case (15% probability):</strong> Hawkish central bank speeches at Jackson Hole reinforce sticky rate expectations, prompting a tactical pullback toward the $65,000 support level.</p></>), 
+      },
+    ]
+  },
+  {
     id: 'treasury-genius-act-fomc-aug-18-2026',
     title: `Treasury Unveils GENIUS Act Stablecoin Rules as FOMC Minutes Loom`,
     subtitle: `Federal licensing standards for dollar-pegged tokens establish structural institutional rails while markets await central bank rate trajectory signals.`,
