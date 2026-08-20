@@ -179,14 +179,19 @@ const SectorPerformanceCard: React.FC = () => {
   const [sectors, setSectors] = useState<SectorEntry[]>([]);
 
   useEffect(() => {
+    let isMounted = true;
     fetchSectorPerformance().then(data => {
-      if (data && Array.isArray(data)) {
-        // Exclude empty ones
+      if (!isMounted) return;
+      if (data && Array.isArray(data) && data.length > 0) {
         const validSectors = data.filter(s => s.market_cap > 0 && s.market_cap_change_24h !== null);
-        // Show up to 8 as per requested grid layout
-        setSectors(validSectors.slice(0, 8));
+        if (validSectors.length > 0) {
+          setSectors(validSectors.slice(0, 8));
+        }
       }
     });
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
   return (

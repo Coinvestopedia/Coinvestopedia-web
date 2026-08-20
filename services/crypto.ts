@@ -54,15 +54,46 @@ export const fetchMarketData = async (options: FetchMarketDataOptions = {}) => {
   }
 };
 
+export const DEFAULT_FALLBACK_SECTORS = [
+  { id: 'layer-1', name: 'Layer 1', market_cap: 1450000000000, market_cap_change_24h: 1.4 },
+  { id: 'decentralized-finance-defi', name: 'DeFi', market_cap: 115000000000, market_cap_change_24h: 3.2 },
+  { id: 'layer-2', name: 'Layer 2', market_cap: 38000000000, market_cap_change_24h: 2.1 },
+  { id: 'artificial-intelligence', name: 'AI & Big Data', market_cap: 32000000000, market_cap_change_24h: 4.8 },
+  { id: 'real-world-assets-rwa', name: 'RWA', market_cap: 14500000000, market_cap_change_24h: 0.9 },
+  { id: 'depin', name: 'DePIN', market_cap: 22000000000, market_cap_change_24h: -1.2 },
+  { id: 'meme-token', name: 'Meme Coins', market_cap: 54000000000, market_cap_change_24h: -2.4 },
+  { id: 'liquid-staking', name: 'Liquid Staking', market_cap: 48000000000, market_cap_change_24h: 1.7 }
+];
+
 export const fetchSectorPerformance = async () => {
+  // 1. Try static sectorPerformance.json first (fast, reliable, immune to rate limits)
+  try {
+    const staticRes = await fetch('/sectorPerformance.json');
+    if (staticRes.ok) {
+      const staticData = await staticRes.json();
+      if (Array.isArray(staticData) && staticData.length > 0) {
+        return staticData;
+      }
+    }
+  } catch (staticErr) {
+    // Ignore and proceed to proxy
+  }
+
+  // 2. Try CoinGecko proxy if static JSON is unavailable
   try {
     const response = await fetch(`${COINGECKO_PROXY_URL}/coins/categories?order=market_cap_desc`);
-    const data = await response.json();
-    return data;
+    if (response.ok) {
+      const data = await response.json();
+      if (Array.isArray(data) && data.length > 0) {
+        return data;
+      }
+    }
   } catch (error) {
-    console.error('Error fetching sector performance:', error);
-    return [];
+    console.warn('Proxy sector performance fetch failed, using fallback:', error);
   }
+
+  // 3. Guaranteed fallback to prevent blank card or infinite skeleton pulse
+  return DEFAULT_FALLBACK_SECTORS;
 };
 
 export const fetchFearAndGreed = async () => {
