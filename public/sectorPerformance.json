@@ -2,49 +2,49 @@
   {
     "id": "smart-contract-platform",
     "name": "Smart Contract",
-    "market_cap": 2175333842887.6714,
-    "market_cap_change_24h": 7.478910150985627
+    "market_cap": 2261533350597.016,
+    "market_cap_change_24h": 3.1993752552338397
   },
   {
     "id": "layer-1",
     "name": "Layer 1 (L1)",
-    "market_cap": 2145458183560.2104,
-    "market_cap_change_24h": 7.481816688046564
+    "market_cap": 2228829575843.031,
+    "market_cap_change_24h": 3.123934957898138
   },
   {
     "id": "proof-of-work-pow",
     "name": "Proof of Work (PoW)",
-    "market_cap": 1548698361343.0432,
-    "market_cap_change_24h": 7.863153642162218
+    "market_cap": 1598070691379.7493,
+    "market_cap_change_24h": 2.35765660907429
   },
   {
     "id": "world-liberty-financial-portfolio",
     "name": "World Liberty Financial Portfolio",
-    "market_cap": 594043560000.8834,
-    "market_cap_change_24h": 2.481878641515695
+    "market_cap": 604995942639.6349,
+    "market_cap_change_24h": 1.4779503852341138
   },
   {
     "id": "proof-of-stake-pos",
     "name": "Proof of Stake (PoS)",
-    "market_cap": 502089152125.74414,
-    "market_cap_change_24h": 4.737061428340154
+    "market_cap": 521058392595.6312,
+    "market_cap_change_24h": 2.9897855766066397
   },
   {
     "id": "made-in-usa",
     "name": "Made in USA",
-    "market_cap": 303797584148.7513,
-    "market_cap_change_24h": 7.3614069489865726
+    "market_cap": 330229342780.8905,
+    "market_cap_change_24h": 8.422260117068179
   },
   {
     "id": "stablecoins",
     "name": "Stablecoins",
-    "market_cap": 288647392671.2356,
-    "market_cap_change_24h": 0.1344485921159498
+    "market_cap": 289601148608.7945,
+    "market_cap_change_24h": 0.30325113806429965
   },
   {
     "id": "usd-stablecoin",
     "name": "USD Stablecoin",
-    "market_cap": 285945397212.3372,
-    "market_cap_change_24h": 0.13522896060670855
+    "market_cap": 286971193800.6714,
+    "market_cap_change_24h": 0.32851458364892216
   }
 ]
