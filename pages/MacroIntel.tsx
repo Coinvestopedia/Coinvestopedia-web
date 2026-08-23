@@ -59,6 +59,39 @@ const TABS: { id: MacroTab; label: string; icon: React.ReactNode; isPro?: boolea
 
 const REPORTS: MacroReport[] = [
   {
+    id: 'treasury-buybacks-jackson-hole-liquidity-aug-23-2026',
+    title: `Treasury Buyback Expansion Injects Fresh Liquidity as Markets Eye Jackson Hole Innovation Keynote`,
+    subtitle: `Secondary bond buybacks suppress term premia across U.S. yields, creating a structural tailwind for digital assets as spot ETFs capture $1B in weekly net inflows.`,
+    tab: 'weekly',
+    date: 'August 23, 2026',
+    readTime: '14 min read',
+    confidenceLevel: 'High',
+    keyMetrics: [{"label":"Bitcoin Spot Price","value":"$76,850","direction":"up"},{"label":"3-Day Net ETF Inflow","value":"+$984M","direction":"up"},{"label":"U.S. 10Y Treasury Yield","value":"3.84%","direction":"down"},{"label":"Jackson Hole Date","value":"Aug 27–29","direction":"neutral"}],
+    keyInsights: ["The U.S. Treasury doubled the pace of its long-dated debt repurchase operations, removing duration risk and pulling 10-year Treasury yields down to 3.84%.","Bitcoin stabilized near $76,850 after testing weekly highs of $79,000, successfully absorbing over $547 million in derivative market liquidations.","U.S. spot Bitcoin ETFs accumulated $984 million over a three-session window, led by BlackRock's IBIT and Fidelity's FBTC.","Institutional desks are positioning for the Federal Reserve's Jackson Hole Symposium on August 27–29, focusing on the keynote on digital payment architecture and stablecoin frameworks."],
+    sections: [
+      {
+        icon: <Globe size={18} />,
+        title: `Macro Context`,
+        content: (<><p className="mb-4">Global sovereign debt markets experienced a notable liquidity injection over the past 72 hours as the U.S. Department of the Treasury expanded its secondary market bond buyback operations. By systematically retiring off-the-run Treasury coupons and expanding cash liquidity in the banking system, federal debt managers effectively capped long-term borrowing costs and induced a measured flattening of the yield curve. With 10-year benchmark yields easing toward <span className="text-emerald-400 font-bold">3.84%</span>, financial conditions have relaxed to their most accommodative levels of the quarter.</p><p className="mb-4">Simultaneously, digital assets demonstrated pronounced structural strength. Despite a temporary flash contraction that washed out $547 million in leveraged long derivatives, Bitcoin held firm in the $76,000 to $77,000 corridor. Sustained institutional ETF demand provided immediate liquidity absorption, proving that real-money institutional balance sheets are actively capitalizing on intraday volatility ahead of the Federal Reserve's Jackson Hole policy gathering.</p></>), 
+      },
+      {
+        icon: <TrendingUp size={18} />,
+        title: `Transmission Analysis`,
+        content: (<><p className="mb-4">The easing of sovereign yield pressures and expanding fiscal liquidity transmit into the digital asset ecosystem via three distinct channels:</p><div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6"><div className="p-4 bg-surface border border-border rounded-xl"><h4 className="text-sm font-bold text-primary mb-2">Channel 1</h4><p className="text-xs text-text-muted">Sovereign Term Premia Compression — Lower long-dated yields reduce the opportunity cost of holding non-yielding scarce digital assets, incentivizing multi-asset hedge funds to increase allocation weightings.</p></div><div className="p-4 bg-surface border border-border rounded-xl"><h4 className="text-sm font-bold text-primary mb-2">Channel 2: ETF Balance-Sheet Absorption</h4><p className="text-xs text-text-muted">Continuous daily inflows exceeding $300 million into U.S. spot ETFs remove liquid spot inventory from centralized exchanges, tightening the aggregate supply curve.</p></div><div className="p-4 bg-surface border border-border rounded-xl"><h4 className="text-sm font-bold text-primary mb-2">Channel 3</h4><p className="text-xs text-text-muted">Policy Innovation Forward Guidance — The Federal Reserve's official Jackson Hole theme—'Financial Innovation: Implications for Payments and Policy'—sets expectations for accommodative rhetoric regarding commercial stablecoins and institutional tokenization rails.</p></div></div><p className="mb-4">The simultaneous operation of these three channels establishes a robust valuation floor across major digital asset classes.</p></>), 
+      },
+      {
+        icon: <Eye size={18} />,
+        title: `What Professional Investors Are Watching`,
+        content: (<><p className="mb-4">Institutional desks are tracking four critical regime indicators over the coming week:</p><ul className="space-y-4 mb-4"><li className="flex items-start gap-3"><span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" /><div><strong className="text-text">Jackson Hole Keynote Address:</strong><span className="text-text-muted"> Parsing Fed remarks on August 28 for explicit commentary on tokenized collateral and balance-sheet liquidity trajectories.</span></div></li><li className="flex items-start gap-3"><span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" /><div><strong className="text-text">Treasury Cash Balance (TGA):</strong><span className="text-text-muted"> Monitoring Treasury General Account drawdowns to gauge the volume of net dollar liquidity entering private bank reserves.</span></div></li><li className="flex items-start gap-3"><span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" /><div><strong className="text-text">Spot ETF Institutional Cumulative Delta:</strong><span className="text-text-muted"> Measuring whether weekly net absorption can sustain runs above $1 billion through late August.</span></div></li><li className="flex items-start gap-3"><span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" /><div><strong className="text-text">Derivative Open Interest Flush:</strong><span className="text-text-muted"> Evaluating funding rates and perpetual basis across CME and offshore venues following the $547 million leverage reset.</span></div></li></ul></>), 
+      },
+      {
+        icon: <BarChart3 size={18} />,
+        title: `Scenario Analysis`,
+        content: (<><p className="mb-4"><strong>Base Case (60% probability):</strong> Bitcoin consolidates between $75,500 and $78,500 as institutional capital accumulates on pullbacks while awaiting Jackson Hole policy signals.</p><p className="mb-4"><strong>Bull Case (25% probability):</strong> Dovish forward guidance at Jackson Hole coupled with accelerating ETF inflows triggers a direct breakout above $80,000 toward new all-time highs.</p><p className="mb-4"><strong>Bear Case (15% probability):</strong> Hawkish inflation pushback from regional Fed presidents re-elevates bond yields, precipitating a retest of lower support at $72,000.</p></>), 
+      },
+    ]
+  },
+  {
     id: 'white-house-summit-fomc-minutes-aug-20-2026',
     title: `White House Crypto Summit Catalyzes $69K Breakout as FOMC Minutes Reveal Hawkish Split`,
     subtitle: `Executive backing for the CLARITY Act unlocks institutional liquidity as markets parse a 9-3 FOMC voting division ahead of Jackson Hole.`,

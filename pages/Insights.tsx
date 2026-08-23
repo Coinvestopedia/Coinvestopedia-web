@@ -41,6 +41,53 @@ import { africaCryptoInfrastructureArticle } from '../content/articles/africa-cr
 
 export const ARTICLES: Article[] = [
   {
+    id: 'sovereign-liquidity-treasury-buyback-framework',
+    title: `The Sovereign Liquidity Matrix: Evaluating Bitcoin Through Treasury Buybacks, Secondary Yield Compression, and Spot ETF Absorption`,
+    category: 'Institutional',
+    tags: ["Framework","Liquidity","Institutional","Macro","Treasury"],
+    readTime: '18 min read',
+    date: 'August 23, 2026',
+    image: '/geo-framework-hero.png',
+    desc: `A quantitative framework examining how the U.S. Treasury's expanded debt repurchase operations interact with spot ETF absorption to compress digital asset risk premiums. Modeling liquidity transmissions across fixed-income curves and decentralized collateral rails.`,
+    icon: <Building2 className="text-blue-400" size={24} />,
+    keyInsights: ["The U.S. Treasury's doubled debt buyback operations inject direct liquidity into primary dealer accounts, easing broader financial conditions.","Benchmark 10-year Treasury yields compressed to 3.84%, significantly reducing the hurdle rate for non-yielding scarce digital assets.","Institutional spot Bitcoin ETFs absorbed $984 million over three sessions, outpacing new issuance by more than 12x.","The Federal Reserve's upcoming Jackson Hole keynote on digital payments aligns monetary research with expanding commercial tokenization.","Cross-market basis spreads on CME indicate structural institutional positioning for an asymmetric liquidity expansion heading into Q4."],
+    content: (<>
+      <p className="text-xl text-text-muted mb-8 italic">The U.S. Treasury's expansion of long-dated bond buybacks marks a structural pivot in federal liquidity management, fundamentally altering the discount rate applied to scarce digital collateral.</p>
+      <div className="my-10 rounded-2xl overflow-hidden border border-border shadow-2xl">
+  <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?q=80&w=2600&auto=format&fit=crop" alt="Sovereign Debt and Capital Markets" className="w-full h-auto object-cover max-h-[500px]" />
+  <div className="p-4 bg-background/50 text-xs text-center border-t border-border italic text-text-muted">Sovereign Liquidity Transmission: Modeling the interaction between federal debt buybacks and institutional digital asset flows.</div>
+</div>
+<h2 className="text-2xl font-bold mt-10 mb-4 text-text">Sovereign Liquidity Engineering: The Secondary Buyback Channel</h2>
+<p className="mb-6">In late August 2026, the U.S. Department of the Treasury doubled its scheduled debt repurchases, targeting illiquid off-the-run Treasury securities. This operation injects primary dealer liquidity directly into money markets, compressing term premia and stabilizing benchmark 10-year yields below <span className="text-emerald-400 font-bold">3.85%</span>. For digital asset markets, which function as ultra-sensitive liquidity barometers, this represents an unannounced expansion of the federal liquidity perimeter.</p>
+<div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
+
+<div className="p-6 bg-surface border border-border rounded-xl">
+  <h3 className="font-bold text-lg mb-4 flex items-center gap-2 text-red-400"><Activity className="w-5 h-5" /> Liquidity Injection Velocity</h3>
+  <p className="text-sm text-text-muted leading-relaxed">Secondary buybacks inject cash directly into primary dealer accounts, expanding reserve balances without formal central bank quantitative easing.</p>
+</div>
+<div className="p-6 bg-surface border border-border rounded-xl">
+  <h3 className="font-bold text-lg mb-4 flex items-center gap-2 text-red-400"><TrendingUp className="w-5 h-5" /> Real Yield Compression</h3>
+  <p className="text-sm text-text-muted leading-relaxed">Lower real yields diminish the opportunity cost of allocating institutional balance sheets to non-yielding pristine collateral like Bitcoin.</p>
+</div>
+</div>
+<h2 className="text-2xl font-bold mt-10 mb-4 text-text">Spot ETF Accumulation and Supply Inelasticity</h2>
+<p className="mb-6">The secondary liquidity expansion coincides with an unprecedented institutional accumulation phase. Over the trailing three trading sessions, U.S. spot Bitcoin ETFs absorbed $984 million in net capital. When institutional ETF demand absorbs spot coins faster than miners produce them, the market experiences severe supply inelasticity, magnifying upward price discovery.</p>
+
+<div className="leather-card p-6 rounded-xl mb-10 overflow-hidden">
+  <div className="overflow-x-auto">
+    <table className="w-full text-sm text-left border-collapse min-w-[600px]">
+      <thead><tr><th className="p-4 bg-surface/50 font-bold border-b border-border text-text">Metric</th><th className="p-4 bg-surface/50 font-bold border-b border-border text-text">Q2 Baseline</th><th className="p-4 bg-surface/50 font-bold border-b border-border text-text">August 2026 Active</th><th className="p-4 bg-surface/50 font-bold border-b border-border text-text">Institutional Implication</th></tr></thead>
+      <tbody><tr><td className="p-4 border-b border-border border-dashed text-text-muted font-medium text-text">10Y Treasury Yield</td><td className="p-4 border-b border-border border-dashed text-text-muted "><span className="text-emerald-400 font-bold">4.28%</span></td><td className="p-4 border-b border-border border-dashed text-text-muted "><span className="text-emerald-400 font-bold">3.84%</span></td><td className="p-4 border-b border-border border-dashed text-text-muted ">Diminishing real risk-free rate creates allocation tailwinds</td></tr><tr><td className="p-4 border-b border-border border-dashed text-text-muted font-medium text-text">3-Day Spot ETF Flow</td><td className="p-4 border-b border-border border-dashed text-text-muted ">-$185M</td><td className="p-4 border-b border-border border-dashed text-text-muted ">+$984M</td><td className="p-4 border-b border-border border-dashed text-text-muted ">Direct institutional balance sheet absorption of liquid float</td></tr><tr><td className="p-4 border-b border-border border-dashed text-text-muted font-medium text-text">Bitcoin Spot Band</td><td className="p-4 border-b border-border border-dashed text-text-muted ">$62,000–$65,000</td><td className="p-4 border-b border-border border-dashed text-text-muted ">$76,000–$79,000</td><td className="p-4 border-b border-border border-dashed text-text-muted ">High-conviction structural repricing above summer resistance</td></tr><tr><td className="p-4 border-b border-border border-dashed text-text-muted font-medium text-text">CME Futures Open Interest</td><td className="p-4 border-b border-border border-dashed text-text-muted ">$8.2B</td><td className="p-4 border-b border-border border-dashed text-text-muted ">$12.7B</td><td className="p-4 border-b border-border border-dashed text-text-muted ">Maturing institutional basis and cash-and-carry markets</td></tr></tbody>
+    </table>
+  </div>
+</div>
+<h2 className="text-2xl font-bold mt-10 mb-4 text-text">Synthesis: The Sovereign Collateral Regime</h2>
+<blockquote className="border-l-4 border-primary pl-6 py-2 my-6 italic text-text-muted">&gt; The structural convergence of sovereign debt buybacks, spot ETF liquidity drains, and upcoming central bank payment modernization sets an asymmetric institutional foundation for digital assets heading into Q4. Investors should monitor Treasury cash balances and net ETF inflows as leading indicators of macro regime health.</blockquote>
+<p className="text-xs text-text-muted italic border-t border-border pt-4 text-right mt-10">Research Registry — #TREASURY-LIQUIDITY-2026</p>
+
+    </>)
+  },
+  {
     id: 'the-clarity-act-institutional-unlock-framework',
     title: `The CLARITY Act Institutional Framework: Evaluating Statutory Jurisdiction, Reserve Banking, and Capital Allocations`,
     category: 'Institutional',
