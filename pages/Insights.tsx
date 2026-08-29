@@ -41,6 +41,53 @@ import { africaCryptoInfrastructureArticle } from '../content/articles/africa-cr
 
 export const ARTICLES: Article[] = [
   {
+    id: 'the-post-jackson-hole-rate-regime-framework',
+    title: `The Post-Jackson Hole Regime: Evaluating Digital Asset Sensitivity to Central Bank Reaction Functions, Term Premia, and Institutional Inflows`,
+    category: 'Institutional',
+    tags: ["Framework","Jackson-Hole","Institutional","Macro","Monetary-Policy"],
+    readTime: '18 min read',
+    date: 'August 29, 2026',
+    image: '/geo-framework-hero.png',
+    desc: `A quantitative research framework analyzing the macro transmission mechanisms following Federal Reserve Chair Kevin Warsh's Jackson Hole keynote. Modeling term premia shocks, rate hike probabilities, and spot ETF absorption elasticity.`,
+    icon: <Building2 className="text-blue-400" size={24} />,
+    keyInsights: ["Federal Reserve Chair Kevin Warsh's debut Jackson Hole address reset market-implied odds for a September 16 rate hike to 57.5%.","Benchmark 10-year Treasury yields rebounded 14 bps to 3.92%, triggering an immediate $420M leverage flush across crypto derivatives.","Cumulative August net inflows across U.S. spot Bitcoin ETFs crossed $3.12B, cementing one of the strongest institutional allocation months of 2026.","Cross-asset correlation models demonstrate that digital asset risk premia remain acutely sensitive to central bank terminal rate expectations.","Institutional allocators are treating macro-driven pullbacks below $78,000 as strategic accumulation windows ahead of the September 15 CLARITY Act Senate vote."],
+    content: (<>
+      <p className="text-xl text-text-muted mb-8 italic">The inaugural Jackson Hole keynote by Federal Reserve Chair Kevin Warsh re-establishes a hawkish reaction function, proving that crypto risk premiums remain fundamentally tethered to central bank terminal rate expectations.</p>
+      <div className="my-10 rounded-2xl overflow-hidden border border-border shadow-2xl">
+  <img src="https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?q=80&w=2600&auto=format&fit=crop" alt="Central Bank Monetary Policy" className="w-full h-auto object-cover max-h-[500px]" />
+  <div className="p-4 bg-background/50 text-xs text-center border-t border-border italic text-text-muted">Central Bank Reaction Functions: Mapping the transmission of monetary policy shocks into digital asset liquidity and spot ETF flows.</div>
+</div>
+<h2 className="text-2xl font-bold mt-10 mb-4 text-text">The Jackson Hole Policy Pivot: Warsh's Inflation Mandate</h2>
+<p className="mb-6">On August 28, 2026, Federal Reserve Chair Kevin Warsh delivered a resolute keynote address at the Jackson Hole Economic Symposium. Emphasizing that services inflation has stalled above the <span className="text-emerald-400 font-bold">2%</span> target, Warsh signaled that the central bank is prepared to re-accelerate tightening if underlying price pressures persist. Market-implied odds for a 25 bps rate increase at the September 16 FOMC meeting surged from <span className="text-emerald-400 font-bold">35%</span> to <span className="text-emerald-400 font-bold">57.5%</span>, triggering a broad repricing across sovereign yield curves and risk assets.</p>
+<div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
+
+<div className="p-6 bg-surface border border-border rounded-xl">
+  <h3 className="font-bold text-lg mb-4 flex items-center gap-2 text-red-400"><Shield className="w-5 h-5" /> Policy Credibility Channel</h3>
+  <p className="text-sm text-text-muted leading-relaxed">The Federal Reserve's willingness to signal rate hikes amidst election-year dynamics reinforces institutional confidence in long-term inflation anchoring.</p>
+</div>
+<div className="p-6 bg-surface border border-border rounded-xl">
+  <h3 className="font-bold text-lg mb-4 flex items-center gap-2 text-red-400"><BarChart3 className="w-5 h-5" /> Real Yield Repricing</h3>
+  <p className="text-sm text-text-muted leading-relaxed">A 14 bps spike in 10-year real yields elevates the hurdle rate for speculative assets while expanding cash-and-carry basis spreads for institutional arbitrageurs.</p>
+</div>
+</div>
+<h2 className="text-2xl font-bold mt-10 mb-4 text-text">Institutional Spot ETF Resilience Under Rate Stress</h2>
+<p className="mb-6">Despite the immediate pullback in Bitcoin spot prices from $81,000 to $77,800, institutional spot ETF flows demonstrated unprecedented structural resilience. While short-term tactical momentum halted a nine-day inflow streak, cumulative August net inflows surpassed $3.12 billion. This structural divergence indicates that long-term allocators view macro-driven pullbacks as strategic rebalancing windows rather than systemic liquidation events.</p>
+
+<div className="leather-card p-6 rounded-xl mb-10 overflow-hidden">
+  <div className="overflow-x-auto">
+    <table className="w-full text-sm text-left border-collapse min-w-[600px]">
+      <thead><tr><th className="p-4 bg-surface/50 font-bold border-b border-border text-text">Indicator</th><th className="p-4 bg-surface/50 font-bold border-b border-border text-text">Pre-Keynote Baseline</th><th className="p-4 bg-surface/50 font-bold border-b border-border text-text">Post-Jackson Hole Active</th><th className="p-4 bg-surface/50 font-bold border-b border-border text-text">Macro & Market Implication</th></tr></thead>
+      <tbody><tr><td className="p-4 border-b border-border border-dashed text-text-muted font-medium text-text">September Rate Hike Probability</td><td className="p-4 border-b border-border border-dashed text-text-muted "><span className="text-emerald-400 font-bold">35.0%</span></td><td className="p-4 border-b border-border border-dashed text-text-muted "><span className="text-emerald-400 font-bold">57.5%</span></td><td className="p-4 border-b border-border border-dashed text-text-muted ">Hawkish shift re-elevates short-term rate volatility</td></tr><tr><td className="p-4 border-b border-border border-dashed text-text-muted font-medium text-text">10Y Benchmark Treasury Yield</td><td className="p-4 border-b border-border border-dashed text-text-muted "><span className="text-emerald-400 font-bold">3.78%</span></td><td className="p-4 border-b border-border border-dashed text-text-muted "><span className="text-emerald-400 font-bold">3.92%</span></td><td className="p-4 border-b border-border border-dashed text-text-muted ">Term premia expansion compresses risk-asset multiples</td></tr><tr><td className="p-4 border-b border-border border-dashed text-text-muted font-medium text-text">August Cumulative Spot ETF Flow</td><td className="p-4 border-b border-border border-dashed text-text-muted ">+$2.65B</td><td className="p-4 border-b border-border border-dashed text-text-muted ">+$3.12B</td><td className="p-4 border-b border-border border-dashed text-text-muted ">Robust monthly balance-sheet accumulation across tier-1 funds</td></tr><tr><td className="p-4 border-b border-border border-dashed text-text-muted font-medium text-text">Bitcoin 30-Day Realized Volatility</td><td className="p-4 border-b border-border border-dashed text-text-muted "><span className="text-emerald-400 font-bold">42.1%</span></td><td className="p-4 border-b border-border border-dashed text-text-muted "><span className="text-emerald-400 font-bold">48.6%</span></td><td className="p-4 border-b border-border border-dashed text-text-muted ">Intraday leverage flush cleanses speculative open interest</td></tr></tbody>
+    </table>
+  </div>
+</div>
+<h2 className="text-2xl font-bold mt-10 mb-4 text-text">Synthesis: Navigating the September Policy Matrix</h2>
+<blockquote className="border-l-4 border-primary pl-6 py-2 my-6 italic text-text-muted">&gt; While the hawkish Jackson Hole messaging introduces short-term friction into digital asset valuations, the underlying structural floor provided by $3B+ in monthly ETF inflows and statutory legislative clarity remains intact. Allocators should utilize volatility around the September 16 FOMC meeting to model asymmetric risk-reward entries across core digital commodities.</blockquote>
+<p className="text-xs text-text-muted italic border-t border-border pt-4 text-right mt-10">Research Registry — #JACKSON-HOLE-2026</p>
+
+    </>)
+  },
+  {
     id: 'sovereign-liquidity-treasury-buyback-framework',
     title: `The Sovereign Liquidity Matrix: Evaluating Bitcoin Through Treasury Buybacks, Secondary Yield Compression, and Spot ETF Absorption`,
     category: 'Institutional',

@@ -59,6 +59,39 @@ const TABS: { id: MacroTab; label: string; icon: React.ReactNode; isPro?: boolea
 
 const REPORTS: MacroReport[] = [
   {
+    id: 'warsh-jackson-hole-fomc-hike-odds-aug-29-2026',
+    title: `Warsh's Hawkish Jackson Hole Debut Lifts September Hike Odds to 57.5%: The Cross-Asset Crypto Transmission`,
+    subtitle: `Federal Reserve Chair Kevin Warsh warns of stubborn service inflation, triggering a risk-asset pullback from $81K highs as August ETF inflows cross $3B.`,
+    tab: 'weekly',
+    date: 'August 29, 2026',
+    readTime: '14 min read',
+    confidenceLevel: 'High',
+    keyMetrics: [{"label":"Bitcoin Spot Price","value":"$77,800","direction":"down"},{"label":"September Hike Odds","value":"57.5%","direction":"up"},{"label":"August Net ETF Inflow","value":"+$3.12B","direction":"up"},{"label":"U.S. 10Y Benchmark Yield","value":"3.92%","direction":"up"}],
+    keyInsights: ["Federal Reserve Chair Kevin Warsh delivered his debut Jackson Hole keynote on August 28, reiterating that core inflation remains well above the 2.0% objective.","Market-implied probabilities for a 25 bps rate increase at the September 16 FOMC meeting surged from 35% to 57.5% in the wake of the address.","Bitcoin corrected from weekly highs above $81,000 down to $77,800, shaking out over $420 million in leveraged long derivatives.","Cumulative August net inflows across U.S. spot Bitcoin ETFs crossed $3.12 billion, preserving a strongly positive monthly return despite short-term macro volatility."],
+    sections: [
+      {
+        icon: <Globe size={18} />,
+        title: `Macro Context`,
+        content: (<><p className="mb-4">Global financial markets underwent a sharp reassessment of monetary policy trajectories following Federal Reserve Chair Kevin Warsh's debut keynote address at the Jackson Hole Economic Policy Symposium on August 28. Addressing central bankers and economists, Chair Warsh emphasized that persistent service-sector inflation and resilient wage prints have prevented inflation from converging sustainably toward the central bank's <span className="text-emerald-400 font-bold">2.0%</span> target. By directly stating that monetary authorities 'still have decisive work ahead,' the Fed signaled that the policy easing window has been firmly deferred.</p><p className="mb-4">The immediate consequence across interest rate derivatives was swift: implied odds of a 25 bps rate hike at the upcoming September 16 FOMC meeting surged from <span className="text-emerald-400 font-bold">35%</span> to <span className="text-emerald-400 font-bold">57.5%</span>. Sovereign bond yields responded in tandem, with the benchmark 10-year Treasury yield backing up 14 bps to <span className="text-emerald-400 font-bold">3.92%</span>, while the U.S. Dollar Index (DXY) rebounded toward 104.8. Digital assets, which had rallied past $81,000 earlier in the week on Treasury buyback liquidity, encountered an immediate cross-asset repricing.</p></>), 
+      },
+      {
+        icon: <TrendingUp size={18} />,
+        title: `Transmission Analysis`,
+        content: (<><p className="mb-4">The central bank's hawkish forward guidance transmits into digital asset valuations through three interconnected macroeconomic mechanisms:</p><div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6"><div className="p-4 bg-surface border border-border rounded-xl"><h4 className="text-sm font-bold text-primary mb-2">Channel 1: Real Rate Hurdle Elevation</h4><p className="text-xs text-text-muted">The upward shift in 10-year real yields raises the baseline discount rate across all risk assets, prompting institutional allocators to trim high-beta exposure and recalibrate cash hurdle rates.</p></div><div className="p-4 bg-surface border border-border rounded-xl"><h4 className="text-sm font-bold text-primary mb-2">Channel 2: Derivative Basis Liquidation</h4><p className="text-xs text-text-muted">Rising interest rate uncertainty catalyzed a sudden basis compression across CME futures, triggering $420 million in long liquidations that rapidly pushed spot Bitcoin from $81,000 to $77,800.</p></div><div className="p-4 bg-surface border border-border rounded-xl"><h4 className="text-sm font-bold text-primary mb-2">Channel 3: Sovereign Dollar Strength</h4><p className="text-xs text-text-muted">A resurgent U.S. dollar index restricts offshore dollar liquidity, temporarily curbing cross-border stablecoin expansion and slowing spot ETF accumulation velocity after a nine-day inflow streak.</p></div></div><p className="mb-4">Despite these short-term pressures, the structural liquidity accumulated throughout August maintains aggregate market capitalization substantially higher month-over-month.</p></>), 
+      },
+      {
+        icon: <Eye size={18} />,
+        title: `What Professional Investors Are Watching`,
+        content: (<><p className="mb-4">Institutional portfolio managers are monitoring four pivotal macro milestones heading into the September policy decision:</p><ul className="space-y-4 mb-4"><li className="flex items-start gap-3"><span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" /><div><strong className="text-text">August Non-Farm Payrolls (NFP):</strong><span className="text-text-muted"> The final employment report prior to the September 16 FOMC meeting, serving as the decisive catalyst for the 25 bps hike debate.</span></div></li><li className="flex items-start gap-3"><span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" /><div><strong className="text-text">Core PCE Inflation Print:</strong><span className="text-text-muted"> Gauging whether the Fed's preferred inflation gauge corroborates Chair Warsh's hawkish commentary regarding sticky services prices.</span></div></li><li className="flex items-start gap-3"><span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" /><div><strong className="text-text">Spot ETF Redemption vs. Inflow Elasticity:</strong><span className="text-text-muted"> Assessing whether institutional desks maintain net positive monthly inflows or transition into defensive capital preservation.</span></div></li><li className="flex items-start gap-3"><span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" /><div><strong className="text-text">Senate CLARITY Act Cloture Schedule:</strong><span className="text-text-muted"> Tracking legislative floor timing ahead of the September 15 Senate vote to assess offsetting domestic regulatory tailwinds.</span></div></li></ul></>), 
+      },
+      {
+        icon: <BarChart3 size={18} />,
+        title: `Scenario Analysis`,
+        content: (<><p className="mb-4"><strong>Base Case (55% probability):</strong> Bitcoin consolidates between $76,000 and $79,500 as the market digests the Jackson Hole policy shock and awaits official August labor and inflation data.</p><p className="mb-4"><strong>Bull Case (25% probability):</strong> Softer economic prints dial back September hike odds, allowing institutional ETF inflows to resume and driving Bitcoin back above $82,000.</p><p className="mb-4"><strong>Bear Case (20% probability):</strong> Strong inflation prints cement a 25 bps hike at the September 16 meeting, precipitating an extended test of lower structural support near $73,500.</p></>), 
+      },
+    ]
+  },
+  {
     id: 'treasury-buybacks-jackson-hole-liquidity-aug-23-2026',
     title: `Treasury Buyback Expansion Injects Fresh Liquidity as Markets Eye Jackson Hole Innovation Keynote`,
     subtitle: `Secondary bond buybacks suppress term premia across U.S. yields, creating a structural tailwind for digital assets as spot ETFs capture $1B in weekly net inflows.`,
